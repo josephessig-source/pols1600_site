@@ -28,7 +28,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Setup Quarto
-        uses: quarto-dev/setup-quarto@v2
+        uses: quarto-dev/quarto-actions/setup@v2
         # This is the correct, current action to install Quarto.
 
       - name: Restore render cache
