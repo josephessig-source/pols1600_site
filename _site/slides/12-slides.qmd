@@ -116,30 +116,33 @@ ipak(the_packages)
 
 # {{< fa magnifying-glass>}} Presentations {.inverse}
 
-## Presentations
+## Presentations {.smaller}
 
-1.  Motivation
+- Motivation
 
-2.  Research Question
+- Research Question
 
-3.  Theory
+- Theory
 
-4.  Expectations
+- Expectations
 
-5.  Data
+- Data
 
--   Summary
--   Descriptive Table and/or Figure (Optional)
+  - Summary
 
-6.  Design
+  - Descriptive Table and/or Figure (Optional)
 
-7.  Results
+- Design
 
--   Summary
--   Table (Optional)
--   Figure (Optional)
+- Results
 
-8.  Conclusion
+  - Summary
+
+  - Table (Optional)
+
+  - Figure (Optional)
+
+- Conclusion
 
 -   Appendices (Extra Slides Optional)
 
