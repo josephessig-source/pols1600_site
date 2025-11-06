@@ -63,10 +63,9 @@ Location TBD
 ### Office Hours
 
 [Joe | Time TBD](https://calendar.app.google) <br>
-111 Thayer St Rm 339
-
-[Maya | Time TBD](https://calendar.app.google) <br>
-111 Thayer St Rm 309
+Stephen Roberts Hall, Rm. 123 (Taubman Center)
+[Teaching Assistant | Time TBD](https://calendar.app.google) <br>
+Location TBD
 :::
 :::
 
@@ -184,9 +183,9 @@ comments[base::seq(26,28,by=2)] <- as.character(fa("graduation-cap"))
 assignments <- rep(" ", 28)
 
 
-slides_show <- rep(" ", length(slides_full))
-labs_show <- rep(" ", length(labs_full))
-comments_show <- rep(" ", length(comments_full))
+slides_show <- rep(" ", length(slides))
+labs_show <- rep(" ", length(labs))
+comments_show <- rep(" ", length(comments))
 
 rows_to_show <- (show_up_to_week + 1) * 2
 solution_rows_to_show <- (show_solutions_up_to_week + 1) * 2
@@ -204,7 +203,7 @@ if (solution_rows_to_show > 0) {
 schedule_tibble <- tibble(
   ' ' = c(rbind(week, topic)),
   "Lecture" = slides_show,
-  "Labs" = lab_shows,
+  "Labs" = labs_show,
   "Solutions" = comments_show,
   "Assignments" = assignments
   )

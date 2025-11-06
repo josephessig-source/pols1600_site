@@ -1,6 +1,3 @@
----
-title: "My Project Notes"
----
 <!--paste into terminal, do not run chunk!!!-->
 ```{bash}
 | echo: true

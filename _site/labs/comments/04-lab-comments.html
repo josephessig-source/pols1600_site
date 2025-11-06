@@ -1,0 +1,1538 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.32">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Your Name Here">
+<meta name="dcterms.date" content="2024-01-24">
+
+<title>Lab 4 Comments: Causation in Observational Studies – POLS 1600</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-1cfdd6bcdaa40fc01831c1af7ce94cf5.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="docked nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">POLS 1600</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../syllabus.html"> 
+<span class="menu-text">Syllabus</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../class/index.html"> 
+<span class="menu-text">Class</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../assignments/index.html"> 
+<span class="menu-text">Assignments</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul class="collapse">
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a>
+  <ul class="collapse">
+  <li><a href="#goals" id="toc-goals" class="nav-link" data-scroll-target="#goals"><span class="header-section-number">0.1</span> Goals</a></li>
+  </ul></li>
+  <li><a href="#read-ferwerda-and-miller-2014-and-answer-the-following" id="toc-read-ferwerda-and-miller-2014-and-answer-the-following" class="nav-link" data-scroll-target="#read-ferwerda-and-miller-2014-and-answer-the-following"><span class="header-section-number">1</span> Read Ferwerda and Miller (2014) and answer the following:</a></li>
+  <li><a href="#load-the-replication-data-and-set-up-your-workspace" id="toc-load-the-replication-data-and-set-up-your-workspace" class="nav-link" data-scroll-target="#load-the-replication-data-and-set-up-your-workspace"><span class="header-section-number">2</span> Load the replication data and set up your workspace</a></li>
+  <li><a href="#whats-the-unit-of-analysis-for-this-study" id="toc-whats-the-unit-of-analysis-for-this-study" class="nav-link" data-scroll-target="#whats-the-unit-of-analysis-for-this-study"><span class="header-section-number">3</span> What’s the unit of analysis for this study?</a></li>
+  <li><a href="#describe-the-structure-of-the-data" id="toc-describe-the-structure-of-the-data" class="nav-link" data-scroll-target="#describe-the-structure-of-the-data"><span class="header-section-number">4</span> Describe the structure of the data</a></li>
+  <li><a href="#describe-the-studys-outcomes-of-interest-and-their-distributions" id="toc-describe-the-studys-outcomes-of-interest-and-their-distributions" class="nav-link" data-scroll-target="#describe-the-studys-outcomes-of-interest-and-their-distributions"><span class="header-section-number">5</span> Describe the study’s outcomes of interest and their distributions</a></li>
+  <li><a href="#what-is-the-treatment-in-this-study" id="toc-what-is-the-treatment-in-this-study" class="nav-link" data-scroll-target="#what-is-the-treatment-in-this-study"><span class="header-section-number">6</span> What is the “treatment” in this study?</a></li>
+  <li><a href="#calculate-the-means-and-differences-of-means-for-all-communes-north-and-south-of-the-demarcation-line-for-the-following-variables" id="toc-calculate-the-means-and-differences-of-means-for-all-communes-north-and-south-of-the-demarcation-line-for-the-following-variables" class="nav-link" data-scroll-target="#calculate-the-means-and-differences-of-means-for-all-communes-north-and-south-of-the-demarcation-line-for-the-following-variables"><span class="header-section-number">7</span> Calculate the means and differences of means for all communes north and south of the demarcation line for the following variables:</a></li>
+  <li><a href="#use-the-sapply-function-to-apply-the-std_diff_fn-to-the-covariates-in-the_vars." id="toc-use-the-sapply-function-to-apply-the-std_diff_fn-to-the-covariates-in-the_vars." class="nav-link" data-scroll-target="#use-the-sapply-function-to-apply-the-std_diff_fn-to-the-covariates-in-the_vars."><span class="header-section-number">8</span> Use the <code>sapply()</code> function to apply, the <code>std_diff_fn()</code> to the covariates in <code>the_vars.</code></a></li>
+  <li><a href="#explain-how-new_std_diff_fn-differences-from-std_diff_fn" id="toc-explain-how-new_std_diff_fn-differences-from-std_diff_fn" class="nav-link" data-scroll-target="#explain-how-new_std_diff_fn-differences-from-std_diff_fn"><span class="header-section-number">9</span> Explain how <code>new_std_diff_fn()</code> differences from <code>std_diff_fn()</code></a></li>
+  <li><a href="#does-this-claim-appear-more-or-less-plausible-within-10-km-of-the-line" id="toc-does-this-claim-appear-more-or-less-plausible-within-10-km-of-the-line" class="nav-link" data-scroll-target="#does-this-claim-appear-more-or-less-plausible-within-10-km-of-the-line"><span class="header-section-number">10</span> Does this claim appear more or less plausible within 10 km of the line?</a></li>
+  <li><a href="#does-devolution-reduce-resistance" id="toc-does-devolution-reduce-resistance" class="nav-link" data-scroll-target="#does-devolution-reduce-resistance"><span class="header-section-number">11</span> Does devolution reduce resistance?</a></li>
+  <li><a href="#repeat-the-calculations-above-but-this-time-comparing-the-differences-between-communes-north-and-south-of-the-line-within-the-same-department." id="toc-repeat-the-calculations-above-but-this-time-comparing-the-differences-between-communes-north-and-south-of-the-line-within-the-same-department." class="nav-link" data-scroll-target="#repeat-the-calculations-above-but-this-time-comparing-the-differences-between-communes-north-and-south-of-the-line-within-the-same-department."><span class="header-section-number">12</span> Repeat the calculations above, but this time comparing the differences between communes north and south of the line within the same department.</a></li>
+  </ul>
+</nav>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Lab 4 Comments: Causation in Observational Studies</h1>
+<p class="subtitle lead">Replicating Ferwerda and Miller (2014)</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Your Name Here </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">January 24, 2024</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set.seed</span>(<span class="dv">20231005</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  the.questions<span class="ot">&lt;-</span><span class="dv">1</span><span class="sc">:</span><span class="dv">12</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  graded<span class="ot">&lt;-</span><span class="fu">sample</span>(the.questions,<span class="dv">1</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  graded</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3</code></pre>
+</div>
+</div>
+<p>Question 3 is the graded question for this assignment</p>
+<section id="overview" class="level1 unnumbered">
+<h1 class="unnumbered">Overview</h1>
+<p>In this assignment, we’ll walk through the logic and design of <a href="https://pols2580.paultesta.org/files/readings/ferwerda_miller_2014.pdf">Ferwerda and Miller (2014).</a></p>
+<section id="goals" class="level2" data-number="0.1">
+<h2 data-number="0.1" class="anchored" data-anchor-id="goals"><span class="header-section-number">0.1</span> Goals</h2>
+<p>Conceptually, our goal in this lab is to see how scholars might use historical knowledge to make causal claims with observational data.</p>
+<p>Specifically, we will see how F&amp;M leverage a claim about how borders are drawn to assess the effects of different types of governing strategies.</p>
+<p>Practically, we will continue to develop our statistical skills, introducing some core concepts from base <code>R</code>.</p>
+<p>Spefically we will see how we can use:</p>
+<ul>
+<li><code>for()</code> loops to repeat a process like calculating a mean, over multiple variables</li>
+<li>self-defined functions to abstract and generalize repeated tasks</li>
+<li>the <code>with()</code> function to avoid having to write out <code>df$variable</code></li>
+<li>different types of <code>apply()</code> functions (namely <code>sapply()</code> and <code>tapply()</code>) to apply functions to a sets of variables (<code>sapply()</code>) and to subgroups within a set of variables (<code>tapply()</code>)</li>
+</ul>
+<p>These are useful skills that broadly help you write your code more efficiently. Things like <code>for()</code> loops, <code>functions()</code> and <code>apply()</code> can reduce the amount of copying, pasting and replacing you have to do, which in turn can reduce the amount of errors induced by forgetting to change a variable name, or mistyping a command.</p>
+<p>But the first time you see a for loop, or define your own function, it will likely seem a bit abstract, and obtuse.That’s ok. The goal is that you have a better, if not perfect, understanding of these concepts which we will use throughout the course.</p>
+</section>
+</section>
+<section id="read-ferwerda-and-miller-2014-and-answer-the-following" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Read Ferwerda and Miller (2014) and answer the following:</h1>
+<ul>
+<li><p><strong>What’s the research question?</strong></p></li>
+<li><p><strong>What’s the theoretical framework?</strong></p></li>
+<li><p><strong>What’s the empirical design?</strong></p></li>
+<li><p><strong>What’s are the main results?</strong></p></li>
+<li><p><strong>What’s the research question?</strong> Ferwerda and Miller (F&amp;M or “the authors” henceforth) are interested in what type of foreign rule generates resistance.</p></li>
+<li><p><strong>What’s the theoretical framework?</strong> The authors argue that different theories in international relations generate different predictions for different types of foreign rule. Some suggest it shouldn’t matter–instead the relative coercive power of the foreign rulers is the primary factor for determining the degree of local resistance. Others argue that devolving power to native authorities may weaken resistance, either by producing more effective counter insurgencies or dampening nationalist reactions to foreign rule. Evaluating these competing theories is complicated by the fact that the type of foreign rule imposed is not random but instead a function of a number of strategic factors that would complicate comparisons between instances of different types of rule–since typically we only observe one type of foreign rule or another.</p></li>
+<li><p><strong>What’s the empirical design?</strong> F&amp;M take advantage of a unique situation that existed in France during the German occupation in WWII, where the north of France was governed by the Germans while the South of France was subject to rule by the local Vichy government. The key feature of this that the dividing line between these types of rule at the local level, appears to be plausibly random. They write:</p></li>
+</ul>
+<blockquote class="blockquote">
+<p>[T]he line was demonstrably arbitrary at the local level. Seemingly blind to existing boundaries, the demarcation line cut across political units such as departments, cantons, and communes as well as geographic features such as mountain ranges and rivers. As a result, the assignment of a commune to either the German or the Vichy zone in areas close to the line may be plausibly viewed as quasi-random.</p>
+</blockquote>
+<p>This claim is key because it allows them to argue that any differences in rates of resistance events on one side of the line compared to another are due to the type of government in those communes (the primary unit of analysis in this study) and not other factors (like the number of targets or the ruggedness of the terrain).</p>
+<p>Ferwerda and Miller propose a regression discontinuity design to test theories about what types of political devolution lead to resistance to foreign rule. The estimand (target of inference, thing they’re trying to estimate) for this identification strategy is</p>
+<p><span class="math display">\[
+\tau = \lim_{z\downarrow c} E[Y_{i,D=1}|X_i\leq z]-\lim_{z\uparrow c} E[Y_{i,D=1}|X_i\geq z]
+\]</span></p>
+<p>F&amp;M’s estimand is just the thing that they’re interested in estimating. So <span class="math inline">\(\tau\)</span> represents the difference of the average number of resistance events for communes north of the demarcation line <span class="math inline">\(\lim_{z\downarrow c} E[Y_{i,D=1}|X_i\leq z]\)</span> minus the average in communes just below the line <span class="math inline">\(\lim_{z\downarrow c} E[Y_{i,D=1}|X_i\leq z]\)</span>. The <span class="math inline">\(E[...]\)</span> gives us the expected value of the quantity inside the brackets, which we can think of as a mean or average. The <span class="math inline">\(Y\)</span> is just a symbol for the outcome, here resistance events (sabotages or fighting). The <span class="math inline">\(D\)</span> is indicator for the type of denotes communes in the north under German rule. The <span class="math inline">\(|X_i\leq z\)</span> reflects the fact that these means are conditional on a communes distance to the demarcation line <span class="math inline">\(X\)</span> up to a certain cutoff <span class="math inline">\(z\)</span>.</p>
+<ul>
+<li><strong>What’s are the main results?</strong> They find that devolving governing authority significantly lowered levels of resistance. That is, there were fewer instances of fighting and sabotage in Vichy controlled communes south of the demarcation line compared to communes north of the demarcation line</li>
+</ul>
+</section>
+<section id="load-the-replication-data-and-set-up-your-workspace" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Load the replication data and set up your workspace</h1>
+<p>Please run the following command to load the data:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the data</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="fu">url</span>(<span class="st">"https://pols2580.paultesta.org/files/data/04_lab.rda"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>And write code to load any packages you think you might need to analyze the data.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Libraries</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"tidyverse"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.4     ✔ readr     2.1.4
+✔ forcats   1.0.0     ✔ stringr   1.5.1
+✔ ggplot2   3.4.4     ✔ tibble    3.2.1
+✔ lubridate 1.9.3     ✔ tidyr     1.3.0
+✔ purrr     1.0.2     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
+</div>
+<p>The next commands tell us a little about the dataset. Specifically, there are 1371 observations (rows) and 14 variables (columns)</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(wrk)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1371   14</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(wrk)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "south"           "distancetotrain" "communications"  "hectares_scaled"
+ [5] "population"      "pctright"        "pctleft"         "sd_elev250"     
+ [9] "near_km"         "s"               "fighting"        "area_sqkm"      
+[13] "north"           "nom_dept"       </code></pre>
+</div>
+</div>
+<p>Here’s a brief codebook to help you along the way</p>
+<ul>
+<li><strong>south</strong>: 0-1 indicator, 1 if south of demarcation line (Vichy), 0 otherwise (Germany)</li>
+<li><strong>distancetotrain</strong>: Distance to nearest train station from center of commune</li>
+<li><strong>communications</strong>: Ordinal variable treated as interval indicating whether a commune had a telephone bureau (3?), a telegraph station (2?), or a post office (1?) or none of these (0?) in 1939</li>
+<li><strong>hectares_scaled</strong>: number of actively farmed hectares as a proxy for forest cover and urbanization</li>
+<li><strong>population</strong>: Population from the 1936 census</li>
+<li><strong>pctright</strong>: Vote shares for the Right from the 1936 national legislative elections</li>
+<li><strong>pctleft</strong>: Vote shares for the Left from the 1936 national legislative elections</li>
+<li><strong>sd_elev250</strong>: The standard deviation of elevation using resampled 250m resolution SRTM elevation data; a proxy for Ruggedness of Terrain</li>
+<li><strong>near_km</strong>: Distance, in kilometers to the Demarcation line</li>
+<li><strong>s</strong>: Count of the number of sabotage activities (all attacks against infrastructure (largely railroad and communications)</li>
+<li><strong>fighting</strong>:: Count of the number of resistance-initiated attacks on German and Vichy personnel</li>
+<li><strong>area_sqkm</strong>: Area in square kilometers</li>
+<li><strong>north</strong>: 0-1 indicator, 1 if north of demarcation line (Germany), 0 otherwise (Vichy)</li>
+<li><strong>nom_dept</strong>: Name of the department.</li>
+</ul>
+<hr>
+</section>
+<section id="whats-the-unit-of-analysis-for-this-study" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> What’s the unit of analysis for this study?</h1>
+<p><strong>Answer:</strong> The primary unit of analysis is the commune.</p>
+</section>
+<section id="describe-the-structure-of-the-data" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Describe the structure of the data</h1>
+<p>Specifically:</p>
+<ul>
+<li>How many departments are there in the sample?</li>
+<li>How many communes in each department are north and south of the demarcation line?</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Write your code here</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">addmargins</span>(<span class="fu">table</span>(wrk<span class="sc">$</span>nom_dept,wrk<span class="sc">$</span>north))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                
+                    0    1  Sum
+  CHARENTE         62  299  361
+  CHER            116  133  249
+  SAONE-ET-LOIRE  336  175  511
+  VIENNE           57  193  250
+  Sum             571  800 1371</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Percentage of commmunes treated with German occupation:</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">apply</span>(<span class="fu">table</span>(wrk<span class="sc">$</span>nom_dept,wrk<span class="sc">$</span>north),<span class="dv">1</span>, prop.table)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   
+     CHARENTE      CHER SAONE-ET-LOIRE VIENNE
+  0 0.1717452 0.4658635      0.6575342  0.228
+  1 0.8282548 0.5341365      0.3424658  0.772</code></pre>
+</div>
+</div>
+<p><strong>Answer:</strong> There are four departments. The number of communes per department varies from 249 in Cher to 551 in Saone-et-Loire. The number of “treated” communes also varies by department from 83 percent in Charente and 77 percent in Vienne to 34 percent in Saone-et-Loire. This variation in size of departments and the percentage of treated communes has potential implications for the analysis that we’ll return to later in the course.</p>
+</section>
+<section id="describe-the-studys-outcomes-of-interest-and-their-distributions" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Describe the study’s outcomes of interest and their distributions</h1>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Write your code here</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Sabotage</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(wrk<span class="sc">$</span>s)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+ 0.0000  0.0000  0.0000  0.4362  0.0000 29.0000 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(wrk<span class="sc">$</span>s,<span class="at">breaks=</span><span class="dv">30</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="04-lab-comments_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(wrk<span class="sc">$</span>s<span class="sc">==</span><span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.8599562</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(wrk<span class="sc">$</span>s)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 598</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fighting</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(wrk<span class="sc">$</span>fighting)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+  0.000   0.000   0.000   0.434   0.000  19.000 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(wrk<span class="sc">$</span>fighting,<span class="at">breaks=</span><span class="dv">30</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="04-lab-comments_files/figure-html/unnamed-chunk-6-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(wrk<span class="sc">$</span>fighting<span class="sc">==</span><span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.8103574</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(wrk<span class="sc">$</span>fighting)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 595</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(wrk<span class="sc">$</span>fighting)<span class="sc">+</span><span class="fu">sum</span>(wrk<span class="sc">$</span>s) <span class="co"># differs from number reported in paper, probably due to exclusion of missing cases</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1193</code></pre>
+</div>
+</div>
+<p><strong>Answer:</strong> The primary outcomes of interest are sabotage events and fighting events at the commune level from December 1942 to September 1944. There were a total of 598 unique sabotage events and 595 unique fighting events during this time period in these communes. Both types of events are relatively rare: 85 percent of communes have no sabotage events and 81 have no fighting events. Some communes have a great deal, with the maximum number of sabotage events being 29 and the maximum number of fighting events being 19.</p>
+<hr>
+</section>
+<section id="what-is-the-treatment-in-this-study" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> What is the “treatment” in this study?</h1>
+<p>What variable or variables in the data describe treatment status?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Write your code here</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(wrk<span class="sc">$</span>north)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+  0   1 
+571 800 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(wrk<span class="sc">$</span>north,wrk<span class="sc">$</span>south)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   
+      0   1
+  0   0 571
+  1 800   0</code></pre>
+</div>
+</div>
+<p><strong>Answer:</strong> The treatment is defined as the type of government a commune experienced during the war, defined relative to the demarcation line. Communes north of the demarcation line experienced German occupation (N=800), while communes south of the line were subject to Vichy rule (N=571)</p>
+<hr>
+<p>So one of the implications of this design is that a commune’s status relative to the demarcation line (and thus type of government/devolution of power) is “as-if” random. There’s no way to really prove this claim, but we can test some of its observable implications.</p>
+<p>Specifically, if the Germans essentially drew the demarcation line at random (at least relative to the local boundaries of specific communes), then the observable characteristics of communes north of the line (under German occupation) and south of the line (under Vichy rule) should be similar.</p>
+</section>
+<section id="calculate-the-means-and-differences-of-means-for-all-communes-north-and-south-of-the-demarcation-line-for-the-following-variables" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> Calculate the means and differences of means for all communes north and south of the demarcation line for the following variables:</h1>
+<ul>
+<li><strong>distancetotrain</strong>: Distance to nearest train station from center of commune</li>
+<li><strong>communications</strong>: Ordinal variable treated as interval indicating whether a commune had a telephone bureau (3?), a telegraph station (2?), or a post office (1?) or none of these (0?) in 1939</li>
+<li><strong>hectares_scaled</strong>: number of actively farmed hectares as a proxy for forest cover and urbanization</li>
+<li><strong>population</strong>: Population from the 1936 census</li>
+<li><strong>pctright</strong>: Vote shares for the Right from the 1936 national legislative elections</li>
+<li><strong>pctleft</strong>: Vote shares for the Left from the 1936 national legislative elections</li>
+<li><strong>sd_elev250</strong>: The standard deviation of elevation using resampled 250m resolution SRTM elevation data; a proxy for Ruggedness of Terrain</li>
+<li><strong>near_km</strong></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Write your code here</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="co"># You might find something like the following useful</span></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a><span class="do">## List of covariates</span></span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a><span class="co"># the_vars&lt;-c("distancetotrain","communications","hectares_scaled","population",</span></span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a><span class="co">#           "pctright","pctleft","sd_elev250","near_km")</span></span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a><span class="do">## Holders for means</span></span>
+<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a><span class="co"># north_means&lt;-c()</span></span>
+<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a><span class="co"># south_means&lt;-c()</span></span>
+<span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-12"><a href="#cb34-12" aria-hidden="true" tabindex="-1"></a><span class="co"># #Replace ???? in code below with some useful logical statement</span></span>
+<span id="cb34-13"><a href="#cb34-13" aria-hidden="true" tabindex="-1"></a><span class="co"># for(i in the_vars){</span></span>
+<span id="cb34-14"><a href="#cb34-14" aria-hidden="true" tabindex="-1"></a><span class="co">#      print(paste("Now summarizing",i))</span></span>
+<span id="cb34-15"><a href="#cb34-15" aria-hidden="true" tabindex="-1"></a><span class="co">#     north_means[i]&lt;-mean(wrk[????,i])</span></span>
+<span id="cb34-16"><a href="#cb34-16" aria-hidden="true" tabindex="-1"></a><span class="co">#     south_means[i]&lt;-mean(wrk[????,i])</span></span>
+<span id="cb34-17"><a href="#cb34-17" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb34-18"><a href="#cb34-18" aria-hidden="true" tabindex="-1"></a><span class="co">#     </span></span>
+<span id="cb34-19"><a href="#cb34-19" aria-hidden="true" tabindex="-1"></a><span class="co"># }</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>Answer:</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Write your code here</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>the_vars<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="st">"distancetotrain"</span>,<span class="st">"communications"</span>,<span class="st">"hectares_scaled"</span>,<span class="st">"population"</span>,</span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>            <span class="st">"pctright"</span>,<span class="st">"pctleft"</span>,<span class="st">"sd_elev250"</span>,<span class="st">"near_km"</span>)</span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>north_means<span class="ot">&lt;-</span><span class="fu">c</span>()</span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>south_means<span class="ot">&lt;-</span><span class="fu">c</span>()</span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> the_vars){</span>
+<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">"Now summarizing"</span>,i))</span>
+<span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a>    north_means[i]<span class="ot">&lt;-</span><span class="fu">mean</span>(wrk[wrk<span class="sc">$</span>north<span class="sc">==</span><span class="dv">1</span>,i],<span class="at">na.rm=</span>T)</span>
+<span id="cb35-12"><a href="#cb35-12" aria-hidden="true" tabindex="-1"></a>    south_means[i]<span class="ot">&lt;-</span><span class="fu">mean</span>(wrk[wrk<span class="sc">$</span>north<span class="sc">==</span><span class="dv">0</span>,i],<span class="at">na.rm=</span>T)</span>
+<span id="cb35-13"><a href="#cb35-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-14"><a href="#cb35-14" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb35-15"><a href="#cb35-15" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Now summarizing distancetotrain"
+[1] "Now summarizing communications"
+[1] "Now summarizing hectares_scaled"
+[1] "Now summarizing population"
+[1] "Now summarizing pctright"
+[1] "Now summarizing pctleft"
+[1] "Now summarizing sd_elev250"
+[1] "Now summarizing near_km"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>diff_means<span class="ot">&lt;-</span>north_means<span class="sc">-</span>south_means</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">cbind</span>(north_means,south_means,diff_means))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: right;">north_means</th>
+<th style="text-align: right;">south_means</th>
+<th style="text-align: right;">diff_means</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">distancetotrain</td>
+<td style="text-align: right;">4.0037500</td>
+<td style="text-align: right;">4.2889667</td>
+<td style="text-align: right;">-0.2852167</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">communications</td>
+<td style="text-align: right;">1.5375000</td>
+<td style="text-align: right;">1.4956217</td>
+<td style="text-align: right;">0.0418783</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">hectares_scaled</td>
+<td style="text-align: right;">51.2661532</td>
+<td style="text-align: right;">39.6845843</td>
+<td style="text-align: right;">11.5815689</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">population</td>
+<td style="text-align: right;">997.4450000</td>
+<td style="text-align: right;">740.1295972</td>
+<td style="text-align: right;">257.3154028</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">pctright</td>
+<td style="text-align: right;">0.3969024</td>
+<td style="text-align: right;">0.2743438</td>
+<td style="text-align: right;">0.1225586</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">pctleft</td>
+<td style="text-align: right;">0.3930110</td>
+<td style="text-align: right;">0.5333780</td>
+<td style="text-align: right;">-0.1403671</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">sd_elev250</td>
+<td style="text-align: right;">20.3176547</td>
+<td style="text-align: right;">25.5892396</td>
+<td style="text-align: right;">-5.2715849</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">near_km</td>
+<td style="text-align: right;">23.9157269</td>
+<td style="text-align: right;">19.8388128</td>
+<td style="text-align: right;">4.0769140</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Answer:</strong> See above</p>
+<hr>
+<p>So how should we make sense of these differences? Are they substantively large? Do they provide support for or against a claim that the demarcation lines is “as if” random?</p>
+<p>Answering these questions has proved difficult, since different variables are measured on different scales, and it’s hard to quantify what big is.</p>
+<p>Last week, we saw that we could assess these differences relative to a claim about the world (“i.e.&nbsp;if there were no difference between theses groups, how likely is it that we would a difference as large as we did”).</p>
+<p>Today, we’ll consider another way of thinking about how big differences are, which is to think about how much the difference might vary.</p>
+<p>We know from our first week on measurement, that things like variance and standard deviations can be used to describe the spread of a random variable’s distribution (how much observations tend to vary around their means).</p>
+<p>Means and differences of means are functions of variables, and so we can think about these quantities as having their own distributions and spreads.</p>
+<p>So one way to compare the magnitude of the differences you calcuated above, is to standardize each difference by its standard error – that is, we could divide each difference by the standard deviation of the sampling distribution of that difference (how much we might expect that difference to vary). Don’t worry about the terminology right now–we’ll cover these concepts in greater detail later in the course.</p>
+<p>For now, we’ll use as a rough rule of thumb, that <strong>standardized differences greater than 2 are “big,”</strong> that is, they are unlikely to arise by chance and thus provide evidence against the claim that the demarcation line was drawn as if random.</p>
+<p>The code below <strong>defines a function</strong> to calculate these standardized differences and returns the standardized difference (as well as the means, difference of means, and standard error of that difference) for the <code>distancetotrain</code> variable.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>std_diff_fn <span class="ot">&lt;-</span> <span class="cf">function</span>(x){</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># inputs</span></span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># x: the variable we want to calculate a standardized difference of</span></span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stopifnot</span>(<span class="fu">is.character</span>(x))</span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>  <span class="co">#1.  Calculate means and difference of means</span></span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a>  mu1 <span class="ot">&lt;-</span> <span class="fu">with</span>(wrk, <span class="fu">mean</span>(wrk[north<span class="sc">==</span><span class="dv">1</span>, x],<span class="at">na.rm=</span>T))</span>
+<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a>  mu0 <span class="ot">&lt;-</span> <span class="fu">with</span>(wrk, <span class="fu">mean</span>(wrk[north<span class="sc">==</span><span class="dv">0</span>, x],<span class="at">na.rm=</span>T))</span>
+<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a>  diff <span class="ot">&lt;-</span> mu1 <span class="sc">-</span> mu0</span>
+<span id="cb39-10"><a href="#cb39-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-11"><a href="#cb39-11" aria-hidden="true" tabindex="-1"></a>  <span class="co">#2. Calculate "standard error" of difference</span></span>
+<span id="cb39-12"><a href="#cb39-12" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Assuming unequal variance of groups</span></span>
+<span id="cb39-13"><a href="#cb39-13" aria-hidden="true" tabindex="-1"></a>  sd1 <span class="ot">&lt;-</span> <span class="fu">with</span>(wrk, <span class="fu">sd</span>(wrk[north<span class="sc">==</span><span class="dv">1</span>, x],<span class="at">na.rm=</span>T))</span>
+<span id="cb39-14"><a href="#cb39-14" aria-hidden="true" tabindex="-1"></a>  sd0 <span class="ot">&lt;-</span> <span class="fu">with</span>(wrk, <span class="fu">sd</span>(wrk[north<span class="sc">==</span><span class="dv">0</span>, x],<span class="at">na.rm=</span>T))</span>
+<span id="cb39-15"><a href="#cb39-15" aria-hidden="true" tabindex="-1"></a>  n1 <span class="ot">&lt;-</span> <span class="fu">with</span>(wrk, <span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(wrk[north<span class="sc">==</span><span class="dv">1</span>, x])))</span>
+<span id="cb39-16"><a href="#cb39-16" aria-hidden="true" tabindex="-1"></a>  n0 <span class="ot">&lt;-</span> <span class="fu">with</span>(wrk, <span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(wrk[north<span class="sc">==</span><span class="dv">0</span>, x])))</span>
+<span id="cb39-17"><a href="#cb39-17" aria-hidden="true" tabindex="-1"></a>  se <span class="ot">&lt;-</span> <span class="fu">sqrt</span>( sd1<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span>n1 <span class="sc">+</span> sd0<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span>n0)</span>
+<span id="cb39-18"><a href="#cb39-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-19"><a href="#cb39-19" aria-hidden="true" tabindex="-1"></a>  <span class="co">#3. Standardize difference</span></span>
+<span id="cb39-20"><a href="#cb39-20" aria-hidden="true" tabindex="-1"></a>  std_diff <span class="ot">&lt;-</span> diff<span class="sc">/</span>se</span>
+<span id="cb39-21"><a href="#cb39-21" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb39-22"><a href="#cb39-22" aria-hidden="true" tabindex="-1"></a>  <span class="co">#4. Combine Results</span></span>
+<span id="cb39-23"><a href="#cb39-23" aria-hidden="true" tabindex="-1"></a>  results <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">North=</span>mu1, <span class="at">South=</span>mu0,<span class="at">Differnece=</span>diff, <span class="at">SE =</span> se, <span class="at">StdDiff =</span> std_diff)</span>
+<span id="cb39-24"><a href="#cb39-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(results)</span>
+<span id="cb39-25"><a href="#cb39-25" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb39-26"><a href="#cb39-26" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb39-27"><a href="#cb39-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-28"><a href="#cb39-28" aria-hidden="true" tabindex="-1"></a><span class="fu">std_diff_fn</span>(<span class="st">"distancetotrain"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     North      South Differnece         SE    StdDiff 
+ 4.0037500  4.2889667 -0.2852167  0.2086812 -1.3667580 </code></pre>
+</div>
+</div>
+</section>
+<section id="use-the-sapply-function-to-apply-the-std_diff_fn-to-the-covariates-in-the_vars." class="level1" data-number="8">
+<h1 data-number="8"><span class="header-section-number">8</span> Use the <code>sapply()</code> function to apply, the <code>std_diff_fn()</code> to the covariates in <code>the_vars.</code></h1>
+<p>Evaluate these standardized differences in relation to the authors’ claims that the demarcation line can be seen as being as-if randomly assigned.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Write your code here</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="co"># hint:</span></span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a><span class="co"># sapply(some object here, some function here)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>Answer:</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>std_diffs <span class="ot">&lt;-</span> <span class="fu">sapply</span>(the_vars,std_diff_fn)</span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Unformatted</span></span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>std_diffs</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>           distancetotrain communications hectares_scaled population
+North            4.0037500     1.53750000       51.266153 997.445000
+South            4.2889667     1.49562172       39.684584 740.129597
+Differnece      -0.2852167     0.04187828       11.581569 257.315403
+SE               0.2086812     0.07629262        1.850539 123.135504
+StdDiff         -1.3667580     0.54891659        6.258484   2.089693
+              pctright       pctleft sd_elev250    near_km
+North       0.39690241   0.393010980  20.317655 23.9157269
+South       0.27434378   0.533378040  25.589240 19.8388128
+Differnece  0.12255864  -0.140367060  -5.271585  4.0769140
+SE          0.01057544   0.009591825   1.006851  0.7158021
+StdDiff    11.58898370 -14.634030948  -5.235715  5.6955885</code></pre>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Nicely formatted</span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(std_diffs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 9%">
+<col style="width: 14%">
+<col style="width: 13%">
+<col style="width: 14%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 10%">
+<col style="width: 9%">
+<col style="width: 9%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: right;">distancetotrain</th>
+<th style="text-align: right;">communications</th>
+<th style="text-align: right;">hectares_scaled</th>
+<th style="text-align: right;">population</th>
+<th style="text-align: right;">pctright</th>
+<th style="text-align: right;">pctleft</th>
+<th style="text-align: right;">sd_elev250</th>
+<th style="text-align: right;">near_km</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">North</td>
+<td style="text-align: right;">4.0037500</td>
+<td style="text-align: right;">1.5375000</td>
+<td style="text-align: right;">51.266153</td>
+<td style="text-align: right;">997.445000</td>
+<td style="text-align: right;">0.3969024</td>
+<td style="text-align: right;">0.3930110</td>
+<td style="text-align: right;">20.317655</td>
+<td style="text-align: right;">23.9157269</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">South</td>
+<td style="text-align: right;">4.2889667</td>
+<td style="text-align: right;">1.4956217</td>
+<td style="text-align: right;">39.684584</td>
+<td style="text-align: right;">740.129597</td>
+<td style="text-align: right;">0.2743438</td>
+<td style="text-align: right;">0.5333780</td>
+<td style="text-align: right;">25.589240</td>
+<td style="text-align: right;">19.8388128</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Differnece</td>
+<td style="text-align: right;">-0.2852167</td>
+<td style="text-align: right;">0.0418783</td>
+<td style="text-align: right;">11.581569</td>
+<td style="text-align: right;">257.315403</td>
+<td style="text-align: right;">0.1225586</td>
+<td style="text-align: right;">-0.1403671</td>
+<td style="text-align: right;">-5.271585</td>
+<td style="text-align: right;">4.0769140</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">SE</td>
+<td style="text-align: right;">0.2086812</td>
+<td style="text-align: right;">0.0762926</td>
+<td style="text-align: right;">1.850539</td>
+<td style="text-align: right;">123.135504</td>
+<td style="text-align: right;">0.0105754</td>
+<td style="text-align: right;">0.0095918</td>
+<td style="text-align: right;">1.006851</td>
+<td style="text-align: right;">0.7158021</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">StdDiff</td>
+<td style="text-align: right;">-1.3667580</td>
+<td style="text-align: right;">0.5489166</td>
+<td style="text-align: right;">6.258484</td>
+<td style="text-align: right;">2.089693</td>
+<td style="text-align: right;">11.5889837</td>
+<td style="text-align: right;">-14.6340309</td>
+<td style="text-align: right;">-5.235715</td>
+<td style="text-align: right;">5.6955885</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Answer:</strong> The claim of as-if randomization leads us to expect that communes north and south of the line should be similar on these variables that we can measure (as well as those we can’t). But having caluclated standardized differences, it looks like the communes north of the demarcation line differ in a number of ways from the communes south of the demarcation line. They tend to have more farmland, larger populations, a greater percentage of people who voted for right-leaning parties in the last election, lower overall elevations. So the claim for the full set of communes seems somewhat unplausible.</p>
+<hr>
+<p>Hmmm… so using our “standardized differences bigger than two” rule of thumb, we became a little bit skeptical about whether the claim of as-if random was justified for the whole sample.</p>
+<p>Now we’ll explore whether for a subset of the sample, this claims appears more plausible.</p>
+<p>Specifically, we’ll look at whether for communes within a narrower window or bandwidth around the demarcation line differences in observed covariates between communes north and south of the line are small, and thus seem consistent with a claim that the line of demarcation is as good as randomly assigned for these communes.</p>
+<p>To do so, we’ll modify our <code>std_diff_fn</code> and create a new function called <code>new_std_diff_fn</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>new_std_diff_fn <span class="ot">&lt;-</span> <span class="cf">function</span>(x, <span class="at">c =</span> <span class="fu">max</span>(wrk<span class="sc">$</span>near_km,<span class="at">na.rm=</span>T)){</span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># inputs</span></span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># x: the variable we want to calculate a standardized difference of</span></span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># c: the cutoff distance from the borderd</span></span>
+<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stopifnot</span>(<span class="fu">is.character</span>(x))</span>
+<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stopifnot</span>(<span class="fu">is.numeric</span>(c))</span>
+<span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-8"><a href="#cb45-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># What's going on here?</span></span>
+<span id="cb45-9"><a href="#cb45-9" aria-hidden="true" tabindex="-1"></a>  wrk <span class="ot">&lt;-</span> wrk[wrk<span class="sc">$</span>near_km <span class="sc">&lt;=</span> c,]</span>
+<span id="cb45-10"><a href="#cb45-10" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb45-11"><a href="#cb45-11" aria-hidden="true" tabindex="-1"></a>  <span class="co">#1.  Calculate means and difference of means</span></span>
+<span id="cb45-12"><a href="#cb45-12" aria-hidden="true" tabindex="-1"></a>  mu1 <span class="ot">&lt;-</span> <span class="fu">with</span>(wrk, <span class="fu">mean</span>(wrk[north<span class="sc">==</span><span class="dv">1</span>, x],<span class="at">na.rm=</span>T))</span>
+<span id="cb45-13"><a href="#cb45-13" aria-hidden="true" tabindex="-1"></a>  mu0 <span class="ot">&lt;-</span> <span class="fu">with</span>(wrk, <span class="fu">mean</span>(wrk[north<span class="sc">==</span><span class="dv">0</span>, x],<span class="at">na.rm=</span>T))</span>
+<span id="cb45-14"><a href="#cb45-14" aria-hidden="true" tabindex="-1"></a>  diff <span class="ot">&lt;-</span> mu1 <span class="sc">-</span> mu0</span>
+<span id="cb45-15"><a href="#cb45-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-16"><a href="#cb45-16" aria-hidden="true" tabindex="-1"></a>  <span class="co">#2. Calculate "standard error" of difference</span></span>
+<span id="cb45-17"><a href="#cb45-17" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Assuming unequal variance of groups</span></span>
+<span id="cb45-18"><a href="#cb45-18" aria-hidden="true" tabindex="-1"></a>  sd1 <span class="ot">&lt;-</span> <span class="fu">with</span>(wrk, <span class="fu">sd</span>(wrk[north<span class="sc">==</span><span class="dv">1</span>, x],<span class="at">na.rm=</span>T))</span>
+<span id="cb45-19"><a href="#cb45-19" aria-hidden="true" tabindex="-1"></a>  sd0 <span class="ot">&lt;-</span> <span class="fu">with</span>(wrk, <span class="fu">sd</span>(wrk[north<span class="sc">==</span><span class="dv">0</span>, x],<span class="at">na.rm=</span>T))</span>
+<span id="cb45-20"><a href="#cb45-20" aria-hidden="true" tabindex="-1"></a>  n1 <span class="ot">&lt;-</span> <span class="fu">with</span>(wrk, <span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(wrk[north<span class="sc">==</span><span class="dv">1</span>, x])))</span>
+<span id="cb45-21"><a href="#cb45-21" aria-hidden="true" tabindex="-1"></a>  n0 <span class="ot">&lt;-</span> <span class="fu">with</span>(wrk, <span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(wrk[north<span class="sc">==</span><span class="dv">0</span>, x])))</span>
+<span id="cb45-22"><a href="#cb45-22" aria-hidden="true" tabindex="-1"></a>  se <span class="ot">&lt;-</span> <span class="fu">sqrt</span>( sd1<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span>n1 <span class="sc">+</span> sd0<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span>n0)</span>
+<span id="cb45-23"><a href="#cb45-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-24"><a href="#cb45-24" aria-hidden="true" tabindex="-1"></a>  <span class="co">#3. Standardize difference</span></span>
+<span id="cb45-25"><a href="#cb45-25" aria-hidden="true" tabindex="-1"></a>  std_diff <span class="ot">&lt;-</span> diff<span class="sc">/</span>se</span>
+<span id="cb45-26"><a href="#cb45-26" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb45-27"><a href="#cb45-27" aria-hidden="true" tabindex="-1"></a>  <span class="co">#4. Combine Results</span></span>
+<span id="cb45-28"><a href="#cb45-28" aria-hidden="true" tabindex="-1"></a>  results <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">North=</span>mu1, <span class="at">South=</span>mu0,<span class="at">Differnece=</span>diff, <span class="at">SE =</span> se, <span class="at">StdDiff =</span> std_diff)</span>
+<span id="cb45-29"><a href="#cb45-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(results)</span>
+<span id="cb45-30"><a href="#cb45-30" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb45-31"><a href="#cb45-31" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb45-32"><a href="#cb45-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-33"><a href="#cb45-33" aria-hidden="true" tabindex="-1"></a><span class="fu">new_std_diff_fn</span>(<span class="st">"distancetotrain"</span>, <span class="at">c=</span><span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     North      South Differnece         SE    StdDiff 
+ 3.5290323  4.0909091 -0.5618768  0.4131077 -1.3601219 </code></pre>
+</div>
+</div>
+</section>
+<section id="explain-how-new_std_diff_fn-differences-from-std_diff_fn" class="level1" data-number="9">
+<h1 data-number="9"><span class="header-section-number">9</span> Explain how <code>new_std_diff_fn()</code> differences from <code>std_diff_fn()</code></h1>
+<p><strong>Answer:</strong> Our modified <code>new_std_diff_fn</code> contains an additional argument <code>c</code>, whose default value is set to <code>c = max(wrk$near_km,na.rm=T)</code>.</p>
+<p>The <code>c</code> argument is then used to subset the data inside the function, <code>wrk &lt;- wrk[wrk$near_km &lt;= c,]</code>, so that the function returns calculations based off the values for communes that are within <code>c</code> km of the demarcation line.</p>
+<hr>
+<p>Great! So this modified function can calculate conditional means for a subset of observations (communes) within <code>c</code> kilometers of the demarcation line.</p>
+</section>
+<section id="does-this-claim-appear-more-or-less-plausible-within-10-km-of-the-line" class="level1" data-number="10">
+<h1 data-number="10"><span class="header-section-number">10</span> Does this claim appear more or less plausible within 10 km of the line?</h1>
+<p>Use <code>new_std_diff_fn()</code> to calculate the standardized differnces for the covariates in <code>the_vars</code> for communes within 10 km north or south of the demarcation line (i.e., c=10).</p>
+<p>Evaluate these differences as they relate to F&amp;M’s claim of “as-if” randomization.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Write your code here</span></span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sapply</span>(the_vars,new_std_diff_fn,<span class="at">c=</span><span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>           distancetotrain communications hectares_scaled population   pctright
+North            3.5290323      1.5548387       48.595407 1257.76774 0.28311626
+South            4.0909091      1.4125874       41.646461  707.51748 0.25136878
+Differnece      -0.5618768      0.1422513        6.948946  550.25026 0.03174748
+SE               0.4131077      0.1617868        3.686990  367.73333 0.02667063
+StdDiff         -1.3601219      0.8792515        1.884721    1.49633 1.19035350
+               pctleft sd_elev250    near_km
+North       0.49014613 17.6661522  6.1250279
+South       0.53676801 19.2212878  6.3868316
+Differnece -0.04662189 -1.5551356 -0.2618037
+SE          0.02388174  1.6013191  0.2594980
+StdDiff    -1.95219806 -0.9711591 -1.0088852</code></pre>
+</div>
+</div>
+<p><strong>Answer:</strong> For the subset of communes within 10 km of the line, the differences in observed covariates are smaller and the claim of as-if randomization, based on these observable covariates, seems more plausible.</p>
+<hr>
+<p>So the identifying assumption seems more plausible for communes closer to the demarcation line. Now let’s estimate the “effect” of German rule on resistance activity (sabotage and fighting) for the full sample and for the subset of communes within 10 km of the demarcation line.</p>
+</section>
+<section id="does-devolution-reduce-resistance" class="level1" data-number="11">
+<h1 data-number="11"><span class="header-section-number">11</span> Does devolution reduce resistance?</h1>
+<p>Calculate the difference in the mean number of sabotage events and fighting events for communes north and south of the demarcation line, for the full sample of communes and the communes within 10 km of the demarcation line. Provide a substantive interpretation of these differences.</p>
+<p>You can use logical indexing, or the <code>new_std_diff_fn</code> if you’d like. Try to do it both ways to savor the joy of logical indexing and the magic of functions.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Write your code here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>Answer:</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Sabotage</span></span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Full sample</span></span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>mu_s_north<span class="ot">&lt;-</span><span class="fu">mean</span>(wrk<span class="sc">$</span>s[wrk<span class="sc">$</span>north<span class="sc">==</span><span class="dv">1</span>])</span>
+<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a>mu_s_south<span class="ot">&lt;-</span><span class="fu">mean</span>(wrk<span class="sc">$</span>s[wrk<span class="sc">$</span>north<span class="sc">==</span><span class="dv">0</span>])</span>
+<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a>diff_s<span class="ot">&lt;-</span>mu_s_north<span class="sc">-</span>mu_s_south</span>
+<span id="cb50-6"><a href="#cb50-6" aria-hidden="true" tabindex="-1"></a>diff_s</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.1022176</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 10k</span></span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>mu_s_north_10k<span class="ot">&lt;-</span><span class="fu">mean</span>(wrk<span class="sc">$</span>s[wrk<span class="sc">$</span>north<span class="sc">==</span><span class="dv">1</span><span class="sc">&amp;</span>wrk<span class="sc">$</span>near_km<span class="sc">&lt;=</span><span class="dv">10</span>])</span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>mu_s_south_10k<span class="ot">&lt;-</span><span class="fu">mean</span>(wrk<span class="sc">$</span>s[wrk<span class="sc">$</span>north<span class="sc">==</span><span class="dv">0</span><span class="sc">&amp;</span>wrk<span class="sc">$</span>near_km<span class="sc">&lt;=</span><span class="dv">10</span>])</span>
+<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a>diff_s_10k<span class="ot">&lt;-</span>mu_s_north_10k<span class="sc">-</span>mu_s_south_10k</span>
+<span id="cb52-5"><a href="#cb52-5" aria-hidden="true" tabindex="-1"></a>diff_s_10k</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.6325739</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fighting</span></span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Full Sample</span></span>
+<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a>mu_f_north<span class="ot">&lt;-</span><span class="fu">mean</span>(wrk<span class="sc">$</span>fighting[wrk<span class="sc">$</span>north<span class="sc">==</span><span class="dv">1</span>])</span>
+<span id="cb54-4"><a href="#cb54-4" aria-hidden="true" tabindex="-1"></a>mu_f_south<span class="ot">&lt;-</span><span class="fu">mean</span>(wrk<span class="sc">$</span>fighting[wrk<span class="sc">$</span>north<span class="sc">==</span><span class="dv">0</span>])</span>
+<span id="cb54-5"><a href="#cb54-5" aria-hidden="true" tabindex="-1"></a>diff_f<span class="ot">&lt;-</span>mu_f_north<span class="sc">-</span>mu_f_south</span>
+<span id="cb54-6"><a href="#cb54-6" aria-hidden="true" tabindex="-1"></a>diff_f</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -0.08161121</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 10k</span></span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(wrk<span class="sc">$</span>fighting[wrk<span class="sc">$</span>north<span class="sc">==</span><span class="dv">1</span><span class="sc">&amp;</span>wrk<span class="sc">$</span>near_km<span class="sc">&lt;=</span><span class="dv">10</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 97</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(wrk<span class="sc">$</span>fighting[wrk<span class="sc">$</span>north<span class="sc">==</span><span class="dv">0</span><span class="sc">&amp;</span>wrk<span class="sc">$</span>near_km<span class="sc">&lt;=</span><span class="dv">10</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 92</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>mu_f_north_10k<span class="ot">&lt;-</span><span class="fu">mean</span>(wrk<span class="sc">$</span>fighting[wrk<span class="sc">$</span>north<span class="sc">==</span><span class="dv">1</span><span class="sc">&amp;</span>wrk<span class="sc">$</span>near_km<span class="sc">&lt;=</span><span class="dv">10</span>])</span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>mu_f_south_10k<span class="ot">&lt;-</span><span class="fu">mean</span>(wrk<span class="sc">$</span>fighting[wrk<span class="sc">$</span>north<span class="sc">==</span><span class="dv">0</span><span class="sc">&amp;</span>wrk<span class="sc">$</span>near_km<span class="sc">&lt;=</span><span class="dv">10</span>])</span>
+<span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a>diff_f_10k<span class="ot">&lt;-</span>mu_f_north_10k<span class="sc">-</span>mu_f_south_10k</span>
+<span id="cb60-4"><a href="#cb60-4" aria-hidden="true" tabindex="-1"></a>diff_f_10k</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -0.01755019</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Using the new_std_diff_fn</span></span>
+<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sapply</span>(<span class="st">"s"</span>,new_std_diff_fn)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                    s
+North      0.47875000
+South      0.37653240
+Differnece 0.10221760
+SE         0.09655532
+StdDiff    1.05864287</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sapply</span>(<span class="st">"fighting"</span>,new_std_diff_fn)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>              fighting
+North       0.40000000
+South       0.48161121
+Differnece -0.08161121
+SE          0.07440703
+StdDiff    -1.09682120</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sapply</span>(<span class="st">"s"</span>,new_std_diff_fn,<span class="at">c=</span><span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                   s
+North      1.0451613
+South      0.4125874
+Differnece 0.6325739
+SE         0.3038117
+StdDiff    2.0821249</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sapply</span>(<span class="st">"fighting"</span>,new_std_diff_fn,<span class="at">c=</span><span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>              fighting
+North       0.62580645
+South       0.64335664
+Differnece -0.01755019
+SE          0.19431084
+StdDiff    -0.09032019</code></pre>
+</div>
+</div>
+<p><strong>Answer:</strong> There are 0.1022176 more sabotage events in communes under German rule in the full sample and -0.0816112 fewer fighting events. Substantively, we might say that for every 10 additional communes under German rule we would expect to see 1 additional act of sabotage.</p>
+<p>Within 10 km of the line there are 0.6325739 more sabotage events and -0.0175502 fewer fighting events. So now for every 10 additional communes under German rule (within 10 km of the line) we might expect 6 more sabotage events. Only the difference in sabotage events within 10 km appears to pass our bigger than two standardized differences rule of thumb.</p>
+<p>Note these results differ from those reported in the text, in part because F&amp;M are weighting events by area of the commune.</p>
+<hr>
+</section>
+<section id="repeat-the-calculations-above-but-this-time-comparing-the-differences-between-communes-north-and-south-of-the-line-within-the-same-department." class="level1" data-number="12">
+<h1 data-number="12"><span class="header-section-number">12</span> Repeat the calculations above, but this time comparing the differences between communes north and south of the line within the same department.</h1>
+<p>Comment on the relative similarity of or differences in the findings from estimating effects for each department compared to pooling all the communes together?</p>
+<p>Below is some code to get you started the hard way, you could also try modifying the <code>new_std_diff_fn</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Here's some code to get you started</span></span>
+<span id="cb70-2"><a href="#cb70-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb70-3"><a href="#cb70-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 10k</span></span>
+<span id="cb70-4"><a href="#cb70-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Sabotage</span></span>
+<span id="cb70-5"><a href="#cb70-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate means by department for communes in the north within 10 km of line</span></span>
+<span id="cb70-6"><a href="#cb70-6" aria-hidden="true" tabindex="-1"></a>mus_s_north_dep_10k <span class="ot">&lt;-</span> <span class="fu">with</span>(wrk[wrk<span class="sc">$</span>north<span class="sc">==</span><span class="dv">1</span> <span class="sc">&amp;</span> wrk<span class="sc">$</span>near_km<span class="sc">&lt;=</span><span class="dv">10</span>,], <span class="fu">tapply</span>(s, nom_dept, mean))</span>
+<span id="cb70-7"><a href="#cb70-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb70-8"><a href="#cb70-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate means by department for communes in the south within 10 km of line</span></span>
+<span id="cb70-9"><a href="#cb70-9" aria-hidden="true" tabindex="-1"></a>mus_s_south_dep_10k <span class="ot">&lt;-</span> <span class="fu">with</span>(wrk[wrk<span class="sc">$</span>north<span class="sc">==</span><span class="dv">0</span> <span class="sc">&amp;</span> wrk<span class="sc">$</span>near_km<span class="sc">&lt;=</span><span class="dv">10</span>,], <span class="fu">tapply</span>(s, nom_dept, mean))</span>
+<span id="cb70-10"><a href="#cb70-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb70-11"><a href="#cb70-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate differences within each department</span></span>
+<span id="cb70-12"><a href="#cb70-12" aria-hidden="true" tabindex="-1"></a>diffs_s_south_dep_10k <span class="ot">&lt;-</span> mus_s_north_dep_10k<span class="sc">-</span>mus_s_south_dep_10k</span>
+<span id="cb70-13"><a href="#cb70-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb70-14"><a href="#cb70-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Print differences.</span></span>
+<span id="cb70-15"><a href="#cb70-15" aria-hidden="true" tabindex="-1"></a>diffs_s_south_dep_10k</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      CHARENTE           CHER SAONE-ET-LOIRE         VIENNE 
+     0.1111111      0.7260870      1.2085572      0.2758621 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="do">###########</span></span>
+<span id="cb72-2"><a href="#cb72-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Your turn</span></span>
+<span id="cb72-3"><a href="#cb72-3" aria-hidden="true" tabindex="-1"></a><span class="do">###########</span></span>
+<span id="cb72-4"><a href="#cb72-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-5"><a href="#cb72-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 10k</span></span>
+<span id="cb72-6"><a href="#cb72-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Fighting</span></span>
+<span id="cb72-7"><a href="#cb72-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-8"><a href="#cb72-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-9"><a href="#cb72-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Full sample </span></span>
+<span id="cb72-10"><a href="#cb72-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Sabotage</span></span>
+<span id="cb72-11"><a href="#cb72-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-12"><a href="#cb72-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-13"><a href="#cb72-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Full sample </span></span>
+<span id="cb72-14"><a href="#cb72-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Fighting</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Write your code here</span></span>
+<span id="cb73-2"><a href="#cb73-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-3"><a href="#cb73-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Full Sample</span></span>
+<span id="cb73-4"><a href="#cb73-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Sabotage</span></span>
+<span id="cb73-5"><a href="#cb73-5" aria-hidden="true" tabindex="-1"></a>mus_s_north_dep<span class="ot">&lt;-</span><span class="fu">with</span>(wrk[wrk<span class="sc">$</span>north<span class="sc">==</span><span class="dv">1</span>,],<span class="fu">tapply</span>(s,nom_dept,mean))</span>
+<span id="cb73-6"><a href="#cb73-6" aria-hidden="true" tabindex="-1"></a>mus_s_south_dep<span class="ot">&lt;-</span><span class="fu">with</span>(wrk[wrk<span class="sc">$</span>north<span class="sc">==</span><span class="dv">0</span>,],<span class="fu">tapply</span>(s,nom_dept,mean))</span>
+<span id="cb73-7"><a href="#cb73-7" aria-hidden="true" tabindex="-1"></a>diffs_s_south_dep<span class="ot">&lt;-</span>mus_s_north_dep<span class="sc">-</span>mus_s_south_dep</span>
+<span id="cb73-8"><a href="#cb73-8" aria-hidden="true" tabindex="-1"></a>diffs_s_south_dep</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      CHARENTE           CHER SAONE-ET-LOIRE         VIENNE 
+    0.04488079     0.28020482     0.58261905     0.30006363 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fighting</span></span>
+<span id="cb75-2"><a href="#cb75-2" aria-hidden="true" tabindex="-1"></a>mus_f_north_dep<span class="ot">&lt;-</span><span class="fu">with</span>(wrk[wrk<span class="sc">$</span>north<span class="sc">==</span><span class="dv">1</span>,],<span class="fu">tapply</span>(fighting,nom_dept,mean))</span>
+<span id="cb75-3"><a href="#cb75-3" aria-hidden="true" tabindex="-1"></a>mus_f_south_dep<span class="ot">&lt;-</span><span class="fu">with</span>(wrk[wrk<span class="sc">$</span>north<span class="sc">==</span><span class="dv">0</span>,],<span class="fu">tapply</span>(fighting,nom_dept,mean))</span>
+<span id="cb75-4"><a href="#cb75-4" aria-hidden="true" tabindex="-1"></a>diffs_f_south_dep<span class="ot">&lt;-</span>mus_f_north_dep<span class="sc">-</span>mus_f_south_dep</span>
+<span id="cb75-5"><a href="#cb75-5" aria-hidden="true" tabindex="-1"></a>diffs_f_south_dep</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      CHARENTE           CHER SAONE-ET-LOIRE         VIENNE 
+    -0.1717014      0.4233861      0.1538095     -0.8750114 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb77"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 10k</span></span>
+<span id="cb77-2"><a href="#cb77-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Sabotage</span></span>
+<span id="cb77-3"><a href="#cb77-3" aria-hidden="true" tabindex="-1"></a>mus_s_north_dep_10k<span class="ot">&lt;-</span><span class="fu">with</span>(wrk[wrk<span class="sc">$</span>north<span class="sc">==</span><span class="dv">1</span><span class="sc">&amp;</span>wrk<span class="sc">$</span>near_km<span class="sc">&lt;=</span><span class="dv">10</span>,],<span class="fu">tapply</span>(s,nom_dept,mean))</span>
+<span id="cb77-4"><a href="#cb77-4" aria-hidden="true" tabindex="-1"></a>mus_s_south_dep_10k<span class="ot">&lt;-</span><span class="fu">with</span>(wrk[wrk<span class="sc">$</span>north<span class="sc">==</span><span class="dv">0</span><span class="sc">&amp;</span>wrk<span class="sc">$</span>near_km<span class="sc">&lt;=</span><span class="dv">10</span>,],<span class="fu">tapply</span>(s,nom_dept,mean))</span>
+<span id="cb77-5"><a href="#cb77-5" aria-hidden="true" tabindex="-1"></a>diffs_s_south_dep_10k<span class="ot">&lt;-</span>mus_s_north_dep_10k<span class="sc">-</span>mus_s_south_dep_10k</span>
+<span id="cb77-6"><a href="#cb77-6" aria-hidden="true" tabindex="-1"></a>diffs_s_south_dep_10k</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      CHARENTE           CHER SAONE-ET-LOIRE         VIENNE 
+     0.1111111      0.7260870      1.2085572      0.2758621 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fighting</span></span>
+<span id="cb79-2"><a href="#cb79-2" aria-hidden="true" tabindex="-1"></a>mus_f_north_dep_10k<span class="ot">&lt;-</span><span class="fu">with</span>(wrk[wrk<span class="sc">$</span>north<span class="sc">==</span><span class="dv">1</span><span class="sc">&amp;</span>wrk<span class="sc">$</span>near_km<span class="sc">&lt;=</span><span class="dv">10</span>,],<span class="fu">tapply</span>(fighting,nom_dept,mean))</span>
+<span id="cb79-3"><a href="#cb79-3" aria-hidden="true" tabindex="-1"></a>mus_f_south_dep_10k<span class="ot">&lt;-</span><span class="fu">with</span>(wrk[wrk<span class="sc">$</span>north<span class="sc">==</span><span class="dv">0</span><span class="sc">&amp;</span>wrk<span class="sc">$</span>near_km<span class="sc">&lt;=</span><span class="dv">10</span>,],<span class="fu">tapply</span>(fighting,nom_dept,mean))</span>
+<span id="cb79-4"><a href="#cb79-4" aria-hidden="true" tabindex="-1"></a>diffs_f_south_dep_10k<span class="ot">&lt;-</span>mus_f_north_dep_10k<span class="sc">-</span>mus_f_south_dep_10k</span>
+<span id="cb79-5"><a href="#cb79-5" aria-hidden="true" tabindex="-1"></a>diffs_f_south_dep_10k</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      CHARENTE           CHER SAONE-ET-LOIRE         VIENNE 
+    -0.4027778      0.5971014      0.3180100     -1.7389163 </code></pre>
+</div>
+</div>
+<p><strong>Answer:</strong> So it seems like there’s a lot of heterogeneity across department. For sabotage events, the effects of German rule appear largest in Cher and Saone-et-Loire, while they’re more modest in Charente and Vienne. For fighting events, we see a difference in the sign of the effect by department. In Charente and Vienne, fighting is more common in Vichy communes, while in Cher and Saone-et-Loire it is more common in German communes. This raise some questions about the generality of the overall findings.</p>
+<p>If you’re interested <a href="https://www.cambridge.org/core/journals/perspectives-on-politics/article/lines-of-demarcation-causation-designbased-inference-and-historical-research/49EBB15B1B8F1E4A3B4441D46725CBED">Kochner and Monteiro (2016)</a> provide an even more thorough critique of Ferwerda and Miller’s analysis, disputing the validity of F&amp;M’s identifying assumption using both historical records and an empirical analysis of the relative location railroad tracks.</p>
+<p>If we wanted to modify our function to calculate standardized differences, we could add an option to subset by department (not perfect, but it does the trick…)</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a>new_new_std_diff_fn <span class="ot">&lt;-</span> <span class="cf">function</span>(x, <span class="at">c =</span> <span class="fu">max</span>(wrk<span class="sc">$</span>near_km,<span class="at">na.rm=</span>T), <span class="at">the_dept =</span> <span class="st">"CHARENTE"</span>){</span>
+<span id="cb81-2"><a href="#cb81-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># inputs</span></span>
+<span id="cb81-3"><a href="#cb81-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># x: the variable we want to calculate a standardized difference of</span></span>
+<span id="cb81-4"><a href="#cb81-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># c: the cutoff distance from the borderd</span></span>
+<span id="cb81-5"><a href="#cb81-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stopifnot</span>(<span class="fu">is.character</span>(x))</span>
+<span id="cb81-6"><a href="#cb81-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stopifnot</span>(<span class="fu">is.numeric</span>(c))</span>
+<span id="cb81-7"><a href="#cb81-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb81-8"><a href="#cb81-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># What's going on here?</span></span>
+<span id="cb81-9"><a href="#cb81-9" aria-hidden="true" tabindex="-1"></a>  wrk <span class="ot">&lt;-</span> wrk[wrk<span class="sc">$</span>near_km <span class="sc">&lt;=</span> c <span class="sc">&amp;</span> wrk<span class="sc">$</span>nom_dept <span class="sc">==</span> the_dept,]</span>
+<span id="cb81-10"><a href="#cb81-10" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb81-11"><a href="#cb81-11" aria-hidden="true" tabindex="-1"></a>  <span class="co">#1.  Calculate means and difference of means</span></span>
+<span id="cb81-12"><a href="#cb81-12" aria-hidden="true" tabindex="-1"></a>  mu1 <span class="ot">&lt;-</span> <span class="fu">with</span>(wrk, <span class="fu">mean</span>(wrk[north<span class="sc">==</span><span class="dv">1</span>, x],<span class="at">na.rm=</span>T))</span>
+<span id="cb81-13"><a href="#cb81-13" aria-hidden="true" tabindex="-1"></a>  mu0 <span class="ot">&lt;-</span> <span class="fu">with</span>(wrk, <span class="fu">mean</span>(wrk[north<span class="sc">==</span><span class="dv">0</span>, x],<span class="at">na.rm=</span>T))</span>
+<span id="cb81-14"><a href="#cb81-14" aria-hidden="true" tabindex="-1"></a>  diff <span class="ot">&lt;-</span> mu1 <span class="sc">-</span> mu0</span>
+<span id="cb81-15"><a href="#cb81-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb81-16"><a href="#cb81-16" aria-hidden="true" tabindex="-1"></a>  <span class="co">#2. Calculate "standard error" of difference</span></span>
+<span id="cb81-17"><a href="#cb81-17" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Assuming unequal variance of groups</span></span>
+<span id="cb81-18"><a href="#cb81-18" aria-hidden="true" tabindex="-1"></a>  sd1 <span class="ot">&lt;-</span> <span class="fu">with</span>(wrk, <span class="fu">sd</span>(wrk[north<span class="sc">==</span><span class="dv">1</span>, x],<span class="at">na.rm=</span>T))</span>
+<span id="cb81-19"><a href="#cb81-19" aria-hidden="true" tabindex="-1"></a>  sd0 <span class="ot">&lt;-</span> <span class="fu">with</span>(wrk, <span class="fu">sd</span>(wrk[north<span class="sc">==</span><span class="dv">0</span>, x],<span class="at">na.rm=</span>T))</span>
+<span id="cb81-20"><a href="#cb81-20" aria-hidden="true" tabindex="-1"></a>  n1 <span class="ot">&lt;-</span> <span class="fu">with</span>(wrk, <span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(wrk[north<span class="sc">==</span><span class="dv">1</span>, x])))</span>
+<span id="cb81-21"><a href="#cb81-21" aria-hidden="true" tabindex="-1"></a>  n0 <span class="ot">&lt;-</span> <span class="fu">with</span>(wrk, <span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(wrk[north<span class="sc">==</span><span class="dv">0</span>, x])))</span>
+<span id="cb81-22"><a href="#cb81-22" aria-hidden="true" tabindex="-1"></a>  se <span class="ot">&lt;-</span> <span class="fu">sqrt</span>( sd1<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span>n1 <span class="sc">+</span> sd0<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span>n0)</span>
+<span id="cb81-23"><a href="#cb81-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb81-24"><a href="#cb81-24" aria-hidden="true" tabindex="-1"></a>  <span class="co">#3. Standardize difference</span></span>
+<span id="cb81-25"><a href="#cb81-25" aria-hidden="true" tabindex="-1"></a>  std_diff <span class="ot">&lt;-</span> diff<span class="sc">/</span>se</span>
+<span id="cb81-26"><a href="#cb81-26" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb81-27"><a href="#cb81-27" aria-hidden="true" tabindex="-1"></a>  <span class="co">#4. Combine Results</span></span>
+<span id="cb81-28"><a href="#cb81-28" aria-hidden="true" tabindex="-1"></a>  results <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">North=</span>mu1, <span class="at">South=</span>mu0,<span class="at">Differnece=</span>diff, <span class="at">SE =</span> se, <span class="at">StdDiff =</span> std_diff)</span>
+<span id="cb81-29"><a href="#cb81-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(results)</span>
+<span id="cb81-30"><a href="#cb81-30" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb81-31"><a href="#cb81-31" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb81-32"><a href="#cb81-32" aria-hidden="true" tabindex="-1"></a><span class="co"># Sabotage 10k</span></span>
+<span id="cb81-33"><a href="#cb81-33" aria-hidden="true" tabindex="-1"></a><span class="fu">new_new_std_diff_fn</span>(<span class="st">"s"</span>,<span class="dv">10</span>, <span class="at">the_dept=</span><span class="st">"CHARENTE"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     North      South Differnece         SE    StdDiff 
+0.11111111 0.00000000 0.11111111 0.05312127 2.09165007 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb83"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="fu">new_new_std_diff_fn</span>(<span class="st">"s"</span>,<span class="dv">10</span>, <span class="at">the_dept=</span><span class="st">"CHER"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     North      South Differnece         SE    StdDiff 
+ 0.8260870  0.1000000  0.7260870  0.3773161  1.9243468 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb85"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a><span class="fu">new_new_std_diff_fn</span>(<span class="st">"s"</span>,<span class="dv">10</span>, <span class="at">the_dept=</span><span class="st">"SAONE-ET-LOIRE"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     North      South Differnece         SE    StdDiff 
+ 1.9552239  0.7466667  1.2085572  0.6461002  1.8705413 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb87"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a><span class="fu">new_new_std_diff_fn</span>(<span class="st">"s"</span>,<span class="dv">10</span>, <span class="at">the_dept=</span><span class="st">"VIENNE"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     North      South Differnece         SE    StdDiff 
+ 0.2758621  0.0000000  0.2758621  0.1850080  1.4910818 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb89"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb89-1"><a href="#cb89-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fighting 10k</span></span>
+<span id="cb89-2"><a href="#cb89-2" aria-hidden="true" tabindex="-1"></a><span class="fu">new_new_std_diff_fn</span>(<span class="st">"fighting"</span>,<span class="dv">10</span>, <span class="at">the_dept=</span><span class="st">"CHARENTE"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      North       South  Differnece          SE     StdDiff 
+ 0.05555556  0.45833333 -0.40277778  0.26507398 -1.51949195 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb91"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb91-1"><a href="#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="fu">new_new_std_diff_fn</span>(<span class="st">"fighting"</span>,<span class="dv">10</span>, <span class="at">the_dept=</span><span class="st">"CHER"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     North      South Differnece         SE    StdDiff 
+ 1.1304348  0.5333333  0.5971014  0.3743506  1.5950329 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb93"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb93-1"><a href="#cb93-1" aria-hidden="true" tabindex="-1"></a><span class="fu">new_new_std_diff_fn</span>(<span class="st">"fighting"</span>,<span class="dv">10</span>, <span class="at">the_dept=</span><span class="st">"SAONE-ET-LOIRE"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     North      South Differnece         SE    StdDiff 
+ 0.7313433  0.4133333  0.3180100  0.2377393  1.3376416 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb95"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb95-1"><a href="#cb95-1" aria-hidden="true" tabindex="-1"></a><span class="fu">new_new_std_diff_fn</span>(<span class="st">"fighting"</span>,<span class="dv">10</span>, <span class="at">the_dept=</span><span class="st">"VIENNE"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     North      South Differnece         SE    StdDiff 
+ 0.6896552  2.4285714 -1.7389163  1.3379197 -1.2997165 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb97"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb97-1"><a href="#cb97-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Full Sample</span></span>
+<span id="cb97-2"><a href="#cb97-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-3"><a href="#cb97-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Sabotage Full</span></span>
+<span id="cb97-4"><a href="#cb97-4" aria-hidden="true" tabindex="-1"></a><span class="fu">new_new_std_diff_fn</span>(<span class="st">"s"</span>, <span class="at">the_dept=</span><span class="st">"CHARENTE"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     North      South Differnece         SE    StdDiff 
+0.17391304 0.12903226 0.04488079 0.08191133 0.54791911 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb99"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb99-1"><a href="#cb99-1" aria-hidden="true" tabindex="-1"></a><span class="fu">new_new_std_diff_fn</span>(<span class="st">"s"</span>, <span class="at">the_dept=</span><span class="st">"CHER"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     North      South Differnece         SE    StdDiff 
+0.32330827 0.04310345 0.28020482 0.08671967 3.23115645 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb101"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb101-1"><a href="#cb101-1" aria-hidden="true" tabindex="-1"></a><span class="fu">new_new_std_diff_fn</span>(<span class="st">"s"</span>, <span class="at">the_dept=</span><span class="st">"SAONE-ET-LOIRE"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     North      South Differnece         SE    StdDiff 
+ 1.1600000  0.5773810  0.5826190  0.3104033  1.8769744 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb103"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb103-1"><a href="#cb103-1" aria-hidden="true" tabindex="-1"></a><span class="fu">new_new_std_diff_fn</span>(<span class="st">"s"</span>, <span class="at">the_dept=</span><span class="st">"VIENNE"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     North      South Differnece         SE    StdDiff 
+ 0.4404145  0.1403509  0.3000636  0.1353704  2.2166121 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb105"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb105-1"><a href="#cb105-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fighting Full</span></span>
+<span id="cb105-2"><a href="#cb105-2" aria-hidden="true" tabindex="-1"></a><span class="fu">new_new_std_diff_fn</span>(<span class="st">"fighting"</span>, <span class="at">the_dept=</span><span class="st">"CHARENTE"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      North       South  Differnece          SE     StdDiff 
+ 0.07023411  0.24193548 -0.17170137  0.11368411 -1.51033750 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb107"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb107-1"><a href="#cb107-1" aria-hidden="true" tabindex="-1"></a><span class="fu">new_new_std_diff_fn</span>(<span class="st">"fighting"</span>, <span class="at">the_dept=</span><span class="st">"CHER"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     North      South Differnece         SE    StdDiff 
+ 0.6992481  0.2758621  0.4233861  0.1325777  3.1934936 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb109"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb109-1"><a href="#cb109-1" aria-hidden="true" tabindex="-1"></a><span class="fu">new_new_std_diff_fn</span>(<span class="st">"fighting"</span>, <span class="at">the_dept=</span><span class="st">"SAONE-ET-LOIRE"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     North      South Differnece         SE    StdDiff 
+ 0.5942857  0.4404762  0.1538095  0.1331109  1.1554988 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb111"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb111-1"><a href="#cb111-1" aria-hidden="true" tabindex="-1"></a><span class="fu">new_new_std_diff_fn</span>(<span class="st">"fighting"</span>, <span class="at">the_dept=</span><span class="st">"VIENNE"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     North      South Differnece         SE    StdDiff 
+ 0.5284974  1.4035088 -0.8750114  0.4096784 -2.1358493 </code></pre>
+</div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
