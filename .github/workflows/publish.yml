@@ -27,7 +27,7 @@ jobs:
       - name: Check out
         uses: actions/checkout@v4
 
-     - name: Setup R
+      - name: Setup R
         uses: r-lib/actions/setup-r@v2
         with:
           r-version: '4.2.2' # You can change this to a specific R version
