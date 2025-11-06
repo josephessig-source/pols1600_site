@@ -1,0 +1,164 @@
+---
+title: 'Lab 02 - Visualizing data on COVID-19 in the U.S.'
+author: "Your Name HERE"
+date: "Last Updated `r format(Sys.Date())`"
+output:
+  html_document:
+    theme: journal
+    toc: TRUE
+    toc_float: TRUE
+    toc_depth: 2
+    number_sections: TRUE
+---
+
+```{r setup, include = FALSE, cache = FALSE}
+knitr::opts_chunk$set(error = TRUE, 
+                      comment = NA, 
+                      warnings = FALSE, 
+                      errors = FALSE, 
+                      messages = FALSE, 
+                      cache = TRUE,
+                      tidy = FALSE)
+```
+
+<style>
+div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}
+</style>
+
+
+
+# Overview {-}
+
+
+Our goal for today is to reproduce this figure:
+
+```{r goal, echo=F}
+knitr::include_graphics("https://pols1600.paultesta.org/labs/images/02_fig.png")
+```
+
+
+I don't expect anyone to be able to recite from memory the exact code, functions, and syntax to accomplish this task. 
+
+That said, you've already seen the code you need. 
+
+It's available to you in multiple places like the slides (week 1 [here](https://pols1600.paultesta.org/slides/01-slides.html#1), week 2 [here](https://pols1600.paultesta.org/slides/02-slides.html)) and last week's [labs](https://pols1600.paultesta.org/labs/01-lab-comments.html) 
+
+
+My hope is that this lab will help you do the following:
+
+- **Chunk big tasks into smaller concrete steps**
+  - Learn how to take a complex problem ("How do I produce a figure that shows the average rate of new cases per month for states with a particular type of face mask policy") which you may think you have no idea how to do and break this challenge down into concrete tasks which you do know how do ("Well first, I'll need to load some packages to work with and visualize data. Then, I'll need to get the data. And then...")
+- **Think and write programmatically**
+  - In this .Rmd file, I'll first ask you to outline, conceptually, all the steps you'll need to do to produce this figure. 
+  - Don't worry if you can't think of all the necessary steps or aren't sure of the order. We'll produce a collective outline of what we need to do before getting to the actual coding
+  - When we do code, I'll ask you to organize your code as outlined below:
+    - Separate your steps into sections using the `#` headers in Markdown
+    - Write a brief overview in words that a normal human can understand, what the code in that section is doing
+    - Paste the code for that section into a code chunk
+    - Add brief comments to this code to help your reader understand what's happening
+    - Knit your document after completing each section.
+- **Mapping concepts to code**
+  - Again you shouldn't have to write much code. Just copy and paste from the labs and slides.
+  - Your goal for today is to interpret that code and develop a mental map that allows you to say when I want to do this type of task (say "recode data"), I need to use some combination of these functions (`%>%`, `mutate()`, maybe `group_by()` or `case_when()`)
+  - But shouldn't we be writing our own code?! Yes. Sure. Eventually. 
+  - The tutorials give you practice writing single commands, and by the end of the class you should be able write this code like this for to accomplish similar tasks 
+  - But even then, you will not be writing code from memory. I still have to Google functions, and often search my old code to find a clever solution to task. 
+  - Everyone starts learning to code by copying and pasting other people's code.
+  - This will help minimize (but not eliminate) syntactic errors, while over time we get better writing code from scratch and fixing errors as the develop.
+- **Practice wrangling data**
+  - How do you load data?
+  - How do you look at data?
+  - How do you transform data?
+- **Practice visualizing data**
+  - Using the grammar of graphics to translate raw data into visual graphics
+  - Understanding the components of this grammar:
+    - data
+    - aesthetics
+    - geometries
+    - facets
+    - statistics
+    - coordinates
+    - themes
+  - Exploring what happens when we change these components
+
+We'll work in pairs and periodically check in as a class to check our progress, review concepts, and share insights. 
+
+For fun, let's say that the first group that successfully recreates this figure gets to choose one of the following non-monetary prizes:
+
+- I'll tell them a joke
+- One AMA I will answer truthfully
+- One question to be asked on the weekly class survey
+- 0.00001% extra credit added to their final grade for the course.
+
+If we finish early, you're free to go. If you want, we can take some time to [explore some additional figures](https://www.r-graph-gallery.com/index.html){target="_blank"} we might produce like [maps](https://jtr13.github.io/cc19/different-ways-of-plotting-u-s-map-in-r.html){target="_blank"} or [lollipop](https://www.r-graph-gallery.com/lollipop-plot.html){target="_blank"} plots.
+
+Ok, let's begin!
+
+
+
+# Please knit this .Rmd file {-}
+
+For every lab:
+
+- Download the file
+- Save it in your course folder
+- Knit the document
+- Open the html file in your browser (Easier to read)
+- Knit the document again after completing a section or chunk (Error checking)
+- Upload the final lab to [Canvas](https://canvas.brown.edu/courses/1091286/assignments/7925685?module_item_id=10882025){target="_blank"}.
+
+# Describe the components of the figure you're trying to reprodce
+
+Recall, that we need `data`, `aesthetic` mappings and `geometries` to produce a figure
+
+
+- What are the aesthetic mappings in this plot
+- What is the geometry?
+- What is the data set used? (Hint it's a transformation of `covid_us`)
+
+
+# Outline the steps you will need to complete this process {-}
+
+
+
+# Step 1
+
+Describe in words what your code below is doing
+
+```{r}
+# Write the code for Step 1 here
+```
+
+
+# Step 2
+
+Perhaps Step 2 has multiple parts and code chunks
+
+Use sub headers to break down step 2 into its constituent parts
+
+## Step 2.1
+
+Describe briefly (in a sentence or two or a couple of bullet points) what this section does
+
+```{r}
+# Write the code for Step 2.1 here
+```
+
+## Step 2.2
+
+Describe briefly (in a sentence or two or a couple of bullet points) what this section does
+
+```{r}
+# Write the code for Step 2.2 here
+```
+
+
+
+
+# CLASS SURVEY
+
+Finally, please take a moment to complete this week's [class survey](https://brown.co1.qualtrics.com/jfe/form/SV_cYlY1R3DBzmFthI)
+
+
+
+

@@ -1,0 +1,625 @@
+---
+title: 'Lab 02 - Visualizing data on COVID-19 in the U.S.'
+author: "Your Name HERE"
+date: "Last Updated `r format(Sys.Date())`"
+output:
+  html_document:
+    theme: journal
+    toc: TRUE
+    toc_float: TRUE
+    toc_depth: 2
+    number_sections: TRUE
+---
+
+```{r setup, include = FALSE, cache = FALSE}
+knitr::opts_chunk$set(error = TRUE, 
+                      comment = NA, 
+                      warnings = FALSE, 
+                      errors = FALSE, 
+                      messages = FALSE, 
+                      cache = TRUE,
+                      tidy = FALSE)
+```
+
+<style>
+div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}
+</style>
+
+
+
+# Overview {-}
+
+
+Our goal for today is to reproduce this figure:
+
+```{r goal, echo=F}
+knitr::include_graphics("https://pols1600.paultesta.org/labs/images/02_fig.png")
+```
+
+
+I don't expect anyone to be able to recite from memory the exact code, functions, and syntax to accomplish this task. 
+
+That said, you've already seen the code you need. 
+
+It's available to you in multiple places like the slides (week 1 [here](https://pols1600.paultesta.org/slides/01-slides.html#1), week 2 [here](https://pols1600.paultesta.org/slides/02-slides.html)) and last week's [labs](https://pols1600.paultesta.org/labs/01-lab-comments.html) 
+
+
+My hope is that this lab will help you do the following:
+
+- **Chunk big tasks into smaller concrete steps**
+  - Learn how to take a complex problem ("How do I produce a figure that shows the average rate of new cases per month for states with a particular type of face mask policy") which you may think you have no idea how to do and break this challenge down into concrete tasks which you do know how do ("Well first, I'll need to load some packages to work with and visualize data. Then, I'll need to get the data. And then...")
+- **Think and write programmatically**
+  - In this .Rmd file, I'll first ask you to outline, conceptually, all the steps you'll need to do to produce this figure. 
+  - Don't worry if you can't think of all the necessary steps or aren't sure of the order. We'll produce a collective outline of what we need to do before getting to the actual coding
+  - When we do code, I'll ask you to organize your code as outlined below:
+    - Separate your steps into sections using the `#` headers in Markdown
+    - Write a brief overview in words that a normal human can understand, what the code in that section is doing
+    - Paste the code for that section into a code chunk
+    - Add brief comments to this code to help your reader understand what's happening
+    - Knit your document after completing each section.
+- **Mapping concepts to code**
+  - Again you shouldn't have to write much code. Just copy and paste from the labs and slides.
+  - Your goal for today is to interpret that code and develop a mental map that allows you to say when I want to do this type of task (say "recode data"), I need to use some combination of these functions (`%>%`, `mutate()`, maybe `group_by()` or `case_when()`)
+  - But shouldn't we be writing our own code?! Yes. Sure. Eventually. 
+  - The tutorials give you practice writing single commands, and by the end of the class you should be able write this code like this for to accomplish similar tasks 
+  - But even then, you will not be writing code from memory. I still have to Google functions, and often search my old code to find a clever solution to task. 
+  - Everyone starts learning to code by copying and pasting other people's code.
+  - This will help minimize (but not eliminate) syntactic errors, while over time we get better writing code from scratch and fixing errors as the develop.
+- **Practice wrangling data**
+  - How do you load data?
+  - How do you look at data?
+  - How do you transform data?
+- **Practice visualizing data**
+  - Using the grammar of graphics to translate raw data into visual graphics
+  - Understanding the components of this grammar:
+    - data
+    - aesthetics
+    - geometries
+    - facets
+    - statistics
+    - coordinates
+    - themes
+  - Exploring what happens when we change these components
+
+We'll work in pairs and periodically check in as a class to check our progress, review concepts, and share insights. 
+
+For fun, let's say that the first group that successfully recreates this figure gets to choose one of the following non-monetary prizes:
+
+- I'll tell them a joke
+- One AMA I will answer truthfully
+- One question to be asked on the weekly class survey
+- 0.00001% extra credit added to their final grade for the course.
+
+If we finish early, you're free to go. If you want, we can take some time to [explore some additional figures](https://www.r-graph-gallery.com/index.html){target="_blank"} we might produce like [maps](https://jtr13.github.io/cc19/different-ways-of-plotting-u-s-map-in-r.html){target="_blank"} or [lollipop](https://www.r-graph-gallery.com/lollipop-plot.html){target="_blank"} plots.
+
+Ok, let's begin!
+
+
+
+# Please knit this .Rmd file {-}
+
+For every lab:
+
+- Download the file
+- Save it in your course folder
+- Knit the document
+- Open the html file in your browser (Easier to read)
+- Knit the document again after completing a section or chunk (Error checking)
+- Upload the final lab to [Canvas](https://canvas.brown.edu/courses/1087979/assignments/7870521?module_item_id=10762395){target="_blank"}.
+
+
+# Describe the components of the figure you're trying to reprodce
+
+Recall, that we need `data`, `aesthetic` mappings and `geometries` to produce a figure
+
+
+- What are the aesthetic mappings in this plot
+  - `x` average number of new cases per capita by month and policy
+  - `y` a variable indexing year and month
+  - `col` a variable indexing the face mask policy in place
+- What is the geometry?
+  - points using `geom_point()`
+- What is the data set used? (Hint it's a transformation of `covid_us`)
+  - From the comments to last week's lab, I know I need to produce something like `cases_by_month_and_policy` from the `covid_us` data
+
+
+# Outline the steps you will need to complete this process {-}
+
+1. Set up our work space
+2. Download the COVID-19 data
+3. Get a high level overview of the data
+4. Recode the data
+5. Calculate the average number of new cases in a given month for states with a given policy on face masks
+6. Produce an initial figure
+7. Refine the figure
+
+
+# Set up our workspace
+
+First we need to get R ready to work by loading (and if need installing) any packages that we will be using.
+
+From Tuesday's [slides](https://pols1600.paultesta.org/slides/02-slides.html#8){target="_blank"} I will
+
+## Create an object listing all the packages I will use today
+
+This code creates a object called `the_packages` which contains a vector of character strings corresponding to the names of the packages I want to use today
+
+```{r packages}
+the_packages <- c(
+  ## R Markdown
+  "tinytex", "kableExtra",
+  ## Tidyverse
+  "tidyverse","lubridate", "forcats", "haven","labelled",
+  ## Extensions for ggplot
+  "ggmap","ggrepel", "ggridges", "ggthemes","ggpubr",
+  "GGally",
+  # Data 
+  "COVID19","maps","mapdata","DT"
+)
+```
+
+## Define a function to install and load packages
+
+```{r ipak}
+ipak <- function(pkg){
+    new.pkg <- pkg[!(pkg %in% installed.packages()[, "Package"])]
+    if (length(new.pkg)) 
+        install.packages(new.pkg, dependencies = TRUE)
+    sapply(pkg, require, character.only = TRUE)
+}
+```
+
+## Use the ipak function to load the necessary packages
+
+Now I run the `ipak()` giving it the object `the_packages` as an input. It sorts through the packages, checks to see if they're installed, if not installs them, and then loads all of the packages so I can use them.
+
+```{r loadpackages, message=FALSE}
+ipak(the_packages)
+```
+
+
+# Download the COVID-19 data
+
+Now, I'll use the `covid19()` function from the `COVID19` package to download the data for today
+
+- The argument `country = 'US'` tells the function I want data from the US
+- The argument `level = 2` tells the function I want data at the second administrative level (States in the US)
+- The argument `verbose = F` tells the function to hide any messages the function might produce (in this case a progress bar telling me how the download is going)
+- `covid <- ...` Saves the output of `covid19()` into a data frame named `covid`
+
+
+
+```{r data}
+covid <- COVID19::covid19(
+  country = "US",
+  level = 2,
+  verbose = F
+)
+```
+
+# Get a high level overview of the data
+
+There are lots of ways to do this. At a minium
+
+- Get a sense of the dimensions of the data:
+
+```{r}
+dim(covid)
+```
+
+- Take a look at the first few rows
+
+```{r}
+head(covid)
+```
+
+- Get a quick sense of the values of key variables to see if there's any recoding you need to do (like with the negative values for `facial_coverings`)
+
+```{r}
+table(covid$facial_coverings)
+summary(covid$confirmed)
+```
+
+
+# Recode the data
+
+This is a complex task. 
+
+```{r meme, echo=F}
+knitr::include_graphics("https://pols1600.paultesta.org/labs/images/recode.jpeg")
+```
+
+So lets break it down conceptually. Roughly we'll need to:
+
+- Filter out U.S. territories
+- Create a variable called `state` from the `administrative_area_level_2` variable
+- Group by this state variable and calculate:
+  - the number of new cases in a state on given day
+  - the number of new cases in a state on given day per capita
+  - the type of face mask policy in effect in a state.
+  - A variable that contains just the year and month of a given observation
+
+I'd probably use the code from the comments to [Lab 01](https://pols1600.paultesta.org/labs/01-lab-comments.html#5_Replicate_the_data_cleaning_and_recoding_from_class){target="_blank"} as my guide.
+
+That code will also calculate the percentage of a state's population that's vaccinated, which might be interesting to explore later.
+
+## Filter out U.S. Territories
+
+For simplicity, (and practice filtering observations), I've asked us to remove observations from U.S. territories.
+
+The code below 
+
+- Creates an object called `us_territories`. 
+- Use this object to filter out observations that are US territories
+- Creates a new data frame that is just observations from the 50 U.S. states. and D.C.
+- Checks that this recoding seems to have worked
+
+```{r subset}
+# U.S. Territories
+territories <- c(
+  "American Samoa",
+  "Guam",
+  "Northern Mariana Islands",
+  "Puerto Rico",
+  "Virgin Islands"
+  )
+
+# Filter out U.S. Territories
+covid_us <- covid %>%
+  filter(!administrative_area_level_2 %in% territories)
+
+# Check to make sure covid_us contains only 50 states and D.C.
+dim(covid)
+dim(covid_us)
+length(unique(covid$administrative_area_level_2)) 
+length(unique(covid_us$administrative_area_level_2)) == 51
+
+
+```
+
+## Create a `state` variable
+
+This is purely for convenience, because typing `administrative_area_level_2` is annoying. The code copies the values of this variable into a new variable called `state` using the `mutate()` function. 
+
+Mutate returns the original data frame plus the new column. We have to save this output for our our changes to persist (i.e. we have to assign the output of `mutate()` back into `covid_us`)
+
+In last week's lab, I just `piped` the output to the next command, did some more recoding with mutate, and then finally saved the output back into `covid_us`. In this lab, I'll save the output after each step.
+
+```{r state}
+covid_us %>%
+  mutate(
+    state = administrative_area_level_2,
+  ) -> covid_us
+```
+
+## Group by the `state` variable to calculate new Covid-19 cases
+
+Now I use this shorter variable `state` to calculate the number of new cases (`new_cases`) in a given state on a given date, and rescale this variable so that it's expressed in terms of new cases per 100,000 residents.
+
+
+```{r newcases}
+covid_us %>%
+  dplyr::group_by(state) %>%
+  mutate(
+    new_cases = confirmed - lag(confirmed),
+    new_cases_pc = new_cases / population *100000
+    ) -> covid_us
+```
+
+
+The slides from Tuesday, helped demonstrate what this code was doing, and why we wanted to group by state.  
+
+Here's an example for a subset of the data from April 1, 2020 to April 7, 2020 
+
+We see that the `lag()` function simply moves the observation of a variable "up" one row so that we can take the difference between the total number of cases in a state on one date and the total number of cases on the date before, to calculate the number of *new* cases
+
+```{r lag1ex}
+covid_us %>%
+  filter(date >= "2020-04-01" & date < "2020-04-07")%>%
+  group_by(state) %>%
+  select(state, date, confirmed)%>%
+  mutate(
+    confirmed_lag1 = lag(confirmed),
+    new_cases = confirmed - lag(confirmed)
+  )
+```
+
+
+If we hadn't grouped by state, then when we lagged the `confirmed` variable, R thinks the number of confirmed cases in California before April 1, 2020, is 986 which is actually the number of cases in Minnesota on April 7, 2020
+
+```{r lag2ex}
+covid_us %>%
+  filter(date >= "2020-04-01" & date < "2020-04-07")%>%
+  ungroup() %>%
+  select(state, date, confirmed)%>%
+  mutate(
+    confirmed_lag1 = lag(confirmed),
+    new_cases = confirmed - lag(confirmed)
+  )
+```
+
+## Recode the `facial_coverings` variable
+
+Next we use the `case_when()` function inside the `mutate()` function to create a variable called `face_masks` based on the values of the `facial_coverings` variable in the data.
+
+`case_when()` when uses R's ability to make logical comparisons. When the variable `facial_coverings` equals 0, R will input the character string `"No policy"` into the `face_masks` variable.
+
+When the absolute value of `facial_coverings` equals 1 (i.e.`facial_coverings` equals 1 or -1 ), R will input the character string `"Recommended"` into the `face_masks` variable. And so on.
+
+We use the `abs()` function to take the absolute value of the `facial_coverings` variable because codebook for these data implied:
+
+> In short: positive integers identify policies applied to the entire administrative area. Negative integers are used to identify policies that represent a best guess of the policy in force, but may not represent the real status of the given area. The negative sign is used solely to distinguish the two cases, it should not be treated as a real negative value.
+
+We know from last weeks lab, that negative values in the U.S. typically seem to be cases where a city had a more stringent policy than the state (e.g. Chicago adopts more stringent face mask policies than Illinois). 
+
+Finally, we put a `%>%` after the output of `case_when()` and pass it's output to the `factor()` function. 
+
+The  `.` acts as sort of placeholder, `factor()` expects some input here (like a variable from a data frame), `.` tells R to use the output of `case_when()`. 
+
+The `levels =` then transforms the character data produced by `case_when()` into a `factor` with an implicit ordering of levels (i.e. "No policy" < "Recommended"< "Some requirements" <"Required shared places" <"Required all times") which turns out to be useful trick for organizing how data are plotted and visualized.
+
+
+```{r facemasks}
+covid_us %>%
+  mutate(
+    face_masks = case_when(
+      facial_coverings == 0 ~ "No policy",
+      abs(facial_coverings) == 1 ~ "Recommended",
+      abs(facial_coverings) == 2 ~ "Some requirements",
+      abs(facial_coverings) == 3 ~ "Required shared places",
+      abs(facial_coverings) == 4 ~ "Required all times",
+    ) %>% factor(.,
+      levels = c("No policy","Recommended",
+                 "Some requirements",
+                 "Required shared places",
+                 "Required all times")
+    ) 
+    ) -> covid_us
+```
+
+## Create a variable capturing the year and month of the observation
+
+Finally we create some variables that extract components of an observation's date:
+
+- `year = year(date)` returns just the year from a variable of class `Date`
+- `month = month(date)` returns just the month from a variable of class `Date`
+- `year_month = paste(year, str_pad(month, width = 2, pad=0), sep = "-")` pastes these to variables together. 
+- `str_pad(month, width = 2, pad=0)` adds a leading 0 to any month with only 1 digit, to ensure that all the months have 2 characters.
+
+
+
+The code from your lab also calculates the percent of a states population that is vaccinated, which isn't strictly needed for today.
+
+```{r dates}
+covid_us %>%
+  mutate(
+    year = year(date),
+    month = month(date),
+    year_month = paste(year, str_pad(month, width = 2, pad=0), sep = "-"),
+    percent_vaccinated = people_fully_vaccinated/population*100  
+    ) -> covid_us
+```
+
+Creating separte `year` and `month` variables aren't strictly necessary,
+
+We could have written something like:
+
+```{r datesalt, eval=F}
+covid_us %>%
+  mutate(
+    year_month = paste(year(date), str_pad(month(date), width = 2, pad=0), sep = "-"),
+    percent_vaccinated = people_fully_vaccinated/population*100  
+    ) -> covid_us
+```
+
+
+But that `year_month` line was already feeling kind of clunky, and maybe we'll want the `year` and `month` variables later.
+
+
+# Calculate the average number of new cases in a given month for states with a given policy on face mask
+
+- To calculate averages, we'll use the `mean()` function
+- To calculate averages separately by month and year and by type of face mask policy, we'll use the `group_by()` function.
+- To make these values more legible, we'll round them to integers
+- To count the total number of states with a given policy in a given month, we'll use the unique command to return a string with the list unique names of states with say Recommended face mask policies in a month (e.g. April 2020), and the `length()` command to count up how many states.
+- Finally we'll save the output of this collection of code to an object called `cases_by_month_and_policy` which we'll use to produce our figure.
+
+
+```{r plotdata}
+# Data
+covid_us %>%
+  # Exclude observations with missing values on face_masks
+  filter(!is.na(face_masks))%>%
+  # Calculate summaries separately by Year-Month and face-mask policy
+  group_by(year_month,face_masks) %>%
+  # Summaries
+  summarise(
+    # Total number of observations
+    n = length(unique(state)),
+    # Average number of cases per capita
+    new_cases_pc = round(mean(new_cases_pc,na.rm=T)),
+    # Average number of total cases
+    total_cases = round(mean(confirmed,na.rm=T))
+  ) -> cases_by_month_and_policy
+```
+
+
+# Reproduce the figure from Lab 01
+
+Finally use `cases_by_month_and_policy` data frame to create a figure. 
+
+Recalling our **grammar of graphics**:
+
+- `data` = `cases_by_month_and_policy`
+- `ggplot(...)` initializes the plotting environment
+- `aes()` maps variables in `cases_by_month_and_policy` to `aesthetic` features of the graph:
+  - `x= year_month` says to use  values of `year_month` column on the x axis
+  - `y = new_cases_pc` says use values from the `new_cases_pc` on the y axis
+  - `col=face_masks` says to use a unique color each value of `face_masks` column
+- `geom_point()` says to plot points using the aesthetic mappings we defined in `ggplot` with the `aes()` function
+- `coord_flip()` flips the coordinates of the plot so that the values of x axis are now on the y axis, and the values of the y axis are now on the x axis.
+- Finally `-> fig1` saves the output of this code to an object called `fig1`. Writing this object on it's own line will display the figure. Saving the our figure as an object will allow us to update it
+
+```{r fig1}
+# Data
+cases_by_month_and_policy %>%
+  ggplot(
+    # Aesthetics
+    aes(
+    x= year_month,
+    y = new_cases_pc,
+    col=face_masks)
+    )+
+  # Geometries
+  geom_point()+
+  # Coordinates
+  coord_flip() -> fig1
+
+fig1
+```
+
+
+
+# Optional: Refine the figure 
+
+Let's see if we can improve this figure by:
+
+- Adding meaningful labels and a title
+- Changing the theme
+- Changing the size of the points to reflect the total number of states with a policy in that month
+- Faceting our plot by face mask policy
+
+
+## Adding meaningful labels and title
+
+Because we saved the output of our `ggplot` to an object called `fig1` we can add additional commands to this object using the `+` without having to rewrite all the code.
+
+First let's add better labels to the graph.
+
+- Note that even though we flipped the coordinates, the `aes` aesthetic mappings stay the same. So to change the label of the figures y-axis to "Date" we change the label of `x = "Date"`
+- `ggplot` automatically generates a legend for aesthetic mappings like `color` We can add a line break using the the special character `\n` in our code
+
+```{r fig1labelled}
+
+fig1 +
+  labs(
+    x = "Date",
+    y = "Average number of new cases (per 100k)",
+    col = "Face Mask\n Policy"
+  )
+
+```
+
+Note the code above didn't update `fig1`
+
+```{r fig1orig}
+fig1
+```
+
+We have to save the output (if we like it) for our changes to persist.
+
+```{r fig1labs}
+
+fig1 +
+  labs(
+    x = "Date",
+    y = "Average number of new cases (per 100k)",
+    col = "Face Mask\nPolicy"
+  ) -> fig1
+
+fig1
+
+```
+
+
+
+## Changing the theme of the plot
+
+Here's an example of some different themes
+
+```{r figthemes}
+# Black and white
+fig1 +
+  theme_bw()
+
+# Minimal
+fig1 +
+  theme_minimal()
+
+# Classic
+fig1 +
+  theme_classic()
+
+
+```
+
+This is pretty personal, and depends of the figure itself. I like a white background and some guide lines:
+
+```{r fig1theme}
+fig1 +
+  theme_bw() -> fig1
+
+fig1
+```
+
+## Make the size of the dots reflect the number of states with this policy
+
+In the `cases_by_month_and_policy` we have a column called `n` which is the number of states which had a given policy in a given month. 
+
+We can add an aesthetic to our plot that varies the size of the points by the number of states.
+
+```{r fig1size}
+fig1 +
+  aes(size = n) -> fig1
+
+```
+
+We call this type of plot a [bubble plot](https://www.r-graph-gallery.com/bubble-chart.html){target="_blank"
+
+I have mixed feelings about multiple legends. We can remove the legend for size using the `scale_size()` function. I had to Google how to do this for the millionth time.
+
+```{r fig1guide}
+fig1 +
+  scale_size(guide = "none") -> fig1
+```
+
+
+## Facet the plot
+
+Varying the size of the dots by the number of states conveys more information. But makes the chart a little harder to read. Dots overlap.
+
+The `facet_wrap` command will produce separate bubble plots for each level of the "facetting" variable, in this case `face_masks
+
+```{r fig1facet}
+fig1 +
+  facet_wrap(~face_masks) -> fig1
+fig1
+```
+
+Now I think also want a second legend for the number of states
+
+```{r fig1facetguide}
+fig1 +
+  scale_size(guide = "legend")+
+  labs(
+    size = "# of States\nwith Policy"
+  )-> fig1
+fig1
+```
+
+This seems pretty good if our goal was to show in general terms
+
+- It shows the average number new cases for states with a given face mask policy over time.
+- It shows how the mix of types of face mask policies states have adopted has changed over time
+
+If our goal was to make comparisons across face mask policies over a given time period, I'm might still prefer something closer to our original graph.
+
+
+
+# CLASS SURVEY
+
+Finally, please take a moment to complete this week's [class survey](https://brown.co1.qualtrics.com/jfe/form/SV_cYlY1R3DBzmFthI)
+
+
+
+

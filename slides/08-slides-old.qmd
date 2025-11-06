@@ -1,0 +1,140 @@
+---
+title: "POLS 1600"
+subtitle: "Topic"
+date: last-modified
+date-format: "[Updated ]MMM D, YYYY"
+format: 
+  revealjs:
+    theme: brownslides.scss
+    logo: images/pols1600_hex.png
+    footer: "POLS 1600"
+    multiplex: false
+    transition: fade
+    slide-number: c
+    incremental: true
+    center: false
+    menu: true
+    scrollable: true
+    highlight-style: github
+    progress: true
+    code-overflow: wrap
+    chalkboard: true
+    # include-after-body: title-slide.html
+    title-slide-attributes:
+      align: left
+      data-background-image: images/pols1600_hex.png
+      data-background-position: 90% 50%
+      data-background-size: 40%
+filters:
+  - openlinksinnewpage
+execute: 
+  eval: true
+  echo: true
+  warning: false
+  message: false
+  cache: true
+---
+
+
+```{r}
+#| label: init
+#| echo: false
+#| results: hide
+#| warning: false 
+#| message: false
+
+library(tidyverse)
+library(labelled)
+library(haven)
+library(DeclareDesign)
+library(easystats)
+library(texreg)
+
+```
+
+
+
+# {{< fa map-location>}} Overview {.inverse}
+
+## Class Plan
+
+- Announcements
+- Feedback
+- Review
+- Class plan
+
+
+## Annoucements
+
+## Packages for today
+
+```{r}
+#| label: packages
+#| echo: true
+
+## Pacakges for today
+the_packages <- c(
+  ## R Markdown
+  "kableExtra","DT","texreg",
+  ## Tidyverse
+  "tidyverse", "lubridate", "forcats", "haven", "labelled",
+  ## Extensions for ggplot
+  "ggmap","ggrepel", "ggridges", "ggthemes", "ggpubr", 
+  "GGally", "scales", "dagitty", "ggdag", "ggforce",
+  # Data 
+  "COVID19","maps","mapdata","qss","tidycensus", "dataverse", 
+  # Analysis
+  "DeclareDesign", "easystats", "zoo"
+)
+
+## Define a function to load (and if needed install) packages
+
+#| label = "ipak"
+ipak <- function(pkg){
+    new.pkg <- pkg[!(pkg %in% installed.packages()[, "Package"])]
+    if (length(new.pkg)) 
+        install.packages(new.pkg, dependencies = TRUE)
+    sapply(pkg, require, character.only = TRUE)
+}
+
+## Install (if needed) and load libraries in the_packages
+ipak(the_packages)
+```
+
+
+## Feedback
+
+```{r}
+load(url("https://pols1600.paultesta.org/files/data/cps_clean.rda"))
+#load("../files/data/cps_clean.rda")
+```
+
+
+# {{< fa lightbulb >}}  Grumbach and Hill (2021);
+
+## Goals
+
+## Variation in Turnout overtime
+
+
+
+
+# {{< fa magnifying-glass>}} Review {.inverse}
+
+## Review
+
+# {{< fa lightbulb >}} Concept {.inverse}
+
+
+## Concept
+
+
+# {{< fa code>}} Code {.inverse}
+
+## Code
+
+# {{< fa home >}} Summary {.inverse}
+
+## Summary
+
+## References

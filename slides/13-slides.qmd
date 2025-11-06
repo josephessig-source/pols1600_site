@@ -1,0 +1,93 @@
+---
+title: "POLS 1600"
+subtitle: "Presentations"
+date: last-modified
+date-format: "[Updated ]MMM D, YYYY"
+format: 
+  revealjs:
+    theme: brownslides.scss
+    logo: images/pols1600_hex.png
+    footer: "POLS 1600"
+    multiplex: false
+    transition: fade
+    slide-number: c
+    incremental: true
+    center: false
+    menu: true
+    scrollable: true
+    highlight-style: github
+    progress: true
+    code-overflow: wrap
+    chalkboard: true
+    # include-after-body: title-slide.html
+    title-slide-attributes:
+      align: left
+      data-background-image: images/pols1600_hex.png
+      data-background-position: 90% 50%
+      data-background-size: 40%
+filters:
+  - openlinksinnewpage
+execute: 
+  eval: true
+  echo: true
+  warning: false
+  message: false
+  cache: true
+---
+
+
+```{r}
+#| label: init
+#| echo: false
+#| results: hide
+#| warning: false 
+#| message: false
+
+library(tidyverse)
+library(labelled)
+library(haven)
+library(DeclareDesign)
+library(easystats)
+library(texreg)
+
+```
+
+
+
+# {{< fa map-location>}} Overview {.inverse}
+
+## Presentation Order{.smaller}
+
+:::{.nonincremental}
+
+1. Group  7 - Mariana, Kahrie, Shannon, Jarret
+2. Group  4 - Tiffany, Dan, Zoe, Lorena
+3. Group  5 - Chris, Dan, Neve, Olivia
+4. Group  1 - Maia, Guadalupe, Stephen, Jeremiah
+5. Group  3 - Serafym, Rachel, Kai, Emma
+6. Group  8 - Logan, Keiley, Lydell, Mahir
+7. Group  6 - Mia, Emily, Davis, Talia
+8. Group  2 - Andrew, Spencer, Lucinda, Serenity
+
+~ Roughly 8 minutes each
+
+:::
+
+## Class Survey and Course Evals{.smaller}
+
+![](images/13_survey.jpg){width=75%}
+
+[Click here to take the last survey ever](https://brown.co1.qualtrics.com/jfe/form/SV_dhxC4BzEgsGNF8W)
+
+Also, at some point please complete the course evaluations at:
+
+<https://brown.evaluationkit.com>
+
+## Parting thoughts
+
+:::{.center}
+<iframe width="672" height="378" src="https://www.youtube.com/embed/CnQ8N1KacJc?si=KdEjgy39A5V0X5AL" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+:::
+
+Seriously, thank you. It's been a pleasure teaching you all!
+

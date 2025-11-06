@@ -1,0 +1,188 @@
+%\input{vc}
+\usepackage{graphicx,parskip,grffile}
+\usepackage[T1]{fontenc} \usepackage{textcomp}
+%% \renewcommand{\rmdefault}{pmnj}
+%% \renewcommand{\sfdefault}{phv} %helvetica
+\usepackage{tgpagella}
+\usepackage[sc]{mathpazo}
+\renewcommand*{\bfdefault}{bx} 
+\renewcommand{\oldstylenums}[1]{%
+  {\fontfamily{pplj}\selectfont #1}} 
+\usepackage{microtype}
+\usepackage{bigfoot}
+
+\hyphenation{Incomplete}
+
+\usepackage{bibentry,natbib,url,comment,amsmath}
+\nobibliography*
+%b\usepackage[square,sort,comma,numbers]{natbib}
+% \usepackage[bookmarks,pdftex,letterpaper]{hyperref}
+\bibliographystyle{apalike}
+% \renewcommand\harvardurl[1]{\textsf{\textbf{url:}} \url{#1}}
+% \urlstyle{rm} parskip.sty does next two lines better
+% \setlength{\parindent}{0pt} \addtolength{\parskip}{.5\baselineskip}
+\usepackage[letterpaper,bottom=1in,top=1in,right=1.5in,lmargin=1.5in]{geometry}
+
+\usepackage{advdate}
+
+
+
+\usepackage[compact,nobottomtitles*]{titlesec} %nobottomtitles
+\titleformat{\part}[display]{\centering\huge\scshape}{\thepart}{.5em}{}{}
+\titleformat{\section}[hang]{\large\bfseries}{\hspace{-1.5in}\thesection}{.5em}{}{}
+\titleformat{\subsection}[leftmargin]{\small\bfseries\filleft}{\thesubsection}{.5em}{\hspace{-1in}}{}
+%\titleformat{\subsection}[hang]{\itshape}{\thesubsection}{.5em}{}{}%
+
+%\titleformat{\subsubsection}[leftmargin]{\itshape\filleft}{\thesubsubsection}{.2em}{\hspace{-1in}}{}
+\titleformat{\paragraph}[runin]{\bfseries}{\theparagraph}{0em}{}{}
+
+\titlespacing{\part}{2ex}{.5ex plus .1ex minus .2ex}{2\parskip}
+\titlespacing{\section}{0ex}{1.5ex plus .1ex minus .2ex}{\parskip}
+
+\titlespacing{\subsection}{0ex}{.5ex plus .1ex minus .1ex}{1ex}
+\titlespacing{\subsubsection}{0ex}{.5ex plus .1ex minus .1ex}{1ex}
+\titlespacing{\paragraph}{0em}{1ex}{.5ex plus .1ex minus .1ex}
+
+
+% \titleformat{\section}[hang]{\large\bfseries}{\hspace{-1in}\thesection}{.5em}{}{}
+% \titleformat*{\section}{\hspace{-1in}}
+% \titleformat{\subsection}[hang]{\bfseries}{\thesubsection}{.5em}{}{}
+% \titleformat{\subsection}[leftmargin]{\small\bfseries\filleft}{\thesubsection}{.5em}{\hspace{-1in}}{}
+% \titleformat{\subsubsection}[leftmargin]{\itshape\filleft}{\thesubsubsection}{.2em}{\hspace{-1in}}{}
+% \titleformat{\paragraph}[runin]{\bfseries}{\theparagraph}{0em}{}{}
+
+% \titlespacing{\section}{2pc}{1.5ex plus .1ex minus .2ex}{1pc}
+% \titlespacing{\subsection}{0pt}{1pt}{1pt}
+% \titlespacing{\paragraph}{0em}{1ex}{2ex}
+% \titlespacing{\subsection}{2pc}{1.5ex plus .1ex minus .2ex}{1pc}
+% \titlespacing{\subsubsection}{2pc}{1.5ex plus .1ex minus .2ex}{1pc}
+
+% \setcounter{secnumdepth}{0}
+
+
+\newenvironment{introstuff} {\setcounter{secnumdepth}{0}%
+  \titlespacing*{\section}{-1in}{1em}{0em}{}%
+  \titleformat{\subsection}[leftmargin]{\itshape\filleft}{\thesubsection}{.5em}{\hspace{-1in}}{}%
+  \titleformat{\subsubsection}[leftmargin]{\itshape\filleft}{\thesubsubsection}{.2em}{\hspace{-1in}}{}%
+  \titleformat{\paragraph}[hang]{\bfseries}{\theparagraph}{0em}{}{}%
+  \titlespacing{\subsection}{2pc}{1.5ex plus .1ex minus .2ex}{1pc}%
+  \titlespacing{\paragraph}{0em}{1ex}{0ex plus .1ex minus .1ex}%
+  \titlespacing{\subsubsection}{2pc}{1.5ex plus .1ex minus .2ex}{1pc}%
+} {\setcounter{secnumdepth}{0}%
+  \titleformat{\part}[hang]{\large\bfseries}{\hspace{-1in}\thepart}{.5em}{}{}%
+  \titleformat{\section}[hang]{\large\bfseries}{\hspace{-1in}\thesection}{.5em}{}{}%
+  \titleformat{\subsection}[leftmargin]{\small\bfseries\filleft}{\thesubsection}{.5em}{\hspace{-1in}}{}%
+  \titleformat{\subsubsection}[leftmargin]{\itshape\filleft}{\thesubsubsection}{.2em}{\hspace{-1in}}{}%
+  \titleformat{\paragraph}[runin]{\bfseries}{\theparagraph}{0em}{}{}%
+  %\titleformat{\subsection}[hang]{\itshape}{\thesubsection}{.5em}{}{}%
+  \titlespacing{\section}{2pc}{1.5ex plus .1ex minus .2ex}{1pc}%
+  \titlespacing{\paragraph}{0em}{1ex}{0ex plus .1ex minus .1ex}%
+  \titlespacing{\subsubsection}{2pc}{1.5ex plus .1ex minus .2ex}{1pc}%
+}
+
+% Create new title appearance
+%\makeatletter
+%\def\maketitle{%
+%  %\null
+%  \thispagestyle{empty}%
+%  \begin{center}\leavevmode
+%    \normalfont
+%    {\large \bfseries\@title\par}%
+%    {\large \@author\par}%
+%    {\large \@date\par}%
+%  \end{center}%
+%  \null }
+%\makeatother
+
+\usepackage{fancyhdr}
+% \renewcommand{\sectionmark}[1]{\markright{#1}{}}
+  
+\fancypagestyle{myfancy}{%
+  \fancyhf{}
+  % \fancyhead[R]{\small{Page~\thepage}}
+  \fancyhead[R]{\small{POLS 1600 -- Spring 2025-- \thepage}}
+ % \fancyfoot[R]{\footnotesize{Rev: \VCRevision~on~\VCDateTEX}}
+  % \fancyfoot[R]{\small{\today -- Jake Bowers}}
+  \renewcommand{\headrulewidth}{0pt}
+  \renewcommand{\footrulewidth}{0pt}}
+
+\pagestyle{myfancy}
+
+\newcommand{\entrylabel}[1]{\mbox{\textsf{#1:}}\hfil}
+
+
+%% These next lines tell latex that it is ok to have a single graphic
+%% taking up most of a page, and they also decrease the space arou
+%% figures and tables.
+\renewcommand\floatpagefraction{.9} \renewcommand\topfraction{.9}
+\renewcommand\bottomfraction{.9} \renewcommand\textfraction{.1}
+\setcounter{totalnumber}{50} \setcounter{topnumber}{50}
+\setcounter{bottomnumber}{50} \setlength{\intextsep}{2ex}
+\setlength{\floatsep}{2ex} \setlength{\textfloatsep}{2ex}
+
+\newenvironment{entry} {\begin{list}{}%
+    {\renewcommand{\makelabel}{\entrylabel}%
+      \setlength{\labelwidth}{1in}% \setlength{\labelwidth}{35pt}%
+      \setlength{\leftmargin}{\labelwidth+\labelsep}%
+    }%
+  }%
+  {\end{list}}
+
+\newenvironment{Ventry}[1]%
+{\begin{list}{}{\renewcommand{\makelabel}[1]{\textbf{##1:}\hfil}%
+      \settowidth{\labelwidth}{\textbf{#1~:}}%
+      \setlength{\leftmargin}{\labelwidth+\labelsep}}}%
+  {\end{list}}
+
+\newcommand{\Mentrylabel}[1]%
+{\raisebox{0pt}[1em][0pt]{\makebox[\labelwidth][l]%
+    {\parbox[t]{\labelwidth}{\hspace{0pt}\textsf{#1:}}}}}
+
+\newenvironment{Mentry}%
+{\renewcommand{\entrylabel}{\Mentrylabel}\begin{entry}}%
+  {\end{entry}}
+
+
+\specialcomment{com} {\begingroup\sffamily\small\bfseries}{\endgroup}
+\excludecomment{com}
+
+\title{Political Science 1600 \\ \vspace{.5em} INTRODUCTION TO QUANTITATIVE RESEARCH METHODS \\
+  }
+\author{Paul Testa \\
+  \small{Assistant Professor} \\
+  \small{paul\_testa@brown.edu}     
+  \and 
+    Maya Nunez\\
+    \small{Teaching Assistant} \\
+  \small{maya\_nunez@brown.edu}}
+
+\date{Spring 2025}%, \SVNDate, Version \SVNRev}
+
+\usepackage[pdftex,colorlinks=TRUE,citecolor=blue]{hyperref}
+
+\renewcommand{\bibname}{ }
+% \renewcommand{\refname}{\normalsize{Required:}}
+\renewcommand{\refname}{\vspace{-2em}}
+
+\def\themonth{\ifcase\month\or
+  January\or February\or March\or April\or May\or June\or
+  July\or August\or September\or October\or November\or December\fi} 
+
+%Math defs
+\newcommand{\bX}{\mathbf{X}}
+\newcommand{\by}{\mathbf{y}}
+\newcommand{\bY}{\mathbf{Y}}
+\newcommand{\bbeta}{\boldsymbol{\beta}}
+
+% Checkmark
+\usepackage{tikz}
+\def\checkmark{\tikz\fill[scale=0.4](0,.35) -- (.25,0) -- (1,.7) -- (.25,.15) -- cycle;} 
+
+\DeclareNewFootnote{default}
+\DeclareNewFootnote{A}[alph]
+\DeclareNewFootnote{B}[num]
+
+%\usepackage{datetime}
+
+\date{First Draft: August 29, 2017 \\ \vspace{2mm}This Draft: \today{}}
+

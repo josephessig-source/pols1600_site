@@ -1,0 +1,2685 @@
+---
+title: "Week 05:"
+subtitle: "Prediction with Linear Regression"
+author: "Paul Testa"
+output:
+  xaringan::moon_reader:
+    css: ["default", "css/brown.css"]
+    lib_dir: libs
+    nature:
+      highlightStyle: atelier-lakeside-light
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+class: inverse, center, middle
+background-image:url("https://img1.hscicdn.com/image/upload/f_auto/lsci/db/PICTURES/CMS/332100/332134.4.jpg")
+background-size:cover
+
+# Overview
+
+```{r}
+#| label = "setup",
+#| include = FALSE
+options(htmltools.dir.version = FALSE)
+knitr::opts_chunk$set(warning = FALSE, 
+                      message = FALSE, 
+                      cache = T,
+  comment = NA, dpi = 300,
+  fig.align = "center", out.width = "80%")
+library("tidyverse")
+```
+
+```{r}
+#| label = "xaringan-tile-view",
+#| echo = FALSE
+xaringanExtra::use_tile_view()
+```
+
+```{r}
+#| label = "xaringanExtra-clipboard",
+#| echo = FALSE
+htmltools::tagList(
+  xaringanExtra::use_clipboard(
+    button_text = "<i class=\"fa fa-clipboard\"></i>",
+    success_text = "<i class=\"fa fa-check\" style=\"color: #90BE6D\"></i>",
+  ),
+  rmarkdown::html_dependency_font_awesome()
+)
+```
+
+
+```{r}
+#| label = "packages",
+#| include = F
+the_packages <- c(
+  ## R Markdown
+  "kableExtra","DT","texreg",
+  ## Tidyverse
+  "tidyverse", "lubridate", "forcats", "haven", "labelled",
+  ## Extensions for ggplot
+  "ggmap","ggrepel", "ggridges", "ggthemes", "ggpubr", 
+  "GGally", "scales", "dagitty", "ggdag", "ggforce",
+  # Data 
+  "COVID19","maps","mapdata","qss","tidycensus", "dataverse", #<<
+  # Analysis
+  "DeclareDesign", "easystats", "zoo"#<<
+)
+```
+
+```{r}
+#| label = "ipak",
+#| include = F
+ipak <- function(pkg){
+    new.pkg <- pkg[!(pkg %in% installed.packages()[, "Package"])]
+    if (length(new.pkg)) 
+        install.packages(new.pkg, dependencies = TRUE)
+    sapply(pkg, require, character.only = TRUE)
+}
+
+```
+
+
+```{r}
+#| label = "loadpackages",
+#| cache = F,
+#| include = F
+ipak(the_packages)
+```
+
+
+
+---
+## General Plan
+
+- Group Assignment 1: Research Questions
+- Setup
+  - Packages
+  - Data
+- Feedback
+- Review
+  - Casual inference
+  - Covariate Adjustment
+- Linear Models
+  - Conceptual
+  - Practical
+  - Technical
+  - Theoretical
+- Three Common Observational Designs
+  - Difference in Difference
+  - Regression Discontinuity
+  - Instrumental Variable Designs
+
+---
+class: inverse, center, middle
+# Research Questions
+
+---
+## Research Questions
+
+- Template [here](https://pols1600.paultesta.org/files/assignments/A1_research_questions.docx)
+
+- Upload to [Canvas](https://canvas.brown.edu/courses/1087979/assignments/7870538?module_item_id=10762418) this Sunday
+
+- 3 Research questions:
+  
+  - One-sentence research question
+  
+  - Why do we care
+  
+  - Ideal experiment
+  
+  - Observational study
+  
+  - Feasibility
+
+
+
+---
+class:inverse, middle, center
+# 💪
+## Get set up to work
+
+---
+## New packages
+
+Hopefully, you were all able to install the following packages 
+
+```{r}
+#| label = "installpacks",
+#| eval = FALSE
+install.packages("dataverse")
+install.packages("tidycensus")
+install.packages("easystats")
+install.packages("DeclareDesign")
+
+```
+
+
+---
+## Census API:
+
+Additionally, I hope you have all followed the steps [here](https://pols1600.paultesta.org/slides/04-packages.html#3_Install_a_Census_API_tidycensus_package):
+
+1. Install the `tidycensus` package
+2. Load the installed package
+3. Request an API key from the Census
+4. Check your email
+5. Activate your key
+6. Install your API key in R
+7. Check that everything worked
+
+To install the an API key so we can download data directly from the US Census
+
+
+---
+## Packages for today
+
+
+```{r}
+#| ref.label = c("packages")
+
+```
+
+---
+## Define a function to load (and if needed install) packages
+
+
+```{r}
+#| ref.label = "ipak"
+```
+
+---
+## Load packages for today
+
+```{r}
+#| ref.label = "loadpackages"
+```
+
+
+---
+class:inverse, center, middle
+# 💪
+## Load Data for today
+
+---
+## Load the Covid-19 Data
+
+```{r}
+#| label = "covid"
+# covid <- COVID19::covid19(
+#   country = "US",
+#   level = 2,
+#   verbose = F
+# )
+load(url("https://pols1600.paultesta.org/files/data/covid.rda"))
+```
+
+---
+## Filter Covid-19 Data to US States
+
+```{r}
+#| label = "covidus"
+# Vector containing of US territories
+territories <- c(
+  "American Samoa",
+  "Guam",
+  "Northern Mariana Islands",
+  "Puerto Rico",
+  "Virgin Islands"
+  )
+
+# Filter out Territories and create state variable
+covid_us <- covid %>%
+  filter(!administrative_area_level_2 %in% territories)%>%
+  mutate(
+    state = administrative_area_level_2
+  )
+```
+
+---
+## Mutate: Calculate New Cases
+
+
+```{r}
+#| label = "newcases"
+covid_us %>%
+  dplyr::group_by(state) %>%
+  mutate(
+    new_cases = confirmed - lag(confirmed),
+    new_cases_pc = new_cases / population *100000,
+    new_cases_pc_7da = zoo::rollmean(new_cases_pc, 
+                                     k = 7, 
+                                     align = "right",
+                                     fill=NA )
+    ) -> covid_us
+```
+
+---
+## Calculating a Rolling Average New Cases
+
+```{r}
+#| label = "rollmean"
+covid_us %>%
+  filter(date > "2020-03-05") %>%
+  select(date,new_cases_pc,new_cases_pc_7da)
+```
+
+---
+## New Case Per Capita
+
+.pull-left[
+```{r }
+#| label = "plotmean"
+covid_us %>%
+  filter(date > "2020-03-05", 
+         state == "Minnesota") %>%
+  select(date,
+         new_cases_pc,
+         new_cases_pc_7da)%>%
+  ggplot(aes(date,new_cases_pc ))+
+  geom_line(aes(col="Daily"))+
+  theme(legend.position="bottom")+
+    labs( col = "Measure",
+    y = "New Cases Per 100k", x = "",
+    title = "Minnesota"
+  ) -> fig_covid_mn 
+```
+]
+
+.pull-right[
+```{r}
+#| label = "plotmean2",
+#| echo = F
+fig_covid_mn
+```
+]
+
+---
+## New Case Per Capita vs 7-day average
+
+.pull-left[
+```{r}
+#| label = "plotmean7d",
+#| eval = F
+fig_covid_mn +
+  geom_line(aes(y = new_cases_pc_7da,
+                col = "7-day average")
+            ) -> fig_covid_mn
+```
+]
+
+.pull-right[
+```{r}
+#| label = "plotmean7d2",
+#| echo = F
+fig_covid_mn +
+  geom_line(aes(y = new_cases_pc_7da,
+                col = "7-day average")
+            ) -> fig_covid_mn
+fig_covid_mn
+```
+
+]
+
+---
+## Facemask Policy
+
+```{r}
+#| label = "recode_facemasks"
+covid_us %>%
+mutate(
+  # Recode facial_coverings to create face_masks
+    face_masks = case_when(
+      facial_coverings == 0 ~ "No policy",
+      abs(facial_coverings) == 1 ~ "Recommended",
+      abs(facial_coverings) == 2 ~ "Some requirements",
+      abs(facial_coverings) == 3 ~ "Required shared places",
+      abs(facial_coverings) == 4 ~ "Required all times",
+    ),
+    # Turn face_masks into a factor with ordered policy levels
+    face_masks = factor(face_masks,
+      levels = c("No policy","Recommended",
+                 "Some requirements",
+                 "Required shared places",
+                 "Required all times")
+    ) 
+    ) -> covid_us
+```
+
+---
+## Mutate: Dates and Vaccinations
+
+```{r}
+#| label = "dates"
+covid_us %>%
+  mutate(
+    year = year(date),
+    month = month(date),
+    year_month = paste(year, 
+                       str_pad(month, width = 2, pad=0), 
+                       sep = "-"),
+    percent_vaccinated = people_fully_vaccinated/population*100  
+    ) -> covid_us
+```
+
+
+---
+## Load Data on Presidential Elections
+
+
+
+```{r}
+#| label = "pres_data"
+# Try this code first
+Sys.setenv("DATAVERSE_SERVER" = "dataverse.harvard.edu")
+
+pres_df <- get_dataframe_by_name(
+  "1976-2020-president.tab",
+  "doi:10.7910/DVN/42MVDX"
+)
+
+# If the code above fails, comment out and uncomment the code below:
+
+# load(url("https://pols1600.paultesta.org/files/data/pres_df.rda"))
+```
+
+---
+## HLO of Presidential Elections Data
+
+```{r}
+#| label = "pres_hlo"
+head(pres_df)
+```
+
+---
+## Transform Data to get just 2020 Election
+
+```{r}
+#| label = "pres_wrangle"
+pres_df %>%
+  mutate(
+    year_election = year,
+    state = str_to_title(state),
+    # Fix DC
+    state = ifelse(state == "District Of Columbia", "District of Columbia", state)
+  ) %>%
+  filter(party_simplified %in% c("DEMOCRAT","REPUBLICAN"))%>%
+  filter(year == 2020) %>%
+  select(state, state_po, year_election, party_simplified, candidatevotes, totalvotes
+         ) %>%
+  pivot_wider(names_from = party_simplified,
+              values_from = candidatevotes) %>%
+  mutate(
+    dem_voteshare = DEMOCRAT/totalvotes *100,
+    rep_voteshare = REPUBLICAN/totalvotes*100,
+    winner = forcats::fct_rev(factor(ifelse(rep_voteshare > dem_voteshare,"Trump","Biden")))
+  ) -> pres2020_df
+```
+
+---
+## Transform Data to get just 2020 Election
+
+```{r}
+head(pres2020_df)
+```
+
+
+---
+## Load Data on Median State Income from the Census
+
+```{r}
+#| label = "acs_data"
+acs_df <- get_acs(geography = "state", 
+              variables = c(med_income = "B19013_001",
+                            med_age = "B01002_001"), 
+              year = 2019)
+```
+
+---
+## HLO: Census Data 
+
+```{r}
+#| label = "acs_hlo"
+head(acs_df)
+```
+
+
+---
+## Tidy Census Data
+
+```{r}
+#| label = "acs_tidy"
+acs_df %>%
+  mutate(
+    state = NAME,
+  ) %>%
+  select(state, variable, estimate) %>%
+  pivot_wider(names_from = variable,
+              values_from = estimate) -> acs_df
+```
+
+---
+## Tidy Census Data
+
+```{r}
+head(acs_df)
+```
+
+
+---
+## Merge election data and covid data into single `df`
+
+.pull-left[
+- We're going to take our `covid_us` data and **merge** into this data on the 2020 election from `pres2020_df` using the common `state` variable in each data set for a `left_join()` 
+
+- Always check the matches in your joining variable (i.e. `state`)
+
+- Below we see that our recoding of state to title case in created a mismatch
+
+]
+
+.pull-right[
+```{r}
+#| label = "merge_check"
+# Should be 51
+sum(pres2020_df$state %in% covid_us$state)
+# Find the mismatch:
+pres2020_df$state[!pres2020_df$state %in% covid_us$state]
+# Fix
+pres2020_df$state[pres2020_df$state == "District Of Columbia"] <- "District of Columbia"
+# Problem Solved
+sum(pres2020_df$state %in% covid_us$state)
+
+```
+]
+
+---
+## Merge election data into Covid data
+
+```{r}
+#| label = "merge_pres"
+dim(covid_us)
+dim(pres2020_df)
+covid_us <- covid_us %>% left_join(
+  pres2020_df,
+  by = c("state" = "state")
+)
+dim(covid_us) 
+```
+
+
+---
+## Merge Census data into Covid data
+
+```{r}
+#| label = "acs_merge"
+dim(covid_us)
+dim(acs_df)
+covid_us <- covid_us %>% left_join(
+  acs_df,
+  by = c("state" = "state")
+)
+dim(covid_us)  # Same number of rows as covid_us w/ 2 additional columns
+
+```
+
+---
+
+```{r}
+#| label = "red_covid",
+#| echo = F,
+#| out.height = "80%"
+knitr::include_graphics("./images/05_covid.png")
+```
+
+[Red Covid, an Update](https://www.nytimes.com/2022/02/18/briefing/red-covid-partisan-deaths-vaccines.html) *New York Times*, 18 February, 2022
+
+
+---
+## Preview of the Lab
+
+Conceptually, this lab is designed to help reinforce the relationship between linear models like $y=\beta_0 + \beta_1x$ and the conditional expectation function $E[Y|X]$. 
+
+- Questions 1-5 are designed to reinforce your **data wrangling** skills. In particular, you will get practice:
+  - Creating and recoding variables using `mutate()`
+  - Calculating a [moving average](https://en.wikipedia.org/wiki/Moving_average) or rolling mean using the `rollmean()` function from the `zoo` package
+  - Transforming the data on presidential elections so that it can be merged with the data on Covid-19 using the `pivot_wider()` function.
+  - [Merging data](https://r4ds.had.co.nz/relational-data.html) together using the `left_join()` function.
+
+- In question 6, you will see how calculating conditional means provides a simple test of "Red Covid" claim.
+
+- In question 7, you will see how a linear model returns the same information as these conditional means (in a sligthly different format)
+
+- In question 8, you will get practice interpreting linear models with continuous predictors (i.e. predictors that take on a range of values)
+
+- In question 9, you will get practice visualizing these models and using the figures help interpret your results substantively.
+
+- Question 10 asks you to play the role of a skeptic and consider what other factors might explain the relationships we found in Questions 6-9. We will explore these factors in next week's lab.
+
+
+---
+class: inverse, center, middle
+background-image: url("https://i.pinimg.com/originals/a2/05/b6/a205b689caf19f3287b1544cbe0e6b7b.jpg")
+background-size: contain
+# 📢
+## Feedback
+
+```{r}
+#| label = "feedback",
+#| echo = F,
+#| message = F
+df_wk04 <- haven::read_spss("../files/survey/week5.sav")
+df_wk04
+```
+
+
+---
+## What we liked and learned
+
+--
+
+- Causal Inference!
+- Data Viz
+- Programming
+- Review
+- Dank Memes
+
+---
+## What we liked
+
+```{r}
+#| label = "likes",
+#| echo = F,
+#| out.height = "90%"
+DT::datatable(df_wk04 %>% 
+                select(Likes),
+               fillContainer = F,
+              height = "90%",
+              options = list(
+                pageLength = 3
+              )
+              )
+
+```
+
+
+---
+## What we've learned
+
+```{r}
+#| label = "learn",
+#| echo = F,
+#| out.height = "90%"
+df_wk04$code_skills
+DT::datatable(df_wk04 %>% 
+                select(code_skills),
+               fillContainer = F,
+              height = "90%",
+              options = list(
+                pageLength = 4
+              )
+              )
+```
+
+
+---
+## What we disliked or struggled with
+
+
+- Stats
+  - DAGs
+  - Regression
+- Pacing
+- Keeping track of various concepts and skills
+- Lack of breaks
+- Too much review
+
+---
+## What we disliked
+
+```{r}
+#| label = "dislikes",
+#| echo = F
+DT::datatable(df_wk04 %>% 
+                select(Dislikes),
+               fillContainer = F,
+              height = "90%",
+              options = list(
+                pageLength = 4
+              )
+              )
+2+2
+```
+
+
+---
+## What we've struggled with
+
+```{r}
+#| label = "struggle",
+#| echo = F,
+#| out.height = "90%"
+
+DT::datatable(df_wk04 %>% 
+                select(code_challenge),
+               fillContainer = F,
+              height = "90%",
+              options = list(
+                pageLength = 4
+              )
+              )
+```
+
+
+---
+
+```{r}
+#| echo = F
+df_wk04$eval_trump_6
+df_wk04 %>%
+  mutate(
+    `Comparison Includes`= ifelse(is.na(eval_1), "Trump", "No Trump"),
+    You = ifelse(is.na(eval_1), eval_trump_1, eval_1),
+    Me = ifelse(is.na(eval_2), eval_trump_2, eval_2),
+    Trump = eval_trump_6,
+    `Everyone we know` = ifelse(is.na(eval_3), eval_trump_3, eval_3),
+  )%>%
+  select(`Comparison Includes`, Me, You, `Everyone we know`, Trump)%>%
+  pivot_longer(
+    cols = -`Comparison Includes`,
+    names_to = "Target",
+    values_to = "Evaluation"
+      
+  )%>%
+  mutate(
+    Target = factor(Target, levels = rev(c("You","Me", "Everyone we know", "Trump")))
+  )%>%
+  ggplot(aes(Evaluation, Target, fill=`Comparison Includes`))+
+  geom_density_ridges(
+                      jittered_points = TRUE,
+                      position = position_points_jitter(width = 0.05, height = 0),
+                      point_shape = '|', point_size = 3, point_alpha = 1, alpha = 0.7,
+                      )+
+  labs(y="",
+       title = "How are we doing?")
+```
+
+
+
+---
+class:inverse, middle, center
+# 🔍
+## Review
+
+
+---
+## Review
+
+- Casual Inference
+  
+- Covariate Adjustment
+
+---
+class:inverse, middle, center
+# 🔍
+## Causal Inference
+
+---
+## Review: Causal Inference 
+
+- Causal inference is about counterfactual comparisons
+
+--
+
+- Some counterfactuals are easier to imagine or create than others
+
+--
+
+- Randomization solves the fundamental problem of causal inference allowing us to estimate average treatment effects free from selection bias
+
+--
+
+- Randomization is not always possible, desirable, or ethical
+
+--
+
+- Observational designs that try to estimate causal effects need to justify assumptions about conditional independence:
+
+$$
+Y_i(1),Y_i(0) \perp D_i |X_i
+$$
+
+--
+
+- This assumption goes by many, jargony names: Selection on Observables, Conditional Independence, No unmeasured confounders.
+
+--
+
+- Credibility of this assumption depends less on having a lot of data, and more on how your data were generated.
+
+--
+
+- Observational designs estimate the effect of $D$ conditional on $X$ using covariate adjustment.
+
+
+---
+class:inverse, middle, center
+# 🔍
+## Covariate Adjustment
+
+---
+## Review: Covariate Adjustment
+
+- Covariate adjustment are a set of statistical procedures that allow us to estimate conditional values 
+  - $e.g.(E[Y|X=x]), E[Happiness| leetCoder == T]$
+
+- We adjust for covariates to improve our predictions and make credible comparisons
+  - $E[\text{New Covid-19 cases}|\text{Face mask policy}]$ vs $E[\text{New Covid-19 cases}|\text{Face mask policy |June 2020 },]$
+  - $ATE = E[Y| D = 1] - E[Y | D=0]$
+
+- Three approaches:
+  - Subclassification
+  - Matching
+  - Regression
+
+---
+## Subclassification
+
+- Subclassification is a simple way to adjust for a covariate
+  
+  - Subset the data to include only the values you want ($X=x$, $D=1$, $Interverntion = Treated$) and calculate the quantity of interest (e.g. a conditional mean, `mean(df$income[df$age <30])`)
+
+--
+
+- But what if we want to control for more than one variable? 
+
+- What if our variables aren't categorical like sex, but continuous like height?
+
+--
+
+- **The Curse of Dimensionality** as you attempt to adjust for more covariates (add more dimensions), the space of possible combinations grows exponentially
+  
+  - Assumption of Common Support likely to be violated $0 < Pr(D_i = 1|X_i) < 1$ 
+
+---
+## Matching
+
+- Matching refers to a broad set of procedures that try to recreate what randomization provides: **covariate balance**
+  
+  - **covariate balance** is a fancy term for saying that in the aggregate, two groups look similar accept on group received the *treatment* $(D=1)$ while another group did not $(D=0)$
+
+--
+
+- There are many ways to try to match observations:
+  - **Exact matching:** Find exact matches between treatment and control observations for all covariates $X$. Only works for a few covariates.
+  - **Coarsened exact matching:** Find approximate matches within ranges of values for $X$
+  - **Matching on summaries of the covariates** calculating  a single measure of the similarility of observations and matching on this summary to produce covariate balance.
+
+--
+
+- Matching:
+  - Conceptually appealing (mirrors the logic of an experiment)
+  - Technically complex (complicated algorithms, finicky software) 
+  - Only provides balance on **observed covariates**
+
+
+
+---
+class: inverse, center, middle
+# 💡  
+# Linear Regression
+## The Basics
+
+---
+## Understanding Linear Regression
+
+- **Conceptual**
+  - Simple linear regression estimates "a line of best fit" that summarizes relationships between two variables
+
+$$
+y_i = \beta_0 + \beta_1x_i + \epsilon_i
+$$
+
+- **Practical**
+  - We estimate linear models in R using the `lm()` function
+  
+```{r}
+#| eval = F
+lm(y ~ x, data = df)
+```
+
+- *Technical/Definitional*
+  - Linear regression chooses $\beta_0$ and $\beta_1$ to minimize the Sum of Squared Residuals (SSR): 
+
+$$\textrm{Find }\hat{\beta_0},\,\hat{\beta_1} \text{ arg min}_{\beta_0, \beta_1} \sum (y_i-(\beta_0+\beta_1x_i))^2$$
+
+- *Theoretical*
+  - Linear regression provides a **linear** estimate of the conditional expectation function (CEF): $E[Y|X]$
+
+---
+class: inverse, center, middle
+# 💡  
+# Conceptual: Linear Regression
+## Linear Regression Provides an Estimate of the Line of Best Fit
+
+---
+## Conceptual: Linear Regression 
+
+- Regression is a tool for describing relationships.
+  
+  - How does some outcome we're interested in tend to change as some predictor of that outcome changes?
+  
+  - How does economic development vary with democracy?
+  
+  - How does economic development vary with democracy, adjusting for natural resources like oil and gas
+
+- Formally:
+
+$$
+y_i = f(x_i) + \epsilon
+$$
+
+  - Y is a function of X plus some error, $\epsilon$
+
+- Linear regression assumes that relationship between an outcome and a predictor can be by a [linear](https://en.wikipedia.org/wiki/Linearity) function 
+
+$$
+y_i = \beta_0 + \beta_1 x_i + \epsilon
+$$
+
+
+---
+##  Linear Regression and the Line of Best Fit
+
+
+- The goal of linear regression is to choose coefficients $\beta_0$ and $\beta_1$  to summarizes the relationship between $y$ and $x$
+
+$$
+y_i = \beta_0 + \beta_1 x_i + \epsilon
+$$
+
+- To accomplish this we need some sort of criteria. 
+
+- For linear regression, that criteria is minimizing the error between what our model predicts $\hat{y_i} = \beta_0 + \beta_1 x_i$ and what we actually observed $(y_i)$ 
+
+- More on this to come. But first...
+
+
+
+---
+## Regression Notation
+
+- $y_i$ an **outcome variable** or thing we're trying to explain
+  
+  - AKA: The dependent variable, The response Variable, The left hand side of the model
+
+- $x_i$ a **predictor variables** or things we think explain variation in our outcome
+  
+  - AKA: The independent variable, covariates, the right hand side of the model.
+  
+  - Cap or No Cap: I'll use  $X$ (should be $\mathbf{X}$) to denote a set (matrix) of predictor variables. $y$ vs $Y$ can also have technical distinctions (Sample vs Population, observed value vs Random Variable, ...)
+
+- $\beta$ a set of **unknown parameters** that describe the relationship between our outcome $y_i$ and our predictors $x_i$
+
+- $\epsilon$ the **error term** representing variation in  $y_i$ not explained by our model.
+
+
+---
+## Linear Regression
+
+Let's return to the simple (bivariate) linear regressions we introduced last week:
+
+$$
+y_i = \beta_0 + \beta_1 x_i + \epsilon
+$$
+
+- We call this a bivariate regression, because there are only two variables.
+
+- We call this a linear regression, because $y_i = \beta_0 + \beta_1 x_i$ is the equation for a line, where:
+ 
+  - $\beta_0$ corresponds to the $y$ intercept, or the model's prediction when $x = 0$.
+ 
+  - $\beta_1$ corresponds to the slope, or how $y$ is predicted to change as $x$ changes.
+
+---
+## Linear Regression 
+  
+- If you find this notation confusing, try plugging in substantive concepts for what $y$ and $x$ represent
+- Say we wanted to know how attitudes to transgender people varied with age in the baseline survey from Lab 03.
+
+The generic linear model
+
+$$y_i = \beta_0 + \beta_1 x_i + \epsilon$$
+
+Reflects:
+
+$$\text{Transgender Feeling Thermometer}_i = \beta_0 + \beta_1\text{Age}_i + \epsilon_i$$
+
+---
+## Practical: Estimating a Linear Regression
+
+- We estimate linear regressions in `R` using the `lm()` function.
+- `lm()` requires two arguments:
+  - a `formula` argument of the general form `y ~ x` read as "Y modeled by X" or below "Transgender Feeling Thermometer (`y`) modeled by (`~`) Age (`x`)
+  - a `data` argument telling R where to find the variables in the formula
+  
+
+```{r}
+#| label = "lmdata"
+load(url("https://pols1600.paultesta.org/files/data/03_lab.rda"))
+m1 <- lm(therm_trans_t0 ~ vf_age, data = df)
+m1
+
+```
+
+---
+
+The coefficients from `lm()` are saved in object called `m1` 
+  
+```{r}
+#| label = "printm1"
+m1
+```
+
+`m1` actually contains a lot of information
+
+```{r}
+#| label = "m1info"
+names(m1)
+m1$coefficients
+```
+
+---
+## Practical: Interpreting a Linear Regression
+
+We can extract the intercept and slope from this simple bivariate model, using the `coef()` function
+
+```{r}
+#| label = "m1coef"
+# All the coefficients
+coef(m1)
+# Just the intercept
+coef(m1)[1]
+# Just the slope
+coef(m1)[2]
+```
+
+---
+## Practical: Interpreting a Linear Regression
+
+The two coefficients from `m1` define a line of best fit, summarizing how feelings toward transgender individuals change with age
+
+
+$$y_i = \beta_0 + \beta_1 x_i + \epsilon$$
+
+$$\text{Transgender Feeling Thermometer}_i = \beta_0 + \beta_1\text{Age}_i + \epsilon_i$$
+
+$$\text{Transgender Feeling Thermometer}_i = `r round(coef(m1)[1],2)` + `r round(coef(m1)[2],2)` \text{Age}_i + \epsilon_i$$
+---
+## Practical: Predicted values from a Linear Regression
+
+- Often it's useful for interpretation to obtain predicted values from a regression. 
+
+
+- To obtain predicted vales $(\hat{y})$, we simply plug in a value for $x$ (In this case, $Age$) and evaluate our equation.
+
+- For example, might we expect attitudes to differ among an 18-year-old college student and their 68-year-old grandparent?
+
+$$\hat{FT}_{x=18} = `r round(coef(m1)[1],2)` + `r round(coef(m1)[2],2)` \times 18  = 59.16$$
+$$\hat{FT}_{x=65} = `r round(coef(m1)[1],2)` + `r round(coef(m1)[2],2)` \times 68  = 49.01$$
+
+---
+## Practical: Predicted values from a Linear Regression
+
+We could do this by hand
+
+```{r}
+#| label = "pred_man"
+coef(m1)[1] + coef(m1)[2] * 18
+coef(m1)[1] + coef(m1)[2] * 68
+
+```
+
+---
+## Practical: Predicted values from a Linear Regression
+
+More often we will:
+
+- Make a prediction data frame (called `pred_df` below) with the values of interests
+- Use the `predict()` function with our linear model (`m1`) and `pred_df`
+- Save the predicted values to our new column in our prediction data frame
+
+
+
+---
+## Practical: Predicted values from a Linear Regression
+
+```{r}
+#| label = "pred_df"
+# Make prediction data frame
+pred_df <- data.frame(
+  vf_age = c(18, 68)
+)
+# Predict FT for 18 and 68 year-olds
+predict(m1, newdata = pred_df)
+
+# Save predictions to data frame
+pred_df$ft_trans_hat <- predict(m1, newdata = pred_df)
+pred_df
+```
+
+
+
+---
+## Practical: Visualizing Linear Regression
+
+We can visualize simple regression by:
+
+- plotting a scatter plot of the outcome (y-axis) and predictors (x-axis)
+
+- overlaying the line defined by `lm()`
+
+---
+```{r}
+#| label = "fig_lm_code",
+#| eval = F
+fig_lm <- df %>%
+  ggplot(aes(vf_age,therm_trans_t0))+
+  geom_point(size=.5, alpha=.5)+
+  geom_abline(intercept = coef(m1)[1],
+              slope = coef(m1)[2],
+              col = "blue"
+              )+
+  geom_vline(xintercept = 0,linetype = 2)+
+  xlim(0,100)+
+  annotate("point",
+           x = 0, y = coef(m1)[1],
+           col= "red",
+           )+
+  annotate("text",
+           label = expression(paste(beta[0],"= 62.81" )),
+           x = 1, y = coef(m1)[1]+5,
+           hjust = "left",
+           )+
+  labs(
+    x = "Age",
+    y = "Feeling Thermometer toward\nTransgender People"
+  )+
+  theme_classic()
+fig_lm
+```
+
+---
+```{r}
+#| label = "fig_lm_plot",
+#| echo = F
+fig_lm <- df %>%
+  ggplot(aes(vf_age,therm_trans_t0))+
+  geom_point(size=.5, alpha=.5)+
+  geom_abline(intercept = coef(m1)[1],
+              slope = coef(m1)[2],
+              col = "blue"
+              )+
+  geom_vline(xintercept = 0,linetype = 2)+
+  xlim(0,100)+
+  annotate("point",
+           x = 0, y = coef(m1)[1],
+           col= "red",
+           )+
+  annotate("text",
+           label = expression(paste(beta[0],"= 62.81" )),
+           x = 1, y = coef(m1)[1]+5,
+           hjust = "left",
+           )+
+  labs(
+    x = "Age",
+    y = "Feeling Thermometer toward\nTransgender People"
+  )+
+  theme_classic()
+fig_lm
+```
+
+
+
+---
+```{r}
+#| label = "figlm1code",
+#| echo = F
+
+fig_lm+
+  geom_segment(aes(x=47, xend = 47,
+                   y=53.27526, yend=74),
+               col="red")+
+  geom_segment(aes(x=47, xend = 55,
+                   y=74, yend=74),
+               col="darkgrey",linetype = 2)+
+  annotate("text",label = expression(paste(Y[i],"= 74" )),
+           x = 55.5, y = 74,
+           hjust = "left")+
+  geom_segment(aes(x=47, xend = 55,
+                   y=63.5, yend=63.5),
+               col="red",linetype = 2)+
+  annotate("text",label = expression(paste(epsilon[i],"=", Y[i] - hat(Y[i]),"= 74 - 53.27 = 20.73" )),
+           x = 55.5, y = 63.5,
+           col = "red",
+           hjust = "left")+
+  geom_segment(aes(x=47, xend = 55,
+                   y=53.27526, yend=53.27526),
+               col="blue",linetype = 2)+
+  annotate("text",label = expression(paste(hat(Y[i]),"=", beta[0] + beta[1],"Age = 62.81 -0.20*47 = 53.27" )),
+           x = 55.5, y = 53.27526,
+           col = "blue",
+           hjust = "left")
+
+
+
+```
+
+---
+```{r}
+#| label = "figlm1",
+#| echo = F
+# devtools::install_github("nicolash2/ggbrace")
+library(ggbrace)
+fig_lm +
+  ylim(48, 52)+
+  xlim(58, 62)+
+  geom_segment(aes(
+    y = coef(m1)[1] + coef(m1)[2]*61,
+    yend = coef(m1)[1] + coef(m1)[2]*60,
+    x = 60, xend = 60),
+    arrow = arrow(ends = "first",length = unit(0.015, "npc")),
+    col = "red"
+    )+
+    geom_segment(aes(
+    y = coef(m1)[1] + coef(m1)[2]*61,
+    yend = coef(m1)[1] + coef(m1)[2]*61,
+    x = 60, xend = 61),
+    arrow = arrow(ends = "last",length = unit(0.015, "npc")),
+    col = "red"
+    )+
+   geom_curve(aes(
+    y = 49.7,
+    yend = 50.53,
+    x = 59.43, xend = 59.8),
+    curvature = -.2,
+    arrow = arrow(ends = "last",length = unit(0.015, "npc")),
+    col = "black",
+    )+
+    annotate("text",
+           label = expression(paste(beta[1],"= -0.21" )),
+           x = 59, y = 49.5,
+           hjust = "left",
+           )+
+  geom_brace(aes(c(59.9, 59.98),c(50.43, 50.63)), 
+             inherit.data=F,
+             rotate = 270)
+```
+
+
+
+
+
+
+---
+background-image:url("https://i.imgflip.com/66mx9d.jpg")
+background-size:contain
+
+---
+class: inverse, center, middle
+# 💡  
+# Technical: Linear Regression
+## The Mechanics of Minimizing the Sum of Squared Errors
+
+---
+## How did `lm()` choose $\beta_0$ and $\beta_1$
+
+--
+
+- P: By minimizing the sum of squared errors, in procedure called Ordinary Least Squares (OLS) regression
+
+--
+
+- Q: Ok, that's not really that helpful...
+
+  - What's an error?
+  - Why would we square and sum them
+  - How do we minimize them.
+
+P: Good questions!
+
+
+---
+## What's an error?
+
+An error, $\epsilon_i$ is simply the difference between the observed value of $y_i$ and what our model would predict, $\hat{y_i}$ given some value of $x_i$. So for a model:
+
+$$y_i=\beta_0+\beta_1 x_{i} + \epsilon_i$$
+
+We simply subtract our model's prediction $\beta_0+\beta_1 x_{i}$ from the the observed value, $y_i$
+
+$$\hat{\epsilon_i}=y_i-\hat{y_i}=(Y_i-(\beta_0+\beta_1 x_{i}))$$
+
+To get $\epsilon_i$
+
+---
+## Why are we squaring and summing $\epsilon$
+
+There are more mathy reasons for this, but at intuitive level, the Sum of Squared Residuals (SSR)
+
+  - Squaring $\epsilon$ treats positive and negative residuals equally.
+  
+  - Summing produces single value summarizing our models overall performance.
+  
+There are other criteria we could use (e.g. minimizing the sum of absolute errors), but SSR has some nice properties
+
+
+---
+## How do we minimize $\sum \epsilon^2$
+
+OLS chooses $\beta_0$ and $\beta_1$ to minimize $\sum \epsilon^2$, the Sum of Squared Residuals (SSR)
+
+$$\textrm{Find }\hat{\beta_0},\,\hat{\beta_1} \text{ arg min}_{\beta_0, \beta_1} \sum (y_i-(\beta_0+\beta_1x_i))^2$$
+
+---
+## How did `lm()` choose $\beta_0$ and $\beta_1$
+
+In an intro stats course, we would walk through the process of finding
+
+$$\textrm{Find }\hat{\beta_0},\,\hat{\beta_1} \text{ arg min}_{\beta_0, \beta_1} \sum (y_i-(\beta_0+\beta_1x_i))^2$$
+Which involves a little bit of calculus. The big payoff is that 
+
+$$\beta_0 = \bar{y} - \beta_1 \bar{x}$$
+And 
+
+$$ \beta_1 = \frac{Cov(x,y)}{Var(x)}$$
+Which is never quite the epiphany, I think we think it is...
+
+The following slides walk you through the mechanics of this exercise. We're gonna skip through them in class, but they're there for your reference
+
+
+
+
+---
+## How do we minimize $\sum \epsilon^2$
+
+To understand what's going on under the hood, you need a broad understanding of some basic calculus.
+
+The next few slides provide a brief review of derivatives and differential calculus.
+
+
+---
+## Derivatives
+
+
+The derivative of $f$ at $x$ is its rate of change at $x$
+
+- For a line: the slope
+- For a curve: the slope of a line tangent to the curve
+
+You'll see two notations for derivatives:
+
+1. Leibniz notation:
+
+$$
+\frac{df}{dx}(x)=\lim_{h\to0}\frac{f(x+h)-f(x)}{(x+h)-x}
+$$
+
+2. Lagrange: $f^{\prime}(x)$
+
+
+---
+## Some useful Facts about Derivatives
+
+Derivative of a constant
+
+$$
+f^{\prime}(c)=0
+$$
+
+Derivative of a line f(x)=2x
+
+$$
+f^{\prime}(2x)=2
+$$
+
+Derivative of $f(x)=x^2$
+
+$$
+f^{\prime}(x^2)=2x
+$$
+
+Chain rule: y= f(g(x)). The derivative of y with respect to x is
+
+$$
+\frac{d}{dx}(f(g(x)))=f^{\prime}(g(x))g^{\prime}(x)
+$$
+
+The derivative of the "outside" times the derivative of the "inside," remembering that the derivative of the outside function is evaluated at the value of the inside function.
+
+---
+## Finding a Local Minimums
+
+.pull-left[
+Local minimum:
+
+$$
+f^{\prime}(x)=0 \text{ and } f^{\prime\prime}(x)>0 
+$$
+]
+
+.pull-right[
+```{r}
+#| label = "derivatives",
+#| echo = F
+knitr::include_graphics("https://copingwithcalculus.com/SecondDeriv1.png")
+```
+[Source](https://copingwithcalculus.com/SecondDerivativeTest.html)
+]
+
+
+---
+## Partial Derivatives
+
+Let $f$ be a function of the variables $(x, \dots, X_n)$. The partial derivative of $f$ with respect to $X_i$ is
+
+$$\begin{align*}
+\frac{\partial f(x, \dots, X_n)}{\partial X_i}=\lim_{h\to0}\frac{f(x, \dots X_i+h \dots, X_n)-f(x, \dots X_i \dots, X_n)}{h}
+\end{align*}$$
+
+```{r}
+#| label = "partial",
+#| echo = F,
+#| fig.height = 4
+knitr::include_graphics("https://miro.medium.com/max/766/1*dToo8pNrhBmYfwmPLp6WrQ.png")
+```
+[Source](https://towardsdatascience.com/linear-regression-detailed-view-ea73175f6e86)
+
+---
+## Minimizing the sum of squared errors
+
+Our model
+
+$$y_i =\beta_0+\beta_1x_{i}+\epsilon_i$$
+
+Finds coefficients $\beta_0$ and $\beta_1$ to to minimize the sum of squared residuals, $\hat{\epsilon}_i$:
+
+$$\begin{aligned}
+\sum \hat{\epsilon_i}^2 &= \sum (y_i-\beta_0-\beta_1 x_{i})^2
+\end{aligned}$$
+
+
+---
+## Minimizing the sum of squared errors
+
+We solve for $\beta_0$ and $\beta_1$, by taking the partial derivatives with respect to $\beta_0$ and $\beta_1$, and setting them equal to zero
+
+$$\begin{aligned}
+\frac{\partial \sum \hat{\epsilon_i}^2}{\partial \beta_0} &= -2\sum (y_i-\beta_0-\beta_1 x_{i})=0 & f'(-x^2) = -2x\\
+\frac{\partial \sum \hat{\epsilon_i}^2}{\partial\beta_1} &= -2\sum (y_i-\beta_0-\beta_1 x_{i})x_{i}=0 & \text{chain rule}
+\end{aligned}$$
+
+
+---
+## Solving for $\beta_0$
+
+First, we'll solve for $\beta_0$, by multiplying both sides by -1/2 and distributing the $\sum$:
+
+$$\begin{aligned}
+0 &= -2\sum (y_i-\beta_0-\beta_1 x_{i})\\
+\sum \beta_0 &= \sum y_i - \sum \beta_1 x_{i}\\
+N \beta_0 &= \sum y_i -\sum \beta_1 x_{i}\\
+\beta_0 &= \frac{\sum y_i}{N} - \frac{\beta_1 \sum x_{i}}{N}\\
+\beta_0 &= \bar{y} - \beta_1 \bar{x}
+\end{aligned}$$
+
+---
+## Solving for $\beta_1$
+
+Now, we can solve for $\beta_1$ plugging in $\beta_0$.
+
+$$\begin{aligned}
+0 &= -2\sum [(y_i-\beta_0-\beta_1 x_{i})x_{i}]\\
+0 &= \sum [y_ix_i-(\bar{y} - \beta_1 \bar{x})x_{i}-\beta_1 x_{i}^2]\\
+0 &= \sum [y_ix_i-\bar{y}x_{i} + \beta_1 \bar{x}x_{i}-\beta_1 x_{i}^2]
+\end{aligned}$$
+
+---
+## Solving for $\beta_1$
+
+Now we'll rearrange some terms and pull out an $x_{i}$ to get
+
+
+$$\begin{aligned}
+0 &= \sum [(y_i -\bar{y} + \beta_1 \bar{x}-\beta_1 x_{i})x_{i}]
+\end{aligned}$$
+
+Dividing both sides by $x_{i}$ and distributing the summation, we can isolate $\beta_1$
+
+$$\begin{aligned}
+\beta_1 \sum (x_{i}-\bar{x}) &= \sum (y_i -\bar{y})
+\end{aligned}$$
+
+Dividing by $\sum (x_{i}-\bar{x})$ to get
+
+$$\begin{aligned}
+\beta_1  &= \frac{\sum (y_i -\bar{y})}{\sum (x_{i}-\bar{x})}
+\end{aligned}$$
+
+---
+## Solving for $\beta_1$
+
+Finally, by multiplying by $\frac{(x_{i}-\bar{x})}{(x_{i}-\bar{x})}$ we get
+
+$$\begin{aligned}
+\beta_1  &= \frac{\sum (y_i -\bar{y})(x_{i}-\bar{x})}{\sum (\bar{x}-x_{i})^2}
+\end{aligned}$$
+
+Which has a nice interpretation: 
+
+$$\begin{aligned}
+\beta_1 &= \frac{Cov(x,y)}{Var(x)}
+\end{aligned}$$
+
+So the coefficient in a simple linear regression of $Y$ on $X$ is simply the ratio of the covariance between $X$ and $Y$ over the variance of $X$. Neat! 
+
+
+---
+class: inverse, center, middle
+# 💡  
+# Theoretical: Linear Regression
+## OLS provides a linear estimate of CEF: E[Y|X]
+
+---
+## Linear Regression is a many splendored thing
+
+[Timothy Lin](https://www.timlrx.com/tags/ols) provides a great overview of the various interpretations/motivations for linear regression.
+
+- A [least squares estimator](https://www.timlrx.com/blog/notes-on-regression-ols)
+
+- A [linear projection](https://www.timlrx.com/blog/notes-on-regression-geometry) of $y$ on the subspace spanned by $X\beta$
+
+- A [method of moments estimator](https://www.timlrx.com/blog/notes-on-regression-method-of-moments)
+
+- A [maximum likelihood estimator](https://www.timlrx.com/blog/notes-on-regression-maximum-likelihood)
+
+- A [singular vector decomposition](https://www.timlrx.com/blog/notes-on-regression-singular-vector-decomposition)
+
+- A [linear approximation of the conditional expectation function](https://www.timlrx.com/blog/notes-on-regression-approximation-of-the-conditional-expectation-function#fn1)
+
+
+---
+## Linear Regression is a many splendored thing
+
+[Timothy Lin](https://www.timlrx.com/tags/ols) provides a great overview of various interpretations/motivations for linear regression.
+
+- A [least squares estimator](https://www.timlrx.com/blog/notes-on-regression-ols)
+
+- A [linear projection](https://www.timlrx.com/blog/notes-on-regression-geometry) of $y$ on the subspace spanned by $X\beta$
+
+- A [method of moments estimator](https://www.timlrx.com/blog/notes-on-regression-method-of-moments)
+
+- A [maximum likelihood estimator](https://www.timlrx.com/blog/notes-on-regression-maximum-likelihood)
+
+- A [singular vector decomposition](https://www.timlrx.com/blog/notes-on-regression-singular-vector-decomposition)
+
+- A **[linear approximation of the conditional expectation function](https://www.timlrx.com/blog/notes-on-regression-approximation-of-the-conditional-expectation-function#fn1)**
+
+
+---
+## The Conditional Expectation Function
+
+Of all the functions we could choose to describe the relationship between $Y$ and $X$, 
+
+$$
+Y_i = f(X_i) + \epsilon_i
+$$
+
+the conditional expectation of $Y$ given $X$ $(E[Y|X])$, has some appealing properties
+
+$$
+Y_i = E[Y_i|X_i] + \epsilon
+$$
+
+The error, by definition, is uncorrelated with X and $E[\epsilon|X]=0$ 
+
+$$
+E[\epsilon|X] = E[Y - E[Y|X]|X]= E[Y|X] - E[Y|X] = 0
+$$
+
+Of all the possible functions $g(X)$, we can show that $E[Y_i|X_i] $ is the best predictor in terms of minimizing **mean squared error**
+
+$$
+E[ (Y - g(Y))^2] \geq E[(Y - E[Y|X])^2] 
+$$
+
+---
+## Linear Approximations to the  Conditional Expectation Function
+
+- We can then show (in a different class) that linear regression provides the best linear predictor of the CEF
+  - Chapter 3, of [Mostly Harmless Econometrics](https://bruknow.library.brown.edu/permalink/01BU_INST/9mvq88/alma991028523169706966)
+  - Chapter 4 of [Foundations of Agnostic Statistics](https://bruknow.library.brown.edu/permalink/01BU_INST/9mvq88/alma991000736119706966)
+
+- Furthermore, when the CEF is linear, it's equal exactly to OLS regression
+
+
+---
+```{r}
+#| label = "cef1code",
+#| echo = T,
+#| eval = F
+df %>%
+  ggplot(aes(vf_age,therm_trans_t0))+
+  geom_point(size=.5, alpha=.5)+
+  stat_summary(geom="point", aes(col="CEF"))+
+  stat_summary(geom="line", aes(col="CEF"))+
+  labs(
+    x = "Age",
+    y = "Feeling Thermometer toward\nTransgender People",
+    col = ""
+  )+
+  theme_classic() -> plot_cef
+
+
+
+```
+
+---
+```{r}
+#| label = "cef1",
+#| echo = F
+df %>%
+  ggplot(aes(vf_age,therm_trans_t0))+
+  geom_point(size=.5, alpha=.5)+
+  stat_summary(geom="point", aes(col="CEF"))+
+  stat_summary(geom="line", aes(col="CEF"))+
+  labs(
+    x = "Age",
+    y = "Feeling Thermometer toward\nTransgender People",
+    col = ""
+  )+
+  theme_classic() -> plot_cef
+
+plot_cef
+```
+
+
+
+---
+```{r}
+#| label = "cef2code",
+#| echo = T,
+#| eval = F
+plot_cef+
+  geom_smooth(method = "lm", se=F, aes(col = "OLS")) -> plot_cef
+plot_cef
+
+
+
+
+```
+
+---
+```{r}
+#| label = "cef2",
+#| echo = F
+plot_cef+
+  geom_smooth(method = "lm", se=F, aes(col = "OLS")) -> plot_cef
+plot_cef
+```
+
+
+
+---
+```{r}
+#| label = "cef3code",
+#| echo = T,
+#| eval = F
+plot_cef+
+  geom_smooth(method = "lm", se=F, aes(col = "OLS")) -> plot_cef
+plot_cef
+
+
+
+
+```
+
+---
+```{r}
+#| label = "cef3",
+#| echo = F
+plot_cef+
+  geom_smooth(method = "lm", se=F, aes(col = "OLS")) -> plot_cef
+plot_cef
+```
+
+
+
+---
+## What you need to know about Regression
+
+- **Conceptual**
+  - Simple linear regression estimates a line of best fit that summarizes relationships between two variables
+
+$$
+y_i = \beta_0 + \beta_1x_i + \epsilon_i
+$$
+
+- **Practical**
+  - We estimate linear models in R using the `lm()` function
+  
+```{r}
+#| label = "ols",
+#| eval = F
+lm(y ~ x, data = df)
+```
+
+- *Technical/Definitional*
+  - Linear regression chooses $\beta_0$ and $\beta_1$ to minimize the Sum of Squared Residuals (SSR): 
+
+$$\textrm{Find }\hat{\beta_0},\,\hat{\beta_1} \text{ arg min}_{\beta_0, \beta_1} \sum (y_i-(\beta_0+\beta_1x_i))^2$$
+
+- *Theoretical*
+  - Linear regression provides a **linear** estimate of the conditional expectation function (CEF): $E[Y|X]$
+
+---
+class: center, middle
+background-image:url(https://www.memecreator.org/static/images/memes/5312518.jpg)
+background-size:contain
+
+---
+class: inverse, center, middle
+# 💡  
+# Three Designs for Causal Inference in Observational Studies
+
+
+---
+## Credible Cauasal Inference in Observational Studies
+
+Subclassification, matching, and regression all require an assumption of selection on observables:
+
+$$
+Y_i(1),Y_i(0) \perp D_i |x_i
+$$
+
+But how do we know if we've got the right model or we've controlled for the right variables?
+
+--
+
+Typically, we don't
+
+---
+## Credible Cauasal Inference in Observational Studies
+
+Instead, social scientists  look for situations where the credibility of
+
+$$
+Y_i(1),Y_i(0) \perp D_i |X_i
+$$
+
+depends less on how much data you have and much more on how your data were generated.
+
+
+
+---
+class: middle
+
+.pull-left[
+> Empirical microeconomics has experienced a credibility revolution, with a consequent increase in policy relevance and scientific impact. ... [T]he primary engine driving improvement has been a focus on the **quality of empirical research designs.** (p. 4)
+
+]
+
+.pull-right[
+```{r}
+#| label = "cred1",
+#| echo = F
+knitr::include_graphics("./images/04_cred.png")
+```
+
+[Source](https://pubs.aeaweb.org/doi/pdfplus/10.1257/jep.24.2.3)
+
+]
+
+---
+class: middle
+
+.pull-left[
+> Design-based studies are distinguished by their prima facie credibility and by the attention investigators devote to making both an **institutional** and a **data-driven** case for causality (p. 5)
+
+]
+
+.pull-right[
+```{r}
+#| label = "cred2",
+#| echo = F
+knitr::include_graphics("./images/04_cred.png")
+```
+[Source](https://pubs.aeaweb.org/doi/pdfplus/10.1257/jep.24.2.3)
+]
+
+---
+class: middle
+
+.pull-left[
+> The econometric methods that feature most prominently in quasi-experimental studies are **instrumental variables**, **regression discontinuity** methods,and **differences-in-differences**-style policy analysis. ... The best of today’s design-based studies make a strong institutional case, backed up with empirical evidence, for the variation thought to generate a useful **natural experiment**.(p. 12)
+
+]
+
+.pull-right[
+```{r}
+#| label = "cred3",
+#| echo = F
+knitr::include_graphics("./images/04_cred.png")
+```
+[Source](https://pubs.aeaweb.org/doi/pdfplus/10.1257/jep.24.2.3)
+]
+
+---
+## Three Designs for Causal Inference in Observational Studies
+
+- Difference in Differences
+
+- Regression Discontinuity
+
+- Instrumental Variables
+
+
+---
+class: inverse, center, middle
+# 💡 Difference in Differences
+
+
+---
+class: inverse, center, middle
+background-image:url(https://www.finebooksmagazine.com/sites/default/files/styles/gallery_item/public/media-images/2020-11/map-lead-4.jpg?h=2ded5a3f&itok=Mn-K5rQc)
+background-size: cover
+## London in the Time of Cholera
+
+---
+## Motivating Example: What causes Cholera?
+
+- In the 1800s, cholera was thought to be transmitted through the air.
+
+- John Snow (the physician, not the snack), to explore the origins eventunally concluding that cholera was transmitted through living organisms in water.
+
+- Leveraged a **natural experiment** in which one water company in London moved its pipes further upstream (reducing contamination for Lambeth), while other companies kept their pumps serving Southwark and Vauxhall in the same location. 
+
+---
+## Notation
+
+Let's adopt a little notation to help us think about the logic of Snow's design:
+
+- $D$: treatment indicator, 1 for treated neighborhoods (Lambeth), 0 for control neighborhoods (Southwark and Vauxhall)
+
+- $T$: period indicator, 1 if post treatment (1854), 0 if pre-treatment (1849).
+
+- $Y_{di}(t)$ the potential outcome of unit $i$ 
+
+  - $Y_{1i}(t)$ the potential outcome of unit $i$ when treated between the two periods 
+
+  - $Y_{0i}(t)$ the potential outcome of unit $i$ when control between the two periods 
+
+---
+## Causal Effects
+
+The individual causal effect for unit i at time t is:
+
+$$\tau_{it} = Y_{1i}(t) − Y_{0i}(t)$$
+
+What we observe is 
+
+$$Y_i(t) = Y_{0i}(t)\cdot(1 − D_i(t)) + Y_{1i}(t)\cdot D_i(t)$$
+
+$D$ only equals 1, when $T$ equals 1, so we never observe $Y_0i(1)$ for the treated units. 
+
+In words, we don't know what Lambeth's outcome would have been in the second period, had they not been treated.
+
+---
+## Average Treatment on Treated
+
+Our goal is to estimate the average effect of treatment on treated (ATT):
+
+
+$$\tau_{ATT} = E[Y_{1i}(1) -  Y_{0i}(1)|D=1]$$
+
+That is, what would have happened in Lambeth, had their water company not moved their pipes
+
+---
+## Average Treatment on Treated
+
+Our goal is to estimate the average effect of treatment on treated (ATT):
+
+We we can observe is:
+
+|               | Post-Period (T=1)  | Pre-Period (T=0)  |
+|---------------|--------------------|-------------------|
+| Treated $D_{i}=1$  | $E[Y_{1i}(1)\vert D_i = 1]$  | $E[Y_{0i}(0)\vert D_i = 1]$ |
+| Control $D_i=0$  | $E[Y_{0i}(1)\vert D_i = 0]$  | $E[Y_{0i}(0)\vert D_i = 0]$ |
+
+---
+## Data
+
+Because potential outcomes notation is abstract, let's consider a modified description of the Snow's cholera death data from [Scott Cunningham](https://mixtape.scunning.com/difference-in-differences.html):
+
+```{r}
+#| label = "choleradat",
+#| echo = F
+snow <- tibble(Company = c("Lambeth (D=1)", "Southwark and Vauxhall (D=0"),
+               `1854 (T=1)` = c(19,147),
+               `1849 (T=0)` = c(85,135)
+               )
+
+knitr::kable(snow)
+
+```
+
+---
+## How can we estimate the effect of moving pumps upstream?
+
+Recall, our goal is to estimate the effect of the the treatment on the treated:
+
+$$\tau_{ATT} = E[Y_{1i}(1) -  Y_{0i}(1)|D=1]$$
+
+Let's conisder some strategies Snow could take to estimate this quantity:
+
+---
+## Before vs after comparisons:
+
+- Snow could have compared Labmeth in 1854 $(E[Y_i(1)|D_i = 1] = 19)$ to Lambeth in 1849 $(E[Y_i(0)|D_i = 1]=85)$, and claimed that moving the pumps upstream led to 66 fewer cholera deaths. 
+
+- This comparison assumes Lambeth's pre-treatment outcomes in 1849 are a good proxy for what its outcomes would have been in 1954 if the pumps hadn't moved ($E[Y_{0i}(1)|D_i = 1]$).
+
+- A skeptic might argue that Lambeth in 1849 $\neq$ Lambeth in 1854
+
+
+---
+## Treatment-Control comparisons in the post period
+
+- Snow could have compared outcomes between Lambeth and S&V in 1954  ($E[Yi(1)|Di = 1] − E[Yi(1)|Di = 0]$), concluding that the change in pump locations led to 128 fewer deaths.
+
+- Here the assumption is that the outcomes in S&V and in 1854 provide a good proxy for what would have happened in Lambeth in 1954 had the pumps not been moved ($E[Y_{0i}(1)|D_i = 1]$)
+
+- Again, our skeptic could argue  Lambeth $\neq$ S&V 
+
+---
+## Difference in Differences
+
+To address these concerns, Snow employed what we now call a difference-in-differences design, 
+
+There are two, equivalent ways to view this design. 
+
+$$\underbrace{\{E[Y_{i}(1)|D_{i} = 1] − E[Y_{i}(1)|D_{i} = 0]\}}_{\text{1. Treat-Control |Post }}− \overbrace{\{E[Y_{i}(0)|D_{i} = 1] − E[Y_{i}(0)|D_{i}=0 ]}^{\text{Treated-Control|Pre}}$$
+
+- Difference 1: Average change between Treated and Control  in Post Period
+- Difference 2: Average change between Treated and Control  in Pre Period
+
+Which is equivalent to:
+
+$$\underbrace{\{E[Y_{i}(1)|D_{i} = 1] − E[Y_{i}(0)|D_{i} = 1]\}}_{\text{Post - Pre |Treated }}− \overbrace{\{E[Y_{i}(1)|D_{i} = 0] − E[Y_{i}(0)|D_{i}=0 ]}^{\text{Post-Pre|Control}}$$
+
+
+- Difference 1: Average change between Treated over time
+- Difference 2: Average change between Control over time
+
+---
+## Difference in Differences
+
+
+You'll see the DiD design represented both ways, but they produce the same result:
+
+$$
+\tau_{ATT} = (19-147) - (85-135) = -78
+$$
+
+$$
+\tau_{ATT} = (19-85) - (147-135) = -78
+$$
+
+---
+## Identifying Assumption of a Difference in Differences Design
+
+The key assumption in this design is what's known as the parallel trends assumption: $E[Y_{0i}(1) − Y_{0i}(0)|D_i = 1] = E[Y_{0i}(1) − Y_{0i}(0)|D_i = 0]$ 
+
+- In words: If Lambeth hadn't moved its pumps, it would have followed a similar path as S&V
+
+---
+```{r}
+#| label = "paralleltrends",
+#| echo = F,
+#| fig.height = 4
+
+snow_g <- tibble(
+  Period = c(0,0,3,3,0,3),
+  Treatment = c(0,1,0, 1,1,1),
+  Line = c(1,1,1,1,2,2),
+  Company = c("S&V","Lambeth","S&V","Lambeth","Lambeth (D=0)","Lambeth (D=0)"),
+  Deaths = c(135,85,147,19,85,97)
+)
+
+snow_g %>%
+  ggplot(aes(Period,Deaths,col = Company))+
+  geom_point()+
+  geom_line()+
+  geom_segment(aes(x=3.1,xend=3.1,y=19,yend=147), linetype = 2, col= "gray")+
+  annotate(geom="text",x = 3.3,y=125, label = "1",hjust=.5)+
+  geom_segment(aes(x=3.2,xend=3.2,y=19,yend=97), linetype = 2,col="gray")+
+  annotate(geom="text",x = 3.3,y=55, label = "3",hjust=-.5)+
+  geom_segment(aes(x=-.1,xend=-.1,y=85,yend=135), linetype = 2,col="gray")+
+  annotate(geom="text",x = -.1,y=120, label = "2",hjust=1.5)+
+  xlim(-2,6)+
+  scale_x_continuous(breaks = c(0,3),labels = c("Pre","Post"))+
+  theme_bw() -> snow_p
+
+snow_p
+
+
+```
+
+
+Where:
+
+1. $E[Y_{i}(1)|D_{i} = 1] − E[Y_{i}(1)|D_{i} = 0]$
+2. $E[Y_{i}(0)|D_{i} = 1] − E[Y_{i}(0)|D_{i}\} = 0]$
+3. $E[Y_{1i}(1) − Y_{0i}(1)|D_{i} = 1]$
+
+
+---
+## Summary
+
+- A Difference in Differences (DiD, or diff-in-diff) design combines a pre-post comparison, with a treated and control comparison
+  
+  - Taking the pre-post difference removes any fixed differences between the units
+  
+  - Then taking the difference between treated and control differences removes any common differences over time
+
+- The key identifying assumption of a DiD design is the "assumption of parallel trends"
+  - Absent treatment, treated and control groups
+would see the same changes over time.
+  - Hard to prove, possible to test
+
+
+---
+## Extensions and limitations
+
+- DiD easy to estimate with linear regression
+- Generalizes to multiple periods and treatment interventions
+  - More pre-treatment periods allow you assess "parallel trends" assumption
+- Alternative methods 
+  - Synthetic control
+  - Event Study Designs
+- What if you have multiple treatments or treatments that come and go?
+  - Panel Matching
+  - Generalized Synthetic control
+
+---
+## Applications
+
+- [Card and Krueger (1994)](https://www.nber.org/papers/w4509) What effect did raising the minimum wage in NJ have on employment
+
+- [Abadie, Diamond, & Hainmueller (2014)](https://onlinelibrary.wiley.com/doi/full/10.1111/ajps.12116?casa_token=_ceCu4SwzTEAAAAA%3AP9aeaZpT_Zh1VdWKXx_tEmzaJTtMJ1n0eG7EaYlvJZYN000re33cfMAI2O8N8htFJjOsln2GyVeQql4) What effect did German Unification have on economic development in West Germany
+
+- [Malesky, Nguyen and Tran (2014)](https://www.cambridge.org/core/journals/american-political-science-review/article/impact-of-recentralization-on-public-services-a-differenceindifferences-analysis-of-the-abolition-of-elected-councils-in-vietnam/3477854BAAFE152DC93C594169D64F58) How does decentralization influence public services?
+
+---
+class: inverse, center, middle
+# 💡 Regression Discontinuity Design
+
+---
+## Motivating Example
+
+.pull-left[
+- Do Members of Parliament in the UK get richer from holding office (QSS Chapter 4.3.4)
+]
+.pull-right[
+```{r}
+#| label = "eggers1",
+#| echo = F
+knitr::include_graphics("./images/04_eggers.png")
+```
+[Eggers and Hainmueller (2009)](https://www.cambridge.org/core/journals/american-political-science-review/article/abs/mps-for-sale-returns-to-office-in-postwar-british-politics/E4C2B102194AA1EA0D2F1F777EAE3C08)
+]
+
+
+---
+## Logic of the Regression Discontinuity Design (RDD) 
+
+- What's the effect of holding elected office in the UK on personal wealth?
+
+- People who win elections differ in many ways from people who lose elections.
+
+- Logic of an RDD: 
+
+  - Just look at the wealth of individuals who either narrowly won or lost elections.
+
+  - Candidates close to 50 percent cutoff (discontinuity) should be more comparable (better counterfactuals)
+
+---
+## Data from Eggers and Hainmueller (2009)
+
+```{r}
+#| label = "mpdata"
+library(qss)
+data(MPs)
+glimpse(MPs)
+
+```
+
+---
+```{r}
+#| label = "rddtab",
+#| echo = F
+rdd_vars <- data.frame(
+Variable = c("surname", "firstname", "party", "ln.gross", "ln.net", "yob", "yod", "margin.pre", "region", "margin"),
+Description = c(
+"surname of the candidate",
+"first name of the candidate",
+"party of the candidate (labour or tory)",
+"log gross wealth at the time of death",
+"log net wealth at the time of death",
+"year of birth of the candidate",
+"year of death of the candidate",
+"margin of the candidate’s party in the previous election electoral", 
+"region",
+"margin of victory (vote share)")
+)
+DT::datatable(rdd_vars)
+```
+
+
+
+---
+```{r}
+#| label = "rddfigcode",
+#| eval = F
+MPs %>%
+  ggplot(aes(margin, ln.net))+
+  geom_point(shape=1)+
+  facet_grid(~party)+
+  geom_smooth(data =MPs %>%
+                filter(margin <0),
+              method = "lm")+
+  geom_smooth(data =MPs %>%
+                filter(margin >0),
+              method = "lm")+
+  theme_bw() -> fig_rdd
+fig_rdd
+```
+
+---
+```{r}
+#| label = "rddfig",
+#| echo = F
+MPs %>%
+  ggplot(aes(margin, ln.net))+
+  geom_point(shape=1)+
+  facet_grid(~party)+
+  geom_smooth(data =MPs %>%
+                filter(margin <0),
+              method = "lm")+
+  geom_smooth(data =MPs %>%
+                filter(margin >0),
+              method = "lm")+
+  theme_bw() -> fig_rdd
+fig_rdd
+```
+
+---
+## RDD Notation
+
+- $X$ is a **forcing** variable
+- Treatment $D$ is a determined by $X$
+
+$$
+D_i = 1\{X_i > c\}
+$$
+
+- $X$ is the `margin` variable in the example data, and $D=1$ if `margin` is greater than 0 (i.e. the candidate won the election)
+
+- Interested in the differences in the outcome at the threshold
+
+$$\lim_{x \downarrow  c} E[Y_i|X=x] - \lim_{x \uparrow  c} E[Y_i|X=x]$$
+
+---
+## Causal Identification with an RDD
+
+If we assume $E[Y_i(0)|X=x]$ and $E[Y_i(1)|X=x]$ are continuous in x, then we can estimate a (local) ATE at the threshold:
+
+$$\begin{align}
+ATE_{RDD} &= E[Y(1)-Y(0)|X_i=c] \\
+&=  E[Y(1)|X_i=c] -  E[Y(0)|X_i=c]\\
+&= \lim_{x \downarrow  c} E[Y_i|X=x] - \lim_{x \uparrow  c} E[Y_i|X=x] \\
+\end{align}$$
+
+---
+## Continuity Assumption
+
+```{r}
+#| label = "continuity",
+#| echo = F
+knitr::include_graphics("https://mixtape.scunning.com/graphics/rdd_simul_ex.jpg")
+```
+
+[Cunningham (2022)](https://mixtape.scunning.com/regression-discontinuity.html#continuity-assumption)
+
+---
+## Causal Identification with an RDD
+
+- The continuity assumption is a formal way of saying that observations close to the threshold are good counterfactuals for each other
+
+- We can't prove this assumption
+
+- But if it holds, we should observe
+ 
+  - no sorting around the cutoff (no self selection)
+ 
+  - similar distributions of covariates around the cutoff (balance tests)
+  
+  - no effect of treatment on things measured pre-treatment (placebo tests)
+
+
+---
+## Applications of RDD
+
+- [Lee (2001)](https://www.nber.org/papers/w8441) Does incumbency create electoral advantage
+
+- [Eggers (2014)](https://journals.sagepub.com/doi/full/10.1177/0010414014534199) Does proportional representatoin increase turnout?
+
+- [Velez and Newman (2019)](https://onlinelibrary.wiley.com/doi/full/10.1111/ajps.12427) What's the effect of ethnic television on political participation
+
+---
+class: inverse, center, middle
+# 💡 
+## Instrumental Variables
+
+
+---
+## Instrumental Variables
+
+Instrumental variables are an economists favorite tool for dealing with **omitted variable bias**
+
+- We have some non random treatment whose effects we'd like to assess
+- We're worried that these effects are **confounded** by some unobserved, omitted variable, that influences both the treatment and the outcome
+- We find an **instrumental variable** that satisfies the following:
+  - Randomization
+  - Excludability
+  - First-stage relationship
+  - Monotonicity
+- Allowing us estimate a Local Average Treatment Effect (LATE) using the only the variation in our treatment is **exogenous** (uncorrelated with ommitted variables)
+
+## IV Assumption: Randomization
+
+
+.left-column[
+- No path from $U$ to $Z$
+]
+.right-column[
+```{r}
+#| label = "iv1",
+#| echo = F
+knitr::include_graphics("https://book.declaredesign.org/figures/figure_16.7.svg")
+```
+
+[Source](https://book.declaredesign.org/observational-causal.html?q=instrumental#instrumental-variables)
+
+]
+
+---
+class: center
+## IV Assumption: Excludability
+
+
+.left-column[
+- No path from $Z$ to $Y$
+]
+
+.right-column[
+```{r}
+#| label = "iv2",
+#| echo = F
+knitr::include_graphics("https://book.declaredesign.org/figures/figure_16.7.svg")
+```
+
+[Source](https://book.declaredesign.org/observational-causal.html?q=instrumental#instrumental-variables)
+
+]
+
+---
+class: center
+## IV Assumption:  First Stage
+
+.left-column[
+- Path from $Z$ to $D$
+]
+.right-column[
+```{r}
+#| label = "iv3",
+#| echo = F
+knitr::include_graphics("https://book.declaredesign.org/figures/figure_16.7.svg")
+```
+
+[Source](https://book.declaredesign.org/observational-causal.html?q=instrumental#instrumental-variables)
+
+]
+
+---
+class: center
+## IV Assumption: Monotonicity
+
+
+.left-column[
+
+-  $D_i(Z=1)\geq D_i(Z=0)$
+- "No Defiers"
+
+]
+
+.right-column[
+```{r}
+#| label = "iv4",
+#| echo = F
+knitr::include_graphics("https://book.declaredesign.org/figures/figure_16.7.svg")
+```
+[Source](https://book.declaredesign.org/observational-causal.html?q=instrumental#instrumental-variables)
+]
+
+---
+class: center
+## Compliance
+
+With a binary treatment, $D$ and binary instrument $Z$ there are four types of compliance
+
+```{r}
+#| label = "compliance",
+#| echo = F
+comp_tab <- tibble(
+  Type = c("Always Takers",
+           "Never Takers",
+           "Compliers",
+           "Defiers"),
+   '$D_i(Z=1)$' = c(1,0,1,0),
+   '$D_i(Z=0)$' = c(1,0,0,1)
+)
+kable(comp_tab)
+```
+
+- Assuming Monotonicity means there are "No Defiers"
+
+---
+## Estimating the Local Average Treatment Effect
+
+If we believe our assumptions of:
+
+- Randomization
+- Excludability
+- First-stage relationship
+- Monotonicity
+
+Then we can estimate Local Average Treatment Effect (LATE) sometimes called the Complier Average Treatment Effect CATE) 
+
+---
+## Estimating the Local Average Treatment Effect
+
+It can be [shown](https://www.mattblackwell.org/files/teaching/s10-iv-handout.pdf) that the LATE:
+
+$$LATE = \frac{E[Y|Z=1] - E[Y|Z=0]}{E[D|Z=1]-E[D|Z=0]}= \frac{ATE_{Z\to Y}}{ATE_{Z\to D}}$$
+
+
+---
+
+## Example: Earnings and Military Service
+
+Adapted from [Edward Rubin](https://raw.githack.com/edrubin/EC421W19/master/LectureNotes/11InstrumentalVariables/11_instrumental_variables.html#42)
+
+*Example:* If we want to estimate the effect of veteran status on earnings,
+$$\begin{align}
+  \text{Earnings}_i = \beta_0 + \beta_1 \text{Veteran}_i + u_i \tag{1}
+\end{align}$$
+
+--
+
+We would love to calculate $\color{#e64173}{\text{Earnings}_{1i}} - \color{#6A5ACD}{\text{Earnings}_{0i}}$, but we can't.
+
+--
+
+And OLS will likely be biased for $(1)$ due to selection/omitted-variable bias.
+
+---
+
+## Introductory example
+
+Imagine that we can split veteran status into an exogenous (as-if random, unbiased) part and an endogenous (non-random, biased) part...
+
+--
+
+$$\begin{align}
+  \text{Earnings}_i
+  &= \beta_0 + \beta_1 \text{Veteran}_i + u_i \tag{1} \\
+  &= \beta_0 + \beta_1 \left(\text{Veteran}_i^{\text{Exog.}} + \text{Veteran}_i^{\text{Endog.}}\right) + u_i \\
+  &= \beta_0 + \beta_1 \text{Veteran}_i^{\text{Exog.}} + \underbrace{\beta_1 \text{Veteran}_i^{\text{Endog.}} + u_i}_{w_i} \\
+  &= \beta_0 + \beta_1 \text{Veteran}_i^{\text{Exog.}} + w_i
+\end{align}$$
+
+--
+
+We could use this exogenous variation in veteran status to consistently estimate $\beta_1$.
+
+--
+
+**Q:** What would exogenous variation in veteran status mean?
+
+---
+
+## Introductory example
+
+**Q:** What would exogenous variation in veteran status mean?
+
+--
+
+**A.sub[1]:** Choices to enlist in the military that are essentially random—or at least uncorrelated with omitted variables and the disturbance.
+
+--
+
+**A.sub[2]:** .No selection bias:
+$$\begin{align}
+  \color{#e64173}{\mathop{E}\left(\text{Earnings}_{0i}\mid\text{Veteran}_i = 1\right)} - \color{#6A5ACD}{\mathop{E}\left( \text{Earnings}_{0i} \mid \text{Veteran}_i = 0 \right)} = 0
+\end{align}$$
+
+---
+## Instruments
+
+**Q:** How do we isolate this *exogenous variation* in our explanatory variable?
+--
+<br>**A:** Find an instrument (an instrumental variable).
+
+--
+
+**Q:** What's an instrument?
+--
+<br>**A:** An **instrument** is a variable that is
+
+1. **correlated** with the **explanatory variable** of interest (*relevant*),
+2. **uncorrelated** with the **error** term (*exogenous*).
+
+---
+
+## Instruments
+
+
+So if we want an instrument $z_i$ for endogenous veteran status in
+
+$$\begin{align}
+  \text{Earnings}_i = \beta_0 + \beta_1 \text{Veteran}_i + u_i
+\end{align}$$
+
+1. **Relevant:** $\mathop{\text{Cov}} \left( \text{Veteran}_i,\, z_i \right) \neq 0$
+2. **Exogenous:** $\mathop{\text{Cov}} \left( z_i,\, u_i \right) = 0$
+
+---
+## Instruments: Relevance
+
+**Relevance:** We need the instrument to cause a change in (correlate with) our endogenous explanatory variable.
+
+We can actually test this requirement using regression and a *t* test.
+
+--
+
+***Example:*** For the veteran status, consider three potential instruments:
+
+.pull-left[
+1. Social security number
+
+2. Physical fitness
+
+3. Vietnam War draft
+]
+
+--
+
+.pull-right[ 
+- **Probably not relevant** uncorrelated with military service
+
+- *Potentially relevant* service may correlate with fitness
+
+- **Relevant** being drafted led to service
+]
+
+---
+
+
+## Instruments: Exogeneity
+
+.hi[Exogeneity:] The instrument to be independent of omitted factors that affect our outcome variable—as good as randomly assigned.
+
+$z_i$ must be uncorrelated with our disturbance $u_i$. .hi[Not testable.]
+
+--
+
+***Example:*** For the .pink[veteran status], consider three potential instruments:
+
+.pull-left[
+1. Social security number
+
+2. Physical fitness
+
+3. Vietnam War draft
+]
+
+--
+
+.pull-right[ 
+- **Exogenous** SSN essentially random
+
+- *Not Exogenous* fitness correlated with many things
+
+- **Exogenous** draft via lottery
+]
+
+---
+## Relevant and Exogenous
+
+
+```{r}
+#| label = "venn_iv",
+#| echo = F,
+#| fig.height = 7.5
+# Colors (order: x1, x2, x3, y, z)
+venn_colors <- c("purple", "red", "grey60", "orange", "blue")
+# Line types (order: x1, x2, x3, y, z)
+venn_lines <- c("solid", "dotted", "dotted", "solid", "solid")
+# Locations of circles
+venn_df <- tibble(
+  x  = c( 0.0,   -0.5,    1.5,   -1.0, -1.4),
+  y  = c( 0.0,   -2.5,   -1.8,    2.0, -2.6),
+  r  = c( 1.9,    1.5,    1.5,    1.3,  1.3),
+  l  = c( "Y", "D", "X[2]", "X[3]",  "Z"),
+  xl = c( 0.0,    0.7,    1.6,   -1.0, -2.9),
+  yl = c( 0.0,   -3.8,   -1.9,    2.2, -2.6)
+)
+# Venn
+ggplot(data = venn_df, aes(x0 = x, y0 = y, r = r, fill = l, color = l)) +
+geom_circle(aes(linetype = l), alpha = 0.3, size = 0.75) +
+theme_void() +
+theme(legend.position = "none") +
+scale_fill_manual(values = venn_colors) +
+scale_color_manual(values = venn_colors) +
+scale_linetype_manual(values = venn_lines) +
+geom_text(aes(x = xl, y = yl, label = l), size = 9, parse = T) +
+annotate(
+  x = -5.5, y = 3.3,
+  geom = "text", label = "Figure 1", size = 10, hjust = 0
+) +
+xlim(-5.5, 4.5) +
+ylim(-4.2, 3.4) +
+coord_equal()
+```
+
+---
+## Relevant, Not Exogenous
+
+```{r}
+#| label = "venn_iv_endog",
+#| echo = F,
+#| fig.height = 7.5
+# Change locations of circles
+venn_df %>%
+mutate(
+  x = x +   c(0, 0, 0, 0, 0),
+  xl = xl + c(0, 0, 0, 0, 0),
+  y = y +   c(0, 0, 0, 0, 1),
+  yl = yl + c(0, 0, 0, 0, 1)
+) %>%
+# Venn
+ggplot(data = ., aes(x0 = x, y0 = y, r = r, fill = l, color = l)) +
+geom_circle(aes(linetype = l), alpha = 0.3, size = 0.75) +
+theme_void() +
+theme(legend.position = "none") +
+scale_fill_manual(values = venn_colors) +
+scale_color_manual(values = venn_colors) +
+scale_linetype_manual(values = venn_lines) +
+geom_text(aes(x = xl, y = yl, label = l), size = 9, parse = T) +
+annotate(
+  x = -5.5, y = 3.3,
+  geom = "text", label = "Figure 2", size = 10, hjust = 0
+) +
+xlim(-5.5, 4.5) +
+ylim(-4.2, 3.4) +
+coord_equal()
+```
+
+---
+## Not Relevant and Not Exogenous
+
+
+```{r}
+#| label = "venn_iv_irrelevant",
+#| echo = F,
+#| fig.height = 7.5
+# Change locations of circles
+venn_df %>%
+mutate(
+  x = x +   c(0, 0, 0, 0,-1),
+  xl = xl + c(0, 0, 0, 0,-1),
+  y = y +   c(0, 0, 0, 0, 2.3),
+  yl = yl + c(0, 0, 0, 0, 2.3)
+) %>%
+# Venn
+ggplot(data = ., aes(x0 = x, y0 = y, r = r, fill = l, color = l)) +
+geom_circle(aes(linetype = l), alpha = 0.3, size = 0.75) +
+theme_void() +
+theme(legend.position = "none") +
+scale_fill_manual(values = venn_colors) +
+scale_color_manual(values = venn_colors) +
+scale_linetype_manual(values = venn_lines) +
+geom_text(aes(x = xl, y = yl, label = l), size = 9, parse = T) +
+annotate(
+  x = -5.5, y = 3.3,
+  geom = "text", label = "Figure 3", size = 10, hjust = 0
+) +
+xlim(-5.5, 4.5) +
+ylim(-4.2, 3.4) +
+coord_equal()
+```
+
+---
+## Relevant, Not Exogenous
+```{r}
+#| label = "venn_iv_endog2",
+#| echo = F,
+#| fig.height = 7.5
+# Change locations of circles
+venn_df %>%
+mutate(
+  x = x +   c(0,    0,   0, 0,    2),
+  xl = xl + c(0, -2.4, 0.8, 0,  4.6),
+  y = y +   c(0,    0,   0, 0,    0),
+  yl = yl + c(0,    0,   0, 0, -1.1)
+) %>%
+# Venn
+ggplot(data = ., aes(x0 = x, y0 = y, r = r, fill = l, color = l)) +
+geom_circle(aes(linetype = l), alpha = 0.3, size = 0.75) +
+theme_void() +
+theme(legend.position = "none") +
+scale_fill_manual(values = venn_colors) +
+scale_color_manual(values = venn_colors) +
+scale_linetype_manual(values = venn_lines) +
+geom_text(aes(x = xl, y = yl, label = l), size = 9, parse = T) +
+annotate(
+  x = -5.5, y = 3.3,
+  geom = "text", label = "Figure 4", size = 10, hjust = 0
+) +
+xlim(-5.5, 4.5) +
+ylim(-4.2, 3.4) +
+coord_equal()
+```
+
+---
+# Venn diagram explanation
+
+In these figures (Venn diagrams)
+
+- Each circle illustrates a variable.
+- Overlap gives the share of correlatation between two variables.
+- Dotted borders denote *omitted* variables.
+
+Take-aways
+
+- Figure 1: .hi-pink[Valid instrument] (relevant; exogenous)
+- Figure 2: .hi-slate[Invalid instrument] (relevant; not exogenous)
+- Figure 3: .hi-slate[Invalid instrument] (not relevant; not exogenous)
+- Figure 4: .hi-slate[Invalid instrument] (relevant; not exogenous)
+
+---
+## IV Applications
+
+```{r}
+#| label = "ivapps",
+#| echo = F
+knitr::include_graphics("https://pbs.twimg.com/media/EJGyHnyUYAA-yhM?format=jpg&name=large")
+```
+
+[@AndrewHeiss](https://twitter.com/andrewheiss/status/1193931226865901569?ref_src=twsrc%5Etfw%7Ctwcamp%5Etweetembed%7Ctwterm%5E1193931226865901569%7Ctwgr%5E%7Ctwcon%5Es1_&ref_url=https%3A%2F%2Fpublish.twitter.com%2F%3Fquery%3Dhttps3A2F2Ftwitter.com2Fandrewheiss2Fstatus2F1193931226865901569widget%3DTweet)
+
+
+
+---
+## IV Summary
+
+Instrumental variables require a number of assumptions to yield credible causal claims:
+
+- Randomization
+- Excludability
+- First-stage relationship
+- Monotonicity
+
+Estimation and inference of IVs is beyond the scope of this course. 
+
+  - See Edward Rubin's excellent [slides](https://raw.githack.com/edrubin/EC421W19/master/LectureNotes/11InstrumentalVariables/11_instrumental_variables.html#85)
+  - And Matt Blackwells [notes](https://www.mattblackwell.org/files/teaching/s10-iv-handout.pdf)
+
+- Understanding the identifying assumptions of IV can help you critique a study (even if the you don't fully understand the math)
+
+---
+class: inverse, middle, center
+# 💡 
+## Summary
+
+---
+## What you need to know
+
+- Causal inference in observational and experimental studies is about counterfactual comparisons
+- In observational studies, to make causal claims we generally make some  assumption of conditional independence:
+
+$$
+Y_i(1),Y_i(0), \perp D_i |X_i
+$$
+
+- The credibility of this assumption depends less on the data, and more on how the data were generated.
+- **Selection on Observables** is rarely a credible assumption
+- Observational designs that produce credible causal inference, leverage aspects of the world that create *natural experiments*
+- You should be able to describe the logic and assumptions of common designs in social science 
+  - **Difference-in-Differences:** *Parallel Trends* 
+  - **Regression Discontinuity:** *Continuity at the cutoff*
+  - **Instrumental Variables:** Instruments need to be *Relevant and Exogenous*
+
+

@@ -1,0 +1,40 @@
+---
+title: "Assignments"
+---
+
+You have three types of assignments in this course
+
+## Labs
+
+
+- Each Thursday we will work in groups to complete an in-class lab
+
+- The labs are designed to reinforce and extend concepts from lecture using real world data.
+
+## Tutorials
+
+Coding tutorials to reinforce concepts from lecture and textbook.
+
+Accessed by running in the console of R Studio
+
+```{r}
+#| eval = F
+learnr::run_tutorial("00-intro", package = "qsslearnr")
+```
+
+Complete the tutorial. Save output as "LASTNAME_TutorialNumber.html"
+
+Upload output to Canvas by Friday by 11:59 pm
+
+
+## Final Project
+
+Finally, throughout the semester you will be have periodic assignments to ensure that you're making progress on your final projects.
+
+- **Week 4: ** [Research Topics](a1.qmd)
+- **Week 6: ** [Potential Data](a2.qmd)
+- **Week 8: ** [Explortatory Analysis](a3.qmd)
+- **Week 11:**  [Draft](a4.qmd)
+- **Week 12:**  [Presentations](a5.qmd)
+- **Week 13:**  [Final Paper](final.qmd)
+

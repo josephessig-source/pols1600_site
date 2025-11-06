@@ -1,0 +1,770 @@
+---
+title: "Welcome to POLS 1600"
+subtitle: "Introductions"
+author: "Paul Testa"
+output:
+  xaringan::moon_reader:
+    css: ["default", "css/brown.css"]
+    lib_dir: libs
+    nature:
+      highlightStyle: atelier-lakeside-light
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, 
+  comment = NA, dpi = 300,
+  fig.align = "center", out.width = "80%", cache = FALSE)
+library(tidyverse)
+library(babynames)
+```
+
+```{r xaringan-tile-view, echo=FALSE}
+xaringanExtra::use_tile_view()
+```
+
+## Overview
+
+--
+
+- Goals and Expectations
+
+--
+
+- Course Structure
+
+--
+
+- Course Policies
+
+--
+
+- A Few Fundamental Truths
+
+
+---
+class: middle, center
+
+## Goals and Expectations
+
+---
+
+## What you will learn
+
+You will learn 
+
+--
+
+- how to think like a social scientist
+
+--
+
+--
+
+- how to use data to make descriptive, predictive, and causal claims
+
+--
+
+--
+
+- how to quantify uncertainty about these claims
+
+--
+
+--
+
+- how to present, interpret, and critique these claims
+
+---
+
+## Reasons to take this class
+
+
+.left[
+
+1. You want to change the world
+]
+--
+.pull-left[
+![](https://i.kym-cdn.com/entries/icons/facebook/000/000/015/oreally.jpg)
+]
+--
+.pull-right[
+![](https://i.pinimg.com/736x/73/0d/57/730d570926e83b6cbd70b6f1cf028e77--animal-hats-google-search.jpg)
+]
+
+---
+background-image:url("images/nyt.png")
+background-size:contain
+
+---
+background-image:url("images/pnas-1.png")
+background-size:contain
+
+---
+background-image:url("images/pnas-2.png")
+background-size:cover
+
+---
+
+## Why is this study important?
+
+--
+- Findings provide evidence of benefits of social spending/universal basic income
+
+--
+
+## Why should we believe these results
+
+--
+- Because it's in the *Times*?
+
+--
+- Because the authors are professors at *good* schools?
+
+
+- Because of how the study was done!
+
+--
+  - **Random assignment** provides a reasoned basis for inference
+  - Creates informative **counter-factual comparisons**
+  - **Pre-registered hypotheses** ensure that we're not cherry-picking results
+
+
+---
+## Why might we be skeptical of these results?
+
+- How strong are the effects?
+  - Is a fifth of a standard deviation a lot?
+- Why do we care about brain waves?
+- What's the mechanism?
+- How confident are we that these results couldn't have happened just by chance
+
+---
+## Why might we be skeptical of these results?
+
+```{r,echo=F,out.width=500}
+knitr::include_graphics("images/pnas-3.png")
+```
+
+
+---
+## Why might we be skeptical of these results?
+
+![](https://statmodeling.stat.columbia.edu/wp-content/uploads/2022/01/Rplot01.png)
+Source: [Andrew Gelman](https://statmodeling.stat.columbia.edu/)
+
+---
+## Why might we be skeptical of these results?
+
+
+![](https://statmodeling.stat.columbia.edu/wp-content/uploads/2022/01/Rplot04.png)
+Source: [Andrew Gelman](https://statmodeling.stat.columbia.edu/)
+
+---
+## Reasons to take this class
+
+--
+- You want to change the world
+
+  - Data, design, and analysis are incredliby powerful tools
+  - You want to understand their strengths and limits
+
+--
+
+- You want to be a better consumer of data and knowledge
+
+--
+
+- You want to be a better consumer of data and knowledge
+
+
+--
+
+- You want to get a job / go to grad school
+
+--
+
+- You *have* to 
+
+--
+
+- You're just in it for the memes
+
+
+
+---
+background-image: url("images/00_distracted.jpg")
+background-size: contain
+
+
+
+---
+class: inverse
+background-image: url("https://res.cloudinary.com/uktv/image/upload/v1426611188/ekyiync2zbmgdydizkok.jpg")
+background-size: cover
+background-position: 50% 0%
+
+
+## Great expectations
+
+Come willing to engage with:
+
+--
+- social science
+
+--
+- data 
+
+
+--
+- programming
+
+--
+- math
+
+
+---
+
+## Requirements
+
+I assume that you will
+
+1. Do the readings
+2. Bring your computers<sup>1</sup>
+3. Work through classwork
+4. Ask questions
+
+.footnote[
+[1] If you only have a desktop/or tablet let me know and we'll figure out a solution.
+]
+
+---
+class: center, middle
+
+##  Course structure
+
+---
+
+## Class
+
+- Tuesday: Lecture/Demonstration
+
+- Thursday: Lab/Exploration
+
+---
+
+## Class websites
+
+- Notes, slides, and labs available here: [pols1600.paultesta.org](https://pols1600.paultesta.org)
+
+- Assignments uploaded here: [Canvas](https://canvas.brown.edu/courses/1087979)
+
+---
+
+## Software and computing
+
+- Statistics done using R
+	  + Open source (free) statistical language
+- Through R Studio 
+	  * An integrated development environment for R 
+- Results written up using R Markdown
+	  + Language for combing R code with html Markdown
+
+---
+
+## R
+
+![](images/R.png)
+
+---
+## R Studio
+
+
+
+![](../labs/images/00_r07.png)
+
+---
+## R Markdown
+
+- Code in chunks:
+	
+    ```{r simulate_data}
+    x <- rnorm(100)
+    y <- 2*x + rnorm(100)
+    ```
+    
+- Write up in [Markdown](https://www.markdownguide.org/)
+
+
+---
+## Getting set up for the course:
+
+Here's a [link to a guide](file:///Users/ptesta/git/pols1600_site/static/labs/00-software_setup.html#6_Install_packages) to get you setup for the course.
+
+Take a crack at it after class, over the weekend.
+
+Email me with any issues (there are always issues), and drop by my office hours on Tuesday so we can trouble shoot.
+
+
+
+
+
+---
+## Textbook
+
+```{r, echo=F,out.width="40%"}
+knitr::include_graphics("https://pup-assets.imgix.net/onix/images/9780691222288.jpg?w=1500&auto=format")
+```
+
+
+<!-- ![](https://pup-assets.imgix.net/onix/images/9780691222288.jpg?w=1500&auto=format){width="80%"} -->
+
+<https://press.princeton.edu/books/paperback/9780691222288/quantitative-social-science>
+
+---
+
+## How to Read Imai
+
+- Active reading
+
+- Copy and run the code in the text. To do so, do the following:
+
+```{r, eval=F}
+if (!require("devtools")){
+  install.packages("devtools")
+  }
+library("devtools")
+install_github("kosukeimai/qss-package",  
+               build_vignettes  =  TRUE)
+```
+
+---
+## How to Read Imai
+
+Once you've rune the following
+
+```{r, eval=F}
+install.packages("devtools")
+install.packages("remotes")
+remotes::install_github("kosukeimai/qss-package", build_vignettes = TRUE)
+```
+
+
+Anywhere the text loads data:
+
+```{r, eval=F}
+afghan <- read_csv("afgahn.csv")
+```
+
+You can do 
+```{r}
+library("qss")
+data("afghan")
+summary(afghan$age)
+```
+
+---
+## Additional Readings
+
+- Occasionally, I will provide additional readings, available on both Canvas and pols1600.paultesta.org
+
+
+---
+
+# Assignments
+
+
+---
+## Assignments
+
+You have three types of assignments in this course
+
+
+- Labs
+- Tutorials
+- Final Project
+
+
+---
+## Labs
+
+- Each Thursday we will work in groups to complete an in-class lab
+- The labs are designed to reinforce and extend concepts from lecture using real world data.
+
+---
+## Labs
+
+
+
+```{r,echo=F,out.width=500}
+knitr::include_graphics("images/cw1.png")
+```
+
+
+
+---
+## Labs
+```{r,echo=F,out.width=500}
+knitr::include_graphics("images/cw3.png")
+```
+
+
+
+
+---
+## Labs
+
+- Weeks 1 and 2 we'll work collectively
+- Weeks 3 on, you'll be assigned to small groups
+- Each week:
+  - Log on to the Canvas, download the lab .Rmd file
+  - Open R Studio
+  - Knit the Rmd file to get ready to work
+  - Complete the lab
+  - Upload html file to Canvas by the end of class
+- One question randomly graded
+	 + 100% if correct
+	 + 85% if incorrect, but you tried
+	 + 0% if you did not try/absent for the lab
+- Comments/Answers posted immediately after class
+
+
+---
+## Problem Sets/Tutorials
+
+- Coding tutorials to reinforce concepts from lecture and textbook. 
+- Accessed by running
+
+```{r, eval=F}
+learnr::run_tutorial("00-intro", package = "qsslearnr")
+```
+
+- Complete the tutorial. Save output as "LASTNAME_TutorialNumber.pdf"
+- Upload output to Canvas by Friday by 11:59 pm
+- Grades:
+  - 100% any upload
+  - 0% no upload
+
+---
+## Final Project
+
+
+
+---
+## Your First Assignment:
+
+- Download and install R and R Studio
+    - Email me if you have troubles
+    - Troubleshoot by Zoom or in-person (111 Thayer Room 339)
+- Work through [00-software_setup](https://pols1600.paultesta.org/labs/00-software_setup.html) before next class.
+
+
+---
+class: inverse, middle, center
+background-image: url("https://rosenbach.org/wp-content/uploads/2018/05/joyce-in-field-825x447.jpg")
+background-size: cover
+background-position: 50% 0%
+
+## Portals of Discovery
+
+
+---
+## Errors
+
+- ish happens
+- Seeing red is a good thing
+- We learn by making errors
+
+
+
+
+---
+## Final Reports
+
+- Can be on any topic you like
+- More info to come
+- Due dates:
+    - Week 2 Groups assigned
+    - Week 3 Research Topics
+    - Week 6 Data Proposal
+    - Week 8 Data Explorations
+    - Week 11 Drafts
+    - Week 12 Presentations
+    - Week 13 Final Paper
+
+---
+# Grading and Other Policies
+
+---
+## Grading
+
+![](https://upload.wikimedia.org/wikipedia/commons/5/59/Greuter_Socrates.jpg)
+
+---
+## Grading
+
+![](https://pbs.twimg.com/media/D1oazHVWkAApoCM.jpg)
+
+---
+## Grading
+
+![](http://www.youreduaction.it/wp-content/uploads/2017/11/mozione.jpg)
+
+
+---
+## Grading
+
+![](https://upload.wikimedia.org/wikipedia/commons/8/8c/David_-_The_Death_of_Socrates.jpg)
+
+---
+## Grading
+
+- 5% Attendance
+- 10% Class involvement and participation
+- 10% Tutorials
+- 30% Labs
+- 20% Assignments for final paper
+- 20% Final paper
+
+---
+## Course policies
+
+- Academic honesty
+- Community standards
+- Incomplete/late work
+
+
+---
+class: inverse, center, middle
+background-image:url("https://media.giphy.com/media/xUOwGpVpFJHewjL1u0/giphy.gif")
+background-size: cover
+background-position: 50% 50%
+
+# Introductions
+
+
+
+---
+## Introductions 
+ 
+
+
+---
+## Two Fundamental Truths
+
+
+---
+## Testa's first fundamental truth
+
+---
+background-image:url(https://elephant.art/wp-content/uploads/2019/11/poop-emoji.jpg)
+background-size:50% 
+
+## Testa's first fundamental truth
+
+---
+
+---
+
+## 1. Expectation Management
+
+
+
+```{r, echo=F, out.width = "50%"}
+knitr::include_graphics("https://i.kym-cdn.com/photos/images/newsfeed/001/643/247/199.png")
+```
+
+
+
+
+---
+
+## 2. Pedagogical Tomfoolery
+
+
+
+```{r, echo=F, out.width = "50%"}
+knitr::include_graphics("https://cdn.vox-cdn.com/thumbor/MpA2HVftSFntl9HhmhlQA3MEjIU=/0x0:1409x785/1200x800/filters:focal(622x252:846x476)/cdn.vox-cdn.com/uploads/chorus_image/image/55701647/Screen_Shot_2017_07_13_at_1.09.20_PM.0.png")
+```
+
+
+
+---
+
+## 3. Positionality
+
+```{r, out.width="20%", echo=F}
+knitr::include_graphics("images/prettyfly.jpeg")
+```
+
+
+
+
+---
+
+## 4. Epistemology
+
+
+
+
+![](https://media.tenor.com/L-geRXQ8vrsAAAAC/tyrion-game-of-thrones.gif)
+
+
+---
+## Testa's second fundamental truth
+
+
+---
+## Testa's second fundamental truth
+
+![](images/dwight.jpg)
+
+
+---
+## Two kinds of people in this world
+
+
+![](https://i5.walmartimages.com/asr/ed3b4b7e-a923-4413-b774-750c63189125.f1779c41278636a8ba5887339534f8d7.jpeg?odnHeight=612&odnWidth=612&odnBg=FFFFFF)
+
+---
+## What is it that we say we do here
+
+![](https://media2.giphy.com/media/U1bCix41cllqYDdSFQ/200.gif)
+
+---
+## What does quantitative research do?
+
+- Descriptions
+
+
+---
+## Descriptions
+
+```{r,echo=F,out.width=500}
+knitr::include_graphics("images/stops.png")
+```
+
+
+
+
+---
+## What does quantitative research do?
+
+- Descriptions
+- Explanations
+
+---
+## Explanations
+
+
+```{r,echo=F,out.width=500}
+knitr::include_graphics("images/csf.png")
+```
+
+
+
+
+---
+## Explanations
+
+```{r,echo=F,out.width=600}
+knitr::include_graphics("images/idotvod.png")
+```
+
+
+
+---
+## What does quantitative research do?
+
+- Descriptions
+- Explanations
+- Predictions and Uncertainty
+
+---
+## Predictions and Uncertainty
+
+
+```{r,echo=F,out.width=500}
+knitr::include_graphics("images/stops1.png")
+```
+
+
+
+
+---
+## Predictions and Uncertainty
+
+
+```{r,echo=F,out.width=400}
+knitr::include_graphics("images/neighbor.png")
+```
+
+
+
+
+---
+## Predictions and Uncertainty
+
+
+```{r,echo=F,out.width=450}
+knitr::include_graphics("images/stops2.png")
+```
+
+
+
+---
+## What does quantitative research do?
+
+- Descriptions
+- Explanations
+- Predictions and Uncertainty
+
+---
+background-image:url("https://www.dropletmeasurement.com/wp-content/uploads/2020/06/some-models-are-wrong-e1536948779198.jpg")
+background-size:cover
+
+
+---
+## Two kinds of people in this world
+
+![](images/candy.png)
+
+---
+## Introductions
+
+![](images/officehours.jpg)
+
+---
+## My research
+
+- I study American Poltical Behavior with focus on poltics of race and criminal justice
+- How do we break cycles of inequality when those most affected by injustice are the least likely to participate and those unaffected are the least likely to care?
+- How can we use methodological tools to better answer these questions? 
+
+---
+class: inverse,center, bottom
+background-image:url("https://helios-i.mashable.com/imagery/articles/00jdsdJ5TJ5j9pExdUWjQaC/hero-image.fill.size_1200x900.v1611611940.jpg")
+background-size:cover
+## But Enough about me
+
+
+---
+## Class survey
+
+Please click [here](https://brown.co1.qualtrics.com/jfe/form/SV_3f8f8fyLg98Bwcm) to take a brief survey that will help me structure the class going forward.
+
+
+---
+## Next Week:
+
+- Complete the [class survey](https://brown.co1.qualtrics.com/jfe/form/SV_3f8f8fyLg98Bwcm)
+- [Download and Install R and R studio](https://pols1600.paultesta.org/labs/00-software_setup.html)
+- Read Chapters 1 (Friday) and start Chapter 3 in QSS
+- Tuesday: Lecture: Describing Data in R
+- Thursday: Lab: Exploring COVID-19 data in the US
+- Friday: Submit Tutorials: "00-intro" & "01-measurement"
+  - Only time you'll have two tutorials due (Ok to submit late)
+

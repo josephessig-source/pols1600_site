@@ -1,0 +1,100 @@
+---
+title: "POLS 1600"
+subtitle: "Title of your Presentation"
+authors: "Group X: "
+date: last-modified
+format: 
+  revealjs:
+    embed-resources: true
+    scrollable: true
+---
+
+## Motivating Example
+
+Provide an image or anecdote that can help your audience understand what they're going to learn about
+
+## Research Question
+
+Provide a concise summary of your project's core question(s)
+
+
+
+## Theory
+
+- Use this section to explain how we should think about how to answer your research question
+
+- What explains variation in your outcome?
+
+## Expectations
+
+- Translate your theory into a set of testable empirical implications
+
+## Data
+
+Summarize your data:
+
+- Source(s)
+  - Unit of analysis
+  - Number of observations (periods of observation)
+
+- Measures of:
+  - Outcomes
+  - Key Predictors
+  - Covariates
+
+## Descriptive Summary
+
+- Provide a figure or table that provides a nice overview or insight into your data
+
+## Design
+
+Describe your empirical design
+
+- Present at least one of the models you estimate
+
+$$
+\text{Outcome} = \beta_0 + \beta_1 \text{predictor}
+$$
+
+- Explain to your audience what your theory implies for the sign, size, and signficance of the coefficients
+
+
+## Results{.smaller}
+
+:::: panel-tabset
+
+## Summary
+
+- Summarize the results of your analysis
+
+- Interpret the coefficients from your models in terms of the predictions of your theory
+
+## Table
+
+Put a screen shot of a regression table here
+
+- Or you could generate the table by including your paper's code and analysis in these slides
+
+## Figure
+
+Put a figure here
+
+![](https://pols1600.paultesta.org/labs/06-lab-comments_files/figure-html/m1fig-1.png)
+
+::::
+
+## Conclusion
+
+- Restate your research question
+
+- Summarize your answer
+
+- Offer some discussion of:
+  
+  - Implications
+  - Limitations
+  - Directions for future research
+  
+## Appendix
+
+- Additional slides go here

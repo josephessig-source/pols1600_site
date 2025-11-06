@@ -1,0 +1,1688 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.32">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Your Group Members Names Here">
+<meta name="dcterms.date" content="2025-02-27">
+
+<title>Lab 05 - Examining the Phenomena of Red Covid – POLS 1600</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-1cfdd6bcdaa40fc01831c1af7ce94cf5.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">POLS 1600</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../syllabus.html"> 
+<span class="menu-text">Syllabus</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../class/index.html"> 
+<span class="menu-text">Class</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../assignments/index.html"> 
+<span class="menu-text">Assignments</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul class="collapse">
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
+  <li><a href="#goals" id="toc-goals" class="nav-link" data-scroll-target="#goals">Goals</a></li>
+  <li><a href="#please-knit-this-.rmd-file" id="toc-please-knit-this-.rmd-file" class="nav-link" data-scroll-target="#please-knit-this-.rmd-file">Please knit this .Rmd file</a></li>
+  <li><a href="#set-up-your-workspace" id="toc-set-up-your-workspace" class="nav-link" data-scroll-target="#set-up-your-workspace"><span class="header-section-number">1</span> Set up your workspace</a></li>
+  <li><a href="#load-the-data-for-today." id="toc-load-the-data-for-today." class="nav-link" data-scroll-target="#load-the-data-for-today."><span class="header-section-number">2</span> Load the data for today.</a>
+  <ul class="collapse">
+  <li><a href="#load-covid-19-data" id="toc-load-covid-19-data" class="nav-link" data-scroll-target="#load-covid-19-data"><span class="header-section-number">2.1</span> Load Covid-19 data</a></li>
+  <li><a href="#load-election-data" id="toc-load-election-data" class="nav-link" data-scroll-target="#load-election-data"><span class="header-section-number">2.2</span> Load Election Data</a></li>
+  </ul></li>
+  <li><a href="#describe-the-structure-of-each-dataset" id="toc-describe-the-structure-of-each-dataset" class="nav-link" data-scroll-target="#describe-the-structure-of-each-dataset"><span class="header-section-number">3</span> Describe the structure of each dataset</a></li>
+  <li><a href="#transform-data-for-analysis." id="toc-transform-data-for-analysis." class="nav-link" data-scroll-target="#transform-data-for-analysis."><span class="header-section-number">4</span> Transform data for analysis.</a>
+  <ul class="collapse">
+  <li><a href="#recode-the-covid-19-data" id="toc-recode-the-covid-19-data" class="nav-link" data-scroll-target="#recode-the-covid-19-data"><span class="header-section-number">4.1</span> Recode the Covid-19 data</a></li>
+  <li><a href="#create-new-measures-of-the-7-day-and-14-day-averages-of-new-deaths-from-covid-19-per-100000-residents" id="toc-create-new-measures-of-the-7-day-and-14-day-averages-of-new-deaths-from-covid-19-per-100000-residents" class="nav-link" data-scroll-target="#create-new-measures-of-the-7-day-and-14-day-averages-of-new-deaths-from-covid-19-per-100000-residents"><span class="header-section-number">4.2</span> Create new measures of the 7-day and 14-day averages of new deaths from Covid-19 per 100,000 residents</a></li>
+  <li><a href="#reshape-and-recode-the-presidential-election-data." id="toc-reshape-and-recode-the-presidential-election-data." class="nav-link" data-scroll-target="#reshape-and-recode-the-presidential-election-data."><span class="header-section-number">4.3</span> Reshape and recode the presidential election data.</a></li>
+  </ul></li>
+  <li><a href="#merge-the-election-data-into-the-covid-19-data" id="toc-merge-the-election-data-into-the-covid-19-data" class="nav-link" data-scroll-target="#merge-the-election-data-into-the-covid-19-data"><span class="header-section-number">5</span> Merge the election data into the Covid-19 data</a></li>
+  <li><a href="#calculate-the-average-number-new-covid-19-deaths-in-red-and-blue-states" id="toc-calculate-the-average-number-new-covid-19-deaths-in-red-and-blue-states" class="nav-link" data-scroll-target="#calculate-the-average-number-new-covid-19-deaths-in-red-and-blue-states"><span class="header-section-number">6</span> Calculate the average number new Covid-19 deaths in Red and Blue States</a>
+  <ul class="collapse">
+  <li><a href="#for-all-the-observations" id="toc-for-all-the-observations" class="nav-link" data-scroll-target="#for-all-the-observations"><span class="header-section-number">6.1</span> For all the observations</a></li>
+  <li><a href="#for-the-all-the-observations-before-april-19-2021" id="toc-for-the-all-the-observations-before-april-19-2021" class="nav-link" data-scroll-target="#for-the-all-the-observations-before-april-19-2021"><span class="header-section-number">6.2</span> For the all the observations before April 19, 2021</a></li>
+  <li><a href="#for-the-all-the-observations-after-april-19-2021" id="toc-for-the-all-the-observations-after-april-19-2021" class="nav-link" data-scroll-target="#for-the-all-the-observations-after-april-19-2021"><span class="header-section-number">6.3</span> For the all the observations after April 19, 2021</a></li>
+  </ul></li>
+  <li><a href="#calculate-the-average-number-new-covid-19-deaths-in-red-and-blue-states-using-linear-regression" id="toc-calculate-the-average-number-new-covid-19-deaths-in-red-and-blue-states-using-linear-regression" class="nav-link" data-scroll-target="#calculate-the-average-number-new-covid-19-deaths-in-red-and-blue-states-using-linear-regression"><span class="header-section-number">7</span> Calculate the average number new Covid-19 deaths in Red and Blue States using linear regression</a></li>
+  <li><a href="#explore-the-relationships-between-republican-vote-share-vaccination-rates-and-deaths-from-covid-19-on-september-23-2021" id="toc-explore-the-relationships-between-republican-vote-share-vaccination-rates-and-deaths-from-covid-19-on-september-23-2021" class="nav-link" data-scroll-target="#explore-the-relationships-between-republican-vote-share-vaccination-rates-and-deaths-from-covid-19-on-september-23-2021"><span class="header-section-number">8</span> Explore the relationships between Republican Vote Share, Vaccination Rates, and Deaths from Covid-19 on September 23, 2021</a></li>
+  <li><a href="#visualize-the-relationships-between-republican-vote-share-and-deaths-from-covid-19-on-september-23-2021" id="toc-visualize-the-relationships-between-republican-vote-share-and-deaths-from-covid-19-on-september-23-2021" class="nav-link" data-scroll-target="#visualize-the-relationships-between-republican-vote-share-and-deaths-from-covid-19-on-september-23-2021"><span class="header-section-number">9</span> Visualize the relationships between Republican vote share and deaths from Covid-19 on September 23, 2021</a>
+  <ul class="collapse">
+  <li><a href="#recreating-the-nyt-figures" id="toc-recreating-the-nyt-figures" class="nav-link" data-scroll-target="#recreating-the-nyt-figures"><span class="header-section-number">9.1</span> Recreating the NYT Figures</a></li>
+  </ul></li>
+  <li><a href="#alternative-explanations-for-red-covid" id="toc-alternative-explanations-for-red-covid" class="nav-link" data-scroll-target="#alternative-explanations-for-red-covid"><span class="header-section-number">10</span> Alternative explanations for Red Covid</a></li>
+  <li><a href="#take-the-class-survey" id="toc-take-the-class-survey" class="nav-link" data-scroll-target="#take-the-class-survey"><span class="header-section-number">11</span> Take the Class Survey</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Lab 05 - Examining the Phenomena of Red Covid</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Your Group Members Names Here </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">February 27, 2025</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="overview" class="level1 unnumbered">
+<h1 class="unnumbered">Overview</h1>
+<p>Today we will explore the phenomena of “Red Covid” discussed by the <em>NYT</em>’s David Leonhardt in articles last fall <a href="https://www.nytimes.com/2021/09/27/briefing/covid-red-states-vaccinations.html">here</a> and more recently <a href="https://www.nytimes.com/2021/09/27/briefing/covid-red-states-vaccinations.html">here</a>.</p>
+<p>The core thesis of Red Covid is something like the following:</p>
+<p>Since Covid-19 vaccines became widely available to the general public in the spring of 2021, Republicans have been less likely to get the vaccine. Lower rates of vaccination among Republicans have in turn led to higher rates of death from Covid-19 in Red States compared to Blue States.</p>
+<p>In this lab, we’ll reproduce some basic evidence of this phenomena, using bivariate linear regression as a tool to summarize and describe relationships.</p>
+<p>Next week, we’ll see how multiple regression (linear regression with multiple predictors) can be used to assess alternative explanations for the patterns we see.</p>
+<p>To accomplish this we will:</p>
+<ol type="1">
+<li><p>Set up our work space (2-3 Minutes)</p></li>
+<li><p>Load data on Covid-19 and the 2020 Election. (5 Minutes)</p></li>
+<li><p>Describe the structure of these two datasets (5 Minutes)</p></li>
+<li><p>Transform the datasets so we can analyze them (10 minutes)</p></li>
+<li><p>Merge the election data into our Covid-19 data (5 minues)</p></li>
+<li><p>Calculate the average number new Covid-19 deaths in Red and Blue States (5 minutes)</p></li>
+<li><p>Calculate the average number new Covid-19 deaths in Red and B Blue States using linear regression (10 minutes)</p></li>
+<li><p>Explore the relationships between Republican vote share, vaccination rates, and deaths from Covid-19 on September 23, 2021 (10 minutes)</p></li>
+<li><p>Visualize the relationships between Republican vote share, vaccination rates, and deaths from Covid-19 on September 23, 2021 (15-20 minutes)</p></li>
+<li><p>Discuss some alternative explanations for these relationships (5-10 minutes)</p></li>
+<li><p>Take the weekly survey (2-3 minutes)</p></li>
+</ol>
+<p>One of these 10 tasks (excluding the weekly survey) will be randomly selected as the graded question for the lab.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">20250227</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>graded_question <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">7</span>,<span class="at">size =</span> <span class="dv">1</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">paste</span>(<span class="st">"Question"</span>,graded_question,<span class="st">"is the graded question for this week"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Question 6 is the graded question for this week"</code></pre>
+</div>
+</div>
+<blockquote class="blockquote">
+<p>Grading Questin 9: Basically, if you made any changes to <code>fig_m5</code> 100 percent. If you simply recreated <code>fig_m5</code> 80 percent. If you didn’t create figure <code>fig_m5</code> 0 percent. Sorry! But don’t fret, remember your 3 lowest lab scores are dropped from your lab grade.</p>
+</blockquote>
+<p>You will work in your assigned groups. Only one member of each group needs to submit the html file of lab.</p>
+<p>This lab <strong>must</strong> contain the names of the group members in attendance.</p>
+<p>If you are attending remotely, you will submit your labs individually.</p>
+<p>Here are your assigned groups for the semester.</p>
+<div class="cell">
+<div class="cell-output cell-output-error">
+<pre><code>Error in read_csv("https://pols1600.paultesta.org/files/groups.csv"): could not find function "read_csv"</code></pre>
+</div>
+<div class="cell-output cell-output-error">
+<pre><code>Error: object 'groups_df' not found</code></pre>
+</div>
+</div>
+</section>
+<section id="goals" class="level1 unnumbered">
+<h1 class="unnumbered">Goals</h1>
+<p>Conceptually, this lab is designed to help reinforce the relationship between linear models like <span class="math inline">\(y=\beta_0 + \beta_1x\)</span> and the conditional expectation function <span class="math inline">\(E[Y|X]\)</span>.</p>
+<ul>
+<li><p>Questions 1-5 are designed to reinforce your <strong>data wrangling</strong> skills. In particular, you will get practice:</p>
+<ul>
+<li>Creating and recoding variables using <code>mutate()</code></li>
+<li>Calculating a <a href="https://en.wikipedia.org/wiki/Moving_average">moving average</a> or rolling mean using the <code>rollmean()</code> function from the <code>zoo</code> package</li>
+<li>Transforming the data on presidential elections so that it can be merged with the data on Covid-19 using the <code>pivot_wider()</code> function.</li>
+<li><a href="https://r4ds.had.co.nz/relational-data.html">Merging data</a> together using the <code>left_join()</code> function.</li>
+</ul></li>
+<li><p>In question 6, you will see how calculating conditional means provides a simple test of “Red Covid” claim.</p></li>
+<li><p>In question 7, you will see how a linear model returns the same information as these conditional means (in a sligthly different format)</p></li>
+<li><p>In question 8, you will get practice interpreting linear models with continuous predictors (i.e.&nbsp;predictors that take on a range of values)</p></li>
+<li><p>In question 9, you will get practice visualizing these models and using the figures help interpret your results substantively.</p></li>
+<li><p>Question 10 asks you to play the role of a skeptic, and consider what other factors might explain the relationships we found in Questions 6-9. We will explore these factors in next week’s lab.</p></li>
+</ul>
+</section>
+<section id="please-knit-this-.rmd-file" class="level1 unnumbered">
+<h1 class="unnumbered">Please knit this .Rmd file</h1>
+<p>As with every lab, you should:</p>
+<ul>
+<li>Download the file</li>
+<li>Save it in your course folder</li>
+<li><strong>Update the <code>author:</code> section of the YAML header to include the names of your group members in attendance.</strong></li>
+<li>Knit the document</li>
+<li>Open the html file in your browser (Easier to read)</li>
+<li>Knit the document again after completing a section or chunk (Error checking)</li>
+<li>Upload the final lab to <a href="https://canvas.brown.edu/courses/1087979/assignments/7870523?module_item_id=10762397" target="_blank">Canvas</a>.</li>
+</ul>
+</section>
+<section id="set-up-your-workspace" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Set up your workspace</h1>
+<ol type="1">
+<li><strong>In the code chunk below, please set up your work space by loading more packages, using the <a href="https://pols1600.paultesta.org/slides/05-slides.html#9" target="_blank">code from slides 9-11 from Tuesday’s class</a></strong></li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set working directory</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>wd <span class="ot">&lt;-</span> <span class="st">"."</span> <span class="co"># Change to file path on your computer</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(wd)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>the_packages <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="do">## R Markdown</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">"kableExtra"</span>,<span class="st">"DT"</span>,<span class="st">"texreg"</span>,</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="do">## Tidyverse</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="st">"tidyverse"</span>, <span class="st">"lubridate"</span>, <span class="st">"forcats"</span>, <span class="st">"haven"</span>, <span class="st">"labelled"</span>,</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  <span class="do">## Extensions for ggplot</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>  <span class="st">"ggmap"</span>,<span class="st">"ggrepel"</span>, <span class="st">"ggridges"</span>, <span class="st">"ggthemes"</span>, <span class="st">"ggpubr"</span>, </span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>  <span class="st">"GGally"</span>, <span class="st">"scales"</span>, <span class="st">"dagitty"</span>, <span class="st">"ggdag"</span>, <span class="st">"ggforce"</span>,</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Data </span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>  <span class="st">"COVID19"</span>,<span class="st">"maps"</span>,<span class="st">"mapdata"</span>,<span class="st">"qss"</span>,<span class="st">"tidycensus"</span>, <span class="st">"dataverse"</span>,</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Analysis</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>  <span class="st">"DeclareDesign"</span>, <span class="st">"easystats"</span>, <span class="st">"zoo"</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Define function to load packages</span></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>ipak <span class="ot">&lt;-</span> <span class="cf">function</span>(pkg){</span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>    new.pkg <span class="ot">&lt;-</span> pkg[<span class="sc">!</span>(pkg <span class="sc">%in%</span> <span class="fu">installed.packages</span>()[, <span class="st">"Package"</span>])]</span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="fu">length</span>(new.pkg)) </span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>        <span class="fu">install.packages</span>(new.pkg, <span class="at">dependencies =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sapply</span>(pkg, require, <span class="at">character.only =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a><span class="fu">ipak</span>(the_packages)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   kableExtra            DT        texreg     tidyverse     lubridate 
+         TRUE          TRUE          TRUE          TRUE          TRUE 
+      forcats         haven      labelled         ggmap       ggrepel 
+         TRUE          TRUE          TRUE          TRUE          TRUE 
+     ggridges      ggthemes        ggpubr        GGally        scales 
+         TRUE          TRUE          TRUE          TRUE          TRUE 
+      dagitty         ggdag       ggforce       COVID19          maps 
+         TRUE          TRUE          TRUE          TRUE          TRUE 
+      mapdata           qss    tidycensus     dataverse DeclareDesign 
+         TRUE          TRUE          TRUE          TRUE          TRUE 
+    easystats           zoo 
+         TRUE          TRUE </code></pre>
+</div>
+</div>
+<hr>
+</section>
+<section id="load-the-data-for-today." class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Load the data for today.</h1>
+<p>Next we’ll load data to explore the phenomenom of <em>Red Covid</em></p>
+<section id="load-covid-19-data" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="load-covid-19-data"><span class="header-section-number">2.1</span> Load Covid-19 data</h2>
+<p>First we’ll need data on Covid-19 cases and deaths that we’ve worked with throughout the course.</p>
+<p><strong>In the chunk below, please write code to load data on Covid-19 in the states using the <code>covid19()</code> function from the <code>COVID19</code> package. (<a href="https://pols1600.paultesta.org/slides/05-slides.html#/q2.1-load-the-covid-19-data" target="_blank">slides</a>)</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load covid data</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="fu">url</span>(<span class="st">"https://pols1600.paultesta.org/files/data/covid.rda"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="load-election-data" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="load-election-data"><span class="header-section-number">2.2</span> Load Election Data</h2>
+<p>Next we need data on the 2020 presidential election.</p>
+<p><strong>In the code chunk below, write code that will download data presidential elections from 1976 to 2020 from the MIT Election Lab’s dataverse.</strong></p>
+<p>The code you’ll need is <a href="https://pols1600.paultesta.org/slides/05-slides.html#/q2.2-load-election-data" target="_blank">here</a></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.setenv</span>(<span class="st">"DATAVERSE_SERVER"</span> <span class="ot">=</span> <span class="st">"dataverse.harvard.edu"</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>pres_df <span class="ot">&lt;-</span> dataverse<span class="sc">::</span><span class="fu">get_dataframe_by_name</span>(</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"1976-2020-president.tab"</span>,</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">"doi:10.7910/DVN/42MVDX"</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Backup</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="co"># load(url("https://pols1600.paultesta.org/files/data/pres_df.rda"))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li><code>Sys.setenv("DATAVERSE_SERVER" = "dataverse.harvard.edu")</code> sets a parameter in your <code>R</code> enivornment that tells the <code>dataverse</code> package to use Harvard’s dataverse</li>
+<li><code>get_dataframe_by_name()</code> downloads the <code>"1976-2020-president.tab"</code> file from the <a href="https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/42MVDX">U.S. President 1976–2020 dataverse</a> using its digital object identifier (DOI): doi:10.7910/DVN/42MVDX</li>
+<li>If this doesn’t work, you can use <code>load(url("https://pols1600.paultesta.org/files/data/pres_df.rda"))</code> instead</li>
+</ul>
+</section>
+</section>
+<section id="describe-the-structure-of-each-dataset" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Describe the structure of each dataset</h1>
+<ol type="1">
+<li><strong>Specifically what is the unit of observation? Substantively, what do rows in <code>covid</code> and <code>pres_df</code> correspond to?</strong></li>
+</ol>
+<ul>
+<li><p>A row in the <code>covid</code> dataset corresponds roughly to an observation of given state (or US Territory) on a given date. For example, the first row in <code>covid</code> describes the state of Covid-19 in the Northern Mariana Islands on March 16, 2020.</p></li>
+<li><p>A row in the <code>pres_df</code> dataset corresponds to a candidate’s results in a given state in a given presidential election. For example, the first row describes the number of votes Jimmy Carter got in Alabama in 1976.</p></li>
+</ul>
+<p>You may want to use the code chunk below to get a quick high-level overview of the data</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Take a quick look at your two data sets</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(covid)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>        id       date confirmed deaths recovered tests vaccines
+1 10b692cc 2020-03-16        NA     NA        NA    NA       NA
+2 10b692cc 2020-03-17        NA     NA        NA    NA       NA
+3 10b692cc 2020-03-18        NA     NA        NA    NA       NA
+4 10b692cc 2020-03-19        NA     NA        NA    NA       NA
+5 10b692cc 2020-03-20        NA     NA        NA    NA       NA
+6 10b692cc 2020-03-21        NA     NA        NA    NA       NA
+  people_vaccinated people_fully_vaccinated hosp icu vent school_closing
+1                NA                      NA   NA  NA   NA             NA
+2                NA                      NA   NA  NA   NA             NA
+3                NA                      NA   NA  NA   NA             NA
+4                NA                      NA   NA  NA   NA             NA
+5                NA                      NA   NA  NA   NA             NA
+6                NA                      NA   NA  NA   NA             NA
+  workplace_closing cancel_events gatherings_restrictions transport_closing
+1                NA            NA                      NA                NA
+2                NA            NA                      NA                NA
+3                NA            NA                      NA                NA
+4                NA            NA                      NA                NA
+5                NA            NA                      NA                NA
+6                NA            NA                      NA                NA
+  stay_home_restrictions internal_movement_restrictions
+1                     NA                             NA
+2                     NA                             NA
+3                     NA                             NA
+4                     NA                             NA
+5                     NA                             NA
+6                     NA                             NA
+  international_movement_restrictions information_campaigns testing_policy
+1                                  NA                    NA             NA
+2                                  NA                    NA             NA
+3                                  NA                    NA             NA
+4                                  NA                    NA             NA
+5                                  NA                    NA             NA
+6                                  NA                    NA             NA
+  contact_tracing facial_coverings vaccination_policy elderly_people_protection
+1              NA               NA                 NA                        NA
+2              NA               NA                 NA                        NA
+3              NA               NA                 NA                        NA
+4              NA               NA                 NA                        NA
+5              NA               NA                 NA                        NA
+6              NA               NA                 NA                        NA
+  government_response_index stringency_index containment_health_index
+1                        NA               NA                       NA
+2                        NA               NA                       NA
+3                        NA               NA                       NA
+4                        NA               NA                       NA
+5                        NA               NA                       NA
+6                        NA               NA                       NA
+  economic_support_index administrative_area_level administrative_area_level_1
+1                     NA                         2               United States
+2                     NA                         2               United States
+3                     NA                         2               United States
+4                     NA                         2               United States
+5                     NA                         2               United States
+6                     NA                         2               United States
+  administrative_area_level_2 administrative_area_level_3 latitude longitude
+1    Northern Mariana Islands                        &lt;NA&gt; 14.15569  145.2119
+2    Northern Mariana Islands                        &lt;NA&gt; 14.15569  145.2119
+3    Northern Mariana Islands                        &lt;NA&gt; 14.15569  145.2119
+4    Northern Mariana Islands                        &lt;NA&gt; 14.15569  145.2119
+5    Northern Mariana Islands                        &lt;NA&gt; 14.15569  145.2119
+6    Northern Mariana Islands                        &lt;NA&gt; 14.15569  145.2119
+  population iso_alpha_3 iso_alpha_2 iso_numeric iso_currency key_local
+1      55144         USA          US         840          USD        69
+2      55144         USA          US         840          USD        69
+3      55144         USA          US         840          USD        69
+4      55144         USA          US         840          USD        69
+5      55144         USA          US         840          USD        69
+6      55144         USA          US         840          USD        69
+  key_google_mobility       key_apple_mobility key_jhu_csse key_nuts key_gadm
+1                &lt;NA&gt; Northern Mariana Islands         US69       NA      MNP
+2                &lt;NA&gt; Northern Mariana Islands         US69       NA      MNP
+3                &lt;NA&gt; Northern Mariana Islands         US69       NA      MNP
+4                &lt;NA&gt; Northern Mariana Islands         US69       NA      MNP
+5                &lt;NA&gt; Northern Mariana Islands         US69       NA      MNP
+6                &lt;NA&gt; Northern Mariana Islands         US69       NA      MNP</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(pres_df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 15
+   year state   state_po state_fips state_cen state_ic office       candidate   
+  &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;         &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;        &lt;chr&gt;       
+1  1976 ALABAMA AL                1        63       41 US PRESIDENT "CARTER, JI…
+2  1976 ALABAMA AL                1        63       41 US PRESIDENT "FORD, GERA…
+3  1976 ALABAMA AL                1        63       41 US PRESIDENT "MADDOX, LE…
+4  1976 ALABAMA AL                1        63       41 US PRESIDENT "BUBAR, BEN…
+5  1976 ALABAMA AL                1        63       41 US PRESIDENT "HALL, GUS" 
+6  1976 ALABAMA AL                1        63       41 US PRESIDENT "MACBRIDE, …
+# ℹ 7 more variables: party_detailed &lt;chr&gt;, writein &lt;lgl&gt;,
+#   candidatevotes &lt;dbl&gt;, totalvotes &lt;dbl&gt;, version &lt;dbl&gt;, notes &lt;lgl&gt;,
+#   party_simplified &lt;chr&gt;</code></pre>
+</div>
+</div>
+</section>
+<section id="transform-data-for-analysis." class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Transform data for analysis.</h1>
+<p>Ok, so our main data set on Covid-19 describes the state of the pandemic in a given state on a given date. To explore the concept of <em>Red Covid</em>, we’ll need to add data on the 2020 election to distinguish Red States from Blue States.</p>
+<p>To accomplish this, we’re going to need to:</p>
+<ul>
+<li>Recode the Covid-19 data like we’ve done before</li>
+<li>Reshape and recode the presidential election data.</li>
+</ul>
+<section id="recode-the-covid-19-data" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="recode-the-covid-19-data"><span class="header-section-number">4.1</span> Recode the Covid-19 data</h2>
+<p>In the chunk below, <strong>please recode the <code>covid</code> data to create a <code>covid_us</code> data set</strong>, again using code from the slides as your guide: <a href="https://pols1600.paultesta.org/slides/05-slides.html#/q4.1-recode-the-covid-19" target="_blank">here</a></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a vector containing of US territories</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>territories <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"American Samoa"</span>,</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Guam"</span>,</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Northern Mariana Islands"</span>,</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Puerto Rico"</span>,</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Virgin Islands"</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter out Territories and create state variable</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>covid_us <span class="ot">&lt;-</span> covid <span class="sc">%&gt;%</span></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span>administrative_area_level_2 <span class="sc">%in%</span> territories)<span class="sc">%&gt;%</span></span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">state =</span> administrative_area_level_2</span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate new cases, new cases per capita, and 7-day average</span></span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>covid_us <span class="sc">%&gt;%</span></span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(state) <span class="sc">%&gt;%</span></span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">new_cases =</span> confirmed <span class="sc">-</span> <span class="fu">lag</span>(confirmed),</span>
+<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">new_cases_pc =</span> new_cases <span class="sc">/</span> population <span class="sc">*</span><span class="dv">100000</span>,</span>
+<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">new_cases_pc_7day =</span> zoo<span class="sc">::</span><span class="fu">rollmean</span>(new_cases_pc, </span>
+<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">k =</span> <span class="dv">7</span>, </span>
+<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">align =</span> <span class="st">"right"</span>,</span>
+<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">fill=</span><span class="cn">NA</span> )</span>
+<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a>    ) <span class="ot">-&gt;</span> covid_us</span>
+<span id="cb13-29"><a href="#cb13-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-30"><a href="#cb13-30" aria-hidden="true" tabindex="-1"></a><span class="co"># Recode facemask policy</span></span>
+<span id="cb13-31"><a href="#cb13-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-32"><a href="#cb13-32" aria-hidden="true" tabindex="-1"></a>covid_us <span class="sc">%&gt;%</span></span>
+<span id="cb13-33"><a href="#cb13-33" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>(</span>
+<span id="cb13-34"><a href="#cb13-34" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Recode facial_coverings to create face_masks</span></span>
+<span id="cb13-35"><a href="#cb13-35" aria-hidden="true" tabindex="-1"></a>    <span class="at">face_masks =</span> <span class="fu">case_when</span>(</span>
+<span id="cb13-36"><a href="#cb13-36" aria-hidden="true" tabindex="-1"></a>      facial_coverings <span class="sc">==</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">"No policy"</span>,</span>
+<span id="cb13-37"><a href="#cb13-37" aria-hidden="true" tabindex="-1"></a>      <span class="fu">abs</span>(facial_coverings) <span class="sc">==</span> <span class="dv">1</span> <span class="sc">~</span> <span class="st">"Recommended"</span>,</span>
+<span id="cb13-38"><a href="#cb13-38" aria-hidden="true" tabindex="-1"></a>      <span class="fu">abs</span>(facial_coverings) <span class="sc">==</span> <span class="dv">2</span> <span class="sc">~</span> <span class="st">"Some requirements"</span>,</span>
+<span id="cb13-39"><a href="#cb13-39" aria-hidden="true" tabindex="-1"></a>      <span class="fu">abs</span>(facial_coverings) <span class="sc">==</span> <span class="dv">3</span> <span class="sc">~</span> <span class="st">"Required shared places"</span>,</span>
+<span id="cb13-40"><a href="#cb13-40" aria-hidden="true" tabindex="-1"></a>      <span class="fu">abs</span>(facial_coverings) <span class="sc">==</span> <span class="dv">4</span> <span class="sc">~</span> <span class="st">"Required all times"</span>,</span>
+<span id="cb13-41"><a href="#cb13-41" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb13-42"><a href="#cb13-42" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Turn face_masks into a factor with ordered policy levels</span></span>
+<span id="cb13-43"><a href="#cb13-43" aria-hidden="true" tabindex="-1"></a>    <span class="at">face_masks =</span> <span class="fu">factor</span>(face_masks,</span>
+<span id="cb13-44"><a href="#cb13-44" aria-hidden="true" tabindex="-1"></a>      <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"No policy"</span>,<span class="st">"Recommended"</span>,</span>
+<span id="cb13-45"><a href="#cb13-45" aria-hidden="true" tabindex="-1"></a>                 <span class="st">"Some requirements"</span>,</span>
+<span id="cb13-46"><a href="#cb13-46" aria-hidden="true" tabindex="-1"></a>                 <span class="st">"Required shared places"</span>,</span>
+<span id="cb13-47"><a href="#cb13-47" aria-hidden="true" tabindex="-1"></a>                 <span class="st">"Required all times"</span>)</span>
+<span id="cb13-48"><a href="#cb13-48" aria-hidden="true" tabindex="-1"></a>    ) </span>
+<span id="cb13-49"><a href="#cb13-49" aria-hidden="true" tabindex="-1"></a>    ) <span class="ot">-&gt;</span> covid_us</span>
+<span id="cb13-50"><a href="#cb13-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-51"><a href="#cb13-51" aria-hidden="true" tabindex="-1"></a><span class="co"># Create year-month and percent vaccinated variables</span></span>
+<span id="cb13-52"><a href="#cb13-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-53"><a href="#cb13-53" aria-hidden="true" tabindex="-1"></a>covid_us <span class="sc">%&gt;%</span></span>
+<span id="cb13-54"><a href="#cb13-54" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb13-55"><a href="#cb13-55" aria-hidden="true" tabindex="-1"></a>    <span class="at">year =</span> <span class="fu">year</span>(date),</span>
+<span id="cb13-56"><a href="#cb13-56" aria-hidden="true" tabindex="-1"></a>    <span class="at">month =</span> <span class="fu">month</span>(date),</span>
+<span id="cb13-57"><a href="#cb13-57" aria-hidden="true" tabindex="-1"></a>    <span class="at">year_month =</span> <span class="fu">paste</span>(year, </span>
+<span id="cb13-58"><a href="#cb13-58" aria-hidden="true" tabindex="-1"></a>                       <span class="fu">str_pad</span>(month, <span class="at">width =</span> <span class="dv">2</span>, <span class="at">pad=</span><span class="dv">0</span>), </span>
+<span id="cb13-59"><a href="#cb13-59" aria-hidden="true" tabindex="-1"></a>                       <span class="at">sep =</span> <span class="st">"-"</span>),</span>
+<span id="cb13-60"><a href="#cb13-60" aria-hidden="true" tabindex="-1"></a>    <span class="at">percent_vaccinated =</span> people_fully_vaccinated<span class="sc">/</span>population<span class="sc">*</span><span class="dv">100</span>  </span>
+<span id="cb13-61"><a href="#cb13-61" aria-hidden="true" tabindex="-1"></a>    ) <span class="ot">-&gt;</span> covid_us</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="create-new-measures-of-the-7-day-and-14-day-averages-of-new-deaths-from-covid-19-per-100000-residents" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="create-new-measures-of-the-7-day-and-14-day-averages-of-new-deaths-from-covid-19-per-100000-residents"><span class="header-section-number">4.2</span> Create new measures of the 7-day and 14-day averages of new deaths from Covid-19 per 100,000 residents</h2>
+<p>Using the code from this <a href="https://pols1600.paultesta.org/slides/05-slides.html#/q4.1-recode-the-covid-19" target="_blank">slide</a> as a guide:</p>
+<ul>
+<li>Anywhere you see <code>new_cases</code> write <code>new_deaths</code></li>
+<li>Anywhere you see <code>confirmed</code> write <code>deaths</code></li>
+<li>For the 14-day average, change the <code>new_deaths_pc_7day</code> to <code>new_deaths_pc_14day</code> and set <code>k=14</code> in the <code>zoo::rollmean()</code></li>
+<li>Remember to save the output of <code>mutate()</code> back into <code>covid_us</code></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>covid_us <span class="sc">%&gt;%</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(state) <span class="sc">%&gt;%</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">new_deaths =</span> deaths <span class="sc">-</span> <span class="fu">lag</span>(deaths),</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">new_deaths_pc =</span> new_deaths <span class="sc">/</span> population <span class="sc">*</span><span class="dv">100000</span>,</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">new_deaths_pc_7day =</span> zoo<span class="sc">::</span><span class="fu">rollmean</span>(new_deaths_pc, </span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">k =</span> <span class="dv">7</span>, </span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">align =</span> <span class="st">"right"</span>,</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">fill=</span><span class="cn">NA</span> ),</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">new_deaths_pc_14day =</span> zoo<span class="sc">::</span><span class="fu">rollmean</span>(new_deaths_pc, </span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">k =</span> <span class="dv">14</span>, </span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">align =</span> <span class="st">"right"</span>,</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">fill=</span><span class="cn">NA</span> )</span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>    ) <span class="ot">-&gt;</span> covid_us</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="reshape-and-recode-the-presidential-election-data." class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="reshape-and-recode-the-presidential-election-data."><span class="header-section-number">4.3</span> Reshape and recode the presidential election data.</h2>
+<p>We want to add election data to our Covid-19 data. To do this, we need to transform our election data, which is structured by candidate-state-election, into a data set that contains the election results by state for 2020.</p>
+<p>Using the code from this <a href="https://pols1600.paultesta.org/slides/05-slides.html#/q4.3-recode-presidential-data">slide</a> transform <code>pres_df</code> to create a new data frame called <code>pres2020_df</code> by</p>
+<ul>
+<li><p>Creating a copy of the year variable called <code>year_election</code></p>
+<ul>
+<li>This is a stupid technical thing for merging later…</li>
+</ul></li>
+<li><p>Taking the <code>state</code> variable which was <code>ALLCAPS</code> and turning into <code>Title Case</code> using the <code>str_to_title()</code> function</p></li>
+<li><p>Changing the observations of <code>state</code> which are now <code>"District Of Columbia"</code> to <code>"District Of Columbia"</code></p></li>
+<li><p>Filtering the data to include only candidates from the Democratic and Republican Parties</p></li>
+<li><p>Filtering the data to inlcude only the results from the 2020 election.</p></li>
+<li><p>Selecting the <code>state</code>, <code>state_po</code>, <code>year_election</code>, <code>party_simplified</code>, <code>candidatevotes</code> and <code>totalvotes</code> columns from <code>pres_df</code></p></li>
+<li><p>Pivoting the <code>candidatevotes</code> into two new columns with names from the <code>party_simplified</code> column</p></li>
+<li><p>Creating measures of the Democratic (<code>dem_voteshare</code>)and Republican (<code>rep_voteshare</code>) canditdates’ vote shares in each state by dividing the new <code>DEMOCRAT</code> and <code>REPUBLICAN</code> columns by the values from the <code>totalvotes</code> column</p></li>
+<li><p>Creating a variable called <code>winner</code> which takes a value of <code>"Trump"</code> if the <code>rep_voteshare</code> variable for a state is greater than the <code>dem_voteshare</code> for a state.</p></li>
+<li><p>Making the <code>winner</code> variable a factor, with <code>Trump</code> as the first level and <code>Biden</code> as the second level</p>
+<ul>
+<li>This is a trick for <code>ggplot</code> so that if we want to use <code>winner</code> to color points on a scatter plot, the points for Trump observations will show up as red and the points for Biden observations will show as blue.</li>
+</ul></li>
+<li><p>Saving the output of these transformations to an data frame called <code>pres2020_df</code></p></li>
+</ul>
+<p>Which, I know sounds like a lot, but…</p>
+<p><strong>All you need to do is copy and paste the code from this <a href="https://pols1600.paultesta.org/slides/05-slides.html#/q4.3-recode-presidential-data" target="_blank">slide</a>.</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Transform Presidential Election data</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>pres_df <span class="sc">%&gt;%</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">year_election =</span> year,</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">state =</span> <span class="fu">str_to_title</span>(state),</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Fix DC</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">state =</span> <span class="fu">ifelse</span>(state <span class="sc">==</span> <span class="st">"District Of Columbia"</span>, <span class="st">"District of Columbia"</span>, state)</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(party_simplified <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"DEMOCRAT"</span>,<span class="st">"REPUBLICAN"</span>))<span class="sc">%&gt;%</span></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">==</span> <span class="dv">2020</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(state, state_po, year_election, party_simplified, candidatevotes, totalvotes</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>         ) <span class="sc">%&gt;%</span></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> party_simplified,</span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>              <span class="at">values_from =</span> candidatevotes) <span class="sc">%&gt;%</span></span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">dem_voteshare =</span> DEMOCRAT<span class="sc">/</span>totalvotes<span class="sc">*</span><span class="dv">100</span>,</span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">rep_voteshare =</span> REPUBLICAN<span class="sc">/</span>totalvotes<span class="sc">*</span><span class="dv">100</span>,</span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">winner =</span> forcats<span class="sc">::</span><span class="fu">fct_rev</span>(<span class="fu">factor</span>(<span class="fu">ifelse</span>(rep_voteshare <span class="sc">&gt;</span> dem_voteshare,<span class="st">"Trump"</span>,<span class="st">"Biden"</span>)))</span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>  ) <span class="ot">-&gt;</span> pres2020_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="merge-the-election-data-into-the-covid-19-data" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Merge the election data into the Covid-19 data</h1>
+<p>Now that we’ve got our election data structured as electoral results per state, we can merge this state-level data into our Covid-19 data, using the common variable <code>state</code> in each data frame.</p>
+<ul>
+<li><strong>In the code chunk below, use the <code>left_join()</code> command to merge the <code>pres2020_df</code> data into the <code>covid_us</code> data and save this combined dataset into a new object called <code>covid_df</code></strong></li>
+</ul>
+<p>Again, you should be able to just copy and paste the code from <a href="https://pols1600.paultesta.org/slides/05-slides.html#/q5-merging-data" target="_blank">here</a></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(covid_us)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 53678    60</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(pres2020_df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 51  9</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>covid_df <span class="ot">&lt;-</span> covid_us <span class="sc">%&gt;%</span> <span class="fu">left_join</span>(</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  pres2020_df,</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"state"</span> <span class="ot">=</span> <span class="st">"state"</span>)</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(covid_df) <span class="co"># Same number of rows as covid_us w/ 8 additional columns</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 53678    68</code></pre>
+</div>
+</div>
+<hr>
+<p>Ok. That was a lot of code just to get the data set up to do some simple analyses<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p>
+<p>Let’s start with some simple descriptive statistics.</p>
+</section>
+<section id="calculate-the-average-number-new-covid-19-deaths-in-red-and-blue-states" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Calculate the average number new Covid-19 deaths in Red and Blue States</h1>
+<section id="for-all-the-observations" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="for-all-the-observations"><span class="header-section-number">6.1</span> For all the observations</h2>
+<p>With the <code>covid_df</code> data set:</p>
+<ul>
+<li>use the <code>group_by()</code> command to have <code>summarise()</code> calculate values separately by the <code>winner</code> of each state.</li>
+<li>use the <code>summarise()</code> command with <code>mean()</code> function to calculate the average number of new deaths (<code>new_deaths</code>) and the average of the 7-day rolling average of new deaths per 100,000 citizens (<code>new_deaths_pc_7day</code>)
+<ul>
+<li>Remember to tell <code>mean()</code> what to do with NAs using the <code>na.rm</code> argument.</li>
+</ul></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>covid_df <span class="sc">%&gt;%</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(winner)<span class="sc">%&gt;%</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">new_deaths =</span> <span class="fu">mean</span>(new_deaths, <span class="at">na.rm=</span>T),</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">new_deaths_pc_7day =</span> <span class="fu">mean</span>(new_deaths_pc_7day, <span class="at">na.rm=</span>T),</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 3
+  winner new_deaths new_deaths_pc_7day
+  &lt;fct&gt;       &lt;dbl&gt;              &lt;dbl&gt;
+1 Trump        19.3              0.340
+2 Biden        22.0              0.287</code></pre>
+</div>
+</div>
+</section>
+<section id="for-the-all-the-observations-before-april-19-2021" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="for-the-all-the-observations-before-april-19-2021"><span class="header-section-number">6.2</span> For the all the observations before April 19, 2021</h2>
+<p>Now let’s compare one of the <strong>empirical implications</strong> of Leonhardt’s claims, specifically that “Red Covid” emerged as a phenomena because Republicans were less willing to take the vaccine.</p>
+<p>If that’s true, then the differences between Red and Blue states in terms of new deaths and new deaths per 100,000 residents should be smaller or reversed (i.e.&nbsp;more deaths in Blue states compared to Red States)</p>
+<ul>
+<li>In the code chunk below, take the your code from the previous chunk, and use the <code>filter()</code> command to subset the data to include only obsevations with a value of <code>date</code> less than <code>"2021-04-19</code></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>covid_df <span class="sc">%&gt;%</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(date <span class="sc">&lt;</span> <span class="st">"2021-04-19"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(winner)<span class="sc">%&gt;%</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">new_deaths =</span> <span class="fu">mean</span>(new_deaths, <span class="at">na.rm=</span>T),</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">new_deaths_pc_7day =</span> <span class="fu">mean</span>(new_deaths_pc_7day, <span class="at">na.rm=</span>T),</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 3
+  winner new_deaths new_deaths_pc_7day
+  &lt;fct&gt;       &lt;dbl&gt;              &lt;dbl&gt;
+1 Trump        22.8              0.400
+2 Biden        30.6              0.380</code></pre>
+</div>
+</div>
+</section>
+<section id="for-the-all-the-observations-after-april-19-2021" class="level2" data-number="6.3">
+<h2 data-number="6.3" class="anchored" data-anchor-id="for-the-all-the-observations-after-april-19-2021"><span class="header-section-number">6.3</span> For the all the observations after April 19, 2021</h2>
+<p>Similarly, if Leonhardt’s claim is true, then the differences between Red and Blue states should be more evident in the period after the vaccine became widely available.</p>
+<ul>
+<li>In the code chunk below, take the your code from the previous chunk, and use the <code>filter()</code> command to subset the data to include only obsevations with a value of <code>date</code> greater than <code>"2021-04-19</code></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>covid_df <span class="sc">%&gt;%</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(date <span class="sc">&gt;</span> <span class="st">"2021-04-19"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(winner)<span class="sc">%&gt;%</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">new_deaths =</span> <span class="fu">mean</span>(new_deaths, <span class="at">na.rm=</span>T),</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">new_deaths_pc_7day =</span> <span class="fu">mean</span>(new_deaths_pc_7day, <span class="at">na.rm=</span>T),</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 3
+  winner new_deaths new_deaths_pc_7day
+  &lt;fct&gt;       &lt;dbl&gt;              &lt;dbl&gt;
+1 Trump        17.1              0.302
+2 Biden        16.3              0.226</code></pre>
+</div>
+</div>
+<ul>
+<li><p><strong>Please interpret the results of this analysis here</strong></p></li>
+<li><p>When we look at the difference in the average number of new deaths between Red and Blue States in the full dataset, we see that states which Biden won had about 27 new deaths compared to 23.8 new deaths in states which Trump one.</p></li>
+<li><p>However, when we consider differences in the 7-day average of new deaths per 100,000 residents, we see that rates tend to be higher in Red States (0.415 deaths per 100k) than Blue States (0.349 deaths per 100k). This difference reflects the fact that Biden tended to win more populous states than trump, so simply looking at the average number of new deaths is bit misleading. Comparing 7-day averages per 100,000 residents adjusts for differences in population between Red and Blue States.</p></li>
+<li><p>When we limit our analysis, to just observations before April 19, 2021, the difference in the 7-day average rate of new Covid-19 deaths per 100,000 residents is relatively small (0.02 more deaths per 100,000 residents in Red States)</p></li>
+<li><p>When we look at observations after the vaccine became widely available the difference is more than 6 times as big (0.125 more deaths per 100,000 residents in Red States)</p></li>
+</ul>
+</section>
+</section>
+<section id="calculate-the-average-number-new-covid-19-deaths-in-red-and-blue-states-using-linear-regression" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> Calculate the average number new Covid-19 deaths in Red and Blue States using linear regression</h1>
+<p>Now let’s see how a linear model can be used to estimate conditional means.</p>
+<p>Please estimate the following models using the <code>lm()</code> function:</p>
+<p><span class="math display">\[ \text{New Deaths} = \beta_0 + \beta_1 \text{Election Winner} + \epsilon \]</span></p>
+<p><span class="math display">\[ \text{7-day average of New Deaths (per 100k)} = \beta_0 + \beta_1 \text{Election Winner} + \epsilon \]</span></p>
+<p>Save the output of lm into objects called <code>m1</code> and <code>m2</code> and display the results of each model (by printing the objects on their own line)</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>m1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(new_deaths <span class="sc">~</span> winner, covid_df)</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>m2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(new_deaths_pc_7day <span class="sc">~</span> winner, covid_df)</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Intercept corresponds to the mean among Red States</span></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(m1)[<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(Intercept) 
+   19.34867 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(covid_df<span class="sc">$</span>new_deaths[covid_df<span class="sc">$</span>winner <span class="sc">==</span> <span class="st">"Trump"</span>], <span class="at">na.rm=</span>T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 19.34867</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Slope corresponds to the difference in means between Red and Blue States</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(m1)[<span class="dv">1</span>] <span class="sc">+</span> <span class="fu">coef</span>(m1)[<span class="dv">2</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(Intercept) 
+   22.04853 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(covid_df<span class="sc">$</span>new_deaths[covid_df<span class="sc">$</span>winner <span class="sc">==</span> <span class="st">"Biden"</span>], <span class="at">na.rm=</span>T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 22.04853</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Intercept corresponds to the mean among Red States</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(m2)[<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(Intercept) 
+  0.3402479 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(covid_df<span class="sc">$</span>new_deaths_pc_7day[covid_df<span class="sc">$</span>winner <span class="sc">==</span> <span class="st">"Trump"</span>], <span class="at">na.rm=</span>T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.3402479</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Slope corresponds to the difference in means between Red and Blue States</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(m2)[<span class="dv">1</span>] <span class="sc">+</span> <span class="fu">coef</span>(m2)[<span class="dv">2</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(Intercept) 
+  0.2871843 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(covid_df<span class="sc">$</span>new_deaths_pc_7day[covid_df<span class="sc">$</span>winner <span class="sc">==</span> <span class="st">"Biden"</span>], <span class="at">na.rm=</span>T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.2871843</code></pre>
+</div>
+</div>
+<ul>
+<li><p><strong>Please interpret the coefficients of these models in terms of the conditional means you estimated for all the observations in the previous section</strong></p></li>
+<li><p>The intercept corresponds to the mean number of new deaths (<code>m1</code>)/new deaths per 100k (<code>m2</code>) in states Trump won</p></li>
+<li><p>The coefficient on winner corresponds to the difference in means between Red and Blue states.</p></li>
+<li><p>The intercept plus the coefficient corresponds to the mean number of new deaths (<code>m1</code>)/new deaths per 100k (<code>m2</code>) in states Biden won</p></li>
+</ul>
+<hr>
+<p>Neat. So this simple bivariate model with a binary predictor (a predictor that takes a value of 0 for states Trump won and 1 for states Biden won) is an example of a case where the conditional expectation function is identical to linear regression. As we will see below, for models with continous variables, linear regression provides a linear estimate of the conditional expectation function.</p>
+</section>
+<section id="explore-the-relationships-between-republican-vote-share-vaccination-rates-and-deaths-from-covid-19-on-september-23-2021" class="level1" data-number="8">
+<h1 data-number="8"><span class="header-section-number">8</span> Explore the relationships between Republican Vote Share, Vaccination Rates, and Deaths from Covid-19 on September 23, 2021</h1>
+<p>Let’s tease out some further implications Leonhardt’s claim.</p>
+<ul>
+<li>If vaccines are effective at reducing deaths from Covid-19, then the coefficient on <span class="math inline">\(\beta_1\)</span> in the following model should be <strong>PUT YOUR ANSWER HERE (NEGATIVE/POSITIVE)</strong></li>
+</ul>
+<p><span class="math display">\[ \text{m3} =\text{14-day average of New Deaths (per 100k)} = \beta_0 + \beta_1 \text{Percent Vaccinated} \]</span></p>
+<ul>
+<li>If Republicans are less likely to take the vaccine, then as the share of State’s population that voted for Trump increases, we’d expect the percent of that state’s population that is vaccinated to <strong>PUT YOUR ANSWER HERE</strong> and the so the coefficient on <span class="math inline">\(\beta_1\)</span> in the following model should be <strong>PUT YOUR ANSWER HERE</strong></li>
+</ul>
+<p><span class="math display">\[ \text{m4} =\text{Percent Vaccinated} = \beta_0 + \beta_1 \text{Republican Vote Share} \]</span></p>
+<ul>
+<li>Finally, if we find the expected relationships in models <code>m3</code> and <code>m4</code> above, we would expect the relationship between Trump’s vote share new deaths from Covid-19 per 100,000 residents to be <strong>PUT YOUR ANSWER HERE</strong> in the following model:</li>
+</ul>
+<p><span class="math display">\[ \text{m5} =\text{14-day average of New Deaths (per 100k)} = \beta_0 + \beta_1 \text{Republican Vote Share} \]</span></p>
+<hr>
+<p>Now let’s estimate these models!</p>
+<p>For comparability, we will limit our analysis to just the observations from Sept 23, 2021, that Leonhardt used in his <a href="https://www.nytimes.com/2021/09/27/briefing/covid-red-states-vaccinations.html">article in the fall</a> and use the 14-day average, rather than the 7-day average we’ve discussed so far, since that’s what Leonhardt uses.</p>
+<p>In the code chunk below, use <code>lm()</code> to estimate the relationship between:</p>
+<ul>
+<li><p>Deaths modeled by percent vaccinated on 2021-09-23 (<code>new_deaths_pc_14day ~ percent_vaccinated</code>)</p></li>
+<li><p>Percent vaccinated modeled by Republican Vote share on 2021-09-23 (<code>percent_vaccinated ~ ???</code>)</p></li>
+<li><p>Deaths modeled by Republican vote share on 2021-09-23</p></li>
+</ul>
+<p>To estimate these models using only data from September 23, 2021, place the following argument: <code>subset = date == "2021-09-23"</code> after the <code>data = covid_df</code> argument in <code>lm()</code> in each of your models.</p>
+<p>Remember to separate arguments in lm using a comma ( <code>lm(formula = ??? ~ ???, data = ???, subset = ??? == ???)</code>)</p>
+<p>Please assign the output of each model to objects called <code>m3</code>, <code>m4</code>, and <code>m5</code>. Place these objects on their own line and interpret the results.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Deaths modeled by percent vaccinated on 2021-09-23</span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>m3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(new_deaths_pc_14day <span class="sc">~</span> percent_vaccinated, covid_df,</span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">subset =</span> date <span class="sc">==</span> <span class="st">"2021-09-23"</span>)</span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>m3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = new_deaths_pc_14day ~ percent_vaccinated, data = covid_df, 
+    subset = date == "2021-09-23")
+
+Coefficients:
+       (Intercept)  percent_vaccinated  
+           2.42322            -0.03308  </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="co">#  Percent vaccinated modeled by Republican vote share on 2021-09-23</span></span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>m4 <span class="ot">&lt;-</span> <span class="fu">lm</span>(percent_vaccinated <span class="sc">~</span> rep_voteshare, covid_df,</span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">subset =</span> date <span class="sc">==</span> <span class="st">"2021-09-23"</span>)</span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a>m4 </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = percent_vaccinated ~ rep_voteshare, data = covid_df, 
+    subset = date == "2021-09-23")
+
+Coefficients:
+  (Intercept)  rep_voteshare  
+      84.3326        -0.5731  </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Deaths modeled by Republican vote share on 2021-09-23</span></span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>m5 <span class="ot">&lt;-</span> <span class="fu">lm</span>(new_deaths_pc_14day <span class="sc">~</span> rep_voteshare, covid_df,</span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">subset =</span> date <span class="sc">==</span> <span class="st">"2021-09-23"</span>)</span>
+<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a>m5</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = new_deaths_pc_14day ~ rep_voteshare, data = covid_df, 
+    subset = date == "2021-09-23")
+
+Coefficients:
+  (Intercept)  rep_voteshare  
+     -0.36297        0.01889  </code></pre>
+</div>
+</div>
+<ul>
+<li><strong>Do you’re models’ estimates match your expectations?</strong> That is do the coefficients on each of the predictors have the expected sign (positive or negative), that you wrote above? Please write one sentence for each model, describing how the outcome in that model is expected to change with a unit change in the predictor</li>
+</ul>
+<p>Yes.</p>
+<ul>
+<li><p>A one percentage point increase in the percent of a state’s population that is vaccinated is associated with a 0.033 decrease in the 14-day average of new deaths from Covid-19 (per 100,000 residents)</p></li>
+<li><p>A one percentage point increase in the percent of a state’s population that voted for Trump is associated with a 0.53 percentage point decrease in the percent of state’s population that is vaccinated.</p></li>
+<li><p>A one percentage point increase in the percent of a state’s population that voted for Trump is associated with a 0.02 decrease in the 14-day average of new deaths from Covid-19 (per 100,000 residents)</p></li>
+</ul>
+</section>
+<section id="visualize-the-relationships-between-republican-vote-share-and-deaths-from-covid-19-on-september-23-2021" class="level1" data-number="9">
+<h1 data-number="9"><span class="header-section-number">9</span> Visualize the relationships between Republican vote share and deaths from Covid-19 on September 23, 2021</h1>
+<p>Now, let’s visualize the results of the model <code>m5</code> from the previous section.</p>
+<p>In the code chunk below, uncomment the code to produce a basic figure, for model <code>m5</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="co"># # # # Data for plot</span></span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a><span class="co"># covid_df %&gt;%</span></span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a><span class="co">#   # Only use observations from September 23, 2021</span></span>
+<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a><span class="co">#   filter(date == "2021-09-23") %&gt;%</span></span>
+<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a><span class="co">#   # Exclude DC</span></span>
+<span id="cb50-6"><a href="#cb50-6" aria-hidden="true" tabindex="-1"></a><span class="co">#   filter(state != "District of Columbia") %&gt;%</span></span>
+<span id="cb50-7"><a href="#cb50-7" aria-hidden="true" tabindex="-1"></a><span class="co">#   # Set aesthetics</span></span>
+<span id="cb50-8"><a href="#cb50-8" aria-hidden="true" tabindex="-1"></a><span class="co">#   ggplot(aes(x = rep_voteshare,</span></span>
+<span id="cb50-9"><a href="#cb50-9" aria-hidden="true" tabindex="-1"></a><span class="co">#              y = new_deaths_pc_14day))+</span></span>
+<span id="cb50-10"><a href="#cb50-10" aria-hidden="true" tabindex="-1"></a><span class="co">#   # Set geometries</span></span>
+<span id="cb50-11"><a href="#cb50-11" aria-hidden="true" tabindex="-1"></a><span class="co">#   geom_point(aes(col=rep_voteshare),size=2,alpha=.5)+</span></span>
+<span id="cb50-12"><a href="#cb50-12" aria-hidden="true" tabindex="-1"></a><span class="co">#   # Include the linear regression of lm(new_deaths_pc_14day ~ rep_voteshare)</span></span>
+<span id="cb50-13"><a href="#cb50-13" aria-hidden="true" tabindex="-1"></a><span class="co">#   geom_smooth(method = "lm", se=F, </span></span>
+<span id="cb50-14"><a href="#cb50-14" aria-hidden="true" tabindex="-1"></a><span class="co">#               col = "grey", linetype =2) -&gt; fig_m5</span></span>
+<span id="cb50-15"><a href="#cb50-15" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb50-16"><a href="#cb50-16" aria-hidden="true" tabindex="-1"></a><span class="co"># # Display figure</span></span>
+<span id="cb50-17"><a href="#cb50-17" aria-hidden="true" tabindex="-1"></a><span class="co"># fig_m5</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Now let’s explore ways to improve this figure.</p>
+<p><strong>In the code chunk below, please improve <code>fig_m5</code></strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Mess around with figure fig_m5 in this code chunk</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Play around with different options and themes by adding elements to <code>fig_m5</code> ( literally <code>fig_m5 + ...</code>). You might try some of the following:</p>
+<ul>
+<li><p>Better labels for the <code>x</code> and <code>y</code> axes using <code>lab()</code>. Maybe even include a <code>title</code></p></li>
+<li><p>Changing the <code>theme</code> of the plot. Try out the following themes <code>ggtheme</code> package:</p>
+<ul>
+<li><code>theme_bw()</code></li>
+<li><code>theme_classic()</code></li>
+<li><code>theme_tufte()</code></li>
+<li><code>theme_stata()</code></li>
+<li><code>theme_fivethirtyeight</code></li>
+<li><code>theme_economist()</code></li>
+<li><code>theme_wsj()</code></li>
+</ul></li>
+<li><p>Try adding a vertical line at the 50% threshold using <code>geom_vline()</code>. You’ll need to set</p>
+<ul>
+<li><code>xintercept = 50</code></li>
+</ul></li>
+</ul>
+<p>And may want to play around with arguments like: - <code>col</code> - <code>linetype</code> - <code>size</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example of adding a vertical line</span></span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>fig_m5 <span class="sc">+</span> </span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">50</span>, <span class="at">col =</span> <span class="st">"orange"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>Try changing the color of the points using the following:</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>fig_m5 <span class="sc">+</span>  <span class="fu">scale_color_gradient2</span>(</span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">midpoint =</span> <span class="dv">50</span>,</span>
+<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">low =</span> <span class="st">"blue"</span>, <span class="at">mid =</span> <span class="st">"grey"</span>, <span class="at">high =</span> <span class="st">"red"</span>,</span>
+<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">guide =</span> <span class="st">"none"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>Try annotating your graph with the <code>annotate()</code> function. You’ll need to tell it:
+<ul>
+<li>a <code>geom</code> this general “text” (ie `geom = “text”)</li>
+<li><code>x</code> and <code>y</code> coordinates for the label</li>
+<li><code>label</code> this is the text of your annotation (`label = “my label text”)</li>
+</ul></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>fig_m5 <span class="sc">+</span>  <span class="fu">annotate</span>(</span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">geom =</span> <span class="st">"text"</span>,</span>
+<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> <span class="dv">50</span>,</span>
+<span id="cb54-4"><a href="#cb54-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> <span class="dv">1</span>,</span>
+<span id="cb54-5"><a href="#cb54-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">label =</span> <span class="st">"Your label goes here"</span></span>
+<span id="cb54-6"><a href="#cb54-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>Or maybe try adding state labels using the <code>geom_text_repel()</code> function
+<ul>
+<li>You’ll need to make sure <code>ggrepel</code> is installed and loaded (it should be)</li>
+<li>You could use a variable like <code>state_po</code> to add the postal codes to each dot</li>
+</ul></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>fig_m5 <span class="sc">+</span></span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text_repel</span>(<span class="fu">aes</span>(<span class="at">label =</span> state_po))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>Or something else. Have fun with it, but don’t let the perfect be the enemy of the good enough.</li>
+</ul>
+<p><img src="https://i.kym-cdn.com/photos/images/newsfeed/001/018/899/936.jpg" class="img-fluid"></p>
+<p><strong>When you’re finished exploring, please write the code for your new and improved <code>fig_m5</code> in the code chunk below</strong></p>
+<p>Here’s an example fo what an improved <code>fig_m5</code> might look like</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Updated fig_m5 code here</span></span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a>fig_m5 <span class="sc">+</span></span>
+<span id="cb56-4"><a href="#cb56-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># two way gradient, blue states -&gt; blue, red states -&gt; red, swing -&gt; grey</span></span>
+<span id="cb56-5"><a href="#cb56-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_gradient2</span>(</span>
+<span id="cb56-6"><a href="#cb56-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">midpoint =</span> <span class="dv">50</span>,</span>
+<span id="cb56-7"><a href="#cb56-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">low =</span> <span class="st">"blue"</span>, <span class="at">mid =</span> <span class="st">"grey"</span>, <span class="at">high =</span> <span class="st">"red"</span>,</span>
+<span id="cb56-8"><a href="#cb56-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">guide =</span> <span class="st">"none"</span>)<span class="sc">+</span></span>
+<span id="cb56-9"><a href="#cb56-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Vertical line at 50% threshold</span></span>
+<span id="cb56-10"><a href="#cb56-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">50</span>, </span>
+<span id="cb56-11"><a href="#cb56-11" aria-hidden="true" tabindex="-1"></a>             <span class="at">col =</span> <span class="st">"grey"</span>,<span class="at">linetype =</span> <span class="dv">3</span>)<span class="sc">+</span></span>
+<span id="cb56-12"><a href="#cb56-12" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Add labels</span></span>
+<span id="cb56-13"><a href="#cb56-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text_repel</span>(<span class="fu">aes</span>(<span class="at">label =</span> state_po), <span class="at">size=</span><span class="dv">2</span>)<span class="sc">+</span></span>
+<span id="cb56-14"><a href="#cb56-14" aria-hidden="true" tabindex="-1"></a>  <span class="co"># theme with minimal lines</span></span>
+<span id="cb56-15"><a href="#cb56-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()<span class="sc">+</span></span>
+<span id="cb56-16"><a href="#cb56-16" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Labels</span></span>
+<span id="cb56-17"><a href="#cb56-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb56-18"><a href="#cb56-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Republican Vote Share</span><span class="sc">\n</span><span class="st"> 2020 Presidential Election"</span>,</span>
+<span id="cb56-19"><a href="#cb56-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"New Covid-19 Deaths per 100kresidents</span><span class="sc">\n</span><span class="st"> (14-day average)"</span>,</span>
+<span id="cb56-20"><a href="#cb56-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Partisan Gaps in Covid-19 Deaths at the State Level"</span>,</span>
+<span id="cb56-21"><a href="#cb56-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Data from Sept. 23, 2021"</span></span>
+<span id="cb56-22"><a href="#cb56-22" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-error">
+<pre><code>Error: object 'fig_m5' not found</code></pre>
+</div>
+</div>
+<p>In the comments to this lab, I’ll include some code to recreate as closely as possible, the first two figures from Leonhardt’s September 27, 2021 <a href="https://www.nytimes.com/2021/09/27/briefing/covid-red-states-vaccinations.html">article.</a></p>
+<section id="recreating-the-nyt-figures" class="level2" data-number="9.1">
+<h2 data-number="9.1" class="anchored" data-anchor-id="recreating-the-nyt-figures"><span class="header-section-number">9.1</span> Recreating the NYT Figures</h2>
+<p>This turned out to be more annoying than I thought, but if you really wanted to recreate the figures from the articles, this was as close as I could get:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Vector containing labeled states</span></span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>the_labs <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"WV"</span>,<span class="st">"WY"</span>,<span class="st">"MS"</span>,<span class="st">"KY"</span>,<span class="st">"TX"</span>,<span class="st">"FL"</span>,<span class="st">"GA"</span>,<span class="st">"IL"</span>,<span class="st">"NY"</span>,<span class="st">"VT"</span>,<span class="st">"MD"</span>,<span class="st">"CA"</span>)</span>
+<span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb58-4"><a href="#cb58-4" aria-hidden="true" tabindex="-1"></a>covid_df <span class="sc">%&gt;%</span></span>
+<span id="cb58-5"><a href="#cb58-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Only include labels for states in the the_labs</span></span>
+<span id="cb58-6"><a href="#cb58-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb58-7"><a href="#cb58-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">nyt_labs =</span> <span class="fu">ifelse</span>(state_po <span class="sc">%in%</span>the_labs, state_po, <span class="cn">NA</span>)</span>
+<span id="cb58-8"><a href="#cb58-8" aria-hidden="true" tabindex="-1"></a>  )<span class="sc">%&gt;%</span></span>
+<span id="cb58-9"><a href="#cb58-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Subset data</span></span>
+<span id="cb58-10"><a href="#cb58-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(date <span class="sc">==</span> <span class="st">"2021-09-23"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb58-11"><a href="#cb58-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(state <span class="sc">!=</span> <span class="st">"District of Columbia"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb58-12"><a href="#cb58-12" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Set aesthetics, flipping vax to % unvaxxed</span></span>
+<span id="cb58-13"><a href="#cb58-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> rep_voteshare,</span>
+<span id="cb58-14"><a href="#cb58-14" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> (<span class="dv">100</span><span class="sc">-</span>percent_vaccinated),</span>
+<span id="cb58-15"><a href="#cb58-15" aria-hidden="true" tabindex="-1"></a>             <span class="at">label =</span> nyt_labs</span>
+<span id="cb58-16"><a href="#cb58-16" aria-hidden="true" tabindex="-1"></a>             ))<span class="sc">+</span></span>
+<span id="cb58-17"><a href="#cb58-17" aria-hidden="true" tabindex="-1"></a>  <span class="co"># points coloreded by vote share</span></span>
+<span id="cb58-18"><a href="#cb58-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">col=</span>rep_voteshare),<span class="at">size=</span><span class="dv">2</span>,<span class="at">alpha=</span>.<span class="dv">5</span>)<span class="sc">+</span></span>
+<span id="cb58-19"><a href="#cb58-19" aria-hidden="true" tabindex="-1"></a>  <span class="co"># color gradient</span></span>
+<span id="cb58-20"><a href="#cb58-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_gradient2</span>(</span>
+<span id="cb58-21"><a href="#cb58-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">midpoint =</span> <span class="dv">50</span>,</span>
+<span id="cb58-22"><a href="#cb58-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">low =</span> <span class="st">"blue"</span>, <span class="at">mid =</span> <span class="st">"grey"</span>, <span class="at">high =</span> <span class="st">"red"</span>,</span>
+<span id="cb58-23"><a href="#cb58-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">guide =</span> <span class="st">"none"</span>)<span class="sc">+</span></span>
+<span id="cb58-24"><a href="#cb58-24" aria-hidden="true" tabindex="-1"></a>  <span class="co"># add simple regression line</span></span>
+<span id="cb58-25"><a href="#cb58-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, </span>
+<span id="cb58-26"><a href="#cb58-26" aria-hidden="true" tabindex="-1"></a>              <span class="at">se=</span>F,</span>
+<span id="cb58-27"><a href="#cb58-27" aria-hidden="true" tabindex="-1"></a>              <span class="at">linetype =</span> <span class="dv">2</span>,</span>
+<span id="cb58-28"><a href="#cb58-28" aria-hidden="true" tabindex="-1"></a>              <span class="at">col =</span><span class="st">"grey"</span>)<span class="sc">+</span></span>
+<span id="cb58-29"><a href="#cb58-29" aria-hidden="true" tabindex="-1"></a>  <span class="co"># add labels</span></span>
+<span id="cb58-30"><a href="#cb58-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text_repel</span>()<span class="sc">+</span></span>
+<span id="cb58-31"><a href="#cb58-31" aria-hidden="true" tabindex="-1"></a>  <span class="co"># futz with limits</span></span>
+<span id="cb58-32"><a href="#cb58-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylim</span>(<span class="dv">15</span>,<span class="dv">60</span>)<span class="sc">+</span></span>
+<span id="cb58-33"><a href="#cb58-33" aria-hidden="true" tabindex="-1"></a>  <span class="co"># add grid lines by hand</span></span>
+<span id="cb58-34"><a href="#cb58-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">60</span>, <span class="at">col =</span> <span class="st">"lightgrey"</span>, <span class="at">size =</span> .<span class="dv">25</span>)<span class="sc">+</span></span>
+<span id="cb58-35"><a href="#cb58-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">40</span>, <span class="at">col =</span> <span class="st">"lightgrey"</span>, <span class="at">size =</span> .<span class="dv">25</span>)<span class="sc">+</span></span>
+<span id="cb58-36"><a href="#cb58-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">20</span>, <span class="at">col =</span> <span class="st">"lightgrey"</span>, <span class="at">size =</span> .<span class="dv">25</span>)<span class="sc">+</span></span>
+<span id="cb58-37"><a href="#cb58-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="dv">50</span>, <span class="at">xend =</span> <span class="dv">50</span>, <span class="at">y=</span><span class="dv">20</span>, <span class="at">yend =</span> <span class="dv">60</span>), <span class="at">col =</span> <span class="st">"lightgrey"</span>, <span class="at">size =</span> .<span class="dv">25</span>)<span class="sc">+</span></span>
+<span id="cb58-38"><a href="#cb58-38" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Add arrows</span></span>
+<span id="cb58-39"><a href="#cb58-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="dv">34</span>, <span class="at">xend =</span> <span class="dv">32</span>, <span class="at">y=</span><span class="fl">18.5</span>, <span class="at">yend =</span> <span class="fl">18.5</span>),</span>
+<span id="cb58-40"><a href="#cb58-40" aria-hidden="true" tabindex="-1"></a>               <span class="at">arrow =</span> <span class="fu">arrow</span>(<span class="at">length =</span> <span class="fu">unit</span>(<span class="fl">0.2</span>, <span class="st">"cm"</span>)),</span>
+<span id="cb58-41"><a href="#cb58-41" aria-hidden="true" tabindex="-1"></a>               <span class="at">col =</span> <span class="st">"#95959c"</span>)<span class="sc">+</span></span>
+<span id="cb58-42"><a href="#cb58-42" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Add biden text</span></span>
+<span id="cb58-43"><a href="#cb58-43" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>,<span class="at">x =</span> <span class="fl">34.5</span>, <span class="at">y=</span><span class="fl">18.5</span> ,<span class="at">label =</span> <span class="st">"Larger vote"</span>,</span>
+<span id="cb58-44"><a href="#cb58-44" aria-hidden="true" tabindex="-1"></a>           <span class="at">hjust=</span><span class="dv">0</span>,<span class="at">vjust=</span><span class="dv">0</span>, <span class="at">col =</span> <span class="st">"#95959c"</span>)<span class="sc">+</span></span>
+<span id="cb58-45"><a href="#cb58-45" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>,<span class="at">x =</span> <span class="fl">34.5</span>, <span class="at">y=</span><span class="fl">17.1</span> ,<span class="at">label =</span> <span class="st">"share for"</span>,</span>
+<span id="cb58-46"><a href="#cb58-46" aria-hidden="true" tabindex="-1"></a>           <span class="at">hjust=</span><span class="dv">0</span>,<span class="at">vjust=</span><span class="dv">0</span>, <span class="at">col =</span> <span class="st">"#95959c"</span>)<span class="sc">+</span></span>
+<span id="cb58-47"><a href="#cb58-47" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>,<span class="at">x =</span> <span class="fl">38.7</span>, <span class="at">y=</span><span class="fl">17.1</span> ,<span class="at">label =</span> <span class="st">"Biden"</span>,</span>
+<span id="cb58-48"><a href="#cb58-48" aria-hidden="true" tabindex="-1"></a>           <span class="at">colour =</span> <span class="st">"#494ca6"</span>, </span>
+<span id="cb58-49"><a href="#cb58-49" aria-hidden="true" tabindex="-1"></a>           <span class="at">fontface =</span><span class="dv">2</span>,</span>
+<span id="cb58-50"><a href="#cb58-50" aria-hidden="true" tabindex="-1"></a>           <span class="at">hjust=</span><span class="dv">0</span>,<span class="at">vjust=</span><span class="dv">0</span>)<span class="sc">+</span></span>
+<span id="cb58-51"><a href="#cb58-51" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Add trump arrow</span></span>
+<span id="cb58-52"><a href="#cb58-52" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="dv">70</span>, <span class="at">xend =</span> <span class="dv">72</span>, <span class="at">y=</span><span class="fl">18.5</span>, <span class="at">yend =</span> <span class="fl">18.5</span>),</span>
+<span id="cb58-53"><a href="#cb58-53" aria-hidden="true" tabindex="-1"></a>               <span class="at">arrow =</span> <span class="fu">arrow</span>(<span class="at">length =</span> <span class="fu">unit</span>(<span class="fl">0.2</span>, <span class="st">"cm"</span>)),</span>
+<span id="cb58-54"><a href="#cb58-54" aria-hidden="true" tabindex="-1"></a>               <span class="at">col =</span> <span class="st">"#95959c"</span>)<span class="sc">+</span></span>
+<span id="cb58-55"><a href="#cb58-55" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Add trump text</span></span>
+<span id="cb58-56"><a href="#cb58-56" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>,<span class="at">x =</span> <span class="fl">69.5</span>, <span class="at">y=</span><span class="fl">18.5</span> ,<span class="at">label =</span> <span class="st">"Larger vote"</span>,</span>
+<span id="cb58-57"><a href="#cb58-57" aria-hidden="true" tabindex="-1"></a>           <span class="at">hjust=</span><span class="dv">1</span>,<span class="at">vjust=</span><span class="dv">0</span>, <span class="at">col =</span> <span class="st">"#95959c"</span>)<span class="sc">+</span></span>
+<span id="cb58-58"><a href="#cb58-58" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>,<span class="at">x =</span> <span class="fl">66.1</span>, <span class="at">y=</span><span class="fl">17.1</span> ,<span class="at">label =</span> <span class="st">"share for"</span>,</span>
+<span id="cb58-59"><a href="#cb58-59" aria-hidden="true" tabindex="-1"></a>           <span class="at">hjust=</span><span class="dv">1</span>,<span class="at">vjust=</span><span class="dv">0</span>, <span class="at">col =</span> <span class="st">"#95959c"</span>)<span class="sc">+</span></span>
+<span id="cb58-60"><a href="#cb58-60" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>,<span class="at">x =</span> <span class="fl">69.5</span>, <span class="at">y=</span><span class="fl">17.1</span> ,<span class="at">label =</span> <span class="st">"Trump"</span>,</span>
+<span id="cb58-61"><a href="#cb58-61" aria-hidden="true" tabindex="-1"></a>           <span class="at">colour =</span> <span class="st">"#991a38"</span>, </span>
+<span id="cb58-62"><a href="#cb58-62" aria-hidden="true" tabindex="-1"></a>           <span class="at">fontface =</span><span class="dv">2</span>,</span>
+<span id="cb58-63"><a href="#cb58-63" aria-hidden="true" tabindex="-1"></a>           <span class="at">hjust=</span><span class="dv">1</span>,<span class="at">vjust=</span><span class="dv">0</span>)<span class="sc">+</span></span>
+<span id="cb58-64"><a href="#cb58-64" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Label y-axis</span></span>
+<span id="cb58-65"><a href="#cb58-65" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>,<span class="at">x =</span> <span class="dv">30</span>, <span class="at">y=</span><span class="dv">20</span> ,<span class="at">label =</span> <span class="st">"20%"</span>,<span class="at">col =</span> <span class="st">"#95959c"</span>,</span>
+<span id="cb58-66"><a href="#cb58-66" aria-hidden="true" tabindex="-1"></a>           <span class="at">vjust =</span> <span class="sc">-</span><span class="fl">0.5</span>, <span class="at">hjust =</span> <span class="dv">0</span>)<span class="sc">+</span></span>
+<span id="cb58-67"><a href="#cb58-67" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>,<span class="at">x =</span> <span class="dv">30</span>, <span class="at">y=</span><span class="dv">40</span> ,<span class="at">label =</span> <span class="st">"40%"</span>,<span class="at">col =</span> <span class="st">"#95959c"</span>,</span>
+<span id="cb58-68"><a href="#cb58-68" aria-hidden="true" tabindex="-1"></a>           <span class="at">vjust =</span> <span class="sc">-</span><span class="fl">0.5</span>, <span class="at">hjust =</span> <span class="dv">0</span>)<span class="sc">+</span></span>
+<span id="cb58-69"><a href="#cb58-69" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>,<span class="at">x =</span> <span class="dv">30</span>, <span class="at">y=</span><span class="dv">60</span> ,<span class="at">label =</span> <span class="st">"60% of residents not fully vaccinated"</span>,<span class="at">col =</span> <span class="st">"#95959c"</span>,</span>
+<span id="cb58-70"><a href="#cb58-70" aria-hidden="true" tabindex="-1"></a>           <span class="at">vjust =</span> <span class="sc">-</span><span class="fl">0.5</span>, <span class="at">hjust =</span> <span class="dv">0</span>)<span class="sc">+</span></span>
+<span id="cb58-71"><a href="#cb58-71" aria-hidden="true" tabindex="-1"></a>  <span class="co"># get rid of default theme</span></span>
+<span id="cb58-72"><a href="#cb58-72" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
+ℹ Please use `linewidth` instead.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: The following aesthetics were dropped during statistical transformation: label.
+ℹ This can happen when ggplot fails to infer the correct grouping structure in
+  the data.
+ℹ Did you forget to specify a `group` aesthetic or to convert a numerical
+  variable into a factor?</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 38 rows containing missing values or values outside the scale range
+(`geom_text_repel()`).</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="05-lab-comments_files/figure-html/nty1-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Same as above, but now modeling deaths with rep vote share</span></span>
+<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-3"><a href="#cb63-3" aria-hidden="true" tabindex="-1"></a>covid_df <span class="sc">%&gt;%</span></span>
+<span id="cb63-4"><a href="#cb63-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb63-5"><a href="#cb63-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">nyt_labs =</span> <span class="fu">ifelse</span>(state_po <span class="sc">%in%</span>the_labs, state_po, <span class="cn">NA</span>)</span>
+<span id="cb63-6"><a href="#cb63-6" aria-hidden="true" tabindex="-1"></a>  )<span class="sc">%&gt;%</span></span>
+<span id="cb63-7"><a href="#cb63-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(date <span class="sc">==</span> <span class="st">"2021-09-23"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb63-8"><a href="#cb63-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(state <span class="sc">!=</span> <span class="st">"District of Columbia"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb63-9"><a href="#cb63-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> rep_voteshare,</span>
+<span id="cb63-10"><a href="#cb63-10" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> new_deaths_pc_14day,</span>
+<span id="cb63-11"><a href="#cb63-11" aria-hidden="true" tabindex="-1"></a>             <span class="at">label =</span> nyt_labs</span>
+<span id="cb63-12"><a href="#cb63-12" aria-hidden="true" tabindex="-1"></a>             ))<span class="sc">+</span></span>
+<span id="cb63-13"><a href="#cb63-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">col=</span>rep_voteshare),<span class="at">size=</span><span class="dv">2</span>,<span class="at">alpha=</span>.<span class="dv">5</span>)<span class="sc">+</span></span>
+<span id="cb63-14"><a href="#cb63-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_gradient2</span>(</span>
+<span id="cb63-15"><a href="#cb63-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">midpoint =</span> <span class="dv">50</span>,</span>
+<span id="cb63-16"><a href="#cb63-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">low =</span> <span class="st">"blue"</span>, <span class="at">mid =</span> <span class="st">"grey"</span>, <span class="at">high =</span> <span class="st">"red"</span>,</span>
+<span id="cb63-17"><a href="#cb63-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">guide =</span> <span class="st">"none"</span>)<span class="sc">+</span></span>
+<span id="cb63-18"><a href="#cb63-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, </span>
+<span id="cb63-19"><a href="#cb63-19" aria-hidden="true" tabindex="-1"></a>              <span class="at">se=</span>F,</span>
+<span id="cb63-20"><a href="#cb63-20" aria-hidden="true" tabindex="-1"></a>              <span class="at">linetype =</span> <span class="dv">2</span>,</span>
+<span id="cb63-21"><a href="#cb63-21" aria-hidden="true" tabindex="-1"></a>              <span class="at">col =</span><span class="st">"grey"</span>)<span class="sc">+</span></span>
+<span id="cb63-22"><a href="#cb63-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text_repel</span>()<span class="sc">+</span></span>
+<span id="cb63-23"><a href="#cb63-23" aria-hidden="true" tabindex="-1"></a>  <span class="co"># theme_void()+</span></span>
+<span id="cb63-24"><a href="#cb63-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylim</span>(<span class="sc">-</span>.<span class="dv">2</span>,<span class="fl">2.2</span>)<span class="sc">+</span></span>
+<span id="cb63-25"><a href="#cb63-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>, <span class="at">col =</span> <span class="st">"lightgrey"</span>, <span class="at">size =</span> .<span class="dv">25</span>)<span class="sc">+</span></span>
+<span id="cb63-26"><a href="#cb63-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> .<span class="dv">5</span>, <span class="at">col =</span> <span class="st">"lightgrey"</span>, <span class="at">size =</span> .<span class="dv">25</span>)<span class="sc">+</span></span>
+<span id="cb63-27"><a href="#cb63-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">1</span>, <span class="at">col =</span> <span class="st">"lightgrey"</span>, <span class="at">size =</span> .<span class="dv">25</span>)<span class="sc">+</span></span>
+<span id="cb63-28"><a href="#cb63-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="fl">1.5</span>, <span class="at">col =</span> <span class="st">"lightgrey"</span>, <span class="at">size =</span> .<span class="dv">25</span>)<span class="sc">+</span></span>
+<span id="cb63-29"><a href="#cb63-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">2</span>, <span class="at">col =</span> <span class="st">"lightgrey"</span>, <span class="at">size =</span> .<span class="dv">25</span>)<span class="sc">+</span></span>
+<span id="cb63-30"><a href="#cb63-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="dv">50</span>, <span class="at">xend =</span> <span class="dv">50</span>, <span class="at">y=</span><span class="dv">0</span>, <span class="at">yend =</span> <span class="dv">2</span>), <span class="at">col =</span> <span class="st">"lightgrey"</span>, <span class="at">size =</span> .<span class="dv">25</span>)<span class="sc">+</span></span>
+<span id="cb63-31"><a href="#cb63-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="dv">34</span>, <span class="at">xend =</span> <span class="dv">32</span>, <span class="at">y=</span><span class="sc">-</span>.<span class="dv">12</span>, <span class="at">yend =</span> <span class="sc">-</span>.<span class="dv">12</span>),</span>
+<span id="cb63-32"><a href="#cb63-32" aria-hidden="true" tabindex="-1"></a>               <span class="at">arrow =</span> <span class="fu">arrow</span>(<span class="at">length =</span> <span class="fu">unit</span>(<span class="fl">0.2</span>, <span class="st">"cm"</span>)),</span>
+<span id="cb63-33"><a href="#cb63-33" aria-hidden="true" tabindex="-1"></a>               <span class="at">col =</span> <span class="st">"#95959c"</span>)<span class="sc">+</span></span>
+<span id="cb63-34"><a href="#cb63-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>,<span class="at">x =</span> <span class="fl">34.5</span>, <span class="at">y=</span><span class="sc">-</span>.<span class="dv">1</span> ,<span class="at">label =</span> <span class="st">"Larger vote"</span>,</span>
+<span id="cb63-35"><a href="#cb63-35" aria-hidden="true" tabindex="-1"></a>           <span class="at">hjust=</span><span class="dv">0</span>,<span class="at">vjust=</span><span class="dv">0</span>, <span class="at">col =</span> <span class="st">"#95959c"</span>)<span class="sc">+</span></span>
+<span id="cb63-36"><a href="#cb63-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>,<span class="at">x =</span> <span class="fl">34.5</span>, <span class="at">y=</span><span class="sc">-</span>.<span class="dv">2</span> ,<span class="at">label =</span> <span class="st">"share for"</span>,</span>
+<span id="cb63-37"><a href="#cb63-37" aria-hidden="true" tabindex="-1"></a>           <span class="at">hjust=</span><span class="dv">0</span>,<span class="at">vjust=</span><span class="dv">0</span>, <span class="at">col =</span> <span class="st">"#95959c"</span>)<span class="sc">+</span></span>
+<span id="cb63-38"><a href="#cb63-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>,<span class="at">x =</span> <span class="fl">38.82</span>, <span class="at">y=</span><span class="sc">-</span>.<span class="dv">2</span> ,<span class="at">label =</span> <span class="st">"Biden"</span>,</span>
+<span id="cb63-39"><a href="#cb63-39" aria-hidden="true" tabindex="-1"></a>           <span class="at">colour =</span> <span class="st">"#494ca6"</span>, </span>
+<span id="cb63-40"><a href="#cb63-40" aria-hidden="true" tabindex="-1"></a>           <span class="at">fontface =</span><span class="dv">2</span>,</span>
+<span id="cb63-41"><a href="#cb63-41" aria-hidden="true" tabindex="-1"></a>           <span class="at">hjust=</span><span class="dv">0</span>,<span class="at">vjust=</span><span class="dv">0</span>)<span class="sc">+</span></span>
+<span id="cb63-42"><a href="#cb63-42" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="dv">70</span>, <span class="at">xend =</span> <span class="dv">72</span>, <span class="at">y=</span><span class="sc">-</span>.<span class="dv">12</span>, <span class="at">yend =</span> <span class="sc">-</span>.<span class="dv">12</span>),</span>
+<span id="cb63-43"><a href="#cb63-43" aria-hidden="true" tabindex="-1"></a>               <span class="at">arrow =</span> <span class="fu">arrow</span>(<span class="at">length =</span> <span class="fu">unit</span>(<span class="fl">0.2</span>, <span class="st">"cm"</span>)),</span>
+<span id="cb63-44"><a href="#cb63-44" aria-hidden="true" tabindex="-1"></a>               <span class="at">col =</span> <span class="st">"#95959c"</span>)<span class="sc">+</span></span>
+<span id="cb63-45"><a href="#cb63-45" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>,<span class="at">x =</span> <span class="fl">69.5</span>, <span class="at">y=</span><span class="sc">-</span>.<span class="dv">1</span> ,<span class="at">label =</span> <span class="st">"Larger vote"</span>,</span>
+<span id="cb63-46"><a href="#cb63-46" aria-hidden="true" tabindex="-1"></a>           <span class="at">hjust=</span><span class="dv">1</span>,<span class="at">vjust=</span><span class="dv">0</span>, <span class="at">col =</span> <span class="st">"#95959c"</span>)<span class="sc">+</span></span>
+<span id="cb63-47"><a href="#cb63-47" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>,<span class="at">x =</span> <span class="fl">66.09</span>, <span class="at">y=</span><span class="sc">-</span>.<span class="dv">2</span> ,<span class="at">label =</span> <span class="st">"share for"</span>,</span>
+<span id="cb63-48"><a href="#cb63-48" aria-hidden="true" tabindex="-1"></a>           <span class="at">hjust=</span><span class="dv">1</span>,<span class="at">vjust=</span><span class="dv">0</span>, <span class="at">col =</span> <span class="st">"#95959c"</span>)<span class="sc">+</span></span>
+<span id="cb63-49"><a href="#cb63-49" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>,<span class="at">x =</span> <span class="fl">69.5</span>, <span class="at">y=</span><span class="sc">-</span>.<span class="dv">2</span> ,<span class="at">label =</span> <span class="st">"Trump"</span>,</span>
+<span id="cb63-50"><a href="#cb63-50" aria-hidden="true" tabindex="-1"></a>           <span class="at">colour =</span> <span class="st">"#991a38"</span>, </span>
+<span id="cb63-51"><a href="#cb63-51" aria-hidden="true" tabindex="-1"></a>           <span class="at">fontface =</span><span class="dv">2</span>,</span>
+<span id="cb63-52"><a href="#cb63-52" aria-hidden="true" tabindex="-1"></a>           <span class="at">hjust=</span><span class="dv">1</span>,<span class="at">vjust=</span><span class="dv">0</span>)<span class="sc">+</span></span>
+<span id="cb63-53"><a href="#cb63-53" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>,<span class="at">x =</span> <span class="dv">30</span>, <span class="at">y=</span><span class="fl">0.5</span> ,<span class="at">label =</span> <span class="st">"0.5"</span>,<span class="at">col =</span> <span class="st">"#95959c"</span>,</span>
+<span id="cb63-54"><a href="#cb63-54" aria-hidden="true" tabindex="-1"></a>           <span class="at">vjust =</span> <span class="sc">-</span><span class="fl">0.5</span>, <span class="at">hjust =</span> <span class="dv">0</span>)<span class="sc">+</span></span>
+<span id="cb63-55"><a href="#cb63-55" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>,<span class="at">x =</span> <span class="dv">30</span>, <span class="at">y=</span><span class="dv">1</span> ,<span class="at">label =</span> <span class="st">"1"</span>,<span class="at">col =</span> <span class="st">"#95959c"</span>,</span>
+<span id="cb63-56"><a href="#cb63-56" aria-hidden="true" tabindex="-1"></a>           <span class="at">vjust =</span> <span class="sc">-</span><span class="fl">0.5</span>, <span class="at">hjust =</span> <span class="dv">0</span>)<span class="sc">+</span></span>
+<span id="cb63-57"><a href="#cb63-57" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>,<span class="at">x =</span> <span class="dv">30</span>, <span class="at">y=</span><span class="fl">1.5</span> ,<span class="at">label =</span> <span class="st">"1.5"</span>,<span class="at">col =</span> <span class="st">"#95959c"</span>,</span>
+<span id="cb63-58"><a href="#cb63-58" aria-hidden="true" tabindex="-1"></a>           <span class="at">vjust =</span> <span class="sc">-</span><span class="fl">0.5</span>, <span class="at">hjust =</span> <span class="dv">0</span>)<span class="sc">+</span></span>
+<span id="cb63-59"><a href="#cb63-59" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>,<span class="at">x =</span> <span class="dv">30</span>, <span class="at">y=</span><span class="dv">2</span> ,<span class="at">label =</span> <span class="st">"2 deaths per 100,000 residents"</span>,<span class="at">col =</span> <span class="st">"#95959c"</span>,</span>
+<span id="cb63-60"><a href="#cb63-60" aria-hidden="true" tabindex="-1"></a>           <span class="at">vjust =</span> <span class="sc">-</span><span class="fl">0.5</span>, <span class="at">hjust =</span> <span class="dv">0</span>)<span class="sc">+</span></span>
+<span id="cb63-61"><a href="#cb63-61" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: The following aesthetics were dropped during statistical transformation: label.
+ℹ This can happen when ggplot fails to infer the correct grouping structure in
+  the data.
+ℹ Did you forget to specify a `group` aesthetic or to convert a numerical
+  variable into a factor?</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 38 rows containing missing values or values outside the scale range
+(`geom_text_repel()`).</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="05-lab-comments_files/figure-html/nty2-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="alternative-explanations-for-red-covid" class="level1" data-number="10">
+<h1 data-number="10"><span class="header-section-number">10</span> Alternative explanations for Red Covid</h1>
+<p>Finally, before you go, let’s consider some alternative explanations for why we might see an association between state partisanship and Covid-19 outcomes.</p>
+<p>Think about factors that might be associated with both Covid-19 deaths and a state’s Republican voteshare</p>
+<p><strong>Please write some alternative explanations for why we might see a relationship between the Republican Vote Share in a State and Covid-19 outcomes</strong></p>
+<ul>
+<li>Alternative Explanation 1</li>
+<li>Alternative Explanation 2</li>
+<li>…</li>
+<li>Write as many as you want!</li>
+</ul>
+<p>If you’re stumped, Leonhardt discusses some of these explanations in his November 2021 <a href="https://www.nytimes.com/2021/11/08/briefing/covid-death-toll-red-america.html" target="_blank">article</a> on the matter.</p>
+<ul>
+<li><p>Specifically, there are lots of ways in which Red States tend to differ from Blue states:</p></li>
+<li><p>Population size (which we tried to adjust for by using a measure scaled by population)</p></li>
+<li><p>Socio-Economic Differences</p>
+<ul>
+<li>Red states tend to be older than Blue states and older people tend to be more vulnerable to Covid. But as Leonhardt argues, shouldn’t we have seen a difference throughout Covid then? Similary, Red states tend to be poorer, maybe there residents are on average less healthy,</li>
+</ul></li>
+<li><p>Geography and Climate</p></li>
+<li><p>Different policies</p>
+<ul>
+<li>Different policy regimes and rates of compliance with social distancing measures (this is still a partisan story the mechanism is maybe different than a simple low rates of vaccines)</li>
+</ul></li>
+</ul>
+<p>Anyway there are lots of things a skeptic might claim. Next week, we’ll see how we might explore these criticisms using multiple regression.</p>
+</section>
+<section id="take-the-class-survey" class="level1" data-number="11">
+<h1 data-number="11"><span class="header-section-number">11</span> Take the Class Survey</h1>
+<p>Please take a few moments to complete the <a href="https://brown.co1.qualtrics.com/jfe/form/SV_bDFDWRGcnpm09hk" target="_blank">class survey</a> for this week.</p>
+
+
+</section>
+
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>Which is why so much of the start of this course has been focused on developing our coding skills<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

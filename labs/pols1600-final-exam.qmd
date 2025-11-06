@@ -1,0 +1,348 @@
+---
+title: "POLS 1600 Take Home Final"
+author: "Your Name Here"
+date: "Due May 12, 2024"
+format:
+  html:
+    toc: true
+    toc-location: right
+    toc-float: true
+    toc-depth: 2
+    number-sections: true
+execute: 
+  eval: true
+  echo: true
+  warning: false
+  message: false
+  cache: true
+---
+
+
+
+# Overview {-}
+
+This document provides your final exam for POLS 1600.
+
+The exam consists of four parts corresponding to core concepts and skills from POLS 1600:
+
+- Causal Inference (20 Points)
+- Interpreting Linear Models (20 points)
+- Quantifying Uncertainty through Statistical Inference (20 points)
+- Conducting applied empirical analysis (40 points)
+
+Each section contains a series of conceptual questions, and or coding tasks for your to accomplish.
+
+You will write your answers to these questions and tasks in this Rmd file.
+
+You will **submit the html file** produced by this .Rmd file on **[on Canvas by May 12, 11:59 pm.](https://canvas.brown.edu/courses/1094972/assignments/7981746)**
+
+Exams submitted after May 12 will automatically lose 10 points for each late day.
+
+If you submit the `qmd` file instead of the `html` file you will lose 5 points from your exam grade.
+
+If you like, I will meet with you by Zoom or in person for 30 minutes to answer general questions about material from the course. I will not answer specific questions from the exam.
+
+This exam is designed to test **your knowledge and understanding** of concepts and skills from the course. You can and should make use of material from lectures and labs, but if I find evidence of plagiarism (copying and pasting answers verbatim from Google or ChatGPT), I will initiate plagiarism procedures described in Brown's [Academic Code](https://college.brown.edu/sites/g/files/dprerj916/files/2022-04/Academic-Code.pdf)
+
+# Causal Inference (20 points)
+
+## What is the fundamental problem of causal inference? (3 points)
+
+-   Please frame your answer in terms of potential outcomes and counterfactual comparisons
+
+## How does random assignment help solve this fundamental problem? (3 points)
+
+-   Please discuss the concepts of statistical independence and average treatment effects.
+
+## What's the difference between an observational and experimental design? (4 points)
+
+-   Who or what determines the presence of some causal factor
+
+-   Which the strengths and weaknesses of each design
+
+## Explain the logic of a difference-in-differences design? (10 points)
+
+
+-   Describe the basic logic of the design
+
+-   Explain the key identifying assumptions of the design
+
+-   Discuss some testable implications of these assumptions
+
+# Linear Models (20 points)
+
+## What is a linear regression and why is it useful? (5 points)
+
+In your answer, please discuss:
+
+-   The basic goals and intuitions that motivate linear regression
+
+-   The mechanics of ordinary least squares regression
+
+-   The relationship between linear regression and the Conditional Expectation Function
+
+## What does it mean to control for a variable in a multiple regression? (5 points)
+
+In your answer, please explain:
+
+-   Why would we want to control for covariates?
+
+-   How linear regression accomplishes this
+
+-   What covariates we want to control for
+
+-   What covariates we shouldn't control for
+
+## Interpreting regression models (10 points)
+
+Suppose we are interested in understanding partisan differences in vaccination rates.
+
+Our outcome is a binary indicator which takes a value of 1 if someone was vaccinated, and 0 otherwise.
+
+Our key predictor of interest people's self-reported partisanship, measured with a 7-point scale where (1 = Strong Democrat, 2 = Democrat, 3 Independent who leans Democratic, 4 = Independent who leans Republican, 5 = Republican, and 7 = Strong Republican)
+
+Please answer the following:
+
+1.  Suppose we expect Republicans are less likely to be vaccinated.
+
+-   Specify a bivariate model predicting vaccination status with partisanship, measured by a 7-point scale to test this expectation (ie fill in the ??? in the equation below):
+
+$$\text{???} = \beta_0 + \beta_1 \times \text{???} + \epsilon$$
+
+-    If your expectations are correct, what is the expected sign and significance of the coefficient on $\beta_1$
+
+-   How should we interpret $\beta_0$ in this model?
+
+2.  Suppose we find the expected relationship in our bivariate model. Suppose a skeptic sees your results and says:
+
+    "You claim differences in vaccination rates are a function of partisanship, I think this is really just a matter of geography. Republicans are more likely to live in rural areas. Vaccines were less available in rural areas and the pandemic was less severe."
+
+To address the skeptics concerns, you estimate a second model "controlling for geography" with a binary indicator of whether someone lives in a rural setting (rural = 1) or not (rural = 0)
+
+-   Specify a multiple regression model predicting vaccination status with partisanship and an indicator of whether someone lives in a rural setting.
+
+$$\text{???} = \beta_0 + \beta_1 \times \text{???} + \beta_2 \times \text{???} + \epsilon$$
+
+-   Assuming there is some truth behind the skeptic claims, what is the expected sign and significance of the coefficient on rural status in this model?
+
+-   If the skeptic is right, and differences in vaccination rates are entirely a function of geography, what should happen to the sign and significance of the coefficient on partisanship in this model compared to the bivariate model?
+
+-   If the skeptic is only partly right, and only part of the relationship between partisanship and vaccination is actually a function of geographic differences, what should happen to the sign and significance of the coefficient on partisanship in this model compared to the bivariate model?
+
+-   If the skeptic is completely wrong, and geography has no relationship to vaccination rates, what should we expect in terms of the size and significance of the coefficient on rural status? How will the coefficient on partisanship in this model change?
+
+# Statistical Inference (20 points)
+
+## What is a confidence interval? (10 points)
+
+Please provide a one-two paragraph explanation of what a confidence interval is, how we construct confidence intervals, and how confidence intervals can be used to conduct statistical inference.
+
+In your answer, please be sure to discuss and explain the following concepts:
+
+-   Populations and samples
+-   Sampling distributions
+-   Standard errors
+-   Significance thresholds and critical values
+-   For a 95% confidence interval, what are we 95% percent confident about?
+
+## What is a hypothesis test? (10 points)
+
+Please provide a one-two paragraph explanation of what a hypothesis test is, how we conduct hypothesis tests, and how hypothesis tests can be used to conduct statistical inference.
+
+In your answer, please be sure to explain the following:
+
+-   What is a null hypothesis?
+-   What is a test stastitic?
+-   What is a distribution of a test statistic under the null?
+-   What is a p-value?
+-   What's the difference between a Type I and Type II error?
+
+# Applied Empirical Analysis (40 points)
+
+Finally lets demonstrate some of the empirical skills you've learned in POLS 1600.
+
+Run the code below to load a small subset of data from the 2020 National Elections Time Seriese.
+
+```{r}
+
+# Load libraries
+library(tidyverse)
+
+# Load data
+load(url("https://pols1600.paultesta.org/files/data/final_exam.rda"))
+
+```
+
+
+The data frame `df` contains the following variables:
+
+-   `V201627`
+    -   Question: How often do you stop yourself from saying something because you think someone might call you a racist, a sexist, or otherwise a bad person?
+    -   Response Values: 1= Never, 2 = Rarely; 3 = Occasionally; 4 = Fairly Often; 5 = Very Often; -9 = Refused; -5 = Interview Breakoff
+-   `V201511x`
+    -   Question: Summary measure of PARTY ID
+    -   Values: 1 = Strong Democrat; 2 = Not very strong Democrat; 3 = Independent-Democrat; 4 = Independent; 5 = Independent-Republican; 6 = Not very strong Republican; 7 = Strong Republican; -9 = Refused; -8 = Don't Know
+-   `V202300`
+    -   Question: Now I'm going to read several more statements. After each one, I would like you to tell me how strongly you agree or disagree: 'Irish, Italian, Jewish and many other minorities overcame prejudice and worked their way up. Blacks should do the same without any special favors.' Do you agree strongly, agree somewhat, neither agree nor disagree, disagree somewhat, or disagree strongly with this statement?
+    -   Response Values: 1 = Agree strongly; 2 = Agree somewhat; 3 = Neither agree nor disagree; 4 = Disagree somewhat; 5 = Disagree strongly; -9 = Refused; -8 = Don't know; -7 = No post-election data, deleted due to incomplete interview; -6 = No post-election interview; -5 = Interview breakoff (sufficient partial IW)
+
+We will use these data to explore how self-reported rates of self-censorship vary by partisanship and racial attitudes. 
+
+In this section you will:
+
+-   Look at and recode the data (10 points)
+
+-   Produce a table of descriptive statistics (10 points)
+
+-   Estimate three models (5 points)
+
+-   Present and interpret the substantive and statistical significance of these models using a regression table and plot of predicted values (15 points)
+
+## Look at and recode the data (10 points)
+
+First write some code to give yourself a high level overivew the data.
+
+```{r hlo}
+# High Level Overview of the Data
+```
+
+- **Code Advice** I would use `head()`, `table()` and `summary()` to accomplish this
+
+Based on this overview of the data, recode the raw variables to create the following columns in the dataset:
+
+- `self_censor` from `V201627` with negative values in `V201627` recoded to be NA
+
+- `pid` from `V201511x` with negative values in `V201511x` recoded to be NA
+
+- `pid_3cat` from `pid`. 
+  - When `pid` corresponds to a Democratic respondent, `pid_3cat` should take the value of "Democrat". 
+  - When `pid` corresponds to a Republican respondent, `pid_3cat` should take the value of "Republican". 
+  - When `pid` corresponds to an Independent respondent, `pid_3cat` should take the value of "Independent". 
+  -  When `pid` is `NA`, `pid_3cat` should be `NA`
+
+- `racial_attitudes` from `V202300` with negative values recoded to be `NA` and higher values corresponding to greater levels of agreement with statement (e.g. where `V202300` equals 1 (Strongly Agree), `racial_attitudes` should equal 5, `V202300` equals 5 (Strongly Disagree Agree), `racial_attitudes` should equal 1  )
+
+```{r recode}
+# Recode data
+```
+
+- **Code Advice** I would use `%>%`, `mutate()`, `ifelse()` and `case_when()` to accomplish this.
+
+If your coding is correct, the following code should all return `TRUE`
+
+```{r}
+# # 7 total columns in the data
+# dim(df)[2] == 7
+# 
+# # Recodes of V201627
+# median(df$self_censor, na.rm=T) == 2
+# sum(is.na(df$self_censor)) == 135
+# 
+# # Recodes of V201511x
+# median(df$pid, na.rm=T) == 4
+# sum(is.na(df$pid)) ==35
+# table(df$pid_3cat) == c(3835,968,3442)
+# sum(is.na(df$pid_3cat)) ==35
+# 
+# # Recodes of V202300
+# median(df$racial_attitudes, na.rm=T) == 3
+# sum(is.na(df$racial_attitudes)) == 907
+
+```
+
+
+## Produce a table of descriptive statistics (10 points)
+
+Please calculate the following descriptive statistics for `self_censor`, `pid`, and `racial_resentment` describing the:
+
+- Minimum
+- 25th percentile
+- Median
+- Mean 
+- 75th percentile
+- Maximum
+- Number of Missing Observations
+
+Ideally, present this information like we did in class as a table of descriptive statistics. Use this information to describe the distributions of your data.
+
+```{r descriptives}
+# Calculate Summary Statistics
+
+```
+
+
+- **Code Advice** Look at the [final paper template](https://pols1600.paultesta.org/assignments/pols1600_paper_template)
+
+```{r}
+# Table of Descriptive Statistics
+```
+
+
+
+## Estimtate three models (5 points)
+
+Please estimate the following models:
+
+1. A simple model testing whether Republicans and Independents report higher or lower rates of self censorship compared to Democrats (hint, use `pid_3cat` as your predictor)
+
+$$\text{Self Censoring} = \beta_0 + \beta_1 \text{Republican} + \beta_2 \text{Independent} + \epsilon$$
+
+2. A model which explores how these partisan differences change when controlling for variation in respondents' attitudes about race.
+
+$$\text{SC} = \beta_0 + \beta_1 \text{Rep} + \beta_2 \text{Ind} + \beta_3 \text{Racial Attitudes} +\epsilon$$
+
+3. An interaction model which allows the relationship between racial attitudes and self-censorship to vary by partisanship.
+
+explores how these partisan differences change when controlling for variation in respondents' attitudes about race.
+
+$$\begin{align}\text{SC} &= \beta_0 + \beta_1 \text{Rep} + \beta_2 \text{Ind} + \beta_3 \text{RA} + \\
+&\beta_4 \text{Rep} \times \text{RA} + \beta_5 \text{Ind} \times \text{RA} +  \epsilon\end{align}$$
+
+```{r}
+# Estimate models
+```
+
+
+
+
+## Present and interperet your results (15 points)
+
+Finally, present and interpret the substantive and statistical signficance of your results.
+
+Please include:
+
+- A regression table containing the coefficients, standard errors, p-values for each model
+
+- A plot of the predicted values from your third model (the one interacting the categorical measure of partisanship with the numeric measure of racial attitudes).
+
+- A interpretation of the substantive and statistical significance of your three models with clear references to your table and figure.
+
+```{r}
+#| label: regtab
+#| results: asis
+# Use htmlreg to present your models as a regression table
+```
+
+
+```{r}
+#| label: prediction
+# Create a prediction dataframe and produce predicted values 
+# for you interaction model
+```
+
+```{r }
+#| label: prediction_plot
+
+
+# Plot the predicted values (ideally with confidence intervals)
+# using ggplot
+
+```
+
+Here's an example of the kind of final figure you could produce for the interaction model
+
+![](https://pols1600.paultesta.org/assignments/final_fig.png)
+
+
+- **Code Advice** Again the [final paper template](https://pols1600.paultesta.org/assignments/pols1600_paper_template) has lots of code that should be useful for you.
+

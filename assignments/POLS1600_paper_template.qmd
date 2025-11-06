@@ -1,0 +1,664 @@
+---
+title: 'POLS 1600: Final Paper Template'
+author: "Group XX: Member names here "
+date: "UPDATE DATE"
+format:
+  html:
+    embed-resources: true
+    toc: true
+    toc-location: right
+    toc-float: true
+    toc-depth: 2
+    number-sections: true
+execute: 
+  eval: true
+  echo: false 
+  include: false
+  warning: false
+  message: false
+  cache: false
+---
+
+# Introduction 
+
+This document provides a template for the structure of your final paper for POLS 1600. 
+
+**Replace this markdown text with the introduction to your paper that:**
+
+- Clearly articulates your group's research question
+
+- Lays out the theoretical framework that motivates your inquiry
+
+- Describes your empirical strategy
+
+- Provides an outline of the rest of the paper and previews your results.
+
+
+# Theory and Expectations 
+
+In this section you will develop on your theoretical framework to develop a set of testable empirical implications that address your broader research question.
+
+This section should begin by explaining the following:
+
+- What is the phenomena you are studying? (Research Question/Outcome of Interest)
+
+- Why should we care about this phenomena? (Context/Motivation/Importance)
+
+Then it should turn to addressing:
+
+- What are the factors scholars think explain this phenomena? (Literature Review/Key predictors/Alternative explanations)
+
+Which should lead to a discussion of
+
+- What are the empirical implications of these claims? (Testable hypotheses)
+
+
+# Data 
+
+In this section you will describe your data. 
+
+- Identify the source or sources of your data
+
+- Define the unit of analysis and number of observations in your data
+
+- Explain how your key concepts (outcome variable, key predictors, covariates/alternative explanations) are operationalized and measured
+
+- Describe the distributions of these data using a table and/or figure(s). 
+
+- Interpret these distributions for your reader. What does a typical observation in the data look like. Are some data skewed. Are their big outliers 
+
+Before you write anythin in this section, you will want to adapt the code chunks below to:
+
+- Set up the work space
+
+- Load your data
+
+- Recode and transform the data as needed
+
+- Produce tables of summary statistics and figures
+
+I've included code chunks in the .qmd file to demonstrate this process using data from the 2020 National Election Time Series Study. 
+
+However, you won't see that code until in the knitted document until you get to the code appendix at the end.
+
+For example, in the .qmd file, there is a code chunk here, labelled `setup`, for loading packages.
+
+```{r}
+#| label: setup
+
+# Pacakges used in analysis
+the_packages <- c(
+  ## R Markdown
+  "kableExtra","DT","texreg","htmltools",
+  ## Tidyverse
+  "tidyverse", "lubridate", "forcats", "haven", "labelled",
+  "modelr", "purrr",
+  ## Extensions for ggplot
+  "ggmap","ggrepel", "ggridges", "ggthemes", "ggpubr", 
+  "GGally", "scales", "dagitty", "ggdag", "ggforce",
+  # Data 
+  "COVID19","maps","mapdata","qss","tidycensus", "dataverse",
+  # Analysis
+  "DeclareDesign", "boot"
+)
+
+# Define function to load packages
+ipak <- function(pkg){
+    new.pkg <- pkg[!(pkg %in% installed.packages()[, "Package"])]
+    if (length(new.pkg)) 
+        install.packages(new.pkg, dependencies = TRUE)
+    sapply(pkg, require, character.only = TRUE)
+}
+
+ipak(the_packages)
+```
+
+A code chunk here labelled `data` loading data
+
+```{r}
+#| label: data
+
+# Uncomment to install | Recomment after installing
+# remotes::install_github("jamesmartherus/anesr")
+library(anesr)
+
+# Load 2020 NES
+data("timeseries_2020", package ="anesr")
+
+# rename timeseries_2020 to df
+df <- timeseries_2020
+
+```
+
+A code chunk here here labelled `recodes` recoding the data
+
+```{r }
+#| label: recodes
+
+df %>%
+  mutate(
+    # ---- OUTCOMES ----
+    
+    ## V201233 PRE: HOW OFTEN TRUST GOVERNMENT IN WASHINGTON TO DO WHAT IS RIGHT
+    ### Reverse code so 0 = Never, 4 = Always
+    trust_gov = ifelse(V201233 < 0, NA, (V201233-5)*-1),
+    
+    # ---- KEY PREDICTORs ----
+    
+    ## V202457 POST: HAS R EVER BEEN ARRESTED
+    been_arrested = case_when(
+      V202457 == 2 ~ 0,
+      V202457 == 1 ~ 1,
+      T ~ NA_real_
+    ),
+    ## V202456: DURING PAST 12 MONTHS, R OR ANY FAMILY MEMBERS STOPPED BY POLICE
+    police_stop_12mo = case_when(
+      V202456 == 2 ~ 0,
+      V202456 == 1 ~ 1,
+      T ~ NA_real_
+    ),
+    
+    # ---- COVARIATES ----
+    
+    ## V201549x  PRE: SUMMARY: R self‐identified race/ethnicity
+    race_f = ifelse(
+      V201549x < 0, NA,
+      # Remove numbers from race variable labels
+      gsub("^[[:graph:]]* ", "", as_factor(V201549x))
+    ),
+    # Relevel race_f so white is reference category
+    race_f = forcats::fct_relevel(race_f,"White, non-Hispanic"),
+    # Create label variable with line breaks for plotting
+    race_l = stringr::str_wrap(race_f, width = 20),
+    is_white = ifelse(race_f == "White, non-Hispanic", 1, 0),
+    is_black = ifelse(race_f == "Black, non-Hispanic", 1, 0),
+    is_asian = ifelse(race_f == "Asian or Native Hawaiian/other Pacific Islander, non-Hispanic alone", 1, 0),
+    is_hispanic = ifelse(race_f == "Hispanic", 1, 0),
+    is_multiracial = ifelse(race_f == "Multiple races, non-Hispanic", 1, 0),
+    is_NA_AN_other = ifelse(race_f == "Native American/Alaska Native or other race, non-Hispanic alone", 1, 0),
+    is_nonwhite = ifelse(is_white == 1, 0, 1),
+    ## V201617x PRE: SUMMARY: Total (family) income
+    income  = ifelse(V201617x < 0, NA, V201617x),
+    income_class = case_when(
+      income <= 6 ~ "Low income",
+      income > 6 & income < 17 ~ "Middle income",
+      income >= 17 ~ "High income",
+      T ~ NA_character_
+    ) %>% factor(., levels = c("Middle income","Low income","High income")) # Make middle income reference category
+    
+  ) -> df
+
+
+
+# ---- Check Recodes ----
+
+## Trust
+table(df$V201233, df$trust_gov, useNA = "ifany")
+## CJS Contact
+
+### Respondented Arrested Ever
+table(df$V202457, df$been_arrested, useNA = "ifany")
+
+### Respondent or peers/family been stopped by police in past year
+table(df$V202456, df$police_stop_12mo, useNA = "ifany")
+
+## Race
+table(df$race_f, df$V201549x, useNA = "ifany")
+### White indicator
+table(df$race_f, df$is_white, useNA = "ifany")
+
+### Non-White indicator
+table(df$race_f, df$is_nonwhite, useNA = "ifany")
+
+## Income
+table(df$income, df$income_class)
+```
+
+A code chunk here labelled `descriptives` calculating some descriptive statistics, and producing some example figures, saved to objects called `fig1` and `fig2`
+
+```{r}
+#| label: descriptives
+
+# ---- Descriptive Statistics ----
+
+# Variables for table of descriptive statistics:
+the_vars <- c("trust_gov",
+              "been_arrested", "police_stop_12mo",
+              "income", df%>%select(starts_with("is_"))%>%names())
+
+# Create table of summary statistics
+
+df %>%
+  select(all_of(the_vars))%>%
+  pivot_longer(
+    cols = all_of(the_vars),
+    names_to = "Variable"
+  )%>%
+  mutate(
+    Variable = factor(Variable, levels = the_vars)
+  )%>%
+  arrange(Variable)%>%
+  dplyr::group_by(Variable)%>%
+  dplyr::summarise(
+    min = min(value, na.rm=T),
+    p25 = quantile(value, na.rm=T, prob = 0.25),
+    Median = quantile(value, na.rm=T, prob = 0.5),
+    mean = mean(value, na.rm=T),
+    p75 = quantile(value, na.rm=T, prob = 0.25),
+    max = max(value, na.rm=T),
+    missing = sum(is.na(value))
+  ) %>%
+  mutate(
+    Variable = case_when(
+      Variable == "been_arrested" ~ "Ever Arrested",
+      Variable == "income" ~ "Income",
+      Variable == "police_stop_12mo" ~ "Stopped by Police in Past Year",
+      Variable == "is_nonwhite" ~ "Non-White",
+      Variable == "is_white" ~ "White",
+      Variable == "is_black" ~ "Black",
+      Variable == "is_hispanic" ~ "Hispanic",
+      Variable == "is_asian" ~ "Asian",
+      Variable == "is_NA_AN_other" ~ "Native American, Alaskan Native, or Other",
+      Variable == "is_multiracial" ~ "Multiracial",
+      Variable == "trust_gov" ~ "Trust in Government"
+    )
+  ) -> sum_df
+
+
+
+# ---- Descriptive Figures ----
+
+
+## Distribution of trust in Government
+fig1 <- df %>%
+  ggplot(aes(trust_gov))+
+  geom_histogram()+
+  labs(
+    x = "Trust in Government"
+  )
+
+## Average proportion of respendents reporting Police Stops by Race
+
+fig2 <- df %>%
+  filter(!is.na(race_l))%>%
+  group_by(race_l)%>%
+  summarise(
+    stop = mean(police_stop_12mo, na.rm=T)
+  )%>%
+  mutate(
+    race_l = fct_reorder(race_l,stop)
+  )%>%
+  ggplot(aes(race_l, stop, 
+             fill = race_l,
+             label = scales::percent(stop),
+             ))+
+  geom_bar(stat = "identity")+
+  scale_y_continuous(labels = scales::percent,
+                     expand = expansion(mult = c(0,0.5))
+                     )+
+  labs(
+    y = "% Experiencing Police Stop\nin Past Year",
+    x= ""
+  )+
+  geom_text_repel(direction = "x", hjust = 1)+
+  coord_flip()+
+  guides(fill = "none")+
+
+  theme_bw()
+
+## Average trust by Arrest Status
+fig3 <- df %>%
+  mutate(
+    `Ever Arrested` = ifelse(been_arrested == 1, "Yes", "No")
+  ) %>%
+  filter(!is.na(`Ever Arrested`))%>%
+  ggplot(aes(`Ever Arrested`,trust_gov, 
+             fill = `Ever Arrested`,
+             group = `Ever Arrested`))+
+  stat_summary()+
+  labs(
+    y = "Trust in Government\n(0 = Never, 4 = Always)"
+  )
+
+```
+
+Finally, once I've created a data frame containing summary statistics, I use the `knitr` packages `kable` function, and functions from the `kableExtra` package to [format the table](https://cran.r-project.org/web/packages/kableExtra/vignettes/awesome_table_in_html.html)
+
+The code chunk is labelled `sumtab` but you won't see the R code itself, because in the YAML header at the top of the document, I've: set `include: false` to hide **all the R code and output** in the YAML header of the document
+
+**When I want to display the results** of a particular chunk, I need to put `#| include: true` in the chunk's argument.
+
+**If I'm displaying a table** I need to set `results="asis"` to display just the results of `sumtab` exactly as they are (which in this chunk is a table formatted in html)
+
+```{r}
+#| label: sumtab
+#| include: true
+#| results: asis
+# Table of descriptive statistics
+knitr::kable(sum_df,
+             caption = "Descriptive Statistics",
+             digits = 2) %>%
+  kableExtra::kable_styling() %>%
+  kableExtra::pack_rows("Outcome", start_row = 1, end_row =1) %>%
+  kableExtra::pack_rows("Key Predictors", start_row = 2, end_row =3) %>%
+  kableExtra::pack_rows("Covariates", start_row = 4, end_row =11)
+
+```
+
+**To display a figure** that I **have saved as an object** in a previous chunk, like `fig1`, I simply **print that object** on its own line in it's own chunk and set `#| include: true`. I've added a caption to the figure, using the `fig.cap="Distribution of Trust in Government` argument of this the code chunk below
+
+```{r}
+#| label: fig1
+#| include: true
+#| fig-cap: "Figure 1: Distribution of Trust in Government"
+
+fig1
+```
+
+And similarly for `fig2`
+
+```{r}
+#| label: fig2
+#| include: true
+#| fig-cap: "Figure 2: Police Stops by Race"
+fig2
+```
+
+
+And similarly for `fig3`
+
+```{r fig3}
+#| label: fig3
+#| include: true
+#| fig-cap: "Figure 3: Average Trust in Government by Arrest Status"
+# Figure 3
+fig3
+```
+
+
+# Design 
+
+Next, you will describe the empirical research design that you will use to test your expectations. You have two main tasks or goals for this section:
+
+First you need to explain how you will to **test your theoretical expectations** in terms of the **empirical estimates of your model** (e.g. the regression coefficients of your linear models). 
+
+At a minimum, you will likely want to specify at least two models:
+
+1. A baseline (bivariate) model
+
+$$
+\text{Outcome} = \beta_0 + \beta_1 \times \text{Key Predictor} + \epsilon
+$$
+
+2. A multiple regression model controlling for alternative explanations (things that predict both your outcome and key predictor)
+
+
+$$
+\text{Outcome} = \beta_0 + \beta_1 \times \text{Key Predictor} + X\beta + \epsilon
+$$
+Where $X\beta$ is a matrix containing one or more additional predictors representing alternative explanations. Again tell the reader how to interpret this model in relation to your baseline.
+
+Second, in framing your expectations and explaining how you interpret your models you can use this section to **demonstrate your mastery of some of the key statistical concepts** from the course.
+
+Show the reader that you understand:
+
+- What the identifying assumptions of your design
+
+- What linear regression is and how it works
+
+- What it means to control for variables in a multiple regression
+
+- How to quantify uncertainty in your estimates
+
+You can also demonstrate your understanding of these concepts in the next section.
+
+# Results 
+
+Having described your data and mapped your theoretical expectations onto your empirical models, you will present your results.
+
+This section should include the following:
+
+- A regression table (or tables) presenting the coefficients from estimated models
+
+- Interpretation of the the coefficients from these models in terms of your empirical expectations. 
+  - Are the results consistent with your expectations?
+  - How and why do estimates vary from one model to the next?
+  - How confident should we be in a given estimate? 
+  - Specifically, how should we interpret the confidence intervals and p-values associated with a given estimate? 
+
+- A figure that helps illustrate one of your key findings:
+  - This will likely be a predicted values from one (or more) of your models, particularly if you are estimating a model with an interaction term, a polynomial term, or a generalized linear model.
+
+In general, I would encourage you to start from the simplest, likely bivariate model. Use this as a chance to explain the mechanics of linear regression, the interpretation of linear regression as linear estimated of the Conditional Expectation Function, and demonstrate your mastery of the concepts of confidence intervals and hypothesis testing.
+
+Then turn results from more complicated models. Again provide a substantive interpretation the coefficients and possible changes sign, size, and/or significance of coefficients from one model to the next. Use this discussion to further demonstrate your understanding of what it means to control for variables -- both from a technical and substantive perspective.
+
+Finally use a figure (or figures) to help illustrate the substantive interpretation of your results. (e.g. How much is your outcome predicted to change if some key predictor moved from one standard deviation below its mean to one standard deviation above)
+
+Again, **before you do any writing** in this section, you should have code that:
+
+- Estimates models
+
+```{r}
+#| label: models
+
+# ---- Regression Models ----
+
+
+# Bivariate
+m1 <- lm(trust_gov ~ been_arrested, df)
+m2 <- lm(trust_gov ~ police_stop_12mo, df)
+m3 <- lm(trust_gov ~ race_f, df)
+m4 <- lm(trust_gov ~ income_class, df)
+
+# Mutliple regression
+m5 <- lm(trust_gov ~ been_arrested + police_stop_12mo + race_f + income_class, df)
+
+
+```
+
+- Present your results in one or more regression tables
+
+```{r}
+#| label: tab1
+#| results: asis
+
+texreg::htmlreg(
+  list(m1, m2, m3,m4),
+  custom.coef.names = c("(Intercept)",
+                        "Ever Arrested", "Police Stopped in Past Yr", 
+                        "Asian",
+                        "Black",
+                        "Hispanic",
+                        "Multiracial",
+                        "NA, AN, or Other",
+                        "Low Income",
+                        "High Income"),
+  custom.model.names = c("Arrests","Stops","Race","Class"),
+  custom.header = list("Outcome: Trust in Government" = 1:4),
+  caption = "Baseline Models"
+  
+)
+```
+
+Here's an example reporting the confidence intervals instead of standard errors
+
+```{r tab2, results="asis"}
+#| label: tab2
+#| results: asis
+
+texreg::htmlreg(
+  list(m5),
+  custom.coef.names = c("(Intercept)",
+                        "Ever Arrested", "Police Stopped in Past Yr", 
+                        "Asian",
+                        "Black",
+                        "Hispanic",
+                        "Multiracial",
+                        "NA, AN, or Other",
+                        "Low Income",
+                        "High Income"),
+  ci.force = T,
+  caption = "Multiple regression"
+  
+)
+```
+
+And produce a plot of predicted values to illustrate a key relationship
+
+```{r predictions}
+#| label: predicitions
+
+
+# ---- Regression Predictions ----
+
+
+# Focus on race_class black-white differences
+# Note model coefficients not reported in text. 
+# Don't do this. Present the coefficients from every model in a table, even if they're hard to interpret
+
+m6 <- lm(trust_gov ~ police_stop_12mo*is_black*income_class, df,
+         subset = is_black == 1 | is_white == 1)
+
+
+
+# Prediction data frane for model 6
+pred_df <- expand_grid(
+  income_class = c("Low income","Middle income", "High income"),
+  police_stop_12mo = 0:1,
+  is_black = 0:1
+)
+
+# Include the confidence intervals for predictions
+pred_df <- cbind(pred_df,predict(m6, pred_df, interval = "confidence"))
+
+pred_df %>%
+  # Nice labels for plotting
+  mutate(
+    Race = ifelse(is_black == 1, "Black","White"),
+    Police = ifelse(police_stop_12mo == 1, "Recent Stop","No Recent Stop"),
+    Class = factor(income_class, levels =c("Low income","Middle income", "High income") )
+  ) %>%
+  ggplot(aes(Race, fit, col = Police))+
+  geom_pointrange(aes(ymin = lwr, ymax = upr),
+                  position = position_dodge(width = .25))+
+  labs(
+    y = "Predicted Trust in Government"
+  )+facet_grid(~Class) -> fig4
+
+```
+
+
+Here's where you would write the interpretation of `fig4`, which is displayed in by the code chunk below
+
+```{r}
+#| label: fig4
+#| include: true
+#| fig-cap: "Figure 4: Differences in Trust by Race, Class, and Contact with the Police"
+
+# Figure 4
+fig4
+```
+
+
+
+
+
+
+# Conclusion 
+
+
+Finally, conclude by summarizing the results of your project. 
+
+- What did you set out to learn? 
+- What did you find? 
+- What are some the strengths and weaknesses of your approach?
+- What should future research on this topic look like?
+- A list of correctly formatted references
+
+## References
+
+I'd use a bulleted list to format your references. Aim for at least three, academic citations.
+
+- Citrin, J. (1974). Comment: The political relevance of trust in government. *American Political Science Review*, 68(3), 973-988.
+
+- Lerman, Amy E., and Vesla M. Weaver. (2014) *Arresting Citizenship*. University of Chicago Press, 2014.
+
+- Jeong, J., & Han, S. (2020). Trust in police as an influencing factor on trust in government: 2SLS analysis using perception of safety. *Policing: An International Journal.*
+
+# Appendix 
+
+Finally, at the end of your document, you should provide a:
+
+- Codebook
+- Code Appendix.
+
+
+## Code book
+
+Your code book should describe be organized conceptually by variable type:
+
+- Outcome
+- Key Predictors
+- Covariates
+
+For each variable, provide:
+
+- `variable_name_used_in_code` | Conceptual name
+  - Description of variable/Survey Question Wording
+  - Original name in raw data.
+  - Summary of any recoding, transformations (e.g. Collapsing categories, or reverse coding endpoints of scales)
+  - Summary of range of values (e.g. 1= Strong Democrat ... 7 = Strong Republican)
+
+
+- `trust_in_gov` | Trust in Government
+  - **Question:** "How often can you trust the federal government in Washington
+to do what is right?"
+  - **Original variable:** `V201233`
+  - **Recoding:** `V201233` reverse coded so that in `trust_in_gov`, 0 = "Never", 1 = "Some of the Time", 2 = "About half the time", 3 = "Most of the time" and 4 = "Always" 
+  - **Range:** 0 ("Never) to 4 ("Always)
+
+## Code Appendix
+
+Finally, in your code appendix you will display the all the code from the previous code chunks in one single code chunk by:
+
+- setting `echo = T, eval = F` in the code chunk's header
+
+- typing the `<<chunk_label>>` for each of your code chunks sequentially where `chunk_label` is replaced with the of the corresponding code chunk (e.g. `<<data>>)
+
+```{r}
+#| label: appendix
+#| include: true
+#| eval: false
+#| echo: true
+
+
+
+<<setup>>
+
+<<data>>
+
+<<recodes>>
+
+<<descriptives>>
+
+<<sumtab>>
+
+<<fig1>>
+
+<<fig2>>
+
+<<fig3>>
+
+<<models>>
+
+<<tab1>>
+
+<<tab2>>
+
+<<predictions>>
+
+<<fig4>>
+
+```
+

@@ -1,0 +1,1594 @@
+---
+title: "Week 06:"
+subtitle: "Linear Regression with Multiple Predictors"
+author: "Paul Testa"
+output:
+  xaringan::moon_reader:
+    css: ["default", "css/brown.css"]
+    lib_dir: libs
+    nature:
+      highlightStyle: atelier-lakeside-light
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+class: inverse, center, middle
+background-image:url("https://static.onecms.io/wp-content/uploads/sites/20/2020/04/09/abby-huntsman-1.jpg")
+background-size:cover
+
+# Overview
+
+```{r}
+#| label = "setup",
+#| include = FALSE
+options(htmltools.dir.version = FALSE)
+knitr::opts_chunk$set(warning = FALSE, 
+                      message = FALSE, 
+                      cache = T,
+  comment = NA, dpi = 300,
+  fig.align = "center", out.width = "80%")
+library("tidyverse")
+```
+
+```{r}
+#| label = "xaringan-tile-view",
+#| echo = FALSE
+xaringanExtra::use_tile_view()
+```
+
+```{r}
+#| label = "xaringanExtra-clipboard",
+#| echo = FALSE
+htmltools::tagList(
+  xaringanExtra::use_clipboard(
+    button_text = "<i class=\"fa fa-clipboard\"></i>",
+    success_text = "<i class=\"fa fa-check\" style=\"color: #90BE6D\"></i>",
+  ),
+  rmarkdown::html_dependency_font_awesome()
+)
+```
+
+
+```{r}
+#| label = "packages",
+#| include = F
+the_packages <- c(
+  ## R Markdown
+  "kableExtra","DT","texreg",
+  ## Tidyverse
+  "tidyverse", "lubridate", "forcats", "haven", "labelled",
+  ## Extensions for ggplot
+  "ggmap","ggrepel", "ggridges", "ggthemes", "ggpubr", 
+  "GGally", "scales", "dagitty", "ggdag", "ggforce",
+  # Graphics:
+  "scatterplot3d", #<<
+  # Data 
+  "COVID19","maps","mapdata","qss","tidycensus", "dataverse", 
+  # Analysis
+  "DeclareDesign", "easystats", "zoo"
+)
+```
+
+```{r}
+#| label = "ipak",
+#| include = F
+ipak <- function(pkg){
+    new.pkg <- pkg[!(pkg %in% installed.packages()[, "Package"])]
+    if (length(new.pkg)) 
+        install.packages(new.pkg, dependencies = TRUE)
+    sapply(pkg, require, character.only = TRUE)
+}
+
+```
+
+
+```{r}
+#| label = "loadpackages",
+#| cache = F,
+#| include = F
+ipak(the_packages)
+```
+
+
+
+---
+## General Plan
+
+- Group Assignment 2: Data
+- Setup
+  - Packages
+  - Data
+- Feedback
+- Review
+  - Causal Inference in Observational Designs
+  - Simple Linear Regression
+- Multiple Regression 
+  - Overview
+  - Estimating and Interpreting Multiple Regression
+  - Reading Regression Tables
+
+---
+class: inverse, center, middle
+# Research Questions
+
+---
+## Assignment 1 Research Questions:
+
+- Feedback posted to Canvas.
+
+- General Comments:
+
+  - Really great questions!
+  
+  - Feedback tries to balance interest/feasibility/data availability
+  
+  - "Not an experiment" $\to$ What would you have to randomize to answer your question
+  
+  - Not every question need to be causal
+  
+  - "Make your theories elaborate" - R.A. Fisher to [William Cochran](https://www.jstor.org/stable/2344179)
+    - But keep your models simple - Testa to POLS 1600
+
+
+---
+## Assignment 2: Data Explorations
+
+
+- Prompt posted [here](https://pols1600.paultesta.org/files/assignments/A1_research_questions.docx)
+
+- Upload to [Canvas](https://canvas.brown.edu/courses/1087979/assignments/7870539) next Sunday March 19
+
+1. A revised description of your group's research project
+2. A description of a linear model implied by your question
+3. R code that loads some potentially relevant data to your question and at least one descriptive summary of that data.
+4. Some information about your group such as:
+    - A group name^[If you're Group 01 don't change your name to Group 4]
+    - A group color or color scheme
+    - A group motto, mascot, crest, etc.
+    - Your group's theme song
+    - Your group's astrological sign
+    - Anything else that you think well help you form strong ingroup bounds that facilitate collaboration
+
+
+---
+class:inverse, middle, center
+# 💪
+## Get set up to work
+
+---
+## Packages
+
+Hopefully, you were all able to install the following packages 
+
+- `dataverse` (necessary for this week)
+- `tidycensus` (necessary for this week)
+- `easystats` (useful later)
+- `DeclareDesign` (useful later)
+
+---
+## Census API:
+
+Additionally, I hope you have all followed the steps [here](https://pols1600.paultesta.org/slides/04-packages.html#3_Install_a_Census_API_tidycensus_package):
+
+1. Install the `tidycensus` package
+2. Load the installed package
+3. Request an API key from the Census
+4. Check your email
+5. Activate your key
+6. Install your API key in R
+7. Check that everything worked
+
+To install the an API key so we can download data directly from the US Census
+
+
+---
+## Packages for today
+
+
+```{r}
+#| ref.label = c("packages")
+
+```
+
+---
+## Define a function to load (and if needed install) packages
+
+
+```{r}
+#| ref.label = "ipak"
+```
+
+---
+## Load packages for today
+
+```{r}
+#| ref.label = "loadpackages"
+```
+
+
+---
+class:inverse, center, middle
+# 💪
+## Load Data for Thursday's Lab
+
+---
+## Load the Covid-19 Data
+
+```{r}
+#| label = "covid"
+# covid <- COVID19::covid19(
+#   country = "US",
+#   level = 2,
+#   verbose = F
+# )
+
+load(url("https://pols1600.paultesta.org/files/data/covid.rda"))
+```
+
+---
+## Filter Covid-19 Data to US States (Now Excluding D.C. as well)
+
+```{r}
+#| label = "covidus"
+# Vector containing of US territories
+territories <- c(
+  "American Samoa",
+  "Guam",
+  "Northern Mariana Islands",
+  "Puerto Rico",
+  "Virgin Islands",
+  "District of Columbia"
+  )
+
+# Filter out Territories and create state variable
+covid_us <- covid %>%
+  filter(!administrative_area_level_2 %in% territories)%>%
+  mutate(
+    state = administrative_area_level_2
+  )
+```
+
+---
+## Mutate: Calculate New Deaths Per Capita and Percent Vaccinated
+
+
+```{r}
+#| label = "newcases"
+covid_us %>%
+  dplyr::group_by(state) %>%
+  mutate(
+    new_deaths = deaths - lag(deaths),
+    new_deaths_pc = new_deaths / population *100000,
+    new_deaths_pc_14da = zoo::rollmean(new_deaths_pc, k = 14, align = "right", fill=NA ),
+    percent_vaccinated = people_fully_vaccinated/population*100  
+    ) -> covid_us
+```
+
+
+---
+## Load Data on Presidential Elections
+
+
+
+```{r}
+#| label = "pres_data"
+# Try this code first
+Sys.setenv("DATAVERSE_SERVER" = "dataverse.harvard.edu")
+
+pres_df <- get_dataframe_by_name(
+  "1976-2020-president.tab",
+  "doi:10.7910/DVN/42MVDX"
+)
+
+# If the code above fails, comment out and uncomment the code below:
+
+# load(url("https://pols1600.paultesta.org/files/data/pres_df.rda"))
+```
+
+---
+## HLO of Presidential Elections Data
+
+```{r}
+#| label = "pres_hlo"
+head(pres_df)
+```
+
+---
+## Transform Data to get just 2020 Election
+
+```{r}
+#| label = "pres_wrangle"
+pres_df %>%
+  mutate(
+    year_election = year,
+    state = str_to_title(state),
+    # Fix DC
+    state = ifelse(state == "District Of Columbia", "District of Columbia", state)
+  ) %>%
+  filter(party_simplified %in% c("DEMOCRAT","REPUBLICAN"))%>%
+  filter(year == 2020) %>%
+  select(state, state_po, year_election, party_simplified, candidatevotes, totalvotes
+         ) %>%
+  pivot_wider(names_from = party_simplified,
+              values_from = candidatevotes) %>%
+  mutate(
+    dem_voteshare = DEMOCRAT/totalvotes *100,
+    rep_voteshare = REPUBLICAN/totalvotes*100,
+    winner = forcats::fct_rev(factor(ifelse(rep_voteshare > dem_voteshare,"Trump","Biden")))
+  ) -> pres2020_df
+```
+
+---
+## Transform Data to get just 2020 Election
+
+```{r}
+head(pres2020_df)
+```
+
+
+---
+## Load Data on Median State Income from the Census
+
+```{r}
+#| label = "acs_data"
+acs_df <- get_acs(geography = "state", 
+              variables = c(med_income = "B19013_001",
+                            med_age = "B01002_001"), 
+              year = 2019)
+
+# Uncomment if get_acs() doesn't work:
+# load(url("https://pols1600.paultesta.org/files/data/acs_df.rda"))
+
+```
+
+---
+## HLO: Census Data 
+
+```{r}
+#| label = "acs_hlo"
+head(acs_df)
+```
+
+
+---
+## Tidy Census Data
+
+```{r}
+#| label = "acs_tidy"
+acs_df %>%
+  mutate(
+    state = NAME,
+  ) %>%
+  select(state, variable, estimate) %>%
+  pivot_wider(names_from = variable,
+              values_from = estimate) -> acs_df
+```
+
+---
+## Tidy Census Data
+
+```{r}
+head(acs_df)
+```
+
+
+
+---
+## Merge election data into Covid data
+
+```{r}
+#| label = "merge_pres"
+# Always check dimensions before and after merging
+dim(covid_us)
+dim(pres2020_df)
+# Merge covid_us with pres2020_df and save as tmp file
+tmp <- covid_us %>% left_join(
+  pres2020_df,
+  by = c("state" = "state")
+)
+dim(tmp) # Same number of rows as covid_us w/ 8 additional columns
+```
+
+
+---
+## Merge Census data into Covid data
+
+```{r}
+#| label = "acs_merge"
+dim(tmp)
+dim(acs_df)
+
+# Merge tmp with acs_df and save as final covid_df file
+covid_df <- tmp %>% left_join(
+  acs_df,
+  by = c("state" = "state")
+)
+dim(covid_df)  # Same number of rows as tmp w/ 2 additional columns
+
+```
+
+
+
+---
+## Subset Merged data to include only the variables and observations we want
+
+```{r}
+the_vars <- c(
+  # Covid variables
+  "state","state_po","date","new_deaths_pc_14da", "percent_vaccinated",
+  # Election variables
+  "winner","rep_voteshare",
+  # Demographic variables
+  "med_age","med_income","population")
+
+
+covid_lab <- covid_df %>%
+  filter( date == "2021-09-23")%>%
+  select(all_of(the_vars))%>%
+  ungroup()
+
+length(the_vars)
+dim(covid_lab)
+```
+
+
+---
+## A Preview of Where We're Headed:
+
+Consider the following **multiple regression** (which we will on Thursday):
+
+$$\text{New Covid Deaths} = \beta_0 +\beta_1 \text{Rep. Vote Share} +\beta_2 \text{Median Age} +\beta_3 \text{Median Income} + \epsilon$$
+- The tell us how the outcome, *New Covid Deaths*, is expected to change with a **unit change** in a given predictor, controlling for/holding constant the other predictors in the model (more on "controlling for" shortly).
+  - In the model above, $\beta_2$ tells us how *New Covid Deaths* is predicted to change, if the *Median Age* of a state increased by one year (i.e. a unit change).
+  - Similarly, $\beta_3$ tells us how *New Covid Deaths* is predicted to change, if the *Median Income* of a state increased by one dollar (i.e. a unit change).  
+  - Since vote share, median income and age are measured on very different scales, interpreting these coefficients in the same model can be cumbersome.
+
+---
+## Standardizing variables.
+
+
+- When variables are measured in different units multiple regression coefficients can be hard to interpret
+  - Coefficients, $\beta$, tell us about the predicted change in $y$ for a unit change in $x$ or $z$
+  - For example $\beta_{age}$
+
+- *z-scores* standardize variables so that their unit of measurement no longer matters (QSS p. 103).
+
+
+- To calculate the *z-score* of a variable $x$, we simply, substract off the mean and divide by the standard deviaton
+
+$$z\text{-score of x} = \frac{x_i - \mu_{x}}{\sigma_x}$$
+
+- The *z-score* of Age is 
+
+$$z\text{-score of Age} = \frac{\text{Age}_i - \mu_{Age}}{\sigma_{Age}}$$
+
+---
+## Standardizing Predictors in R
+
+```{r}
+covid_lab %>%
+  mutate(
+    rep_voteshare_std = (rep_voteshare - mean(rep_voteshare))/sd(rep_voteshare),
+    med_age_std = ( med_age - mean( med_age))/sd( med_age),
+    med_income_std = (med_income - mean(med_income))/sd(med_income),
+    percent_vaccinated_std = (percent_vaccinated - mean(percent_vaccinated))/sd(percent_vaccinated)
+  ) -> covid_lab
+
+
+
+```
+
+
+
+
+---
+## Multiple Regression with Standardized Predictors
+
+If we were to estimate a model with standardized predictors:
+
+$$\text{New Covid Deaths} = \beta_0 +\beta_1 \text{Rep. Vote Share}_{std} +\beta_2 \text{Median Age}_{std} +\beta_3 \text{Median Income}_{std} + \epsilon$$
+The coefficients still tell us predicted change in New Covid Deaths for a unit change in a predictor, but now a unit change corresponds to a 1-standard deviation increase of each predictor:
+
+```{r}
+covid_lab %>%
+  summarise(
+    sd_rep_vote = sd(rep_voteshare),
+    sd_med_age = sd(med_age),
+    sd_med_income = sd(med_income),
+    sd_rep_vote_std = sd(rep_voteshare_std),
+    sd_med_age_std = sd(med_age_std),
+    sd_med_income_std = sd(med_income_std)
+  )
+```
+
+---
+## Saving Data
+
+Finally, I'll save the data for Thursday's lab
+
+```{r}
+# Don't run this code
+save(covid_lab, file = "../files/data/06_lab.rda")
+
+```
+
+And on Thursday, we'll be able to load the `covid_lab` just by running:
+
+```{r}
+load(url("https://pols1600.paultesta.org/files/data/06_lab.rda"))
+```
+
+
+
+
+
+
+
+
+---
+class:inverse, middle, center
+# 🔍
+## Review
+
+
+---
+## Review
+
+- Casual Inference in Observational Designs
+  - Difference-in-Differences
+  - Regression Discontinuity Design
+  - Instrumental Variables
+
+- Simple Linear Regression
+
+---
+## Review
+
+- Casual Inference in Observational Designs
+  - **Difference-in-Differences**
+  - Regression Discontinuity Design
+  - Instrumental Variables
+
+- Simple Linear Regression
+
+---
+class:inverse, middle, center
+# 🔍
+## Casual Inference in Observational Designs
+
+---
+## Review: Casual Inference in Observational Designs
+
+
+- Observational designs that try to estimate causal effects need to justify assumptions about conditional independence:
+
+$$
+Y_i(1),Y_i(0), Y_i, U_i \perp D_i |X_i
+$$
+
+--
+
+- This assumption goes by many, jargony names: Selection on Observables, Conditional Independence, No unmeasured confounders.
+
+--
+
+- Credibility of this assumption depends less on having a lot of data, and more on how your data were generated.
+
+--
+
+- $Y_i(1),Y_i(0) \perp D_i \mid X_i$ doesn't mean that D has no effect on $Y$
+
+- Instead it means, that what we can estimate $E[Y_i|D_i=1,X_i]$ and treat this as a good (unbiased) estimate of $E[Y_i(1)]$ and similarly $E[Y_i|D_i=0,X_i]$ is a good estimate of $E[Y_i(0)]$
+
+---
+## Observational Designs for Causal Inference
+
+- Three common research designs:
+
+  - Difference in Difference Design
+
+  - Regression Discontinuity Designs
+  
+  - Instrumental Variable Designs
+
+
+
+---
+class: inverse, center, middle
+# 💡 Difference in Differences
+
+
+---
+class: inverse, center, middle
+background-image:url(https://www.finebooksmagazine.com/sites/default/files/styles/gallery_item/public/media-images/2020-11/map-lead-4.jpg?h=2ded5a3f&itok=Mn-K5rQc)
+background-size: cover
+## London in the Time of Cholera
+
+---
+## Motivating Example: What causes Cholera?
+
+- In the 1800s, cholera was thought to be transmitted through the air.
+
+- John Snow (the physician, not the snack), to explore the origins eventunally concluding that cholera was transmitted through living organisms in water.
+
+- Leveraged a **natural experiment** in which one water company in London moved its pipes further upstream (reducing contamination for Lambeth), while other companies kept their pumps serving Southwark and Vauxhall in the same location. 
+
+---
+## Notation
+
+Let's adopt a little notation to help us think about the logic of Snow's design:
+
+- $D$: treatment indicator, 1 for treated neighborhoods (Lambeth), 0 for control neighborhoods (Southwark and Vauxhall)
+
+- $T$: period indicator, 1 if post treatment (1854), 0 if pre-treatment (1849).
+
+- $Y_{di}(t)$ the potential outcome of unit $i$ 
+
+  - $Y_{1i}(t)$ the potential outcome of unit $i$ when treated between the two periods 
+
+  - $Y_{0i}(t)$ the potential outcome of unit $i$ when control between the two periods 
+
+---
+## Causal Effects
+
+The individual causal effect for unit i at time t is:
+
+$$\tau_{it} = Y_{1i}(t) − Y_{0i}(t)$$
+
+What we observe is 
+
+$$Y_i(t) = Y_{0i}(t)\cdot(1 − D_i(t)) + Y_{1i}(t)\cdot D_i(t)$$
+
+$D$ only equals 1, when $T$ equals 1, so we never observe $Y_0i(1)$ for the treated units. 
+
+In words, we don't know what Lambeth's outcome would have been in the second period, had they not been treated.
+
+---
+## Average Treatment on Treated
+
+Our goal is to estimate the average effect of treatment on treated (ATT):
+
+
+$$\tau_{ATT} = E[Y_{1i}(1) -  Y_{0i}(1)|D=1]$$
+
+That is, what would have happened in Lambeth, had their water company not moved their pipes
+
+---
+## Average Treatment on Treated
+
+Our goal is to estimate the average effect of treatment on treated (ATT):
+
+We we can observe is:
+
+|               | Post-Period (T=1)  | Pre-Period (T=0)  |
+|---------------|--------------------|-------------------|
+| Treated $D_{i}=1$  | $E[Y_{1i}(1)\vert D_i = 1]$  | $E[Y_{0i}(0)\vert D_i = 1]$ |
+| Control $D_i=0$  | $E[Y_{0i}(1)\vert D_i = 0]$  | $E[Y_{0i}(0)\vert D_i = 0]$ |
+
+---
+## Data
+
+Because potential outcomes notation is abstract, let's consider a modified description of the Snow's cholera death data from [Scott Cunningham](https://mixtape.scunning.com/difference-in-differences.html):
+
+```{r}
+#| label = "choleradat",
+#| echo = F
+snow <- tibble(Company = c("Lambeth (D=1)", "Southwark and Vauxhall (D=0"),
+               `1854 (T=1)` = c(19,147),
+               `1849 (T=0)` = c(85,135)
+               )
+
+knitr::kable(snow)
+
+```
+
+---
+## How can we estimate the effect of moving pumps upstream?
+
+Recall, our goal is to estimate the effect of the the treatment on the treated:
+
+$$\tau_{ATT} = E[Y_{1i}(1) -  Y_{0i}(1)|D=1]$$
+
+Let's conisder some strategies Snow could take to estimate this quantity:
+
+---
+## Before vs after comparisons:
+
+- Snow could have compared Labmeth in 1854 $(E[Y_i(1)|D_i = 1] = 19)$ to Lambeth in 1849 $(E[Y_i(0)|D_i = 1]=85)$, and claimed that moving the pumps upstream led to 66 fewer cholera deaths. 
+
+- This comparison assumes Lambeth's pre-treatment outcomes in 1849 are a good proxy for what its outcomes would have been in 1954 if the pumps hadn't moved $(E[Y_{0i}(1)|D_i = 1])$.
+
+- A skeptic might argue that Lambeth in 1849 $\neq$ Lambeth in 1854
+
+
+---
+## Treatment-Control comparisons in the Post Period.
+
+- Snow could have compared outcomes between Lambeth and S&V in 1954  ($E[Yi(1)|Di = 1] − E[Yi(1)|Di = 0]$), concluding that the change in pump locations led to 128 fewer deaths.
+
+- Here the assumption is that the outcomes in S&V and in 1854 provide a good proxy for what would have happened in Lambeth in 1954 had the pumps not been moved $(E[Y_{0i}(1)|D_i = 1])$
+
+- Again, our skeptic could argue  Lambeth $\neq$ S&V 
+
+---
+## Difference in Differences
+
+To address these concerns, Snow employed what we now call a difference-in-differences design, 
+
+There are two, equivalent ways to view this design. 
+
+$$\underbrace{\{E[Y_{i}(1)|D_{i} = 1] − E[Y_{i}(1)|D_{i} = 0]\}}_{\text{1. Treat-Control |Post }}− \overbrace{\{E[Y_{i}(0)|D_{i} = 1] − E[Y_{i}(0)|D_{i}=0 ]\}}^{\text{Treated-Control|Pre}}$$
+
+- Difference 1: Average change between Treated and Control  in Post Period
+- Difference 2: Average change between Treated and Control  in Pre Period
+
+Which is equivalent to:
+
+$$\underbrace{\{E[Y_{i}(1)|D_{i} = 1] − E[Y_{i}(0)|D_{i} = 1]\}}_{\text{Post - Pre |Treated }}− \overbrace{\{E[Y_{i}(1)|D_{i} = 0] − E[Y_{i}(0)|D_{i}=0 ]\}}^{\text{Post-Pre|Control}}$$
+
+
+- Difference 1: Average change between Treated over time
+- Difference 2: Average change between Control over time
+
+---
+## Difference in Differences
+
+
+You'll see the DiD design represented both ways, but they produce the same result:
+
+$$
+\tau_{ATT} = (19-147) - (85-135) = -78
+$$
+
+$$
+\tau_{ATT} = (19-85) - (147-135) = -78
+$$
+
+---
+## Identifying Assumption of a Difference in Differences Design
+
+The key assumption in this design is what's known as the parallel trends assumption: $E[Y_{0i}(1) − Y_{0i}(0)|D_i = 1] = E[Y_{0i}(1) − Y_{0i}(0)|D_i = 0]$ 
+
+- In words: If Lambeth hadn't moved its pumps, it would have followed a similar path as S&V
+
+---
+```{r}
+#| label = "paralleltrends",
+#| echo = F,
+#| fig.height = 4
+
+snow_g <- tibble(
+  Period = c(0,0,3,3,0,3),
+  Treatment = c(0,1,0, 1,1,1),
+  Line = c(1,1,1,1,2,2),
+  Company = c("S&V","Lambeth","S&V","Lambeth","Lambeth (D=0)","Lambeth (D=0)"),
+  Deaths = c(135,85,147,19,85,97)
+)
+
+snow_g %>%
+  ggplot(aes(Period,Deaths,col = Company))+
+  geom_point()+
+  geom_line()+
+  geom_segment(aes(x=3.1,xend=3.1,y=19,yend=147), linetype = 2, col= "gray")+
+  annotate(geom="text",x = 3.3,y=125, label = "1",hjust=.5)+
+  geom_segment(aes(x=3.2,xend=3.2,y=19,yend=97), linetype = 2,col="gray")+
+  annotate(geom="text",x = 3.3,y=55, label = "3",hjust=-.5)+
+  geom_segment(aes(x=-.1,xend=-.1,y=85,yend=135), linetype = 2,col="gray")+
+  annotate(geom="text",x = -.1,y=120, label = "2",hjust=1.5)+
+  xlim(-2,6)+
+  scale_x_continuous(breaks = c(0,3),labels = c("Pre","Post"))+
+  theme_bw() -> snow_p
+
+snow_p
+
+
+```
+
+
+Where:
+
+1. $E[Y_{i}(1)|D_{i} = 1] − E[Y_{i}(1)|D_{i} = 0]$
+2. $E[Y_{i}(0)|D_{i} = 1] − E[Y_{i}(0)|D_{i}\} = 0]$
+3. $E[Y_{1i}(1) − Y_{0i}(1)|D_{i} = 1]$
+
+
+---
+## Summary
+
+- A Difference in Differences (DiD, or diff-in-diff) design combines a pre-post comparison, with a treated-control comparison
+  
+  - Taking the pre-post difference removes any fixed differences between the units
+  
+  - Then taking the difference between treated and control differences removes any common differences over time
+
+- The key identifying assumption of a DiD design is the "assumption of parallel trends"
+  - Absent treatment, treated and control groups
+would see the same changes over time.
+  - Hard to prove, possible to test
+
+
+---
+## Extensions and limitations
+
+- DiD easy to estimate with linear regression
+- Generalizes to multiple periods and treatment interventions
+  - More pre-treatment periods allow you assess "parallel trends" assumption
+- Alternative methods 
+  - Synthetic control
+  - Event Study Designs
+- What if you have multiple treatments or treatments that come and go?
+  - Panel Matching
+  - Generalized Synthetic control
+
+---
+## Applications
+
+- [Card and Krueger (1994)](https://www.nber.org/papers/w4509) What effect did raising the minimum wage in NJ have on employment
+
+- [Abadie, Diamond, & Hainmueller (2014)](https://onlinelibrary.wiley.com/doi/full/10.1111/ajps.12116?casa_token=_ceCu4SwzTEAAAAA%3AP9aeaZpT_Zh1VdWKXx_tEmzaJTtMJ1n0eG7EaYlvJZYN000re33cfMAI2O8N8htFJjOsln2GyVeQql4) What effect did German Unification have on economic development in West Germany
+
+- [Malesky, Nguyen and Tran (2014)](https://www.cambridge.org/core/journals/american-political-science-review/article/impact-of-recentralization-on-public-services-a-differenceindifferences-analysis-of-the-abolition-of-elected-councils-in-vietnam/3477854BAAFE152DC93C594169D64F58) How does decentralization influence public services?
+
+
+---
+class:inverse, middle, center
+# 🔍
+# Simple Linear Regression
+### Linear regression provides a linear estimate of the CEF
+
+---
+## Review: Simple Linear Regression
+
+- **Conceptual**
+  - Simple linear regression estimates a line of best fit that summarizes relationships between two variables
+
+$$
+y_i = \beta_0 + \beta_1x_i + \epsilon_i
+$$
+
+- **Practical**
+  - We estimate linear models in R using the `lm()` function
+  
+```{r}
+#| label = "ols",
+#| eval = F
+lm(y ~ x, data = df)
+```
+
+- *Technical/Definitional*
+  - Linear regression chooses $\beta_0$ and $\beta_1$ to minimize the Sum of Squared Residuals (SSR): 
+
+$$\textrm{Find }\hat{\beta_0},\,\hat{\beta_1} \text{ arg min}_{\beta_0, \beta_1} \sum (y_i-(\beta_0+\beta_1x_i))^2$$
+
+- *Theoretical*
+  - Linear regression provides a **linear** estimate of the conditional expectation function (CEF): $E[Y|X]$
+  
+---
+## Linear Regression and the CEF
+
+Recall the first model we fit in last week's lab
+
+$$\text{new_deaths} = \beta_0 + \beta_1 \text{winner} + \epsilon$$
+
+```{r}
+m1 <- lm(new_deaths ~ winner, covid_df)
+m1
+```
+
+`m1` is the equation for a very simple line defined by two points:
+
+  - $\beta_0$ = E[new_deaths|winner = Trump]
+  - $\beta_0 + \beta_1$ = E[new_deaths|winner = Biden]
+
+---
+## Linear Regression and the CEF
+
+It's helpful to take a look at what's going on under the hood in `lm()`
+
+We gave it the following data:
+
+```{r}
+head(m1$model)
+```
+
+---
+## Linear Regression and the CEF
+
+- R doesn't know how to calculate the mean of `Biden` (or any character or factor data). 
+- Instead it creates an indicator variable `winnerBiden` which equals 1 when `winner` equals `Biden` and 0 otherwise.
+
+```{r}
+head(model.matrix(m1))
+```
+
+---
+## Linear Regression and the CEF
+
+```{r}
+table(m1$model$winner)
+table(model.matrix(m1)[,2])
+```
+
+---
+
+```{r}
+#| eval = F
+covid_df%>%
+  mutate(
+    winner01 = ifelse(winner=="Biden",1,0)
+  )%>%
+  ggplot(aes(winner01, new_deaths))+
+  geom_point()+
+  stat_summary(geom="point",fun=mean,col= "red",size=2)+
+  geom_segment(aes(x=0,xend =1, 
+                   y=coef(m1)[1],
+                   yend = coef(m1)[1]+coef(m1)[2]*1
+                   ),
+               col= "red")
+
+```
+
+---
+```{r}
+#| echo = F
+covid_df%>%
+  mutate(
+    winner01 = ifelse(winner=="Biden",1,0)
+  )%>%
+  ggplot(aes(winner01, new_deaths))+
+  geom_point()+
+  stat_summary(geom="point",fun=mean,col= "red",size=2)+
+  geom_segment(aes(x=0,xend =1, 
+                   y=coef(m1)[1],
+                   yend = coef(m1)[1]+coef(m1)[2]*1
+                   ),
+               col= "red")
+
+```
+
+---
+## Linear Regression and the CEF
+
+- When the CEF function is linear, `lm()` provides you coefficients that give you conditional means like in `m1`
+  - The CEF is linear for *saturated models* in like  `m1` where the coefficients define every possible category of comparison.
+- For continuous variables, like  `m3` from the lab below, `lm()` provides a linear approximation to the CEF
+
+```{r}
+m3 <- lm(new_deaths_pc_14da ~ percent_vaccinated, covid_df,
+         subset = date == "2021-09-23")
+m3
+```
+
+
+---
+
+```{r}
+#| eval = F
+covid_df %>%
+  filter(date == "2021-09-23") %>%
+  ggplot(aes(percent_vaccinated, new_deaths_pc_14da))+
+  geom_point(size=.5,alpha=.5)+
+  stat_summary_bin(fun = "mean", 
+                   geom = "point", 
+                   col="red",
+                   bins =10
+                   )+
+  geom_smooth(method ="lm")
+```
+
+---
+
+```{r}
+#| echo = F
+covid_df %>%
+  filter(date == "2021-09-23") %>%
+  ggplot(aes(percent_vaccinated, new_deaths_pc_14da))+
+  geom_point(size=.5,alpha=.5)+
+  stat_summary_bin(fun = "mean", 
+                   geom = "point", 
+                   col="red",
+                   bins =10
+                   )+
+  geom_smooth(method ="lm")
+```
+
+
+---
+class: inverse, middle, center
+# 💡 
+## Multiple Regression
+
+---
+## Overiew: Multiple Regression
+
+- **Conceptual**
+  - Multiple linear regression generalizes simple regression to models with multiple predictors
+
+$$y_i = \beta_0 + \beta_1x_{1,i} +\beta_2x_{2,i} + \epsilon_i$$
+
+$$y_i = X\beta + \epsilon_i$$
+
+- **Practical**
+  - We estimate linear models in R using the `lm()` function using the `+` to add predictors
+  - We use the `*` to include the main effects $(\beta_1 x, \beta_2z)$ and interactions $(\beta_3 (x\cdot z))$of two predictors
+  
+```{r}
+#| eval = F
+lm(y ~ x + z, data = df)
+lm(y ~ x*z, data = df) # Is a shortcut for:
+lm(y ~ x + z + x:z, data = df)
+
+```
+
+---
+## Overiew: Multiple Regression
+
+
+- *Technical/Definitional*
+  - Simple linear regression chooses a $\hat{\beta_0}$ and $\hat{\beta_1}$  to minimize the Sum of Squared Residuals (SSR): 
+
+$$\textrm{Find }\hat{\beta_0},\,\hat{\beta_1} \text{ arg min}_{\beta_0, \beta_1} \sum (y_i-(\hat{\beta_0}+\hat{\beta_1}x_i))^2$$
+  - Multiple linear regression chooses a vector of coefficients $\hat{\beta}$ to minimize the Sum of Squared Residuals (SSR):
+  
+$$\textrm{Find }\widehat{\beta} \text{ argmin }_{\widehat{\beta}} \sum \epsilon^2=\epsilon^\prime\epsilon=(Y-X\widehat{\beta})^\prime(Y-X\widehat{\beta})$$
+
+
+- *Theoretical*
+  - Multiple Linear regression provides a **linear** estimate of the conditional expectation function (CEF): $E[Y|X]$ where $Y$ is now a function of multiple predictors, $X$
+
+
+---
+class: inverse, middle, center
+# 💡 
+## Estimating and Interpreting Multiple Regression Regression Models
+
+---
+## Political Interest and Partisan Evaluations
+
+Let's load some data from the [2016 NES](https://electionstudies.org/data-center/2016-time-series-study/) and explore the relationship between political interest and evaluations of presidential candidates:
+
+- Political Interest: "How interested are you in in politics?
+  - Very Interested
+  - Somewhat interested
+  - Not very Interested
+  - Not at all Interested
+- Feeling Thermometer: "... On the feeling thermometer scale of 0 to 100, how would you rate"
+  - Donald Trump
+  - Hillary Clinton
+
+---
+## Data
+
+```{r}
+load(url("https://pols1600.paultesta.org/files/data/nes.rda"))
+# Look at data
+dim(nes)
+head(nes)
+```
+
+---
+## Data: HLO
+
+```{r}
+table(nes$pol_interest)
+summary(nes$ft_trump)
+summary(nes$ft_hrc)
+
+```
+
+
+
+---
+## Data Wrangling/Recoding
+
+```{r}
+nes %>%
+  mutate(
+    income = ifelse(faminc > 16, NA, faminc),
+    interested = ifelse(pol_interest==3,T,F),
+    pol_interest_f = factor(case_when(
+      pol_interest == 0 ~ "Not at all Interested",
+      pol_interest == 1 ~ "Not very Interested",
+      pol_interest == 2 ~ "Somewhat Interested",
+      pol_interest == 3 ~ "Very Interested"
+    )),
+    tc_diff = abs(ft_trump - ft_hrc)
+  ) -> nes
+```
+
+---
+## Roadmap
+
+Let's estimate the following series of models, predicting the absolute value of the difference in feeling thermometer ratings between Trump and Clinton (`tc_diff`)
+
+$$\text{tc_diff} = \beta_0$$
+$$\text{tc_diff} = \beta_0 + \beta_1\text{interested}$$
+$$\text{tc_diff} = \beta_0 + \beta_1\text{pol_interest_f}$$
+$$\text{tc_diff} = \beta_0 + \beta_1\text{pol_interest}$$
+$$\text{tc_diff} = \beta_0 + \beta_1\text{interested} + \beta_2\text{age}$$
+$$\text{tc_diff} = \beta_0 + \beta_1\text{interested} + \beta_2\text{age} + \beta_3\text{interested} \times \text{age}$$
+$$\text{tc_diff} = \beta_0 + \beta_1\text{age} + \beta_2\text{income}$$
+
+---
+## `m0`: "The Empty Model"
+
+A linear model with just an intercept returns the mean of `tc_diff`
+
+```{r}
+m0 <- lm(tc_diff ~ 1, nes)
+m0
+mean(nes$tc_diff, na.rm=T)
+
+# Save Sum of Squared Residuals
+ssr0 <- sum(m0$residuals^2)
+
+```
+
+---
+#### `m1` A model with a single dichotomous predictor
+
+Now let's model `tc_diff` as function of whether respondents are very interested in politics (`interested` = T) or not (`interested` = F)
+
+```{r}
+m1 <- lm(tc_diff ~ interested, nes)
+coef(m1)
+mean(nes$tc_diff[nes$interested == F],na.rm = T)
+
+coef(m1)[1] + coef(m1)[2]
+mean(nes$tc_diff[nes$interested == T],na.rm = T)
+```
+
+
+---
+#### `m1` A model with a single dichotomous predictor
+
+- If we tell R not to include an intercept, it returns those conditional means exactly.
+
+```{r}
+m1_alt <- lm(tc_diff ~ -1+ interested, nes)
+coef(m1_alt)
+tapply(nes$tc_diff, nes$interested, mean,na.rm=T)
+```
+
+
+---
+#### `m1` A model with a single dichotomous predictor
+
+- When we compare the SSR from `m1` we see that it has decreased from `m0` reflecting the fact some of the total variation in `tc_diff` is being explained by the variation in  `interested` 
+
+```{r}
+# Save Sum of Squared Residuals
+ssr1 <- sum(m1$residuals^2)
+ssr1 < ssr0
+```
+
+---
+#### `m2` A model with a single categoical predictor
+
+Now let's model `tc_diff` as function of the categorical predictor `pol_interest_f`, which is a factor variable of the four unique levels of political interest
+
+```{r}
+m2 <- lm(tc_diff ~ pol_interest_f, nes)
+m2
+```
+
+- Woah, why did R turn a single variable into model with four coefficients?
+
+---
+
+When we give `lm()` factor or character data, 
+
+
+```{r}
+head(m2$model)[1:4,]
+```
+
+
+It converts this data in separate binary indicators for each level excluding the first ("Not at all interested"), that take a value of 1 when `pol_interest_f` equals that level and 0 otherwise
+
+```{r}
+head(model.matrix(m2))[1:4,]
+```
+
+
+---
+## `m2` A model with a single categoical predictor
+
+The coefficients in `m2` tell us how the conditional mean of `tc_diff` for someone with a given level of interest is likely to very from the conditional mean of `tc_diff` for someone that is not at all interested in politics.
+
+```{r}
+tapply(nes$tc_diff, nes$pol_interest_f, mean,na.rm=T)
+```
+
+- `Not at all interested` is the *reference* or *excluded* category, described by the intercept coefficient in `m2`
+
+---
+## `m2` A model with a single categoical predictor
+
+
+```{r}
+# Compare to
+# Not at all
+coef(m2)[1]
+# Not very
+coef(m2)[1] + coef(m2)[2]
+# Somewhat
+coef(m2)[1] + coef(m2)[3]
+# Very
+coef(m2)[1] + coef(m2)[4]
+```
+
+---
+## `m2` A model with a single categorical predictor
+
+- Again if we excluded the intercept `lm()` returns the conditional means
+
+```{r}
+m2_alt <- lm(tc_diff ~ -1+ pol_interest_f, nes)
+coef(m2_alt)
+tapply(nes$tc_diff, nes$pol_interest_f, mean,na.rm=T)
+```
+
+---
+## `m2` A model with a single categorical predictor
+
+
+- Finally, note that the SSR for `m2` is lower than that of `m1`. Including more information about varying levels of political interest helped us explain more variation in our outcome
+
+```{r}
+# Save Sum of Squared Residuals
+ssr2 <- sum(m2$residuals^2)
+ssr2 < ssr1
+```
+
+
+---
+## `m3` A model with a single numeric predictor
+
+What if we had instead modeled `tc_diff` as a function of `pol_interest`
+
+```{r}
+m3 <- lm(tc_diff ~ pol_interest, nes)
+m3
+```
+
+`lm()` returns a single coefficient, because `pol_interest` is a numeric variable.
+
+
+---
+## Comparing `m2` to `m3`
+
+```{r}
+#| eval = F
+nes %>%
+  ggplot(aes(pol_interest,tc_diff))+
+  geom_jitter(size=.5, alpha=.5)+
+  geom_smooth(method ="lm", aes(col = "m3"),se=F)+
+  stat_summary(geom ="point",
+               fun = mean,
+               aes(col = "m2")
+               )+
+  labs(col = "Model")
+```
+
+
+---
+#### Comparing `m2` to `m3`
+
+```{r}
+#| echo = F
+nes %>%
+  ggplot(aes(pol_interest,tc_diff))+
+  geom_jitter(size=.5, alpha=.5)+
+  geom_smooth(method ="lm", aes(col = "m3"),se=F)+
+  stat_summary(geom ="point",
+               fun = mean,
+               aes(col = "m2")
+               )+
+  labs(col = "Model")
+```
+
+
+---
+#### `m4`: A model with both a dichtomous and continuous predictor
+
+Now let's estimate a multiple regression model "controlling" for age
+
+```{r}
+m4 <- lm(tc_diff ~ interested + age, nes)
+coef(m4)
+```
+
+Note the size of the coefficient on `interested` has decreased, compared to `m1`. Part of the variation `tc_diff` explained by `interested` reflected variation explained by `age`
+
+```{r}
+coef(m1)[1]
+coef(m4)[2]
+```
+
+- Mechanically, we sometimes say the coefficient on `interested` shifts the intercept of the line describing the relationship between `tc_diff` and age.
+
+---
+```{r}
+#| echo = F
+nes%>%
+  ggplot(aes(age, tc_diff))+
+  geom_point()+
+  geom_abline(aes(intercept = coef(m4)[1],
+                  slope = coef(m4)[3],
+                  col = "Not interested"))+
+  geom_abline(aes(intercept = coef(m4)[1] + coef(m4)[2],
+                  slope = coef(m4)[3],
+                  col = "Interested"))+
+  labs(
+    col = "Interested?"
+  )
+```
+
+
+
+
+
+
+
+---
+#### `m5`: A model with an interaction between a dichtomous and continuous predictor
+
+What if we think the relationship between `age` and `tc_diff` varies depending on a person's level of political interest?
+
+We could fit an interacton model:
+
+```{r}
+m5 <- lm(tc_diff ~ interested*age, nes)
+coef(m5)
+```
+
+
+---
+
+Mechanically, R takes the data
+
+```{r}
+head(m5$model)
+```
+
+And creates a model matrix:
+
+```{r}
+head(model.matrix(m5))
+```
+
+---
+#### `m5`: A model with an interaction between a dichtomous and continuous predictor
+
+This interaction model essentially estimates separate models describing the relationship between `tc_diff` and `age`  for the uninterested...
+
+```{r}
+m5_uninterested <- lm(tc_diff ~ age, nes,
+                    subset = interested == F)
+coef(m5_uninterested)
+coef(m5)[1]
+coef(m5)[3]
+```
+
+
+---
+#### `m5`: A model with an interaction between a dichtomous and continuous predictor
+
+And interested
+
+```{r}
+m5_interested <- lm(tc_diff ~ age, nes,
+                    subset = interested == T)
+coef(m5_interested)
+coef(m5)[1] +coef(m5)[2]
+coef(m5)[3] +coef(m5)[4]
+
+```
+
+---
+
+```{r}
+nes %>%
+  filter(!is.na(interested))%>%
+  ggplot(aes(age, tc_diff, col = interested))+
+  geom_point(size = .5, alpha = .5)+
+  geom_smooth(method ="lm")
+```
+
+
+---
+#### `m6`: A model with an two continuous predictors
+
+Now lets model `tc_diff` as a function of two predictors: `age` and `income`
+
+```{r}
+m6 <- lm(tc_diff ~ age + income, nes)
+m6
+```
+
+We interpret this model as saying:
+
+- Controlling for `income`, as `age` increases by 1 we can expect the predicted difference in `tc_diff` to increase by 0.40
+- Controlling for `age`, as `income` increases by 1 we can expect the predicted difference in `tc_diff` to increase by 0.16
+
+---
+```{r}
+#| echo = F
+
+s3d <-with(nes, scatterplot3d(age,income,tc_diff ,
+      pch=16,cex.symbols=.5, type="p",angle=70))
+s3d$plane3d(m6,col="red")
+
+
+```
+
+
+
+---
+## Multiplicative interactions with a continuous moderator
+
+Suppose we wanted to fit an interaction between two continuous variables like `age` and `income`. 
+
+The general form of this model is
+
+$$
+Y= \beta_0 + \beta_1X + \beta_2 +\beta_3X\times Z + \epsilon
+$$
+
+- The marginal effect of X on Y, now depends on the value of Z at which you evaluate the relationship
+
+$$
+\frac{\partial Y}{\partial X}=\beta_1+\beta_3Z
+$$
+
+---
+
+Easier to show this with some simulated data:
+
+```{r}
+#| echo = F
+set.seed(123)
+X<-rnorm(200,5,2)
+Z<-rnorm(200,5,2)
+Y<-2+2*X+3*Z+-3*X*Z+rnorm(200,1,4)
+m7<-lm(Y~X*Z)
+nx <- seq(min(c(X,Z)), max(c(X,Z)), length.out = 50)
+z <- outer(nx, nx, FUN = function(a, b) predict(m7, data.frame(X = a, Z = b)))
+pmat<-persp(nx, nx, z, theta = 0, phi = 10, shade = 0.75, xlab = "X", ylab = "Z", 
+    zlab = "Y")
+depth3d <- function(x,y,z, pmat, minsize=0.2, maxsize=2) {
+
+  # determine depth of each point from xyz and transformation matrix pmat
+  tr <- as.matrix(cbind(x, y, z, 1)) %*% pmat
+  tr <- tr[,3]/tr[,4]
+
+  # scale depth to point sizes between minsize and maxsize
+  psize <- ((tr-min(tr) ) * (maxsize-minsize)) / (max(tr)-min(tr)) + minsize
+  return(psize)
+}
+psize = depth3d(X,Z,Y,pmat,minsize=0.1, maxsize = 1)
+mypoints <- trans3d(X, Z, Y, pmat=pmat)
+points(mypoints, cex=psize, col=4)
+
+```
+
+
+---
+```{r}
+#| echo = F
+pmat<-persp(nx, nx, z, theta = 45, phi = 10, shade = 0.75, xlab = "X", ylab = "Z", 
+    zlab = "Y")
+psize = depth3d(X,Z,Y,pmat,minsize=0.1, maxsize = 1)
+mypoints <- trans3d(X, Z, Y, pmat=pmat)
+points(mypoints, cex=psize, col=4)
+```
+
+
+---
+class: inverse, middle, center
+# 💡 
+## Reading Regression Tables
+
+
+---
+## Regression Tables
+
+- Academic articles are littered with regression tables.
+
+- Below we'll see how to produce regression tables in R
+
+- Learn some heuristics for how to interpret regression tables
+  - We'll cover the theory behind these heuristics in the coming weeks
+  
+
+---
+## Making Regression Tables in R
+
+We can make a very simple regression table using the `htmlreg` function from the `texreg` package
+
+```{r}
+#| eval = F
+texreg::htmlreg(
+  list(m0,m1,m3,m4,m5,m6)
+)
+```
+  
+
+---
+
+```{r}
+#| echo = F
+texreg::htmlreg(
+  list(m0,m1,m3,m4,m5,m6)
+)
+```
+  
+---
+Yuck, we need to set a argument in the chunk header to results="asis"
+
+````
+
+```{r echo=F, results = "asis"}`r`''`
+texreg::htmlreg(
+  list(m0,m1,m3,m4,m5,m6)
+)
+
+```
+
+````
+
+---
+
+```{r}
+#| echo = F,
+#| results = "asis",
+#| out.height = "60%"
+texreg::htmlreg(
+  list(m0,m1,m3,m4,m5,m6),
+    
+)
+
+```
+  
+
+
+---
+## Interpreting Regression Tables (Stargazing)
+
+- Each column is a model
+- Each row is a coefficient from that model with its  **standard error** (more to come) in parantheses below
+- The bottom of the table shows summary stastitics of the model ( $R^2$ = proportion of variance explained)
+- Coefficients with asterisks `*` are **statistically significant**
+  - It is unlikely that we would see a coefficient this big or bigger if the true coefficient were 0
+- Rule of thumb:
+
+$$\text{If }\frac{\beta}{se} > 2 \to \text{Statistically Significant}$$
+
+
+---
+class: inverse, middle, center
+# 💡 
+## Summary
+
+---
+## Summary
+
+Today we estimated and interpreted a series of multiple regression models
+
+- The coefficients in these models still describe slopes (partial derivatives), now for planes (and hyper planes)
+
+- Controlling for variables is easy in `lm()`
+
+```{r}
+#| eval = F
+m1 <- lm(y ~ x, data=df)
+m2 <- lm(y ~ x + z, data=df)
+
+```
+
+In the lab and next week, we will start to explore
+
+- What it means to "control for x"
+- How can we compare different models
+- How can we interpret predictions from multiple regression

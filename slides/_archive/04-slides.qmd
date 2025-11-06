@@ -1,0 +1,2573 @@
+---
+title: "Week 04:"
+subtitle: "Casual Inference in Observational Designs"
+author: "Paul Testa"
+output:
+  xaringan::moon_reader:
+    css: ["default", "css/brown.css"]
+    lib_dir: libs
+    nature:
+      highlightStyle: atelier-lakeside-light
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+```{r}
+#| label = "setup",
+#| include = FALSE
+options(htmltools.dir.version = FALSE)
+options(blogdown.knit.on_save = FALSE)
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, 
+  comment = NA, dpi = 400,
+  fig.align = "center", out.width = "80%",
+  cache = TRUE)
+
+# Run setup
+# <<packages>>
+# <<ipak>>
+# <<loadpackages>>
+
+# ---- Slides ----
+
+## Tileview
+xaringanExtra::use_tile_view()
+# Clipboard
+htmltools::tagList(
+  xaringanExtra::use_clipboard(
+    button_text = "<i class=\"fa fa-clipboard\"></i>",
+    success_text = "<i class=\"fa fa-check\" style=\"color: #90BE6D\"></i>",
+  ),
+  rmarkdown::html_dependency_font_awesome()
+)
+```
+
+```{r}
+#| label = "pacakges",
+#| include = F
+the_packages <- c(
+  ## R Markdown
+  "kableExtra","DT",
+  
+  ## Tidyverse
+  "tidyverse", "lubridate", "forcats", "haven", "labelled",
+  
+  ## Extensions for ggplot
+  "ggmap","ggrepel", "ggridges", "ggthemes", "ggpubr", 
+  "GGally", "scales", "dagitty", "ggdag","ggforce",
+  
+  # Data 
+  "COVID19","maps","mapdata","qss",
+  "tidycensus", "dataverse", #<<
+  
+  # Analysis
+  "DeclareDesign", "easystats" #<<
+)
+```
+
+```{r}
+#| label = "ipak",
+#| include = F
+ipak <- function(pkg){
+    new.pkg <- pkg[!(pkg %in% installed.packages()[, "Package"])]
+    if (length(new.pkg)) 
+        install.packages(new.pkg, dependencies = TRUE)
+    sapply(pkg, require, character.only = TRUE)
+}
+
+```
+
+
+```{r}
+#| label = "loadpackages",
+#| include = F
+ipak(the_packages)
+```
+
+
+class: inverse, center, middle
+background-image:url(https://images.gnwcdn.com/2021/articles/2021-11-02-21-59/overwatch-2-and-diablo-4-have-been-delayed-1635890355123.jpg/EG11/resize/1200x-1/overwatch-2-and-diablo-4-have-been-delayed-1635890355123.jpg)
+background-size:cover
+
+# Overview
+
+---
+## General Plan
+
+- Setup
+  - Packages
+  - Data
+- Review
+  - Statistical programming
+  - Descriptive statistics
+  - Data visualization
+  - Causal inference
+- Experimental vs Observational Studies
+- Three Approaches to Covariate Adjustment
+  - Subclassification
+  - Matching
+  - Regression
+  
+Tuesday:
+
+- Three Designs for Causal Inference in Observational Studies
+  - Difference in Differences
+  - Regression Discontinuity
+  - Instrumental Variables
+
+---
+## What you'll learn
+
+- Causal inference in observational and experimental studies is about counterfactual comparisons
+- In observational studies, to make causal claims we generally make some  assumption of conditional independence:
+
+$$
+Y_i(1),Y_i(0) \perp D_i |X_i
+$$
+
+- The credibility of this assumption depends less on the data, and more on how the data were generated.
+  - **Selection on Observables** is rarely a credible assumption
+- Observational designs that produce credible causal inference, leverage aspects of the world that create *natural experiments*
+- You should be able to describe the logic and assumptions of common designs in social science 
+  - **Difference-in-Differences:** *Parallel Trends* 
+  - **Regression Discontiniuity:** *Continuity at the cutoff*
+  - **Instrumental Variables:** Instruments need to be *Relevant and Exogenous*
+
+
+---
+class:inverse, middle, center
+# 💪
+## Get set up to work
+
+---
+## New packages
+
+Let's try installing these packages manually: 
+
+```{r}
+#| label = "newpacks1",
+#| eval = FALSE
+install.packages("dataverse")
+```
+
+```{r}
+#| label = "newpacks2",
+#| eval = FALSE
+install.packages("tidycensus")
+```
+
+```{r}
+#| label = "newpacks3",
+#| eval = FALSE
+install.packages("easystats", repos = "https://easystats.r-universe.dev")
+```
+
+```{r}
+#| label = "newpacks4",
+#| eval = FALSE
+install.packages("DeclareDesign")
+```
+
+- Some further guidance available [here](https://pols1600.paultesta.org/slides/04-packages.html)
+
+- Particular, for next week, please follow the instructions to [install a Census API key in R](https://pols1600.paultesta.org/slides/04-packages.html#3_Install_a_Census_API_tidycensus_package)
+
+---
+## Packages for today
+
+
+```{r}
+#| ref.label = c("packages")
+
+```
+
+---
+## Define a function to load (and if needed install) packages
+
+
+```{r}
+#| ref.label = "ipak"
+```
+
+---
+## Load packages for today
+
+```{r}
+#| ref.label = "loadpackages"
+```
+
+
+---
+class:inverse, center, middle
+# 💪
+## Load Data for today
+
+---
+## Load Data for today
+
+We'll load the data we need in some of the examples below as well:
+
+```{r}
+## Lab data
+load(url("https://pols1600.paultesta.org/files/data/03_lab.rda"))
+
+## RDD data
+library(qss)
+data(MPs)
+```
+
+
+
+---
+## Review: What have we covered
+
+ 
+- Statistical Programming
+  - [Slides 02](https://pols1600.paultesta.org/slides/02-slides.html#72) on Data Wrangling
+  - [Cheat sheets](https://www.rstudio.com/resources/cheatsheets/)
+  - QSS: Chapter 1.3, Chapter 2.2
+
+--
+
+- Descriptive statistics
+
+  - [Slides 01](https://pols1600.paultesta.org/slides/01-slides.html#112), [Lab 01](https://pols1600.paultesta.org/labs/01-lab-comments.html#8_Explore_R%E2%80%99s_functions_for_generating_summary_statistics)
+  - QSS: Chapter 2.6, Chapter 3,6, Exercises 1.5,
+
+--
+
+- Data visualization as tool for descriptive inference
+
+  - [Slides 02](https://pols1600.paultesta.org/slides/02-slides.html#16), [Lab 02](https://pols1600.paultesta.org/labs/02-lab-comments.html#Outline_the_steps_you_will_need_to_complete_this_process)
+  -  [ggplot2](https://raw.githubusercontent.com/rstudio/cheatsheets/main/data-visualization.pdf) cheat sheet
+  - QSS: Chapter 1.3, Chapter 2.2, Chapter 3.3, 3.6
+
+--
+
+- Causal inference in experimental designs
+  - [Slides 03](https://pols1600.paultesta.org/slides/03-slides.html#39), [Lab 03](https://pols1600.paultesta.org/labs/03-lab-comments.html#8_Calculate_the_Average_Treatment_Effect)
+  - QSS: Chapter 2.3, 2.4
+
+
+
+---
+class:inverse, middle, center
+# 🔍
+## Statistical Programming
+
+---
+##  Mapping Concepts to Code
+
+```{r}
+#| label = "spdf",
+#| echo = F
+sp_df <- tibble(
+  Skill = c("Setup R",
+            "Load data",
+            "Get HLO of data",
+            "Transform data",
+            "Reshape data",
+            "Summarize data numerically",
+            "Summarize data graphically"),
+  `Common Commands` = c("library(), ipak()",
+               "read_csv(), load()",
+               "df$x, glimpse(), table(), summary()",
+               "<-, mutate(), ifelse(), case_when()",
+               "pivot_longer(), left_join()",
+               "mean(), median(), summarise(), group_by()",
+               "ggplot(), aes(), geom_")
+)
+
+kable(sp_df, 
+      caption = "You're learning how to map conceptual tasks to commands in R",
+      caption.above=T)
+
+```
+
+---
+##  Mapping Concepts to Code
+
+- Takes time and practice
+
+- Don't be afraid to FAAFO
+
+- Don't worry about memorizing everything. 
+
+- Statistical programming is necessary to actually **do** empirical research
+
+- Learning to code will help us understand statistical concepts.
+
+- Learning to think programmatically and algorithmically will help us tackle complex problems
+
+
+---
+## Data Wrangling from the Lab:
+
+```{r}
+#| echo = TRUE,
+#| eval = F
+df %>%
+  # Calculate difference between Survey and Non-Survey Takers
+  group_by(treatment_assigned) %>%
+  filter(!is.na(treatment_assigned)) %>%
+  # Calculate means for variables that start with "therm_trans"
+  summarise(across(starts_with("therm_trans"), \(x) mean(x, na.rm = TRUE)))%>%
+  # Transpose (flip) data
+  pivot_longer(
+    cols = starts_with("therm_trans"),
+    names_to = "Covariate",
+    values_to = "Means"
+  ) %>%
+  # Gather means into separate columns by treatment status
+  pivot_wider(
+    names_from = treatment_assigned,
+    values_from = Means
+  )%>%
+  # Calculate ATEs, add labels
+  mutate(
+    ATE = `Trans-Equality` - Recycling,
+    Days = c(0,3,21,42,90)
+    )-> ate_df
+```
+
+
+---
+
+```{r}
+#| echo = T,
+#| eval = F
+df %>%
+  # Calculate difference between Survey and Non-Survey Takers
+  group_by(treatment_assigned) %>%
+  filter(!is.na(treatment_assigned)) %>%
+  # Calculate means for variables that start with "therm_trans"
+  summarise(across(starts_with("therm_trans"), \(x) mean(x, na.rm = TRUE))) #<<
+```
+
+
+
+```{r}
+#| echo = F,
+#| eval = T
+df %>%
+  # Calculate difference between Survey and Non-Survey Takers
+  group_by(treatment_assigned) %>%
+  filter(!is.na(treatment_assigned)) %>%
+  # Calculate means for variables that start with "therm_trans"
+  summarise(across(starts_with("therm_trans"), \(x) mean(x, na.rm = TRUE)))
+```
+
+---
+
+```{r}
+#| echo = T,
+#| eval = F
+df %>%
+  # Calculate difference between Survey and Non-Survey Takers
+  group_by(treatment_assigned) %>%
+  filter(!is.na(treatment_assigned)) %>%
+  # Calculate means for variables that start with "therm_trans"
+  summarise(across(starts_with("therm_trans"), \(x) mean(x, na.rm = TRUE))) %>% 
+  # Transpose (flip) data
+  pivot_longer(  #<<
+    cols = starts_with("therm_trans"), #<<
+    names_to = "Covariate", #<<
+    values_to = "Means" #<<
+  ) #<<
+```
+
+
+
+```{r}
+#| echo = F,
+#| eval = T
+df %>%
+  # Calculate difference between Survey and Non-Survey Takers
+  group_by(treatment_assigned) %>%
+  filter(!is.na(treatment_assigned)) %>%
+  # Calculate means for variables that start with "therm_trans"
+  summarise(across(starts_with("therm_trans"), \(x) mean(x, na.rm = TRUE))) %>% 
+  # Transpose (flip) data
+  pivot_longer(  #<<
+    cols = starts_with("therm_trans"), #<<
+    names_to = "Covariate", #<<
+    values_to = "Means" #<<
+  ) #<<
+```
+
+---
+
+```{r}
+#| echo = T,
+#| eval = F
+df %>%
+  group_by(treatment_assigned) %>%
+  filter(!is.na(treatment_assigned)) %>%
+  summarise(across(starts_with("therm_trans"), \(x) mean(x, na.rm = TRUE)))%>%
+  pivot_longer(
+    cols = starts_with("therm_trans"),
+    names_to = "Covariate",
+    values_to = "Means"
+  ) %>%
+  # Gather means into separate columns by treatment status
+  pivot_wider(  #<<
+    names_from = treatment_assigned,  #<<
+    values_from = Means  #<<
+  )  #<<
+```
+
+
+
+```{r}
+#| echo = F,
+#| eval = T
+df %>%
+  group_by(treatment_assigned) %>%
+  filter(!is.na(treatment_assigned)) %>%
+  summarise(across(starts_with("therm_trans"), \(x) mean(x, na.rm = TRUE)))%>%
+  pivot_longer(
+    cols = starts_with("therm_trans"),
+    names_to = "Covariate",
+    values_to = "Means"
+  ) %>%
+  # Gather means into separate columns by treatment status
+  pivot_wider(
+    names_from = treatment_assigned,
+    values_from = Means
+  )
+```
+
+---
+
+```{r}
+#| echo = T,
+#| eval = F
+df %>%
+  group_by(treatment_assigned) %>%
+  filter(!is.na(treatment_assigned)) %>%
+  summarise(across(starts_with("therm_trans"), \(x) mean(x, na.rm = TRUE)))%>%
+  pivot_longer(
+    cols = starts_with("therm_trans"),
+    names_to = "Covariate",
+    values_to = "Means"
+  ) %>%
+  pivot_wider(
+    names_from = treatment_assigned,
+    values_from = Means
+  )%>%
+  # Calculate ATEs, add labels, save output
+  mutate(  #<<
+    ATE = `Trans-Equality` - Recycling, #<<
+    Days = c(0,3,21,42,90) #<<
+    )-> ate_df #<<
+ate_df #<<
+```
+
+
+
+```{r}
+#| echo = F,
+#| eval = T
+df %>%
+  group_by(treatment_assigned) %>%
+  filter(!is.na(treatment_assigned)) %>%
+  summarise(across(starts_with("therm_trans"), \(x) mean(x, na.rm = TRUE)))%>%
+  pivot_longer(
+    cols = starts_with("therm_trans"),
+    names_to = "Covariate",
+    values_to = "Means"
+  ) %>%
+  pivot_wider(
+    names_from = treatment_assigned,
+    values_from = Means
+  )%>%
+  # Calculate ATEs, add labels, save output
+  mutate(
+    ATE = `Trans-Equality` - Recycling,
+    Days = c(0,3,21,42,90)
+    )-> ate_df
+ate_df
+```
+
+
+---
+class: inverse, middle, center
+# 🔍
+## Descriptive statistics
+
+
+---
+## Descriptive statistics
+
+- Descriptive statistics help us describe what's typical of our data
+
+--
+- What's a typical value in our data
+  - [Mean](https://pols1600.paultesta.org/labs/01-lab-comments.html#81_Measures_of_Central_Tendency)
+  - [Median](https://pols1600.paultesta.org/labs/01-lab-comments.html#81_Measures_of_Central_Tendency)
+  - [Mode](https://pols1600.paultesta.org/labs/01-lab-comments.html#81_Measures_of_Central_Tendency)
+
+--
+- How much do our data vary?
+  - [Variance](https://pols1600.paultesta.org/labs/01-lab-comments.html#82_Measures_of_Dispersion)
+  - [Standard deviation](https://pols1600.paultesta.org/labs/01-lab-comments.html#82_Measures_of_Dispersion)
+
+--
+- As one variable changes how does another change?
+  - [Covariance](https://pols1600.paultesta.org/labs/01-lab-comments.html#83_Measures_of_Association)
+  - [Correlation](https://pols1600.paultesta.org/labs/01-lab-comments.html#83_Measures_of_Association)
+
+--
+- Descriptive statistics are:
+  - Diagnostic
+  - Generative
+
+
+---
+## Descriptive statistics: Levels of understanding
+
+- Conceptual
+
+- Practical
+
+- Definitional
+
+- Theoretical
+
+---
+## Descriptive statistics: Levels of understanding
+
+- **Conceptual**
+
+- **Practical**
+
+- Definitional
+
+- Theoretical
+
+
+---
+## Mean: Conceptual Understanding
+
+A mean is:
+  
+- A common and important measure of central tendency (what's typical)
+
+- It's the arithmetic average you learned in school
+
+- We can think of it as the balancing point of a distribution
+
+- A conditional mean is the average of one variable $X$, when some other variable, $Z$ takes a value $z$
+
+  - Think about the average height in our class (unconditional mean) vs the average height among men and women (conditional means)
+
+
+---
+## Mean as a balancing point
+
+
+![](https://mathbitsnotebook.com/Algebra1/StatisticsData/balancepoint1.jpg)
+
+[Source](https://mathbitsnotebook.com/Algebra1/StatisticsData/STCenter.html)
+
+---
+## Mean: Practical
+
+There are lots of ways to calculate means in `R`
+
+- The simplest is to use the `mean()` function
+  
+  - If our data have missing values, we need to to tell `R` to remove them 
+  
+```{r}
+#| label = "meanex",
+#| eval = F
+mean(df$x, na.rm=T)
+```
+
+---
+## Conditional Means: Practical
+
+  
+- To calculate a conditional mean we could us a logical index `[df$z == 1]` 
+
+```{r}
+#| label = "conmean",
+#| eval = F
+mean(df$x[df$z == 1], na.rm=T)
+```
+
+--
+  
+- If we wanted to a calculate a lot of conditional means we could use the `mean()` in combination with `group_by()` and `summarise()`
+
+```{r}
+#| label = "grpmean",
+#| eval = F
+df %>% 
+  group_by(z)%>%
+  summarise(
+    x = mean(x, na.rm=T)
+  )
+```
+
+
+---
+## Mean: Definitional
+
+Formally, we  define the arithmetic mean of $x$ as $\bar{x}$:
+
+$$
+\bar{x} = \frac{1}{n}\left (\sum_{i=1}^n{x_i}\right ) = \frac{x_1+x_2+\cdots +x_n}{n}
+$$
+
+In words, this formula says, to calculate the average of x, we sum up all the values of $x_i$ from observation $i=1$ to $i=n$ and then divide by the total number of observations $n$
+
+
+---
+## Mean: Definitional
+
+- In this class, I don't put a lot of weight on memorizing definitions (that's what Google's for).
+
+- But being comfortable with "the math" is important and useful
+
+- Definitional knowledge is a prerequisite for understanding more theoretical claims.
+
+---
+## Mean: Theoretical
+
+Suppose I asked you to show that the sum of deviations from a mean equals 0?
+
+$$
+\text{Claim:} \sum_{i=1}^n (x_i -\bar{x}) = 0
+$$
+
+---
+## Mean: Theoretical
+
+Knowing the definition of an arithmetic mean, we could write: 
+
+
+$$\begin{aligned}
+\sum_{i=1}^n (x_i -\bar{x}) &= \sum_{i=1}^n x_i - \sum_{i=1}^n\bar{x} & \text{Distribute Summation}\\
+              &= \sum_{i=1}^n x_i - n\bar{x} & \text{Summing a constant, } \bar{x}\\
+              &= \sum_{i=1}^n x_i - n\times \left ( \frac{1}{n} \sum_{i=1}^n{x_i}\right ) & \text{Definition of } \bar{x}\\
+              &= \sum_{i=1}^n x_i - \sum_{i=1}^n{x_i} & n \times \frac{1}{n}=1\\
+              &= 0             
+\end{aligned}$$
+
+
+---
+## Mean: Theoretical
+
+Why do we care?
+
+- Showing the deviations sum to 0 is another way of saying the mean is a "balancing point." 
+
+- This turns out to be a useful property of means that will reappear throughout the course
+
+- If I asked you to make a prediction, $\hat{x}$ of a random person's height in this class, the mean would have the lowest "mean squared error" (MSE $=\frac{1}{n}\sum (x_i - \hat{x_i})^2)$ 
+
+
+
+---
+## Mean: Theoretical
+
+Occasionally, you'll read or here me say  say things like:
+
+> The sample mean is an unbiased estimator of the population mean
+
+In a statistics class, we would take time to prove this.
+
+
+---
+## The sample mean is an unbiased estimator of the population mean
+
+Claim:
+
+Let $x_1, x_2, \dots x_n$ from a random sample from a population with mean $\mu$ and variance $\sigma^2$
+
+Then:
+
+$$
+\bar{x} = \frac{1}{n}\left (\sum_{i=1}^n x_i\right )
+$$
+
+is an unbiased estimator of $\mu$
+
+$$
+E[\bar{x}] = \mu
+$$
+
+---
+## The sample mean is an unbiased estimator of the population mean
+
+
+Proof:
+
+$$\begin{aligned}
+E\left [\bar{x} \right] &= E\left [\frac{1}{n}\left (\sum_{i=1}^n x_i \right) \right] & \text{Definition of } \bar{x} \\
+&= \frac{1}{n} \sum_{i=1}^nE\left [ x_i \right]  & \text{Linearity of Expectations} \\
+&= \frac{1}{n} \sum_{i=1}^n \mu  & E[x_i] = \mu \\
+&= \frac{n}{n}  \mu  & \sum_{i=1}^n \mu = n\mu \\
+&= \mu  & \blacksquare \\
+\end{aligned}$$
+
+
+---
+## Levels of understanding
+
+In this course, we tend to emphasize the 
+
+- **Conceptual**
+
+- **Practical**
+
+Over
+
+- Definitional
+
+- Theoretical
+
+
+In an intro statistics class, the ordering might be reversed.
+
+Trade offs:
+
+- Pro: We actually get to *work with data* and *do empirical research* much sooner
+- Cons: We substitute intuitive understandings for more rigorous proofs
+
+
+---
+class:inverse, middle, center
+# 🔍
+## Data visualization
+
+
+---
+## Data visualization as a tool for descriptive inference
+
+A statistical graphic is a mapping of `data` variables to `aes` thetic attributes of `geom` etric objects.
+
+At a minimum, a graphic contains three core components:
+
+- `data:` the dataset containing the variables of interest.
+- `aes`: aesthetic attributes of the geometric object. For example, x/y position, color, shape, and size. Aesthetic attributes are mapped to variables in the dataset.
+- `geom:` the geometric object in question. This refers to the type of object we can observe in a plot For example: points, lines, and bars.
+
+[Ismay and Kim (2022)](https://moderndive.com/2-viz.html#grammarofgraphics)
+
+
+---
+## Data Visualization from the Lab
+```{r}
+#| eval = F
+ate_df %>%
+  ggplot(aes(Days, ATE))+
+  geom_point()+
+  geom_hline(yintercept = 0,linetype=2)+
+  theme_bw()+
+  labs(x="Days Since Treatment",
+       y = "ATE on Feeling Thermometers\n toward Transgender People")
+```
+
+
+---
+
+```{r}
+#| echo = F
+ate_df %>%
+  ggplot(aes(Days, ATE))+
+  geom_point()+
+  geom_hline(yintercept = 0,linetype=2)+
+  theme_bw()+
+  labs(x="Days Since Treatment",
+       y = "ATE on Feeling Thermometers\n toward Transgender People")
+```
+
+
+---
+## ATEs with Confidence Intervals
+
+```{r}
+#| label = "atecis"
+df %>%
+  # Get the select the columns whose names start with vf_
+  select(starts_with("therm_trans"))%>%
+  # Extract the column names
+  names()%>%
+  # Create the formulas to calculate the diff in means for
+  # Each variable
+  purrr::map(~ formula(paste0(.," ~ treatment_group"))) %>%
+  # Caclulate the difference in means for each variable
+  purrr::map(~difference_in_means(., data = df)) %>%
+  # Put the output into a tidy data frame.
+  map_df(tidy)%>%
+  mutate(
+    ATE = estimate,
+    Days = c(0,3,21,42,90)
+  ) -> ate_df
+ate_df[,-1]
+```
+
+---
+
+```{r}
+#| eval = FALSE
+ate_df %>%
+  ggplot(aes(Days, ATE))+
+  geom_point()+
+  geom_linerange(aes(ymin=conf.low, ymax=conf.high))+ #<<
+  geom_hline(yintercept = 0,linetype=2)+
+  theme_bw()+
+  labs(x="Days Since Treatment",
+       y = "ATE on Feeling Thermometers\n toward Transgender People")
+```
+
+
+---
+
+```{r}
+#| echo = FALSE
+ate_df %>%
+  ggplot(aes(Days, ATE))+
+  geom_point()+
+  geom_linerange(aes(ymin=conf.low, ymax=conf.high))+
+  geom_hline(yintercept = 0,linetype=2)+
+  theme_bw()+
+  labs(x="Days Since Treatment",
+       y = "ATE on Feeling Thermometers\n toward Transgender People")
+```
+
+
+---
+## Data visualization is an iterative process
+
+- Data visualization is an iterative process
+
+- Good data viz requires lots of data transformations
+
+- Start with a minimum working example and build from there
+
+- Don't let the perfect be the enemy of the good enough.
+
+
+---
+class:inverse, middle, center
+# 🔍
+## Causal inference
+
+
+---
+## Causal inference is about counterfactual comparisons
+
+- Causal inference is about counterfactual comparisons
+  
+  - What would have happened if some aspect of the world either had or had not been present
+
+---
+## Causal inference is about counterfactual comparisons
+
+Two ways to represent causal claims
+
+--
+
+- DAGs helped illustrate types of bias
+  - **Confounder bias:** Failing to control for a common cause (aka Selection Bias, Omitted Variable Bias)
+  - **Collider bias:** Controlling for a common consequence 
+
+--
+
+- Potential Outcomes Notation helped illustrate the **Fundamental Problem of Causal Inference**
+
+---
+## Fundamental Problem of Causal Inference
+
+- For an individual, we only observe one of potential many potential outcomes.
+  
+  - Did taking an aspirin make your headache go away?
+  
+  - Need to compare you with aspirin and without, but only see one version of the world.
+
+- Individual Causal Effects are **unidentified**
+
+---
+## Causal Identification
+
+
+- Causal Identification: What do we need to assume for your causal claim to be credible
+
+- Randomization offers a solution to the fundamental problem by ensuring that treatment is independent of potential outcomes $(Y(1), Y(0))$, observed $(X)$, and unobserved covariates $(U)$.
+
+$$
+Y(1), Y(0),X,U, \perp D
+$$
+
+---
+## Randomization creates credible counterfactual comparisons
+
+If treatment has been randomly assigned, then:
+
+- The only thing that differs between treatment and control is that one group got the treatment, and another did not.
+- We can estimate the Average Treatment Effect (ATE) using the difference of sample means
+
+
+$$\begin{aligned}
+E \left[ \frac{\sum_1^m Y_i}{m}-\frac{\sum_{m+1}^N Y_i}{N-m}\right]&=\overbrace{E \left[ \frac{\sum_1^m Y_i}{m}\right]}^{\substack{\text{Average outcome}\\
+\text{among treated}\\ \text{units}}}
+-\overbrace{E \left[\frac{\sum_{m+1}^N Y_i}{N-m}\right]}^{\substack{\text{Average outcome}\\
+\text{among control}\\ \text{units}}}\\
+&= E [Y_i(1)|D_i=1] -E[Y_i(0)|D_i=0]
+\end{aligned}$$
+
+---
+## What's the counterfactual?
+
+> Broadly speaking, I don't like computers. I don't like bending over the small desks, staring at a screen, etc. The class is fine: it's something I have to do, all things worth doing are difficult, and I'm learning to think in new ways. That said, I tend to doubt that computer programing is conducive to human flourishing. Would the world be a better place if everyone learned how to code? I tend to think no. Would the world be a better place if everyone read Shakespeare? Probably. This isn't really a practical concern, but rather a question about, y'know, what we're doing here. 
+
+> More concretely, I found the lab hard to complete, but I'll look over the notes and review. Part of me thinks I'd learn better if I started the labs before class. I'd ask better questions, be less confused, etc. 
+
+> In sum: the class is fine. It's good to learn to think in new ways and good to be challenged, even if I have some broader questions about coding as a human activity."
+
+
+---
+## What's the counterfactual?
+
+> Broadly speaking, I don't like computers. I don't like bending over the small desks, staring at a screen, etc. The class is fine: it's something I have to do, all things worth doing are difficult, and I'm learning to think in new ways. That said, I tend to doubt that computer programing is conducive to human flourishing. **Would the world be a better place if everyone learned how to code?** I tend to think no. Would the world be a better place if everyone read Shakespeare? Probably. This isn't really a practical concern, but rather a question about, y'know, what we're doing here. 
+
+> More concretely, I found the lab hard to complete, but I'll look over the notes and review. Part of me thinks I'd learn better if I started the labs before class. I'd ask better questions, be less confused, etc. 
+
+> In sum: the class is fine. It's good to learn to think in new ways and good to be challenged, even if I have some broader questions about coding as a human activity."
+
+---
+## Would the world be a better place if everyone learned how to code?
+
+--
+
+- How should we define/measure human flourishing?
+
+--
+
+- What are some counterfactuals  we might make?
+  - Everyone learns to code:
+  - You learning to code:
+  - Learning to code vs reading Shakespeare
+
+--
+
+- Why might these comparisons be misleading?
+  - CS concentrators to POLS concentrators
+  - POLS 1600 takers to POLS 0500
+
+--
+
+- How could we assess the "effects" of POLS 1600?
+
+---
+class:,bottom, center
+background-image:url("https://media.giphy.com/media/dUaHl1MDcaGLGtVBbI/giphy-downsized-large.gif")
+background-size:contain
+
+## Learning to code
+
+
+---
+class: inverse, bottom, center
+background-image:url("https://media.giphy.com/media/h5pRkbOXAH66zlZVML/giphy.gif")
+background-size:contain
+## Thinking Programatically
+
+
+
+
+
+
+
+---
+class: inverse, center, middle
+# 💡
+# Casual Inference in Experimental and Observational Designs
+
+---
+## Experimental and Observational Designs
+
+- **Experimental designs** are studies in which a causal variable of interest, the *treatement*, is manipulated by the researcher to examine its causal effects on some *outcome* of interest
+
+  - **Randomized Controlled Trial** (RCTs) each unit is **randomly** assigned to a treatment(s) or control group
+
+- **Observational designs** are studies in which a causal variable of interest is assigned by someone other than the researcher (nature, governments, people)
+
+---
+## Causal Identification
+
+- **Casual Identification** refers to "the assumptions needed for statistical estimates to be given a causal interpretation" [Keele (2015)](http://lukekeele.com/wp-content/uploads/2016/03/causal.pdf)
+
+--
+
+- **What's  Your Casual Identification Strategy:** What are the assumptions that make your research design credible?
+
+--
+
+- Identification > Estimation
+
+---
+## Causal Identification with Experimental Designs
+
+Causal identification for an experiment, requires relatively few assumptions:
+
+- **Independence** (Satisfied by Randomization)
+  - $Y(1), Y(0),X,U, \perp D$
+- **SUTVA** Stable Unit Treatment Value Assumption (Depends on features of the design)
+  - No interference between units $Y_i(d_1, d_2, \dots, d_N) = Y_i(d_i)$
+  - No hidden values of the treatment/Variation in the treatment 
+
+
+
+---
+## Internal vs External Validity
+
+
+
+- **Internal validity** the extent to which causal assumptions are satisfied in a study
+
+- **External validity** the extent to which conclusions can be generalized beyond a particular study
+
+---
+## Internal vs External Validity
+
+Experimental designs are said to have high **internal** validity, but may lack **external** validity
+
+  - [The college sophomore problem](https://psycnet.apa.org/doiLanding?doi=10.1037%2F0022-3514.51.3.515)
+  
+  - [The weirdest people in the world](https://www.cambridge.org/core/journals/behavioral-and-brain-sciences/article/weirdest-people-in-the-world/BF84F7517D56AFF7B7EB58411A554C17)
+
+  - **The Hawthorne Effect** refers to the phenomenon where study subjects behave differently because they know they are being observed by researchers. (QSS Ch 2 p. 52)
+
+---
+## Causal Identification in Observational Designs
+
+- In an *observational study* the researcher does not control the treatment assignment
+
+- No guarantee that treatment (D=1) and control groups (D=0) are comparable (That is that we're comparing like with like)
+
+- Instead, we have justify our claims by theory and assumption rather than direct manipulation through random assignment.
+
+---
+## Conditional Independence (ignorability)
+
+If treatment is not randomly assigned then in general:
+
+$$
+Y_i(1),Y_i(0) \text{ is not} \perp D_i
+$$
+
+
+However, in some situations, it may be plausible to claim that *conditional* on some variable(s) $X$, the distribution of potential outcomes $Y$ is the same (independent) across levels of treatment $D$ (**conditional ignorability**)
+
+
+$$
+Y_i(1),Y_i(0) \perp D_i |X_i
+$$
+
+- Conditional on a some covariate(s) $X_i$ our treatment is **as-if randomized**
+
+---
+## As-if randomized
+
+![](https://media.makeameme.org/created/dx-59c7bd.jpg)
+
+
+---
+## Causal Identification in Observational Designs
+
+- The claim that treatment is as-if randomized requires further justification in the theory and design of your study
+
+$$
+Y_i(1),Y_i(0) \perp D_i |X_i
+$$
+
+- While we can't "prove" this assumption, we typically can test some observable implications of this claim,
+  
+  - For example, in [lab 03](https://pols1600.paultesta.org/labs/03-lab-comments.html#7_Examine_the_difference_in_covariates_between_those_assigned_to_each_treatment_condition_in_the_study) we tested for **covariate balance** by comparing the average values of pre-treatment covariates from the voter file.
+
+
+---
+## The Experimental Ideal
+
+> “The planner of an observational study should always ask himself: How would the study be conducted if it were possible to do it by controlled experimentation” (Cochran 1965)
+
+- What would you have to randomly assign to answer your question as posed?
+
+- Is it feasible to imagine changing just the treatment and nothing else? 
+
+  - If yes, maybe we should do an experiment
+
+  - If not, maybe we should rethink our question and ask what about the design of observational study allows us to make the credible comparisons that an experiment would generate?
+  
+---
+## Observational Designs
+
+Observational designs all involve covariate adjustment
+
+We will discuss three approaches to covariate adjustment
+
+- Subclassification
+- Matching
+- Regression
+
+Then we will consider three types of observational desings that can produce credible causal claims:
+
+- Difference in Difference
+- Regression Discontinuities
+- Instrumental Variables
+
+
+---
+class: inverse, center, middle
+background-image:url("https://m.media-amazon.com/images/I/71lsG3fCaOL._SL1200_.jpg")
+background-size:cover
+# Break
+## [Take the survey](https://brown.co1.qualtrics.com/jfe/form/SV_7PZrwVs9hVxzOZg)
+
+---
+class: inverse, center, middle
+
+# 💡  
+## Covariate Adjustment
+
+---
+##  Covariate Adjustment
+
+Covariate adjustment refers a broad class of procedures that try to make a comparison more credible or meaningful by adjusting for some other potentially confounding factor.
+
+---
+##  Covariate Adjustment
+
+When you hear people talk about
+
+- Controlling for age
+- Conditional on income
+- Holding age and income constant
+- Ceteris paribus (All else equal)
+
+They are typically talking about some sort of covariate adjustment.
+
+---
+##  Three approaches to for covariate adjustment
+
+- Subclassification
+
+- Matching 
+
+- Regression 
+
+
+
+
+
+---
+##  Causal Identification through Subclassification
+
+Motivation: Treatment, $D$ is not randomly assigned
+
+$$
+Y_i(1),Y_i(0) \text{ is not} \perp D_i
+$$
+
+Identifying assumptions
+
+$$\begin{aligned}
+Y_i(1),Y_i(0) \perp D_i |X_i && \text{Selection on Observables}\\
+0 < Pr(D_i = 1|X_i) < 1  && \text{Common Support}
+\end{aligned}$$
+
+---
+##  Causal Identification through Subclassification
+
+If these assumptions hold, we can estimate the average treatment effect:
+
+$$\begin{aligned}
+ATE = E[Y_i(1)- Y_i(0)|X_i] &= E[Y_i(1)- Y_i(0)|X_i, D_i=1]\\
+& = E[Y_i |X_i, D_i=1] - E[Y_i |X_i, D_i=0]
+\end{aligned}$$
+
+The average treatment effect is identified by the observed difference of means between treatment and control conditional on the values of $X$
+
+---
+##  Causal Identification through Subclassification
+
+- Economists call $Y_i(1),Y_i(0) \perp D_i |X_i$ an assumption of **Selection on Observables**
+  
+  - Controlling for what we can observe $X$, $D$ is conditionally independent of Potential Outcomes
+  
+  - Violated if there were some other factor, $U$ that influenced both $D$ and $Y$
+
+- $0 < Pr(D = 1|X) < 1$ is called an assumption of **Common Support**
+  
+  - There is a non-zero probability of receiving the treatment for all values of X
+  
+  - Violated if only one subgroup had access to the treatment (Vaccine by age group comparisons)
+
+---
+##  Example of Subclassification
+
+- We used subclassification when we compared the unconditional rates of new Covid-19 cases by face mask policy to the conditional rates new cases by policy regime in each month of our data.
+  - Overall rates are misleading. 
+  - Lots of things differ between January 2020 and January 2022
+  - Subclassification by month provides a "fairer" comparison
+  - But is it "causal"
+
+--
+- Even controlling for "month" there are other omitted variables:
+  - Other policies in place?
+  - Socio-economic differences between states
+  - Others?
+
+--
+- Trying to subclassify (stratify) comparisons on more than one or two variables gets hard
+  - **The Curse of Dimensionality**
+
+---
+## The Curse of Dimensionality
+
+- As we try to control for more factors, the number of observations per dimension declines rapidly
+  - Men vs Women
+  - Men, ages 20-30 vs Men ages 30-40
+  - Men, ages 20-30 with college degrees and blue eyes vs Men  ages 20-30 with college degrees and green eyes
+
+- Subclassification with more than a few variables, will often produce a lack of common support: 
+  - Not enough observations to make credible counterfactual comparisons
+
+---
+## Matching
+
+- Matching refers to a broad set of procedures that essentially try to generalize subclassification to 
+  - address to **curse of dimensionality**
+  - achieve balance on a range of observable covariates between **treated** and **control** groups
+
+- Many different types of matching procedures:
+
+  - **Exact matching:** Find exact matches between treatment and control observations for all covariates $X$
+  - **Coarsened exact matching:** Find approximate matches within ranges of values for $X$
+  - **Distance-metric matching:** Calculate a distance metric between observations based on their values of $X$, and match treated and control to minimize that distance
+  - **Propensity score matching:** Calculate the propsenity to receive treatment using $X$ to predict $D$ and treated and control based on their *propensity scores*
+
+---
+
+```{r}
+#| label = "matching",
+#| echo = F
+knitr::include_graphics("https://cdn2.hubspot.net/hubfs/355318/images/Propensity-Score-Graphic.jpg")
+```
+[Source](https://www.summitllc.us/propensity-score-matching)
+
+---
+## Causal Identification with Matching (ICYI)
+
+Matching again requires an assumption of **selection on observables**
+
+$$\begin{aligned}
+Y_i(1),Y_i(0) \perp D_i |X_i && \text{Selection on Observables}\\
+0 < Pr(D_i = 1|X_i) < 1  && \text{Common Support}
+\end{aligned}$$
+
+
+Matching procedures like propensity score matching, allow us to match treated and control observations based on a *propensity score*, a predicted value of receiving the treatment, $D$ based on observed variables, $X$.
+
+$$
+p(X_i) = Pr(D=1|X_i) = \pi_i
+$$
+
+Allowing us to estimate an ATE conditional on $\pi_i$
+
+$$\begin{aligned}
+ATE &= E[Y_i(1)- Y_i(0)|p(X_i) = \pi_i] \\
+&= E[Y_i(1)- Y_i(0)|p(X_i) = \pi_i, D_i=1]\\
+& = E[Y_i |p(X_i) = \pi_i, D_i=1] - E[Y_i |p(X_i) = \pi_i, D_i=0]
+\end{aligned}$$
+
+
+---
+## What to Know about Matching
+
+- The mechanics of matching are beyond the scope of this course
+
+- Just think of it as a generalization of subclassification when we want to condition on multiple variables
+
+- "Solves" the curse of dimensionality, creating Treatment-Control comparisons between groups that are similar on **observed covariates**
+
+- But **no guarantee** that matching produces balance on **unobserved covariates**.
+
+
+
+
+
+---
+## Regression
+
+- We will spend the next two weeks talking in detail about regression, in general and linear regression in particular.
+
+- Today we'll introduce some basic notation and simple examples
+
+- Conceptually, think of regression as 
+  - a tool to make predictions
+  - by fitting lines to data
+
+- Theoretically, we will build towards an understanding of linear regression as a "linear estimate of the conditional expectation function $(CEF = E[Y|X])$
+
+---
+## Regression
+
+Broadly regression is a statistical procedural to help us model relationships that consists of:
+
+- $Y$ an **outcome variable** or thing we're trying to explain
+  - AKA: The Dependent Variable, The Response Variable, The Lefthand side of the model
+
+- $X$ a set of **predictor variables** or things we think explain variation in our outcome
+  - AKA: The independent variable, covariates, the right hand side of the model.
+
+- $\beta$ a set of **unknown parameters** that describe the relationship between our outcome $Y$ and our predictors $X$
+
+- $\epsilon$ the **error term** representing variation in $Y$ not explained by our model.
+
+---
+## Linear Regression
+
+Next week, we will start to consider simple (bivariate) linear regressions of the form:
+
+$$
+y_i = \beta_0 + \beta_1 x_i + \epsilon
+$$
+
+- We call this a bivariate regression, because there are only two variables.
+
+- We call this a linear regression, because $y_i = \beta_0 + \beta_1 x_i$ is the equation for a line, where:
+  - $\beta_0$ corresponds to the $y$ intercept, or the model's prediction when $x = 0$.
+  - $\beta_1$ corresponds to the slope, or how $y$ is predicted to change as $x$ changes.
+
+---
+## Linear Regression 
+  
+- If you find this notation confusing, try plugging in substantive concepts for what $y$ and $x$ represent
+- Say we wanted to know how attitudes to transgender people varied with age in the baseline survey from Lab 03.
+
+The generic linear model
+
+$$y_i = \beta_0 + \beta_1 x_i + \epsilon$$
+
+Reflects:
+
+$$\text{Transgender Feeling Thermometer}_i = \beta_0 + \beta_1\text{Age}_i + \epsilon_i$$
+
+---
+## Estimating a Linear Regression
+
+- We estimate linear regressions in `R` using the `lm()` function.
+- `lm()` requires two arguments:
+  - a formula of the general form `y ~ x` read as "Y modeled by X" or below "Transgender Feeling Thermometer's modeled by Age
+  - a `data` telling R 
+  
+
+```{r}
+#| label = "lmdata"
+load(url("https://pols1600.paultesta.org/files/data/03_lab.rda"))
+```
+
+```{r}
+#| label = "m1"
+m1 <- lm(therm_trans_t0 ~ vf_age, data = df)
+m1
+```
+
+---
+```{r}
+#| label = "figlm1code",
+#| echo = F
+fig_lm <- df %>%
+  ggplot(aes(vf_age,therm_trans_t0))+
+  geom_point(size=.5, alpha=.5)+
+  geom_abline(intercept = coef(m1)[1],
+              slope = coef(m1)[2],
+              col = "blue"
+              )+
+  geom_vline(xintercept = 0,linetype = 2)+
+  xlim(0,100)+
+  annotate("point",
+           x = 0, y = coef(m1)[1],
+           col= "red",
+           )+
+  annotate("text",
+           label = expression(paste(beta[0],"= 62.81" )),
+           x = 1, y = coef(m1)[1]+5,
+           hjust = "left",
+           )+
+  labs(
+    x = "Age",
+    y = "Feeling Thermometer toward\nTransgender People"
+  )+
+  theme_classic()
+fig_lm
+```
+
+---
+```{r}
+#| label = "figlm1",
+#| echo = F
+# devtools::install_github("nicolash2/ggbrace")
+library(ggbrace)
+fig_lm +
+  ylim(48, 52)+
+  xlim(58, 62)+
+  geom_segment(aes(
+    y = coef(m1)[1] + coef(m1)[2]*61,
+    yend = coef(m1)[1] + coef(m1)[2]*60,
+    x = 60, xend = 60),
+    arrow = arrow(ends = "first",length = unit(0.015, "npc")),
+    col = "red"
+    )+
+    geom_segment(aes(
+    y = coef(m1)[1] + coef(m1)[2]*61,
+    yend = coef(m1)[1] + coef(m1)[2]*61,
+    x = 60, xend = 61),
+    arrow = arrow(ends = "last",length = unit(0.015, "npc")),
+    col = "red"
+    )+
+   geom_curve(aes(
+    y = 49.7,
+    yend = 50.53,
+    x = 59.43, xend = 59.8),
+    curvature = -.2,
+    arrow = arrow(ends = "last",length = unit(0.015, "npc")),
+    col = "black",
+    )+
+    annotate("text",
+           label = expression(paste(beta[1],"= -0.21" )),
+           x = 59, y = 49.5,
+           hjust = "left",
+           )+
+  geom_brace(aes(c(59.9, 59.98),c(50.43, 50.63)), 
+             inherit.data=F,
+             rotate = 270)
+```
+
+
+---
+## Multiple Regression
+
+In two weeks, we will generalize this to include multiple predictors
+
+$$y_i = \beta_0 + \beta_1 x_{1i} + \beta_2  x_{2i} + \epsilon$$
+
+- $\beta_0$ in this model still corresponds to the y intercept the model's prediction when everything else is 0 
+- $\beta_1$ now describes the relationship between $x$
+
+
+$$\text{FT}_{Trans} = \beta_0 + \beta_1 \text{Age}_{1i} + \beta_2  \text{Party ID}_{2i} + \epsilon$$
+
+---
+## Multiple Regression with Matrix Notation
+
+With more than two predictors, we will write equations using Matrix notation
+
+$$y_i = X\beta + \epsilon$$
+
+.pull-left[
+Where X is a matrix of variables:
+
+$$X=
+\begin{bmatrix}
+	 1  & X_{1,1}&\dots & X_{1,k}\\
+ 1  & X_{2,1}&\dots & X_{2,k}\\
+ \vdots&\vdots&  & \vdots \\
+ 1  & X_{n,1}&\dots & X_{n,k}\\
+\end{bmatrix}$$
+]
+.pull-right[
+And $\beta$ is a vector of coefficients
+
+$$\beta=
+\begin{bmatrix}
+\beta_0\\
+\beta_1\\
+\vdots \\
+\beta_k\\
+\end{bmatrix}$$
+]
+
+---
+## Causal Identification with Regression
+
+Like subclassification and matching, causal identification with Linear Regression requires us to believe the assumption of **Selection on Observables**
+
+$$
+Y_i(1),Y_i(0) \perp D_i |X_i
+$$
+
+And additionally asks us to make assumptions about the "functional form": 
+
+$$
+Y = \beta_0 + \tau D + X\beta + \epsilon
+$$
+
+
+---
+## Causal Identification with Regression
+
+- To interpret a linear regression's estimate of $\tau$ as the causal effect of $D$ on $Y$, we need to believe we've got the *right model*
+  
+  - The only factors that predict both $Y$ and $D$ are those factors $X$ which we control for in our model.
+  
+  - The relationship between $Y$ and these predictors is *linear*
+
+--
+
+- We almost never have the right model.
+  - Do we think age is the only factor that influences attitudes toward Trangendered folk? Probably not. 
+
+--
+
+- Regression is still a robust and useful tool
+  - Why do we see negative relationship between age and transgender attitudes?
+
+--
+
+- But for causal inference, there's nothing inherent about estimating a regression, or controlling for a lot of variables that makes for particularly credible causal claims.
+
+
+
+---
+##  Methods for covariate adjustment
+
+- Subclassification
+  - 👍: Easy to implement and interpret
+  - 👎: Curse of dimensionality, Selection on observables
+
+- Matching 
+  - 👍: Balance on multiple covariates, Mirrors logic of experimental design 
+  - 👎: Selection on observables, Only provides balance on observed variables, Lot's of technical details...
+
+- Regression 
+  - 👍: Easy to implement, control for many factors (good and bad)
+  - 👎: Selection on observables, easy to fit "bad" models
+
+---
+class: inverse, center, middle
+
+# 💡  
+# Three Designs for Causal Inference in Observational Studies
+
+
+---
+## Credible Cauasal Inference in Observational Studies
+
+Subclassification, matching, and regression all require an assumption of selection on observables:
+
+$$
+Y_i(1),Y_i(0) \perp D_i |X_i
+$$
+
+But how do we know if we've got the right model or we've controlled for the right variables?
+
+--
+
+Typically, we don't
+
+---
+## Credible Cauasal Inference in Observational Studies
+
+Instead, social scientists  look for situations where the credibility of
+
+$$
+Y_i(1),Y_i(0) \perp D_i |X_i
+$$
+
+depends less on how much data you have and much more on how your data were generated.
+
+
+
+---
+class: middle
+
+.pull-left[
+> Empirical microeconomics has experienced a credibility revolution, with a consequent increase in policy relevance and scientific impact. ... [T]he primary engine driving improvement has been a focus on the **quality of empirical research designs.** (p. 4)
+
+]
+
+.pull-right[
+```{r}
+#| label = "cred1",
+#| echo = F
+knitr::include_graphics("./images/04_cred.png")
+```
+
+[Source](https://pubs.aeaweb.org/doi/pdfplus/10.1257/jep.24.2.3)
+
+]
+
+---
+class: middle
+
+.pull-left[
+> Design-based studies are distinguished by their prima facie credibility and by the attention investigators devote to making both an **institutional** and a **data-driven** case for causality (p. 5)
+
+]
+
+.pull-right[
+```{r}
+#| label = "cred2",
+#| echo = F
+knitr::include_graphics("./images/04_cred.png")
+```
+[Source](https://pubs.aeaweb.org/doi/pdfplus/10.1257/jep.24.2.3)
+]
+
+---
+class: middle
+
+.pull-left[
+> The econometric methods that feature most prominently in quasi-experimental studies are **instrumental variables**, **regression discontinuity** methods,and **differences-in-differences**-style policy analysis. ... The best of today’s design-based studies make a strong institutional case, backed up with empirical evidence, for the variation thought to generate a useful **natural experiment**.(p. 12)
+
+]
+
+.pull-right[
+```{r}
+#| label = "cred3",
+#| echo = F
+knitr::include_graphics("./images/04_cred.png")
+```
+[Source](https://pubs.aeaweb.org/doi/pdfplus/10.1257/jep.24.2.3)
+]
+
+---
+## Three Designs for Causal Inference in Observational Studies
+
+- Difference in Differences
+
+- Regression Discontinuity
+
+- Instrumental Variables
+
+
+---
+## Three Designs for Causal Inference in Observational Studies
+
+- **Difference in Differences (Today)**
+
+- Regression Discontinuity
+
+- Instrumental Variables
+
+---
+## Three Designs for Causal Inference in Observational Studies
+
+- **Difference in Differences**
+
+- *Regression Discontinuity (Next Week)*
+
+- *Instrumental Variables (Next Week)*
+
+
+---
+class: inverse, center, middle
+# 💡 Difference in Differences
+
+
+---
+class: inverse, center, middle
+background-image:url(https://www.finebooksmagazine.com/sites/default/files/styles/gallery_item/public/media-images/2020-11/map-lead-4.jpg?h=2ded5a3f&itok=Mn-K5rQc)
+background-size: cover
+## London in the Time of Cholera
+
+---
+## Motivating Example: What causes Cholera?
+
+- In the 1800s, cholera was thought to be transmitted through the air.
+
+- John Snow (the physician, not the snack), to explore the origins eventunally concluding that cholera was transmitted through living organisms in water.
+
+- Leveraged a **natural experiment** in which one water company in London moved its pipes further upstream (reducing contamination for Lambeth), while other companies kept their pumps serving Southwark and Vauxhall in the same location. 
+
+---
+## Notation
+
+Let's adopt a little notation to help us think about the logic of Snow's design:
+
+- $D$: treatment indicator, 1 for treated neighborhoods (Lambeth), 0 for control neighborhoods (Southwark and Vauxhall)
+
+- $T$: period indicator, 1 if post treatment (1854), 0 if pre-treatment (1849).
+
+- $Y_{di}(t)$ the potential outcome of unit $i$ 
+
+  - $Y_{1i}(t)$ the potential outcome of unit $i$ when treated between the two periods 
+
+  - $Y_{0i}(t)$ the potential outcome of unit $i$ when control between the two periods 
+
+---
+## Causal Effects
+
+The individual causal effect for unit i at time t is:
+
+$$\tau_{it} = Y_{1i}(t) − Y_{0i}(t)$$
+
+What we observe is 
+
+$$Y_i(t) = Y_{0i}(t)\cdot(1 − D_i(t)) + Y_{1i}(t)\cdot D_i(t)$$
+
+$D$ only equals 1, when $T$ equals 1, so we never observe $Y_0i(1)$ for the treated units. 
+
+In words, we don't know what Lambeth's outcome would have been in the second period, had they not been treated.
+
+---
+## Average Treatment on Treated
+
+Our goal is to estimate the average effect of treatment on treated (ATT):
+
+
+$$\tau_{ATT} = E[Y_{1i}(1) -  Y_{0i}(1)|D=1]$$
+
+That is, what would have happened in Lambeth, had their water company not moved their pipes
+
+---
+## Average Treatment on Treated
+
+Our goal is to estimate the average effect of treatment on treated (ATT):
+
+We we can observe is:
+
+|               | Pre-Period (T=0)  | Post-Period (T=1)  |
+|---------------|--------------------|-------------------|
+| Treated $D_{i}=1$  |  $E[Y_{0i}(0)\vert D_i = 1]$ | $E[Y_{1i}(1)\vert D_i = 1]$  |
+| Control $D_i=0$  |  $E[Y_{0i}(0)\vert D_i = 0]$ | $E[Y_{0i}(1)\vert D_i = 0]$  |
+
+---
+## Data
+
+Because potential outcomes notation is abstract, let's consider a modified description of the Snow's cholera death data from [Scott Cunningham](https://mixtape.scunning.com/difference-in-differences.html):
+
+```{r}
+#| label = "choleradat",
+#| echo = F
+snow <- tibble(Company = c("Lambeth (D=1)", "Southwark and Vauxhall (D=0"),
+               `1849 (T=0)` = c(85,135),
+               `1854 (T=1)` = c(19,147),
+
+               )
+
+knitr::kable(snow)
+
+```
+
+---
+## How can we estimate the effect of moving pumps upstream?
+
+Recall, our goal is to estimate the effect of the the treatment on the treated:
+
+$$\tau_{ATT} = E[Y_{1i}(1) -  Y_{0i}(1)|D=1]$$
+
+Let's conisder some strategies Snow could take to estimate this quantity:
+
+---
+## Before vs after comparisons:
+
+- Snow could have compared Labmeth in 1854 $(E[Y_i(1)|D_i = 1] = 19)$ to Lambeth in 1849 $(E[Y_i(0)|D_i = 1]=85)$, and claimed that moving the pumps upstream led to **66 fewer cholera deaths.** 
+
+- Assumes Lambeth's pre-treatment outcomes in 1849 are a good proxy for what its outcomes would have been in 1954 if the pumps hadn't moved $(E[Y_{0i}(1)|D_i = 1])$.
+
+- A skeptic might argue that Lambeth in 1849 $\neq$ Lambeth in 1854
+
+
+---
+## Treatment-Control comparisons in the Post Period.
+
+- Snow could have compared outcomes between Lambeth and S&V in 1954  ($E[Yi(1)|Di = 1] − E[Yi(1)|Di = 0]$), concluding that the change in pump locations led to **128 fewer deaths.**
+
+- Here the assumption is that the outcomes in S&V and in 1854 provide a good proxy for what would have happened in Lambeth in 1954 had the pumps not been moved $(E[Y_{0i}(1)|D_i = 1])$
+
+- Again, our skeptic could argue  Lambeth $\neq$ S&V 
+
+---
+## Difference in Differences
+
+To address these concerns, Snow employed what we now call a difference-in-differences design, 
+
+There are two, equivalent ways to view this design. 
+
+$$\underbrace{\{E[Y_{i}(1)|D_{i} = 1] − E[Y_{i}(1)|D_{i} = 0]\}}_{\text{1. Treat-Control |Post }}− \overbrace{\{E[Y_{i}(0)|D_{i} = 1] − E[Y_{i}(0)|D_{i}=0 ]}^{\text{Treated-Control|Pre}}$$
+
+- Difference 1: Average change between Treated and Control  in Post Period
+- Difference 2: Average change between Treated and Control  in Pre Period
+
+Which is equivalent to:
+
+$$\underbrace{\{E[Y_{i}(1)|D_{i} = 1] − E[Y_{i}(0)|D_{i} = 1]\}}_{\text{Post - Pre |Treated }}− \overbrace{\{E[Y_{i}(1)|D_{i} = 0] − E[Y_{i}(0)|D_{i}=0 ]}^{\text{Post-Pre|Control}}$$
+
+
+- Difference 1: Average change between Treated over time
+- Difference 2: Average change between Control over time
+
+---
+## Difference in Differences
+
+
+You'll see the DiD design represented both ways, but they produce the same result:
+
+$$
+\tau_{ATT} = (19-147) - (85-135) = -78
+$$
+
+$$
+\tau_{ATT} = (19-85) - (147-135) = -78
+$$
+
+---
+## Identifying Assumption of a Difference in Differences Design
+
+The key assumption in this design is what's known as the parallel trends assumption: $E[Y_{0i}(1) − Y_{0i}(0)|D_i = 1] = E[Y_{0i}(1) − Y_{0i}(0)|D_i = 0]$ 
+
+- In words: If Lambeth hadn't moved its pumps, it would have followed a similar path as S&V
+
+---
+```{r}
+#| label = "paralleltrends",
+#| echo = F,
+#| fig.height = 4
+
+snow_g <- tibble(
+  Period = c(0,0,3,3,0,3),
+  Treatment = c(0,1,0, 1,1,1),
+  Line = c(1,1,1,1,2,2),
+  Company = c("S&V","Lambeth","S&V","Lambeth","Lambeth (D=0)","Lambeth (D=0)"),
+  Deaths = c(135,85,147,19,85,97)
+)
+
+snow_g %>%
+  ggplot(aes(Period,Deaths,col = Company))+
+  geom_point()+
+  geom_line()+
+  geom_segment(aes(x=3.1,xend=3.1,y=19,yend=147), linetype = 2, col= "gray")+
+  annotate(geom="text",x = 3.3,y=125, label = "1",hjust=.5)+
+  geom_segment(aes(x=3.2,xend=3.2,y=19,yend=97), linetype = 2,col="gray")+
+  annotate(geom="text",x = 3.3,y=55, label = "3",hjust=-.5)+
+  geom_segment(aes(x=-.1,xend=-.1,y=85,yend=135), linetype = 2,col="gray")+
+  annotate(geom="text",x = -.1,y=120, label = "2",hjust=1.5)+
+  xlim(-2,6)+
+  scale_x_continuous(breaks = c(0,3),labels = c("Pre","Post"))+
+  theme_bw() -> snow_p
+
+snow_p
+
+
+```
+
+
+Where:
+
+1. $E[Y_{i}(1)|D_{i} = 1] − E[Y_{i}(1)|D_{i} = 0]$
+2. $E[Y_{i}(0)|D_{i} = 1] − E[Y_{i}(0)|D_{i}\} = 0]$
+3. $E[Y_{1i}(1) − Y_{0i}(1)|D_{i} = 1]$
+
+
+---
+## Summary
+
+- A Difference in Differences (DiD, or diff-in-diff) design combines a pre-post comparison, with a treated and control comparison
+  
+  - Taking the pre-post difference removes any fixed differences between the units
+  
+  - Then taking the difference between treated and control differences removes any common differences over time
+
+- The key identifying assumption of a DiD design is the "assumption of parallel trends"
+  - Absent treatment, treated and control groups
+would see the same changes over time.
+  - Hard to prove, possible to test
+
+
+---
+## Extensions and limitations
+
+- DiD easy to estimate with linear regression
+- Generalizes to multiple periods and treatment interventions
+  - More pre-treatment periods allow you assess "parallel trends" assumption
+- Alternative methods 
+  - Synthetic control
+  - Event Study Designs
+- What if you have multiple treatments or treatments that come and go?
+  - Panel Matching
+  - Generalized Synthetic control
+
+---
+## Applications
+
+- [Card and Krueger (1994)](https://www.nber.org/papers/w4509) What effect did raising the minimum wage in NJ have on employment
+
+- [Abadie, Diamond, & Hainmueller (2014)](https://onlinelibrary.wiley.com/doi/full/10.1111/ajps.12116?casa_token=_ceCu4SwzTEAAAAA%3AP9aeaZpT_Zh1VdWKXx_tEmzaJTtMJ1n0eG7EaYlvJZYN000re33cfMAI2O8N8htFJjOsln2GyVeQql4) What effect did German Unification have on economic development in West Germany
+
+- [Malesky, Nguyen and Tran (2014)](https://www.cambridge.org/core/journals/american-political-science-review/article/impact-of-recentralization-on-public-services-a-differenceindifferences-analysis-of-the-abolition-of-elected-councils-in-vietnam/3477854BAAFE152DC93C594169D64F58) How does decentralization influence public services?
+
+---
+class: inverse, center, middle
+# 💡 Regression Discontinuity Design
+
+---
+## Motivating Example
+
+.pull-left[
+- Do Members of Parliament in the UK get richer from holding office (QSS Chapter 4.3.4)
+]
+.pull-right[
+```{r}
+#| label = "eggers1",
+#| echo = F
+knitr::include_graphics("./images/04_eggers.png")
+```
+[Eggers and Hainmueller (2009)](https://www.cambridge.org/core/journals/american-political-science-review/article/abs/mps-for-sale-returns-to-office-in-postwar-british-politics/E4C2B102194AA1EA0D2F1F777EAE3C08)
+]
+
+
+---
+## Logic of the Regression Discontinuity Design (RDD) 
+
+- What's the effect of holding elected office in the UK on personal wealth?
+
+- People who win elections differ in many ways from people who lose elections.
+
+- Logic of an RDD: 
+
+  - Just look at the wealth of individuals who either narrowly won or lost elections.
+
+  - Candidates close to 50 percent cutoff (discontinuity) should be more comparable (better counterfactuals)
+
+---
+## Data from Eggers and Hainmueller (2009)
+
+```{r}
+#| label = "mpdata"
+library(qss)
+data(MPs)
+glimpse(MPs)
+
+```
+
+---
+## Variables
+
+```{r}
+#| label = "rddtab",
+#| echo = F
+rdd_vars <- data.frame(
+Variable = c("surname", "firstname", "party", "ln.gross", "ln.net", "yob", "yod", "margin.pre", "region", "margin"),
+Description = c(
+"surname of the candidate",
+"first name of the candidate",
+"party of the candidate (labour or tory)",
+"log gross wealth at the time of death",
+"log net wealth at the time of death",
+"year of birth of the candidate",
+"year of death of the candidate",
+"margin of the candidate’s party in the previous election electoral", 
+"region",
+"margin of victory (vote share)")
+)
+# DT::datatable(rdd_vars,
+#               options = list(pageLength = "5"))
+kable(rdd_vars)
+```
+
+
+
+---
+```{r}
+#| label = "rddfigcode",
+#| eval = F
+MPs %>%
+  ggplot(aes(margin, ln.net))+
+  geom_point(shape=1)+
+  facet_grid(~party)+
+  geom_smooth(data =MPs %>%
+                filter(margin <0),
+              method = "lm")+
+  geom_smooth(data =MPs %>%
+                filter(margin >0),
+              method = "lm")+
+  theme_bw() -> fig_rdd
+fig_rdd
+```
+
+---
+```{r}
+#| label = "rddfig",
+#| echo = F
+MPs %>%
+  ggplot(aes(margin, ln.net))+
+  geom_point(shape=1)+
+  facet_grid(~party)+
+  geom_smooth(data =MPs %>%
+                filter(margin <0),
+              method = "lm")+
+  geom_smooth(data =MPs %>%
+                filter(margin >0),
+              method = "lm")+
+  theme_bw() -> fig_rdd
+fig_rdd
+```
+---
+## RDD Notation
+
+- $X$ is a **forcing** variable
+- Treatment $D$ is a determined by $X$
+
+$$
+D_i = 1\{X_i > c\}
+$$
+
+- $X$ is the `margin` variable in the example data, and $D=1$ if `margin` is greater than 0 (i.e. the candidate won the election)
+
+- Interested in the differences in the outcome at the threshold
+
+$$\lim_{x \downarrow  c} E[Y_i|X=x] - \lim_{x \uparrow  c} E[Y_i|X=x]$$
+
+---
+## Causal Identification with an RDD
+
+If we assume $E[Y_i(0)|X=x]$ and $E[Y_i(1)|X=x]$ are continuous in x, then we can estimate a (local) ATE at the threshold:
+
+$$\begin{align}
+ATE_{RDD} &= E[Y(1)-Y(0)|X_i=c] \\
+&=  E[Y(1)|X_i=c] -  E[Y(0)|X_i=c]\\
+&= \lim_{x \downarrow  c} E[Y_i|X=x] - \lim_{x \uparrow  c} E[Y_i|X=x] \\
+\end{align}$$
+
+---
+## Continuity Assumption
+
+```{r}
+#| label = "continuity",
+#| echo = F
+knitr::include_graphics("https://mixtape.scunning.com/graphics/rdd_simul_ex.jpg")
+```
+
+[Cunningham (2022)](https://mixtape.scunning.com/regression-discontinuity.html#continuity-assumption)
+
+---
+## Causal Identification with an RDD
+
+- The continuity assumption is a formal way of saying that observations close to the threshold are good counterfactuals for each other
+
+- We can't prove this assumption
+
+- But if it holds, we should observe
+ 
+  - no sorting around the cutoff (no self selection)
+ 
+  - similar distributions of covariates around the cutoff (balance tests)
+  
+  - no effect of treatment on things measured pre-treatment (placebo tests)
+
+
+
+---
+class: inverse, center, middle
+# 💡 
+## Instrumental Variables
+
+
+---
+## Instrumental Variables
+
+Instrumental variables are an economists favorite tool for dealing with **omitted variable bias**
+
+- We have some non random treatment whose effects we'd like to assess
+- We're worried that these effects are **confounded** by some unobserved, omitted variable, that influences both the treatment and the outcome
+- We find an **instrumental variable** that satisfies the following:
+  - Randomization
+  - Excludability
+  - First-stage relatioship
+  - Monotonicity
+- Allowing us estimate a Local Average Treatment Effect (LATE) using the only the variation in our treatment is **exogenous** (uncorrelated with ommited variables)
+
+---
+class: center
+## IV Assumption: Randomization
+
+
+.left-column[
+- No path from $U$ to $Z$
+]
+.right-column[
+```{r}
+#| label = "iv1",
+#| echo = F
+knitr::include_graphics("https://book.declaredesign.org/figures/figure_16.7.svg")
+```
+
+[Source](https://book.declaredesign.org/observational-causal.html?q=instrumental#instrumental-variables)
+
+]
+
+---
+class: center
+## IV Assumption: Excludability
+
+
+.left-column[
+- No path from $Z$ to $Y$
+]
+
+.right-column[
+```{r}
+#| label = "iv2",
+#| echo = F
+knitr::include_graphics("https://book.declaredesign.org/figures/figure_16.7.svg")
+```
+
+[Source](https://book.declaredesign.org/observational-causal.html?q=instrumental#instrumental-variables)
+
+]
+
+---
+class: center
+## IV Assumption:  First Stage
+
+.left-column[
+- Path from $Z$ to $D$
+]
+.right-column[
+```{r}
+#| label = "iv3",
+#| echo = F
+knitr::include_graphics("https://book.declaredesign.org/figures/figure_16.7.svg")
+```
+
+[Source](https://book.declaredesign.org/observational-causal.html?q=instrumental#instrumental-variables)
+
+]
+
+---
+class: center
+## IV Assumption: Monotonicity
+
+
+.left-column[
+
+-  $D_i(Z=1)\geq D_i(Z=0)$
+- "No Defiers"
+
+]
+
+.right-column[
+```{r}
+#| label = "iv4",
+#| echo = F
+knitr::include_graphics("https://book.declaredesign.org/figures/figure_16.7.svg")
+```
+[Source](https://book.declaredesign.org/observational-causal.html?q=instrumental#instrumental-variables)
+]
+
+---
+class: center
+## Compliance
+
+With a binary treatment, $D$ and binary instrument $Z$ there are four types of compliance
+
+```{r}
+#| label = "compliance",
+#| echo = F
+comp_tab <- tibble(
+  Type = c("Always Takers",
+           "Never Takers",
+           "Compliers",
+           "Defiers"),
+   '$D_i(Z=1)$' = c(1,0,1,0),
+   '$D_i(Z=0)$' = c(1,0,0,1)
+)
+kable(comp_tab)
+```
+
+- Assuming Monotonicity means there are "No Defiers"
+
+---
+## Estimating the Local Average Treatment Effect
+
+If we believe our assumptions of:
+
+- Randomization
+- Excludability
+- First-stage relationship
+- Monotonicity
+
+Then we can estimate Local Average Treatment Effect (LATE) sometimes called the Complier Average Treatment Effect CATE) 
+
+---
+## Estimating the Local Average Treatment Effect
+
+It can be [shown](https://www.mattblackwell.org/files/teaching/s10-iv-handout.pdf) that the LATE:
+
+$$LATE = \frac{E[Y|Z=1] - E[Y|Z=0]}{E[D|Z=1]-E[D|Z=0]}= \frac{ATE_{Z\to Y}}{ATE_{Z\to D}}$$
+
+Where:
+
+- $ATE_{Z\to Y}$ is the known as the "Intent to Treat" effect (ITT) (i.e. the effect of being assigned to treatment)
+
+- $ATE_{Z\to D}$ is the "effect" of being assigned to treatment on actually receiving treatment
+
+
+
+
+---
+
+## Example: Earnings and Military Service
+
+Adapted from [Edward Rubin](https://raw.githack.com/edrubin/EC421W19/master/LectureNotes/11InstrumentalVariables/11_instrumental_variables.html#42)
+
+*Example:* If we want to estimate the effect of veteran status on earnings,
+$$\begin{align}
+  \text{Earnings}_i = \beta_0 + \beta_1 \text{Veteran}_i + u_i \tag{1}
+\end{align}$$
+
+--
+
+We would love to calculate $\color{#e64173}{\text{Earnings}_{1i}} - \color{#6A5ACD}{\text{Earnings}_{0i}}$, but we can't.
+
+--
+
+And OLS will likely be biased for $(1)$ due to selection/omitted-variable bias.
+
+---
+
+## Introductory example
+
+Imagine that we can split veteran status into an exogenous (as-if random, unbiased) part and an endogenous (non-random, biased) part...
+
+--
+
+$$\begin{align}
+  \text{Earnings}_i
+  &= \beta_0 + \beta_1 \text{Veteran}_i + u_i \tag{1} \\
+  &= \beta_0 + \beta_1 \left(\text{Veteran}_i^{\text{Exog.}} + \text{Veteran}_i^{\text{Endog.}}\right) + u_i \\
+  &= \beta_0 + \beta_1 \text{Veteran}_i^{\text{Exog.}} + \underbrace{\beta_1 \text{Veteran}_i^{\text{Endog.}} + u_i}_{w_i} \\
+  &= \beta_0 + \beta_1 \text{Veteran}_i^{\text{Exog.}} + w_i
+\end{align}$$
+
+--
+
+We could use this exogenous variation in veteran status to consistently estimate $\beta_1$.
+
+--
+
+**Q:** What would exogenous variation in veteran status mean?
+
+---
+
+## Introductory example
+
+**Q:** What would exogenous variation in veteran status mean?
+
+--
+
+**A.sub[1]:** Choices to enlist in the military that are essentially random—or at least uncorrelated with omitted variables and the disturbance.
+
+--
+
+**A.sub[2]:** .No selection bias:
+$$\begin{align}
+  \color{#e64173}{\mathop{E}\left(\text{Earnings}_{0i}\mid\text{Veteran}_i = 1\right)} - \color{#6A5ACD}{\mathop{E}\left( \text{Earnings}_{0i} \mid \text{Veteran}_i = 0 \right)} = 0
+\end{align}$$
+
+---
+## Instruments
+
+**Q:** How do we isolate this *exogenous variation* in our explanatory variable?
+--
+<br>**A:** Find an instrument (an instrumental variable).
+
+--
+
+**Q:** What's an instrument?
+--
+<br>**A:** An **instrument** is a variable that is
+
+1. **correlated** with the **explanatory variable** of interest (*relevant*),
+2. **uncorrelated** with the **error** term (*exogenous*).
+
+---
+
+## Instruments
+
+
+So if we want an instrument $z_i$ for endogenous veteran status in
+
+$$\begin{align}
+  \text{Earnings}_i = \beta_0 + \beta_1 \text{Veteran}_i + u_i
+\end{align}$$
+
+1. **Relevant:** $\mathop{\text{Cov}} \left( \text{Veteran}_i,\, z_i \right) \neq 0$
+2. **Exogenous:** $\mathop{\text{Cov}} \left( z_i,\, u_i \right) = 0$
+
+---
+## Instruments: Relevance
+
+**Relevance:** We need the instrument to cause a change in (correlate with) our endogenous explanatory variable.
+
+We can actually test this requirement using regression and a *t* test.
+
+--
+
+***Example:*** For the veteran status, consider three potential instruments:
+
+.pull-left[
+1. Social security number
+
+2. Physical fitness
+
+3. Vietnam War draft
+]
+
+--
+
+.pull-right[ 
+- **Probably not relevant** uncorrelated with military service
+
+- *Potentially relevant* service may correlate with fitness
+
+- **Relevant** being drafted led to service
+]
+
+---
+
+
+## Instruments: Exogeneity
+
+.hi[Exogeneity:] The instrument to be independent of omitted factors that affect our outcome variable—as good as randomly assigned.
+
+$z_i$ must be uncorrelated with our disturbance $u_i$. .hi[Not testable.]
+
+--
+
+***Example:*** For the .pink[veteran status], consider three potential instruments:
+
+.pull-left[
+1. Social security number
+
+2. Physical fitness
+
+3. Vietnam War draft
+]
+
+--
+
+.pull-right[ 
+- **Exogenous** SSN essentially random
+
+- *Not Exogenous* fitness correlated with many things
+
+- **Exogenous** draft via lottery
+]
+
+---
+## Relevant and Exogenous
+
+
+```{r}
+#| label = "venn_iv",
+#| echo = F,
+#| fig.height = 7.5
+# Colors (order: x1, x2, x3, y, z)
+venn_colors <- c("purple", "red", "grey60", "orange", "blue")
+# Line types (order: x1, x2, x3, y, z)
+venn_lines <- c("solid", "dotted", "dotted", "solid", "solid")
+# Locations of circles
+venn_df <- tibble(
+  x  = c( 0.0,   -0.5,    1.5,   -1.0, -1.4),
+  y  = c( 0.0,   -2.5,   -1.8,    2.0, -2.6),
+  r  = c( 1.9,    1.5,    1.5,    1.3,  1.3),
+  l  = c( "Y", "D", "X[2]", "X[3]",  "Z"),
+  xl = c( 0.0,    0.7,    1.6,   -1.0, -2.9),
+  yl = c( 0.0,   -3.8,   -1.9,    2.2, -2.6)
+)
+# Venn
+ggplot(data = venn_df, aes(x0 = x, y0 = y, r = r, fill = l, color = l)) +
+geom_circle(aes(linetype = l), alpha = 0.3, size = 0.75) +
+theme_void() +
+theme(legend.position = "none") +
+scale_fill_manual(values = venn_colors) +
+scale_color_manual(values = venn_colors) +
+scale_linetype_manual(values = venn_lines) +
+geom_text(aes(x = xl, y = yl, label = l), size = 9, parse = T) +
+annotate(
+  x = -5.5, y = 3.3,
+  geom = "text", label = "Figure 1", size = 10, hjust = 0
+) +
+xlim(-5.5, 4.5) +
+ylim(-4.2, 3.4) +
+coord_equal()
+```
+
+---
+## Relevant, Not Exogenous
+
+```{r}
+#| label = "venn_iv_endog",
+#| echo = F,
+#| fig.height = 7.5
+# Change locations of circles
+venn_df %>%
+mutate(
+  x = x +   c(0, 0, 0, 0, 0),
+  xl = xl + c(0, 0, 0, 0, 0),
+  y = y +   c(0, 0, 0, 0, 1),
+  yl = yl + c(0, 0, 0, 0, 1)
+) %>%
+# Venn
+ggplot(data = ., aes(x0 = x, y0 = y, r = r, fill = l, color = l)) +
+geom_circle(aes(linetype = l), alpha = 0.3, size = 0.75) +
+theme_void() +
+theme(legend.position = "none") +
+scale_fill_manual(values = venn_colors) +
+scale_color_manual(values = venn_colors) +
+scale_linetype_manual(values = venn_lines) +
+geom_text(aes(x = xl, y = yl, label = l), size = 9, parse = T) +
+annotate(
+  x = -5.5, y = 3.3,
+  geom = "text", label = "Figure 2", size = 10, hjust = 0
+) +
+xlim(-5.5, 4.5) +
+ylim(-4.2, 3.4) +
+coord_equal()
+```
+
+---
+## Not Relevant and Not Exogenous
+
+
+```{r}
+#| label = "venn_iv_irrelevant",
+#| echo = F,
+#| fig.height = 7.5
+# Change locations of circles
+venn_df %>%
+mutate(
+  x = x +   c(0, 0, 0, 0,-1),
+  xl = xl + c(0, 0, 0, 0,-1),
+  y = y +   c(0, 0, 0, 0, 2.3),
+  yl = yl + c(0, 0, 0, 0, 2.3)
+) %>%
+# Venn
+ggplot(data = ., aes(x0 = x, y0 = y, r = r, fill = l, color = l)) +
+geom_circle(aes(linetype = l), alpha = 0.3, size = 0.75) +
+theme_void() +
+theme(legend.position = "none") +
+scale_fill_manual(values = venn_colors) +
+scale_color_manual(values = venn_colors) +
+scale_linetype_manual(values = venn_lines) +
+geom_text(aes(x = xl, y = yl, label = l), size = 9, parse = T) +
+annotate(
+  x = -5.5, y = 3.3,
+  geom = "text", label = "Figure 3", size = 10, hjust = 0
+) +
+xlim(-5.5, 4.5) +
+ylim(-4.2, 3.4) +
+coord_equal()
+```
+
+---
+## Relevant, Not Exogenous
+```{r}
+#| label = "venn_iv_endog2",
+#| echo = F,
+#| fig.height = 7.5
+# Change locations of circles
+venn_df %>%
+mutate(
+  x = x +   c(0,    0,   0, 0,    2),
+  xl = xl + c(0, -2.4, 0.8, 0,  4.6),
+  y = y +   c(0,    0,   0, 0,    0),
+  yl = yl + c(0,    0,   0, 0, -1.1)
+) %>%
+# Venn
+ggplot(data = ., aes(x0 = x, y0 = y, r = r, fill = l, color = l)) +
+geom_circle(aes(linetype = l), alpha = 0.3, size = 0.75) +
+theme_void() +
+theme(legend.position = "none") +
+scale_fill_manual(values = venn_colors) +
+scale_color_manual(values = venn_colors) +
+scale_linetype_manual(values = venn_lines) +
+geom_text(aes(x = xl, y = yl, label = l), size = 9, parse = T) +
+annotate(
+  x = -5.5, y = 3.3,
+  geom = "text", label = "Figure 4", size = 10, hjust = 0
+) +
+xlim(-5.5, 4.5) +
+ylim(-4.2, 3.4) +
+coord_equal()
+```
+
+---
+# Venn diagram explanation
+
+In these figures (Venn diagrams)
+
+- Each circle illustrates a variable.
+- Overlap gives the share of correlatation between two variables.
+- Dotted borders denote *omitted* variables.
+
+Take-aways
+
+- Figure 1: .hi-pink[Valid instrument] (relevant; exogenous)
+- Figure 2: .hi-slate[Invalid instrument] (relevant; not exogenous)
+- Figure 3: .hi-slate[Invalid instrument] (not relevant; not exogenous)
+- Figure 4: .hi-slate[Invalid instrument] (relevant; not exogenous)
+
+---
+## IV Applications
+
+```{r}
+#| echo = F
+knitr::include_graphics("https://pbs.twimg.com/media/EJGyHnyUYAA-yhM?format=jpg&name=large")
+```
+
+[@AndrewHeiss](https://twitter.com/andrewheiss/status/1193931226865901569?ref_src=twsrc%5Etfw%7Ctwcamp%5Etweetembed%7Ctwterm%5E1193931226865901569%7Ctwgr%5E%7Ctwcon%5Es1_&ref_url=https%3A%2F%2Fpublish.twitter.com%2F%3Fquery%3Dhttps3A2F2Ftwitter.com2Fandrewheiss2Fstatus2F1193931226865901569widget%3DTweet)
+
+
+
+---
+## IV Summary
+
+Instrumental variables require a number of assumptions to yield credible causal claims:
+
+- Randomization
+- Excludability
+- First-stage relationship
+- Monotonicity
+
+Estimation and inference of IVs is beyond the scope of this course. 
+
+  - See Edward Rubin's excellent [slides](https://raw.githack.com/edrubin/EC421W19/master/LectureNotes/11InstrumentalVariables/11_instrumental_variables.html#85)
+  - And Matt Blackwells [notes](https://www.mattblackwell.org/files/teaching/s10-iv-handout.pdf)
+
+- Understanding the identifying assumptions of IV can help you critique a study (even if the you don't fully understand the math)
+
+---
+class: inverse, middle, center
+# 💡 
+## Summary
+
+---
+## What you need to know
+
+- Causal inference in observational and experimental studies is about counterfactual comparisons
+- In observational studies, to make causal claims we generally make some  assumption of conditional independence:
+
+$$
+Y_i(1),Y_i(0), \perp D_i |X_i
+$$
+
+- The credibility of this assumption depends less on the data, and more on how the data were generated.
+- **Selection on Observables** is rarely a credible assumption
+- Observational designs that produce credible causal inference, leverage aspects of the world that create *natural experiments*
+- You should be able to describe the logic and assumptions of common designs in social science 
+  - **Difference-in-Differences:** *Parallel Trends* 
+  - **Regression Discontiniuity:** *Continuity at the cutoff*
+  - **Instrumental Variables:** Instruments need to be *Relevant and Exogenous*
+
+
+
+

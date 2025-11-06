@@ -1,0 +1,397 @@
+---
+title: 'Lab 03 - Replicating Broockman and Kalla (2016)'
+author: "Your Group Members Names Here"
+date: "Last Updated `r format(Sys.Date())`"
+output:
+  html_document:
+    theme: journal
+    toc: TRUE
+    toc_float: TRUE
+    toc_depth: 2
+    number_sections: TRUE
+---
+
+```{r setup, include = FALSE, cache = FALSE}
+knitr::opts_chunk$set(error = TRUE, 
+                      comment = NA, 
+                      warnings = FALSE, 
+                      errors = FALSE, 
+                      messages = FALSE, 
+                      cache = TRUE,
+                      tidy = FALSE)
+
+```
+
+<style>
+div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}
+</style>
+
+
+
+# Overview {-}
+
+Today we will explore **the logic and design** of Broockman and Kalla's 2016 study, ["Durably reducing transphobia: A field experiment on door-to-door canvassing"](https://www.science.org/doi/10.1126/science.aad9713){target="_blank"}, from the recruitment of subjects for the study to the delivery of their interventions. Then we will explore **whether the intervention had any effect on respondents' feelings toward transgender individuals.**
+
+To accomplish this we will:
+
+1. Summarize the study (5 Minutes)
+2. Set up our work space (2-3 Minutes)
+3. Load a portion of the replication data (1-2 Minutes)
+4. Get a high level overview of the data (5 minutes)
+5. Describe the distribution of covariates in the full dataset (5 minutes)
+6. Examine the difference in covariates between those who did and did not complete the survey (10 minutes)
+7. Examine the difference in covariates between those assigned to each treatment condition in the study. (10 minutes)
+8. Estimate the average treatment effect of the intervention (10 minutes)
+9. Plot the results and comment on the study (10 minutes)
+10. Take the weekly survey (3-5 minutes)
+
+One of these 9 tasks (excluding the weekly survey) will be randomly selected as the graded question for the lab.
+
+You will work in your assigned groups. Only one member of each group needs to submit the html file of lab.
+
+This lab **must** contain the names of the group members in attendance. 
+
+If you are attending remotely, you will submit your labs individually.
+
+Here are your assigned groups for the semester.
+
+```{r groups, echo=F}
+groups_df <- tibble::tibble(
+`Group 1` = c("Anna Lister", "Kate Kuli", "Andreas Young", "Claudia Spelman"),
+`Group 2` = c("Elizabeth Steeves","Fabian Lopez","Lorenzo Mahoney", "Ariana Palomo"),
+`Group 3` = c("Will Lake","Taha Siddiqui" , "Amanda Page", "Noah Soutier"),
+`Group 4` = c("Georgia Kennedy-Bailey","Samuel Levine", "Elie Lubin", "Bianca Rosen"),
+`Group 5` = c("Theo Simmons","Fengyu Seah", "Hunter Keneley", "Schuyler Dubitsky"),
+`Group 6` = c("Logan Torres", "Jonathan Zhang", "Osiris Russell-Delano", "Aicha Sama"),
+`Group 7` = c("Natalia Ibarra", "Khaled Abdo", "Starrchild Jackson", "Selene Luna", "Yoo Min Lee")
+)
+
+DT::datatable(groups_df)
+```
+
+# Goals {-}
+
+Conceptually, this lab will give you lots of practice calculating **means** and **conditional means**. We will use these means to 
+
+- **Describe the characteristics of the study's population.** After Question 5, you should be able to describe what a typical registered voter in Miami-Dade County looks like
+- **Explore differences between participants in the study this population** Do people who took the baseline survey differ in systematic ways from people who did not (Question 6)
+- **Assess the empirical implications of the identifying assumptions of this design** If treatment was randomly assigned, then participants assigned to treatment condition should on average look similar to participants in the control condition (Question 7)
+- **Estimate the average treatment effect over multiple time periods** You'll recall from lecture that the ATE is simply a difference of conditional means:
+
+$$
+\begin{align*}
+E \left[ \frac{\sum_1^m Y_i}{m}-\frac{\sum_{m+1}^N Y_i}{N-m}\right]&=\overbrace{E \left[ \frac{\sum_1^m Y_i}{m}\right]}^{\substack{\text{Average outcome}\\
+\text{among treated}\\ \text{units}}}
+-\overbrace{E \left[\frac{\sum_{m+1}^N Y_i}{N-m}\right]}^{\substack{\text{Average outcome}\\
+\text{among control}\\ \text{units}}}\\
+&= E [Y_i(1)|D_i=1] -E[Y_i(0)|D_i=0]
+\end{align*}
+$$
+
+We'll see that these quantities can be calculated quickly for multiple variables using the following commands:
+
+- We will use the `group_by` and `summarise` commands to quickly calculate average values for different groups, and the `mutate` function to calculate differences between these averages
+- We will introduce the `across()` and `starts_with()` functions to calculate summaries like a `mean` across multiple variables that start the the same pre-fixes.
+- We will introduce the `pivot_longer()`, `pivot_wider()` and `left_join` commands to gather, spread, and merge data so that we can calculate the difference of means simply by subtracting means for one group in one column from means for another group in a different column 
+- We will use functions from the `ggplot` package to graphically display our results.
+
+
+# Please knit this .Rmd file {-}
+
+As with every lab, you should:
+
+- Download the file
+- Save it in your course folder
+- **Update the `author:` section of the YAML header to include the names of your group members in attendance.**
+- Knit the document
+- Open the html file in your browser (Easier to read)
+- Knit the document again after completing a section or chunk (Error checking)
+- Upload the final lab to [Canvas]https://canvas.brown.edu/courses/1091286/assignments/7925686?module_item_id=10882030){target="_blank"}.
+
+# Summarize the study
+
+Before we get started working with the data, please provide some brief answers (1-3 sentences) to the following questions
+
+- **What's the research question?** 
+- **What's the theoretical framework?** 
+- **What's the empirical design?** 
+- **What's are the main results?** 
+
+# Set up your workspace
+
+Here is some minimal code so that your lab will compile when you first knit it.
+
+```{r tidverse}
+library(tidyverse)
+```
+
+1. **In the code chunk below, please set up your work space by loading more packages, following the steps outlined in the slides  [here](https://pols1600.paultesta.org/slides/03-slides.html#14){target="_blank"}**
+
+```{r extendedsetup, message=F}
+
+```
+
+
+----
+
+#  Load the replication data
+
+Next we'll load the data for today, which is a subset of Broockman and Kalla's full data set^[You can find the full set of replication files [here](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/WKR39N){target="_blank"}]
+
+
+1. **Please run the code chunk below to load the data** That's it. That's the task for this question
+
+```{r data}
+load(url("https://pols1600.paultesta.org/files/data/03_lab.rda"))
+```
+
+The will load a data frame called `df` containing the following variables:
+
+- `completed_baseline` whether someone completed the baseline survey ("Survey") or not ("No Survey")
+- `treatment_assigned` what intervention someone who completed the baseline survey was assigned two (treatment= "Trans-Equality", placebo = "Recycling")
+- `answered_door` whether someone answered the door ("Yes") or not ("No") when a canvasser came to their door
+- `treatment_group` the treatment assignments of those who answered the door and the received the treatment or placebo (treatment= "Trans-Equality", placebo = "Recycling")
+- `vf_age` the age of the person in years
+- `vf_female` the respondent's sex (female = 1, male = 0)
+- `vf_democrat` whether the person was a registered Democract (Democrat=1, 0 otherwise)
+- `vf_white` whether the person was white (White=1, 0 otherwise)
+- `vf_vg_12` whether the person voted in the 2012 general election (voted = 1, 0 otherwise)
+- `therm_trans_tX` a feeling thermometer^[The actual study contains a number of measures about transgender attitudes and policies which are scaled together to produce a single measure of subjects latent tolerance. For simplicity, we'll focus on this single survey item.], where respondents are asked to rate how warmly they feel toward transgender people on a scale of 0 (Very Cold) to 100 (Very Warm), with 50 corresponding to neither warm nor cold. The `_tX` corresponds to the time the measure was taken: 
+    - `_t0` pre-treatment measure from baseline survey
+    - `_t1` post-treatment measure 3-days after intervention
+    - `_t2` post-treatment measure 3-weeks after intervention
+    - `_t3` post-treatment measure 6-weeks after intervention
+    - `_t4` post-treatment measure 3-months after intervention
+    
+# Provide a high level overview of the data
+
+In the code chunk below, please write code to provide a *high level overview* of the data that allows you to answer the following questions. 
+
+Please interpret the results of your code by writing brief answers in Markdown after each question.
+
+1. **How many observations are there in `df`?** 
+2. **How many variables are there in the `df`?** 
+3. **What's the unit of analysis?**  
+4. **How many registered voters completed the baseline survey?** 
+5. **How many treatment conditions are there?** 
+6. **How many participants were assigned to each condition?** 
+7. **How many participants answered the door when a canvasser came?** 
+8. **How many participants actually received each treatment condition?** 
+
+
+```{r hlo}
+
+
+```
+
+# Describe the distribution of covariates in the full dataset
+
+Now let's look at the distribution of pre-treatment covariates in the full data set.
+
+The variables that start with `vf_` contain information about registered voters from the voter file for Miami-Dade County:
+
+- `vf_age` the age of the person in years
+- `vf_female` the respondent's sex (female = 1, male = 0)
+- `vf_democrat` whether the person was a registered Democract (Democrat=1, 0 otherwise)
+- `vf_white` whether the person was white (White=1, 0 otherwise)
+- `vf_vg_12` whether the person voted in the 2012 general election (voted = 1, 0 otherwise)
+
+The code below quickly calculates the mean for each of these voter file variables, by [applying a the mean function across multiple columns](https://dplyr.tidyverse.org/articles/colwise.html){target="_blank"} that all start with `vf_`
+
+- `df%>%` pipes the `df` data frame into the `summarise()` function
+- `across()` tells  `summarise()` to calculate the `mean` for every column in `df` that `starts_with()` `vf_`
+
+
+```{r cov_vf1}
+df %>%
+  # Calculate means for voter file variables
+  summarise(across(starts_with("vf_"), mean))
+```
+
+Next I **[gather](https://r4ds.had.co.nz/tidy-data.html?q=gather%20#pivoting){target="_blank"}** the columns together using the `pivot_longer()` command which pivots the columns which `starts_with("vf")` into a column named `Covariates` and puts their associated values into a column named `Voter File Means`
+
+
+
+```{r cov_vf2}
+df %>%
+  # Calculate means for voter file variables
+  summarise(across(starts_with("vf_"), mean))%>%
+  # Gather covariate means into `Voter File Means` column
+  pivot_longer(
+    cols = starts_with("vf_"),
+    names_to = "Covariate",
+    values_to = "Voter File Means"
+  ) -> cov_vf
+
+cov_vf
+```
+
+1. **Using `cov_vf` please describe the demographics of the `df` data set** 
+
+# Examine the difference in covariate balance between those who did and did not take the baseline survey
+
+Now let's examine the difference in these covariates between registered voters who did and did not take the baseline survey.
+
+The code below uses `group_by(completed_baseline)` to adapt the code from the previous section to calculate the covariate averages **separately** for respondents who did and did not complete the baseline survey. 
+
+```{r cov_baseline1}
+df %>%
+  # Calculate difference between Survey and Non-Survey Takers
+  group_by(completed_baseline) %>%
+  # Calculate means for voter file variables
+  summarise(across(starts_with("vf_"), mean))
+```
+
+Next we **reshape the data** gathering the values for all the columns **except** the `completed_baseline` column
+
+```{r cov_baseline2}
+df %>%
+  # Calculate difference between Survey and Non-Survey Takers
+  group_by(completed_baseline) %>%
+  # Calculate means for voter file variables
+  summarise(across(starts_with("vf_"), mean))%>%
+  # Gather columns containing means, exclude column for groups
+  pivot_longer(
+    cols = starts_with("vf_"),
+    names_to = "Covariate",
+    values_to = "Means"
+  ) 
+```
+
+Then we spread the values of the `completed_baseline` into separate columns using the `pivot_wider()` command
+
+The column `No Survey` contains the mean value of each covariate for registered voters who did not complete the survey, and the `Survey` column contains averages for registered voters who completed the baseline. 
+
+
+```{r cov_baseline3}
+df %>%
+  # Calculate difference between Survey and Non-Survey Takers
+  group_by(completed_baseline) %>%
+  # Calculate means for voter file variables
+  summarise(across(starts_with("vf_"), mean))%>%
+  # Gather columns containing means, exclude column for groups
+  pivot_longer(
+    cols = starts_with("vf_"),
+    names_to = "Covariate",
+    values_to = "Means"
+  ) %>%
+  pivot_wider(
+    names_from = completed_baseline,
+    values_from = Means
+  )
+
+```
+
+Next we calculate the difference in means between Non Survey takers and survey takers using the `mutate()` function to create a column called `Difference` and save this output to an an object called `cov_baseline`
+
+```{r cov_baseline4}
+df %>%
+  # Calculate difference between Survey and Non-Survey Takers
+  group_by(completed_baseline) %>%
+  # Calculate means for voter file variables
+  summarise(across(starts_with("vf_"), mean))%>%
+  # Gather columns containing means, exclude column for groups
+  pivot_longer(
+    cols = starts_with("vf_"),
+    names_to = "Covariate",
+    values_to = "Means"
+  ) %>%
+  pivot_wider(
+    names_from = completed_baseline,
+    values_from = Means
+  )%>%
+  # Calculate difference
+  mutate(
+    Diff_Survey = `No Survey` - Survey
+  ) -> cov_baseline
+
+# Display differences
+cov_baseline
+```
+
+Finally, I **[join](https://r4ds.had.co.nz/relational-data.html#outer-join){target="blank"}** the values from `cov_baseline` into `cov_vf` using the shared column `Covariate`
+
+```{r cov_baseline5}
+cov_balance <- cov_vf %>% 
+  left_join(cov_baseline,
+            by = c("Covariate" = "Covariate")
+            ) %>%
+  mutate_if(is.numeric,round,2)
+cov_balance
+```
+
+1. **Please describe the differences between those who completed the baseline survey and those who did not. Do these differences seem large or small?** 
+
+
+
+# Examine the difference in covariates between those assigned to each treatment condition in the study.
+
+One of the identifying assumptions of an experimental design like Broockman and Kalla's is that treatment is independent of potential outcomes and covariates.
+
+One of the empirical implications of this assumption is that, that the differences in observable covariates between treatment and control should be small. 
+
+To the extent the groups are comparable on observable covariates, we are more confident that the random assignment of treatment conditions has created a credible counterfactual comparison.
+
+
+Using the code from the previous section as a guide, calculate the difference in average covariate values between those subjects who completed the baseline survey and were randomly **assigned** to receive the `Trans-Equality` treatment, and those who were randomly assigned to receive the `Recyclying` placebo.
+
+To accomplish this you will need to do the following:
+
+- add a `filter(!is.na(treatement_assigned))%>%` after `df%>%` to filter out subjects who didn't not complete the baseline.
+- Replace `completed_baseline` with `treatement_assigned` in the code
+- In the `mutate()` function, change:
+  - `Diff_Survey` to `Diff_Treatment`
+  - the values `No Survey` to `Trans-Equality` and `Survey` to `Recycling`
+- Change `-> cov_baseline` to `-> cov_treatment`
+
+```{r baltreat}
+
+```
+
+1. **Please describe the covariate differences between each treatment condition. Are these differences larger or smaller than those between who completed the survey and those who did not?** 
+
+# Calculate the Average Treatment Effect
+
+Now let's take the same approach to calculate the Average Treatment Effect (ATE) for each time period.
+
+Using the code from the previous sections as a template,
+
+- Add a `filter(!is.na(treatment_group))%>%` after `df%>%` to filter out subjects who didn't receive the treatment.^[Recall that only some people who completed the baseline and were assigned to receive the treatment actually answered the door when canvassers came knocking.]
+- Change `summarise(across(starts_with("vf_"), mean))%>%` code to select variables that start with `therm_trans`
+- Change the `cols` argument in `pivot_longer()` to select the columns that start with `therm_trans`
+- Everywhere you see `treatment_assigned` in the code replace it with `treatement_group` 
+- In the `mutate()` function, change:
+  - `Diff_Treatment` to `ATE`
+  - Add the following line `Days = c(0,3,21,42,90)` to create a column called Days (*make sure to put a comma after `ATE = `Trans-Equality` - Recycling,` )  Be sure to wrap ``Trans-Equality`` in backticks ` before and after the phrase
+- Change `-> cov_treatment` to `ate_df`
+
+```{r ate}
+
+```
+
+1. **Did the treatment seem to effect respondents feelings toward transgender people?**
+2. **Does this effect appear to last?**
+
+# Plot the results and comment on the study
+
+Using `ate_df` with commands from the `ggplot` package please produce a figure that displays these differences
+
+- You'll need to provide
+  - `data` 
+  - `aes`
+  - `geom`
+
+
+1. **Finally, use this space to share some thoughts on the study** 
+
+- **Do you find it convincing?** 
+- **What makes the design credible?** 
+- **Are there things you would do differently?** 
+- **Do you think the results would "travel" to other topics and issues?** 
+
+
+
+# Take the Class Survey
+
+Please take a few moments to complete the [class survey](https://brown.co1.qualtrics.com/jfe/form/SV_0f8mrDmAAwGpcpw){target="_blank"} for this week.
+

@@ -1,0 +1,929 @@
+---
+title: 'Comments for Lab 08 - Replicating Grumbach and Hill (2022):'
+subtitle: "Reproducing the results"
+author: "P.F. Testa"
+date: "Last Updated `r format(Sys.Date())`"
+format:
+  html:
+    toc: true
+    toc-location: right
+    toc-float: true
+    toc-depth: 2
+    number-sections: true
+execute: 
+  eval: true
+  echo: true
+  warning: false
+  message: false
+  cache: true
+---
+
+
+# Overview {.unnumbered}
+
+In this lab, we continue our replication of [Grumbach and Hill (2021)](https://www.journals.uchicago.edu/doi/full/10.1086/714776) "Rock the Registration: Same Day Registration Increases Turnout of Young Voters."
+
+To accomplish this we will:
+
+0. Load packages. (5 minutes)
+
+1. **Set working directory and load the data** from last class. (5 minutes)
+
+2. Do some additional **recoding** (5 minutes)
+
+3. **Describe** variation in voting by state, year, policy, and age (20 minutes)
+
+4. **Estimate** four regression models to understand **fixed effects** and **cluster robust standard errors** (20 minutes)
+
+5.  **Replicate** two regression models from Grumbach and Hill (2021) **interacting** `sdr` with `age_group` (10 minutes)
+
+6. **Recreate** a portion of Figure 3 showing the **marginal effect** of `sdr` by age group. (15 minutes)
+
+Finally, we'll take the survey for this week
+
+One of these 6 tasks will be randomly selected as the graded question for the lab.
+
+```{r}
+#| label: graded
+set.seed(3202025)
+graded_question <- sample(1:6,size = 1)
+paste("Question",graded_question,"is the graded question for this week")
+```
+
+
+You will work in your assigned groups. Only one member of each group needs to submit the html file of lab.
+
+This lab **must** contain the names of the group members in attendance.
+
+If you are attending remotely, you will submit your labs individually.
+
+Here are your assigned groups for the semester.
+
+```{r}
+#| label: groups
+#| echo: false
+groups_df <- readr::read_csv("https://pols1600.paultesta.org/files/groups.csv")
+
+DT::datatable(groups_df)
+```
+
+# Goals {.unnumbered}
+
+This week's lab will give you practice:
+
+- Loading data from your own computers (Q1)
+
+- Data wrangling with conditional logic (Q2)
+
+- Describing variation to help illustrate the motivation behind fixed effects regression (Q3)
+
+- Using `lm_robust()` to easily estimate models with fixed effects and robust clustered standard errors (Q4)
+
+- Estimating and interpreting interaction models (Q5-6) to test conditional claims (like does the effect of Same Day Registration vary across age cohorts)
+
+
+# Workflow {.unnumbered}
+
+## Please render this .qmd file {.unnumbered}
+
+As with every lab, you should:
+
+-   Download the file
+-   Save it in your course folder
+-   **Update the `author:` section of the YAML header to include the names of your group members in attendance.**
+-   Render the document
+-   Open the html file in your browser (Easier to read)
+-   Write your code in the **chunks provided under each section**
+-   Comment out or delete any test code you do not need
+-   **Render the document again after completing a section or chunk** (Error checking)
+-   Upload the final lab to [Canvas](https://canvas.brown.edu/courses/1094972/assignments){target="_blank"}.
+
+# Get set up to work{.unnumbered}
+
+## Load packages {.unnumbered}
+
+
+As always, let's load the packages we'll need for today
+
+```{r}
+#| label: packages
+
+the_packages <- c(
+  ## R Markdown
+  "kableExtra","DT","texreg","htmltools",
+  ## Tidyverse
+  "tidyverse", "lubridate", "forcats", "haven", "labelled",
+  ## Extensions for ggplot
+  "ggmap","ggrepel", "ggridges", "ggthemes", "ggpubr", 
+  "GGally", "scales", "dagitty", "ggdag", "ggforce",
+  # Data 
+  "COVID19","maps","mapdata","qss","tidycensus", "dataverse",
+  "janitor",
+  # Analysis
+  "DeclareDesign", "easystats", "zoo","margins",
+  "modelsummary", "ggeffects"
+)
+
+# Define function to load packages
+ipak <- function(pkg){
+    new.pkg <- pkg[!(pkg %in% installed.packages()[, "Package"])]
+    if (length(new.pkg)) 
+        install.packages(new.pkg, dependencies = TRUE)
+    sapply(pkg, require, character.only = TRUE)
+}
+
+ipak(the_packages)
+```
+
+# Set your working directory and load the data
+
+```{r}
+#| label: data
+
+# Set working directory to source file location
+
+# Load data (assumes a file called `cps_clean.rda` is in the same folder as this lab)
+
+
+# # BACKUP: Uncomment if you're having trouble you can load a version of the data from the web:
+load(url("https://pols1600.paultesta.org/files/data/cps_clean.rda"))
+```
+
+# Create additional variables
+
+The following code **relevels** the factor variable `age_group` so that "65+" is the first level of the factor. 
+
+When `lm()` converts `age_group` to indicators for each in level of the factor, it's excludes the first level, which becomes the `reference category` described by the intercept, $\beta_0$ in the model.
+
+**Please create the following additional variables, that will be useful for presenting and visualizing data:**
+
+- `election_type` a categorical variable takes a value of "Presidential" when `year` is a presidential election, and a value of "Midterm" otherwise
+- `SDR` a categorical variable that takes a value of "SDR" when `sdr == 1` and 0 otherwise (you may already have this in your data)
+
+```{r}
+#| label: recodes
+
+presidential_elections <- seq(1980, 2016, by = 4)
+ 
+cps %>% 
+  mutate(
+    age_group = fct_relevel(age_group, "65+"),
+    SDR = ifelse(sdr == 1, "SDR","non-SDR"),
+    election_type = ifelse(year %in% presidential_elections, "General","Midterm"),
+  ) -> cps
+
+
+```
+
+
+# Describing variation in voting by state, year, policy, and age
+
+## Variation by state
+
+Create a figure that shows how average turnout varies across state in the `cps` data
+
+```{r}
+#| label: var_by_state
+#| out-width: 100%
+
+# Create dataframe of average voting rates by state
+cps %>% 
+  group_by(st) %>% 
+  summarise(
+    turnout = mean(dv_voted, na.rm=T)
+  ) %>% 
+  mutate(
+    st = fct_reorder(st, turnout)
+    ) -> df_state
+
+# Use data frame of state averages to produce figure
+df_state %>% 
+  ggplot(aes(turnout,st,fill=turnout))+
+  geom_bar(stat = "identity") +
+  theme_minimal()
+
+```
+
+
+## Variation over time
+
+Create a figure that shows how turnout varies across time. 
+
+Calculate the `year`ly averages separately by `election_type`. Facet your plot by `election_type` using `facet_wrap(~election_type)`
+
+```{r}
+#| label: var_by_year
+#| out-width: 100%
+
+# Calculate yearly averages in turnout by election type
+cps %>% 
+  group_by(year, election_type ) %>%
+  summarise(
+    turnout = mean(dv_voted, na.rm=T)
+  ) -> df_year
+
+# Display variation in turnout by year for Presidential And Midterm Elections
+df_year %>% 
+  ggplot(aes(year, turnout, col=election_type)) +
+  geom_line() +
+  facet_grid(~election_type)+
+  theme_minimal()+
+  theme(legend.position = "bottom",
+        axis.text.x = element_text(size =5))
+
+```
+
+
+## Across policy and age for single state
+
+For a single state (you pick) that implemented SDR registration at some point between 1978 and 2018, plot the average turnout by `age_group` before and after the SDR
+
+:::{.callout-tip}
+
+This is a tricky one that is designed to test your data-wrangling skills.
+
+1. Figure out which states adopted `sdr`
+2. Create a summary dataframe of average turnout by age for a single state using `filter()`, `group_by()` and `summarise()`
+3. Pipe this dataframe to `ggplot()` setting the appropriate aesthetics using `geom_point()` and `facet_grid()` 
+
+:::
+
+
+```{r}
+#| label: var_by_policy_age
+#| out-width: 100%
+
+
+# For a chosen state, create a dataframe showing how turnout varies by year, age_group, and SDR
+
+
+# states that implement SDR
+sdr_states <- unique(cps$st[cps$sdr == 1])
+
+cps %>% 
+  filter(st %in% sdr_states) %>% 
+  group_by(st, year, SDR, age_group) %>% 
+  summarise(
+    turnout = mean(dv_voted,na.rm=T)
+  ) -> sdr_age_df
+
+# Figure: Turnout by age group before and after SDR
+
+sdr_age_df %>% 
+  filter(!is.na(age_group)) %>% 
+  filter(st == "NH") %>% 
+  mutate(
+    # Relevel age_group so 18-24 comes first for this fig
+    age_group = factor(as.character(age_group))
+  ) %>% 
+  ggplot(aes(year, turnout, col = SDR))+
+  geom_point()+
+  # calculate conditional means by SDR using lm
+  stat_smooth(method = "lm", formula = "y~1")+
+  facet_grid(~ age_group)+
+  theme_minimal()+ 
+  theme(legend.position = "bottom",
+        axis.text.x = element_text(size =5))
+
+```
+
+-------------------------
+
+
+## Describe your results
+
+In a few sentences, explain to your reader what these figures tell us about the data:
+
+First there is considerable variation in average rates of turnout across states. For example, across the years considered, the average turnout rate in West Virginia (a state which never implemented Same Day Registration) was about 46.8 percent among CPS respondents, while the average turnout rate in Minnesota (a state which had SDR for the entire period) was more than 20 percentage points higher (68.2 percent).
+
+Second, there is also considerable variation in turnout across election years. Turnout in presidential elections is much higher than turnout in midterm elections. From one presidential or midterm election to the next, turnout rates can swing by as much as 10 percentage points. There does not seem to be a clear trend in turnout over time in these data. 
+
+As for variation in turnout by age before and after SDR, your interpretations depend on which state you chose. In states like New Hampshire or North Carolina, turnout seems markedly higher among young folks after the states adopted SDR.^[But note the bump in turnout in NC appears pretty similar across age groups] In states like Illinois or Wyoming, there doesn't appear to be much of a difference.
+
+
+```{r}
+#| label: desc1
+
+
+# Additional code to help me describe these figures
+df_state %>% 
+  filter(turnout == min(turnout) | turnout == max(turnout))
+
+df_year %>% 
+  group_by(election_type) %>% 
+  mutate(
+    swing = abs(turnout - lag(turnout))
+  ) %>% 
+  summarize(
+    sd = sd(turnout),
+    max_swing = max(swing, na.rm=T)
+  )
+```
+
+Here's the turnout by age plot for North Carolina
+
+```{r}
+#| label: figNC
+#| out-width: 100%
+
+sdr_age_df %>% 
+  filter(!is.na(age_group)) %>% 
+  filter(st == "NC") %>% 
+  mutate(
+    age_group = factor(as.character(age_group))
+  ) %>% 
+  ggplot(aes(year, turnout, col = SDR))+
+  geom_point()+
+  stat_smooth(method = "lm", formula = "y~1")+
+  facet_grid(~ age_group)+
+  theme_minimal()+
+   theme(legend.position = "bottom",
+        axis.text.x = element_text(size =5))
+```
+
+
+Here's the same plot for Illinois
+
+```{r}
+#| label: figIL
+#| out-width: 100%
+
+sdr_age_df %>% 
+  filter(!is.na(age_group)) %>% 
+  filter(st == "IL") %>% 
+  mutate(
+    age_group = factor(as.character(age_group))
+  ) %>% 
+  ggplot(aes(year, turnout, col = SDR))+
+  geom_point()+
+  stat_smooth(method = "lm", formula = "y~1")+
+  facet_grid(~ age_group)+
+  theme_minimal()+
+  theme(legend.position = "bottom",
+        axis.text.x = element_text(size =5))
+```
+
+And here is a plot of the average turnout rates among 18-24 year olds over time in the 18 states that adopted SDR at some point between 1978-2018
+
+```{r}
+#| label: fig18_24
+#| out-width: 100%
+
+sdr_age_df %>%
+  filter(age_group == "18-24") %>% 
+  ggplot(aes(year, turnout, col = SDR))+
+  geom_point()+
+  stat_smooth(method = "lm", formula = "y~1", se = F)+
+  facet_wrap(~st , ncol = 3)+
+  theme_minimal()+
+  theme(legend.position = "bottom",
+        axis.text.x = element_text(size =5))
+
+
+
+```
+
+
+# Understanding Two-Way Fixed Effects Regression
+
+:::{.callout-note}
+Interesting, so there appears to be considerable variation in turnout across states and over time. Further, depending on which state you looked at you may have found evidence of differences in turnout by age group before and after SDR that either support or challenge Grumbach's main claims.
+
+In this question, we'll see how we can use **fixed effects** to try and account for variation across states and years to **isolate** the effect of same day registration on turnout.
+
+We will also see how using **robust standard errors** with and without clustering changes our interpretations of the significance of our results.
+:::
+
+
+In this question you will estimate **four** increasingly complex models using `lm_robust()` and explain how each subsequent model differs from the preceding model.
+
+1. A **simple linear model**, `m1` akin to what `lm()` produces modelling turnout (`dv_voted`) as a function of same day registration (`sdr`)
+
+2. A simple linear model, `m2`  with standard errors that are **robust to heteroskedasticity** (i.e. non-constant error variance) by setting the `lm_robust()` argument: `se_type = "stata"` 
+
+3. A two-way fixed effects model, `m3`, with **fixed effects** for `st`ate and `year` using `lm_robust()` argument: `fixed_effects = ~ st + year` and **robust standard errors** using the same argument as `m2`
+
+4. A two-way fixed effects model, `m3`, with fixed effects for `st`ate and `year` using `lm_robust()` argument: `fixed_effects = ~ st + year` **AND** robust standard errors  **clustered by state** using the argument: `clusters = st`
+
+
+
+## Estimate the models
+
+I've gotten you started with `m1` Use that code as a template to estimate `m2`, `m3`, and `m4`
+
+```{r}
+#| label: fe_models
+
+# ---- m1: Simple OLS regression ----
+m1 <- lm_robust(dv_voted ~ sdr, 
+                data = cps,
+                se_type = "classical",
+                try_cholesky = T)
+
+# ---- m2: Simple OLS with robust standard errors ----
+m2 <- lm_robust(dv_voted ~ sdr, 
+                data = cps,
+                se_type = "stata",
+                try_cholesky = T)
+
+# ---- m3: Two-way Fixed Effects for State and Year ----
+m3 <- lm_robust(dv_voted ~ sdr,
+                data = cps,
+                fixed_effects = ~ st + year,
+                se_type = "stata",
+                try_cholesky = T)
+
+# ---- m4: TWFE for State and Year and cluster robust SEs ----
+
+m4 <- lm_robust(dv_voted ~ sdr,
+                data = cps,
+                fixed_effects = ~ st + year,
+                se_type = "stata",
+                clusters = st,
+                try_cholesky = T)
+
+
+
+```
+
+## Present and interpret the results
+
+When you've completed the previous section, you should be able uncomment and run the following code
+
+```{r}
+#| label: fe_model_tab
+
+htmlreg(l = list(m1,m2,m3, m4),
+        digits = 5,
+        include.ci = F,
+        ) %>% HTML() %>% browsable()
+
+```
+
+**Please write a few sentences** explaining how the coefficient on `sdr` and it's standard error changes across the four models. I'll get you started:
+
+The table presents the results of four regression models. The outcome in each model is a binary indicator of whether respondents to the CPS voted in a given election. The key predictor of interest in each model is the coefficient for `sdr` which corresponds the model's predicted difference in turnout in states that had same day registration compared to states that did not. Model 1 presents the results from a simple linear regression assuming homoskedastic errors (i.e. constant error variance). The coefficient on `sdr` of 0.062 implies that this model predicts turnout will be higher by 6.2 percentage points in states with Same Day Registration. The standard error of 0.00110 is small relative to the coefficient, which as we will see in two weeks implies a *statistically significant* relationship. 
+
+Model 2 presents the same specification, but uses robust standard errors that allow for non-constant (heteroskedastic) error variance. The coefficient on `sdr` is exactly the same as Model 1, and the standard error is similar to the ten-thousandth decimal place. In short, simply including robust standard errors does little to change our substantive interpretation.
+
+Model 3 includes fixed effects of state and year. Specifically, `lm_robust()` uses the [within-in](https://en.wikipedia.org/wiki/Fixed_effects_model#Fixed_effects_estimator) transformation via the [method of alternating projections](https://www.ams.org/journals/jams/2002-15-03/S0894-0347-02-00398-3/S0894-0347-02-00398-3.pdf), subtracting off the state and year level means of the predictors and outcomes before estimating the regression. This transformation is equivalent to including indicator variables to represent the various levels of each fixed effect (e.g. including year and st as factor variables in the model). That latter, sometimes called the dummy variable approach, is more computationally intensive (if there are lots of levels to the fixed effect, the matrices involved in the calculation get very large), but as the code below demonstrates, they all yield the same estimates and standard errors (although there are some additional degrees of freedom adjustments that `lm_robust()` performs, which we are not when we calculate the within transformations by hand) 
+
+
+```{r}
+#| label: within_transformation
+
+
+# Kludge-y method of alternating projections....
+cps %>% 
+  ungroup() %>% 
+  # Only use observations from m3
+  filter(!is.na(dv_voted), !is.na(sdr)) %>% 
+  dplyr::group_by(st) %>% 
+  # Within transformation by states
+  mutate(
+    dv_voted_within = dv_voted - mean(dv_voted, na.rm=T),
+    sdr_within = sdr - mean(sdr, na.rm=T)
+  ) %>% 
+  ungroup() %>% 
+  # Within transformation by year
+  dplyr::group_by(year) %>%
+  mutate(
+    dv_voted_within = dv_voted_within - mean(dv_voted_within, na.rm=T),
+    sdr_within = sdr_within - mean(sdr_within,na.rm=T)
+  ) %>% ungroup() %>% 
+  # Within transformation by year
+  dplyr::group_by(st) %>%
+  mutate(
+    dv_voted_within = dv_voted_within - mean(dv_voted_within, na.rm=T),
+    sdr_within = sdr_within - mean(sdr_within,na.rm=T)
+  ) %>% 
+    dplyr::group_by(year) %>%
+  mutate(
+    dv_voted_within = dv_voted_within - mean(dv_voted_within, na.rm=T),
+    sdr_within = sdr_within - mean(sdr_within,na.rm=T)
+  ) %>% ungroup() %>% 
+  dplyr::group_by(st) %>%
+  mutate(
+    dv_voted_within = dv_voted_within - mean(dv_voted_within, na.rm=T),
+    sdr_within = sdr_within - mean(sdr_within,na.rm=T)
+  ) %>% 
+    dplyr::group_by(year) %>%
+  mutate(
+    dv_voted_within = dv_voted_within - mean(dv_voted_within, na.rm=T),
+    sdr_within = sdr_within - mean(sdr_within,na.rm=T)
+  ) %>% ungroup()-> cps
+
+start_time_m3_within  <- Sys.time()
+m3_within <- lm_robust(dv_voted_within ~ sdr_within, 
+                       cps,
+                       se_type = "stata",
+                       try_cholesky = T)
+
+end_time_m3_within  <- Sys.time()
+time_m3_within <- round(end_time_m3_within - start_time_m3_within,5)
+
+
+start_time_m3_indicator  <- Sys.time()
+m3_indicator <- lm_robust(dv_voted ~ sdr + factor(year) + factor(st),
+                          cps,
+                          se_type = "stata",
+                          try_cholesky = T)
+end_time_m3_indicator  <- Sys.time()
+time_m3_indicator <- round(end_time_m3_indicator - start_time_m3_indicator,5)
+
+time_m3_within
+time_m3_indicator
+
+```
+
+```{r}
+#| label: fe_models_compare
+
+htmlreg(list(m3, m3_within, m3_indicator),
+        omit.coef = "factor|Intercept",
+        digits = 5,
+        include.ci = F,
+        custom.model.names = c("lm_robust (within transformation)","Within transformation by hand","Indicator FE")
+        ) %>% HTML() %>% browsable()
+```
+
+Finally, model 4 presents the results of a TWFE regression with fixed effects for state and year with robust standard errors clustered by state. The coefficient on `sdr` remains the same as in Model 3, predicting about 0.6 percentage points higher turnout in states with same day registration. We see, however, that once we relax the assumption that our errors are independent, and allow for correlations between observations from the same state, our uncertainty about this estimate (quantified by its standard error) increases 10-fold, and we are non longer confident that there is a statistically significant relationship between same day registration and voting in these data. 
+
+In sum, once we account for fixed differences across states and between time periods, and allow correlated errors between observations from the same state, variation in the presence of same day registration laws seems to explain relatively little variation in voting
+
+
+:::{.callout-note}
+So which model should we prefer? I would say the default approach of most social scientists is to prefer the **most conservative** estimate, which in this case corresponds to the results from model 4. We'd rather under claim than over claim. Since **rarely if ever, do we _know_ the right model** , it's generally common practice to report the results of **multiple models** with different specifications (as Grumbach and Hill do) as a way of **demonstrating the robustness** of ones' results.
+:::
+
+
+# Replicate two models from Figure 3
+
+Interesting. Once we account for fixed differences across states and between time periods and allow correlated errors between observations from the same state, variation in the presence of same day registration laws seems to explain relatively little variation in voting. 
+
+Grumbach and Hill, however, are interested in a different question, namely, **whether the effects of same day registration vary by age.** 
+
+Grumbach and Hill test these claims using a regression model that interacts the `sdr` variable with indicators for the `age_group` of respondents. 
+
+The **combination** of the coefficient on `sdr` and the coefficient on the interaction of `sdr` with a specific age group indicator, tells us the predicted effect of `sdr` for respondents of that age group. In other words, it lets us assess whether same day registration is associated with more turnout among younger voters compared to older voters.
+
+Formally, we we can describe these models using the following notation:
+
+$$
+y_{ist} = \beta_0 + \overbrace{\alpha_s}^{\text{FE State}} + \underbrace{\gamma_t}_{\text{FE Year}} + \overbrace{\beta_1sdr_{st}}^{\text{ME of SDR for 65+}} + \underbrace{\sum_{k = 18-14}^{k = 55-64}\beta_{k} sdr_{st}\times age_{ist}}_{\Delta \text{ in ME of SDR for Age }}  +\overbrace{X\beta}^{\text{Controls}}+\epsilon_{ist}
+$$
+And the quantities of interest for Grumbach and Hill's claim are:
+
+$$
+\text{Marginal Effect of SDR for 65+} = \beta_1
+$$
+The marginal effects of the other age groups are defined by $\beta_1$, the marginal effect of SDR for 65+, **PLUS** the coefficient on the interaction term between SDR and each age group indicator. So for 18-24 year olds the quantity of interest is the sum of:
+
+$$
+\text{Marginal Effect of SDR for 18-24} = \beta_1 + \beta_{sdr \times 18-24}
+$$
+
+For 25-34 year olds
+
+$$
+\text{Marginal Effect of SDR for 25-34} = \beta_1 + \beta_{sdr \times 25-34}
+$$
+
+And so on.
+
+Please fit **two models** that **interact** the variable `sdr` with the variable `age_group`. Include fixed effects for `st`ate and `year`, and cluster your standard errors by `st`ate. 
+
+Call one model `m1gh` and only include the interaction between same day voting and age cohorts (`sdr*age_group`).
+
+Call the second model `m2gh`. In addition to the interaction, include controls for:
+
+- `race` (as a `factor()` variable) 
+- `is_female`
+- `income`
+- `education`
+
+## Estimate the models
+
+```{r}
+#| label: fig3_models
+
+m1gh <- lm_robust(dv_voted ~ sdr*age_group, 
+                  data = cps,
+                  fixed_effects = ~ st + year,
+                  se_type = "stata",
+                  clusters = st,
+                  try_cholesky = T
+                  )
+
+
+m2gh <- lm_robust(dv_voted ~ sdr*age_group +
+                    factor(race) + is_female + income + education, 
+                  data = cps,
+                  fixed_effects = ~ st + year,
+                  se_type = "stata",
+                  clusters = st,
+                  try_cholesky = T
+                  )
+
+
+```
+
+## Present the results
+
+Please present the results in a regression table. 
+
+Once you've estimated the models, you can just uncomment the code below:
+
+```{r}
+#| label: fig3_tab
+
+htmlreg(list(m1gh, m2gh), 
+        digits = 4,
+        include.ci = F) %>% HTML() %>% browsable()
+```
+
+
+# Recreate Figure 3
+
+Wuff. That's a lot of coefficients to sort through. 
+
+Moreover, the question Grumbach and Hill are interested -- how the marginal effect of same day registration varies by age -- isn't directly answered by any one coefficient in the the table.
+
+That's because the marginal effect of SDR (and it's standard error) varies conditionally on the value of age group we're looking at. 
+
+The comments to this lab contain a more formal discussion of the math behind this results. For right now, just know that to recreate Figure 3, we'll need to add the coefficients on the interactions of `sdr` with `age_group` to the coefficient on `sdr` to get the marginal effects for each age group.
+
+
+------------------------
+
+More formally, we can think of the marginal effect of any variable in a multiple regression as the partial derivative of the outcome with respect to that variable. Depending on how much calculus we took, this is either relatively obvious, or completely confusing. 
+
+So below, when taking the partial derivative of $y$ with respect to $x$ $(\frac{\partial y}{\partial x})$, anything not involving an $x$ is treated as a constant and the partial derivative of a constant is 0. By the [power rule](https://en.wikipedia.org/wiki/Power_rule), the derivative of $\beta_1 x$ is 1, and so the marginal effect of x on y  is $\beta_1$
+
+$$
+\begin{aligned}
+y &= \beta_0 + \beta_1 x +\beta_2z \\
+\frac{\partial y}{\partial x} &= 0 + \beta_1*(1) + 0\\
+\frac{\partial y}{\partial x} &= \beta_1
+\end{aligned} 
+$$
+
+Now consider a multiple regression with an interaction between two variables $x$ and $z$
+
+$$
+y = \beta_0 +\beta_1x +\beta_2 z + \beta_3 x*z
+$$
+
+Taking the partial derivative of y with respect to x $(\frac{\partial y}{\partial x})$, there are now two terms with $x$ in them:
+
+$$
+\begin{aligned}
+y &= \beta_0 +\beta_1x +\beta_2 z + \beta_3 x*z \\
+\frac{\partial y}{\partial x} &= 0 + \beta_1*(1) +0 + \beta_3*(1)*z\\
+\frac{\partial y}{\partial x} &= \beta_1 +\beta_3z
+\end{aligned} 
+$$
+
+And the marginal effect of $x$ now depends on value of $z$ at which we evaluate the model. Moreover, it can be shown for example in [Brambor Clark, and Golder 2006](https://www.jstor.org/stable/25791835), that the standard error of this marginal effect is a function of the variance and covariance of $\beta_1$ and $\beta_3$ and the value of the conditioning term $z$
+
+$$
+\text{Var}(\frac{\partial y}{\partial x}) = \text{Var}(\beta_1) + z^2\text{Var}(\beta_3) + 2\times z \text{Cov}(\beta_1,\beta_3)
+$$
+
+
+## Calculate Marginal Effects of Interactions
+
+In the code below, I've written a **custom function** called `me_fn()` to calculate the **marginal effects** of Same Day Registration, a specific age cohort^[This is not a robust function, but one designed to work specifically for these data and models]
+
+The function returns a $1\times 5$ data frame with following columns
+
+- `Age` the Age for which we are evaluating the marginal effect of `sdr`
+- `Effect` the marginal effect in percentage points of predicted turnout of `sdr` conditional on `age_group` equaling the age cohort in `Age`
+- `SE` the standard error of this marginal effect
+- `ll` the **lower limit** of a 95 percent **confidence interval** for our estimate
+- `ul` the **upper limit** of a 95 percent **confidence interval** for our estimate
+
+We will talk in more detail about what a **confidence interval** is in two weeks. For now, you can think of this interval as a **range of equally plausible values** for the marginal effect of SDR at a given age cohort. 
+
+:::{.callout-note}
+The heuristic for interpreting a confidence interval as a measure of statistical significance, is to ask:
+
+> Is **zero within** the upper and lower **limits of the confidence interval**. If so, then the true estimate could be negative, or it could be positive, in which case, we conclude the estimate is **not statistically significant**.
+:::
+
+Please run the code below:
+
+```{r}
+#| label: me_function
+
+# ---- Function to calculate marginal effect and SE of interactions ----
+
+me_fn <- function(mod, cohort, ci=0.95){
+  # Confidence Level for CI
+  alpha <- 1-ci
+  z <- qnorm(1-alpha/2)
+  
+  # Age (Always one for indicator of specific cohort)
+  age <- 1
+  
+  # Variance Covariance Matrix from Model
+  cov <- vcov(mod)
+  
+  # coefficient for SDR (Marginal Effect for reference category: 65+)
+  b1 <- coef(mod)["sdr"]
+  
+  # If age is one of the interactions
+  if(cohort %in% c("18-24","25-34","35-44","45-54","55-64")){
+    # get the name of the specific interaction
+    the_int <- paste("sdr:age_group",cohort,sep="")
+    # the coefficient on the interaction
+    b2 <- coef(mod)[the_int]
+    # Calculate marginal effect for age cohort
+    me <- b1 + b2*age
+    me_se <- sqrt(cov["sdr","sdr"] + age^2*cov[the_int,the_int] + 2*age*cov["sdr",the_int])
+    ll <- me - z*me_se
+    ul <- me + z*me_se
+  }
+  if(!cohort %in% c("18-24","25-34","35-44","45-54","55-64")){
+    me <- b1 
+    me_se <- mod$std.error["sdr"]
+    ll <- mod$conf.low["sdr"]
+    ul <- mod$conf.high["sdr"]
+  }
+
+  # scale results to be percentage points
+  res <- tibble(
+    Age = cohort,
+    Effect = me*100,
+    SE = me_se*100,
+    ll = ll*100,
+    ul = ul*100
+  )
+  return(res)
+
+
+}
+```
+
+Then uncomment the code below to create the data frame to produce a version of the coefficient plots from Grumbach and Hill's Figure 3.
+
+```{r}
+#| label: fig3_df
+
+
+## List of age cohorts
+the_age_groups <- levels(cps$age_group)
+
+## Model 1: No controls
+## Estimate Marginal effect for each age cohort
+the_age_groups %>% 
+  purrr::map_df(~me_fn(m1gh, cohort=.)) %>% 
+  # Add labels for plotting
+  mutate(
+    Age = factor(Age),
+    Model = "No controls"
+  ) -> fig3_no_controls
+
+## Model 3: Controls for Education, Income, Race,and Sex 
+## Estimate Marginal effect for each age cohort
+the_age_groups %>% 
+  purrr::map_df(~me_fn(m2gh, cohort=.)) %>% 
+  # Add labels for plotting
+  mutate(
+    Age = factor(Age),
+    Model = "With controls"
+  ) -> fig3_controls
+  
+## Combine estimates into data frame for plotting
+fig3_df <- fig3_no_controls %>% bind_rows(fig3_controls)
+
+## Display results
+fig3_df
+```
+
+------------------------
+
+If you're trying to understand the code above, it's a equivalent to writing something like:
+
+```{r}
+#| label: fig3_df_alt
+
+
+rbind(
+me_fn(m1gh, cohort="18-24"),
+me_fn(m1gh, cohort="25-34"),
+me_fn(m1gh, cohort="35-44"),
+me_fn(m1gh, cohort="45-54"),
+me_fn(m1gh, cohort="55-64"),
+me_fn(m1gh, cohort="65+")
+) %>% 
+  mutate(
+    Age = factor(Age),
+    Model = "No controls"
+  )
+```
+
+Using `map_df()` from the `purrr` package, simply lets us pipe the values of `age_group`, to the `cohort` argument of the `me_fn()` we defined above. `map_df()` then evaluates `me_fn()` for each value of the `the_age_groups` and returns a data frame with 6 rows corresponding to the marginal effects, standard errors, and confidence intervals for each age group.
+
+
+
+## Recreate Figure 3
+ 
+Now we can recreate the first and second panels in the first column of Grumbach and Hill's Figure 3.
+ 
+In the code chunk below, pipe `fig3_df` into ggplot() and:
+
+- Set the `x` aesthetic to `Age`
+- Set the `y` aesthetic to `Effect`
+- Add `geom_point()`
+- Add `geom_linerange(aes(ymin = ll, ymax =ul))`
+- Add `geom_hline(yintercept = 0)`
+- Add a `facet_wrap(~Model)`
+- Set the `theme` if you like
+
+
+```{r}
+#| label: fig3
+
+
+fig3_df %>% 
+  ggplot(aes(Age, Effect))+
+  geom_point()+
+  geom_linerange(aes(ymin = ll, ymax =ul))+
+  geom_hline(yintercept = 0, linetype = "dashed")+
+  facet_wrap(~Model)+
+  theme_minimal()
+
+```
+
+## Compare your figure to Figure 3 from the text
+
+Finally, **write a few sentences** comparing your results to those presented in Figure 3 of Grumbach and Hill.
+
+Here's a snapshot of the relevant panels of Figure 3 for reference:
+
+![](https://pols1600.paultesta.org/labs/images/08_fig3.png)
+
+
+Please comment on the following:
+
+- How does the size (magnitude) of the marginal effects for 18-24 year olds compare to those reported in Figure 3?
+
+- How would you interpret this marginal effect substantively?
+
+- Are any of the marginal effects in the model with no controls statistically significant?
+
+And if you're interested, check out the comments for some further discussion about the differences between our replication and the published results.
+
+-----------------
+
+So, I would say that the general constellation of results is similar to those in reported in the first two rows of the first column of Figure 3, but with some noticeable differences.
+
+As with Grumbach and Hill's Figure 3, the size of the marginal effect of SDR is generally largest for respondents in the 18-24-year-old age cohort. The model with no controls predicts that turnout among young folks will be about 2.6 percentage points higher in states with SDR. Including demographic and socio-economic controls, that estimate rises to about 4.6 percentage points.
+
+However, none of the marginal effects appear statistically significant in the model with no controls (all the CIs include 0). In the model with controls, the marginal effect for 18-24 year olds remains statistically significant, while the confidence interval on the marginal effect for 25-34 now includes 0 (i.e. is no longer statistically significant, or maybe is only *marginally significant*). Further, the specific point estimates differ in our replication from the results reported in the [appendix of Grumbach and Hill](https://www.journals.uchicago.edu/doi/suppl/10.1086/714776)
+
+So what's going on?
+
+**Differences in recoding** If you dive into the replication code for the paper, you'll note that their are some differences in how we recoded variables. In particular, our `age_group` variable classifies people in the 18-24 cohort, if their reported age is 18 to 24 when they took the survey. In the original paper, 18-24 year olds are coded with the following:
+
+```{r}
+#| label: age_recode
+
+#| eval: false
+# cps$age_group[cps$age<=24] <- "18-24"
+
+```
+
+So young folks below the age of 18 are included in this measure, which wouldn't alter the estimates if they didn't report voting, but it turns out that 7,991 folks in the CPS reported voting even though their recorded age is under 18.
+
+```{r}
+#| label: age_vote
+
+table(cps$dv_voted, cps$age < 18)
+```
+
+These respondents are included in G&H's analysis, but excluded from ours. 
+
+There are also some differences in the way we recoded covariates, like `income` and `education` that might also contribute to some of the differences we see in the model with controls.
+
+
+**Differences in standard errors** The second main difference between the paper and our replication, is how we calculate the standard error for the marginal effect of Same Day Registration for a given age group.
+
+In G&H, based on the 100 or so lines of code from line 662 it looks like they're constructing confidence intervals around the estimates of the marginal effects, using the SEs for the interaction terms. But as discussed above, the correct standard errors need to be calculated from the variances and covariances of both the coefficients on `sdr` and `sdr`'s interaction with a specific `age_group` indicator. Doing so generally gives us wider confidence intervals, which likely explains the difference in the model with controls for 25-34 year-olds.
+
+**What does it all mean?** 
+
+I guess I would say something like the following: Errors in code happen which is why it is doing empirical research in a reproducible way -- sharing your data and code -- is so vital. 
+
+In the present case, the errors seem to me to be *relatively minor* (some quibbles about how variables were recoded, a different approach to calculating standard errors) -- such that the core finding, SDR has a bigger impact on young folks than old folks-- remains relatively unchanged. Of course, we've only replicated two of 9 models in figure 3, but I suspect we'd find similar results. Further, Figure 3, is only one piece of evidence in their larger argument.
+
+So even though we've uncovered some irregularities in how data were coded and standard errors calculated, I would caution against jumping to the conclusion that we've disproved or invalidated the paper. We haven't. 
+
+But hopefully we've gotten a sense of how important it is to work in a clear manner. To check and double check our results. To know our data (e.g. do folks who legally can't vote, report voting in the data?) To make sure our code is clean, easy to follow, and does what we think it does. 
+
+Finally, I hope that in looking at the data by state and year and age group, we've gained a better sense of what **fixed effects regression** is trying to accomplish. Broadly, we're taking into account variation across states and time periods, and then seeing if the thing we're interested -- Same Day Registration -- still explains variation voting. These models are motivated by the same logic of the difference-in-differences designs we talked about in class. The interpretation of these regressions becomes [more complicated](https://www.sciencedirect.com/science/article/pii/S0304407621001445) (and their similarity to the the canonical DiD more tenuous), when "treatment" is implemented at different time periods, as well as when states can go from being not treated, to treated, back to not-treated, like Ohio, not to mention the fact that these models also introduce interactions between SDR and age groups to test for heterogeneous effects. 
+
+# Take the Class Survey {.unnumbered}
+
+Please take a few moments to complete the [class survey](https://brown.co1.qualtrics.com/jfe/form/SV_eFmwvHaKLBBLoJU){target="_blank"} for this week.

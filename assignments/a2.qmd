@@ -1,0 +1,273 @@
+---
+title: "POLS 1600: Research Topics"
+format:
+  html:
+    toc: TRUE
+    toc-location: right
+    toc_float: TRUE
+    toc_depth: 2
+    number_sections: TRUE
+---
+
+
+
+# Overview {-}
+
+For this assignment, please upload to [Canvas](https://canvas.brown.edu/courses/1094972/assignments){target="_blank"} an html file named `a2_group0X_data.html` produced from an Quarto Markdown file called `a2_group0X_data.qmd` (changing `group0X` to your group's number `group0X`) that contains the following:
+
+1. A revised description of your group's research project
+2. A description of a linear model implied by your question
+3. R code that loads some potentially relevant data to your question and at least one descriptive summary of that data.
+4. Some information about your group such as:
+    - A group name^[If you're Group 01 don't change your name to Group 4]
+    - A group color or color scheme
+    - A group motto, mascot, crest, etc.
+    - Your group's theme song
+    - Your group's astrological sign
+    - Anything else that you think well help you form strong ingroup bounds that facilitate collaboration
+
+Your files (.qmd file, .html file, and maybe a data file^[Please don't upload terabytes of data though.]) should be saved in the shared Google drive folder `Group_XX` for your group.
+
+:::{.callout-note}
+
+Google is great for sharing files but not so great for version control. When working on this assignment, please **Coordinate with your group so only ONE PERSON is editing the file at a given time**
+
+:::
+
+
+# Revised Research questions
+
+Please write no more than a brief paragraph laying out your revised research question. 
+
+For this assignment, a simple descriptive question of a theoretically interesting relationship is fine.^[That is, don't worry about whether your question is causally identified.]
+
+Perhaps your initial question was something like "Why do Republicans tend to vote at higher rates in midterm elections." 
+
+Perhaps my feedback was something unhelpful like this "question lacks conceptual clarity" or "there are many reasons why Republicans may vote at higher rates in midterm elections," or "instead of trying to identify all the causes of an effect, an experiment helps us identify the effect of cause."
+
+A revised research question might look something like:
+
+> Most surveys typically find that more people identify as Democrats than Republicans. Yet rates of turnout tend to be higher among Republicans than Democrats, particularly in midterm elections in which a Democrat controls the presidency. For this paper, we will explore who votes in midterm elections using validated voter turnout data from the 2006 through 2018 Cooperate Congressional Election Studies. We are particularly interested in whether gaps in turnout appear to be driven by differences in the skills and resources of members of each party or whetjer other factors such as mobilization and partisan affect for the party controlling the presidency. 
+
+That's some jargon-y, tortuous, writing (i.e. academic writing), but it gets the point across. Your group is interested in why Republicans tend to do better in midterms. Is it because Republicans in general tend have more resources and skills^[This is a common [explanation](https://www.cambridge.org/core/journals/american-political-science-review/article/abs/beyond-ses-a-resource-model-of-political-participation/CE74BA78807755F0A09E589D631EB03E){target="_blank"} for socio-economic differences in political participation.] that make them more likely to vote or is it because the Republican Party is more effective at mobilizing itss constituents in midterm elections. 
+
+Like code, no one writes perfect prose the first time through. Instead writing is a form of thinking. The process of putting your ideas on the electronic page will help you clarify just what it is you want to say.
+
+
+# Describing a linear model implied by your research question
+
+Broadly, your model should take the form of some outcome variable, $Y$ on the left hand side modeled by $(\sim)$ some independent/predictor/explanatory variable, $X$, on the right hand side of an equation. 
+
+$$Y = \beta_0 + \beta_1X$$
+
+
+To produce the above, I wrote
+
+    $$
+    Y = \beta_0 + \beta_1X
+    $$
+
+Here's more on how to [format mathematical expressions in R Markdown](https://bookdown.org/yihui/rmarkdown/markdown-syntax.html#math-expressions){targe="_blank"}.
+
+Please provide some basic explanation of the expected sign of the relationship (i.e., we expect the coefficient on $\beta_1$ to be positive)
+
+Continuing with the midterm election example, the first model I'd probably want to fit is a very simple one trying to establish if a gap exists. For each election dataset, I'd estimate a model that looked something like:
+
+
+$$\text{Voted in Midterm} = \beta_0 +\beta_1 \text{Is a Republican}$$
+
+Which was produced in Markdown by writing
+
+    $$\text{Voted in Midterm} = \beta_0 +\beta_1 \text{Is a Republican}$$
+
+
+Here the outcome variable would be an indicator^[Also known as a dummy variable, or binary variable because it only takes values of 0 or 1] variable of whether a person voted in the election that year. 
+
+The key predictor would be another indicator of whether that person was a Republican^[You'd probably also want to some clarity about how you're treating Independents and people who say they're Independents but when asked if they lean toward one party or the other. Typically, these partisan leaners tend to behave like partisans.]. 
+
+The coefficient on $\beta_0$ would provide the proportion of Democrats voting in that election (i.e. the model's prediction when `Is a Republican = 0`). 
+
+The coefficient on $\beta_1$ would provide the difference in proportions between Republicans and Democrats^[Assuming for simplicity that we're excluding independents from our analysis...]. If Republicans tended to vote at higher rates, we would expect this coefficient to be positive.
+
+Now perhaps this simple difference is due entirely to differences in the socio-economic status of Democrats and Republicans. That is Republicans tend to be higher income and higher income people tend to vote at higher rates (they have more time, resources, interest, sense of civic duty or social pressure, lots of potential reasons which aren't are central focus here). A model to test this claim might control for common measures of SES, things like income and education.
+
+$$\text{Voted in Midterm} = \beta_0 +\beta_1 \text{Rep} + \beta_2\text{Inc} + \beta_3\text{Educ}$$
+
+    $$\text{Voted in Midterm} = \beta_0 +\beta_1 \text{Rep} + \beta_2\text{Inc} + \beta_3\text{Educ}$$
+
+
+If the Republican advantage were primarily due to differences in SES, then controlling for these factors in a model, we would expect the coefficient on our Republican indicator to be close to 0. That is, once we've accounted for the variance in voting behavior predicted by people's incomes and education levels, knowing whether they identify as Republican may tell us little more about their likelihood of voting. 
+
+# Loading and summarizing Data in R.
+
+I don't expect you to have the final data you will use in for your analysis all set up and ready to go. 
+
+I do expect you to try and find at least some potential data set that might be useful. 
+
+It can be something we've worked with in class like the Covid-19 data or something you've downloaded from the web, pulled from the replication files of a published paper, or constructed yourself in a .csv file. See these slides [on loading data into R](https://pols1600.paultesta.org/slides/01-slides#/loading-data-into-r){target="_blank"}. 
+
+Similarly, I don't expect you to produce a full set of descriptive tables and figures, although you're welcome to do as much as you like. At a minimum, after you've successfully loaded the data into R, try to get a [High Level Overview of the Data,](https://pols1600.paultesta.org/slides/05-slides#/q3-describe-the-structure-of-each-dataset-1){target="_blank"}  and calculate some simple summary [statistics](https://pols1600.paultesta.org/labs/comments/01-lab-comments#explore-rs-functions-for-generating-summary-statistics){target="_blank"} like [measures of central tendency](https://pols1600.paultesta.org/slides/02-slides.html#114){target="_blank"} and/or [figures](https://pols1600.paultesta.org/slides/02-slides#/dataviz-describing-distributions-and-associations){target="_blank"}.
+
+
+Again, use the slides and past assignments as templates. Use Quarto's sections and code chunks  to structure your tasks. 
+
+# Sample .qmd file
+
+A simple structure for your .qmd file might look like this:
+
+````
+---
+title: 'Assignment 2: Revised Research Question'
+author: "The Groupers"
+date: "Last Updated `r format(Sys.Date())`"
+output:
+  html_document:
+    theme: journal
+    toc-location: right
+    toc: TRUE
+    toc_float: TRUE
+    toc_depth: 2
+    number_sections: TRUE
+---
+
+
+# Revised Research Question
+    
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. 
+
+# Implied Model
+    
+$$\text{Your Outcome} = \beta_0 + \beta_1 \text{Your Predictor} $$
+
+# Setup workspace
+
+```{{r}}
+#| label: setup
+# Code to setup workspace
+  library(tidyverse)
+```
+
+ 
+
+# Load data
+
+```{{r}}
+#| label: data
+
+# Code to load data
+df <- read_csv(url("www.data.com/data.csv"))
+```
+
+ 
+
+# Describe data
+
+## High Level Overview
+
+```{{r}}
+#| label: hlo
+# Code to provide high level overview
+head(df)
+```
+
+ 
+  
+## Recodes
+
+```{{r}}
+#| label: recodes
+
+# Code to do simple recoding
+df %>%
+  mutate(
+    dv = outcome_variable,
+    iv = predictor_variable
+  ) -> df
+```
+
+## Descriptive Statistics
+
+```{{r}}
+#| label: desciptives
+
+# Code to describe data
+summary(df$dv)
+
+hist(df$iv)
+```
+
+# Group Bounding Exercises
+
+- Group Name: The Groupers
+- Group Mascot: A grouper fish
+- Group Color: Mud
+- Group Motto: Give a man a fish, if you must, just not a grouper. Teach a man to fish for groupers and he'll go to jail.
+- Theme Song: Fish Bass, Phish
+- Astrological Sign: Pisces
+
+
+````    
+
+
+
+# Advice for finding a data set {-}
+
+
+Once you have a question in mind and a theory you want to test, the next step is to find some data that will allow you to assess the empirical implications of your claim. 
+
+You can do the following:
+  
+- **Use existing datasets** I'll provide some useful sources below.
+
+- **Collect your own data** Rewarding but time consuming. An example of how to scrape data from Twitter is provided below
+
+- **Combining datasets** Can be a clever strategy. Take an existing study and merge in data from a different study or data set to test some additional question. 
+  - Check out the [slides](https://pols1600.paultesta.org/slides/05-slides.html#29){target="_blank"} [labs](https://pols1600.paultesta.org/labs/05-lab-comments.html#5_Merge_the_election_data_into_the_Covid-19_data){target="_blank"} and [outside resources](https://r4ds.had.co.nz/relational-data.html#mutating-joins){target="_blank"}
+
+
+## Gathering Data from Existing Data Sets
+
+
+Below are some common data sets in American, Comparative and International Relations. Again your question doesn't have to be political and you can look elsewhere for data -- (the U.S. Census, Data.gov).
+
+
+## American Politics
+
+- The American National Elections Studies (NES)
+  - <http://www.electionstudies.org/>
+- CCES
+  - <http://projects.iq.harvard.edu/cces/home>
+- General Social Survey
+  - <http://www3.norc.org/GSS+Website/>
+- Roper Center
+  - <https://ropercenter.cornell.edu//>
+- Pew
+  - <http://www.pewresearch.org/data/>
+  
+## Comparative Politics/International Relations
+  
+- World Values Survey
+  - <http://www.worldvaluessurvey.org/wvs.jsp>
+- Eurobarometer
+  - <http://ec.europa.eu/public_opinion/index_en.htm>
+- Latinobarometer
+  - <http://www.latinobarometro.org/lat.jsp>
+- OECD
+  - <https://data.oecd.org/>
+- Quality of Government Data (I love this)
+  - <http://qog.pol.gu.se/data>
+- Uppsala Conflict Data (I hate this^[Basically conflict data is real pain to work with, and it's not always clear what statitistical inference means for these type of questions. But if your group is desperate to study these types of questions we can talk. I'd recommend trying to replicate and extend someone else's analysis of these data, rather than starting from scratch])
+  - <http://www.pcr.uu.se/research/UCDP/>
+- Threat and imposition of sanctions
+  - <http://www.unc.edu/~bapat/TIES.htm>
+- Correlates of War (Also hate this)
+  - <http://www.correlatesofwar.org/>
+  
+  
+## General Research
+  
+- Harvard Dataverse (Good for finding replication data from published studies)
+  - <https://dataverse.harvard.edu/> 
+- ICPSR (Same)
+  - <https://www.icpsr.umich.edu/icpsrweb/landing.jsp>
+  

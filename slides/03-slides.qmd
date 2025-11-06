@@ -1,0 +1,1595 @@
+---
+title: "POLS 1600"
+subtitle: "Causal Inference in<br>Experimental Designs"
+date: last-modified
+date-format: "[Updated ]MMM D, YYYY"
+bibliography: ../files/paperpile.bib
+format: 
+  revealjs:
+    theme: brownslides.scss
+    logo: images/pols1600_hex.png
+    footer: "POLS 1600"
+    multiplex: false
+    transition: fade
+    slide-number: c
+    incremental: true
+    center: false
+    menu: true
+    scrollable: true
+    highlight-style: github
+    progress: true
+    code-overflow: wrap
+    html-math-method: mathjax
+    # include-after-body: title-slide.html
+    title-slide-attributes:
+      align: left
+      data-background-image: images/pols1600_hex.png
+      data-background-position: 90% 50%
+      data-background-size: 40%
+filters:
+    - openlinksinnewpage
+
+    # title-slide-attributes:
+    #   data-background-image: ../../assets/stat20-hex-bg.png
+    #   data-background-size = contain
+---
+
+```{r}
+#| echo: false
+#| results: hide
+#| warning: false 
+#| message: false
+
+library(tidyverse)
+library(labelled)
+library(haven)
+library(DeclareDesign)
+library(easystats)
+```
+
+# {{< fa map-location>}} Overview {.inverse}
+
+## Class Plan {.smaller}
+
+-   Announcements
+-   Feedback
+-   Review
+-   Class plan
+    -   Causal Inference
+    -   Notation for Causal Inference
+    -   Causal Identification
+    -   Causal Identification in Experiments
+    -   `resume` data from QSS (Skipping, but their for your reference)
+    -   Explore Broockman and Kalla (2016)
+
+## Annoucements
+
+- We start taking attendance this week
+
+- Readings for this week:
+
+  - QSS Chapter 2: pp. 38--65
+  - [@Broockman2016-pi](https://pols1600.paultesta.org/files/readings/broockman_kalla_2016.pdf)
+
+- No class next Tuesdays
+
+- No lab next Thursday
+
+- Meet your groups!
+
+## Group Assignments {.smaller}
+
+```{r}
+#| echo: false
+groups_df <- tibble::tibble(
+`Group 1` = c("Gurpartap Singh","Niyah Whitten", "Marisa Coghlin", "Aidan Choi"),
+`Group 2` = c("Sylvie Watts","Amani Diallo", "Sinclair Harris","Peter Zucker"),
+`Group 3` = c("Joshua Okwaning","Eiffel Sunga","Jenna Hercher", "Ella Hendelman"),
+`Group 4` = c( "Jacqueline Zhang", "Charlie Jeffers","Meleah Neely", "Nene Mokonchu"),
+`Group 5` = c("Talib Reddick","Zoe Kaufman","Jenna Lowry", "Harry Laferriere"),
+`Group 6` = c("Tess	Naquet-Radiguet"," Anisha Kumar","Nash Riebe", "Sophia Wotman"),
+`Group 7` = c("Ben Buka","Ianthe Ince","Riya Srinivasan","Kaelah Kimura")
+)
+
+groups_df |> 
+  pivot_longer(cols = starts_with("Group"),
+               names_to = "Group",
+               values_to = "Name") |> 
+  arrange(Group) |>
+  group_by(Group) |> 
+  mutate(
+    id = 1:n()
+  ) |> 
+  pivot_wider(id_cols = Group,
+              names_from = id,
+              values_from = Name) -> groups_df
+#write_csv(groups_df, file = "../files/groups.csv" )
+DT::datatable(groups_df)
+```
+
+# Feedback
+
+```{r}
+
+df <- haven::read_spss("../files/data/class_surveys/wk02.sav")
+
+df %>%
+  mutate(
+    Likes = like,
+    Dislikes = dislike,
+  ) -> df
+```
+
+## What did we like {.smaller}
+
+```{r}
+DT::datatable(df %>% 
+                select(Likes),
+               fillContainer = F,
+              height = "90%",
+              options = list(
+                pageLength = 5
+              )
+              )
+```
+
+## What did we dislike {.smaller}
+
+```{r}
+#| echo = F
+DT::datatable(df %>% 
+                select(Dislikes),
+               fillContainer = F,
+              height = "90%",
+              options = list(
+                pageLength = 4
+              )
+              )
+```
+
+## Setup
+
+Every time you work in R
+
+-   Save your file to your course or project folder
+
+-   Set your working directory to where your file is saved
+
+-   Load, and if needed, install packages
+
+-   Maybe change some global options in your .Qmd file
+
+## Setting your working directory when working "Live"
+
+```{r}
+#| echo = F
+knitr::include_graphics("https://statisticsglobe.com/wp-content/uploads/2020/03/figure-2-set-working-directory-to-source-file-location-manually.png")
+```
+
+## Packages for today
+
+```{r}
+#| label: packages
+#| echo: true
+
+## Pacakges for today
+the_packages <- c(
+  ## R Markdown
+  "kableExtra","DT",
+  
+  ## Tidyverse
+  "tidyverse", "lubridate", "forcats", 
+  "haven", "labelled",
+  
+  ## Extensions for ggplot
+  "ggmap","ggrepel", "ggridges", 
+  "ggthemes", "ggpubr", "GGally",
+  "scales", "dagitty", "ggdag", #<<
+  
+  # Data 
+  "COVID19","maps","mapdata",
+  "qss" #<<
+)
+
+## Define a function to load (and if needed install) packages
+
+ipak <- function(pkg){
+    new.pkg <- pkg[!(pkg %in% installed.packages()[, "Package"])]
+    if (length(new.pkg)) 
+        install.packages(new.pkg, dependencies = TRUE)
+    sapply(pkg, require, character.only = TRUE)
+}
+
+## Install (if needed) and load libraries in the_packages
+ipak(the_packages)
+```
+
+# {{< fa magnifying-glass>}} Review {.inverse}
+
+## Review: Data wrangling
+
+## Data transformations {.smaller}
+
+::: columns
+::: {.column width="30%"}
+You want to:
+
+-   Load some data
+
+-   Combine multiple functions
+
+-   Look at your data
+
+-   Recode your data
+
+-   Transform your data
+:::
+
+::: {.column width="70%"}
+::: fragment
+You could use
+
+-   `read_*` functions
+
+-   `%>%` the "pipe" operator
+
+-   `glimpse()` `head()`, `filter()`, `select()`, `arrange()`
+
+-   `mutate()`, `case_when()`, `ifelse()`
+
+-   `summarize()`, `group_by()`
+:::
+:::
+:::
+
+## Data Visualization {.smaller}
+
+-   The grammar of graphics
+
+-   At minimum you need:
+
+    -   `data`
+    -   `aesthetic` mappings
+    -   `geometries`
+
+-   Hey Jude, take a sad plot and make it better by:
+
+    -   `labels`
+    -   `themes`
+    -   `statistics`
+    -   `cooridnates`
+    -   `facets`
+    -   transforming your data before plotting
+
+## Practice {.smaller}
+
+
+
+- Create two variables `x` and `y`
+  - `x` should be a random variable with 100 observations from a random normal (`rnorm`) distribution  with mean 0 and standard deviation 1
+  - `y` should be a function of x plus the square of a random normal distribution with mean 0 and standard deviation 1
+- Combine  `x` and `y` into a `data.frame` called `df` 
+- `summarize` the `mean`, `median`, standard deviation (`sd`), 16th and 84th percentile (`quantile`) of `x` and `y` and save this to an object called `df_sum`
+- Plot the distributions of `x` and `y`, separately, using a density plot (`geom_density`)
+  - Add a rug to each density plot
+  - Add vertical lines for the mean and median of each variable
+  - A vertical lines at the 16th and and 84th percentile of each plot
+    - Hint use your object `df_sum` as the data for these geometries
+
+
+## Practice {.smaller}
+
+:::: panel-tabset
+
+## Tasks
+
+:::{.nonincremental}
+
+- Create two variables `x` and `y`
+  - `x` should be a random variable with 100 observations from a random normal (`rnorm`) distribution  with mean 0 and standard deviation 1
+  - `y` should be a function of x plus the square of a random normal distribution with mean 0 and standard deviation 1
+- Combine  `x` and `y` into a `data.frame` called `df` 
+- `summarize` the `mean`, `median`, standard deviation (`sd`), 16th and 84th percentile (`quantile`) of `x` and `y` and save this to an object called `df_sum`
+- Plot the distributions of `x` and `y`, separately, using a density plot (`geom_density`)
+  - Add a rug to each density plot
+  - Add vertical lines for the mean and median of each variable
+  - A vertical lines at the 16th and and 84th percentile of each plot
+    - Hint: use your object `df_sum` as the data for these geometries
+
+:::
+
+## {{<fa code>}}
+
+```{r}
+#| echo: true
+
+# Load libraries
+library(tidyverse)
+
+# Set seed for reproducibility
+set.seed(123)
+
+# Number of observations
+n <- 1000
+
+# Generate data
+x <- rnorm(n, mean = 0, sd = 1)
+y <- x + (rnorm(n, mean = 0, sd = 1))^2
+
+# Create dataframe
+df <- data.frame(x = x, y = y)
+
+# Calculate summary statistics
+
+df_sum <- df %>% 
+  dplyr::summarise(
+    x_mean = mean(x),
+    x_median = median(x),
+    x_sd = sd(x),
+    x_16th = quantile(x, probs = .16),
+    x_84th = quantile(x, probs = .84),
+    y_mean = mean(y),
+    y_median = median(y),
+    y_sd = sd(y),
+    y_16th = quantile(y, probs = .16),
+    y_84th = quantile(y, probs = .84)
+  )
+
+df_sum
+
+fig_x <- df %>% 
+  ggplot(aes(x))+
+  geom_density()+
+  geom_rug()+
+  geom_vline(
+    data = df_sum,
+    aes(xintercept = x_mean, col="Mean"))+
+  geom_vline(
+    data = df_sum,
+    aes(xintercept = x_median, col="Median"),
+    linetype = "dashed")+
+  geom_vline(
+    data = df_sum,
+    aes(xintercept = x_16th, col="16th percentile"))+
+  geom_vline(
+    data = df_sum,
+    aes(xintercept = x_84th, col="84th percentile"))+
+  geom_segment(
+    aes(y=.45, yend=.45,
+        x = df_sum$x_mean - df_sum$x_sd,
+        xend = df_sum$x_mean + df_sum$x_sd)
+  )+
+  ylim(0,.5)+
+  labs(
+    col = "Statistic"
+  )
+
+fig_y <- df %>% 
+  ggplot(aes(y))+
+  geom_density()+
+  geom_rug()+
+  geom_vline(
+    data = df_sum,
+    aes(xintercept = y_mean, col="Mean"))+
+  geom_vline(
+    data = df_sum,
+    aes(xintercept = y_median, col="Median"),
+    linetype = "dashed")+
+  geom_vline(
+    data = df_sum,
+    aes(xintercept = y_16th, col="16th percentile"))+
+  geom_vline(
+    data = df_sum,
+    aes(xintercept = y_84th, col="84th percentile"))+
+  geom_segment(
+    aes(y=.45, yend=.45,
+        x = df_sum$y_mean - df_sum$y_sd,
+        xend = df_sum$y_mean + df_sum$y_sd)
+  )+
+  ylim(0,.5)+
+  labs(
+    col = "Statistic"
+  )
+
+cor(df$x, df$y)
+
+fig_xy <- df %>% 
+  ggplot(aes(x,y))+
+  geom_point()+
+  geom_smooth(method="lm")
+
+```
+
+## Figures
+
+```{r}
+fig_x
+
+fig_y
+
+fig_xy
+```
+
+## Summary
+
+- Measures of central tendency describe [what's typical]{.blue}
+
+- Measures of dispersion describe [variation around what's typical]{.blue}
+
+:::
+
+# {{< fa lightbulb >}} Causal Inference {.inverse}
+
+## Causal claims imply counterfactual comparisons
+
+::: columns
+::: {.column width="40%"}
+-   Causal claims imply counterfactual comparisons
+
+-   What would have happened if we were to change some aspect of the world?
+:::
+
+::: {.column width="60%"}
+![](https://media.philly.com/images/20150621-Groundhog-day.jpg){.fragment}
+:::
+:::
+
+## What's the counterfactual for these claims:
+
+-   Foreign aid increases develop
+
+-   Joe Rogan cost Kamala the 2024 election
+
+-   Democracies don't fight wars with other democracies
+
+-   Universal Pre-K improves child development
+
+## Casual claims are all around us
+
+::: columns
+::: {.column width="45%"}
+```{r}
+#| echo = F
+knitr::include_graphics("https://images-na.ssl-images-amazon.com/images/I/A1qhBebbu6L.jpg")
+```
+:::
+
+::: {.column width="45%"}
+```{r}
+#| echo = F
+knitr::include_graphics("https://press.uchicago.edu/.imaging/mte/ucp/medium/dam/ucp/books/jacket/978/02/26/11/9780226112374.jpg/jcr:content/9780226112374.jpg")
+```
+:::
+:::
+
+## Casual claims  are all around us
+
+What are some questions that interest you?
+
+What are the counterfactual comparisons they imply?
+
+# {{< fa lightbulb >}} Notation for Causal Inference {.inverse}
+
+## How to represent causal claims
+
+In this course, we will use two forms of notation to describe our causal claims.
+
+-   Directed Acyclic Graphs (DAGs, next lecture)
+
+-   **Potential Outcomes Notation**
+
+## General Notation: Variables {.smaller}
+
+-   `Y` our [outcome]{.blue} of interest
+
+-   `D` an indicator of [treatment]{.blue} status
+
+    -   `D=1` $\to$ treated
+    -   `D=0` $\to$ not treated (control)
+
+-   `Z` an of [assignment]{.blue} status
+
+    -   `Z=1` $\to$ assigned to treatment
+    -   `Z=0` $\to$ assigned to control
+
+-   `X` a [covariate]{.blue} or [predictor]{.blue} we can measure/observe
+
+-   `U` [unmeasured]{.blue} covariates
+
+## Expected Values
+
+::: nonincremental
+-   The $E[Y]$ reads as "the expected value of Y"
+
+-   $E[Y]$ is defined as a probability weighted average based on the unconditional probability of Y ( $f(y)$ )
+
+$$\operatorname{E}[Y] = \int_{-\infty}^\infty y f(y)\, dy$$
+:::
+
+## Conditional Expectations
+
+::: nonincremental
+-   The $E[Y|X=x]$ reads as "the expected value of Y conditional on the value of X"
+
+-   $E[Y|X=x]$ is defined as a probability weighted average of Y based on the conditional probability of Y given X ( $y f_{Y|X}(y|x)$ )
+
+$$\operatorname{E}[Y \vert X=x] = \int_{-\infty}^\infty y f (y\vert x) \, dy$$
+:::
+
+## Estimands, Estimators and Estimates {.smaller}
+
+-   [Estimand]{.blue} the thing we want to know.
+
+    -   Sometimes called a [parameter ($\theta$, "theta")]{.blue} or [quantity of interest]{.blue}
+    -   The expected value of heights in POLS 1600 ($\theta =E[X]$)
+
+-   [Estimator]{.blue} a rule or method for calculating an [estimate]{.blue} of our [estimand]{.blue}
+
+    -   An average of a sample of 10 student's heights in POLS 1600
+    -   $\hat{\theta} = \bar{x} = 1/n*\sum_1^{n} x_i$
+
+-   [Estimate:]{.blue} a value produced by our estimator for some data
+
+    -   The average of our 10 person sample is `5'10''`
+
+## Error and Bias {.smaller}
+
+Formally, we'll say an estimate, $\hat{\theta}$ ("theta hat") is an unbiased estimator of a parameter, $\theta$ ("theta") if:
+
+$$
+E[\hat{\theta}] = \theta
+$$
+
+Bias or error, $\epsilon$, is the difference between our estimate and the truth
+
+$$
+\epsilon = \hat{\theta} -\theta
+$$
+
+An estimator is unbiased if, on average, the errors equal 0
+
+$$
+E[\epsilon] = E[\hat{\theta} -\theta] = 0
+$$
+
+## Bias vs. variance
+
+```{r}
+
+knitr::include_graphics("https://www.cs.cornell.edu/courses/cs4780/2018fa/lectures/images/bias_variance/bullseye.png")
+```
+
+## The bias-variance tradeoff
+
+```{r}
+
+knitr::include_graphics("http://scott.fortmann-roe.com/docs/docs/BiasVariance/biasvariance.png")
+```
+
+## Potential outcomes notation {.smaller}
+
+-   $Y_i(1)$ describes individual $i$'s outcome, $Y_i$ if they [received the treatment]{.blue} $(D_i = 1)$
+    -   Shorthand for $Y_i(D_i=1)$
+    -   Paul's Covid-19 status ($Y_i$) with the vaccine ($D_i = 1$)
+-   $Y_i(0)$ describes individual $i$'s outcome, $Y_i$ if they [did not receive the treatment]{.blue} $(D_i = 0)_i$
+    -   Shorthand for $Y_i(D_i=0)$
+    -   Paul's Covid-19 status ($Y_i$) without the vaccine ($D_i=0$)
+
+. . .
+
+The [treatment received]{.blue} determines which [potential outcome]{.blue} we actually [observe]{.blue}:
+
+$$
+Y_i = (1 - D_i)*Y_i(0) + D_i*Y_i(1)
+$$
+
+Potential outcomes are fixed, but we only observe one (of many) potential outcomes $\to$ *Fundamental Problem of Causal Inference*
+
+## Fundamental Problem of Causal Inference {.smaller}
+
+The individual causal effect (ICE), $\tau_i$, is defined as
+
+$$
+\tau_i \equiv Y_i(1) - Y_i(0)
+$$
+
+-   The [fundamental problem of causal inference]{.blue} is that we only ever see one potential outcome for an individual, and so it's [impossible to know]{.blue} the causal effect of some intervention for that individual
+
+-   The ICE is [unidentified]{.blue}
+
+# {{< fa lightbulb >}} Causal Identification {.inverse}
+
+## Identification
+
+-   Identification refers to [what we can learn]{.blue} from the data available
+
+-   A quantity of interest is [identified](https://en.wikipedia.org/wiki/Identifiability) if, with infinite data it can only take one value
+
+-   For example, a coefficient in an equation can be [unidentified]{.blue} if
+
+    -   We have more predictors than observations, or
+
+    -   Some of predictors are linear combinations of other predictors.
+
+## Causal Identification
+
+-   [Casual Identification]{.blue} refers to "the assumptions needed for statistical estimates to be given a causal interpretation" [Keele (2015)](http://lukekeele.com/wp-content/uploads/2016/03/causal.pdf)
+
+-   [What's Your Casual Identification Strategy]{.blue} What are the assumptions that make your research design credible?
+
+-   **Identification \> Estimation**
+
+## Observational vs Experimental Designs
+
+-   [Experimental designs]{.blue} are studies in which a causal variable of interest, the *treatement*, is [manipulated by the researcher]{.blue} to examine its causal effects on some *outcome* of interest
+
+-   [Observational designs]{.blue} are studies in which a causal variable of interest is determined by someone/thing [other than the researcher]{.blue} (nature, governments, people, etc.)
+
+# {{< fa lightbulb >}} Causal Identification in Experimental Designs {.inverse}
+
+## The FPoCI is a problem of missing data {.smaller}
+
+Recall that an individual causal effect $\tau_i$, is defined as:
+
+$$
+\tau_i \equiv Y_i(1) - Y_i(0)
+$$
+
+The problem is that for any one individual, we only observe $Y_i(1)$ or $Y_i(0)$, but never both.
+
+-   If Paul got the vaccine $(Y_{Paul}(Vaxxed)=\text{Covid Free})$, then we don't know what Paul's health status would have been, had he not got the vaccine $(Y_{Paul}(Unvaxxed) =???)$
+
+## A statistical solution to the FPoCI {.smaller}
+
+Rather than focus individual causal effects:
+
+$$
+\tau_i \equiv Y_i(1) - Y_i(0)
+$$
+
+We focus on average causal effects (Average Treatment Effects \[ATEs\]):
+
+$$
+E[\tau_i] = \overbrace{E[Y_i(1) - Y_i(0)]}^{\text{Average of a difference}} = \overbrace{E[Y_i(1)] - E[Y_i(0)]}^{\text{Difference of Averages}}
+$$
+
+When does the difference of averages provide us with a good estimate of the average difference?
+
+Let's consider a simple example
+
+## Does eating chocolate make you happy?
+
+-   $Y_i$ happiness measured on a 0-10 scale
+
+-   $D_i$ whether a person ate [chocolate]{style="color: chocolate"} $(D=1)$ or [fruit]{style="color: purple"} $(D = 0)$
+
+-   $Y_i(1)$ a person's happiness eating [chocolate]{style="color: chocolate"}
+
+-   $Y_i(0)$ a person's happiness eating [fruit]{style="color: purple"}
+
+-   $X_i$ a person's self-reported preference $(X_i \in$ {[chocolate]{style="color: chocolate"}, [fruit]{style="color:purple"} })
+
+```{r}
+#| echo: false
+candy_df <- tibble(
+  y1 = c(7, 8, 5, 4, 6, 8, 5, 7, 4, 6),
+  y0 = c(3, 6, 4, 3, 10, 9, 4, 8, 3, 0),
+  tau = y1 - y0,
+  x = c("chocolate", "chocolate", "chocolate","chocolate",
+            "fruit","fruit",
+            "chocolate",
+            "fruit",
+            "chocolate","chocolate"),
+  d = if_else(x == "chocolate", 1, 0),
+  y = if_else(d ==  1,y1,y0)
+)
+
+candy_tab <- candy_df
+estimand_df <- tibble(
+  y1_mn = mean(candy_df$y1, na.rm = T),
+  y0_mn = mean(candy_df$y0,na.rm = T),
+  tau_mn = mean(candy_df$tau,na.rm = T)
+)
+
+effects_df <- tibble(
+  y1_mn = mean(candy_df$y1[candy_df$d == 1], na.rm = T),
+  y0_mn = mean(candy_df$y0[candy_df$d == 0],na.rm = T),
+  ate = y1_mn - y0_mn
+)
+
+candy_tab$y1 <- cell_spec(
+  candy_df$y1, color = "chocolate"
+)
+candy_tab$y0 <- cell_spec(
+  candy_df$y0, color = "purple"
+)
+candy_tab$x <- cell_spec(
+  candy_df$x, color = ifelse(candy_df$x == "fruit", "purple", "chocolate"
+)
+)
+candy_tab$d <- cell_spec(
+  candy_df$d, color = ifelse(candy_df$d == 0, "purple", "chocolate"
+)
+)
+candy_tab$y <- cell_spec(
+  candy_df$y, color = ifelse(candy_df$d == 0, "purple", "chocolate"
+)
+)
+
+
+
+```
+
+##  {.smaller}
+
+::: columns
+::: {.column width="45%"}
+#### Potential Outcomes:
+
+```{r}
+#| echo: false
+#| results: asis
+
+kable(candy_tab |> 
+        select(y1, y0,tau)
+      ,escape = FALSE,
+      # format = "markdown",
+      col.names = c(
+        "$Y_i(1)$",
+        "$Y_i(0)$",
+        "$\\tau_i$"
+      ))
+```
+
+```{r}
+#| echo: false
+#| results: asis
+
+kable(estimand_df,escape = F,
+      format = "markdown",
+      col.names = c(
+        "$E[Y_i(1)]$",
+        "$E[Y_i(0)]$",
+        "$E[\\tau_i]$"
+      )
+      )  
+```
+:::
+
+::: {.column width="45%"}
+-   If we could observe everyone's potential outcomes, we could calculate the ICE
+
+-   On average eating chocolate increases happiness by 1 point on our 10-point scale (ATE = 1)
+
+-   Suppose we conducted a study and let folks [select]{.blue} what they wanted to eat.
+:::
+:::
+
+##  {.smaller}
+
+::: columns
+::: {.column width="45%"}
+#### Potential Outcomes:
+
+```{r}
+#| echo: false
+
+kable(candy_tab |> 
+        select(y1, y0,tau)
+      ,escape = F,
+      format = "markdown",
+      col.names = c(
+        "$Y_i(1)$",
+        "$Y_i(0)$",
+        "$\\tau_i$"
+      )) 
+```
+
+```{r}
+#| echo: false
+
+kable(estimand_df,escape = F,
+      format = "markdown",
+      col.names = c(
+        "$E[Y_i(1)]$",
+        "$E[Y_i(0)]$",
+        "$ATE$"
+      )
+      ) 
+```
+:::
+
+::: {.column width="45%"}
+#### Observed Treatment:
+
+```{r}
+#| echo: false
+
+kable(candy_tab |> 
+        select(x, d,y)
+      ,escape = F,
+      format = "markdown",
+      col.names = c(
+        "$x_i$",
+        "$d_i$",
+        "$y_i$"
+      )) 
+```
+
+```{r}
+#| echo: false
+
+kable(effects_df,escape = F,
+      format = "markdown",
+      digits = 2,
+      col.names = c("$\\bar{y}_{d=1}$",
+        "$\\bar{y}_{d=0}$",
+        "$\\hat{ATE}$")
+      ) 
+```
+:::
+:::
+
+##  {.smaller}
+
+::: columns
+::: {.column width="45%"}
+#### Observed Treatment:
+
+```{r}
+#| echo: false
+
+kable(candy_tab |> 
+        select(x, d,y)
+      ,escape = F,
+      format = "markdown",
+      col.names = c(
+        "$x_i$",
+        "$d_i$",
+        "$y_i$"
+      )) 
+```
+
+```{r}
+#| echo: false
+
+kable(effects_df,escape = F,
+      format = "markdown",
+      digits = 2,
+      col.names = c("$\\bar{y}_{d=1}$",
+        "$\\bar{y}_{d=0}$",
+        "$\\hat{ATE}$")
+      ) 
+```
+:::
+
+::: {.column width="45%"}
+#### Selection Bias
+
+-   Our estimate of the ATE is [biased]{.blue} by the fact that folks who prefer fruit seem to be happier than folks who prefer chocolate in this example
+
+-   In general, [selection bias]{.blue} occurs when folks who receive the treatment differ systematically from folks who don't
+
+-   What if instead of letting people pick and choose, we [randomly assigned]{.blue} half our respondents to [chocolate]{style="color: chocolate"} and half to receive [fruit]{style="color: purple"}
+:::
+:::
+
+##  {.smaller}
+
+```{r}
+#| echo: false
+
+set.seed(12)
+candy_df |> 
+  mutate(
+    d = randomizr::complete_ra(10),
+    y = if_else(d ==  1,y1,y0)
+  ) -> candy_df
+
+candy_tab <- candy_df
+estimand_df <- tibble(
+  y1_mn = mean(candy_df$y1, na.rm = T),
+  y0_mn = mean(candy_df$y0,na.rm = T),
+  tau_mn = mean(candy_df$tau,na.rm = T)
+)
+
+effects_df <- tibble(
+  y1_mn = mean(candy_df$y1[candy_df$d == 1], na.rm = T),
+  y0_mn = mean(candy_df$y0[candy_df$d == 0],na.rm = T),
+  ate = y1_mn - y0_mn
+)
+
+candy_tab$y1 <- cell_spec(
+  candy_df$y1, color = "chocolate"
+)
+candy_tab$y0 <- cell_spec(
+  candy_df$y0, color = "purple"
+)
+candy_tab$x <- cell_spec(
+  candy_df$x, color = ifelse(candy_df$x == "fruit", "purple", "chocolate"
+)
+)
+candy_tab$d <- cell_spec(
+  candy_df$d, color = ifelse(candy_df$d == 0, "purple", "chocolate"
+)
+)
+candy_tab$y <- cell_spec(
+  candy_df$y, color = ifelse(candy_df$d == 0, "purple", "chocolate"
+)
+)
+
+```
+
+::: columns
+::: {.column width="45%"}
+#### Potential Outcomes:
+
+```{r}
+#| echo: false
+
+kable(candy_tab |> 
+        select(y1, y0,tau)
+      ,escape = F,
+      format = "markdown",
+      col.names = c(
+        "$Y_i(1)$",
+        "$Y_i(0)$",
+        "$\\tau_i$"
+      )) 
+```
+
+```{r}
+#| echo: false
+
+kable(estimand_df,escape = F,
+      format = "markdown",
+      col.names = c(
+        "$E[Y_i(1)]$",
+        "$E[Y_i(0)]$",
+        "$ATE$"
+      )
+      ) 
+```
+:::
+
+::: {.column width="45%"}
+#### Randomly Assigned Treatment:
+
+```{r}
+#| echo: false
+
+kable(candy_tab |> 
+        select(x, d,y)
+      ,escape = F,
+      format = "markdown",
+      col.names = c(
+        "$x_i$",
+        "$d_i$",
+        "$y_i$"
+      )) 
+```
+
+```{r}
+#| echo: false
+
+kable(effects_df,escape = F,
+      format = "markdown",
+      digits = 2,
+      col.names = c("$\\bar{y}_{d=1}$",
+        "$\\bar{y}_{d=0}$",
+        "$\\hat{ATE}$")
+      )
+```
+:::
+:::
+
+##  {.smaller}
+
+::: columns
+::: {.column width="45%"}
+#### Randomly Assigned Treatment:
+
+```{r}
+#| echo: false
+
+kable(candy_tab |> 
+        select(x, d,y)
+      ,escape = F,
+      format = "markdown",
+      col.names = c(
+        "$x_i$",
+        "$d_i$",
+        "$y_i$"
+      ))
+```
+
+```{r}
+#| echo: false
+
+kable(effects_df,escape = F,
+      format = "markdown",
+      digits = 2,
+      col.names = c("$\\bar{y}_{d=1}$",
+        "$\\bar{y}_{d=0}$",
+        "$\\hat{ATE}$")
+      ) 
+```
+:::
+
+::: {.column width="45%"}
+#### Random Assignment
+
+-   When treatment has been [randomly assigned]{.blue}, a difference in sample means provides an [unbiased]{.blue} estimate of the [ATE]{.blue}
+
+-   The fact that our $\hat{ATE} = ATE$ in this example is pure coincidence.
+
+-   If we randomly assigned treatment a different way, we'd get a different estimate.
+
+-   In general unbiased estimators will tend to be neither too high nor too low (e.g. $E[\hat{\theta} - \theta] = 0$\])
+:::
+:::
+
+## Estimating an Average Treatment Effect {.smaller}
+
+If we treatment has been randomly assigned, we can estimate the ATE by taking the difference of means between treatment and control:
+
+$$
+\begin{align*}
+E \left[ \frac{\sum_1^m Y_i}{m}-\frac{\sum_{m+1}^N Y_i}{N-m}\right]&=\overbrace{E \left[ \frac{\sum_1^m Y_i}{m}\right]}^{\substack{\text{Average outcome}\\
+\text{among treated}\\ \text{units}}}
+-\overbrace{E \left[\frac{\sum_{m+1}^N Y_i}{N-m}\right]}^{\substack{\text{Average outcome}\\
+\text{among control}\\ \text{units}}}\\
+&= E [Y_i(1)|D_i=1] -E[Y_i(0)|D_i=0]
+\end{align*}
+$$
+
+That is, the ATE is causally identified by the **difference of means** estimator in an experimental design
+
+##  {.smaller}
+
+:::: columns
+::: {.column width="30%"}
+#### Random Assignment 1
+
+```{r}
+#| echo: false
+
+kable(candy_tab |> 
+        select(x, d,y)
+      ,escape = F,
+      format = "markdown",
+      col.names = c(
+        "$x_i$",
+        "$d_i$",
+        "$y_i$"
+      )) 
+```
+
+```{r}
+#| echo: false
+
+kable(effects_df,escape = F,
+      format = "markdown",
+      digits = 2,
+      col.names = c("$\\bar{y}_{d=1}$",
+        "$\\bar{y}_{d=0}$",
+        "$\\hat{ATE}$")
+      ) 
+```
+:::
+
+::: {.column width="30%"}
+#### Random Assignment 2
+
+```{r}
+#| echo: false
+
+set.seed(123)
+candy_df |> 
+  mutate(
+    d = randomizr::complete_ra(10),
+    y = if_else(d ==  1,y1,y0)
+  ) -> candy_df
+
+candy_tab <- candy_df
+estimand_df <- tibble(
+  y1_mn = mean(candy_df$y1, na.rm = T),
+  y0_mn = mean(candy_df$y0,na.rm = T),
+  tau_mn = mean(candy_df$tau,na.rm = T)
+)
+
+effects_df <- tibble(
+  y1_mn = mean(candy_df$y1[candy_df$d == 1], na.rm = T),
+  y0_mn = mean(candy_df$y0[candy_df$d == 0],na.rm = T),
+  ate = y1_mn - y0_mn
+)
+
+candy_tab$y1 <- cell_spec(
+  candy_df$y1, color = "chocolate"
+)
+candy_tab$y0 <- cell_spec(
+  candy_df$y0, color = "purple"
+)
+candy_tab$x <- cell_spec(
+  candy_df$x, color = ifelse(candy_df$x == "fruit", "purple", "chocolate"
+)
+)
+candy_tab$d <- cell_spec(
+  candy_df$d, color = ifelse(candy_df$d == 0, "purple", "chocolate"
+)
+)
+candy_tab$y <- cell_spec(
+  candy_df$y, color = ifelse(candy_df$d == 0, "purple", "chocolate"
+)
+)
+
+
+kable(candy_tab |> 
+        select(x, d,y)
+      ,escape = F,
+      format = "markdown",
+      col.names = c(
+        "$x_i$",
+        "$d_i$",
+        "$y_i$"
+      )) 
+```
+
+```{r}
+#| echo: false
+
+kable(effects_df,escape = F,
+      format = "markdown",
+      digits = 2,
+      col.names = c("$\\bar{y}_{d=1}$",
+        "$\\bar{y}_{d=0}$",
+        "$\\hat{ATE}$")
+      ) 
+```
+:::
+
+::: {.column width="30%"}
+#### Random Assignment 3
+
+```{r}
+#| echo: false
+
+set.seed(123456)
+candy_df |> 
+  mutate(
+    d = randomizr::complete_ra(10),
+    y = if_else(d ==  1,y1,y0)
+  ) -> candy_df
+
+candy_tab <- candy_df
+estimand_df <- tibble(
+  y1_mn = mean(candy_df$y1, na.rm = T),
+  y0_mn = mean(candy_df$y0,na.rm = T),
+  tau_mn = mean(candy_df$tau,na.rm = T)
+)
+
+effects_df <- tibble(
+  y1_mn = mean(candy_df$y1[candy_df$d == 1], na.rm = T),
+  y0_mn = mean(candy_df$y0[candy_df$d == 0],na.rm = T),
+  ate = y1_mn - y0_mn
+)
+
+candy_tab$y1 <- cell_spec(
+  candy_df$y1, color = "chocolate"
+)
+candy_tab$y0 <- cell_spec(
+  candy_df$y0, color = "purple"
+)
+candy_tab$x <- cell_spec(
+  candy_df$x, color = ifelse(candy_df$x == "fruit", "purple", "chocolate"
+)
+)
+candy_tab$d <- cell_spec(
+  candy_df$d, color = ifelse(candy_df$d == 0, "purple", "chocolate"
+)
+)
+candy_tab$y <- cell_spec(
+  candy_df$y, color = ifelse(candy_df$d == 0, "purple", "chocolate"
+)
+)
+
+kable(candy_tab |> 
+        select(x, d,y)
+      ,escape = F,
+      format = "markdown",
+      col.names = c(
+        "$x_i$",
+        "$d_i$",
+        "$y_i$"
+      )) 
+```
+
+```{r}
+#| echo: false
+
+kable(effects_df,escape = F,
+      format = "markdown",
+      digits = 2,
+      col.names = c("$\\bar{y}_{d=1}$",
+        "$\\bar{y}_{d=0}$",
+        "$\\hat{ATE}$")
+      ) 
+```
+:::
+::::
+
+## Distribution of Sample ATEs
+
+```{r}
+#| echo: false
+
+ate_fn <- function(df){
+  df |> 
+    mutate(
+    d = randomizr::complete_ra(10),
+    y = if_else(d ==  1,y1,y0)
+  ) -> df
+  
+  ate <- mean(df$y[df$d == 1]) - mean(df$y[df$d == 0])
+  return(ate)
+}
+set.seed(123)
+plot_df <- tibble(
+ate = replicate(5000,ate_fn(candy_df),simplify = "array")
+)
+plot_df |> 
+  ggplot(aes(ate))+
+  geom_histogram(bins=100)+
+  theme_minimal()+
+  geom_vline(aes(xintercept =1),
+             col = "red") +
+  labs(
+    title = "Distribution of Difference of Means under Different Randomizations of Treamtent",
+    x = "Difference of Means"
+  )+
+  xlim(-3,4)
+
+
+```
+
+
+## Why Random Assignment Matters? {.smaller}
+
+Formally, randomly assigning treatments creates [statistical independence]{.blue} $(\unicode{x2AEB})$ between treatment ( $D$ ) and potential outcomes ( $Y(1),Y(0)$ ) as well as any observed ( $X$ ) or unobserved confounders ( $U$ ):
+
+$$Y_i(1),Y_i(0),\mathbf{X_i},\mathbf{U_i} \unicode{x2AEB} D_i$$
+
+Practically, what this means is that what we can observe ( differences in conditional means for [treated]{.blue} and [control]{.blue} ), provide good ([unbiased]{.blue}) estimates of what we're trying to learn about ([Average Treatment Effects]{.blue})
+
+## Causal Identification with Experimental Designs {.smaller}
+
+Causal identification for experimental designs requires very few assumptions:
+
+-   [Independence]{.blue} (Satisfied by Randomization)
+
+    -   $Y(1), Y(0),X,U, \perp D$
+
+-   [SUTVA]{.blue} Stable Unit Treatment Value Assumption (Depends on features of the design)
+
+    -   No interference between units $Y_i(d_1, d_2, \dots, d_N) = Y_i(d_i)$
+    -   No hidden values of the treatment/Variation in the treatment
+
+## Random assignment creates testable implications {.smaller}
+
+-   If treatment has been randomly assigned, we would expect treatment and control groups to [look similar]{.blue} in terms of [pre-treatment covariates]{.blue}
+
+    -   We can show [covariate balance]{.blue} by comparing the means in each treatment group
+
+-   If the treatment had an effect, than we can credibly claim that that effect was due to the presence or absence of the treatment, and not some alternative explanation.
+
+-   This type of clean [apples-to-apples]{.blue} counterfactual comparison is what people mean when they talk about an *experimental ideal*
+
+## No Causation without Manipulation?
+
+-   "No causation without manipulation" - [Holland (1986)](https://www.jstor.org/stable/2289064)
+-   Causal effects are well defined when we can imagine manipulating (changing) the value of $D_i$ and only $D_i$
+-   But what about the "effects" of things like:
+    -   Race
+    -   Sex
+    -   Democracy
+-   Studying the effects of these factors requires strong theory and clever design [Sen and Wasow (2016)](https://scholar.harvard.edu/files/msen/files/race_causality.pdf)
+
+# {{< fa code>}} Estimating ATEs with the `resume` data {.inverse}
+
+## The Resume Experiment
+
+Let's take a look at the resume experiment from your text book and compare some of Imai's code to its `tidyverse` equivalent
+
+```{r}
+#| echo: true
+# make sure qss package is loaded
+library(qss)
+data("resume")
+```
+
+## High level Overview (p. 34)
+
+```{r}
+#| echo: true
+
+dim(resume)
+head(resume)
+```
+
+## High level Overview (p. 34)
+
+```{r}
+#| echo: true
+
+summary(resume)
+```
+
+## Crosstabs
+
+```{r}
+#| echo: true
+
+race.call.tab <- table(race = resume$race,
+                       call = resume$call)
+race.call.tab
+addmargins(race.call.tab)
+
+```
+
+## Tidy crosstab
+
+```{r}
+#| echo: true
+
+resume %>%
+  group_by(race, call)%>%
+  summarise(
+    n = n()
+  )%>%
+  pivot_wider(names_from = call, values_from = n)
+```
+
+## Calculating Call Back Rates
+
+```{r}
+#| echo: true
+
+# Overall
+sum(race.call.tab[,2])/nrow(resume)
+
+# Black names
+cb_bl <- sum(race.call.tab[1,2])/sum(race.call.tab[1,])
+# White Names
+cb_wh <- sum(race.call.tab[2,2])/sum(race.call.tab[2,])
+
+# ATE
+cb_wh - cb_bl
+
+
+```
+
+## Calculating Call Back Rates with group_by()
+
+```{r}
+#| echo: true
+
+resume %>%
+  group_by(race)%>%
+  summarise(
+    call_back = mean(call)
+  )
+```
+
+## Factor variables in Base R
+
+```{r}
+#| echo: true
+
+resume$type <- NA
+resume$type[resume$race == "black" & resume$sex == "female"] <- "BlackFemale"
+resume$type[resume$race == "black" & resume$sex == "male"] <- "BlackMale"
+resume$type[resume$race == "white" & resume$sex == "female"] <- "WhiteFemale"
+resume$type[resume$race == "white" & resume$sex == "male"] <- "WhiteMale"
+
+```
+
+## Factor variables in Tidy R
+
+```{r}
+#| echo: true
+
+resume %>%
+  mutate(
+    type_tidy = case_when(
+      race == "black" & sex == "female" ~ "BlackFemale",
+      race == "black" & sex == "male" ~ "BlackMale",
+      race == "white" & sex == "female" ~ "WhiteFemale",
+      race == "white" & sex == "male" ~ "WhiteMale"
+    )
+  ) -> resume
+```
+
+## Comparing approaches
+
+```{r}
+#| echo: true
+
+table(base= resume$type, tidy= resume$type_tidy)
+```
+
+## Visualizing Call Back Rates by Name
+
+::: panel-tabset
+## Code
+
+```{r}
+#| echo: true
+#| eval: false
+resume %>%
+  group_by(race, sex,firstname)%>%
+  summarize(
+    Y = mean(call),
+    n = n()
+  )%>%
+  arrange(desc(Y)) %>%
+  mutate(
+    firstname = forcats::fct_reorder(firstname,Y)
+  )%>%
+  ggplot(aes(Y, firstname,col=race, size=n))+
+  geom_point() + 
+  facet_grid(sex~.,scales = "free_y")
+```
+
+## Figure
+
+```{r}
+#| echo: false
+resume %>%
+  group_by(race, sex,firstname)%>%
+  summarize(
+    Y = mean(call),
+    n = n()
+  )%>%
+  arrange(desc(Y)) %>%
+  mutate(
+    firstname = forcats::fct_reorder(firstname,Y)
+  )%>%
+  ggplot(aes(Y, firstname,col=race, size=n))+
+  geom_point() + 
+  facet_grid(sex~.,scales = "free_y")
+```
+:::
+
+# {{< fa code>}} Broockman and Kalla (2016) {.inverse}
+
+## Reading Academic Papers
+
+-   Reading academic papers is a skill and takes practice.
+-   You should aim to answer the following:
+    -   What's the research question?
+    -   What's the theoretical framework?
+    -   What's the empirical design?
+    -   What's are the main results?
+
+## Study Design :A placebo-controlled field experiment
+
+1.  Recruited from voter files to complete a baseline survey
+2.  Among those who complete the survey, half are assigned to receive an intervention and half are assigned to receive a placebo
+3.  Only some are actually home or open the door when the canvassers knock.
+4.  These people are then recruited to participate in a series of surveys 3 days, 3 weeks, 6 weeks, and 3 months after the initial intervention.
+
+## Data for Thursday
+
+Let's load the data from the orginal study
+
+```{r}
+#| echo: true
+load(url("https://pols1600.paultesta.org/files/data/03_lab.rda"))
+```
+
+## Codebook {.smaller}
+
+-   `completed_baseline` whether someone completed the baseline survey ("Survey") or not ("No Survey")
+-   `treatment_assigned` what intervention someone who completed the baseline survey was assigned two (treatment= "Trans-Equality", placebo = "Recycling")
+-   `answered_door` whether someone answered the door ("Yes") or not ("No") when a canvasser came to their door
+-   `treatment_group` the treatment assignments of those who answered the door (treatment= "Trans-Equality", placebo = "Recycling")
+-   `vf_age` the age of the person in years
+-   `vf_female` the respondent's sex (female = 1, male = 0)
+-   `vf_democrat` whether the person was a registered Democract (Democrat=1, 0 otherwise)
+-   `vf_white` whether the person was white (White=1, 0 otherwise)
+-   `vf_vg_12` whether the person voted in the 2012 general election (voted = 1, 0 otherwise)
+
+## HLO
+
+```{r}
+#| echo: true
+glimpse(df)
+```
+
+## Study Design
+
+```{r}
+#| echo: true
+table(df$completed_baseline)
+table(df$treatment_assigned)
+table(df$answered_door)
+table(df$treatment_group)
+
+```
+
+## Assessing balance in covariates
+
+```{r}
+#| echo: true
+df %>%
+  filter(completed_baseline == "Survey") %>%
+  select(treatment_assigned,
+         starts_with("vf_"))%>%
+  group_by(treatment_assigned)%>%
+  summarise(
+    across(starts_with("vf_"), mean)
+    ) -> pretreatment_balance
+
+```
+
+## Assessing balance in covariates
+
+```{r}
+#| echo: true
+pretreatment_balance
+```
+
+## Assessing balance in covariates
+
+::: panel-tabset
+## Code
+
+```{r}
+#| echo: true
+#| eval: false
+
+# Rearrange data
+pretreatment_balance %>%
+  # Pivot columns except treatement assigned
+  pivot_longer(names_to = "covariate", values_to =  "value", -treatment_assigned) %>%
+  # Pivot rows two two columns for treatment and placebo
+  pivot_wider(names_from = treatment_assigned) %>%
+  # Calculate covariate balance
+  mutate(
+    Difference = `Trans-Equality` - Recycling
+  )
+
+```
+
+## Balance
+
+```{r}
+pretreatment_balance %>%
+  # Pivot columns except treatment assigned
+  pivot_longer(
+    cols = -treatment_assigned,
+    names_to = "covariate",
+    values_to =  "value", 
+    ) %>%
+  # Pivot rows two two columns for treatment and placebo
+  pivot_wider(names_from = treatment_assigned) %>%
+  # Calculate covariate balance
+  mutate(
+    Difference = `Trans-Equality` - Recycling
+  )
+```
+:::
+
+# {{< fa home >}} Summary {.inverse}
+
+## Summary
+
+-   Causal Claims involve [counterfactual comparisons]{.blue}
+
+-   The [fundamental problem of causal inference]{.blue} is that for an individual only observe one of many potential outcomes
+
+-   [Causal identification]{.blue} refers to the assumptions necessary to generate credible causal estimates
+
+-   Identification for experimental designs follows from the [random assignment of treatment]{.blue} which allows us to produce unbiased estimates of the [Average Treatment Effect]{.blue}
+
+## References

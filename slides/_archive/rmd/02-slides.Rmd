@@ -1,0 +1,1956 @@
+---
+title: "Week 02:"
+subtitle: "Visualizing Data in R"
+author: "Paul Testa"
+reveal_options:
+  width: 100%
+  height: 100%
+  margin: 0.1
+output:
+  xaringan::moon_reader:
+    css: ["default", "css/brown.css"]
+    lib_dir: libs
+    nature:
+      highlightStyle: atelier-lakeside-light
+      highlightLines: true
+      countIncrementalSlides: false
+
+---
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+knitr::opts_chunk$set(
+  warning = FALSE, 
+  message = FALSE, 
+  comment = NA, dpi = 300,
+  fig.align = "center", out.width = "80%",out.height = "400px", 
+  cache = TRUE)
+```
+
+```{r xaringan-tile-view, echo=FALSE}
+xaringanExtra::use_tile_view()
+```
+
+```{r xaringanExtra-clipboard, echo=FALSE}
+htmltools::tagList(
+  xaringanExtra::use_clipboard(
+    button_text = "<i class=\"fa fa-clipboard\"></i>",
+    success_text = "<i class=\"fa fa-check\" style=\"color: #90BE6D\"></i>",
+  ),
+  rmarkdown::html_dependency_font_awesome()
+)
+```
+
+
+---
+background-image: url("https://scontent-lga3-2.xx.fbcdn.net/v/t1.6435-9/37921549_422082921647443_3300610361849282560_n.jpg?_nc_cat=110&ccb=1-5&_nc_sid=e3f864&_nc_eui2=AeHyVjbRWA57U_p3xsoku058nOTeFOsG5mKc5N4U6wbmYsss7QXmxM6f1k6xEJyGnhI&_nc_ohc=85K100sjKxMAX8Cefh-&_nc_oc=AQkmFfA4-nsiYsb22TICWQc5TzpF5zn9QtJqVC77NzK0q5i2SZRDqSYlRKOFzjqCH-U&_nc_ht=scontent-lga3-2.xx&oh=00_AT_LrNXKJ8t-qBq_Z6W9pCRVwO8Sl11aGTQZX8_yRWZYNg&oe=6226CB72")
+background-size:cover
+class: inverse, center, middle
+# Overview
+
+<style>
+
+.source {
+  margin: 5;
+  position: absolute;
+  top: 95%;
+  left: 10%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+</style>
+
+
+
+---
+## Today
+
+- Setup
+- Data Visualization and the grammar of graphics
+- Feedback
+- Review
+  - Troubleshooting errors
+  - Data Wrangling in R
+- Summary
+
+---
+## Thursday: More lecture than lab
+
+- Review
+  - Data Visualization
+  - The Grammar of Graphics
+- Basic figures with `ggplot`
+  - data
+  - aesthetics
+  - geoms
+- Adjusting figures with `ggplot`
+  - facets
+  - statistics
+  - coordinates
+  - themes
+- Advanced figures with `ggplot`
+  - Combining figures with `patchwork`
+  - Creating maps with `ggmap`
+
+---
+## Talk: Race & Democracy
+### America is Always Changing, But America Never Changes
+
+.pull-left[
+
+- Date: Thursday, February 9, 2023
+
+- Time: 5:00pm - 6:30pm EST
+
+- Sponsor: Center for Philosophy, Politics and Economics and the Democracy Project
+
+- Location: Salomon Center for Teaching
+
+- Room: DeCiccio
+
+- Cost: Free!
+
+[Register Here](https://events.brown.edu/event/242481-race-democracy-america-is-always-changing-but)
+]
+
+.pull-right[
+![](https://events.brown.edu/live/image/scale/2x/gid/71/width/250/9583_glaude_eddie300.rev.1665161069.webp)
+]
+
+---
+## Core Concepts
+
+- A grammar for understanding graphics (new)
+- 5 basic plots in R (new)
+- How to troubleshoot errors (review)
+- How to explore and transform data (review)
+
+
+---
+background-image:url(https://spoke-api-media.s3-us-west-2.amazonaws.com/spoke-api/prod/pictures/21_12_34_29_12_2020_movie_pic.jpg)
+background-size:contain
+
+---
+## Data and Libraries
+
+This week we'll use the following libraries.
+
+```{r packages, cache=F}
+the_packages <- c(
+  ## R Markdown
+  "tinytex", "kableExtra",
+  
+  ## Tidyverse
+  "tidyverse","lubridate", "forcats", "haven","labelled",
+  
+  ## Extensions for ggplot
+  "ggmap","ggrepel", "ggridges", "ggthemes","ggpubr",
+  "GGally",
+  
+  # Data 
+  "COVID19","maps","mapdata","DT"
+)
+the_packages
+```
+
+Please run the code above on your machines.
+
+---
+## Installing and loading new packages
+
+Next we'll create a function called `ipak` (thanks [Steven](https://gist.github.com/stevenworthington/3178163)) which:
+
+- Takes a list of packages (`pkg`)
+- Checks to see if these packages are installed
+- Installs any new packages
+- Loads all the packages so we can use them
+
+```{r ipak}
+ipak <- function(pkg){
+    new.pkg <- pkg[!(pkg %in% installed.packages()[, "Package"])]
+    if (length(new.pkg)) 
+        install.packages(new.pkg, dependencies = TRUE)
+    sapply(pkg, require, character.only = TRUE)
+}
+
+```
+
+Again, run this code on your machines
+
+---
+## Installing and loading new packages
+
+Finally, let's use `ipak` to install and load `the_packages`
+
+What should we replace `some_function` and `some_input` with to do this?
+
+```{r, eval=F}
+some_function(some_input)
+```
+
+
+--
+
+```{r libraries, cache=F}
+ipak(the_packages)
+```
+
+
+- `R` may ask you to install a package's dependencies (other packages  your package needs). Try entering the number `1` into your console
+- `R` may tell you need to restart `R` Try saying yes. If it doesn't start downloading, say no
+- `R` may then ask if you want to compile some packages from source. Type `Y` into your console. If this doesn't work, try again, but this time type `N` when asked
+
+--
+
+Remember, you only need to install packages once. Then when you work in `R` you need to load packages you want use with `library("package")`
+---
+## Tutorials
+
+- Install tutorials:
+
+```{r}
+# Uncomment and install
+# install.packages("devtools")
+# install.packages("remotes")
+remotes::install_github("kosukeimai/qss-package", build_vignettes = TRUE)
+remotes::install_github("rstudio/learnr")
+remotes::install_github("rstudio-education/gradethis")
+remotes::install_github("PaulTestaBrown/qsslearnr")
+```
+
+---
+## Tutorials
+
+You can see the available problem sets by running the following code in your console:
+
+```{r, eval=F}
+learnr::run_tutorial(package = "qsslearnr")
+```
+
+
+And start a tutorial by running:
+
+```{r, eval=F}
+learnr::run_tutorial("00-intro", package = "qsslearnr")
+
+```
+
+---
+
+![](images/00_problemsets.png)
+
+
+---
+## Tutorials
+
+- Upload Tutorials 00 and 01 sometime this week for credit
+
+- Get Started on Tutorial 02: QSS Tutorial 2: Measurment II
+
+
+
+
+---
+## Tutorials
+
+- To produce a pdf, R needs a version of $\LaTeX$ installed.
+
+- Try the following:
+
+```{r, eval=F}
+tinytex::install_tinytex()
+```
+
+- This may work on some computers, but not others.
+  - Producing pdfs is nice, but not strictly necessary
+  - Come see me when you have time and we'll get it sorted. 
+
+- For now, just export the html file and upload that to canvas
+
+
+
+---
+## Loading the Covid-19 Data
+
+Let's load the Covid-19 data we worked with last week:
+
+```{r covid}
+load(url("https://pols1600.paultesta.org/files/data/covid.rda"))
+```
+
+--
+While that runs, let's talk about data visualization and the grammar of graphics
+
+---
+class:inverse,center, middle
+background-image:url("https://i.kym-cdn.com/entries/icons/mobile/000/018/929/graphic_design_is_my_passion.jpg")
+background-size:contain
+# 💡
+#  Data Visualization 
+
+
+---
+class: center, middle
+
+--
+> "The simple graph has brought more information to the data analyst’s mind than any other device." - John Tukey
+
+--
+
+> "A picture's worth a thousand words" - Paul Testa
+
+---
+##  Data Visualization 
+
+Data visualization is an incredibly valuable tool that helps us to
+
+- Explore data, uncovering new relationships, as well as potential problems
+- Communicate our results clearly and precisely
+
+Take a look at how the [BBC](https://medium.com/bbc-visual-and-data-journalism/how-the-bbc-visual-and-data-journalism-team-works-with-graphics-in-r-ed0b35693535) uses R to produce its graphics
+
+Today, we will
+
+- Learn about basic plots to describe
+  - Univariate distributions
+  - Bivariate relations
+- Introduce the `grammar of graphics`
+- Learn how to apply this grammar with `ggplot`
+
+
+
+
+
+---
+class:inverse,center, middle
+# 💡
+# The grammar of grapics 
+  
+
+---
+## The Grammar of Graphics
+
+Inspired by [Wilkinson (2005)](https://link.springer.com/book/10.1007/0-387-28695-0)
+
+> A statistical graphic is a mapping of `data` variables to `aes` thetic attributes of `geom` etric objects.
+
+At a minimum, a graphic contains three core components:
+
+- `data:` the dataset containing the variables of interest.
+- `aes`: aesthetic attributes of the geometric object. For example, x/y position, color, shape, and size. Aesthetic attributes are mapped to variables in the dataset.
+- `geom:` the geometric object in question. This refers to the type of object we can observe in a plot For example: points, lines, and bars.
+
+[Ismay and Kim (2022)](https://moderndive.com/2-viz.html#grammarofgraphics)
+
+---
+background-image:url(https://miro.medium.com/max/1400/1*ZdQ9wFwaA214ABiib7AygQ.png)
+background-size:contain
+## Seven Layers of Graphics
+
+  
+ 
+  
+.source[
+[Kesari (2018)](https://gkesari.medium.com/my-talk-on-grammar-of-graphics-the-secret-sauce-of-powerful-data-stories-3da618cf1bbf)
+]
+
+---
+## The grammar of graphics in R
+
+In R, we'll implement this grammar of graphics using the `ggplot` package
+
+- Let's take a look at your feedback to last week's survey and see how we can visualize some of the in formation you provided
+
+---
+class: inverse, center, middle
+background-image:url(https://www.wikihow.com/images/thumb/9/9e/Create-Guitar-Feedback-Step-6-Version-2.jpg/v4-460px-Create-Guitar-Feedback-Step-6-Version-2.jpg)
+background-size:cover
+
+# Feedback
+## (From Last Year...)
+
+---
+
+```{r,echo=F}
+# For working live
+#df <- haven::read_spss("static/files/wk01.sav")
+# For rendering
+df <- haven::read_spss("../files/wk01.sav")
+```
+
+```{r, echo=F, out.height='80%'}
+DT::datatable(df %>% 
+                select(like))
+```
+
+
+
+---
+
+```{r, echo=F, out.height='60%'}
+DT::datatable(df %>% 
+                select(dislike))
+```
+
+
+---
+
+
+```{r, echo=F, out.height='80%'}
+df %>%
+  mutate(
+    Playlist = str_wrap(forcats::as_factor(trip),20)
+  ) %>%
+  ggplot(aes(x = Playlist,
+             fill = Playlist))+
+  geom_bar(stat = "count")+
+  scale_fill_brewer()+
+  coord_flip()+
+  labs(title = "Who controls the playlist")+
+  theme_bw()
+```
+
+
+---
+## Building that figure
+
+1. Look at the raw data
+2. Recode the raw data
+3. Make a basic plot, telling R the data, aesthetics, geometries, and statistics I want it to plot
+4. Tinker with the data and plot's scales, coordinates, labels and theme to make the figure look better
+
+
+---
+## 1. Look at the raw data
+
+```{r}
+df$trip
+```
+
+---
+## 2. Recode the raw data
+
+```{r}
+df %>%
+  mutate(
+    Playist = forcats::as_factor(trip) #<<
+ )%>%
+  select(Playist)
+```
+
+---
+## 3. Make a basic plot
+
+```{r ,eval=F}
+df %>% #<< Raw data
+  mutate(
+    Playlist =forcats::as_factor(trip)
+  ) %>% # Transformed data
+  ggplot(aes(x = Playlist, # Aesthetics
+             fill = Playlist))+
+  geom_bar( # Geometry
+    stat = "count" # Statistic
+    )
+```
+
+---
+## 3. Make a basic plot
+
+```{r ,echo=F,out.height='80%'}
+df %>% #<< Raw data
+  mutate(
+    Playlist =forcats::as_factor(trip)
+  ) %>% # Transformed data
+  ggplot(aes(x = Playlist, # Aesthetics
+             fill = Playlist))+
+  geom_bar( # Geometry
+    stat = "count" # Statistic
+    )
+```
+
+
+---
+## 4.1 Tinker with data
+
+
+```{r, eval=F}
+df %>%
+  mutate(
+*    Playlist =str_wrap(forcats::as_factor(trip),20)
+  ) %>%
+  ggplot(aes(x = Playlist,
+             fill = Playlist))+
+  geom_bar(stat = "count")
+```
+
+
+---
+## 4.1 Tinker with data
+
+```{r, echo=FALSE,out.height='80%'}
+df %>%
+  mutate(
+    Playlist =str_wrap(forcats::as_factor(trip),20)
+  ) %>%
+  ggplot(aes(x = Playlist,
+             fill = Playlist))+
+  geom_bar(stat = "count")
+```
+
+
+---
+## 4.2 Tinker with scales
+
+
+```{r, eval=F}
+df %>%
+  mutate(
+    Playlist =str_wrap(forcats::as_factor(trip),20)
+  ) %>%
+  ggplot(aes(x = Playlist,
+             fill = Playlist))+
+  geom_bar(stat = "count")+
+  scale_fill_brewer() #<<
+```
+
+
+---
+## 4.2 Tinker with scales
+
+```{r, echo=FALSE,out.height='80%'}
+df %>%
+  mutate(
+    Playlist =str_wrap(forcats::as_factor(trip),20)
+  ) %>%
+  ggplot(aes(x = Playlist,
+             fill = Playlist))+
+  geom_bar(stat = "count")+
+  scale_fill_brewer()
+
+```
+
+---
+## 4.3 Tinker with coordinates
+
+
+```{r, eval=F}
+df %>%
+  mutate(
+    Playlist =str_wrap(forcats::as_factor(trip),20)
+  ) %>%
+  ggplot(aes(x = Playlist,
+             fill = Playlist))+
+  geom_bar(stat = "count")+
+  scale_fill_brewer()+
+  coord_flip() #<<
+```
+
+
+---
+## 4.3 Tinker with coordinates
+
+```{r, echo=FALSE,out.height='80%'}
+df %>%
+  mutate(
+    Playlist =str_wrap(forcats::as_factor(trip),20)
+  ) %>%
+  ggplot(aes(x = Playlist,
+             fill = Playlist))+
+  geom_bar(stat = "count")+
+  scale_fill_brewer()+
+  coord_flip()
+
+```
+
+
+---
+## 4.4 Tinker with labels
+
+
+```{r, eval=F}
+df %>%
+  mutate(
+    Playlist =str_wrap(forcats::as_factor(trip),20)
+  ) %>%
+  ggplot(aes(x = Playlist,
+             fill = Playlist))+
+  geom_bar(stat = "count")+
+  scale_fill_brewer()+
+  coord_flip() +
+  labs(title = "Who controls the playlist on a roadtrip")#<<
+```
+
+
+---
+## 4.4 Tinker with labels
+
+```{r, echo=FALSE,out.height='80%'}
+df %>%
+  mutate(
+    Playlist =str_wrap(forcats::as_factor(trip),20)
+  ) %>%
+  ggplot(aes(x = Playlist,
+             fill = Playlist)) +
+  geom_bar(stat = "count") +
+  scale_fill_brewer() +
+  coord_flip() +
+  labs(title = "Who controls the playlist on a roadtrip")
+
+
+```
+
+
+---
+## 4.4 Tinker with labels
+
+
+```{r, eval=F}
+df %>%
+  mutate(
+    Playlist =str_wrap(forcats::as_factor(trip),20)
+  ) %>%
+  ggplot(aes(x = Playlist,
+             fill = Playlist)) +
+  geom_bar(stat = "count") +
+  scale_fill_brewer() +
+  coord_flip() +
+  labs(title = "Who controls the playlist on a roadtrip") +
+  theme_bw() #<<
+```
+
+
+---
+## 4.4 Tinker with theme
+
+```{r, echo=FALSE,out.height='80%'}
+df %>%
+  mutate(
+    Playlist =str_wrap(forcats::as_factor(trip),20)
+  ) %>%
+  ggplot(aes(x = Playlist,
+             fill = Playlist))+
+  geom_bar(stat = "count") +
+  scale_fill_brewer()+
+  coord_flip()+
+  labs(title = "Who controls the playlist on a roadtrip")+
+  theme_bw()
+
+
+```
+
+---
+## The final code
+```{r, echo=T, eval=F}
+df %>%
+  mutate(
+    Playlist = str_wrap(forcats::as_factor(trip),20)
+  ) %>%
+  ggplot(aes(x = Playlist,
+             fill = Playlist))+
+  geom_bar(stat = "count")+
+  coord_flip()+
+  scale_fill_brewer()+
+  labs(title = "Who controls the playlist on a roadtrip")+
+  theme_bw()
+```
+
+
+---
+# How we're doing
+
+```{r}
+df %>%
+  select(starts_with("eval"))%>%
+  mutate(
+    Instructor = eval_1,
+    Lectures = eval_2,
+    Labs = eval_3,
+    Tutorials = eval_4,
+    `QSS textbook` = eval_5,
+    `Course website` = eval_6,
+     Canvas = eval_7
+  )%>%
+  select(-starts_with("eval")) -> eval_df
+```
+
+---
+# How we're doing
+
+```{r, echo=F, out.height='80%'}
+DT::datatable(eval_df,              
+              options = list(pageLength = 5)
+)
+```
+
+
+---
+# Visualizing how we're doing
+
+- Three ways to visualize a univariate distribution
+  - Histograms
+  - Boxplots
+  - Density plots
+  - Barplots (for categorical data)
+- Simple way to display a bivariate relationship
+  - Scatter plots
+
+
+---
+# How I'm doing with a Histogram
+
+```{r, eval=F}
+eval_df %>%
+  ggplot(aes(Instructor))+
+  geom_histogram()
+```
+
+---
+# How I'm doing with a Histogram
+
+```{r, echo=F}
+eval_df %>%
+  ggplot(aes(Instructor))+
+  geom_histogram()
+```
+
+---
+# How I'm doing with a Boxplot
+
+```{r, eval=F}
+eval_df %>%
+  ggplot(aes(Instructor))+
+  geom_boxplot()
+```
+
+---
+# How I'm doing with a Boxplot
+
+```{r, echo=F}
+eval_df %>%
+  ggplot(aes(Instructor))+
+  geom_boxplot()
+```
+
+---
+# How I'm doing with a density plot
+
+```{r, eval = F}
+eval_df %>%
+  ggplot(aes(Instructor))+
+  geom_density()+
+  geom_rug()
+```
+
+---
+# How I'm doing with a density plot
+
+```{r, echo = F}
+eval_df %>%
+  ggplot(aes(Instructor))+
+  geom_density()+
+  geom_rug()
+```
+
+---
+# Overall distribution of evaluations
+
+```{r}
+eval_df %>%
+  gather(
+    key = "Evaluation",
+    value = "Score"
+  ) -> plot_df
+plot_df
+```
+
+
+---
+# Overall distribution of evaluations
+
+
+```{r, eval=F}
+plot_df %>%
+  ggplot(aes(Score,Evaluation))+
+  geom_density_ridges()
+```
+
+---
+# Overall distribution of evaluations
+
+
+```{r, echo=F}
+plot_df %>%
+  ggplot(aes(Score,Evaluation))+
+  geom_density_ridges()
+```
+
+
+---
+# Course webiste vs Canvas
+
+```{r, eval=F}
+eval_df %>%
+  ggplot(aes(`Course website`, Canvas))+
+  geom_point()+
+  geom_smooth(method = "lm")
+```
+
+---
+# Course webiste vs Canvas
+
+```{r, echo=F}
+eval_df %>%
+  ggplot(aes(`Course website`, Canvas))+
+  geom_point()+
+  geom_smooth(method = "lm")
+```
+
+
+
+---
+# Putting it all together
+
+```{r}
+GGally::ggpairs(eval_df)
+```
+
+---
+# Summary
+
+- Data visualization helps us explore our data and communicate results
+- Good data visualization requires lots of data transformations
+- The grammar of graphics provides a framework for thinking how to translate data in graphics
+- We can display distributions using
+  - histograms
+  - density plots
+  - boxplots
+  - barplots
+- We can describe relationships using
+  - scatter plots
+- And much more!
+
+---
+class: bottom,center
+background-image:url(http://nowiknow.com/wp-content/uploads/home-kit-kat-bar-break-1024x575.png)
+background-size:cover
+# Let's take a brief break
+
+---
+# Review
+
+- Troubleshooting errors
+- Data wrangling with R
+- Descriptive Statistics
+
+
+---
+class:center
+# 🔍
+# Troubleshooting errors
+
+![](https://imgs.xkcd.com/comics/wisdom_of_the_ancients.png)
+
+[XKCD](https://xkcd.com/979)
+---
+## Two kinds of errors:
+
+--
+
+- **Syntactic**
+  - R doesn't understand how to run your code
+  - Most common, easy to fix (eventually...)
+
+--
+
+- **Semantic**
+  - R runs your code but doesn't give you the expected result
+  - Less common, harder to fix
+
+--
+
+Most errors happen because R is looking for something that isn't there.
+
+More discussion [here](https://github.com/noamross/zero-dependency-problems/blob/master/misc/stack-overflow-common-r-errors.md) and [here](https://blog.revolutionanalytics.com/2015/03/the-most-common-r-error-messages.html)
+
+---
+## Common Syntactic Errors
+
+- Unmatched parentheses or brackets
+
+- Misspelled a name 
+
+- Forgot a comma
+
+- Forgot to install a package or load a library
+
+- Forgot to set the working directory/path to a file you want R to use.
+
+- Tried to select a column or row that doesn't exist
+
+
+---
+## Fixing Syntactic Errors
+
+- R Studio's script editor will show a red circle with a white x in next to a line of code it thinks has an error in it.
+
+- Have someone else look at your code (Fresh eyes, [paired programming](https://en.wikipedia.org/wiki/Pair_programming))
+
+- Copy and paste the "general part" of error message into Google.
+
+- Knit your document after each completed code chunk
+  - This will run the code from top to bottom, and stop when it encounters an error
+  - Try commenting out the whole chunk, and then uncommenting successive lines of code 
+
+- Be patient. Don't be hard are yourself. Remember, errors are portals of discovery.
+
+---
+## Semantic Errors
+
+- Your code runs, but doesn't produce what you expected.
+- Less common;  can be harder to identify and fix
+- One example: Two packages have a function with the same name that do different things
+
+```{r}
+# dplyr::summarize
+# Hmisc::summarize
+```
+
+---
+## Semantic Errors
+
+- Some general solutions/practices to avoid semantic errors:
+  - Specify the package and the function you want: `package_name::function_name()`
+  - Write helpful comments in your code.
+  - Include "sanity" checks in your code. 
+  - If a function should produce an output that's a data.frame, check to see if it is a data frame
+  
+```{r, eval = F}
+# Here's some pseudo code:
+
+# I expect my_function produces a data frame
+x <- my_function(y) 
+
+# Check to see if x is a data frame
+# If x is not a data frame, return an Error
+stopifnot(is.data.frame(x))
+```
+
+---
+class: inverse, center, middle
+background-image:url(https://miro.medium.com/max/800/0*TXDoF8j-D3LuGbHP.jpg)
+background-size:contain
+# 🔍
+# Data wrangling in R
+
+
+---
+## Why do we need to wrangle data
+
+- Rarely, if ever, do we get data in the exact format we need.
+
+- Instead, before we can get to work, we need to re-shape, re-arrange, and/or reformat our data.
+
+- Sometimes we call this process:
+  - Data cleaning, recoding
+  - Data wrangling
+  - Data carpentry
+
+- The end goal is the same: make messy data tidy
+
+---
+## Tidy data
+
+- Every column is a variable.
+
+- Every row is an observation.
+
+- Every cell is a single value.
+
+---
+## Tools for transforming our data
+
+Last week we used the following functions:
+
+- `read_csv()` and `data()` to read and load data in R
+
+- logical operators like `&`, `|`, `%in%` `==`, `!=`, `>`,`>=`,`<`,`<=` to make comparisons
+
+- the pipe command `%>%` to "pipe" the output of one function into another
+
+- `filter()` to pick observations (rows) by their values
+
+- `arrange()` to reorder rows
+
+- `select()` to pick variables by their names
+
+- `mutate()` and `case_when()` command to create new variables in our data set
+
+- `summarise()` to collapse many values to a single value (like a mean or median)
+
+- `group_by()` to apply functions like `mutate()` and `summarise()` on a group-by-group basis
+
+---
+## Common functions for transforming data
+
+All of these "verb" functions from the `dplyr` package (e.g. `filter()`,`mutate()`) follow a similar format:
+
+1. Their first argument is a data frame
+2. The subsequent arguments tell R what to do with the data frame, using the variable names (without quotes)
+3. The output is a new data frame
+
+[More](https://r4ds.had.co.nz/transform.html)
+
+---
+background-image:url("https://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/2444.png")
+# You trying to get the `%>%`?
+
+---
+## The pipe command `%>%`
+
+- The pipe command is way of "chaining" lines of code together, piping the results of one `tidyverse` function into the next function.
+
+- The pipe command works, because these functions always expect a data frame as their first argument, and always produce a data frame as their output.
+
+---
+## Wrangling the Covid-19 data
+
+To work with the Covid-19 data we did the following:
+
+- Subset the data to exclude US Territories
+- Created new variables from existing variables in the data
+
+---
+## Wrangling the Covid-19 data
+
+
+Specifically, we did the following:
+
+1. Created an object called `territories` that is a vector containing the names of U.S. territories
+2. Created a new dataframe, called `covid_us`, by filtering out observations from the U.S. territories
+3. Created a `state` variable that is a copy of the `administrative_area_level_2` 
+4. Created a variable called `new_cases` from the `confirmed`. Create a variable called `new_cases_pc` that is the number of new Covid-19 cases per 100,000 citizens
+5. Created a variable called `face_masks` from the `facial_coverings` variable. ([slides](hhttps://pols1600.paultesta.org/slides/01-slides#111))
+
+Let's take some time to make sure we understand everything that was happening.
+
+---
+## Created an object called `territories` 
+
+
+```{r}
+# ---- 1. Create territories object
+
+territories <- c(
+  "American Samoa",
+  "Guam",
+  "Northern Mariana Islands",
+  "Puerto Rico",
+  "Virgin Islands"
+  )
+```
+
+The territories object is useful because it let's ask R is an observation from a U.S. territory or not
+
+---
+## Created a new dataframe, called `covid_us`
+
+- Below, we use the `filter()` command to select only the rows where the `administrative_area_level_2` is not (`!`) in (`%in%`) the `territories` object
+- `covid_us` is a subset of the `covid` data.frame with only observations from the 50 States and the District of Columbia
+
+```{r}
+# ---- 2. Create covid_us data frame
+# How many rows and columns in covid
+dim(covid)
+
+# Filter out obs from US territories
+covid_us <- covid %>%
+  filter(!administrative_area_level_2 %in% territories)
+
+# covid_us should have fewer rows than covid
+dim(covid_us)
+
+
+```
+
+---
+## Created a new dataframe, called `covid_us`
+
+- We use the `dim()` function to check and make sure that `covid_us` has fewer rows than `covid`
+
+```{r}
+# ---- 2. Create covid_us data frame
+# How many rows and columns in covid
+dim(covid)
+
+# Filter out obs from US territories
+covid_us <- covid %>%
+  filter(!administrative_area_level_2 %in% territories)
+
+# covid_us should have fewer rows than covid
+dim(covid_us)
+
+
+```
+
+
+---
+## Created a variable called `state`
+
+Next we create a new variable called `state`, that is simply a copy of the `administrative_area_level_2` variable, using the `mutate()` function
+
+Note that mutate doesn't save the output. It just returns a data frame:
+
+```{r}
+covid_us %>%
+  mutate(
+    state = administrative_area_level_2
+  )
+
+
+```
+
+
+---
+## Created a variable called `state`
+
+We need to save the output of `mutate()` function back into an object
+
+```{r}
+dim(covid_us)
+covid_us %>%
+  mutate(
+    state = administrative_area_level_2
+  ) -> covid_us
+dim(covid_us)
+names(covid_us)[48]
+
+```
+
+---
+## Created a variable called `state`
+
+Now there's a new column in `covid_us` called `state`, that we can access by calling `covid_us$state`
+
+```{r}
+covid_us$state[1:5] # Just show first 5 observations
+```
+
+We could have done the same thing in "Base" R
+
+```{r}
+covid_us$state <- covid_us$administrative_area_level_2
+```
+
+Why didn't we?
+
+--
+- Consistent preference for `tidyverse` > `base R`
+- Saves time when recoding lots of variables
+- `mutate()` plays nicely with functions like `group_by()`
+
+
+---
+#### Create a variable called `new_cases` from the `confirmed` variable
+
+The `confirmed` variable contains a running total of confirmed cases in a given state on a given day. 
+
+We want to create a new variable that is just the number of new cases for a given day, by taking the current total, and subtracting the prior day's total.
+
+We want to do this separately, for each state.
+
+```{r}
+covid_us %>%
+  dplyr::group_by(state) %>%
+  mutate(
+    new_cases = confirmed - lag(confirmed)
+  ) -> covid_us
+```
+
+---
+#### Create a variable called `new_cases` from the `confirmed` variable
+
+The code below helps us see what's happening inside our mutate function, when we group by `state`
+
+```{r}
+covid_us %>%
+  filter(date >= "2020-04-01" & date < "2020-04-07")%>%
+  group_by(state) %>%
+  select(state, date, confirmed)%>%
+  mutate(
+    confirmed_lag1 = lag(confirmed),
+    new_cases = confirmed - lag(confirmed)
+  )
+
+```
+
+
+---
+#### Create a variable called `new_cases` from the `confirmed` variable
+
+If we hadn't grouped by state, we might calculate the difference between MN and CA
+
+```{r}
+covid_us %>%
+  filter(date >= "2020-04-01" & date < "2020-04-07")%>%
+  ungroup() %>%
+  select(state, date, confirmed)%>%
+  mutate(
+    confirmed_lag1 = lag(confirmed),
+    new_cases = confirmed - lag(confirmed)
+  )
+
+```
+
+
+---
+## Create a variable called `new_cases_pc` 
+
+- Next we scale our `new_cases` variable by the `population` of each state so that it captures the number of new cases per 100,000 residents.
+- Note the `,` after `new_cases = confirmed - lag(confirmed),`
+  - This tells `mutate()` we're ready to create a new variable
+- See how the number of columns `dim(covid_us)` reports keeps increasing.
+
+```{r}
+covid_us %>%
+  mutate(
+    state = administrative_area_level_2,
+  ) %>%
+  dplyr::group_by(state) %>%
+  mutate(
+    new_cases = confirmed - lag(confirmed),
+    new_cases_pc = new_cases / population *100000
+    ) ->covid_us
+dim(covid_us)
+```
+
+---
+## Created a variable called `face_masks`
+
+Finally, we want to create a new variable called `face_masks` from the `facial_coverings` variable.
+
+---
+## Created a variable called `face_masks`
+
+Recall, that the `facial_coverings` variable took on range of substantive values from 0 to 4
+
+- 0 - No policy
+- 1 - Recommended
+- 2 - Required in some specified shared/public spaces outside the home with other people present, or some situations when social distancing not possible
+- 3 - Required in all shared/public spaces outside the home with other people present or all situations when social distancing not possible
+- 4 - Required outside the home at all times regardless of location or presence of other people
+
+```{r}
+table(covid_us$facial_coverings)
+```
+
+Where negative values correspond to the most stringent policy in effect in a targeted geographic area (rather than the whole state)
+
+
+---
+## Created a variable called `face_masks`
+
+To transform `facial_coverings` into `face_masks`, we want to do the following:
+
+- Treat positive and negative values the same
+- Give numeric values of `facial_coverings` meaningful character labels in  `face_masks`
+- Treat these labels as factor, to convey the increasing stringency of the policy
+
+To do this, we'll use the `case_when()` function
+
+---
+## Created a variable called `face_masks`
+
+
+```{r}
+covid_us %>%
+mutate(
+    face_masks = case_when(
+      facial_coverings == 0 ~ "No policy",
+      abs(facial_coverings) == 1 ~ "Recommended",
+      abs(facial_coverings) == 2 ~ "Some requirements",
+      abs(facial_coverings) == 3 ~ "Required shared places",
+      abs(facial_coverings) == 4 ~ "Required all times",
+    ) %>% factor(.,
+      levels = c("No policy","Recommended",
+                 "Some requirements",
+                 "Required shared places",
+                 "Required all times")
+    ) 
+    ) -> covid_us
+```
+
+---
+## Created a variable called `face_masks`
+
+To understand what that last chunk of code did, it's helpful to look at the two variables
+
+```{r}
+covid_us%>%
+  filter(state == "Illinois", date > "2020-9-28") %>%
+  select(facial_coverings, face_masks)
+
+
+```
+
+
+---
+## Created a variable called `face_masks`
+
+Again we could have done this in `base` R 
+
+```{r}
+covid_us$face_masks_baseR <- NA
+covid_us$face_masks_baseR[covid_us$facial_coverings ==0] <- "No policy"
+covid_us$face_masks_baseR[abs(covid_us$facial_coverings)==1] <- "Recommended"
+covid_us$face_masks_baseR[abs(covid_us$facial_coverings)==2] <-  "Some requirements"
+covid_us$face_masks_baseR[abs(covid_us$facial_coverings)==3] <- "Required shared places"
+covid_us$face_masks_baseR[abs(covid_us$facial_coverings)==4] <- "Required all times"
+```
+
+---
+## Created a variable called `face_masks`
+
+Again we could have done this in `base` R 
+
+
+```{r}
+covid_us$face_masks_baseR <- factor(covid_us$face_masks_baseR,
+                                 levels = c("No policy","Recommended",
+                 "Some requirements",
+                 "Required shared places",
+                 "Required all times")   
+                                    )
+
+all.equal(covid_us$face_masks,covid_us$face_masks_baseR)
+```
+
+---
+## Created a variable called `face_masks`
+
+And gotten the same result
+
+```{r}
+all.equal(covid_us$face_masks,covid_us$face_masks_baseR)
+```
+
+```{r}
+# Compare tidy (rows) to base R (columns)
+table(covid_us$face_masks,covid_us$face_masks_baseR)
+```
+
+
+
+---
+The full code looked something like this:
+
+```{r}
+covid_us %>%
+  mutate(
+    state = administrative_area_level_2,
+  ) %>%
+  dplyr::group_by(state) %>%
+  mutate(
+    new_cases = confirmed - lag(confirmed),
+    new_cases_pc = new_cases / population *100000
+    ) %>%
+  mutate(
+    face_masks = case_when(
+      facial_coverings == 0 ~ "No policy",
+      abs(facial_coverings) == 1 ~ "Recommended",
+      abs(facial_coverings) == 2 ~ "Some requirements",
+      abs(facial_coverings) == 3 ~ "Required shared places",
+      abs(facial_coverings) == 4 ~ "Required all times",
+    ) %>% factor(.,
+      levels = c("No policy","Recommended",
+                 "Some requirements",
+                 "Required shared places",
+                 "Required all times")
+    ) 
+    ) -> covid_us
+```
+
+---
+## Further Recoding
+
+In last week's lab, we also added the following
+
+```{r}
+covid_us %>%
+  mutate(
+    year = year(date),
+    month = month(date),
+    year_month = paste(year, str_pad(month, width = 2, pad=0), sep = "-"),
+    percent_vaccinated = people_fully_vaccinated/population*100  
+    ) -> covid_us
+```
+
+---
+## Working with dates
+
+R treat's dates differently
+
+```{r}
+covid_us$date[1:3]
+class(covid_us$date)
+```
+
+If R knows a variable is a date, we can extract components of that date, using functions from the `lubridate` package
+
+```{r}
+year(covid_us$date[1:3])
+month(covid_us$date[1:3])
+```
+
+---
+## The `str_pad()` and `paste()` function
+
+- The `str_pad()` function lets us 'pad' strings so that they're all the same width
+
+```{r}
+month(covid_us$date[1:3])
+str_pad(month(covid_us$date[1:3]), width=2, pad = 0)
+```
+
+- The `paste` function lets us paste objects together.
+
+```{r}
+paste(year(covid_us$date[1:3]),
+      str_pad(month(covid_us$date[1:3]), width=2, pad = 0),
+      sep = "-"
+      )
+```
+
+
+---
+## Concept check
+
+Suppose you want to do the following, what function or functions would you use:
+
+- Read data into `R`
+- Look at the data to get a high level overview of its structure
+- Subset the data to include just obersvations with certain values
+- Select specific columns from data
+- Add new columns to the data
+- Summarize multiple values by collapsing them into a single value
+- Doing some function group-by-group?
+
+
+---
+## Concept check
+
+Suppose you want to do the following, what function or functions would you use:
+
+- Read data into `R`
+  - `read_xxx()` (tidy), `read.xxx()` (base)
+- Look at the data to get a high level overview of its structure
+  - `head()`, `tail()`, `glimpse()`, `table()`, `summary()`, `View()`
+- Subset the data to include just obersvations with certain values
+  - `data %>% filter(x > 0)`, `data[data$x > 0]`, `subset(data, x > 0)`
+- Select specific columns from data
+  - `data$variable`, `data %>% select(variable1, variable2)`, `data[,c("x1","x2")]`
+- Add new columns to the data
+  - `data %>% mutate(x = y/10)` `data$x <- data$y/10`
+- Summarize multiple values by collapsing them into a single value
+  - `data %>% summarise(x_mn = mean(x, na.rm=T))`
+- Doing some function group-by-group?
+  - `data %>% group_by(g) %>% summarise(x_mn = mean(x, na.rm=T))`
+
+
+---
+## Concept check
+
+Should you know exactly how to do all of this? 
+
+--
+
+**NO! Of course not. For Pete's sake, Paul, It's only the second week**
+
+--
+
+Will you learn how to do much of this?
+
+--
+
+**Maybe, but I'm feeling pretty overwhelmed...**
+
+--
+
+How will you learn how do these things?
+
+--
+
+
+**With lots of practice, patience, and repetition motivated by a sense that these skills will help 
+me learn about things I care about**
+
+---
+## Advice on learning how to code
+
+- It takes lots of practice and lots of errors
+- Only dumb question is one you don't ask
+- Google, Stack Exchange are your friends
+- Try writing out in comments what you want to do in code
+- Learn to recognize patterns in the questions/tasks I give you:
+  - Copy and paste code I give
+  - Change one thing
+  - Fix the error
+  - Adapt code from class to do a similar thing
+- Learning to code is much less painful when you have a reason to do it
+  - I'll try to use interesting data, but please let me know if there are questions or data you'd like us to explore
+
+---
+class: bottom, center
+background-image:url(https://memegenerator.net/img/instances/42703430.jpg)
+
+# 🔍
+# Descriptive Statistics
+
+---
+## Measures of Central Tendency
+
+Measures of central tendency describe what a typical value of some variable. In this course, we'll use three measures of what's typical:
+
+- mean
+- median
+- mode
+
+---
+## Mean
+
+One of the most frequent measures of central tendency we'll use in this course is a mean or average.
+
+Suppose we have $n$ observations of some variable $x$. We'll define the sample mean of $x$ as $\bar{x}$ ("x bar), and calculate it by adding up all the values of x
+
+$$\bar{x}=\frac{1}{n}\sum_{i=1}^n x_i$$
+
+
+```{r mean}
+mean(covid_us$new_cases_pc, na.rm=T)
+```
+
+---
+## Conditional Means
+
+Last week, when we calculated the the average number of new cases under each type of face mask policy, we were calculating a **conditional mean** the mean of some variable, conditional on some other variable taking a specific value.
+
+Formally, you'll often see this written in terms of **Expected Values**: Something like
+
+$$E[Y|X=x]$$
+
+Or to make it more concrete:
+
+$$E[\text{New Cases} | \text{Policy = "Recommended"}]$$
+
+---
+## Conditional Means
+
+
+In R, we could calculate:
+
+
+$$E[\text{New Cases} | \text{Policy = "Recommended"}]$$
+
+
+```{r conmean1}
+mean(covid_us$new_cases_pc[covid_us$face_masks == "No policy"], na.rm=T)
+
+```
+
+Where the `[]` index operator selects only the observations of `covid_us$new_cases_pc` where `covid_us$face_masks` is equal to "No policy" 
+
+---
+## Calculating Multiple Conditional Means
+
+By using `group_by()` with `summarise()` we can calculate multiple conditional means
+
+```{r conmeangroup}
+covid_us%>%
+  group_by(face_masks)%>%
+  summarise(
+    new_cases_pc = mean(new_cases_pc, na.rm=T)
+  )
+```
+
+
+---
+### Median
+
+
+The median is another measure of what's typical for variables that take numeric values
+
+Imagine, we took our data new Covid-19 cases and arranged them in ascending order, from the smallest value to highest value
+
+The median would be the value in the exact middle of that sequence, also known as the 50th percentile.
+
+---
+### Median
+
+Formally, we can define that median as:
+
+
+$$M_x = X_i : \int_{-\infty}^{x_i} f_x(X)dx=\int_{x_i}^\infty f_x(X)dx=1/2$$
+
+Which might look like Greek to you, which is fine. Just think of it as the middle value.
+
+In R:
+
+```{r median}
+median(covid_us$new_cases_pc, na.rm=T)
+```
+
+
+
+---
+### Medians and Means
+
+Note the median is much lower than the mean. 
+
+```{r meanmed}
+mean(covid_us$new_cases_pc, na.rm=T)
+median(covid_us$new_cases_pc, na.rm=T)
+```
+
+Which one is a better summary of what's typical?
+
+
+---
+If we were to look at a histogram of our data (more on that today), we see that the `new_cases_pc` has a "long tail" or is skewed to the right. Most of the values are close to 0, but there are few cases that are extreme outliers.
+
+```{r hist, echo=F}
+hist(covid_us$new_cases_pc, breaks = 100)
+abline(v=mean(covid_us$new_cases_pc, na.rm=T), col ="red")
+abline(v=median(covid_us$new_cases_pc, na.rm=T), col ="blue")
+
+```
+
+
+
+---
+### Modes
+
+Conceptually, a mode describes the most frequent outcome. 
+
+Modes are useful for describing what's typical of "nominal" or categorical data like our measure of face mask policy. 
+
+---
+### Modes
+
+To calculate the mode of our `face_masks` variable, wrap the output of `table()` with the `sort()` function
+
+```{r mode}
+sort(table(covid_us$face_masks))
+```
+
+---
+### Modes
+
+For numeric data, modes correspond to the peak of a variable's density function (more on this later in the class). 
+
+You can get a sense of the relationship between, means, median's and modes from this helpful figure from [Wikipedia](https://en.wikipedia.org/wiki/Mode_(statistics)):
+
+```{r wikifig, out.width=200,echo=F}
+knitr::include_graphics("https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Visualisation_mode_median_mean.svg/240px-Visualisation_mode_median_mean.svg.png")
+```
+
+
+---
+## Measures of Dispersion
+
+Measures of dispersion describe how much the data "vary." Let's discuss the following ways we can summarize how our data vary:
+
+- range
+- percentile range
+- variance
+- standard deviation
+
+---
+### Range
+
+The range of a variable is simply it's minimum and maximum value
+
+```{r range}
+range(covid_us$new_cases_pc,na.rm = T)
+min(covid_us$new_cases_pc,na.rm = T)
+max(covid_us$new_cases_pc,na.rm = T)
+```
+
+---
+## What states on what dates observed these minimum and maximum values?
+
+.left-column[
+
+- FL looks like a clerical error in reporting
+
+- RI looks like Omicron
+]
+
+
+.right-column[
+```{r staterange}
+covid_us %>%
+  filter(
+    new_cases_pc < -188 |
+    new_cases_pc > 1500
+  )%>%
+  select(state, date,new_cases_pc)
+
+```
+]
+
+---
+### Percentiles Ranges
+
+The $p$-th percentile is the value of the observation such that 100\*p percent of the data are to the left and 100-100\*p are two the right.
+
+$$p_x = X_i : \int_{-\infty}^{x_i} f_x(X)dx= p; \int_{x_i}^\infty f_x(X)dx=1-p$$
+
+
+The median is just the 50th percentile
+
+---
+### Percentiles Ranges
+
+In R we calculate the $p$-th percentile using the `quantile()` setting the `probs` argument to the $p/100$ percentile that we we want.
+
+
+```{r quantile}
+quantile(covid_us$new_cases_pc, probs = c(.25,.75), na.rm=T)
+```
+
+
+The 25th and 75th percentile define the "Interquartile Range" where 50 percent of the observations lie within this range, and 50 percent lie outside the range.
+
+---
+### Variance
+
+Variance describes how much observations of a given measure vary around that measure's mean.
+
+The variance in a given sample is calculated by taking the average of the sum of squared deviations (i.e. differences) around a measure's mean.
+
+$$\sigma^2_x=\frac{1}{n-1}\sum_{i=1}^n(x_i-\bar{x})^2$$
+
+- $x_i-\bar{x}$ is the deviation of each observation from the overall mean
+- $(x_i-\bar{x})^2$ squaring this ensures that we treat positive and negative deviations the same when calculating the overall variance
+- $\sum_{i=1}$ sums up all the differences
+- $\frac{1}{n-1}$ is like taking the average of these differences (we divide by $n-1$ instead of $n$ for [statistical reasons](https://web.ma.utexas.edu/users/mks/M358KInstr/SampleSDPf.pdf) that we'll return two when we talk about estimation)
+
+---
+### Variance
+
+We can use the `var()` function to calculate the variance of the `new_cases_pc` variable.
+
+```{r var}
+var(covid_us$new_cases_pc,na.rm=T)
+
+# Calculate by hand
+
+sum(
+  (covid_us$new_cases_pc - mean(covid_us$new_cases_pc,na.rm=T))^2, 
+  na.rm=T
+  )/(sum(!is.na(covid_us$new_cases_pc))-1)
+
+```
+
+
+Variance will be important for thinking about uncertainty and inference (e.g. how might our estimate have been different)
+
+---
+### Standard Deviations
+
+
+A standard deviation is simply the square root of variable's variance. 
+
+
+$$\sigma_x=\sqrt{\sigma^2_x}=\sqrt{\frac{1}{n-1}\sum_{i=1}^n(x_i-\bar{x})^2}$$
+
+Standard deviations are easier to interpet because their units are the same as variable. 
+
+Think of them as a measure of the typical amount of variation for variable.
+
+Again, let's use the `sd()` function to calculate the standard deviation of the `new_cases_pc` variable
+
+```{r sd}
+sd(covid_us$new_cases_pc,na.rm=T)
+```
+
+---
+## Measures of Association
+
+Measures of association describe how variables relate to each other.
+
+- Covariance
+- Correlation
+
+---
+### Covariance
+
+Covariance describes how two variables "co-vary". 
+
+When $x$ is above its mean, $y$ also tends to be above it's mean, these variables have a positive covariance. 
+
+If when $x$ tends to be high, $y$ tends to be low, these variables have a negative variance
+
+---
+### Covariance
+
+Formally, the sample covariance of two variables can written as follows:
+
+$$cov(x,y)=\frac{1}{n-1}\sum_{i=1}^n(x_i-\bar{x})(y_i-\bar{y})$$
+
+The covariance between the percent of state's population that is fully vaccinated (`percent_vaccinated`) and `new_cases_pc` is:
+
+```{r covar}
+var(covid_us$new_cases_pc,covid_us$percent_vaccinated,na.rm = T)
+```
+
+
+---
+background-image:url("https://c.tenor.com/unFf-IWvWuEAAAAC/doesnt-look-like-anything-to-me-westworld.gif")
+background-size:contain
+
+---
+### Correlation
+
+Like variances, covariances don't really have intrinsic meaning, since x and y can be measured on very different scales.
+
+The correlation between two variables takes their covariance and scales this by the standard deviation of each variable, creating a measure that can range from -1 (perfect negative correlation) to 1 perfect positive correlation.
+
+---
+### Correlation
+Again, we can write this formally
+
+$$\rho_{x,y} = \frac{cov(x,y)}{\sigma_x,\sigma_y}$$
+
+---
+### Correlation
+
+We can calculate the correlation between vaccination rates and new cases using the `cor()` function
+
+You'll need to set the argument `use="complete.obs`
+
+```{r cor}
+cor(covid_us$percent_vaccinated, covid_us$new_cases_pc, use = "complete.obs")
+
+```
+
+Hmm... That seems a little strange. What if we calculated the correlation between vaccination rates and new cases separately for each month in 2021
+
+---
+### Correlation
+
+```{r cormonth}
+covid_us %>%
+  filter(year > 2020, year <= 2022)%>%
+  ungroup() %>%
+  group_by(year_month)%>%
+  summarise(
+    mn_per_vax = round(mean(percent_vaccinated, na.rm=T),2),
+    cor = round(cor(new_cases_pc, percent_vaccinated, use = "complete.obs"),2)
+  ) -> monthly_vax_case_correlations
+
+
+```
+
+
+---
+## Monthly Correlation between Vaccination Rates and New Cases
+```{r, echo=F}
+DT::datatable(monthly_vax_case_correlations,
+              options = list(pageLength = 5)
+              )
+```
+
+---
+## Monthly Correlation between Vaccination Rates and New Cases
+
+```{r}
+monthly_vax_case_correlations %>%
+  ggplot(aes(x=year_month, 
+             cor,
+             col=mn_per_vax))+
+    geom_point()+
+  coord_flip()+
+  labs(
+    x = "",
+    y = "Correlation",
+    col = "Percent\nVaccinated"
+  ) -> fig_monthly_vax_case_correlations
+```
+
+---
+
+```{r, echo=F}
+fig_monthly_vax_case_correlations
+```
+
+
+---
+## Monthly Correlation between Vaccination Rates and New Cases
+
+```{r}
+covid_us %>%
+  group_by(year,month,state) %>%
+  summarise(
+    new_cases_pc = mean(new_cases_pc),
+    percent_vaccinated = mean(percent_vaccinated)
+  ) -> monthly_vax_case_rates_by_state
+```
+
+---
+```{r}
+monthly_vax_case_rates_by_state %>%
+  filter(year == 2021) %>%
+  mutate(Month = month(month, label=T, abbr=T))%>%
+  ggplot(aes(percent_vaccinated,new_cases_pc))+
+  geom_point()+
+  stat_smooth(method = "lm")+
+  facet_wrap(~Month) -> fig_monthly_vax_case_rates_by_state
+```
+
+---
+```{r, echo=F, out.height="80%"}
+fig_monthly_vax_case_rates_by_state
+```
+
+
+---
+## Concept Check
+
+Descriptive statistics tell us what's typical of our data:
+
+- What's a typical value
+  - mean, median mode
+- What's a typical amount of variation
+  - ranges, percentile ranges, variance, standard deviation
+- How does one variable typically change as another variable changes
+  - covariance and correlations
+
+---
+## Correlation does not equal causation
+
+
+.pull-left[
+- I think I'm contractually obliged to repeat this to you. 
+- Next week, we'll provide a precise definition of causation
+- For now consider the following:
+  - Y is clearly related to x, but has a correlation of 0
+
+```{r}
+x <- -10:10
+y <- abs(x)
+cor(x,y)
+
+```
+]
+
+.pull-right[
+```{r}
+plot(x,y)
+```
+]
+
+
+
+
+

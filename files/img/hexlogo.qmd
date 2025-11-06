@@ -1,0 +1,56 @@
+---
+title: "Hex Logo for POLS 1600"
+---
+
+
+```{r}
+#| echo: false
+#| 
+
+# install.packages("cropcircles")
+# install.packages("showtext")
+# install.packages("ggpath")
+# install.packages("ggtext")
+
+
+
+library(cropcircles)
+library("magick")
+
+
+
+
+
+library(tidyverse)
+library(ggpath)
+library(ggtext)
+library(glue)
+
+img_cropped <- hex_crop("pols1600_icon.png",
+                        border_colour = "#06182c",
+                        bg_fill = "white",
+                        border_size = 24)
+
+pols1600_hex <- ggplot() +
+  geom_from_path(aes(0.5, 0.5, path = img_cropped)) +
+  annotate("text",
+           x=.5, y = .87,
+           colour = "#06182c",
+           fontface = "bold",
+           size = 16,
+           label ="POLS")+
+  annotate("text",
+           x=.5, y = .12,
+           colour = "#06182c",
+           fontface = "bold",
+           size = 16,
+           label ="1600")+
+  xlim(0,1)+
+  ylim(0,1) +
+  theme_void() +
+  coord_fixed()
+
+ggsave("pols1600_hex.png", pols1600_hex, height = 6, width = 6)
+
+```
+

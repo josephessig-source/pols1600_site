@@ -1,0 +1,22 @@
+---
+title: 'Comments Lab 07 - Replicating Grumbach and Hill (2022):'
+subtitle: "Understanding the Data and Design "
+author: "P.F. Testa"
+date: "Last Updated `r format(Sys.Date())`"
+format:
+  html:
+    toc: true
+    toc-location: right
+    toc-float: true
+    toc-depth: 2
+    number-sections: true
+execute: 
+  eval: true
+  echo: true
+  warning: false
+  message: false
+  cache: true
+---
+
+
+![](https://y.yarn.co/cc123e93-b2df-46ca-9084-22bbf19c2c6b_text.gif)
