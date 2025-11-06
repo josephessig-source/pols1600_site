@@ -6,8 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="P.F. Testa">
 
-<title>POLS 1600</title>
+<title>Comments Lab 07 - Replicating Grumbach and Hill (2022): – POLS 1600</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,24 +24,23 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-1cfdd6bcdaa40fc01831c1af7ce94cf5.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
-<link href="site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-1cfdd6bcdaa40fc01831c1af7ce94cf5.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -68,17 +68,9 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<link href="site_libs/font-awesome-6.4.2/css/all.min.css" rel="stylesheet">
-
-<link href="site_libs/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet">
-
-<script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
-
-<link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 
 
-
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../../styles.css">
 </head>
 
 <body class="nav-fixed quarto-light">
@@ -88,7 +80,7 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">POLS 1600</span>
     </a>
   </div>
@@ -99,19 +91,19 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page"> 
+    <a class="nav-link" href="../../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./syllabus.html"> 
+    <a class="nav-link" href="../../syllabus.html"> 
 <span class="menu-text">Syllabus</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./class/index.html"> 
+    <a class="nav-link" href="../../class/index.html"> 
 <span class="menu-text">Class</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./assignments/index.html"> 
+    <a class="nav-link" href="../../assignments/index.html"> 
 <span class="menu-text">Assignments</span></a>
   </li>  
 </ul>
@@ -125,318 +117,58 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-  <ul>
-  <li><a href="#logistics" id="toc-logistics" class="nav-link active" data-scroll-target="#logistics">Logistics</a></li>
-  <li><a href="#schedule" id="toc-schedule" class="nav-link" data-scroll-target="#schedule">Schedule</a></li>
-  <li><a href="#instructors" id="toc-instructors" class="nav-link" data-scroll-target="#instructors">Instructors</a></li>
-  </ul>
-</nav>
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
     </div>
 <!-- main -->
-<div class="quarto-about-jolla">
-  <img src="files/img/opalka.jpg" class="about-image
-  round " style="height: 15em; width: 15em;">
- <header id="title-block-header" class="quarto-title-block default">
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">POLS 1600</h1>
-<p class="subtitle lead">Political Research Methods</p>
+<h1 class="title">Comments Lab 07 - Replicating Grumbach and Hill (2022):</h1>
+<p class="subtitle lead">Understanding the Data and Design</p>
 </div>
+
+
+
 <div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>P.F. Testa </p>
+          </div>
   </div>
-</header><main class="content" id="quarto-document-content">
-
-<p>This course provides a foundation in the principles and practice of quantitative social science, with a focus on building tools to make descriptive, causal, and predictive inferences.</p>
-<section id="logistics" class="level1">
-<h1>Logistics</h1>
-<p>We meet three times a week from 12-12:50pm with lectures on Monday and Wednesday and lab sessions on Friday. You will need a laptop that can run R and Rstudio for both lectures and labs. test</p>
-<div class="grid">
-<div class="g-col-4">
-<p><a href="./class/index.html"><i class="fa-solid fa-comments fa-3x" aria-label="comments"></i></a></p>
-<section id="lecture" class="level3">
-<h3 data-anchor-id="lecture">Lecture</h3>
-<p>Mondays and Wednesdays, 12-12:50pm</p>
-</section>
-</div>
-<div class="g-col-4">
-<p><a href="./class/index.html"><i class="fa-solid fa-laptop-file fa-3x" aria-label="laptop-file"></i></a></p>
-<section id="labs" class="level3">
-<h3 data-anchor-id="labs">Labs</h3>
-<p>Fridays, 12-12:50pm</p>
-</section>
-</div>
-<div class="g-col-4">
-<p><a href="#"><i class="fa-solid fa-check-to-slot fa-3x" aria-label="check-to-slot"></i></a></p>
-<section id="assignments" class="level3">
-<h3 data-anchor-id="assignments">Assignments</h3>
-<p>Due on <a href="#">Canvas</a></p>
-</section>
-</div>
-<div class="g-col-4">
-<p><a href="#"><i class="fa-solid fa-map-location-dot fa-3x" aria-label="map-location-dot"></i></a></p>
-<section id="location" class="level3">
-<h3 data-anchor-id="location">Location</h3>
-<p>Location TBD</p>
-</section>
-</div>
-<div class="g-col-4">
-<p><a href="#"><i class="fa-solid fa-video fa-3x" aria-label="video"></i></a></p>
-<section id="zoom" class="level3">
-<h3 data-anchor-id="zoom">Zoom</h3>
-</section>
-</div>
-<div class="g-col-4">
-<p><a href="https://calendar.app.google"><i class="fa-solid fa-person-circle-question fa-3x" aria-label="person-circle-question"></i></a></p>
-<section id="office-hours" class="level3">
-<h3 data-anchor-id="office-hours">Office Hours</h3>
-<p><a href="https://calendar.app.google">Joe | Time TBD</a> <br> Stephen Roberts Hall, Rm. 123 (Taubman Center) <a href="https://calendar.app.google">Teaching Assistant | Time TBD</a> <br> Location TBD</p>
-</section>
-</div>
-</div>
-</section>
-<section id="schedule" class="level1">
-<h1>Schedule</h1>
-<table class="table table-striped caption-top" data-quarto-postprocess="true">
-<colgroup>
-<col style="width: 20%">
-<col style="width: 20%">
-<col style="width: 20%">
-<col style="width: 20%">
-<col style="width: 20%">
-</colgroup>
-<thead>
-<tr class="header">
-<th style="text-align: left;" data-quarto-table-cell-role="th"></th>
-<th style="text-align: center;" data-quarto-table-cell-role="th">Lecture</th>
-<th style="text-align: center;" data-quarto-table-cell-role="th">Labs</th>
-<th style="text-align: center;" data-quarto-table-cell-role="th">Solutions</th>
-<th style="text-align: center;" data-quarto-table-cell-role="th">Assignments</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left; font-weight: bold;">Week 0</td>
-<td style="text-align: center; font-weight: bold;"></td>
-<td style="text-align: center; font-weight: bold;"></td>
-<td style="text-align: center; font-weight: bold;"></td>
-<td style="text-align: center; font-weight: bold;"></td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Introductions</td>
-<td style="text-align: center;"><a href="./slides/00-slides.html" target="_blank">
-<svg aria-hidden="true" role="img" viewbox="0 0 640 512" style="height:1em;width:1.25em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:currentColor;overflow:visible;position:relative;">
-<path d="M88.2 309.1c9.8-18.3 6.8-40.8-7.5-55.8C59.4 230.9 48 204 48 176c0-63.5 63.8-128 160-128s160 64.5 160 128s-63.8 128-160 128c-13.1 0-25.8-1.3-37.8-3.6c-10.4-2-21.2-.6-30.7 4.2c-4.1 2.1-8.3 4.1-12.6 6c-16 7.2-32.9 13.5-49.9 18c2.8-4.6 5.4-9.1 7.9-13.6c1.1-1.9 2.2-3.9 3.2-5.9zM0 176c0 41.8 17.2 80.1 45.9 110.3c-.9 1.7-1.9 3.5-2.8 5.1c-10.3 18.4-22.3 36.5-36.6 52.1c-6.6 7-8.3 17.2-4.6 25.9C5.8 378.3 14.4 384 24 384c43 0 86.5-13.3 122.7-29.7c4.8-2.2 9.6-4.5 14.2-6.8c15.1 3 30.9 4.5 47.1 4.5c114.9 0 208-78.8 208-176S322.9 0 208 0S0 78.8 0 176zM432 480c16.2 0 31.9-1.6 47.1-4.5c4.6 2.3 9.4 4.6 14.2 6.8C529.5 498.7 573 512 616 512c9.6 0 18.2-5.7 22-14.5c3.8-8.8 2-19-4.6-25.9c-14.2-15.6-26.2-33.7-36.6-52.1c-.9-1.7-1.9-3.4-2.8-5.1C622.8 384.1 640 345.8 640 304c0-94.4-87.9-171.5-198.2-175.8c4.1 15.2 6.2 31.2 6.2 47.8l0 .6c87.2 6.7 144 67.5 144 127.4c0 28-11.4 54.9-32.7 77.2c-14.3 15-17.3 37.6-7.5 55.8c1.1 2 2.2 4 3.2 5.9c2.5 4.5 5.2 9 7.9 13.6c-17-4.5-33.9-10.7-49.9-18c-4.3-1.9-8.5-3.9-12.6-6c-9.5-4.8-20.3-6.2-30.7-4.2c-12.1 2.4-24.7 3.6-37.8 3.6c-61.7 0-110-26.5-136.8-62.3c-16 5.4-32.8 9.4-50 11.8C279 439.8 350 480 432 480z"></path>
-</svg>
-</a></td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-</tr>
-<tr class="odd">
-<td style="text-align: left; font-weight: bold;">Week 1</td>
-<td style="text-align: center; font-weight: bold;"></td>
-<td style="text-align: center; font-weight: bold;"></td>
-<td style="text-align: center; font-weight: bold;"></td>
-<td style="text-align: center; font-weight: bold;"></td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Data &amp; Measurement</td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-</tr>
-<tr class="odd">
-<td style="text-align: left; font-weight: bold;">Week 2</td>
-<td style="text-align: center; font-weight: bold;"></td>
-<td style="text-align: center; font-weight: bold;"></td>
-<td style="text-align: center; font-weight: bold;"></td>
-<td style="text-align: center; font-weight: bold;"></td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Data Visualization</td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-</tr>
-<tr class="odd">
-<td style="text-align: left; font-weight: bold;">Week 3</td>
-<td style="text-align: center; font-weight: bold;"></td>
-<td style="text-align: center; font-weight: bold;"></td>
-<td style="text-align: center; font-weight: bold;"></td>
-<td style="text-align: center; font-weight: bold;"></td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Causation -- Experiments</td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-</tr>
-<tr class="odd">
-<td style="text-align: left; font-weight: bold;">Week 4</td>
-<td style="text-align: center; font-weight: bold;"></td>
-<td style="text-align: center; font-weight: bold;"></td>
-<td style="text-align: center; font-weight: bold;"></td>
-<td style="text-align: center; font-weight: bold;"></td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Causation -- Observational Studies</td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-</tr>
-<tr class="odd">
-<td style="text-align: left; font-weight: bold;">Week 5</td>
-<td style="text-align: center; font-weight: bold;"></td>
-<td style="text-align: center; font-weight: bold;"></td>
-<td style="text-align: center; font-weight: bold;"></td>
-<td style="text-align: center; font-weight: bold;"></td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Bivariate Regression</td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-</tr>
-<tr class="odd">
-<td style="text-align: left; font-weight: bold;">Week 6</td>
-<td style="text-align: center; font-weight: bold;"></td>
-<td style="text-align: center; font-weight: bold;"></td>
-<td style="text-align: center; font-weight: bold;"></td>
-<td style="text-align: center; font-weight: bold;"></td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Multiple Regression</td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-</tr>
-<tr class="odd">
-<td style="text-align: left; font-weight: bold;">Week 7</td>
-<td style="text-align: center; font-weight: bold;"></td>
-<td style="text-align: center; font-weight: bold;"></td>
-<td style="text-align: center; font-weight: bold;"></td>
-<td style="text-align: center; font-weight: bold;"></td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Regression Extensions</td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-</tr>
-<tr class="odd">
-<td style="text-align: left; font-weight: bold;">Week 8</td>
-<td style="text-align: center; font-weight: bold;"></td>
-<td style="text-align: center; font-weight: bold;"></td>
-<td style="text-align: center; font-weight: bold;"></td>
-<td style="text-align: center; font-weight: bold;"></td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Probability - Random Variables &amp; Distributions</td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-</tr>
-<tr class="odd">
-<td style="text-align: left; font-weight: bold;">Week 9</td>
-<td style="text-align: center; font-weight: bold;"></td>
-<td style="text-align: center; font-weight: bold;"></td>
-<td style="text-align: center; font-weight: bold;"></td>
-<td style="text-align: center; font-weight: bold;"></td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Probability - Limit Theorems</td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-</tr>
-<tr class="odd">
-<td style="text-align: left; font-weight: bold;">Week 10</td>
-<td style="text-align: center; font-weight: bold;"></td>
-<td style="text-align: center; font-weight: bold;"></td>
-<td style="text-align: center; font-weight: bold;"></td>
-<td style="text-align: center; font-weight: bold;"></td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Inference -- Confidence Intervals</td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-</tr>
-<tr class="odd">
-<td style="text-align: left; font-weight: bold;">Week 11</td>
-<td style="text-align: center; font-weight: bold;"></td>
-<td style="text-align: center; font-weight: bold;"></td>
-<td style="text-align: center; font-weight: bold;"></td>
-<td style="text-align: center; font-weight: bold;"></td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Inference -- Hypothesis Testing</td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-</tr>
-<tr class="odd">
-<td style="text-align: left; font-weight: bold;">Week 12</td>
-<td style="text-align: center; font-weight: bold;"></td>
-<td style="text-align: center; font-weight: bold;"></td>
-<td style="text-align: center; font-weight: bold;"></td>
-<td style="text-align: center; font-weight: bold;"></td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Workshop</td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-</tr>
-<tr class="odd">
-<td style="text-align: left; font-weight: bold;">Week 13</td>
-<td style="text-align: center; font-weight: bold;"></td>
-<td style="text-align: center; font-weight: bold;"></td>
-<td style="text-align: center; font-weight: bold;"></td>
-<td style="text-align: center; font-weight: bold;"></td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Presentations</td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="instructors" class="level1">
-<h1>Instructors</h1>
-<div class="grid">
-<div class="g-col-6">
-<p><a href="https://josephessig.com">Joseph Essig</a></p>
-<p>Postdoctoral Research Associate</p>
-<p>Taubman Center for American Politics and Policy</p>
-<p>Brown University &lt;joseph_essig@brown.edu&gt;</p>
-</div>
-</div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">Invalid Date</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
 
 
-</section>
-</main>  
-</div>
- <!-- /main -->
+</header>
+
+
+<p><img src="https://y.yarn.co/cc123e93-b2df-46ca-9084-22bbf19c2c6b_text.gif" class="img-fluid"></p>
+
+
+
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
     const isCodeAnnotation = (el) => {
       for (const clz of el.classList) {
         if (clz.startsWith('code-annotation-')) {                     

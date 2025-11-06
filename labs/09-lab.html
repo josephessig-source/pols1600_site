@@ -1,0 +1,1300 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.32">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Your Group Members Names Here">
+<meta name="dcterms.date" content="2024-04-04">
+
+<title>Lab 09 - Exploring data in the 2020 National Elections Study – POLS 1600</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-1cfdd6bcdaa40fc01831c1af7ce94cf5.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="../site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+
+<link href="../site_libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
+
+<script src="../site_libs/datatables-binding-0.31/datatables.js"></script>
+
+<script src="../site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+
+<link href="../site_libs/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
+
+<link href="../site_libs/dt-core-1.13.6/css/jquery.dataTables.extra.css" rel="stylesheet">
+
+<script src="../site_libs/dt-core-1.13.6/js/jquery.dataTables.min.js"></script>
+
+<link href="../site_libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet">
+
+<script src="../site_libs/crosstalk-1.2.1/js/crosstalk.min.js"></script>
+
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">POLS 1600</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../syllabus.html"> 
+<span class="menu-text">Syllabus</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../class/index.html"> 
+<span class="menu-text">Class</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../assignments/index.html"> 
+<span class="menu-text">Assignments</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul class="collapse">
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
+  <li><a href="#goals" id="toc-goals" class="nav-link" data-scroll-target="#goals">Goals</a></li>
+  <li><a href="#workflow" id="toc-workflow" class="nav-link" data-scroll-target="#workflow">Workflow</a>
+  <ul class="collapse">
+  <li><a href="#please-render-this-.qmd-file" id="toc-please-render-this-.qmd-file" class="nav-link" data-scroll-target="#please-render-this-.qmd-file">Please render this .qmd file</a></li>
+  </ul></li>
+  <li><a href="#set-up-your-workspace" id="toc-set-up-your-workspace" class="nav-link" data-scroll-target="#set-up-your-workspace"><span class="header-section-number">1</span> Set up your workspace</a>
+  <ul class="collapse">
+  <li><a href="#load-packages" id="toc-load-packages" class="nav-link" data-scroll-target="#load-packages"><span class="header-section-number">1.1</span> Load Packages</a></li>
+  <li><a href="#set-your-working-directory-in-r-studio" id="toc-set-your-working-directory-in-r-studio" class="nav-link" data-scroll-target="#set-your-working-directory-in-r-studio"><span class="header-section-number">1.2</span> Set your working directory in R Studio</a></li>
+  </ul></li>
+  <li><a href="#download-and-load-the-nes-data-into-r" id="toc-download-and-load-the-nes-data-into-r" class="nav-link" data-scroll-target="#download-and-load-the-nes-data-into-r"><span class="header-section-number">2</span> Download and load the NES data into R</a></li>
+  <li><a href="#explore-the-codebook" id="toc-explore-the-codebook" class="nav-link" data-scroll-target="#explore-the-codebook"><span class="header-section-number">3</span> Explore the codebook</a>
+  <ul class="collapse">
+  <li><a href="#identify-a-potential-outcome-of-interest" id="toc-identify-a-potential-outcome-of-interest" class="nav-link" data-scroll-target="#identify-a-potential-outcome-of-interest"><span class="header-section-number">3.1</span> Identify a potential outcome of interest</a></li>
+  <li><a href="#identify-at-least-one-variable-that-might-predict-variation-in-your-outcome." id="toc-identify-at-least-one-variable-that-might-predict-variation-in-your-outcome." class="nav-link" data-scroll-target="#identify-at-least-one-variable-that-might-predict-variation-in-your-outcome."><span class="header-section-number">3.2</span> Identify at least one variable that might predict variation in your outcome.</a></li>
+  </ul></li>
+  <li><a href="#get-a-high-level-overview-of-the-data" id="toc-get-a-high-level-overview-of-the-data" class="nav-link" data-scroll-target="#get-a-high-level-overview-of-the-data"><span class="header-section-number">4</span> Get a high level overview of the data</a>
+  <ul class="collapse">
+  <li><a href="#examine-the-distributions-and-values-of-your-outcome-variable" id="toc-examine-the-distributions-and-values-of-your-outcome-variable" class="nav-link" data-scroll-target="#examine-the-distributions-and-values-of-your-outcome-variable"><span class="header-section-number">4.1</span> Examine the distributions and values of your outcome variable</a></li>
+  <li><a href="#describe-any-recoding-of-your-outcome-variable" id="toc-describe-any-recoding-of-your-outcome-variable" class="nav-link" data-scroll-target="#describe-any-recoding-of-your-outcome-variable"><span class="header-section-number">4.2</span> Describe any recoding of your outcome variable</a></li>
+  <li><a href="#examine-the-distributions-and-values-of-your-predictor-variable" id="toc-examine-the-distributions-and-values-of-your-predictor-variable" class="nav-link" data-scroll-target="#examine-the-distributions-and-values-of-your-predictor-variable"><span class="header-section-number">4.3</span> Examine the distributions and values of your predictor variable</a></li>
+  <li><a href="#describe-any-recoding-of-your-predictors" id="toc-describe-any-recoding-of-your-predictors" class="nav-link" data-scroll-target="#describe-any-recoding-of-your-predictors"><span class="header-section-number">4.4</span> Describe any recoding of your predictor(s)</a></li>
+  </ul></li>
+  <li><a href="#recode-the-data" id="toc-recode-the-data" class="nav-link" data-scroll-target="#recode-the-data"><span class="header-section-number">5</span> Recode the data</a>
+  <ul class="collapse">
+  <li><a href="#recode-the-outcome-variables" id="toc-recode-the-outcome-variables" class="nav-link" data-scroll-target="#recode-the-outcome-variables"><span class="header-section-number">5.1</span> Recode the outcome variables</a></li>
+  <li><a href="#check-the-recoding-of-your-outcome" id="toc-check-the-recoding-of-your-outcome" class="nav-link" data-scroll-target="#check-the-recoding-of-your-outcome"><span class="header-section-number">5.2</span> Check the recoding of your outcome</a></li>
+  <li><a href="#recode-your-predictor-variables" id="toc-recode-your-predictor-variables" class="nav-link" data-scroll-target="#recode-your-predictor-variables"><span class="header-section-number">5.3</span> Recode your predictor variables</a></li>
+  </ul></li>
+  <li><a href="#describe-the-data" id="toc-describe-the-data" class="nav-link" data-scroll-target="#describe-the-data"><span class="header-section-number">6</span> Describe the Data</a>
+  <ul class="collapse">
+  <li><a href="#create-a-table-of-summary-statistics" id="toc-create-a-table-of-summary-statistics" class="nav-link" data-scroll-target="#create-a-table-of-summary-statistics"><span class="header-section-number">6.1</span> Create a table of summary statistics</a></li>
+  <li><a href="#modify-the-table-to-include-your-predictors" id="toc-modify-the-table-to-include-your-predictors" class="nav-link" data-scroll-target="#modify-the-table-to-include-your-predictors"><span class="header-section-number">6.2</span> Modify the table to include your predictors</a></li>
+  <li><a href="#interpret-the-results-of-your-table." id="toc-interpret-the-results-of-your-table." class="nav-link" data-scroll-target="#interpret-the-results-of-your-table."><span class="header-section-number">6.3</span> Interpret the results of your table.</a></li>
+  <li><a href="#visualize-the-data" id="toc-visualize-the-data" class="nav-link" data-scroll-target="#visualize-the-data"><span class="header-section-number">6.4</span> Visualize the Data</a></li>
+  </ul></li>
+  <li><a href="#formulate-a-research-question" id="toc-formulate-a-research-question" class="nav-link" data-scroll-target="#formulate-a-research-question"><span class="header-section-number">7</span> Formulate a research question</a></li>
+  <li><a href="#save-your-data" id="toc-save-your-data" class="nav-link" data-scroll-target="#save-your-data"><span class="header-section-number">8</span> Save your data</a></li>
+  <li><a href="#take-the-class-survey" id="toc-take-the-class-survey" class="nav-link" data-scroll-target="#take-the-class-survey">Take the Class Survey</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Lab 09 - Exploring data in the 2020 National Elections Study</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Your Group Members Names Here </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">April 4, 2024</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="overview" class="level1 unnumbered">
+<h1 class="unnumbered">Overview</h1>
+<p>In this lab, we’ll explore data from the National Election Studies 2024 Pilot Study. You find an outcome of interest and a variable you think predicts interesting variation in that outcome. You’ll figure out what recoding you need to do, do that recoding and describe the data. I’ll do the same, so can some template code to compare your work to.</p>
+<p>Everything we’ll do today is something we’ve done before and is also something you’ll likely have to do a version of in your final project. Here’s the plan</p>
+<ol type="1">
+<li><p>Set up your work space (5 minutes)</p></li>
+<li><p>Download and load data from the NES into R (10 minutes)</p></li>
+<li><p>Explore the codebook for the 2024 Pilot Study (5-10 minutes)</p></li>
+<li><p>Get a high level overview of the data to figure out what recoding needs to be done (5-10 minutes)</p></li>
+<li><p>Recode the data (15 minutes)</p></li>
+<li><p>Describe the data (15-20 minutes)</p></li>
+<li><p>Formulate a set of research questions (10 minutes)</p></li>
+<li><p>Save the data (5 minutes)</p></li>
+</ol>
+<p>Finally, as always please take the class survey.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div class="datatables html-widget html-fill-item" id="htmlwidget-a68832e9fd9e7279d6cd" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-a68832e9fd9e7279d6cd">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8"],["Group 1","Group 2","Group 3","Group 4","Group 5","Group 6","Group 7","Group 8"],["Maia Eng","Andrew Rovinsky","Serafym Rybachkivskyi","Tiffany Eddy","Christopher Maron","Mia Hamilton","Mariana Melzer","Logan Szittai"],["Guadalupe Herrera","Spencer Lorin","Rachel Kim","Daniel Solomon","Daniel Baker","Emily Colon","Kahrie Langham","Keiley Thompson"],["Stephen Robinson","Lucinda Anderson","Kai Blades","Zoe Smith","Neve Diaz-Carr","Davis Kelly","Shannon Feerick-Hillenbrand","Lydell Dyer"],["Jeremiah Harrington","Serenity Hamilton","Emma Coleman","Lorena Calderon","Olivia Hanley","Talia Levine","Jarret Fernandes","Mahir Arora"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Group<\/th>\n      <th>1<\/th>\n      <th>2<\/th>\n      <th>3<\/th>\n      <th>4<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"Group","targets":1},{"name":"1","targets":2},{"name":"2","targets":3},{"name":"3","targets":4},{"name":"4","targets":5}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</section>
+<section id="goals" class="level1 unnumbered">
+<h1 class="unnumbered">Goals</h1>
+<p>This week’s lab will give you practice:</p>
+<ul>
+<li><p>Download and loading data from your own computers (Q1,Q2)</p></li>
+<li><p>Exploring a codebook to find interesting relevant variables (Q3)</p></li>
+<li><p>Exploring data to understand what needs to be recoded (Q4)</p></li>
+<li><p>Recoding data in a clear and precise manner (Q5)</p>
+<ul>
+<li>Demonstrate how to recode multiple variables using <code>across()</code></li>
+</ul></li>
+<li><p>Describing, summarizing, and exploring data through tables and figures (Q6)</p>
+<ul>
+<li>Using <code>kable()</code> and functions from the <code>kableExtra</code> package to format tables</li>
+<li>Combining multiple figures into single plots using <code>ggarrange()</code>from the `<code>ggpubr</code> pacakge</li>
+</ul></li>
+<li><p>Formulating research questions based on initial explorations of the data (Q7)</p></li>
+<li><p>Saving data so you can use it later (Q8)</p></li>
+</ul>
+</section>
+<section id="workflow" class="level1 unnumbered">
+<h1 class="unnumbered">Workflow</h1>
+<section id="please-render-this-.qmd-file" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="please-render-this-.qmd-file">Please render this .qmd file</h2>
+<p>As with every lab, you should:</p>
+<ul>
+<li>Download the file</li>
+<li>Save it in your course folder</li>
+<li><strong>Update the <code>author:</code> section of the YAML header to include the names of your group members in attendance.</strong></li>
+<li>Render the document</li>
+<li>Open the html file in your browser (Easier to read)</li>
+<li>Write your code in the <strong>chunks provided under each section</strong></li>
+<li>Comment out or delete any test code you do not need</li>
+<li><strong>Render the document again after completing a section or chunk</strong> (Error checking)</li>
+<li>Upload the final lab to <a href="https://canvas.brown.edu/courses/1094972/assignments" target="_blank">Canvas</a>.</li>
+</ul>
+</section>
+</section>
+<section id="set-up-your-workspace" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Set up your workspace</h1>
+<p>In the code chunk below, please add code to load the package <code>DeclareDesign</code></p>
+<section id="load-packages" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="load-packages"><span class="header-section-number">1.1</span> Load Packages</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Libraries</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(haven)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(labelled)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggpubr)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DeclareDesign)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="do">## ADD DeclareDesign</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="set-your-working-directory-in-r-studio" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="set-your-working-directory-in-r-studio"><span class="header-section-number">1.2</span> Set your working directory in R Studio</h2>
+<p>In R studio <strong>set your working directory</strong> to the <strong>folder where this lab is</strong> saved by clicking &gt; Session &gt; Set Working Directory &gt; To Source File Location</p>
+<p><img src="images/09-nes6.png" class="img-fluid" style="width:50.0%"></p>
+<p>After doing so uncomment <code>getwd()</code> Should print out something like</p>
+<blockquote class="blockquote">
+<p>“~/Desktop/pols1600/labs/”</p>
+</blockquote>
+<p>Depending on where your lab is saved</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># In the Top Panel of RStudio Click</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Session &gt; Set Working Directory &gt; Source File Location</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Uncomment to Check Where Your File is Saved </span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># getwd()</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If <code>getwd()</code> says something like ‘~/Downloads/’ click: “File &gt; Save As” and <strong>save this lab</strong> in your <strong>course folder</strong>. Then <strong>close</strong> the version <code>09-lab.qmd</code> that was opened from your Downloads folder and <strong>open</strong> the version of <code>09-lab.qmd</code> that now exists in your course folder.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="download-and-load-the-nes-data-into-r" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Download and load the NES data into R</h1>
+<p>Please click <a href="https://electionstudies.org/data-center/2024-pilot-study/">here</a> to go to the download page for the National Election Studies 2024 Pilot Study</p>
+<ul>
+<li>Click the <strong>Log-in Button</strong></li>
+</ul>
+<p><img src="images/09-nes1.png" class="img-fluid" style="width:50.0%"></p>
+<ul>
+<li>Create an account with the NES</li>
+</ul>
+<p><img src="images/09-nes2.png" class="img-fluid" style="width:30.0%"></p>
+<ul>
+<li>Right click (Ctrl-click) on the DTA button. This will allow you to select <code>Save Link As...</code> Which should in turn allow you to chose where the file is saved. Save it in the <strong>same folder as 09-lab.qmd</strong></li>
+</ul>
+<p><img src="images/09-nes3.png" class="img-fluid" style="width:50.0%"> <img src="images/09-nes4.png" class="img-fluid" style="width:50.0%"></p>
+<ul>
+<li>Unzip <code>anes_pilot_2024_dta_20240319.zip</code>.
+<ul>
+<li>On a Mac this creates a new folder called <code>anes_pilot_2024_dta_20240319</code> in your course folder which contains the following files:</li>
+<li><code>anes_pilot_2024_dta_20240319.dta</code> the data</li>
+<li><code>anes_pilot_2024_userguidecodebook_20240319.pdf</code> the codebook for the data</li>
+<li>On a PC i think i it asks you where you want to unzip the files. Please unzip them directly into your course folder.</li>
+</ul></li>
+</ul>
+<p><img src="images/09-nes5.png" class="img-fluid" style="width:50.0%"></p>
+<ul>
+<li>Load the data using some version of the following commands:</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># # IF .dta file is in subfolder where lab is:</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># df &lt;- read_dta("~/anes_pilot_2024_dta_20240319/anes_pilot_2024_20240319.dta")</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># # IF .dta file is in SAME folder as lab:</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co"># df &lt;- read_dta("anes_pilot_2024_20240319.dta")</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co"># # IF nothing works, fear not, you can load the data from the web as a backup</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co"># df &lt;- read_dta(url("https://pols1600.paultesta.org/files/data/anes_pilot_2024_20240319.dta"))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="explore-the-codebook" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Explore the codebook</h1>
+<p>Please open the file <code>anes_pilot_2024_userguidecodebook_20240319.pdf</code>.</p>
+<p>It should be in same folder as the data.</p>
+<p>Use Control+F for keywords to quickly navigate through the codebook looking for questions and variables that interest you.</p>
+<section id="identify-a-potential-outcome-of-interest" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="identify-a-potential-outcome-of-interest"><span class="header-section-number">3.1</span> Identify a potential outcome of interest</h2>
+<p>In this and next week’s lab, I’ll be exploring factors that explain variation in the following outcome variables:</p>
+<p>A measure</p>
+<ul>
+<li><p><code>vchoice_rematch</code> “Vote Trump or Biden in 2024”</p>
+<ul>
+<li><code>1</code> = Donald Trump</li>
+<li><code>2</code> = Joe Biden</li>
+<li><code>-7</code> = No Answer</li>
+<li><code>-1</code> = Inapplicable</li>
+</ul></li>
+</ul>
+<p>And five measures of political participation in the 2020 campaign</p>
+<ul>
+<li><p><code>mobil_talk</code> “2020 campaign - Talk to others about candidates”</p></li>
+<li><p><code>mobil_online</code> “2020 campaign - Participate in online rallies”</p></li>
+<li><p><code>mobil_rally</code> “2020 campaign - Attend in person rallies”</p></li>
+<li><p><code>mobil_button</code> “2020 campaign - Wear a button or campaign sticker”</p></li>
+<li><p><code>mobil_work</code> “2020 campaign - Any other work to support candidates”</p>
+<ul>
+<li><code>1</code> = Yes</li>
+<li><code>2</code> = No</li>
+<li><code>-1</code> = Inapplicable</li>
+</ul></li>
+</ul>
+<p><strong>Please find a variable that describes some outcome of interest to you and fill in the following</strong></p>
+<ul>
+<li><code>outcome_variable_name</code> Question topic
+<ul>
+<li>variable values</li>
+</ul></li>
+</ul>
+</section>
+<section id="identify-at-least-one-variable-that-might-predict-variation-in-your-outcome." class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="identify-at-least-one-variable-that-might-predict-variation-in-your-outcome."><span class="header-section-number">3.2</span> Identify at least one variable that might predict variation in your outcome.</h2>
+<p>From a quick skim, I’ve selected the following potential predictors, which I will recode below:</p>
+<ul>
+<li><code>age</code> Age</li>
+<li><code>educ</code> Education</li>
+<li><code>faminc_new</code> Income</li>
+<li><code>race</code> Race</li>
+<li><code>pid7</code> 7 point party identification</li>
+</ul>
+<p><strong>Please find at least one more predictor which you think might explain variation in your outcome of interest and fill in the following</strong></p>
+<ul>
+<li><code>predictor_variable_name</code> Question topic
+<ul>
+<li>variable values</li>
+</ul></li>
+</ul>
+<p>For example, perhaps you’re interested in differences by gender, or ideology, or social media use. See if you can find variables that measure these concepts.</p>
+<p>You only needed to identify one, but you can choose to explore more if you want. Don’t choose 50, unless you really like recoding data.</p>
+</section>
+</section>
+<section id="get-a-high-level-overview-of-the-data" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Get a high level overview of the data</h1>
+<p>In this section, we’ll get practice quickly looking at variables <strong>to see what, if anything needs to be recoded</strong>.</p>
+<p>I had you download the <code>.dta</code> instead of the <code>.csv</code> version of the data, because the <code>.dta</code> includes value labels for the data, which makes it easier to understand what a specific number corresponds to substantively.</p>
+<section id="examine-the-distributions-and-values-of-your-outcome-variable" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="examine-the-distributions-and-values-of-your-outcome-variable"><span class="header-section-number">4.1</span> Examine the distributions and values of your outcome variable</h2>
+<p>Please uncomment and run the code below</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># # Vote Choice</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co"># get_variable_labels(df$vchoice_rematch)</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co"># get_value_labels(df$vchoice_rematch)</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># table(df$vchoice_rematch,useNA = "ifany")</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co"># # Acts of Participation</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co"># # All variables start with mobil_ prefix</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co"># df %&gt;% select(starts_with("mobil")) %&gt;% names()</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="co"># # Political Talk</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="co"># get_variable_labels(df$mobil_talk)</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="co"># get_value_labels(df$mobil_talk)</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="co"># table(df$mobil_talk,useNA = "ifany")</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="co"># # Save the names all variables related to acts of participation in 2020</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="co"># the_participation_vars &lt;- df %&gt;% select(starts_with("mobil")) %&gt;% names()</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="co"># # Only keep the variables that measure participation and not survey timing</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="co"># the_participation_vars &lt;- the_participation_vars[1:5]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>From quickly looking at my outcome variables, I know that I will want to:</p>
+<ul>
+<li>Recode <code>vchoice_rematch</code> to <code>dv_vote_trump2024</code> which
+<ul>
+<li>equals 1 if <code>vchoice_rematch == 1</code></li>
+<li>equals 0 if <code>vchoice_rematch == 2</code></li>
+<li>equals <code>NA</code> if <code>vchoice_rematch &lt; 0</code></li>
+</ul></li>
+<li>Recode variables that start with <code>mobil_*</code> to variables that start with <code>polpart_*</code> and:
+<ul>
+<li>equal 1 if <code>mobil_* == 1</code></li>
+<li>equal 0 if <code>mobil_* == 2</code></li>
+<li>equals <code>NA</code> if <code>mobil_*</code> &lt; 0`</li>
+</ul></li>
+<li>Create <code>dv_participation*</code> which is the sum of respondents’ five responses to the recoded <code>polpart_*</code> variables</li>
+</ul>
+</section>
+<section id="describe-any-recoding-of-your-outcome-variable" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="describe-any-recoding-of-your-outcome-variable"><span class="header-section-number">4.2</span> Describe any recoding of your outcome variable</h2>
+<p>In the code chunk below, please repeat this process for the outcome variable you selected in the previous section:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get a HLO of your outcome variable</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>Recode <code>YOUR OUTCOME VARIABLE HERE</code> to <code>NAME FOR RECODED VARIABLE</code>
+<ul>
+<li>Describe what values need to be recoded in the new variable</li>
+</ul></li>
+</ul>
+</section>
+<section id="examine-the-distributions-and-values-of-your-predictor-variable" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="examine-the-distributions-and-values-of-your-predictor-variable"><span class="header-section-number">4.3</span> Examine the distributions and values of your predictor variable</h2>
+<p>Now I’ll repeat this process for my potential predictor variables.</p>
+<p>Please uncomment and run the code below</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># # Age</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co"># get_variable_labels(df$age)</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co"># get_value_labels(df$age)</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># summary(df$age)</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co"># # Education</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co"># get_variable_labels(df$educ)</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="co"># get_value_labels(df$educ)</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="co"># table(df$educ)</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="co"># summary(df$educ)</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="co"># # Income</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="co"># get_variable_labels(df$faminc_new)</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="co"># get_value_labels(df$faminc_new)</span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="co"># table(df$faminc_new)</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="co"># summary(df$faminc_new)</span></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a><span class="co"># # Race</span></span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a><span class="co"># get_variable_labels(df$race)</span></span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a><span class="co"># get_value_labels(df$race)</span></span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a><span class="co"># summary(df$race)</span></span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a><span class="co"># table(df$race,useNA = "ifany")</span></span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a><span class="co"># # Partisanship</span></span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a><span class="co"># get_variable_labels(df$pid7)</span></span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a><span class="co"># get_value_labels(df$pid7)</span></span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a><span class="co"># summary(df$pid7)</span></span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a><span class="co"># table(df$pid7)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>After taking a quick look at each variable, I know that I’ll want to do the following recoding:</p>
+<ul>
+<li><code>age</code> to <code>age</code><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>
+<ul>
+<li>recode <code>-9</code>s to <code>NA</code></li>
+</ul></li>
+<li><code>educ</code> no recoding needed
+<ul>
+<li>create indicator <code>has_college_degree</code> which equals <code>1</code> is <code>educ &gt; 4</code> and <code>0</code> otherwise</li>
+</ul></li>
+<li><code>faminc_new</code> to <code>income</code>
+<ul>
+<li>recode <code>-7</code> and <code>97</code> to <code>NA</code></li>
+</ul></li>
+<li><code>race</code> to <code>race_5cat</code>
+<ul>
+<li><code>race == 1 ~ "White"</code></li>
+<li><code>race == 2 ~ "Black"</code></li>
+<li><code>race == 3 ~ "Hispanic"</code></li>
+<li><code>race == 4 ~ "Asian"</code></li>
+<li><code>T ~ "Other"</code> (Collapse other racial categories)</li>
+</ul></li>
+<li><code>race</code> to <code>is_*</code> binary indicators:
+<ul>
+<li><code>is_white = 1</code> if <code>race==1</code>, <code>0</code> otherwise</li>
+</ul></li>
+<li><code>pid7</code> to <code>partyid</code>
+<ul>
+<li>recode <code>pid7 == 8</code> to <code>4</code> (Classify <code>Don't Knows</code> as Independents)</li>
+</ul></li>
+<li><code>pid7</code> to <code>is_*</code>: binary indicators:
+<ul>
+<li><code>is_dem = 1</code> if <code>partyid &lt; 4</code>, 0 otherwise</li>
+<li><code>is_rep = 1</code> if <code>partyid &gt; 4</code>, 0 otherwise</li>
+<li><code>is_ind = 1</code> if <code>partyid == 4</code>, 0 otherwise</li>
+</ul></li>
+</ul>
+</section>
+<section id="describe-any-recoding-of-your-predictors" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="describe-any-recoding-of-your-predictors"><span class="header-section-number">4.4</span> Describe any recoding of your predictor(s)</h2>
+<p>In the code chunk below, please repeat this process for the additional predictor(s) you selected in the previous section:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get a HLO of your outcome variable</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>Recode <code>YOUR OUTCOME VARIABLE HERE</code> to <code>NAME FOR RECODED VARIABLE</code>
+<ul>
+<li>Describe what values need to be recoded in the new variable</li>
+</ul></li>
+</ul>
+</section>
+</section>
+<section id="recode-the-data" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Recode the data</h1>
+<p>Now we’ve got a plan of action for how we need to recode the data.</p>
+<section id="recode-the-outcome-variables" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="recode-the-outcome-variables"><span class="header-section-number">5.1</span> Recode the outcome variables</h2>
+<p>Please uncomment and run the following code chunk:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># df %&gt;%</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co">#   # Recode 2024 Vote Choice</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co">#   mutate(</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co">#     dv_vote_trump2024 = case_when(</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co">#       vchoice_rematch == 1 ~ 1,</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="co">#       vchoice_rematch == 2 ~ 0,</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co">#       T ~ NA</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="co">#     )</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="co">#   ) %&gt;% </span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="co">#   # Recode Individual Acts of Participation</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="co">#   mutate(across(all_of(the_participation_vars), </span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="co">#                 \(x) case_when(</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="co">#                   x == 1 ~ 1,</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="co">#                   x == 2 ~ 0,</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="co">#                   T ~ NA</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a><span class="co">#                 ),</span></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a><span class="co">#                 .names = "polpart_{.col}"</span></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a><span class="co">#                 )</span></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a><span class="co">#                 </span></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a><span class="co">#                 ) %&gt;% </span></span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a><span class="co">#   # Create Additive Measure of Participation</span></span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a><span class="co">#   mutate(</span></span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a><span class="co">#     dv_participation = rowSums(</span></span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a><span class="co">#       select(.,starts_with("polpart")),</span></span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a><span class="co">#       na.rm = T)</span></span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a><span class="co">#     </span></span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a><span class="co">#   ) -&gt; df</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>Please recode your outcome of interest as needed</strong></p>
+<p>Remember to save the output of your recode back into the dataframe <code>df</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Recode your outcome of interest</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="check-the-recoding-of-your-outcome" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="check-the-recoding-of-your-outcome"><span class="header-section-number">5.2</span> Check the recoding of your outcome</h2>
+<p>It’s a good habit to compare your recoded variables to their original values, to make sure your code did what you thought it did.</p>
+<p>Please uncomment and run the following:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check recodes</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co"># table(</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co">#   recode = df$dv_vote_trump2024,</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co">#   original = df$vchoice_rematch, </span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="co">#   useNA = "ifany"</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="co">#   )</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="co"># table(</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="co">#   recode = df$polpart_mobil_button,</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="co">#   original = df$mobil_button, </span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="co">#   useNA = "ifany"</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a><span class="co">#   )</span></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a><span class="co"># table(</span></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a><span class="co">#   total = df$dv_participation,</span></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a><span class="co">#   item = df$polpart_mobil_button,</span></span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a><span class="co">#   useNA = "ifany"</span></span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a><span class="co">#   )</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>So everything looks in order. I could have probably checked the <code>dv_participation</code> variable against all of its constituent items, but based off comparing it to <code>polpart_mobil_button</code> everything looks in order since: - there are no cases where <code>polpart_mobil_button</code> is 1 but <code>dv_participation</code> is 0 - there are no cases where <code>dv_participation</code> is at it’s max but <code>polpart_mobil_button</code> is 0. - <code>dv_participation</code> has the correct theoretical range from 0 acts to 5 acts.</p>
+<p>Now do the same for your outcome variable.</p>
+<p><strong>Please check your recoded outcome against its original values</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check recodes</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="recode-your-predictor-variables" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="recode-your-predictor-variables"><span class="header-section-number">5.3</span> Recode your predictor variables</h2>
+<p>Again, I’ve provide some demonstration code to recode the predictors listed above.</p>
+<p>Please uncomment and run the following</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># df %&gt;% </span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co">#   mutate(</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co">#     # Age</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co">#     age = ifelse(age &lt; 0, NA, age),</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co">#     # Education</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="co">#     education = educ,</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="co">#     educ_f = to_factor(educ), #Convert to Factor for Plotting</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="co">#     is_college_grad = ifelse(educ &gt; 4,1,0),</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="co">#     # Income</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="co">#     income = case_when(</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="co">#       faminc_new &lt; 0 ~ NA,</span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a><span class="co">#       faminc_new &gt; 0 &amp; faminc_new &gt;16 ~ NA,</span></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a><span class="co">#       T ~ faminc_new</span></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a><span class="co">#     ),</span></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a><span class="co">#     # Race</span></span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a><span class="co">#     race_5cat = case_when(</span></span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a><span class="co">#       race &lt; 5 ~ to_factor(race),</span></span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a><span class="co">#       T ~ "Other"</span></span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a><span class="co">#     ) %&gt;% factor(., levels = c("White","Black","Hispanic","Asian","Other")),</span></span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a><span class="co">#     is_white = ifelse(race == 1, 1, 0),</span></span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a><span class="co">#     is_black = ifelse(race == 2, 1, 0),</span></span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a><span class="co">#     is_hispanic = ifelse(race == 3, 1, 0),</span></span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a><span class="co">#     is_asian = ifelse(race == 4, 1, 0),</span></span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a><span class="co">#     is_other = ifelse(race == 5, 1, 0),</span></span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a><span class="co">#     # Partisanship</span></span>
+<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a><span class="co">#     partyid = case_when(</span></span>
+<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a><span class="co">#       pid7 == 8 ~ 4,</span></span>
+<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a><span class="co">#       T ~ pid7</span></span>
+<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a><span class="co">#     ),</span></span>
+<span id="cb12-30"><a href="#cb12-30" aria-hidden="true" tabindex="-1"></a><span class="co">#     is_dem = ifelse(partyid  &lt; 4, 1, 0),</span></span>
+<span id="cb12-31"><a href="#cb12-31" aria-hidden="true" tabindex="-1"></a><span class="co">#     is_rep = ifelse(partyid  &gt; 4, 1, 0),</span></span>
+<span id="cb12-32"><a href="#cb12-32" aria-hidden="true" tabindex="-1"></a><span class="co">#     is_ind = ifelse(partyid  == 4, 1, 0),</span></span>
+<span id="cb12-33"><a href="#cb12-33" aria-hidden="true" tabindex="-1"></a><span class="co">#   ) -&gt; df</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>Please recode your additional predictor(s) as needed</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Recode your additional predictor(s)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>It’s a good habit to check your all your recoding – particularly if you’re doing something like summing over multiple columns – but for this lab, we’ll live dangerously.</p>
+</section>
+</section>
+<section id="describe-the-data" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Describe the Data</h1>
+<p>Now let’s get some practice <strong>summarizing our data</strong>, presenting these summaries as <strong>tables</strong> and <strong>figures</strong>, and interpreting our results</p>
+<section id="create-a-table-of-summary-statistics" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="create-a-table-of-summary-statistics"><span class="header-section-number">6.1</span> Create a table of summary statistics</h2>
+<p>Please uncomment and run the code below which demonstrates how to <strong>produce a nicely formatted table</strong> of summary statistics</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># # Vector of numeric variables to summarize</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co"># the_vars &lt;- c(</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co">#   "dv_vote_trump2024", </span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co">#   "dv_participation",</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="co">#   "age","education","income",</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="co">#   "is_white","is_black","is_hispanic","is_asian","is_other",</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="co">#   "partyid","is_dem","is_rep","is_ind"</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="co"># )</span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a><span class="co"># # Vector of nicely formatted labels for variables</span></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="co"># the_labels &lt;- c(</span></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a><span class="co">#   "Vote for Trump in '24",</span></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a><span class="co">#   "Acts of Participation in `20",</span></span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a><span class="co">#   "Age","Education", "Income",</span></span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a><span class="co">#   "White", "Black","Hispanic","Asian","Other",</span></span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a><span class="co">#   "Party ID", "Democrat","Republican","Independent"</span></span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a><span class="co"># )</span></span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a><span class="co"># df_summary &lt;- df %&gt;% </span></span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a><span class="co">#   select(all_of(the_vars)) %&gt;%</span></span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a><span class="co">#   rename_with(~the_labels) %&gt;% </span></span>
+<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a><span class="co">#   pivot_longer(</span></span>
+<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a><span class="co">#     cols = everything(),</span></span>
+<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a><span class="co">#     names_to = "Variable"</span></span>
+<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a><span class="co">#   ) %&gt;% </span></span>
+<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a><span class="co">#   mutate(</span></span>
+<span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a><span class="co">#     Variable = factor(Variable, levels = the_labels)</span></span>
+<span id="cb14-28"><a href="#cb14-28" aria-hidden="true" tabindex="-1"></a><span class="co">#   ) %&gt;% </span></span>
+<span id="cb14-29"><a href="#cb14-29" aria-hidden="true" tabindex="-1"></a><span class="co">#   group_by(Variable) %&gt;% </span></span>
+<span id="cb14-30"><a href="#cb14-30" aria-hidden="true" tabindex="-1"></a><span class="co">#   summarise(</span></span>
+<span id="cb14-31"><a href="#cb14-31" aria-hidden="true" tabindex="-1"></a><span class="co">#     Min = min(value,na.rm = T),</span></span>
+<span id="cb14-32"><a href="#cb14-32" aria-hidden="true" tabindex="-1"></a><span class="co">#     p25 = quantile(value, prob = .25,na.rm = T),</span></span>
+<span id="cb14-33"><a href="#cb14-33" aria-hidden="true" tabindex="-1"></a><span class="co">#     Median = quantile(value, prob = .5,na.rm = T),</span></span>
+<span id="cb14-34"><a href="#cb14-34" aria-hidden="true" tabindex="-1"></a><span class="co">#     Mean = mean(value, na.rm = T),</span></span>
+<span id="cb14-35"><a href="#cb14-35" aria-hidden="true" tabindex="-1"></a><span class="co">#     p75 = quantile(value, prob = .75,na.rm = T),</span></span>
+<span id="cb14-36"><a href="#cb14-36" aria-hidden="true" tabindex="-1"></a><span class="co">#     Max = max(value,na.rm = T),</span></span>
+<span id="cb14-37"><a href="#cb14-37" aria-hidden="true" tabindex="-1"></a><span class="co">#     `N missing` = sum(is.na(value))</span></span>
+<span id="cb14-38"><a href="#cb14-38" aria-hidden="true" tabindex="-1"></a><span class="co">#   )</span></span>
+<span id="cb14-39"><a href="#cb14-39" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb14-40"><a href="#cb14-40" aria-hidden="true" tabindex="-1"></a><span class="co"># # Look at results</span></span>
+<span id="cb14-41"><a href="#cb14-41" aria-hidden="true" tabindex="-1"></a><span class="co"># df_summary</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We can then format <code>df_summary</code> as table using <code>knitr()</code> and styling options from the <code>kableExtra</code> package:</p>
+</section>
+<section id="modify-the-table-to-include-your-predictors" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="modify-the-table-to-include-your-predictors"><span class="header-section-number">6.2</span> Modify the table to include your predictors</h2>
+<p>Using the two <strong>previous code chunks as a template</strong>, update the code so that the table includes your chosen outcome and predictors.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Copy, paste, and update code from datasummary_me to include your variables</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="interpret-the-results-of-your-table." class="level2" data-number="6.3">
+<h2 data-number="6.3" class="anchored" data-anchor-id="interpret-the-results-of-your-table."><span class="header-section-number">6.3</span> Interpret the results of your table.</h2>
+<p><strong>Please write a few sentences that provide a substantive interpretation of your table of descriptive statistics</strong></p>
+<p>Your reader should come away with an understanding of the characteristics of the respondents to this sample.</p>
+<p>The National Election Study’s 2024 Pilot Study contains responses from 1909 individuals<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>. The typical respondent in the data was just under 50 years old, with some college, with an income in the range of $50k-$59k. Approximately two-thirds of the sample identified as white, with 13 percent of respondents identifying as Black, 13 percent as Hispanic, 2 percent as Asian. Forty-three percent of respondents identified as Democrats, 38 percent as Republicans, and 20 percent as Independents. The respondents were evenly split in who they would vote for 2024, with 50 percent saying they would Vote for Donald Trump, and 50 percent saying Joe Biden. In the 2020 campaign, the average respondent reported engaging in about 1 act of political participation.</p>
+</section>
+<section id="visualize-the-data" class="level2" data-number="6.4">
+<h2 data-number="6.4" class="anchored" data-anchor-id="visualize-the-data"><span class="header-section-number">6.4</span> Visualize the Data</h2>
+<p>Please a choose a variable or variables whose distribution or relationship you think may be substantively interesting to the potential story you want to tell.</p>
+<p>In the code below, I visualize:</p>
+<ul>
+<li>the distribution of age by race using <code>geom_boxplot()</code></li>
+<li>average partisanship by race using <code>stat_summary()</code></li>
+<li>how partisanship changes with age by race using <code>geom_smooth()</code></li>
+</ul>
+<p>And combine these 3 plots into a single figure using two calls to the <code>ggarrange()</code> function from the <code>ggpubr</code> package</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># fig_age_race &lt;- df %&gt;% </span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="co">#   ggplot(aes(race_5cat,age,</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co">#              col = race_5cat))+</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co">#   geom_boxplot()+</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="co">#   labs(</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="co">#     x = "Race",</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="co">#     y = "Age",</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="co">#     col = "Race",</span></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="co">#     title = "Distribution of Age by Race"</span></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="co">#   )+</span></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a><span class="co">#   theme_minimal()</span></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a><span class="co"># fig_pid_race &lt;- df %&gt;% </span></span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a><span class="co">#   ggplot(aes(race_5cat,partyid,</span></span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a><span class="co">#              col = race_5cat))+</span></span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a><span class="co">#   stat_summary(position = position_dodge(width=.5))+</span></span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a><span class="co">#   labs(</span></span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a><span class="co">#     x = "Race",</span></span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a><span class="co">#     y = "Partisanship",</span></span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a><span class="co">#     col = "Race",</span></span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a><span class="co">#     title = "Average Partisanship by Race"</span></span>
+<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a><span class="co">#   )+</span></span>
+<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a><span class="co">#   theme_minimal()</span></span>
+<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a><span class="co"># fig_age_race_pid &lt;- df %&gt;% </span></span>
+<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a><span class="co">#   mutate(</span></span>
+<span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a><span class="co">#     Race = race_5cat</span></span>
+<span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a><span class="co">#   ) %&gt;% </span></span>
+<span id="cb16-29"><a href="#cb16-29" aria-hidden="true" tabindex="-1"></a><span class="co">#   ggplot(aes(age,partyid,</span></span>
+<span id="cb16-30"><a href="#cb16-30" aria-hidden="true" tabindex="-1"></a><span class="co">#              col = race_5cat</span></span>
+<span id="cb16-31"><a href="#cb16-31" aria-hidden="true" tabindex="-1"></a><span class="co">#              ))+</span></span>
+<span id="cb16-32"><a href="#cb16-32" aria-hidden="true" tabindex="-1"></a><span class="co">#   geom_smooth(se = F) +</span></span>
+<span id="cb16-33"><a href="#cb16-33" aria-hidden="true" tabindex="-1"></a><span class="co">#   geom_jitter(size=.5, alpha=.3) +</span></span>
+<span id="cb16-34"><a href="#cb16-34" aria-hidden="true" tabindex="-1"></a><span class="co">#   labs(</span></span>
+<span id="cb16-35"><a href="#cb16-35" aria-hidden="true" tabindex="-1"></a><span class="co">#     x = "age",</span></span>
+<span id="cb16-36"><a href="#cb16-36" aria-hidden="true" tabindex="-1"></a><span class="co">#     y = "Partisanship",</span></span>
+<span id="cb16-37"><a href="#cb16-37" aria-hidden="true" tabindex="-1"></a><span class="co">#     col = "Race",</span></span>
+<span id="cb16-38"><a href="#cb16-38" aria-hidden="true" tabindex="-1"></a><span class="co">#     title = "Distribution of Partisanship by Age and Race"</span></span>
+<span id="cb16-39"><a href="#cb16-39" aria-hidden="true" tabindex="-1"></a><span class="co">#   )+</span></span>
+<span id="cb16-40"><a href="#cb16-40" aria-hidden="true" tabindex="-1"></a><span class="co">#   theme_minimal()</span></span>
+<span id="cb16-41"><a href="#cb16-41" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb16-42"><a href="#cb16-42" aria-hidden="true" tabindex="-1"></a><span class="co"># fig_desc &lt;- ggarrange(</span></span>
+<span id="cb16-43"><a href="#cb16-43" aria-hidden="true" tabindex="-1"></a><span class="co">#   # Top Row, two columns</span></span>
+<span id="cb16-44"><a href="#cb16-44" aria-hidden="true" tabindex="-1"></a><span class="co">#   ggarrange(</span></span>
+<span id="cb16-45"><a href="#cb16-45" aria-hidden="true" tabindex="-1"></a><span class="co">#     fig_age_race, fig_pid_race,</span></span>
+<span id="cb16-46"><a href="#cb16-46" aria-hidden="true" tabindex="-1"></a><span class="co">#     ncol =2,</span></span>
+<span id="cb16-47"><a href="#cb16-47" aria-hidden="true" tabindex="-1"></a><span class="co">#     legend = "none"</span></span>
+<span id="cb16-48"><a href="#cb16-48" aria-hidden="true" tabindex="-1"></a><span class="co">#     ), </span></span>
+<span id="cb16-49"><a href="#cb16-49" aria-hidden="true" tabindex="-1"></a><span class="co">#   # Bottom row, 1 column</span></span>
+<span id="cb16-50"><a href="#cb16-50" aria-hidden="true" tabindex="-1"></a><span class="co">#   fig_age_race_pid, </span></span>
+<span id="cb16-51"><a href="#cb16-51" aria-hidden="true" tabindex="-1"></a><span class="co">#   nrow=2,</span></span>
+<span id="cb16-52"><a href="#cb16-52" aria-hidden="true" tabindex="-1"></a><span class="co">#   common.legend = T,</span></span>
+<span id="cb16-53"><a href="#cb16-53" aria-hidden="true" tabindex="-1"></a><span class="co">#   legend = "bottom",</span></span>
+<span id="cb16-54"><a href="#cb16-54" aria-hidden="true" tabindex="-1"></a><span class="co">#   heights = c(1,1.5)</span></span>
+<span id="cb16-55"><a href="#cb16-55" aria-hidden="true" tabindex="-1"></a><span class="co">#   )</span></span>
+<span id="cb16-56"><a href="#cb16-56" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb16-57"><a href="#cb16-57" aria-hidden="true" tabindex="-1"></a><span class="co"># fig_desc</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>From the figure, we see that whites in sample have the highest median age (55 years) followed by Blacks (46 years). Hispanic and Asian respondents have the youngest median age of (40 years). Whites are also tend to lean more Republican in their partisanship than other racial minority groups. This is particularly true for older whites in the sample. Interestingly, average partisanship stays roughly constant with age for Asians and Hispanics, but older Black respondents are more likely to identify as Democrats than younger Blacks, whose partisan identification is more independent.</p>
+<p><strong>Please produce your own figure and provide a similar interpretation of what it conveys.</strong></p>
+</section>
+</section>
+<section id="formulate-a-research-question" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> Formulate a research question</h1>
+<p>Please take a moment, formulate a research question you might ask of your data for next week’s lab</p>
+<p>Here’s an example of some questions I might ask of these data</p>
+<p><strong>Research Question: Age, Race, and Support For Trump</strong></p>
+<p>Broadly, I’m interested in how support for Trump in the 2024 election varies with age and race. On average, I expect that older voters will be more supportive of Trump, but suspect that this trend varies by race. I expect it will be particularly true among White voters, but less so among People of color. Finally, I wonder whether these specific relationships hold, once we control for variations in partisan identification which we know varies both by age and race.</p>
+<p><strong>Research Question: Education, Income, and Political Participation</strong></p>
+<p>What’s the relationship between income, education, and political?<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> Past research suggests both are associated with higher rates of political participation. But I wish to know whether the effects of one varies conditional on the levels of the other. Are income education complements, amplifying each others’ association with participation? Or are they possibly substitutes, such that increases in education for the low income might reduce gaps in rates of participation compared to higher income individuals?</p>
+</section>
+<section id="save-your-data" class="level1" data-number="8">
+<h1 data-number="8"><span class="header-section-number">8</span> Save your data</h1>
+<p>Finally, save your data so you can load all the work you’ve done today and hit the ground running, next lab.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># save(df, file = "nes24.rda")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="take-the-class-survey" class="level1 unnumbered">
+<h1 class="unnumbered">Take the Class Survey</h1>
+<p>Please take a few moments to complete the <a href="https://brown.co1.qualtrics.com/jfe/form/SV_5itnKQBX4cQGCsm" target="_blank">class survey</a> for this week.){target=“_blank”} for this week.</p>
+
+
+</section>
+
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>In general, I try not to recode the original variables, but instead create new columns, with different names. But, like this footnote, it seems overly verbose to create something like <code>age_recoded</code>, so I’ll break my general rule<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>See note below<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>In general, I’m often ambivalent on this kind of “What’s the effect of x on y” phrasing. I think it’s fine for framing, but the real question I’m interested in is something about the interaction and relative effects of income and education on participation, hence the subsequent clarification of research question.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
