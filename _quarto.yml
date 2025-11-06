@@ -5,6 +5,9 @@ project:
   #   - "!*.lab.qmd"
   #   # - "!/_archive"
 
+execute:
+  freeze: auto
+
 website:
   title: "POLS 1600"
   navbar:
@@ -97,5 +100,3 @@ resources:
   - "*.html"
   
 bibliography: files/paperpile.bib
-execute:
-  freeze: auto
