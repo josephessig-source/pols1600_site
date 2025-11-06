@@ -1,0 +1,149 @@
+[
+  {
+    "objectID": "syllabus.html",
+    "href": "syllabus.html",
+    "title": "Syllabus",
+    "section": "",
+    "text": "This class is an introduction to applied statistics as practiced in political science. It is computing intensive, and, as such, will enable students to execute basic quantitative analyses of social science data using the linear model with statistical inference arising from re-sampling and permutation based techniques as applied in the R statistical computing language with RStudio. By the end of the course, a successful student will be able to find social science data online, download it, analyze it, and write about how the analyses bear on focused social science or policy questions.\n\n\n\nMore than anything I assume a willingness to engage with mathematics, data analysis, computer programming, and the practice of social science thinking and writing. I also assume you’ve taken at least one class in algebra at the level taught in most high schools in the United States and have used a personal computer to read and type email and other documents and have some experience with the Internet.\nI also assume that you will read the syllabus and that you keep up to date on changes in the syllabus which will be announced in class. You should not expect a response to emails that ask a question already answered in the syllabus.\nThis is an experimental class so you should expect that the syllabus will change throughout the term. Make sure you have the syllabus with the latest date stamp. I will announce syllabus changes via the emails sent from Canvas.\n\n\n\nNeither the University nor I tolerate cheating or plagiarism. The Brown Writing Center defines plagiarism as ``appropriating another person’s ideas or words (spoken or written) without attributing those word or ideas to their true source.’’ The consequences for plagiarism are often severe, and can include suspension or expulsion. This course will follow the guidelines in the Academic Code for determining what is and isn’t plagiarism:\n\nIn preparing assignments a student often needs or is required to employ outside sources of information or opinion. All such sources should be listed in the bibliography. Citations and footnote references are required for all specific facts that are not common knowledge and about which there is not general agreement. New discoveries or debatable opinions must be credited to the source, with specific references to edition and page even when the student restates the matter in his or her own words. Word-for-word inclusion of any part of someone else’s written or oral sentence, even if only a phrase or sentence, requires citation in quotation marks and use of the appropriate conventions for attribution. Citations should normally include author, title, edition, and page. (Quotations longer than one sentence are generally indented from the text of the essay, without quotation marks, and identified by author, title, edition, and page.) Paraphrasing or summarizing the contents of another’s work is not dishonest if the source or sources are clearly identified (author, title, edition, and page), but such paraphrasing does not constitute independent work and may be rejected by the instructor. Students who have questions about accurate and proper citation methods are expected to consult reference guides as well as course instructors.\n\nWe will discuss specific information about your written work in class in more detail, but if you are unsure of how to properly cite material, please ask for clarification. If you are having difficulty with writing or would like more information or assistance, consult the Writing Center, the Brown library and/or the Academic Code for more information.\n\n\n\nAll students and the instructor must be respectful of others in the classroom. If you ever feel that the classroom environment is discouraging your participation or problematic in any way, please contact me.\n\n\n\nBrown University is committed to full inclusion of all students. Please inform me if you have a disability or other condition that might require accommodations or modification of any of these course procedures. You may speak with me after class or during office hours. For more information contact Student and Employee Accessibility Services at 401-863-9588 or SEAS@brown.edu.\n\n\n\nAny student with a documented disability is welcome to contact me as early in the semester as possible so that we may arrange reasonable accommodations. As part of this process, please be in touch with Student Accessibility Services by calling 401-863-9588 or online\n\n\n\nThis course is designed to support an inclusive learning environment where diverse perspectives are recognized, respected and seen as a source of strength. It is my intent to provide materials and activities that are respectful of various levels of diversity: mathematical background, previous computing skills, gender, sexuality, disability, age, socioeconomic status, ethnicity, race, and culture. Toward that goal:\n\nIf you have a name and/or set of pronouns that differ from those that appear in your official Brown records, please let me know!\nIf there are things going on inside or outside of class that are affecting your performance in class, please don’t hesitate to talk to me, provide anonymous feedback through our course survey, or contact one of Brown’s Academic Deans."
+  },
+  {
+    "objectID": "syllabus.html#description",
+    "href": "syllabus.html#description",
+    "title": "Syllabus",
+    "section": "",
+    "text": "This class is an introduction to applied statistics as practiced in political science. It is computing intensive, and, as such, will enable students to execute basic quantitative analyses of social science data using the linear model with statistical inference arising from re-sampling and permutation based techniques as applied in the R statistical computing language with RStudio. By the end of the course, a successful student will be able to find social science data online, download it, analyze it, and write about how the analyses bear on focused social science or policy questions."
+  },
+  {
+    "objectID": "syllabus.html#expectations",
+    "href": "syllabus.html#expectations",
+    "title": "Syllabus",
+    "section": "",
+    "text": "More than anything I assume a willingness to engage with mathematics, data analysis, computer programming, and the practice of social science thinking and writing. I also assume you’ve taken at least one class in algebra at the level taught in most high schools in the United States and have used a personal computer to read and type email and other documents and have some experience with the Internet.\nI also assume that you will read the syllabus and that you keep up to date on changes in the syllabus which will be announced in class. You should not expect a response to emails that ask a question already answered in the syllabus.\nThis is an experimental class so you should expect that the syllabus will change throughout the term. Make sure you have the syllabus with the latest date stamp. I will announce syllabus changes via the emails sent from Canvas."
+  },
+  {
+    "objectID": "syllabus.html#academic-integrity",
+    "href": "syllabus.html#academic-integrity",
+    "title": "Syllabus",
+    "section": "",
+    "text": "Neither the University nor I tolerate cheating or plagiarism. The Brown Writing Center defines plagiarism as ``appropriating another person’s ideas or words (spoken or written) without attributing those word or ideas to their true source.’’ The consequences for plagiarism are often severe, and can include suspension or expulsion. This course will follow the guidelines in the Academic Code for determining what is and isn’t plagiarism:\n\nIn preparing assignments a student often needs or is required to employ outside sources of information or opinion. All such sources should be listed in the bibliography. Citations and footnote references are required for all specific facts that are not common knowledge and about which there is not general agreement. New discoveries or debatable opinions must be credited to the source, with specific references to edition and page even when the student restates the matter in his or her own words. Word-for-word inclusion of any part of someone else’s written or oral sentence, even if only a phrase or sentence, requires citation in quotation marks and use of the appropriate conventions for attribution. Citations should normally include author, title, edition, and page. (Quotations longer than one sentence are generally indented from the text of the essay, without quotation marks, and identified by author, title, edition, and page.) Paraphrasing or summarizing the contents of another’s work is not dishonest if the source or sources are clearly identified (author, title, edition, and page), but such paraphrasing does not constitute independent work and may be rejected by the instructor. Students who have questions about accurate and proper citation methods are expected to consult reference guides as well as course instructors.\n\nWe will discuss specific information about your written work in class in more detail, but if you are unsure of how to properly cite material, please ask for clarification. If you are having difficulty with writing or would like more information or assistance, consult the Writing Center, the Brown library and/or the Academic Code for more information."
+  },
+  {
+    "objectID": "syllabus.html#community-standards",
+    "href": "syllabus.html#community-standards",
+    "title": "Syllabus",
+    "section": "",
+    "text": "All students and the instructor must be respectful of others in the classroom. If you ever feel that the classroom environment is discouraging your participation or problematic in any way, please contact me."
+  },
+  {
+    "objectID": "syllabus.html#accessibility",
+    "href": "syllabus.html#accessibility",
+    "title": "Syllabus",
+    "section": "",
+    "text": "Brown University is committed to full inclusion of all students. Please inform me if you have a disability or other condition that might require accommodations or modification of any of these course procedures. You may speak with me after class or during office hours. For more information contact Student and Employee Accessibility Services at 401-863-9588 or SEAS@brown.edu."
+  },
+  {
+    "objectID": "syllabus.html#academic-accommodations",
+    "href": "syllabus.html#academic-accommodations",
+    "title": "Syllabus",
+    "section": "",
+    "text": "Any student with a documented disability is welcome to contact me as early in the semester as possible so that we may arrange reasonable accommodations. As part of this process, please be in touch with Student Accessibility Services by calling 401-863-9588 or online"
+  },
+  {
+    "objectID": "syllabus.html#diversity-and-inclusion",
+    "href": "syllabus.html#diversity-and-inclusion",
+    "title": "Syllabus",
+    "section": "",
+    "text": "This course is designed to support an inclusive learning environment where diverse perspectives are recognized, respected and seen as a source of strength. It is my intent to provide materials and activities that are respectful of various levels of diversity: mathematical background, previous computing skills, gender, sexuality, disability, age, socioeconomic status, ethnicity, race, and culture. Toward that goal:\n\nIf you have a name and/or set of pronouns that differ from those that appear in your official Brown records, please let me know!\nIf there are things going on inside or outside of class that are affecting your performance in class, please don’t hesitate to talk to me, provide anonymous feedback through our course survey, or contact one of Brown’s Academic Deans."
+  },
+  {
+    "objectID": "syllabus.html#requirements",
+    "href": "syllabus.html#requirements",
+    "title": "Syllabus",
+    "section": "Requirements",
+    "text": "Requirements\nTo accomplish this metamorphosis, we’ll need the following:\n\nSome math\nSome programming and computing skills\nSome general life skills"
+  },
+  {
+    "objectID": "syllabus.html#math",
+    "href": "syllabus.html#math",
+    "title": "Syllabus",
+    "section": "Math",
+    "text": "Math\nYou either already know, or will learn, all the math you need to take this course.1 We’ll go over some key theorems of probability and statistics in class, emphasizing conceptual understanding (often illustrated via simulation) over formal proofs.2. Along the way, we’ll need some calculus and linear algebra to make our lives easier, and so we’ll briefly review this material together in class."
+  },
+  {
+    "objectID": "syllabus.html#computing",
+    "href": "syllabus.html#computing",
+    "title": "Syllabus",
+    "section": "Computing",
+    "text": "Computing\nDoing quantitative, empirical social science research requires working with data. Today, working with data requires a computer and statistical software. I assume that you have, or will acquire, a laptop that you will bring to class. In terms of software, there are many possible options. In this class,R.3.\nAll the slides, notes, and assignments in this class are produced using R Markdown, a free, open-source tool for creating reproducible research. It’s a short but steep learning curve, the benefits of which (pretty documents, nicely formatted tables and figures, easy integration with citation managers) far outweigh the costs (finicky syntax)"
+  },
+  {
+    "objectID": "syllabus.html#general",
+    "href": "syllabus.html#general",
+    "title": "Syllabus",
+    "section": "General",
+    "text": "General\nLike any course, success in this class requires preparation, participation and perseverance. In terms of preparation, I expect that you will have done the readings and submitted your assignments on time (more on that below). In short, you’ll get out of this class what you put in. In terms of participation, I expect that you will come to class eager to learn and engage with that week’s topics. If you have a question, ask it. If you’re getting an error, share it. In some ways, your job is to make errors. To paraphrase Joyce: people of genius make no mistakes. Our errors are volitional and portals of discovery. While this experience can be challenging and frustrating, it is also incredibly rewarding. I fully expect you persevere through the problems and difficulties that inevitably arise in this course, and will do everything I can to help in this process."
+  },
+  {
+    "objectID": "syllabus.html#class",
+    "href": "syllabus.html#class",
+    "title": "Syllabus",
+    "section": "Class",
+    "text": "Class\nThis course meets two times a week for 80 minutes on Tuesdays and Thursdays. Tuesday’s class will be devoted to lecture, demonstration and review. Recorded versions of these lectures will be provided on Canvas after class. Thursday’s class will focus on applications of these concepts through brief labs where you’ll work with real data from a variety of sources. I assume that you will come to class having done each week’s assigned readings and reviewed material from the previous week’s lectures and labs. Slides and labs are available on Canvas and https://pols1600.paultesta.org"
+  },
+  {
+    "objectID": "syllabus.html#attendance",
+    "href": "syllabus.html#attendance",
+    "title": "Syllabus",
+    "section": "Attendance",
+    "text": "Attendance\nYou may miss two classes without it having any effect on the attendance portion of your grade. After two absences, each additional absence (without a written note from the University) will reduce your final grade by 1 percent."
+  },
+  {
+    "objectID": "syllabus.html#readings",
+    "href": "syllabus.html#readings",
+    "title": "Syllabus",
+    "section": "Readings",
+    "text": "Readings\nImai (2022) required textbooks for the course (Estimated cost: \\(\\sim\\)$38.50 for the ebook, $55.00 for the paperback):\n\nImai, Kosuke. 2022. Quantitative Social Science An Introduction in Tidyverse. Princeton University Press.\n\nMost chapters are spread over multiple weeks. You should read this text with your laptop and R Studio open. Execute the code in the main text and ideally try to complete the assignments and exercises at the end of the chapter.4\nAdditional readings will be listed below and available to download on the course website and Canvas."
+  },
+  {
+    "objectID": "syllabus.html#labs",
+    "href": "syllabus.html#labs",
+    "title": "Syllabus",
+    "section": "Labs",
+    "text": "Labs\nThe bulk of the work and learning you’ll do in the course comes in the form of weekly labs in which you’ll explore a given data set or paper using R. You’ll be given an R Markdown document that will guide you through a set of exercises to teach concepts covered in the lectures and reading. You’ll code in R and summaries of your findings in R Markdown. You will compile your document to produce an html document which you will submit on Canvas by the end of each class.\nAll work in this class MUST BE SUBMITTED ONLINE VIA CANVAS.\nYou will work in groups on these labs. One member of your group will submit a lab. One question from the lab will be randomly selected for grading."
+  },
+  {
+    "objectID": "syllabus.html#tutorials",
+    "href": "syllabus.html#tutorials",
+    "title": "Syllabus",
+    "section": "Tutorials",
+    "text": "Tutorials\nIn addition to weekly labs, you will also work through weekly tutorials made available to you through the `qsslearnr’ package. These tutorials provide you with an opportunity to practice your programming and review concepts from the text and lecture. After completing each tutorial, you will download your progress report and upload this file to Canvas by midnight on Friday each week a tutorial is assigned. If you upload a report by Friday, you receive a grade of 100 % on that Tutorial. If you upload a report after Friday, you receive a grade of 50 %. If you do not upload a report, you receive a grade of 0 %. There are 11 total tutorials for the course. Your lowest grade on the Tutorials will be dropped.\nThese Tutorials are for your personal benefit. You may collaborate with peers, but you must submit your own file."
+  },
+  {
+    "objectID": "syllabus.html#assignments",
+    "href": "syllabus.html#assignments",
+    "title": "Syllabus",
+    "section": "Assignments",
+    "text": "Assignments\nIn addition to weekly labs, you will complete periodic group assignments developing an original research presentation applying skills you have learned in this class to a topic of your choosing. All assignments are due the Friday after the class with which they are associated.\nThe timeline of assignments for your final paper is as follows:\n\nWeek 4: Research Topics\nWeek 6: Identifying Datasets\nWeek 8: Data Explorations\nWeek 11: Draft of Research Presentation\nWeek 12: Research Presentations\nWeek 13: Final Paper\n\nAssignments must be submitted on time to Canvas. No late work will be accepted without prior approval of the instructor or a note from the University."
+  },
+  {
+    "objectID": "syllabus.html#grades",
+    "href": "syllabus.html#grades",
+    "title": "Syllabus",
+    "section": "Grades",
+    "text": "Grades\nYour final grade for this course will be calculated as follows:\n\n5 % Class attendance\n10 % Class involvement and participation\n10 % Tutorials\n30 % Labs\n20 % Assignments not including the final Paper\n25 % Final Project\n\nLabs, assignments excluding the final presentation, will be graded graded out of 100 roughly on a ✓ + (100, completed on time, acceptable), ✓ (85, completed on time, passable), ✓ - (0 not submitted on time, unacceptable). The lowest two lab grades will be dropped from your final lab grade. Tutorials are graded on pass (submitted on time = 100 % ) - fail (not submitted =0) based submitting your progress report from the tutorial by Friday each week. If you submit a Tutorial after the week it’s do, you will receive partial credit (50 %). Your final projects will be graded on 100-point scales with rubrics provided beforehand.\nIncomplete Work Assignments not turned in will be counted as zero in the calculation of the final grade.\nComputers in class Please bring your laptops if you have them. We will install R and RStudio together. If you do not own a laptop, you can still work in a group of other people who have laptops and will be able to complete the in-class worksheets without a problem. In fact, it is ideal if each group of 2-4 people works with one laptop and then shares the work among themselves. Of course, feel free to work on your own outside of class."
+  },
+  {
+    "objectID": "syllabus.html#time",
+    "href": "syllabus.html#time",
+    "title": "Syllabus",
+    "section": "Time",
+    "text": "Time\nThis course meets 27 times over 13 weeks in the semester. Each class is 80 minutes long so you should expect to spend approximately 36 hours total in class; approximately 4 hours per week reading the textbook and reviewing material (42 hours total); approximately 22 hours on tutorials each week, approximately 30 hours on assignments for the final paper; approximately 50 hours researching, writing, and revising your final presentation; and at least .5 hours meeting with me in person to discuss your work (Estimated Total Time: 180.5 hours)"
+  },
+  {
+    "objectID": "syllabus.html#footnotes",
+    "href": "syllabus.html#footnotes",
+    "title": "Syllabus",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nThis is not the same as all the math you need to know be a successful, methodologically sophisticated political scientist. But it’s a start, and one that will hopefully help you figure out what additional training you’ll need.↩︎\nWe’ll do the proofs as well, but your focus should be on making sure you understand concepts and implications rather than specific derivations↩︎\nAvailable for free at https://cran.r-project.org/. Python is also increasingly common among social scientists.↩︎\nSeriously. Working carefully through these examples will be incredibly helpful and rewarding. If you’re taking the time to read this footnote, send me picture of a cute animal and I’ll add 1 point of extra credit to your final paper grade. See, your hard work is already paying off.↩︎"
+  }
+]
