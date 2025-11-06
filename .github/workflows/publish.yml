@@ -1,0 +1,33 @@
+name: Publish to GitHub Pages
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Setup Quarto
+        uses: quarto-dev/quarto-cli-action@v2
+
+      - name: Restore render cache
+        uses: actions/cache@v4
+        with:
+          path: _freeze
+          key: quarto-freeze-${{ runner.os }}-${{ github.sha }}
+          restore-keys: |
+            quarto-freeze-${{ runner.os }}-
+
+      - name: Publish to GitHub Pages
+        uses: quarto-dev/quarto-cli-action@v2
+        with:
+          cmd: publish gh-pages
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
