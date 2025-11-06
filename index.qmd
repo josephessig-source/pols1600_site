@@ -12,11 +12,11 @@ toc: true
 #   type: table
 ---
 
-This course provides a foundation in the principles and practice of quantitative social science, with a focus on building tools to make descriptive, causal, and predictive inferences.
+This course provides a foundation in the principles and practice of quantitative social science, with a focus on building tools to make descriptive, causal, and predictive inferences. 
 
 # Logistics
 
-We meet three times a week from 12-12:50pm with lectures on Monday and Wednesday and lab sessions on Friday. You will need a laptop that can run R and Rstudio for both lectures and labs. 
+We meet three times a week from 12-12:50pm with lectures on Monday and Wednesday and lab sessions on Friday. You will need a laptop that can run R and Rstudio for both lectures and labs. test
 
 ::: grid
 ::: g-col-4
