@@ -82,6 +82,8 @@ library(kableExtra)
 # library(icons)
 library(fontawesome)
 start_date <- "2025-01-23"
+show_up_to_week <- 0
+show_solutions_up_to_week <- 0
 fa_html_dependency()
 week <- paste0("Week ", 0:13)
 topic <- c(
@@ -182,13 +184,28 @@ comments[base::seq(26,28,by=2)] <- as.character(fa("graduation-cap"))
 assignments <- rep(" ", 28)
 
 
+slides_show <- rep(" ", length(slides_full))
+labs_show <- rep(" ", length(labs_full))
+comments_show <- rep(" ", length(comments_full))
+
+rows_to_show <- (show_up_to_week + 1) * 2
+solution_rows_to_show <- (show_solutions_up_to_week + 1) * 2
+
+if (rows_to_show > 0) {
+  slides_show[1:rows_to_show] <- slides[1:rows_to_show]
+  labs_show[1:rows_to_show] <- labs[1:rows_to_show]
+}
+
+if (solution_rows_to_show > 0) {
+  comments_show[1:solution_rows_to_show] <- comments[1:solution_rows_to_show]
+}
 
 
 schedule_tibble <- tibble(
   ' ' = c(rbind(week, topic)),
-  "Lecture" = slides,
-  "Labs" = labs,
-  "Solutions" = comments,
+  "Lecture" = slides_show,
+  "Labs" = lab_shows,
+  "Solutions" = comments_show,
   "Assignments" = assignments
   )
 

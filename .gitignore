@@ -8,3 +8,5 @@ static/labs/data/artworks.csv
 Untitled.Rmd
 *_archive/
 /.quarto/
+.github
+
