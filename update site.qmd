@@ -1,0 +1,10 @@
+---
+title: "My Project Notes"
+---
+<!--paste into terminal, do not run chunk!!!-->
+```{bash}
+| echo: true
+quarto render
+quarto render syllabus.qmd
+quarto publish gh-pages --no-render
+```
