@@ -438,78 +438,78 @@ learnr::run_tutorial("00-intro", package = "qsslearnr")
 
 - If you choose to use GenAI, you are responsible for its output, and will be graded accordingly. 
 
-## What does quantitative research do?
+<!-- ## What does quantitative research do? -->
 
--   Descriptions
+<!-- -   Descriptions -->
 
-## Descriptions
+<!-- ## Descriptions -->
 
-```{r}
-#| echo = F,
-#| out.width = 500
-knitr::include_graphics("images/stops.png")
-```
+<!-- ```{r} -->
+<!-- #| echo = F, -->
+<!-- #| out.width = 500 -->
+<!-- knitr::include_graphics("images/stops.png") -->
+<!-- ``` -->
 
-## What does quantitative research do?
+<!-- ## What does quantitative research do? -->
 
--   Descriptions
--   Explanations
+<!-- -   Descriptions -->
+<!-- -   Explanations -->
 
-## Explanations
+<!-- ## Explanations -->
 
-```{r}
-#| echo = F,
-#| out.width = 500
-knitr::include_graphics("images/csf.png")
-```
+<!-- ```{r} -->
+<!-- #| echo = F, -->
+<!-- #| out.width = 500 -->
+<!-- knitr::include_graphics("images/csf.png") -->
+<!-- ``` -->
 
-## Explanations
+<!-- ## Explanations -->
 
-```{r}
-#| echo = F,
-#| out.width = 600
-knitr::include_graphics("images/idotvod.png")
-```
+<!-- ```{r} -->
+<!-- #| echo = F, -->
+<!-- #| out.width = 600 -->
+<!-- knitr::include_graphics("images/idotvod.png") -->
+<!-- ``` -->
 
-## What does quantitative research do?
+<!-- ## What does quantitative research do? -->
 
--   Descriptions
--   Explanations
--   Predictions and Uncertainty
+<!-- -   Descriptions -->
+<!-- -   Explanations -->
+<!-- -   Predictions and Uncertainty -->
 
-## Predictions and Uncertainty
+<!-- ## Predictions and Uncertainty -->
 
-```{r}
-#| echo = F,
-#| out.width = 500
-knitr::include_graphics("images/stops1.png")
-```
+<!-- ```{r} -->
+<!-- #| echo = F, -->
+<!-- #| out.width = 500 -->
+<!-- knitr::include_graphics("images/stops1.png") -->
+<!-- ``` -->
 
-## Predictions and Uncertainty
+<!-- ## Predictions and Uncertainty -->
 
-```{r}
-#| echo = F,
-#| out.width = 400
-knitr::include_graphics("images/neighbor.png")
-```
+<!-- ```{r} -->
+<!-- #| echo = F, -->
+<!-- #| out.width = 400 -->
+<!-- knitr::include_graphics("images/neighbor.png") -->
+<!-- ``` -->
 
-## Predictions and Uncertainty
+<!-- ## Predictions and Uncertainty -->
 
-```{r}
-#| echo = F,
-#| out.width = 450
-knitr::include_graphics("images/stops2.png")
-```
+<!-- ```{r} -->
+<!-- #| echo = F, -->
+<!-- #| out.width = 450 -->
+<!-- knitr::include_graphics("images/stops2.png") -->
+<!-- ``` -->
 
-## What does quantitative research do?
+<!-- ## What does quantitative research do? -->
 
--   Descriptions
--   Explanations
--   Predictions and Uncertainty
+<!-- -   Descriptions -->
+<!-- -   Explanations -->
+<!-- -   Predictions and Uncertainty -->
 
-## 
+<!-- ##  -->
 
-![](https://www.dropletmeasurement.com/wp-content/uploads/2020/06/some-models-are-wrong-e1536948779198.jpg)
+<!-- ![](https://www.dropletmeasurement.com/wp-content/uploads/2020/06/some-models-are-wrong-e1536948779198.jpg) -->
 
 ## Next Time:
 
