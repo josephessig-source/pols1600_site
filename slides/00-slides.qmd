@@ -142,7 +142,6 @@ Source: [Andrew Gelman](https://statmodeling.stat.columbia.edu/)
 
 ## Reasons to take this class
 
-::: incremental
 -   You want to change the world
 
     -   Data, design, and analysis are incredlibly powerful tools
@@ -158,7 +157,6 @@ Source: [Andrew Gelman](https://statmodeling.stat.columbia.edu/)
 
 ##  Expectations
 
-::: incremental
 I expect that you will come to class ready to engage with:
 
 -   social science
@@ -168,7 +166,6 @@ I expect that you will come to class ready to engage with:
 -   programming
 
 -   math
-:::
 
 ## Requirements
 
