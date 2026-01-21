@@ -3,9 +3,7 @@
   "result": {
     "engine": "knitr",
     "markdown": "---\ntitle: \"Causation I\"\ndate: \"2024-01-30\"\nbibliography: ../files/paperpile.bib\nsubtitle: \"Making Causal Claims with Experimental Designs\"\nimage: \"featured.jpg\"\ndraft: true\n---\n\n\n\n## Readings\n\n-   {{< fa book >}} @Imai2022-pm Chapter 2\n-   {{< fa book >}} @Broockman2016-pi [pdf](../files/readings/broockman_kalla_2016.pdf){target=\"blank\"}\n\n## Slides\n\n<p class=\"buttons\"><a class=\"btn btn-danger\" target=\"_blank\" href=\"/slides/03-slides.html\"><i class=\"fa-solid fa-arrow-up-right-from-square\"></i> View all slides in new window</a>\n<div class=\"ratio ratio-16x9\">\n<iframe src=\"/slides/03-slides.html\"></iframe>\n</div>\n\n## Lecture\n\n<iframe src=\"https://brown.hosted.panopto.com/Panopto/Pages/Embed.aspx?id=c4552193-24fa-480c-a70e-b11701054c21&autoplay=false&offerviewer=true&showtitle=true&showbrand=true&captions=false&interactivity=all\" height=\"405\" width=\"720\" style=\"border: 1px solid #464646;\" allowfullscreen allow=\"autoplay\" aria-label=\"Panopto Embedded Video Player\"></iframe>\n\n## Lab\n\n-   {{< fa laptop-file >}} Download this week's <a href=\"../labs/03-lab.qmd \" download >here </a>\n\n-   {{< fa paintbrush >}} Upload the rendered html file to Canvas [here](https://canvas.brown.edu/courses/1094972/assignments)\n\n-   {{< fa graduation-cap >}} Review the commented solutions after class <a href=\"../labs/03-lab-comments.qmd\" target=\"_blank\" >here </a>\n\n## Assignments\n\n\n-   {{< fa chalkboard-user >}} Complete QSS Tutorial 3: Causality 1\n\n\n::: {.cell}\n\n```{.r .cell-code}\nlearnr::run_tutorial(\"03-causality1\", package = \"qsslearnr\")\n```\n:::\n\n\n-   {{< fa paintbrush >}} Upload the rendered html tutorial files to Canvas [here](https://canvas.brown.edu/courses/1094972/assignments)\n",
-    "supporting": [
-      "03-class_files"
-    ],
+    "supporting": [],
     "filters": [
       "rmarkdown/pagebreak.lua"
     ],

@@ -1,11 +1,9 @@
 {
-  "hash": "15ce502946dc8a22509b31496bf48bd4",
+  "hash": "f347471b48a6c29b1b258150f2d52cb2",
   "result": {
     "engine": "knitr",
-    "markdown": "---\ntitle: \"Introductions\"\ndate: \"2024-01-25\"\nbibliography: ../files/paperpile.bib\nsubtitle: \"Welcome to POLS 1600\"\nimage: \"featured.jpg\"\n---\n\n\n-   Welcome! I'll see you in class on Thursday.\n\n-   Tune in via Zoom: https://brown.zoom.us/j/97039852954\n\n\n\n\n\n## Readings\n\n-   None this week\n\n## Lecture\n\n\n\n\n<p class=\"buttons\"><a class=\"btn btn-danger\" target=\"_blank\" href=\"/slides/00-slides.html\"><i class=\"fa-solid fa-arrow-up-right-from-square\"></i> View all slides in new window</a>\n<div class=\"ratio ratio-16x9\">\n<iframe src=\"/slides/00-slides.html\"></iframe>\n</div>\n\n\n\n\n## Lab\n\n-   None\n\n## Assignments\n\n- Work through [Software Setup](../resources/00-software-setup.qmd) before class next week",
-    "supporting": [
-      "00-class_files"
-    ],
+    "markdown": "---\ntitle: \"Introductions\"\ndate: \"2026-01-21\"\nbibliography: ../files/paperpile.bib\nsubtitle: \"Welcome to POLS 1600\"\nimage: \"featured.jpg\"\n---\n\n\n\n## Readings\n\n-   None this week\n\n## Lecture\n\n\n\n<p class=\"buttons\"><a class=\"btn btn-danger\" target=\"_blank\" href=\"/slides/00-slides.html\"><i class=\"fa-solid fa-arrow-up-right-from-square\"></i> View all slides in new window</a>\n<div class=\"ratio ratio-16x9\">\n<iframe src=\"/slides/00-slides.html\"></iframe>\n</div>\n\n\n## Lab\n\n-   None\n\n## Assignments\n\n- Work through [Software Setup](../resources/00-software-setup.qmd) before class next week",
+    "supporting": [],
     "filters": [
       "rmarkdown/pagebreak.lua"
     ],

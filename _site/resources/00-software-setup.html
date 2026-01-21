@@ -6,8 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Paul Testa">
-<meta name="dcterms.date" content="2025-01-22">
+<meta name="author" content="Joseph Essig (Adapted Directly from Paul Testa)">
+<meta name="dcterms.date" content="2026-01-21">
 
 <title>Getting started with R – POLS 1600</title>
 <style>
@@ -205,14 +205,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Author</div>
     <div class="quarto-title-meta-contents">
-             <p>Paul Testa </p>
+             <p>Joseph Essig (Adapted Directly from Paul Testa) </p>
           </div>
   </div>
     
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">January 22, 2025</p>
+      <p class="date">January 21, 2026</p>
     </div>
   </div>
   
@@ -274,7 +274,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>To work, so make sure you’ve copied and pasted the code above into your console</p>
 <blockquote class="blockquote">
-<p>If you have a question or somethings not working, don’t hesitate to ask. Please email me at <a href="mailto:paul_testa@brown.edu" class="email">paul_testa@brown.edu</a> or come to my office at 111 Thayer St Rm 339.</p>
+<p>If you have a question or somethings not working, don’t hesitate to ask. Please email me at <a href="joseph_essig@brown.edu" class="email">joseph_essig@brown.edu</a> or come to my office at 123 Stephen Roberts Hall (Taubman Center).</p>
 </blockquote>
 </section>
 </section>
@@ -292,12 +292,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h1 data-number="2"><span class="header-section-number">2</span> Download <code>R</code></h1>
 <ul>
 <li><strong>Download R here:</strong> <a href="https://cran.r-project.org/" class="uri">https://cran.r-project.org/</a></li>
-<li>It should be <code>R version 4.4.2 (2024-10-31) -- "Pile of Leaves"</code></li>
-<li>Make sure your operating systems are up to date.
-<ul>
-<li>Mac: at least macOS 12 (Monterey) (Latest: macOS Sequoia 15.2 ). Note different versions for Intel vs Apple M1/M2/M3 chips</li>
-<li>PC: It should work on most versions you have installed</li>
-</ul></li>
+<li>It should be <code>R version 4.5.2</code></li>
+<li>Make sure your operating systems are up to date.</li>
 </ul>
 <p><img src="images/00_r01.png" class="img-fluid"> - Just click yes, on everything the installer asks</p>
 <p><img src="images/00_r02.png" class="img-fluid"></p>
@@ -336,7 +332,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Quarto Markdown is a file format that allows us to combine <code>R</code> code – which we use to do our statistical analysis – with <a href="https://www.markdownguide.org/">Markdown</a> – a lightweight markup language that can turn plain text into all sorts of formats (.pdf, .doc, .html)</p>
 <p><img src="images/00_qmd_file.png" class="img-fluid"></p>
 <ul>
-<li>You can also do this by clicking on the new file icon <svg viewbox="0 0 384 512" style="height:1em;position:relative;display:inline-block;top:.1em;" xmlns="http://www.w3.org/2000/svg"> <path d="M369.9 97.9L286 14C277 5 264.8-.1 252.1-.1H48C21.5 0 0 21.5 0 48v416c0 26.5 21.5 48 48 48h288c26.5 0 48-21.5 48-48V131.9c0-12.7-5.1-25-14.1-34zM332.1 128H256V51.9l76.1 76.1zM48 464V48h160v104c0 13.3 10.7 24 24 24h104v288H48z"></path></svg> in the upper left</li>
+<li>You can also do this by clicking on the new file icon in the upper left</li>
 </ul>
 <p><img src="images/00_qmd_icon.png" class="img-fluid"></p>
 <ul>
@@ -576,7 +572,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/josephessig-source\.github\.io\/pols1600_site\/");
+        var filterRegex = new RegExp('/' + window.location.host + '/');
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }

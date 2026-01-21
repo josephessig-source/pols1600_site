@@ -3,9 +3,7 @@
   "result": {
     "engine": "knitr",
     "markdown": "---\ntitle: \"Interpreting and Evaluating Linear Regression\"\ndate: \"2024-03-11\"\nbibliography: ../files/paperpile.bib\nsubtitle: \"What does it mean to control for X? How do compare regression models?\"\nimage: \"featured.jpg\"\ndraft: true\n---\n\n\n\n\n\n## Readings\n\n-   {{< fa book >}} @Imai2022-pm Chapter 4 \n\n- {{< fa article >}} @Grumbach2022-zj [download](../files/readings/grumbach_hill_2021.pdf){target=\"_blank\"}\n\n\n\n## Lecture\n\n\n<p class=\"buttons\"><a class=\"btn btn-danger\" target=\"_blank\" href=\"/slides/07-slides.html\"><i class=\"fa-solid fa-arrow-up-right-from-square\"></i> View all slides in new window</a>\n<div class=\"ratio ratio-16x9\">\n<iframe src=\"/slides/07-slides.html\"></iframe>\n</div>\n\n\n\n## Lab\n\n\n-   {{< fa laptop-file >}} Download this week's lab <a href=\"../labs/07-lab.qmd \" download >here </a>\n\n- {{< fa paintbrush >}} Upload the rendered html file to Canvas [here](https://canvas.brown.edu/courses/1094972/assignments) \n- {{< fa graduation-cap >}} Review the commented solutions after class <a href=\"../labs/07-lab-comments.qmd\" target=\"_blank\" >here </a>\n\n\n## Assignments\n\n- {{< fa chalkboard-user >}} Work on [Assignment 2: Data](https://pols1600.paultesta.org/assignments/a2){target=\"_blank\"}\n- {{< fa chalkboard-user >}} No tutorial\n\n\n",
-    "supporting": [
-      "07-class_files"
-    ],
+    "supporting": [],
     "filters": [
       "rmarkdown/pagebreak.lua"
     ],

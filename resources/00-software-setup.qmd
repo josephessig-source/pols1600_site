@@ -147,7 +147,7 @@ Quarto Markdown is a file format that allows us to combine `R` code -- which we 
 
 ![](images/00_qmd_file.png)
 
--   You can also do this by clicking on the new file icon `r icons::fontawesome("file", style = "regular")` in the upper left
+-   You can also do this by clicking on the new file icon  in the upper left
 
 ![](images/00_qmd_icon.png)
 

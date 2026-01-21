@@ -4442,7 +4442,7 @@
     "href": "resources/00-software-setup.html#tldr",
     "title": "Getting started with R",
     "section": "TLDR",
-    "text": "TLDR\nIf you’re pressed for time here’s the short version of what you should do before next class.\n\nUpdate your operating system\nDownload R\nDownload R Studio\nOpen R Studio on your computer\nCreate an Quarto Markdown Document (.qmd) in R Studio\n\n\nFile &gt; New File &gt; Quarto Document\nInstall any requested packages\n\n\nRender this .Qmd into an html file.\n\n\nClick the render arrow with the needle OR:\nUse the hot keys: Mac: cmd + shift + k PC: crtl + shift + k\n\n\nInstall some additional packages for the course\n\nSpecifically copy and paste the following into the console in R Studio and hit enter:\n\ninstall.packages(\"rmarkdown\")\ninstall.packages(\"devtools\")\ninstall.packages(\"remotes\")\nremotes::install_github(\"kosukeimai/qss-package\", build_vignettes = TRUE)\nremotes::install_github(\"rstudio/learnr\")\nremotes::install_github(\"rstudio-education/gradethis\")\nremotes::install_github(\"PaulTestaBrown/qsslearnr\")\n\nYou’ll need to have the package rmarkdown installed for\n\nremotes::install_github(\"kosukeimai/qss-package\", build_vignettes = TRUE)\n\nTo work, so make sure you’ve copied and pasted the code above into your console\n\nIf you have a question or somethings not working, don’t hesitate to ask. Please email me at paul_testa@brown.edu or come to my office at 111 Thayer St Rm 339."
+    "text": "TLDR\nIf you’re pressed for time here’s the short version of what you should do before next class.\n\nUpdate your operating system\nDownload R\nDownload R Studio\nOpen R Studio on your computer\nCreate an Quarto Markdown Document (.qmd) in R Studio\n\n\nFile &gt; New File &gt; Quarto Document\nInstall any requested packages\n\n\nRender this .Qmd into an html file.\n\n\nClick the render arrow with the needle OR:\nUse the hot keys: Mac: cmd + shift + k PC: crtl + shift + k\n\n\nInstall some additional packages for the course\n\nSpecifically copy and paste the following into the console in R Studio and hit enter:\n\ninstall.packages(\"rmarkdown\")\ninstall.packages(\"devtools\")\ninstall.packages(\"remotes\")\nremotes::install_github(\"kosukeimai/qss-package\", build_vignettes = TRUE)\nremotes::install_github(\"rstudio/learnr\")\nremotes::install_github(\"rstudio-education/gradethis\")\nremotes::install_github(\"PaulTestaBrown/qsslearnr\")\n\nYou’ll need to have the package rmarkdown installed for\n\nremotes::install_github(\"kosukeimai/qss-package\", build_vignettes = TRUE)\n\nTo work, so make sure you’ve copied and pasted the code above into your console\n\nIf you have a question or somethings not working, don’t hesitate to ask. Please email me at joseph_essig@brown.edu or come to my office at 123 Stephen Roberts Hall (Taubman Center)."
   },
   {
     "objectID": "resources/00-software-setup.html#install-the-devtools-and-remotes-packages",
@@ -6273,7 +6273,7 @@
     "href": "class/00-class.html",
     "title": "Introductions",
     "section": "",
-    "text": "Welcome! I’ll see you in class on Thursday.\nTune in via Zoom: https://brown.zoom.us/j/97039852954",
+    "text": "None this week",
     "crumbs": [
       "Class",
       "Weekly Content",
@@ -6284,8 +6284,8 @@
     "objectID": "class/00-class.html#readings",
     "href": "class/00-class.html#readings",
     "title": "Introductions",
-    "section": "Readings",
-    "text": "Readings\n\nNone this week",
+    "section": "",
+    "text": "None this week",
     "crumbs": [
       "Class",
       "Weekly Content",
@@ -7381,7 +7381,7 @@
     "href": "slides/00-slides.html#overview",
     "title": "Welcome to POLS 1600",
     "section": "Overview",
-    "text": "Overview\n\nGoals and Expectations\nCourse Structure\nCourse Policies\nA Few Fundamental Truths"
+    "text": "Overview\n\nGoals and Expectations\nCourse Structure\nCourse Policies"
   },
   {
     "objectID": "slides/00-slides.html#what-you-will-learn",
@@ -7458,7 +7458,7 @@
     "href": "slides/00-slides.html#reasons-to-take-this-class-1",
     "title": "Welcome to POLS 1600",
     "section": "Reasons to take this class",
-    "text": "Reasons to take this class\n\nYou want to change the world\n\nData, design, and analysis are incredlibly powerful tools\nYou want to understand their strengths and limits\n\nYou want to be a better consumer of data and knowledge\nYou want to be a better consumer of data and knowledge\nYou want to get a job / go to grad school\nYou have to\nYou’re just in it for the memes"
+    "text": "Reasons to take this class\n\nYou want to change the world\n\nData, design, and analysis are incredlibly powerful tools\nYou want to understand their strengths and limits\n\nYou want to be a better consumer of data and knowledge\nYou want to be a better consumer of data and knowledge\nYou want to get a job / go to grad school\nYou have to\n\n\nExpectations\nI expect that you will come to class ready to engage with:\n\nsocial science\ndata\nprogramming\nmath\n\n\n\nRequirements\nI assume that you will\n\n\nDo the readings\n\n\n\n\nBring your computers 1\n\n\n\n\nWork through classwork\n\n\n\n\nAsk questions\n\n\n\n\nCourse structure\n\n\n\nClass\n\nMonday and Wednesday: Lecture/Demonstration (and start lab if time permits)\nFriday: Lab/Hands-on with R\n\n\n\nClass websites\n\nSlides, labs and additional resources available here: Pols 1600 Site\nAssignments uploaded here: Canvas\n\n\n\nSoftware and computing\n\nStatistics done using R\n\nOpen source (free) statistical language\n\nThrough R Studio\n\nAn integrated development environment for R\n\nResults written up using R Markdown\n\nLanguage for combing R code with html Markdown\n\n\n\n\n\nR\n\n\n\nR Studio\n\n\n\nQuarto\n\n\n\nProject options in YAML\nCode in triple backtick chunks:\n\nChunk options set with “#|” (hashpipe)\n\n\n```{r}\n#| label = \"simulate_data\"\nx &lt;- rnorm(100)\ny &lt;- 2*x + rnorm(100)\n```\n\nWrite up in Markdown\nOutput rendered as an html file\n\n\n\n\n\n\nGetting set up for the course:\nHere’s a link to a guide to get you setup for the course.\nTake a crack at it after class.\nEmail me with any issues (there are always issues), and we will get everyone up to speed on Friday.\n\n\nTextbook\n\nhttps://press.princeton.edu/books/paperback/9780691222288/quantitative-social-science\n\n\nHow to Read Imai\n\nActive reading\nCopy and run the code in the text. To do so, do the following:\n\n\nif (!require(\"devtools\")){\n  install.packages(\"devtools\")\n  }\nlibrary(\"devtools\")\ninstall_github(\"kosukeimai/qss-package\",  \n               build_vignettes  =  TRUE)\n\n\n\nHow to Read Imai\nOnce you’ve run the following\n\ninstall.packages(\"devtools\")\ninstall.packages(\"remotes\")\nremotes::install_github(\"kosukeimai/qss-package\", build_vignettes = TRUE)\n\nAnywhere the text loads data:\n\nafghan &lt;- read_csv(\"afgahn.csv\")\n\nYou can do\n\nlibrary(\"qss\")\ndata(\"afghan\")\nsummary(afghan$age)\n\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. \n  15.00   22.00   30.00   32.39   40.00   80.00 \n\n\n\n\nAdditional Readings\n\nOccasionally, I will provide additional readings, available on both Canvas and the course website (under the Class tab).\n\n\n\n\nAssignments\n\n\n\nAssignments\nYou have three types of assignments in this course\n\nLabs\nTutorials\nFinal Project\n\n\n\nLabs\n\nEach Friday we will work in groups to complete an in-class lab\nThe labs are designed to reinforce and extend concepts from lecture using real world data.\n\n\n\nLabs\n\n\n\nLabs\n\n\n\nLabs\n\nWeeks 1 and 2 we’ll work collectively\nWeeks 3 on, you’ll be assigned to small groups\nEach week:\n\nLog on to the Canvas, download the lab .qmd file\nOpen R Studio\nRender the qmd file to get ready to work\nComplete the lab\nUpload the rendered html file to Canvas by the end of class\n\nOne question randomly graded\n\n100% if correct\n85% if incorrect, but you tried\n0% if you did not try/absent for the lab\n\nComments/Answers posted immediately after class\n\n\n\nProblem Sets/Tutorials\n\nCoding tutorials to reinforce concepts from lecture and textbook.\nAccessed by running\n\n\nlearnr::run_tutorial(\"00-intro\", package = \"qsslearnr\")\n\n\nComplete the tutorial. Save output as “LASTNAME_TutorialNumber.pdf”\nUpload output to Canvas by the following Monday by 11:59 pm\nGrades:\n\n100% any upload\n0% no upload\n\n\n\n\nFinal Project\n\n\nYour First Assignment:\n\nDownload and install R and R Studio\n\nEmail me if you have troubles\nTroubleshoot by Zoom or in-person\n\nWork through 00-software_setup before next class.\n\n\n\nMaking Mistakes\n\nTo err is human!\nMaking mistakes is part of learning, even if it is frustrating.\nWorking through problems = improving.\n\n\n\nFinal Reports\n\nCan be on any topic you like\nMore info to come\nDue dates:\n\nWeek 3 Groups assigned\nWeek 4 Research Topics\nWeek 6 Data Proposal\nWeek 8 Data Explorations\nWeek 11 Drafts\nWeek 12 Presentations\nWeek 13 Final Paper\n\n\n\n\n\nGrading and Other Policies\n\n\n\nGrading\n\n5% Attendance\n10% Class involvement and participation\n10% Tutorials\n30% Labs\n20% Assignments for final paper\n25% Final paper\n\n\n\nGrading\n\nLabs: Check-plus (100), Check (85), no credit (0).\n\nTwo lowest labs dropped\n\nTutorials: Pass (100%) or No Credit (not submitted) (0%). +If late, max credit = 50%.\n\nAssignments: % out of 100.\n\n\n\n\nCourse policies\n\nAttendance: Please come to class. After first 2 absences, lose 1% out of 5% possible for attendance, unless excused.\nAcademic Integrity: See the syllabus and refer to the academic code.\nGenerative AI: Discouraged, but if you use it, must be disclosed.(It doesn’t replace your own effort and thinking)\nIf you don’t disclose, this is a violation of the academic code.\nIf you choose to use GenAI, you are responsible for its output, and will be graded accordingly.\n\n\n\nWhat does quantitative research do?\n\nDescriptions\n\n\n\nDescriptions\n\n\n\nWhat does quantitative research do?\n\nDescriptions\nExplanations\n\n\n\nExplanations\n\n\n\nExplanations\n\n\n\nWhat does quantitative research do?\n\nDescriptions\nExplanations\nPredictions and Uncertainty\n\n\n\nPredictions and Uncertainty\n\n\n\nPredictions and Uncertainty\n\n\n\nPredictions and Uncertainty\n\n\n\nWhat does quantitative research do?\n\nDescriptions\nExplanations\nPredictions and Uncertainty\n\n\n\n\n\n\n\nNext Time:\n\nComplete the class survey, which will be sent out in a canvas announcement.\nOn Friday, we will make sure everyone has Downloaded and Installed R and R studio\n\n\n\n\n\nIf you only have a desktop/or tablet let me know and we’ll figure out a solution."
   },
   {
     "objectID": "slides/00-slides.html#great-expectations",
@@ -7472,21 +7472,21 @@
     "href": "slides/00-slides.html#requirements",
     "title": "Welcome to POLS 1600",
     "section": "Requirements",
-    "text": "Requirements\nI assume that you will\n\n\nDo the readings\n\n\n\n\nBring your computers 1\n\n\n\n\nWork through classwork\n\n\n\n\nAsk questions\n\n\nIf you only have a desktop/or tablet let me know and we’ll figure out a solution."
+    "text": "Requirements\nI assume that you will\n\n\nDo the readings\n\n\n\n\nBring your computers 1\n\n\n\n\nWork through classwork\n\n\n\n\nAsk questions"
   },
   {
     "objectID": "slides/00-slides.html#class",
     "href": "slides/00-slides.html#class",
     "title": "Welcome to POLS 1600",
     "section": "Class",
-    "text": "Class\n\nTuesday: Lecture/Demonstration\nThursday: Lab/Exploration"
+    "text": "Class\n\nMonday and Wednesday: Lecture/Demonstration (and start lab if time permits)\nFriday: Lab/Hands-on with R"
   },
   {
     "objectID": "slides/00-slides.html#class-websites",
     "href": "slides/00-slides.html#class-websites",
     "title": "Welcome to POLS 1600",
     "section": "Class websites",
-    "text": "Class websites\n\nSlides, labs and additional resources available here: pols1600.paultesta.org\nAssignments uploaded here: Canvas"
+    "text": "Class websites\n\nSlides, labs and additional resources available here: Pols 1600 Site\nAssignments uploaded here: Canvas"
   },
   {
     "objectID": "slides/00-slides.html#software-and-computing",
@@ -7521,7 +7521,7 @@
     "href": "slides/00-slides.html#getting-set-up-for-the-course",
     "title": "Welcome to POLS 1600",
     "section": "Getting set up for the course:",
-    "text": "Getting set up for the course:\nHere’s a link to a guide to get you setup for the course.\nTake a crack at it after class, over the weekend.\nEmail me with any issues (there are always issues), and drop by my office hours on Tuesday so we can trouble shoot."
+    "text": "Getting set up for the course:\nHere’s a link to a guide to get you setup for the course.\nTake a crack at it after class.\nEmail me with any issues (there are always issues), and we will get everyone up to speed on Friday."
   },
   {
     "objectID": "slides/00-slides.html#textbook",
@@ -7542,14 +7542,14 @@
     "href": "slides/00-slides.html#how-to-read-imai-1",
     "title": "Welcome to POLS 1600",
     "section": "How to Read Imai",
-    "text": "How to Read Imai\nOnce you’ve rune the following\n\ninstall.packages(\"devtools\")\ninstall.packages(\"remotes\")\nremotes::install_github(\"kosukeimai/qss-package\", build_vignettes = TRUE)\n\nAnywhere the text loads data:\n\nafghan &lt;- read_csv(\"afgahn.csv\")\n\nYou can do\n\nlibrary(\"qss\")\ndata(\"afghan\")\nsummary(afghan$age)\n\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. \n  15.00   22.00   30.00   32.39   40.00   80.00"
+    "text": "How to Read Imai\nOnce you’ve run the following\n\ninstall.packages(\"devtools\")\ninstall.packages(\"remotes\")\nremotes::install_github(\"kosukeimai/qss-package\", build_vignettes = TRUE)\n\nAnywhere the text loads data:\n\nafghan &lt;- read_csv(\"afgahn.csv\")\n\nYou can do\n\nlibrary(\"qss\")\ndata(\"afghan\")\nsummary(afghan$age)\n\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. \n  15.00   22.00   30.00   32.39   40.00   80.00"
   },
   {
     "objectID": "slides/00-slides.html#additional-readings",
     "href": "slides/00-slides.html#additional-readings",
     "title": "Welcome to POLS 1600",
     "section": "Additional Readings",
-    "text": "Additional Readings\n\nOccasionally, I will provide additional readings, available on both Canvas and pols1600.paultesta.org"
+    "text": "Additional Readings\n\nOccasionally, I will provide additional readings, available on both Canvas and the course website (under the Class tab)."
   },
   {
     "objectID": "slides/00-slides.html#assignments-1",
@@ -7563,7 +7563,7 @@
     "href": "slides/00-slides.html#labs",
     "title": "Welcome to POLS 1600",
     "section": "Labs",
-    "text": "Labs\n\nEach Thursday we will work in groups to complete an in-class lab\nThe labs are designed to reinforce and extend concepts from lecture using real world data."
+    "text": "Labs\n\nEach Friday we will work in groups to complete an in-class lab\nThe labs are designed to reinforce and extend concepts from lecture using real world data."
   },
   {
     "objectID": "slides/00-slides.html#labs-1",
@@ -7591,7 +7591,7 @@
     "href": "slides/00-slides.html#problem-setstutorials",
     "title": "Welcome to POLS 1600",
     "section": "Problem Sets/Tutorials",
-    "text": "Problem Sets/Tutorials\n\nCoding tutorials to reinforce concepts from lecture and textbook.\nAccessed by running\n\n\nlearnr::run_tutorial(\"00-intro\", package = \"qsslearnr\")\n\n\nComplete the tutorial. Save output as “LASTNAME_TutorialNumber.pdf”\nUpload output to Canvas by Friday by 11:59 pm\nGrades:\n\n100% any upload\n0% no upload"
+    "text": "Problem Sets/Tutorials\n\nCoding tutorials to reinforce concepts from lecture and textbook.\nAccessed by running\n\n\nlearnr::run_tutorial(\"00-intro\", package = \"qsslearnr\")\n\n\nComplete the tutorial. Save output as “LASTNAME_TutorialNumber.pdf”\nUpload output to Canvas by the following Monday by 11:59 pm\nGrades:\n\n100% any upload\n0% no upload"
   },
   {
     "objectID": "slides/00-slides.html#final-project",
@@ -7605,7 +7605,7 @@
     "href": "slides/00-slides.html#your-first-assignment",
     "title": "Welcome to POLS 1600",
     "section": "Your First Assignment:",
-    "text": "Your First Assignment:\n\nDownload and install R and R Studio\n\nEmail me if you have troubles\nTroubleshoot by Zoom or in-person (111 Thayer Room 339)\n\nWork through 00-software_setup before next class."
+    "text": "Your First Assignment:\n\nDownload and install R and R Studio\n\nEmail me if you have troubles\nTroubleshoot by Zoom or in-person\n\nWork through 00-software_setup before next class."
   },
   {
     "objectID": "slides/00-slides.html#portals-of-discovery",
@@ -7626,21 +7626,21 @@
     "href": "slides/00-slides.html#final-reports",
     "title": "Welcome to POLS 1600",
     "section": "Final Reports",
-    "text": "Final Reports\n\nCan be on any topic you like\nMore info to come\nDue dates:\n\nWeek 2 Groups assigned\nWeek 3 Research Topics\nWeek 6 Data Proposal\nWeek 8 Data Explorations\nWeek 11 Drafts\nWeek 12 Presentations\nWeek 13 Final Paper"
+    "text": "Final Reports\n\nCan be on any topic you like\nMore info to come\nDue dates:\n\nWeek 3 Groups assigned\nWeek 4 Research Topics\nWeek 6 Data Proposal\nWeek 8 Data Explorations\nWeek 11 Drafts\nWeek 12 Presentations\nWeek 13 Final Paper"
   },
   {
     "objectID": "slides/00-slides.html#grading",
     "href": "slides/00-slides.html#grading",
     "title": "Welcome to POLS 1600",
     "section": "Grading",
-    "text": "Grading"
+    "text": "Grading\n\n5% Attendance\n10% Class involvement and participation\n10% Tutorials\n30% Labs\n20% Assignments for final paper\n25% Final paper"
   },
   {
     "objectID": "slides/00-slides.html#grading-1",
     "href": "slides/00-slides.html#grading-1",
     "title": "Welcome to POLS 1600",
     "section": "Grading",
-    "text": "Grading"
+    "text": "Grading\n\nLabs: Check-plus (100), Check (85), no credit (0).\n\nTwo lowest labs dropped\n\nTutorials: Pass (100%) or No Credit (not submitted) (0%). +If late, max credit = 50%.\n\nAssignments: % out of 100."
   },
   {
     "objectID": "slides/00-slides.html#grading-2",
@@ -7668,7 +7668,7 @@
     "href": "slides/00-slides.html#course-policies",
     "title": "Welcome to POLS 1600",
     "section": "Course policies",
-    "text": "Course policies\n\nAcademic honesty\nChatGPT and generative AI\nCommunity standards\nIncomplete/late work"
+    "text": "Course policies\n\nAttendance: Please come to class. After first 2 absences, lose 1% out of 5% possible for attendance, unless excused.\nAcademic Integrity: See the syllabus and refer to the academic code.\nGenerative AI: Discouraged, but if you use it, must be disclosed.(It doesn’t replace your own effort and thinking)\nIf you don’t disclose, this is a violation of the academic code.\nIf you choose to use GenAI, you are responsible for its output, and will be graded accordingly."
   },
   {
     "objectID": "slides/00-slides.html#two-fundamental-truths",
@@ -11925,5 +11925,122 @@
     "title": "Syllabus",
     "section": "Class Time",
     "text": "Class Time\nThis course meets three times a week (Monday, Wednesday, and Friday) for 50 minutes. Monday and Wednesday’s classes will be devoted to lecture, demonstration and review. Friday’s class will focus on applications of course concepts through labs where you’ll work with real data from a variety of sources. I assume that you will come to class having done each week’s assigned readings and reviewed material from the previous week’s lectures and labs. Slides and labs are available on Canvas and on the course website."
+  },
+  {
+    "objectID": "class/index.html#readings",
+    "href": "class/index.html#readings",
+    "title": "Introductions",
+    "section": "Readings",
+    "text": "Readings\n\nNone this week",
+    "crumbs": [
+      "Class",
+      "Overview",
+      "General Workflow for POLS 1600"
+    ]
+  },
+  {
+    "objectID": "class/index.html#lecture",
+    "href": "class/index.html#lecture",
+    "title": "Introductions",
+    "section": "Lecture",
+    "text": "Lecture\n#| label: show-slide-tabs\n#| echo: false\n#| results: \"asis\"\nslide_buttons(paste0(\"/slides/\", wk, \"-slides\"))\nslide_frame(paste0(\"/slides/\", wk, \"-slides.html\"))",
+    "crumbs": [
+      "Class",
+      "Overview",
+      "General Workflow for POLS 1600"
+    ]
+  },
+  {
+    "objectID": "class/index.html#lab",
+    "href": "class/index.html#lab",
+    "title": "Introductions",
+    "section": "Lab",
+    "text": "Lab\n\nNone",
+    "crumbs": [
+      "Class",
+      "Overview",
+      "General Workflow for POLS 1600"
+    ]
+  },
+  {
+    "objectID": "class/index.html#assignments",
+    "href": "class/index.html#assignments",
+    "title": "Introductions",
+    "section": "Assignments",
+    "text": "Assignments\n\nWork through Software Setup before class next week",
+    "crumbs": [
+      "Class",
+      "Overview",
+      "General Workflow for POLS 1600"
+    ]
+  },
+  {
+    "objectID": "class/00-class.html#readings-1",
+    "href": "class/00-class.html#readings-1",
+    "title": "Introductions",
+    "section": "Readings",
+    "text": "Readings\n\nNone this week",
+    "crumbs": [
+      "Class",
+      "Weekly Content",
+      "0: Introductions"
+    ]
+  },
+  {
+    "objectID": "class/00-class.html#lecture-1",
+    "href": "class/00-class.html#lecture-1",
+    "title": "Introductions",
+    "section": "Lecture",
+    "text": "Lecture\n#| label: show-slide-tabs\n#| echo: false\n#| results: \"asis\"\nslide_buttons(paste0(\"/slides/\", wk, \"-slides\"))\nslide_frame(paste0(\"/slides/\", wk, \"-slides.html\"))",
+    "crumbs": [
+      "Class",
+      "Weekly Content",
+      "0: Introductions"
+    ]
+  },
+  {
+    "objectID": "class/00-class.html#lab-1",
+    "href": "class/00-class.html#lab-1",
+    "title": "Introductions",
+    "section": "Lab",
+    "text": "Lab\n\nNone",
+    "crumbs": [
+      "Class",
+      "Weekly Content",
+      "0: Introductions"
+    ]
+  },
+  {
+    "objectID": "class/00-class.html#assignments-1",
+    "href": "class/00-class.html#assignments-1",
+    "title": "Introductions",
+    "section": "Assignments",
+    "text": "Assignments\n\nWork through Software Setup before class next week",
+    "crumbs": [
+      "Class",
+      "Weekly Content",
+      "0: Introductions"
+    ]
+  },
+  {
+    "objectID": "slides/00-slides.html#expectations",
+    "href": "slides/00-slides.html#expectations",
+    "title": "Welcome to POLS 1600",
+    "section": "Expectations",
+    "text": "Expectations\nI expect that you will come to class ready to engage with:\n\nsocial science\ndata\nprogramming\nmath"
+  },
+  {
+    "objectID": "slides/00-slides.html#making-mistakes",
+    "href": "slides/00-slides.html#making-mistakes",
+    "title": "Welcome to POLS 1600",
+    "section": "Making Mistakes",
+    "text": "Making Mistakes\n\nTo err is human!\nMaking mistakes is part of learning, even if it is frustrating.\nWorking through problems = improving."
+  },
+  {
+    "objectID": "slides/00-slides.html#next-time",
+    "href": "slides/00-slides.html#next-time",
+    "title": "Welcome to POLS 1600",
+    "section": "Next Time:",
+    "text": "Next Time:\n\nComplete the class survey, which will be sent out in a canvas announcement.\nOn Friday, we will make sure everyone has Downloaded and Installed R and R studio"
   }
 ]

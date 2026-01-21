@@ -16,7 +16,7 @@ This course provides a foundation in the principles and practice of quantitative
 
 # Logistics
 
-We meet three times a week from 12-12:50pm with lectures on Monday and Wednesday and lab sessions on Friday. You will need a laptop that can run R and Rstudio for both lectures and labs. test
+We meet three times a week from 12-12:50pm with lectures on Monday and Wednesday and lab sessions on Friday. You will need a laptop that can run R and Rstudio for both lectures and labs.
 
 ::: grid
 ::: g-col-4
@@ -36,7 +36,7 @@ Fridays, 12-12:50pm
 :::
 
 ::: g-col-4
-[{{< fa check-to-slot size=3x >}}](#)
+[{{< fa check-to-slot size=3x >}}](https://canvas.brown.edu/courses/1102109)
 
 ### Assignments
 
