@@ -1,0 +1,153 @@
+---
+title: 'POLS 2580 Assignment 1'
+author: "Research Questions"
+date: "Due October 12, 2023"
+output:
+  html_document:
+    theme: journal
+    toc: TRUE
+    toc_float: TRUE
+    toc_depth: 2
+    number_sections: TRUE
+---
+
+
+```{r init,echo=F, message=F,results=F}
+knitr::opts_chunk$set(error = TRUE, 
+                      comment = NA, 
+                      warnings = FALSE, 
+                      errors = FALSE, 
+                      messages = FALSE, 
+                      cache = TRUE,
+                      tidy = FALSE)
+
+the_packages <- c(
+  ## R Markdown
+  "kableExtra","DT","texreg",
+  ## Tidyverse
+  "tidyverse", "lubridate", "forcats", "haven", "labelled",
+  ## Extensions for ggplot
+  "ggmap","ggrepel", "ggridges", "ggthemes", "ggpubr", 
+  "GGally", "scales", "dagitty", "ggdag", "ggforce",
+  # Data 
+  "COVID19","maps","mapdata","qss","tidycensus", "dataverse",
+  # Analysis
+  "DeclareDesign", "easystats", "zoo"
+)
+
+# Define function to load packages
+ipak <- function(pkg){
+    new.pkg <- pkg[!(pkg %in% installed.packages()[, "Package"])]
+    if (length(new.pkg)) 
+        install.packages(new.pkg, dependencies = TRUE)
+    sapply(pkg, require, character.only = TRUE)
+}
+
+ipak(the_packages)
+
+```
+
+# Overview {-}
+
+Asking a good research question is one of the most important skills you will develop in your academic careers. It's also one of the hardest.
+
+We often think we're asking one question, when in fact the study we conduct really addresses a related but distinct question. When a priest asked Willie Sutton why he robbed banks, he replied the "Well, that's where the money is". The priest's question was about why rob at all, while Sutton answered the different question "Given one robs, why rob banks?" Similarly, Medieval philosophers might ask why objects stay in motion, while Newton suggests what really need is not an explanation of motion itself but of changes in motion. 
+
+The object of our question shapes the form of our explanation.
+
+In this assignment, I would like your group to craft three potential research questions that we might explore in our research project for this class. Each question, should be a single sentence, with a few sentences answering the following questions (More details below):
+
+1.	Why do we care about the answer to this research question?
+
+2.	What's would a hypothetical "ideal experiment" to answer this question look like?
+
+3.	What would a study with observational data look like?
+
+4.  A published study that relates to this question
+
+5.	How feasible would it be to do a study like this for the course
+
+
+You may use this Rmd file as a template (click [here](https://pols2580.paultesta.org/files/assignments/a1_research_questions.rmd) to download) or create your own file. Please submit your responses to Canvas.
+
+You might start by writing down several questions of different forms about the same topic:
+
+-	Why do people vote?
+-	Why do people not vote?
+-	Why do the rich vote at higher rates than the poor?
+-	When might people who don't vote, be motivated to vote?
+-	What is the effect of encouraging someone to vote via a phone call?
+-	Are phone calls more or less effective than in-person contact for get-out the vote efforts?
+
+Each of these questions addresses a general topic that political scientists seem to think is important. Each carries some suppositions and assumptions that in turn influence the type of explanation we might find convincing. 
+Why do people vote feels a bit broad to me. People probably vote for many reasons. How can we hope to adjudicate between all the possible reasons for voting? (Further are these the same reasons for not voting or do we need another set of explanations altogether?) 
+
+Whether phone calls are more or less effective than in-person contacts for GOTV efforts seems more tractable, but also perhaps to narrow. Do we really care? If we're confident we can identify an effect or difference in one study, are we sure we'll see similar effects in a different study conducted under different circumstances?
+
+In crafting your research questions, you want to strike a balance between things we actually care about (why do people vote) and things we can actually assess (what's effect of a particularly type of encouragement to vote). A few thoughts on this process:
+
+-	"Why" questions tend to be more compelling than "What" or "How" or "Do" questions, I think in part because "why" questions often imply a theory and suggest a counterfactual (why this and not that), while other ways of asking questions feel more descriptive. For example, why do the rich vote at higher rates than the poor. Well, one explanation may be that their relative social and economic status means they are more likely to be targets of mobilization efforts by campaigns (among many things). So a natural follow up to this larger question might be, what's the effect of providing similar mobilization efforts to the poor. Would they vote at similar rates to the rich? If so, then we've learned something about how mobilization explains class differences in participation.
+
+-	Thinking about questions in terms of puzzles is another useful trick. Why do parties exist when politicians' ideological preferences can explain the vast majority of their legislative behavior? Note this type of question contains a lot of presuppositions (how do we measure ideological preferences? Do they really explain legislative behavior? Is that what we care about?), but as point of departure for a study these type arguments can be useful
+
+-	Try to be simple and clear. Don't worry about asking the perfect question right away. Your questions can and should evolve over time, and I suspect some of you will write a paper that has nothing to do with the questions you posed here.
+
+For each question, please discuss the following:
+
+1.	**Why do we care?** Why we should care about the answer to this question. A strong justification is often that existing theories yield conflicting predictions and so your study will offer some insight into how to adjudicate betweeen these theories. A less strong justification is that no one has ever studied this before. Even if this is true (and it's often not) it may be true for good reason. No need for formal citations, but if there are specific theories or claims your addressing feel free to name names.
+
+2.	**The ideal experiment** Please describe an "ideal" experiment that you could run that would give you some purchase on your question. Note the key feature of an experiment, is that you the researcher are able to manipulate (through random assignment) some facet of the world. Assume money, resources, physics, and even ethics are not an object. If you could randomly assign anything, what would you manipulate. At what level of analysis would your manipulation occur (i.e. are your units of analysis individuals or countries or something else). How would you measure your outcome, again assuming you were all power and all-seeing. If that manipulation isn't feasible, what does that say about the ability to make a causal claim about your question?
+
+3.	**The observational study** Finally, considering some of the potential limitations that might prevent you from implementing your ideal experiment (it's hard to randomly assign democratic government), what is one way you might address your research question with observational data. Would your study use cross-sectional or longitudinal data. What are some of the concerns (selection on observables) that arise in this setting. Is there a natural experiment or some sort of discontinuity you might leverage to approximate this experimental ideal.
+
+Again, each paragraph should be brief and to the point. No need to specify a full research design–just give me the broad strokes. You're writing for each question should not exceed a page.
+
+After you've thought through how you might go about answering your question, please find
+
+4. **A published study** that relates to this question. It need not be exactly your question as posed, but it should be in a similar area. Include a full citation, and link to the study. Then in a paragraph sentences try to summarize:
+
+- The study's research question
+- Emprical design
+- Core findings.
+
+
+Finally on a scale of 1 (least feasible) to 10 (most feasible), please evaluate how likely you think it is you could write an empirical paper on this question for this course. 
+
+Don't worry about getting everything right. Your final projects can, will, and probably should change. The point of this exercise is to get some practice thinking about questions that interest you in the language of causal inference and potential outcomes.
+
+
+# Research Question 1:
+
+## Why do we care:
+
+## The ideal experiment:
+
+## The observational study:
+
+## A published study:
+
+## Feasibility: (X/10)
+
+# Research Question 2:
+
+## Why do we care:
+
+## The ideal experiment:
+
+## The observational study:
+
+## A published study:
+
+## Feasibility: (X/10)
+
+# Research Question 3:
+
+## Why do we care:
+
+## The ideal experiment:
+
+## The observational study:
+
+## A published study:
+
+## Feasibility: (X/10)

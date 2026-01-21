@@ -1,0 +1,1797 @@
+---
+title: "POLS 1600"
+subtitle: "Probability:<br>Distributions and Limit Theorems"
+date: last-modified
+date-format: "[Updated ]MMM D, YYYY"
+format: 
+  revealjs:
+    theme: brownslides.scss
+    logo: images/pols1600_hex.png
+    footer: "POLS 1600"
+    multiplex: false
+    transition: fade
+    slide-number: c
+    incremental: true
+    center: false
+    menu: true
+    scrollable: true
+    highlight-style: github
+    progress: true
+    code-overflow: wrap
+    chalkboard: true
+    html-math-method: mathjax
+    # include-after-body: title-slide.html
+    title-slide-attributes:
+      align: left
+      data-background-image: images/pols1600_hex.png
+      data-background-position: 90% 50%
+      data-background-size: 40%
+filters:
+  - openlinksinnewpage
+  - webr
+webr:
+  packages: ['tidyverse', 'dplyr',"ggpubr"]
+  autoload-packages: true
+execute: 
+  eval: true
+  echo: true
+  warning: false
+  message: false
+  cache: true
+---
+
+
+```{r}
+#| label: init
+#| echo: false
+#| results: hide
+#| warning: false 
+#| message: false
+
+library(tidyverse)
+library(labelled)
+library(haven)
+library(DeclareDesign)
+library(easystats)
+library(texreg)
+
+```
+
+
+
+# {{< fa map-location>}} Overview {.inverse}
+
+## Class Plan {.smaller}
+
+- Announcements (5 min)
+- Feedback (5 min)
+- Class plan
+  - Probability Distributions (20 min)
+  - Law of Large Numbers (20 min)
+  - Central Limit Theorem (20 min)
+  - Standard Errors (10 min)
+
+## Goals
+
+
+- [Probability distributions]{.blue} allow us to describe different [data generating processes]{.blue} and [quantify uncertainty]{.blue} about estimates
+
+- [The Law of Large Numbers]{.blue} tells us that the mean of a sample converges to the mean of population as the size of the sample grows larger.
+
+- [The Central Limit Theorem]{.blue} tells us that distribution of sample means of a given sample size converges in distribution to a Normal probability distribution
+
+- [Standard Errors]{.blue} describe the [width of a sampling distribution]{.blue} and allow us to assess the [statistical significance]{.blue} of regression estimates
+
+
+## Annoucements: Assignment 2 {.smaller}
+
+- Feedback on Assignment 2 posted to Canvas
+
+- Proposal:
+
+  - Substitute Lab 11 with in class workshops on Final Project
+  - This will count as both your grade on [Assignment 3](https://pols1600.paultesta.org/assignments/a3) and the Lab for that week
+  - Assignment 3 no longer due April 6, but you can upload questions for feedback this weekend.
+
+
+## Setup: Packages for today
+
+```{r}
+#| label: packages
+#| echo: true
+
+## Pacakges for today
+the_packages <- c(
+  ## R Markdown
+  "kableExtra","DT","texreg","htmltools",
+  ## Tidyverse
+  "tidyverse", "lubridate", "forcats", "haven", "labelled",
+  ## Extensions for ggplot
+  "ggmap","ggrepel", "ggridges", "ggthemes", "ggpubr", 
+  "patchwork",
+  "GGally", "scales", "dagitty", "ggdag", "ggforce",
+  # Data 
+  "COVID19","maps","mapdata","qss","tidycensus", "dataverse", 
+  # Analysis
+  "DeclareDesign", "easystats", "zoo"
+)
+
+## Define a function to load (and if needed install) packages
+
+ipak <- function(pkg){
+    new.pkg <- pkg[!(pkg %in% installed.packages()[, "Package"])]
+    if (length(new.pkg)) 
+        install.packages(new.pkg, dependencies = TRUE)
+    sapply(pkg, require, character.only = TRUE)
+}
+
+## Install (if needed) and load libraries in the_packages
+ipak(the_packages)
+```
+
+
+## Feedback
+
+![](https://i.pinimg.com/736x/74/42/a8/7442a830aa63f844eb04474c149e7834.jpg)
+
+```{r}
+#| label: feeback
+#| echo: false
+
+df <- haven::read_spss("../files/data/class_surveys/wk08.sav")
+
+
+df %>%
+  mutate(
+    optout =ifelse(is.na(optout),1, optout),
+    year = lubridate::year(StartDate)
+  ) %>% 
+  filter(year == 2025) %>% 
+  filter(optout != 2) -> df
+
+```
+
+
+## What did we like {.smaller}
+
+```{r}
+#| label: likes
+#| echo: false
+
+
+DT::datatable(df %>% 
+                select(Likes),
+               fillContainer = F,
+              height = "90%",
+              options = list(
+                pageLength = 5
+              )
+              )
+```
+
+## What did we dislike {.smaller}
+
+```{r}
+#| label: dislikes
+#| echo: false
+
+
+DT::datatable(df %>% 
+                select(Dislikes),
+               fillContainer = F,
+              height = "90%",
+              options = list(
+                pageLength = 5
+              )
+              )
+```
+
+## Advice for Others{.smaller}
+
+
+```{r}
+#| label: advice
+#| echo: false
+
+DT::datatable(df %>% 
+                select(Advice),
+               fillContainer = F,
+              height = "90%",
+              options = list(
+                pageLength = 5
+              )
+              )
+```
+
+## Help me with my fit
+
+![](https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExMDBrNm1ycms0NnJkZm53MTJkZHY4MWJpMnM1dDJhYmthbXRyMmw5OSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/9WxhJU5SUVhao/giphy.gif)
+
+## Our Fashion Advice {.smaller}
+
+```{r}
+#| echo: false
+library(tidyverse)
+library(kableExtra)
+
+
+df_poll <- df
+
+
+df_poll %>% 
+  mutate(across(starts_with("fit"), forcats::as_factor)) ->df_poll
+
+df_poll %>% 
+  select(starts_with("fit")) %>% 
+  pivot_longer(cols = starts_with("fit")) %>% 
+  group_by(name, value) %>% 
+  summarise(
+    n =n(),
+  ) %>% 
+  group_by(name) %>% 
+  summarise(
+    Choice = value[n==max(n)],
+    Votes = max(n)
+  ) %>% 
+  mutate(
+    Option = str_to_title(gsub("fit_","",name)),
+
+  ) %>% select(
+    Option, Choice, Votes
+  ) %>% ungroup() %>% na.omit() -> fashion_tab
+
+kable(fashion_tab[,2:4])
+```
+
+## What would Derek Guy say?
+
+
+{{< tweet ProfPaulTesta 1860348618294603905 >}}
+
+
+
+
+# {{< fa lightbulb >}} Probability Distributions {.inverse}
+
+
+## Probability {.smaller}
+
+-   Probability describes the likelihood of an event happening.
+
+-   Statistics uses probability to quantify uncertainty about estimates and hypotheses.
+
+-   Three *rules* of probability (**Kolmogorov axioms**)
+
+    -   Positivity: $$Pr(A) \geq 0 $$
+    -   Certainty: $$Pr(\Omega) = 1 $$
+    -   Additivity: $$Pr(A \text{ or } B) = Pr(A) + Pr(B)$$ iff A and B are mutually exclusive
+
+## Probability {.smaller}
+
+:::{.nonincremental}
+
+-   Two interpretations interpreting probabilities (**Frequentist** and **Bayesian**)
+
+-   Conditional Probability and Bayes Rule:
+
+$$Pr(A|B) = \frac{Pr(B|A)Pr(A)}{Pr(B)} = \frac{Pr(B|A)Pr(A)}{Pr(B|A)Pr(A)+Pr(B|A^\complement)Pr(A^\complement)}$$
+
+:::
+
+## Random Variables
+
+-   Random variables assign numeric values to each event in an experiment.
+
+    -   Mutually exclusive and exhaustive, together cover the entire sample space.
+
+-   Discrete random variables take on finite, or [countably infinite](http://mathworld.wolfram.com/CountablyInfinite.html) distinct values.
+
+-   Continuous variables can take on an uncountably infinite number of values.
+
+
+## Probability Distributions
+
+Broadly probability distributions provide mathematical descriptions of random variables in terms of the probabilities of events.
+
+$$\text{distribution} = \text{list of possible} \textbf{ values} + \text{associated} \textbf{ probabilities}$$
+
+Useful for:
+
+- Describing the [data generating process]{.blue}
+
+- Quantifying [uncertainty]{.blue} about our estimates
+
+## Probability Distributions
+
+
+The can be represented in terms of:
+
+-   Probability Mass/Density Functions
+
+    -   Discrete variables have probability mass functions (PMF)
+
+    -   Continuous variables have probability density functions (PDF)
+
+-   Cumulative Density Functions
+
+    -   Discrete: Summation of discrete probabilities
+
+    -   Continuous: Integration over a range of values
+
+
+## Common Probability Distributions
+
+![](https://miro.medium.com/max/4854/1*szMCjXuMDfKu6L9T9c34wg.png)
+
+[Source](https://www.datasciencecentral.com/common-probability-distributions-the-data-scientist-s-crib-sheet/)
+
+
+
+## Common Discrete Distributions
+
+
+-   **Bernoulli**: Coin flips with probability of heads, $p$
+
+-   **Uniform**: Coin flip with more than two outcomes
+
+-   **Binomial**: Adding up coin flips
+
+-   **Poisson**: Counting the number of events that occur at some average rate
+
+-   **Geometric**: Counting until a specific event occurs
+
+## Common Continuous Distributions
+
+
+- **Exponential**: Counting till a specific event occurs in continuous time
+
+- **Normal**: Describe the outcomes that are sums of random variables (with finite means)
+  - The limit of a Binomial distribution as $n\to \infty$
+  - The [maximum entropy](https://naokishibuya.medium.com/normal-distribution-demystified-933cf72185d2) when we only know the mean and variance
+
+- **t**: A finite sample approximation of the normal
+
+- $\chi^2$: Distribution of sums of squared variables from a Normal distribution
+
+## {.smaller}
+#### Bernoulli Distribution
+
+::: panel-tabset
+
+## Bernoulli Distribution
+
+A **Bernoulli random variable** describes of "coin flip", where parameter $p$, the probability of success (e.g "Heads")
+
+
+$$Pr(X=x)=f(x) =
+    \left\{
+        \begin{array}{cc}
+                p & \mathrm{if\ } x=1 \\
+                1-p & \mathrm{if\ } x=0 \\
+        \end{array} 
+    \right.$$
+
+
+
+$$
+F(x) =
+    \left\{
+        \begin{array}{cc}
+                0 & \mathrm{if\ } x<1 \\
+                1-p & \mathrm{if\ } 0\leq x<1 \\
+                1& \mathrm{if\ } x\geq1 \\
+        \end{array} 
+    \right.
+$$
+
+
+$$
+E[X] = p
+$$
+
+
+$$
+Var[X] = p(1-p)
+$$    
+
+ 
+
+## {{< fa chart-line >}} Visualize Distribution
+
+```{webr-r}
+#| label: plot_bernoulli
+#| context: setup
+
+## Caluclate E[X] and Var(X)
+
+plot_bernoulli <- function(p){
+bernoulli_mu <- p
+bernoulli_var <- p*(1-p)
+
+
+## dataframe for plotting PMF 
+df_pmf <- data.frame(x = 0:1,
+                 p = dbinom(0:1, size = 1, prob = p))
+
+## Plot PMF 
+
+bernoulli_pmf <- df_pmf %>% 
+  ggplot(aes(x=x, y = p))+
+    geom_point()+
+    geom_segment(aes(x=x,xend=x, y=0, yend =p))+
+    theme_minimal()+
+    scale_x_continuous(breaks=0:1)+
+  labs(y = "f(x)",
+       title = paste("PMF of Bernoulli p=",p,sep=""))
+
+##  dataframe for CDF 
+
+df_cdf <- data.frame(
+  x = c(-.5,0,0,0,1,1,1.5,1.5),
+  p = pbinom(c(-.5,-.5,0,0,0,1,1.5,1.5), size = 1, prob = p),
+  points = c(32,1,1,19,1,19,32,32)
+)
+
+
+##  Plot CDF 
+bernoulli_cdf <- df_cdf %>% 
+  ggplot(aes(x,p))+
+  scale_shape_identity()+
+  geom_point(aes(shape = points))+
+  geom_line()+
+  scale_x_continuous(breaks=0:1)+
+  labs(y = "F(x)",
+       title = paste("CDF of Bernoulli p=",p,sep=""))+
+  theme_minimal()
+
+#  plot to display paramaters 
+
+bernoulli_param <- data.frame(x=1,y=1) %>% 
+  ggplot(aes(x,y))+
+  theme_void()+
+  coord_cartesian(xlim = 0:1,ylim=c(0,1))+
+  annotate(x=0,y=.8,
+           hjust =0,
+           geom = "text",
+            label = paste("p = ",p,sep=""))+
+  annotate(x=0,y=.7,
+            hjust =0,
+          geom = "text",
+            label = paste("E[X] = ",bernoulli_mu,sep=""))+
+  annotate(x=0,y=.6,
+           hjust =0,
+           geom = "text",
+            label = paste("Var[X] = ",bernoulli_var,sep="")
+           )
+  
+fig_bernoulli <-  ggarrange(bernoulli_pmf, bernoulli_cdf,bernoulli_param, ncol=3 )
+return(fig_bernoulli)
+}
+
+```
+
+
+```{webr-r}
+#| label: bernoulli
+#| autorun: true
+#| context: interactive
+# Try Changing p
+p <- .5
+plot_bernoulli(p)
+```
+
+
+:::
+
+## {.smaller}
+#### Binomial Distribution
+
+:::: panel-tabset
+
+## Binomial Distribution
+
+A **Binomial random variable** is sum of successes from a series of [$n$]{.blue} trials from a Bernoulli Distribution with probability of success [$p$]{.blue} 
+
+
+$$
+Pr(X=x) = f(x)=\binom{n}{x}p^x (1-p) ^{1-x} \ \text{for x 0,1,2},\dots n
+$$ 
+
+
+$$
+E[X] = np
+$$
+
+
+$$
+Var[X] = np(1-p)
+$$    
+
+:::{.callout-tip}
+Binomial distributions are useful for modeling the binary (yes/no) outcome like voting
+:::
+
+ 
+
+## {{< fa chart-line >}} Visualize Distribution
+
+```{webr-r}
+#| label: plot_binomial
+#| context: setup
+
+## Caluclate E[X] and Var(X)
+
+
+plot_binomial <- function(n, p){
+binomial_mu <- n*p
+binomial_var <- n*p*(1-p)
+
+
+## dataframe for plotting PMF 
+df_pmf <- data.frame(x = 0:n) %>% 
+  mutate(
+   p = dbinom(x, size = n, prob = p)
+  )
+
+
+## Plot PMF 
+
+binomial_pmf <- df_pmf %>% 
+  ggplot(aes(x=x, y = p))+
+    geom_point()+
+    geom_segment(aes(x=x,xend=x, y=0, yend =p))+
+    theme_minimal()+
+  geom_vline(xintercept = binomial_mu, col = "red",linetype = "dashed")+
+  labs(y = "f(x)",
+       title = paste("PMF of Binomial (n=", n, ", p=",p,")",sep=""))
+
+##  dataframe for CDF 
+
+
+#  plot to display paramaters 
+
+binomial_param <- data.frame(x=1,y=1) %>% 
+  ggplot(aes(x,y))+
+  theme_void()+
+  coord_cartesian(xlim = 0:1,ylim=c(0,1))+
+  annotate(x=0,y=.7,
+           hjust =0,
+           geom = "text",
+            label = paste("p = ",p,sep=""))+
+  annotate(x=0,y=.8,
+           hjust =0,
+           geom = "text",
+            label = paste("n = ",n,sep=""))+
+  annotate(x=0,y=.6,
+            hjust =0,
+          geom = "text",
+            label = paste("E[X] = ",binomial_mu,sep=""))+
+  annotate(x=0,y=.5,
+           hjust =0,
+           geom = "text",
+            label = paste("Var[X] = ",binomial_var,sep="")
+           )
+  
+fig <-  ggarrange(binomial_pmf,binomial_param, ncol=2 )
+return(fig)
+}
+
+```
+
+
+```{webr-r}
+#| label: binomial_plot
+#| autorun: true
+#| context: interactive
+# Try changing n and p
+n <- 10
+p <- .5
+plot_binomial(n=n, p=p)
+```
+
+
+::::
+
+## {.smaller}
+#### Poisson Distribution
+
+:::: panel-tabset
+
+## Poisson Distribution
+
+A **Poisson random variable** describes the probability of observing a discrete [number of events]{.blue} in a fixed period of time given that occur with a fixed average rate of [$\lambda$]{.blue} 
+
+
+$$
+Pr(X=x) = f(x)=\frac{\lambda^x}{x!}e^{-\lambda}
+$$ 
+
+
+$$
+E[X] = \lambda
+$$
+
+
+$$
+Var[X] =  \lambda
+$$    
+
+:::{.callout-tip}
+Poisson distributions are useful for modeling counts (0,1,2,3 ...) like total acts of political participation
+:::
+ 
+
+## {{< fa chart-line >}} Visualize Distribution
+
+```{webr-r}
+#| label: plot_poisson
+#| context: setup
+
+## Caluclate E[X] and Var(X)
+
+
+
+
+
+plot_poisson <- function(lambda){
+poisson_mu <- lambda
+poisson_var <- lambda
+
+range <- ifelse(lambda < 10, 25, 5+2*lambda)
+
+
+## dataframe for plotting PMF 
+df_pmf <- data.frame(x = 0:range) %>% 
+  mutate(
+   p = dpois(x, lambda)
+  )
+
+
+## Plot PMF 
+
+poisson_pmf <- df_pmf %>% 
+  ggplot(aes(x=x, y = p))+
+    geom_point()+
+    geom_segment(aes(x=x,xend=x, y=0, yend =p))+
+    theme_minimal()+
+  geom_vline(xintercept = poisson_mu, col = "red",linetype = "dashed")
+  labs(y = "f(x)",
+       title = paste("PMF of Poisson (lambda = ",lambda, ")",sep=""))
+
+##  dataframe for CDF 
+
+
+#  plot to display paramaters 
+
+poisson_param <- data.frame(x=1,y=1) %>% 
+  ggplot(aes(x,y))+
+  theme_void()+
+  coord_cartesian(xlim = 0:1,ylim=c(0,1))+
+  annotate(x=0,y=.8,
+           hjust =0,
+           geom = "text",
+            label = paste("lambda"," = ",lambda,sep="")
+           )+
+  annotate(x=0,y=.7,
+            hjust =0,
+          geom = "text",
+            label = paste("E[X] = ",lambda,sep=""))+
+  annotate(x=0,y=.6,
+           hjust =0,
+           geom = "text",
+            label = paste("Var[X] = ",lambda,sep="")
+           )
+  
+fig <-  ggarrange(poisson_pmf,poisson_param, ncol=2 )
+return(fig)
+}
+
+```
+
+
+```{webr-r}
+#| label: poisson
+#| autorun: true
+#| context: interactive
+# Try changing n and p
+lambda <- 2
+plot_poisson(lambda = lambda)
+```
+
+
+::::
+
+
+## {.smaller}
+#### Normal Distribution
+
+:::: panel-tabset
+
+## Normal Distribution
+
+A **Normal distribution** is a continuous random variable defined by two parameters: a location parameter $\mu$ that determines the center of a distribution and a scale parameter $\sigma$ that determines the spread of a distribution
+
+$$
+f(x)=\frac{1}{\sqrt{2\pi\sigma^2}}\exp \left[
+-\frac{1}{2\sigma^2}(x-\mu)^2
+\right]
+$$
+
+
+
+$$
+E[X] = \mu
+$$
+
+
+$$
+Var[X] =  \sigma^2
+$$    
+
+::: {.callout-tip}
+Distributions  that involve summing random variables (with finite variance...) say, like the distribution of E[Y|X]) will tend towards normal distributions
+:::
+
+ 
+
+## {{< fa chart-line >}} Visualize Distribution
+
+```{webr-r}
+#| label: plot_normal
+#| context: setup
+
+## Caluclate E[X] and Var(X)
+
+
+plot_normal <- function(mu, sigma, xlims = c(-20,20)){
+
+  
+
+## dataframe for plotting pdf 
+df_pdf <- data.frame(x = seq(mu-4*sigma, mu+4*sigma, length.out =50)) %>% 
+  mutate(
+   p = dnorm(x, mu, sigma)
+  )
+
+
+## Plot pdf 
+
+normal_pdf <- df_pdf %>% 
+  ggplot(aes(x=x, y = p))+
+    stat_function( fun = dnorm, args = list(mu, sigma))+
+    theme_minimal()+
+  xlim(xlims[1],xlims[2])+
+  
+  labs(y = "f(x)",
+       title = paste("PDF of Normal Distribution\n(mu = ",mu, ",sigma = ",sigma,")",sep=""))+
+  geom_vline(xintercept = mu, col = "red", linetype = "dashed")
+
+##  dataframe for CDF 
+df_cdf <- data.frame(x = seq(mu-4*sigma, mu+4*sigma, length.out =50)) %>% 
+  mutate(
+   p = pnorm(x, mu, sigma)
+  )
+
+normal_cdf <- df_cdf %>% 
+  ggplot(aes(x=x, y = p))+
+    stat_function( fun = pnorm, args = list(mu, sigma))+
+    theme_minimal()+
+  xlim(xlims[1],xlims[2])+
+  labs(y = "F(x)",
+       title = paste("CDF of Normal Distribution\n(mu = ",mu, ", sigma = ",sigma,")",sep=""))
+
+
+#  plot to display paramaters 
+
+normal_param <- data.frame(x=1,y=1) %>% 
+  ggplot(aes(x,y))+
+  theme_void()+
+  coord_cartesian(xlim = 0:1,ylim=c(0,1))+
+  annotate(x=0,y=.8,
+           hjust =0,
+           geom = "text",
+            label = paste("mu"," = ",mu,sep=""),
+           parse=F)+
+  annotate(x=0,y=.7,
+           hjust =0,
+           geom = "text",
+            label = paste("sigma"," = ",sigma,sep=""),
+           parse=F)+
+  annotate(x=0,y=.6,
+            hjust =0,
+          geom = "text",
+            label = paste("E[X] = ",mu,sep=""))+
+  annotate(x=0,y=.5,
+           hjust =0,
+           geom = "text",
+            label = paste("Var[X] = ",sigma^2,sep="")
+           )
+  
+fig <-  ggarrange(normal_pdf,normal_cdf, normal_param, ncol=3 )
+return(fig)
+}
+
+```
+
+
+```{webr-r}
+#| label: normal
+#| autorun: true
+#| context: interactive
+# Try changing mu and sigma
+mu <- 0
+sigma <- 1
+plot_normal(mu = mu, sigma = sigma, xlims=c(-6,6) )
+```
+
+
+## Pr(X<0)
+
+
+```{webr-r}
+#| label: plot_normal_prob
+#| context: setup
+
+## Caluclate E[X] and Var(X)
+
+plot_normal_prob <- function(mu=0, sigma=1, x_lt=1, x_gt=NULL){
+  
+  prob_df <- data.frame(x = seq(mu-4*sigma, mu+4*sigma, length.out =50)) %>% 
+  mutate(
+   p = dnorm(x, mu, sigma),
+   cum = pnorm(x, mu,sigma)
+  )
+  if(is.null(x_gt)){
+    the_title <- paste("Pr(X < ",x_lt, ") = ", round(pnorm(x_lt,mu,sigma),3), sep = "")
+      
+    normal_pdf <- prob_df %>% 
+      ggplot(aes(x,p))+
+      stat_function(
+        fun = dnorm, args = list(mu, sigma)
+        ) +
+      stat_function(
+        fun = dnorm, args = list(mu, sigma),
+        geom = "area",
+        fill = "blue",
+        xlim = c(min(prob_df$x),x_lt),
+        alpha = .5
+        )+
+      labs(y = "f(x)")+
+      theme_minimal()
+    
+    normal_cdf <- prob_df %>% 
+      ggplot(aes(x,p))+
+      stat_function(
+        fun = pnorm, args = list(mu, sigma)
+        ) +
+      geom_segment(
+        data = data.frame(
+          x = min(prob_df$x),
+          xend = x_lt,
+          y = pnorm(x_lt,mu,sigma),
+          yend = pnorm(x_lt ,mu,sigma)
+        ),
+        aes(x=x,xend=xend,y=y,yend=yend),
+        col = "blue",
+        alpha = .5
+        )+
+      labs(y = "F(x)")+
+      theme_minimal()
+  
+    fig <- ggarrange(normal_pdf, normal_cdf) %>%  annotate_figure(
+      top = text_grob(the_title)
+    )
+    
+  }
+  if(!is.null(x_gt)){
+    the_title <- paste("Pr(",x_gt, "< X < ",x_lt, ") = ", round(pnorm(x_lt,mu,sigma)-pnorm(x_gt,mu,sigma),3), sep = "")
+      
+    normal_pdf <- prob_df %>% 
+      ggplot(aes(x,p))+
+      stat_function(
+        fun = dnorm, args = list(mu, sigma)
+        ) +
+      stat_function(
+        fun = dnorm, args = list(mu, sigma),
+        geom = "area",
+        fill = "blue",
+        xlim = c(x_gt,x_lt),
+        alpha = .5
+        )+
+      labs(y = "f(x)")+
+      theme_minimal()
+    
+    normal_cdf <- prob_df %>% 
+      ggplot(aes(x,p))+
+      stat_function(
+        fun = pnorm, args = list(mu, sigma)
+        ) +
+      geom_segment(
+        data = data.frame(
+          x = min(prob_df$x),
+          xend = x_lt,
+          y = pnorm(x_lt,mu,sigma),
+          yend = pnorm(x_lt ,mu,sigma)
+        ),
+        aes(x=x,xend=xend,y=y,yend=yend),
+        col = "blue",
+        alpha = .5
+        )+
+       geom_segment(
+        data = data.frame(
+          x = min(prob_df$x),
+          xend = x_gt,
+          y = pnorm(x_gt,mu,sigma),
+          yend = pnorm(x_gt ,mu,sigma)
+        ),
+        aes(x=x,xend=xend,y=y,yend=yend),
+        col = "blue",
+        alpha = .5
+        )+
+      labs(y = "F(x)")+
+      theme_minimal()
+  
+    fig <- ggarrange(normal_pdf, normal_cdf) %>%  annotate_figure(
+      top = text_grob(the_title)
+    )
+    
+  }
+  
+  
+  return(fig)
+  
+}
+
+
+
+```
+
+
+```{webr-r}
+#| label: normal
+#| autorun: true
+#| context: interactive
+# Pr(X < 0)
+pnorm(0, mean = 0, sd = 1)
+# Try changing x_lt
+plot_normal_prob(x_lt = 0 )
+```
+
+## Pr(-1 < X < 1)
+
+```{webr-r}
+#| label: normal
+#| autorun: true
+#| context: interactive
+# Pr(-1 < X < 1)
+pnorm(1, mean = 0, sd = 1) - pnorm(-1, mean = 0, sd = 1)
+
+# Try changing x_gt and x_lt
+plot_normal_prob(x_gt = -1, x_lt = 1 )
+```
+
+::::
+
+
+
+# {{< fa lightbulb >}} The Law of Large Numbers {.inverse}
+
+## The Law of Large Numbers (Intuitive) {.smaller}
+
+Suppose we wanted to know the average height of our class.
+
+Pick 1 person at random and use this as our estimate of the average
+
+It would be a pretty bad estimate (it would vary a lot from person to person), but it would be an unbiased estimate
+
+:::{.fragment}
+
+How would we improve our estimate?
+
+:::
+
+## The Law of Large Numbers (Intuitive) {.smaller}
+
+Suppose we increased our sample size from N=1 to N = 5.
+
+Now our estimate reflects the average of 5 people's heights as opposed to just 1. Both are are unbiased estimates of the truth, but the N=5 sample has a lower variance.
+
+
+Now suppose we took a sample of size N = N-1. That is we measured everyone except one person. Our estimate will be quite close to the truth, varying slightly based on the height of the person left out.
+
+
+## The Law of Large Numbers (Intuitive) {.smaller}
+
+Finally, suppose we took a sample of size N = 32 (e.g. the class size). Since our sample is the population, our estimate will be exactly equal to to the population. 
+
+Each sample will give us the same "true" value. That is, it will not vary at all.
+
+
+The idea that [as the sample size increases]{.blue}, the [distance of a sample mean]{.blue} from the [population mean $\mu$ goes to 0]{.blue} is called the [Law of Large Numbers]{.blue}
+
+## The (Weak) Law of Large Numbers (Formally){.smaller}
+
+Let $X_1, X_2, \dots$ be independent and identically distributed (i.i.d.) random variables with mean $\mu$ and variance $\sigma^2$.
+
+Then for every $\epsilon>0$, as the sample size increases (1), the distance of a sample mean from the population mean $\mu$ (2) goes to 0 (3).
+
+$$\overbrace{Pr(\left|\frac{X_1+\dots+X_n}{n}-\mu\right| > \epsilon)}^{\text{2. The distance of the sample mean from the truth}} \overbrace{\to 0}^{\text{3. Goes to 0}} \underbrace{\text{ as }n \to \infty}_{\text{1. As the sample size increases}}$$
+
+Equivalently:
+
+$$\lim_{n \to \infty} Pr(|\bar{X}_n - \mu| < \epsilon) = 1$$
+
+## Simulating the LLN {.smaller}
+
+The expected value of rolling a die 3.5.
+
+$$ E[X] = \Sigma x_ip(X=x_i) = 1/6 * (1+2+3+4+5+6)$$
+
+Let our [sample size, $N$]{.blue} be the number of times we roll a die as our 
+
+If $N=1$, we could get a 1, 2, 3, 4, 5, or 6. which would be pretty far from our expected value of 3.5
+
+## Simulating the LLN {.smaller}
+
+
+If we rolled the die two times and took an average, we could still get an value of 1 or 6 for average, but values closer to our expected value of 3.5, happen more often
+
+```{r}
+#| label: twodie
+
+# Calculate the average from 2 rows
+table(rowMeans(expand.grid(1:6, 1:6)))
+```
+
+## Simulating the LLN {.smaller}
+
+:::: panel-tabset
+
+
+## LLN 
+As we increase our sample size (roll the die more times), the LLN says the chance that our sample average is far from the truth $(p(\left|\frac{X_1+\dots+X_n}{n}-\mu\right| > \epsilon))$, gets vanishingly small.
+
+Let's write some code to simulate this process
+
+
+## {{< fa code >}} Code
+
+```{r}
+#| label: diefn
+
+# Create a 6-sided die
+die <- 1:6
+
+# Create function to simulate rolling a die N times
+
+roll_fn <- function(n) {
+  rolls <- data.frame(rolls = sample(die, size = n, replace = TRUE))
+  # summarize rolls 
+  df <- rolls %>%
+    summarise(
+    # number of rolls
+      n_rolls = n(),
+    # number of times 1 was rolled
+      ones = sum(rolls == 1),
+    # number of times 2 was rolled, etc..
+      twos = sum(rolls == 2),
+      threes = sum(rolls == 3),
+      fours = sum(rolls == 4),
+      fives = sum(rolls == 5),
+      sixes = sum(rolls == 6),
+      # Average of all our rolls
+      average =  mean(rolls),
+      # Absolute difference between averages and rolls
+      abs_error = abs(3.5-average)
+    )
+  # Return summary df
+  df
+}
+
+
+# Holder for simulatoin
+
+sim_df <- NULL
+
+# Set seed
+set.seed(123)
+
+for(i in 1:1000){
+  sim_df <- rbind(sim_df,
+                  roll_fn(i)
+  )
+}
+
+fig_lln <- sim_df %>% 
+  pivot_longer(
+    cols = c("average", "abs_error"),
+    names_to = "Measure",
+    values_to = "Estimate"
+  ) %>% 
+  mutate(
+    Measure = ifelse(Measure == "average","Average","Absolute Error") %>% 
+      factor(., levels = c("Average","Absolute Error"))
+  ) %>% 
+ggplot(aes(n_rolls, Estimate))+
+  geom_line()+
+  geom_smooth()+
+  facet_wrap(~Measure,scales = "free_y")+
+  theme_minimal()
+```
+
+## {{< fa table >}} Simulations
+
+```{r}
+#| label: llndata
+#| echo: false
+
+
+
+DT::datatable(sim_df)
+```
+
+## {{< fa chart-line >}} LLN
+
+```{r }
+#| label: figLLN
+#| echo: false
+
+fig_lln
+
+```
+
+::::
+
+## Proving the Weak LLN
+
+A proof of the LLN is as follows:
+
+First define $U$ such that its a sample mean for sample of size $n$
+
+$$U=\frac{X_1+\dots +X_n}{n}$$
+
+## Proving the Weak LLN{.smaller}
+
+Then show that the sample mean, $U$ is an unbiased estimator of the population mean $\mu$
+
+$$\begin{align*}
+E[U]&=E[\frac{X_1+\dots +X_n}{n}]=\frac{1}{n}E[X_1+\dots +X_n]\\
+&=\frac{n\mu}{n}=\mu
+\end{align*}$$
+
+With a variance
+
+$$\begin{align*}
+Var[U]&=Var[\frac{X_1+\dots +X_n}{n}]=\\
+    &=Var[\frac{X_1}{n}]\dots Var[\frac{+X_n}{n}]\\
+    &\frac{\sigma^2}{n^2}\dots \frac{\sigma^2}{n^2}\\
+    &\frac{n \sigma^2}{n^2}\\
+    &\frac{\sigma^2}{n}\\
+\end{align*}$$
+
+That decreases with N.
+
+## Proving the Weak LLN
+
+By [Chebyshev's inequality](https://en.wikipedia.org/wiki/Chebyshev%27s_inequality) the maximum fraction of values that can be some distance from that distribution's mean:
+
+$$Pr(\left|U-\mu\right| > \epsilon) \leq \frac{\sigma^2}{n\epsilon^2}$$
+
+Which $\to 0$ as $n \to \infty$
+
+## The Strong Law of Large Numbers {.smaller}
+
+As you may have inferred, there is a weak law of large numbers and a strong law of large numbers.
+
+The weak law of large numbers states that as the sample size increases, the sample mean [converges in probability](https://en.wikipedia.org/wiki/Convergence_in_probability) to the population value $\mu$
+
+$$\lim_{n \to \infty} Pr(|\bar{X}_n - \mu| < \epsilon) = 1$$
+
+The strong law of large numbers states that as the sample size increases, the sample mean [converges almost surely](https://en.wikipedia.org/wiki/Convergence_of_random_variables#Almost_sure_convergence) to the population value $\mu$
+
+$$\lim_{n \to \infty} Pr(|\bar{X}_n = \mu|) = 1$$ The [differences in types of convergence](https://en.wikipedia.org/wiki/Law_of_large_numbers#Differences_between_the_weak_law_and_the_strong_law) won't matter much for us in this course
+
+
+
+# {{< fa lightbulb >}} The Central Limit Theorem {.inverse}
+
+
+## The Central Limit Theorem{.smaller}
+
+So the LLN tells us that as our sample size grows, an unbiased estimator like the sample average, will get increasingly close to the to the "true" value of the population of mean.
+
+If we took a bunch of samples of the same size and calculated the mean of each sample:
+
+-   the distribution of those sample means ([*the sampling distribution*]{.blue}) would be centered around the truth (because the estimator is unbiased).
+-   the width of the distribution (its variance) would decrease [as the sample size increased]{.blue}
+
+- The [Central Limit Theorem]{.blue} tells us about the [shape of that sampling distribution.]{.blue}
+
+## Z-scores and Standardization
+
+Let $X$ be a random variable with mean $\mu$ and standard deviation $\sigma$.
+
+Define a new R.V. $Z$ as the *standardization* of $X$:
+
+$$Z=\frac{X-\mu}{\sigma}$$
+
+Where Z has $\mu=0$ and $\sigma=1$.
+
+## Notation for the CLT
+
+
+Let $X_1,X_2,\dots,X_n$ be independent and identically distributed RVs with mean $\mu$ and standard deviation $\sigma$.
+
+Define $S_n$ and $\bar{X}_n$ as follows:
+
+$$S_n= X_1,X_2,\dots,X_n= \sum_{i=1}^n X_i$$
+
+$$\bar{X}=\frac{X_1,X_2,\dots,X_n}{n}= \frac{S_n}{n}$$
+
+## Additional facts for the CLT {.smaller}
+
+We can show that:
+
+$$\begin{alignat*}{3}
+E[S_n]&=n\mu \hspace{2em}Var[S_n]&=n\sigma^2 \hspace{2em} \sigma_S&=\sqrt{n}\sigma\\
+E[\bar{X}_n]&=\mu \hspace{2em}Var[\bar{X}_n]&=\frac{\sigma^2}{n} \hspace{2em}\sigma_{\bar{X}}&=\frac{\sigma}{\sqrt{n}}\\
+\end{alignat*}$$
+
+Basically: the expected value and variance of the sum is just $n$ times the population parameters (the true values for the distribution).
+
+Since the mean is just the sum divided by the sample size, the expected value of the mean is equal to the population value and the variance and standard deviations of the mean are decreasing in $n$.
+
+Finally, we can define $Z$ to in terms of either $S$ or $\bar{X}$
+
+$$Z_n=\frac{S_n-n\mu}{\sqrt{n}\sigma}=\frac{\bar{X}_n-\mu}{\sigma/\sqrt{n}}$$
+
+## Central Limit Theorem{.smaller}
+
+For a *sufficiently large* $n$
+
+$$\begin{align*}
+\bar{X_n}&\approx N(\mu,\sigma^2/n) \\ 
+\bar{S_n} &\approx N(n\mu,n\sigma^2) \\
+\bar{Z_n}&\approx N(0,1) 
+\end{align*}$$
+
+-   The [distribution of means]{.blue} $(\bar{X_n})$ from almost any distribution $X$ is [approximately Normal]{.blue} (converges in distribution), but with a smaller variance than ($\sigma^2/n$)
+
+-   Proof: [Several ways](https://www.cs.toronto.edu/~yuvalf/CLT.pdf), but requires a little more math than is required for this course
+
+## CLT: Why it matters
+
+- Why is this result so important?
+
+- Lots of our questions come of the form, how does a typical value of Y vary with X.
+
+- We may not know the true underlying distribution of Y
+
+- But the CLT says we can often approximate the distribution of a [typical value of Y conditional on X]{.blue} $(E[Y|X])$ using a normal (or related) distributions.
+
+- Knowing these distribution, in turn allows us to conduct [statistical inference]{.blue}
+
+## {.smaller}
+#### Simulating the CLT 
+
+:::: panel-tabset
+
+## Concept
+
+:::{.nonincremental
+}
+The following code simulates the process of:
+
+- taking repeated ($N_{sim} = 2000$)samples of varying sizes ($N_{samp}= 10, 100, 100$)
+- from two **very not Normal** populations (Poison($\lambda = 5$), Weird mixture of distributions)
+- Calculating the means from each sample
+- Plotting the [sampling distributions]{.blue} of sample means
+- Approximating the distribution of sample means with Normal distributions
+
+:::{.callout-tip}
+Even if random variable's distribution is not at all Normal,  *the distribution of sample means* often can be reasonably approximated by Normal Distributions 
+:::
+
+:::
+
+## {{< fa code >}} Messy Code
+```{r}
+# Define Population
+
+N <- 10000
+set.seed(123)
+pop_df <- tibble(
+  Poisson = rpois(N, 5),
+  # Binomial = rbinom(size=20, n=N, prob = .25),
+  type = sample(0:2,N,replace =T,prob=c(.4,.2,.4)),
+  Weird = case_when(
+    type == 0 ~ rbeta(N,5,2)*2,
+    type == 1 ~ (rexp(N,4)-6.5)*-1,
+    type == 2 ~ rnorm(N,8,2)
+    
+  )
+  ) %>% select(Poisson, Weird)
+
+fig_pop_dist <- pop_df %>% 
+  pivot_longer(
+    col = everything(),
+    names_to = "Distribution"
+  ) %>% 
+  ggplot(aes(value,fill=Distribution,group=Distribution))+
+  geom_histogram()+
+  xlim(0,16)+
+  facet_grid(~Distribution,scales = "free_x")+
+  stat_summary(aes(x=0, y=value),fun.data =\(x) data.frame(xintercept = mean(x)), geom="vline")
+
+sample_sizes <- c(10,100,1000)
+
+calculate_sample_mean <- function(n,pop){
+  df <- tibble(
+    size = n,
+    `Sample Mean` = mean(sample(pop,n,replace = F))
+  )
+  return(df)
+}
+
+simulate_clt_fn <- function(nsims = 100, the_pop,the_n, ...){
+  sim <- 1:nsims %>% purrr::map_df(\(x)calculate_sample_mean(pop=the_pop, n=the_n))
+  return(sim)
+}
+
+
+
+# binomial_clt <- sample_sizes %>% 
+#   purrr::map_df( \(x)  simulate_clt_fn(nsims= 2000,the_pop = pop_df$Binomial, the_n = x)) %>% 
+#   mutate(
+#     id = 1:n(),
+#     Distribution = "Binomial"
+#   )
+
+poisson_clt <- sample_sizes %>% 
+  purrr::map_df( \(x)  simulate_clt_fn(nsims= 2000,the_pop = pop_df$Poisson, the_n = x)) %>% 
+  mutate(
+    id = 1:n(),
+    Distribution = "Poisson"
+  )
+
+weird_clt <- sample_sizes %>% 
+  purrr::map_df( \(x)  simulate_clt_fn(nsims= 2000,the_pop = pop_df$Weird, the_n = x)) %>% 
+  mutate(
+    id = 1:n(),
+    Distribution = "Weird"
+  )
+
+sample_df <- poisson_clt %>% bind_rows(weird_clt) %>% 
+  mutate(
+    `Sample Size` = factor(size)
+  )
+
+
+fig_samp_dist <- sample_df %>% 
+  ggplot(aes(`Sample Mean`,col=`Sample Size`))+
+  geom_density()+
+  geom_rug()+
+  # theme( strip.background.y = element_blank(),
+  #     strip.text.y = element_blank())+
+  xlim(0,16)+
+  facet_grid(`Sample Size`~Distribution,scales = "free_y")
+
+  
+fig_clt <- ggarrange(fig_pop_dist,fig_samp_dist,ncol=1)
+
+
+p10_weird <- sample_df %>% 
+  filter(Distribution == "Weird") %>% 
+  filter(size == 10) %>% 
+  ggplot(aes(`Sample Mean`))+
+  geom_density(aes(col="Sample Size =10"))+
+  geom_rug(aes(col="Sample Size =10"))+
+  stat_function(
+    fun=dnorm, args = list(mean=mean(pop_df$Weird),  sd=sd(pop_df$Weird)/sqrt(10)),
+    col="black",linetype = "dashed"
+    )+
+  xlim(0,10)+
+  theme_minimal()+
+  guides(col="none")+
+  labs(
+    title = "Normal Approximation to Sampling Distribution",
+    subtitle = "Weird Distribution, N = 10"
+  )
+
+p1000_weird <- sample_df %>% 
+  filter(Distribution == "Weird") %>% 
+  filter(size == 1000) %>% 
+  ggplot(aes(`Sample Mean`))+
+  geom_density(aes(col="Sample Size =1000"))+
+  geom_rug(aes(col="Sample Size =1000"))+
+  stat_function(
+    fun=dnorm, args = list(mean=mean(pop_df$Weird),  sd=sd(pop_df$Weird)/sqrt(1000)),
+    col="black",linetype = "dashed"
+    )+
+  xlim(4,6)+
+  theme_minimal()+
+  guides(col="none")+
+  labs(
+    title = "Normal Approximation to Sampling Distribution",
+    subtitle = "Weird Distribution, N = 1000"
+  )
+
+p10_poisson <- sample_df %>% 
+  filter(Distribution == "Poisson") %>% 
+  filter(size == 10) %>% 
+  ggplot(aes(`Sample Mean`))+
+  geom_density(aes(col="Sample Size =10"))+
+  geom_rug(aes(col="Sample Size =10"))+
+  stat_function(
+    fun=dnorm, args = list(mean=5,  sd=sd(pop_df$Poisson)/sqrt(10)),
+    col="black",linetype = "dashed"
+    )+
+  xlim(0,10)+
+  theme_minimal()+
+  guides(col="none")+
+  labs(
+    title = "Normal Approximation to Sampling Distribution",
+    subtitle = "Poisson(Lambda = 5), N = 10"
+  )
+
+p1000_poisson <- sample_df %>% 
+  filter(Distribution == "Poisson") %>% 
+  filter(size == 1000) %>% 
+  ggplot(aes(`Sample Mean`))+
+  geom_density(aes(col="Sample Size =1000"))+
+  geom_rug(aes(col="Sample Size =1000"))+
+  stat_function(
+    fun=dnorm, args = list(mean=5,  sd=sd(pop_df$Poisson)/sqrt(1000)),
+    col="black",linetype = "dashed"
+    )+
+  xlim(4,6)+
+  theme_minimal()+
+  guides(col="none")+
+  labs(
+    title = "Normal Approximation to Sampling Distribution",
+    subtitle = "Poisson(Lambda = 5), N = 1000"
+  )
+
+fig_clt_approx <- ggarrange(p10_weird, p1000_weird, p10_poisson,p1000_poisson)
+
+
+```
+
+## {{< fa chart-line>}} Samp Distrib
+
+```{r}
+#| label: fig_clt
+#| echo: false
+
+fig_clt
+```
+
+## {{< fa chart-line>}} Normal Approx
+
+```{r}
+#| label: fig_clt_approx
+#| echo: false
+
+fig_clt_approx
+```
+
+::::
+
+## Summary
+
+-   So we see that our sampling distributions are centered on the truth, and as the sample size increases, the width of the distribution decreases (Law of Large Numbers)
+
+-   The shapes of distributions of sample means can be approximated by a Normal Distribution $\bar{X} \sim N(\mu, \sigma^2/n)$
+
+# {{< fa magnifying-glass>}} Lab 8 and Standard Errors {.inverse}
+
+## Lab 8
+
+- Lab 8 got into the weeds on standard errors, asking you to use `lm_robust()` to calculate [robust clustered standard errors]{.blue}
+
+- A [standard error]{.blue} is simply the [standard deviation]{.blue} of a theoretical [sampling distribution]{.blue}
+
+- A [sampling distribution]{.blue} describes the range of estimates [we could have seen]{.blue}
+
+- [Standard errors]{.blue} are key to [quantifying uncertainty]{.blue} and making claims about [statistical significance]{.blue}
+
+
+## Errors and Residuals
+
+Errors ($\epsilon$) represent the difference between the outcome and the true mean:
+
+$$
+\begin{aligned}
+y = X\beta + \epsilon\\
+\epsilon = y -X\beta
+\end{aligned}
+$$
+Residuals ($\hat{\epsilon}$) represent the difference between the outcome and our estimate
+
+
+$$
+\begin{aligned}
+y = X\beta + \hat{\epsilon}\\
+\hat{\epsilon} = y -X\hat{\beta}
+\end{aligned}
+$$
+
+## Variance of Regression Coefficients depends on the errors{.smaller}
+
+$$
+\begin{aligned}
+\hat{\beta} &= (X'X)^{-1}X'y \\
+&= (X'X)^{-1}X'(X\beta + \epsilon) \\
+&= \beta + (X'X)^{-1}X'\epsilon \\
+\end{aligned}
+$$
+
+## Variance of Regression Coefficients depends on the errors{.smaller}
+
+Recall that
+
+$$
+\begin{aligned}
+E[\text{c}] &= \text{c} \\
+Var[\text{c}] &= 0\\
+Var[X] &= Var[X^2] - Var[X]^2
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+Var[\hat{\beta}] &= Var[\beta] +Vav[(X'X)^{-1}X'\epsilon] \\
+ &= 0 +E[(X'X)^{-1}X'\epsilon \epsilon'X(X'X)^{-1}] - E[(X'X)^{-1}X'\epsilon]E](X'X)^{-1}X'\epsilon] \\
+&= E[(X'X)^{-1}X'\epsilon \epsilon'X(X'X)^{-1}] - 0 \\
+& = (X'X)^{-1}X'E[\epsilon \epsilon']X(X'X)^{-1} \\
+& = (X'X)^{-1}X'\Sigma X(X'X)^{-1} \\
+\end{aligned}
+$$
+
+## Constant Error Variance{.smaller}
+
+Some motivations for OLS regression assume that the errors are independent and identically distributed
+
+$$
+\begin{aligned}
+Var(\epsilon|X) = E[\epsilon\epsilon'] = \Sigma &= 
+\begin{bmatrix}
+\sigma^2 & 0 & 0 & \cdots & 0 \\
+0 &\sigma^2  & 0 & \cdots &0 \\
+0 & 0 &\sigma^2 & \cdots &0 \\
+\vdots & \vdots  & \vdots &\ddots & \vdots\\
+0 & 0 & 0 & \cdots & \sigma^2 \\
+\end{bmatrix} = \sigma^2
+\begin{bmatrix}
+1 & 0 & 0 & \cdots & 0 \\
+0 &1  & 0 & \cdots &0 \\
+0 & 0 &1 & \cdots &0 \\
+\vdots & \vdots  & \vdots &\ddots & \vdots\\
+0 & 0 & 0 & \cdots & 1 \\
+\end{bmatrix} = \sigma^2\text{I}
+\end{aligned}
+$$
+
+## Constant Error Variance{.smaller}
+
+
+In which case, $Var[\hat{\beta}]$ reduces to:
+
+$$
+Var[\hat{\beta}]= (X'X)^{-1}X'\Sigma X(X'X)^{-1} = \sigma^2(X'X)^{-1}
+$$
+And we can estimate, $\sigma^2$ with the residuals from the model
+
+$$
+\hat{\sigma}^2 = \frac{\hat{\epsilon}'\hat{\epsilon}}{n-k}
+$$
+
+## Non-Constant Error Variance{.smaller}
+
+Constant error variance or ([homoskedasticity]{.blue}) is often an [unrealistic assumption]{.blue}
+
+If there is non-constant error variance ([heteroskedasticity]{.blue}) then:
+
+$$
+\begin{aligned}
+Var(\epsilon|X) = E[\epsilon\epsilon'] = \Sigma &= 
+\begin{bmatrix}
+\sigma_1^2 & 0 & 0 & \cdots & 0 \\
+0 &\sigma_2^2  & 0 & \cdots &0 \\
+0 & 0 &\sigma_3^2 & \cdots &0 \\
+\vdots & \vdots  & \vdots &\ddots & \vdots\\
+0 & 0 & 0 & \cdots & \sigma_n^2 \\
+\end{bmatrix} 
+\end{aligned}
+$$
+
+## Conseqeunces of Non-Constant Error Variance
+
+- $\sigma^2(X'X)^{-1}$ is no longer an unbiased estimator for $Var[\hat{\beta}]$
+
+- Our statistical tests using $\sigma^2(X'X)^{-1}$ to calculate standard errors will not live up to their promised error rates and coverage probabilities (more to come)
+
+- $\hat{\beta}$, however are still unbiased estimates of $\beta$
+
+
+
+## Constant Error Variance
+
+```{r}
+#| label: errorvar
+#| echo: false
+
+n_ols <- 1000
+
+df_ols <- tibble(
+  x = runif(n_ols, 1, 10),
+  y = 3*x + rnorm(n_ols,0,2)
+)
+
+x <- -5:5
+y <- x
+df_plot <- tibble(x,y)
+df_constant <- tibble(
+  x = runif(n_ols, -5, 5),
+  y = x + rnorm(n_ols,0,1)
+)
+
+df_nonconstant <- tibble(
+  x = runif(n_ols, -5, 5),
+  y = x + rnorm(n_ols,0,abs(x+10)/10)
+)
+
+
+
+p_constant <- df_plot %>% 
+  ggplot(aes(x,y)) +
+  geom_line()+
+  geom_point(data=df_constant, aes(x,y),size=.5,
+             alpha=.5)+
+    stat_function(fun = dnorm, args = list(0,1),
+                aes(x=after_stat(y-4),y=after_stat(x-4)),
+                xlim = range(df_plot$y)
+                )+
+    stat_function(fun = dnorm, args = list(0,1),
+                aes(x=after_stat(y+-4),y=after_stat(x+-4)),
+                xlim = range(df_plot$y),
+                geom = "polygon", alpha=.3
+                )+
+      stat_function(fun = dnorm, args = list(0,1),
+                aes(x=after_stat(y-2),y=after_stat(x-2)),
+                xlim = range(df_plot$y)
+                )+
+    stat_function(fun = dnorm, args = list(0,1),
+                aes(x=after_stat(y+-2),y=after_stat(x+-2)),
+                xlim = range(df_plot$y),
+                geom = "polygon", alpha=.3
+                )+
+    stat_function(fun = dnorm, args = list(0,1),
+                aes(x=after_stat(y),y=after_stat(x)),
+                xlim = range(df_plot$y)
+                )+
+    stat_function(fun = dnorm, args = list(0,1),
+                aes(x=after_stat(y),y=after_stat(x)),
+                xlim = range(df_plot$y),
+                geom = "polygon", alpha=.3
+                )+
+    stat_function(fun = dnorm, args = list(0,1),
+                aes(x=after_stat(y+2),y=after_stat(x+2)),
+                xlim = range(df_plot$y)
+                )+
+    stat_function(fun = dnorm, args = list(0,1),
+                aes(x=after_stat(y+2),y=after_stat(x+2)),
+                xlim = range(df_plot$y),
+                geom = "polygon", alpha=.3
+                ) +
+  stat_function(fun = dnorm, args = list(0,1),
+                aes(x=after_stat(y+4),y=after_stat(x+4)),
+                xlim = range(df_plot$y)
+                )+
+  stat_function(fun = dnorm, args = list(0,1),
+                aes(x=after_stat(y+4),y=after_stat(x+4)),
+                xlim = range(df_plot$y),
+                geom = "polygon", alpha=.3
+                )+
+  labs(
+    title = "Constant Error Variance"
+  )+
+  theme_minimal()
+  
+p_nonconstant <- df_plot %>% 
+  ggplot(aes(x,y)) +
+  geom_line()+
+  geom_point(data=df_nonconstant, aes(x,y),
+             size = .5, alpha=.5)+
+    stat_function(fun = dnorm, args = list(0,1),
+                aes(x=after_stat(y-4),y=after_stat(x-4)),
+                xlim = range(df_plot$y)
+                )+
+    stat_function(fun = dnorm, args = list(0,1),
+                aes(x=after_stat(y+-4),y=after_stat(x+-4)),
+                xlim = range(df_plot$y),
+                geom = "polygon", alpha=.3
+                )+
+      stat_function(fun = dnorm, args = list(0,1),
+                aes(x=after_stat(y*2-2),y=after_stat(x-2)),
+                xlim = range(df_plot$y)
+                )+
+    stat_function(fun = dnorm, args = list(0,1),
+                aes(x=after_stat(y*2+-2),y=after_stat(x+-2)),
+                xlim = range(df_plot$y),
+                geom = "polygon", alpha=.3
+                )+
+    stat_function(fun = dnorm, args = list(0,1),
+                aes(x=after_stat(y*3),y=after_stat(x)),
+                xlim = range(df_plot$y)
+                )+
+    stat_function(fun = dnorm, args = list(0,1),
+                aes(x=after_stat(y*3),y=after_stat(x)),
+                xlim = range(df_plot$y),
+                geom = "polygon", alpha=.3
+                )+
+    stat_function(fun = dnorm, args = list(0,1),
+                aes(x=after_stat(y*4+2),y=after_stat(x+2)),
+                xlim = range(df_plot$y)
+                )+
+    stat_function(fun = dnorm, args = list(0,1),
+                aes(x=after_stat(y*4+2),y=after_stat(x+2)),
+                xlim = range(df_plot$y),
+                geom = "polygon", alpha=.3
+                ) +
+  stat_function(fun = dnorm, args = list(0,1),
+                aes(x=after_stat(y*5+4),y=after_stat(x+4)),
+                xlim = range(df_plot$y)
+                )+
+  stat_function(fun = dnorm, args = list(0,1),
+                aes(x=after_stat(y*5+4),y=after_stat(x+4)),
+                xlim = range(df_plot$y),
+                geom = "polygon", alpha=.3
+                )+
+  labs(
+    title = "Non-Constant Error Variance"
+  )+
+  theme_minimal()
+  
+
+
+ggarrange(p_constant, p_nonconstant)
+
+  
+
+
+```
+
+## Robust Standard Errors {.smaller}
+
+Robust standard errors attempt to estimat $\sigma_i^2$ using the residuals from the model $\hat{\epsilon_i}$ and [additional adjustments](https://declaredesign.org/r/estimatr/articles/mathematical-notes.html) to yield [robust standard errors]{.blue} that are [consistent]{.blue}, even when there is heteroskedasiticity. 
+
+$$
+Var[\hat{\beta}]= (X'X)^{-1}X'
+\begin{bmatrix}
+\hat{\epsilon}_1^2 & 0 & 0 & \cdots & 0 \\
+0 &\hat{\epsilon}_2^2  & 0 & \cdots &0 \\
+0 & 0 &\hat{\epsilon}_3^2 & \cdots &0 \\
+\vdots & \vdots  & \vdots &\ddots & \vdots\\
+0 & 0 & 0 & \cdots & \hat{\epsilon}_n^2 \\
+\end{bmatrix}
+X(X'X)^{-1} = 
+$$
+
+Clustered standard errors go a step further, summing up the residuals within clusters (groups) in the data. 
+
+## Replicating Grumbach and Hill
+
+Ok, let's revisit some of the questions from [lab 8](https://pols1600.paultesta.org/labs/08-lab-comments)
+
+## Summary
+
+- [Probability distributions]{.blue} allow us to describe different [data generating processes]{.blue} and [quantify uncertainty]{.blue} about estimates
+
+- [The Law of Large Numbers]{.blue} tells us that the mean of a sample converges to the mean of population as the size of the sample grows larger.
+
+- [The Central Limit Theorem]{.blue} tells us that distribution of sample means of a given sample size converges in distribution to a Normal probability distribution
+
+- [Standard Errors]{.blue} describe the [width of a sampling distribution]{.blue} and allow us to assess the [statistical significance]{.blue} of regression estimates
+
+## References

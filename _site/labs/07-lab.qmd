@@ -1,0 +1,616 @@
+---
+title: 'Lab 07 - Replicating Grumbach and Hill (2022):'
+subtitle: "Understanding the Data and Design "
+author: "P.F. Testa"
+date: "Last Updated `r format(Sys.Date())`"
+format:
+  html:
+    toc: true
+    toc-location: right
+    toc-float: true
+    toc-depth: 2
+    number-sections: true
+execute: 
+  eval: true
+  echo: true
+  warning: false
+  message: false
+  cache: true
+---
+
+
+# Overview {.unnumbered}
+
+In this lab, we will begin the process of replicating Grumbach and Hill (2021) "Rock the Registration: Same Day Registration Increases Turnout of Young Voters."
+
+To accomplish this we will:
+
+0. Load packages and set the working directory to **where this file is saved**. (5 minutes)
+
+1. **Summarize the study** in terms of it's research question, theory, design, and results. (10 minutes)
+
+2. Download the replication files and **save them in the same folder as this lab** (5 minutes)
+
+3. **Load the data** from your computers into R (5 minutes)
+
+4. Get a quick **HLO** of the data (10 minutes)
+
+5. **Merge** data on election policy into data on voting (5 minutes, together),
+
+6. **Recode** the covariates, key predictors, and outcome for the study (10 minutes, partly together)
+
+7. Recreate **Figure 1** (15 minutes)
+
+8. Recreate **Figure 2** (15 minutes)
+
+Finally, we'll take the weekly survey which should be a **fun** one
+
+One of these 8 tasks will be randomly selected as the graded question for the lab.
+
+You will work in your assigned groups. Only one member of each group needs to submit the html file of lab.
+
+This lab **must** contain the names of the group members in attendance.
+
+If you are attending remotely, you will submit your labs individually.
+
+Here are your assigned groups for the semester.
+
+```{r}
+#| label: groups
+#| echo: false
+groups_df <- readr::read_csv("https://pols1600.paultesta.org/files/groups.csv")
+
+DT::datatable(groups_df)
+```
+
+# Goals {.unnumbered}
+
+This week's lab will give you practice:
+
+- Summarizing academic work (Q1)
+
+- Loading data into R from your own computer (rather than just downloading it from the web) (Q2-3)
+
+- Looking at new data and figuring out what you need to do (e.g. merging, recoding) before you can analyze it (Q4-6)
+
+- Creating and interpreting figures that summarize aspects of a study's design and data (Q7-8)
+
+Next week, we'll get into the nuts and bolts of replicating Grumbach and Hill's main results
+
+
+# Workflow {.unnumbered}
+
+## Please render this .qmd file {.unnumbered}
+
+As with every lab, you should:
+
+-   Download the file
+-   Save it in your course folder
+-   **Update the `author:` section of the YAML header to include the names of your group members in attendance.**
+-   Render the document
+-   Open the html file in your browser (Easier to read)
+-   Write your code in the **chunks provided under each section**
+-   Comment out or delete any test code you do not need
+-   **Render the document again after completing a section or chunk** (Error checking)
+-   Upload the final lab to [Canvas](https://canvas.brown.edu/courses/1094972/assignments){target="_blank"}.
+
+# Get set up to work{.unnumbered}
+
+
+## Load packages {.unnumbered}
+
+
+As always, let's load the packages we'll need for today
+
+```{r}
+#| label: packages
+
+the_packages <- c(
+  ## R Markdown
+  "kableExtra","DT","texreg","htmltools",
+  ## Tidyverse
+  "tidyverse", "lubridate", "forcats", "haven", "labelled",
+  ## Extensions for ggplot
+  "ggmap","ggrepel", "ggridges", "ggthemes", "ggpubr", 
+  "GGally", "scales", "dagitty", "ggdag", "ggforce",
+  # Data 
+  "COVID19","maps","mapdata","qss","tidycensus", "dataverse",
+  "janitor",
+  # Analysis
+  "DeclareDesign", "easystats", "zoo"
+)
+
+# Define function to load packages
+ipak <- function(pkg){
+    new.pkg <- pkg[!(pkg %in% installed.packages()[, "Package"])]
+    if (length(new.pkg)) 
+        install.packages(new.pkg, dependencies = TRUE)
+    sapply(pkg, require, character.only = TRUE)
+}
+
+ipak(the_packages)
+```
+
+We will also want to **set our working directory** to where your lab is saved.
+
+## IMPORTANT: Set your working directory {.unnumbered}
+
+
+1. On the top panel of R Studio click: 
+
+> Session Session > Set working directory > Source file location
+
+2. Paste the output that shows up in your console into the code chunk below
+
+```{r}
+#| label: setwd
+
+# Set working directory
+# Session > Set working directory > Source file location
+# paste output here:
+
+
+```
+
+All right, now let's summarize the study
+
+# Summarize the study
+
+In a few sentences please answer the following questions about Grumbach and Hill (2021). I'll get you started:
+
+- **What's research question?** Broadly, Grumbach and Hill (2021 p. 405) are interested in whether "election reform improve turnout among young people?" Specifically, Grumbach and Hill assess whether turnout is higher among younger voters in states with Same-Day-Registration (SDR) laws. 
+
+- **What's the theory motivating the research question and expectations?** Grumbach and Hill (henceforth, G&H) contribute to and draw on a broad literature on voting in the field of political behavior. While past work has found ...
+
+- **What's the empirical design?** G&H draw on a variety of datasets to test their claim. Their primary data for their main analyses comes from the ... 
+
+- **What's the core finding?** The main results of their analyses are presented in ...
+
+
+
+# Download the replication files
+
+Ok now let's download the replication files from the paper's [replication archive](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/AW5LU8){target="_blank"}
+
+Please see the [slides](https://pols1600.paultesta.org/slides/07-slides#/go-to-the-papers-dataverse){target="_blank"}
+
+Make sure the files are **unzipped and saved** in  the **SAME folder as this lab**
+
+
+
+# Load the data
+
+There should be 11 total files in the dataverse_files folder. We're only going to use three of the data files for this replication
+
+Please uncomment and run the code below
+
+```{r}
+#| label: data
+
+# Load fips_codes
+# fips_codes <- read_csv("dataverse_files/fips_codes_website.csv")%>%
+#   janitor::clean_names()
+# 
+# # Load policy data
+# policy_data <- readRDS("dataverse_files/policy_data_updated.RDS")%>%
+#   janitor::clean_names()
+# 
+# # Load CPS data
+# cps <- read_csv("dataverse_files/cps_00021.csv") %>%
+#   janitor::clean_names()
+  
+
+```
+
+:::{callout-note}
+The `janitor::clean_names()` after each `read_XXX()` function converts column names to snake case
+:::
+
+```{r}
+#| label: dataverse
+#| message: false
+#| warning: false
+#| results: hide
+
+# Backup code if you run into major issues downloading and unzipping the files
+# DONT UNCOMMENT UNLESS YOU NEED TO
+
+# Sys.setenv("DATAVERSE_SERVER" = "dataverse.harvard.edu")
+# 
+# 
+# # Load fips_codes
+# fips_codes <- get_dataframe_by_name(
+#   "fips_codes_website.tab",
+#   "doi:10.7910/DVN/AW5LU8"
+# ) %>% janitor::clean_names()
+# 
+# # Load policy data
+# policy_data <- get_dataframe_by_name(
+#   "policy_data_updated.RDS",
+#   "doi:10.7910/DVN/AW5LU8",
+#   .f = readRDS
+# ) %>% janitor::clean_names()
+# 
+# # Load CPS data
+# cps <- get_dataframe_by_name(
+#   "cps_00021.csv",
+#   "doi:10.7910/DVN/AW5LU8",
+#   .f = read_csv
+# ) %>% janitor::clean_names()
+
+```
+
+
+# Get a HLO of each dataset
+
+In the code chunk below, please take a quick look at each dataset and answer the following for about each dataset. I'll get you started for `fips_codes`
+
+- `fips_codes`
+  - **What is the unit of analysis?** Federal Information Processing Standards (FIPS) state and county codes
+  - **How many observations** 41,787 observations
+  - **How many variables** 33 variables
+  - **What variables identify US states** `st` and `statefip`
+
+- `data`
+  - **What is the unit of analysis?** State-years
+  - **How many observations** 2,450 observations
+  - **How many variables** 33 variables
+  - **What variable describes whether a state had Same Day Registration (SDR)** `sdr`
+
+- `cps`
+  - **What is the unit of analysis?** A respondent to the CPS, a US resident
+  - **How many observations** 3,039,807 respondents
+  - **How many variables** 25 variables
+  - **What variables describe whether someone voted and how old they are** `voted`, and `age`
+
+```{r}
+#| label: hlo
+
+# HLO fips_codes
+dim(fips_codes)
+names(fips_codes)
+glimpse(fips_codes)
+
+# HLO policy_data
+
+
+# HLO cps
+
+
+```
+
+
+
+# Merge `policy_data` into `cps` data
+
+To replicate the paper's main results we need to merge the data on election laws in the `policy_data` dataframe into the data on voting in the `cps` data frame.
+
+To merge `policy_data` into `cps`, we first need to merge the `st` column (State postal abbreviations of) from `fips_codes` into `cps` by the common `statefip` variable that is common to both `cps` and `state_fip`
+
+Then we can merge `policy_data` into `cps` by the common variables `st` and `year` to match the policies in a given state and year to observations in `cps` from that state in that year.
+
+To avoid complications that from running merge code multiple times, we will save the output of  each merge into temporary dataframes (e.g. `tmp1`), and then we're confident we have done this correctly, will save the final merged data back into `cps`.
+
+Following Grumbach and Hill, we'll also filter out any observations before 1978 and all observations from DC and North Dakota (why?). 
+
+Please uncomment and run the following code
+
+```{r}
+#| label: merge
+
+# # Merge state abbreviations (st) into CPS using statefip
+# tmp1 <- cps %>% dplyr::left_join(fips_codes %>%
+#                       select(st, statefip),
+#                       by = "statefip",
+#                     multiple = "first"
+#                     )
+# # tmp1 is cps with the added column "st"
+# dim(tmp1)
+# names(tmp1)[26]
+# dim(cps)
+# 
+# # Merge policy data into tmp1 using common variables `st` and `year`
+# tmp2 <- tmp1 %>% dplyr:: left_join(
+#   policy_data,
+#   by = c("st", "year")
+# )
+# 
+# # Check merges
+# dim(tmp2)
+# dim(tmp1)
+# # New variables in tmp2 not in tmp1
+# names(tmp2)[!names(tmp2) %in% names(tmp1)]
+# 
+# # Filter out DC, ND, and observations before 1978
+# tmp2 %>%
+#   filter(!st %in% c("DC","ND"))%>%
+#   filter(year>=1978) -> tmp3
+# 
+# # Replace cps with merged data
+# cps <- tmp3
+# # Tidy up: remove temporary data frames
+# rm(list=c("tmp1","tmp2","tmp3"))
+```
+
+# Examine and recode the data
+
+The **primary outcome** of interest for this paper, is whether someone said they `voted` in a given year.
+
+The **treatment** is the effect of living in state with **same day registration** which is captured by the `sdr` variable.
+
+The **key predictor** will be indicators of a respondent's **age_cohort** which we **need to create** from the `age` variable. 
+
+Next lab we will also look at models that the control for the following covariates:  
+
+- `education` recoded from the original `educ` variable in the `cps` collapsing 
+- `race_f` a factor variable recoded from the original `race` variable in the `cps`
+  - Indicators for respondents who identify as only one race (ie `is_white`)^[The CPS coding on this is not great and there's no measure of ethnicity in these data. Forgive the crude indicators, but their necessary to recreate some of Grumbach and Hill's analysis next week. ]
+- `income` recoded from the original `faminc` variable in the `cps`
+- `is_female` recoded from the original `sex` variable in the `cps`
+
+> Below we will recode the data for analysis. I will recode the covariates and the key predictors. Then **you will write code to look at and recode the outcome.**
+
+## Recode covariates
+
+The CPS are messy data. Please run the code below to recode the covariates in the spirit of (i.e. with minor changes) what Grumbach and Hill did. ^[Note the way the recoding is described in the appendix to the paper is not how it is actually implemented in the replication code in `rock_the_reg_replication_code.R`. For example, the appendix describes income as ranging from 1 (Under \$10k) to 16 (\$500k and above), when their code, implemented above produces 32 unique values, in part because the way the CPS asked and coded the income question changed overtime. We're going to roll with it for now...]
+
+:::{.callout-note}
+The file `cps_00021.cbk.txt` contains the **codebook** for the data, telling us what numeric values of each variable correspond to substantively. So if you're wondering **how I know** what should be recoded to what specific values, it comes from reading the codebook, looking at Grumbach and Hill's code, looking at the raw variable with a table, and the using `case_when()` to judiciously code the data. You'll get practice doing this in your final projects, but I don't want to spend too much time on this this lab, which is why you're only recoding the outcome `voted`
+:::
+
+```{r}
+#| label: recodecovar
+
+# # Recode covariates
+# cps %>% 
+#   mutate(
+#     # Useful for plotting figure 2
+#     SDR = ifelse(sdr == 1, "SDR", "non-SDR"),
+#     education = case_when(
+#       educ == 1 ~ NA, #Blank
+#       educ < 40 ~ 1, # No high school
+#       educ >= 40 & educ < 73 ~ 2, # Some high school
+#       educ == 73 ~ 3, # High school degree
+#       educ >= 80 & educ <= 110 ~ 4, # Some college
+#       educ >= 111 & educ <123 ~ 5, # BA degree (And weirdly people who completed 5, 5+ and 6+ years of college)
+#       educ >= 123 & educ <=125 ~ 6, # BA degree (And weirdly people who completed 5, 5+ and 6+ years of college)
+#       educ == 999 ~ NA # Missing/unknown
+#     ),
+#     race_f = case_when(
+#       race == 999 ~ NA,
+#       T ~ factor(race)
+#     ),
+#     is_white = case_when(
+#       race == 100 ~ 1,
+#       race == 999 ~ NA,
+#       T ~ 0
+#     ),
+#     is_black = case_when(
+#       race == 200 ~ 1,
+#       race == 999 ~ NA,
+#       T ~ 0
+#     ),
+#     is_aapi = case_when(
+#       race == 650 ~ 1,
+#       race == 651 ~ 1,
+#       race == 652 ~ 1,
+#       race == 999 ~ NA,
+#       T ~ 0
+#     ),
+#     is_other = case_when(
+#       is_white == 1 ~ 0,
+#       is_black == 1 ~ 0,
+#       is_aapi ==  1 ~ 0,
+#       race == 999 ~ NA,
+#       T ~ 1
+#     ),
+#     income = case_when(
+#       faminc > 843 ~ NA, # Remove Missing/Refused
+#       T ~ as.numeric(factor(faminc))
+#     ),
+#     is_female = case_when(
+#       sex == 2 ~ 1,
+#       sex == 1 ~ 0,
+#       T ~ NA # recode Not in Universe as NA
+#     )
+#     
+#   ) -> cps
+
+```
+
+
+## Create `age_group` and age_group_XX_XX indicators
+
+Next we'll create an `age_group` variable and binary indicators for each age cohort of the form `age_group_XX_XX`.
+
+Please uncomment and run the code below
+
+```{r}
+#| label: recodeage
+
+# # Create age variables
+# cps %>% 
+#   mutate(
+#     age_group = case_when(
+#       age > 18 & age <= 24 ~ "18-24",
+#       age > 24 & age <= 34  ~ "25-34",
+#       age > 34 & age <= 44  ~ "35-44",
+#       age > 44 & age <= 54  ~ "45-54",
+#       age > 54 & age <= 64  ~ "55-64",
+#       age > 64 ~ "65+",
+#       T ~ NA
+# 
+#     ),
+#     age_group_18_24 = ifelse(age_group == "18-24", 1, 0),
+#     age_group_25_34 = ifelse(age_group == "25-34", 1, 0),
+#     age_group_35_44 = ifelse(age_group == "35-24", 1, 0),
+#     age_group_45_54 = ifelse(age_group == "45-24", 1, 0),
+#     age_group_55_64 = ifelse(age_group == "55-24", 1, 0),
+#     age_group_65plus = ifelse(age_group == "65+", 1, 0)
+#   ) -> cps
+```
+
+## Check age recodes
+
+It's good practice when recoding, to check the output. Please use the `table()` to create a **cross-tab** of `age_group` and `age_group_18_24`. 
+
+```{r}
+#|label: checkage
+
+# Compare age_group to age_group_18_24 using table()
+
+```
+
+**Explain in words how the variable `age_group_18_24` relates to the variable `age_group`** 
+
+## Recode the outcome
+
+Now it's your turn. Please do the following:
+
+- **Look** at the variable `voted` using the `table()` function
+  - `1` corresponds to **Did not vote**
+  - `2 corresponds to **Voted**
+  - `96`,`97`,`98` to people who didn't provide and answer, or didn't remember
+  - `99` corresponds to people [who shouldn't be in the sample ("Not in universe")](https://cps.ipums.org/cps-action/faq){target="_blank"}
+
+- Create a new variable called `dv_voted` using `case_when()` inside of `mutate()` that is:
+  - 1 when `voted == 2`
+  - 0 when `voted == 1`,
+  - 0 when `voted > 2 & voted <99`
+  - `NA` when `voted == 99`
+
+```{r}
+#| label: recodedvvote
+
+# Look at distribution of voted using table()
+
+
+# Create variable dv_voted using mutate(), case_when(), and voted variable
+
+
+```
+
+## Save the recoded data
+
+Finally, let's save our recoded data to file called `cps_clean.rda` that we can use for next week's lab
+
+Uncomment and run the following:
+
+```{r}
+#| label: savedata
+# save(cps, file = "cps_clean.rda")
+```
+
+
+# Recreate Figure 1
+
+Phew, all that work, just to get set up to work. Now we can **have some fun.**
+
+Let's recreate a version of Figure 1 using the policy data from the `policy_data` data frame.
+
+## Write down aesthetic mappings from the figure:
+
+Before we create this figure, think about the information conveyed by the figure's aesthetics (the x axis, the y axis, the color of the squares), and the corresponding columns from `policy_data` that contain this information.
+
+- x-axis: 
+- y-axis: 
+- col: 
+
+## Create a variable called `SDR`
+
+It will be helpful to have a variable called `SDR` in `policy_data` that takes the value of "SDR" when `sdr == 1` and "non-SDR" when `sdr == 0`
+
+Please use `case_when()` or `ifelse()` to create `SDR` in `policy_data`
+
+```{r}
+#| label: figSDR
+
+# Create a variable called SDR in policy_data
+
+
+
+```
+
+## Recreate Figure 1
+
+Recall, we need three things to make a figure:
+
+- data
+- aesthetics
+- geometries
+
+Using data from `policy_data` starting in 1978 (hint add a    `filter()`) and the aesthetic mappings identified above use `ggplot()` with the `geom_point()` geometry to make a version of Figure 1 from paper.
+
+
+```{r}
+#| label: fig1
+
+# Recreate Figure 1
+
+```
+
+## Interpret Figure 1.
+
+Please answer the following questions:
+
+- **How many states had Same Day Registration at some point in time?** XX states
+
+- **How many states had Same Day Registration in 2018?** XX states had SDR in 2018
+ 
+- **Did any states get rid of Same Day Registration? When did they get rid of this policy?** 
+
+- **What's up with North Dakota?** 
+
+
+Use this code chunk to write any code that might help you answer these questions
+
+```{r}
+#| label: intfig1
+
+# Write code to help you answer the questions above (if needed)
+
+
+```
+
+# Recreate Figure 2
+
+Figure 2 shows the proportion of people voting by age group in states that did and did not have Same Day Registration. 
+
+If we take the average of a binary indicator like `dv_voted`, we get a proportion, which corresponds to what Grumbach and Hill call the `Pr(Voted)`
+
+## Calculate the proption voting by age group and SDR
+
+With the `cps` data, use `group_by()` and summarize to calculate the proportion of people voting by age group in states that did and did not have same day registration in the code chunk below.
+
+Save the results to a new object called `fig2_df`
+
+```{r}
+#| label: fig2_df
+
+#  Calculate the proportion of voting by age group and SDR
+
+```
+
+## Recreate Figure 2
+
+Using `fig2_df` recreate a Figure 2 from the paper:
+
+- filter out values of `age_group` that are `NA`
+- set the appropriate aesthetic mappings in `ggplot()`
+- use `geom_bar(stat = "identity", position = "dodge")`
+
+```{r}
+#| label: fig2
+
+#Recreate Figure 2
+
+
+```
+
+## Interpret Figure 2
+
+**What does Figure 2 tell us?** Figure 2 provides ...
+
+# Take the Class Survey {.unnumbered}
+
+Please take a few moments to complete the [class survey](https://brown.co1.qualtrics.com/jfe/form/SV_dgxOHQDv0xG1HzU){target="_blank"} for this week.){target="_blank"} for this week. This one's a banger.

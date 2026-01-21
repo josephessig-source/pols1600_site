@@ -1,0 +1,93 @@
+---
+title: "POLS 1600"
+subtitle: "Topic"
+date: last-modified
+date-format: "[Updated ]MMM D, YYYY"
+format: 
+  revealjs:
+    theme: brownslides.scss
+    logo: images/pols1600_hex.png
+    footer: "POLS 1600"
+    multiplex: false
+    transition: fade
+    slide-number: c
+    incremental: true
+    center: false
+    menu: true
+    scrollable: true
+    highlight-style: github
+    progress: true
+    code-overflow: wrap
+    chalkboard: true
+    # include-after-body: title-slide.html
+    title-slide-attributes:
+      align: left
+      data-background-image: images/pols1600_hex.png
+      data-background-position: 90% 50%
+      data-background-size: 40%
+filters:
+  - openlinksinnewpage
+execute: 
+  eval: true
+  echo: true
+  warning: false
+  message: false
+  cache: true
+---
+
+
+```{r}
+#| label: init
+#| echo: false
+#| results: hide
+#| warning: false 
+#| message: false
+
+library(tidyverse)
+library(labelled)
+library(haven)
+library(DeclareDesign)
+library(easystats)
+library(texreg)
+
+```
+
+
+
+# {{< fa map-location>}} Overview {.inverse}
+
+## Class Plan
+
+- Announcements
+- Feedback
+- Review
+- Class plan
+
+
+## Annoucements
+
+## Feedback
+
+## {{< fa lightbulb >}}  Concepts 
+
+## {{< fa code>}} Code   
+
+# {{< fa magnifying-glass>}} Review {.inverse}
+
+## Review
+
+# {{< fa lightbulb >}} Concept {.inverse}
+
+
+## Concept
+
+
+# {{< fa code>}} Code {.inverse}
+
+## Code
+
+# {{< fa home >}} Summary {.inverse}
+
+## Summary
+
+## References

@@ -1,0 +1,22 @@
+---
+title: 'Comments Lab 09 - Exploring data in the 2020 National Elections Study:'
+subtitle: "Understanding the Data and Design "
+author: "P.F. Testa"
+date: "Last Updated `r format(Sys.Date())`"
+format:
+  html:
+    toc: true
+    toc-location: right
+    toc-float: true
+    toc-depth: 2
+    number-sections: true
+execute: 
+  eval: true
+  echo: true
+  warning: false
+  message: false
+  cache: true
+---
+
+
+![](https://media1.tenor.com/m/H3sj9Yy6L9oAAAAC/dikembe-mutombo.gif)

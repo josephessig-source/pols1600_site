@@ -1,0 +1,138 @@
+---
+title: 'Lab 02 - Visualizing data on COVID-19 in the U.S.'
+author: "Your Name HERE"
+date: "Last Updated `r format(Sys.Date())`"
+format:
+  html:
+    toc: true
+    toc-location: right
+    toc-float: true
+    toc-depth: 2
+    number-sections: true
+    embed-resources: true
+execute:
+  error: true
+  echo: true
+  warning: false
+---
+
+
+# Overview {.unnumbered}
+
+Our goal for today is to first reproduce this figure:
+
+```{r}
+#| label: goal
+#| echo: false
+knitr::include_graphics("https://pols1600.paultesta.org/labs/images/02_fig.png")
+```
+
+And then adapt and improve this figure (or other figures) to explore questions we have about the data
+
+I don't expect anyone to be able to recite from memory the exact code, functions, and syntax to accomplish this task.
+
+That said, you've already seen the code you need.
+
+It's available to you in multiple places like the [slides](https://pols1600.paultesta.org/slides/01-slides#/commented-code) and the comments to last week's [labs](https://pols1600.paultesta.org/labs/01-lab-comments.html)
+
+My hope is that this lab will help you do the following:
+
+-   **Chunk big tasks into smaller concrete steps**
+    - *How do I produce a figure that shows the average rate of new cases pe month for states with a particular type of face mask policy?* 
+      - Well first, I'll need to load some packages to work with and visualize data. 
+      - Then, I'll need to get the data. And then...
+-   **Think and write programmatically**
+    -   In this .qmd file, I'll first ask you to outline, conceptually, all the steps you'll need to do to produce this figure.
+    -   Don't worry if you can't think of all the necessary steps or aren't sure of the order. We'll be working through this collectively
+    -   When we do code, I'll ask you to organize your code as outlined below:
+        -   Separate your steps into sections using the `#` headers in Markdown
+        -   Write a brief overview in words that a normal human can understand, what the code in that section is doing
+        -   Paste the code for that section into a code chunk
+        -   Add brief comments to this code to help your reader understand what's happening
+        -   Render your document after completing each section.
+-   **Mapping concepts to code**
+    -   You shouldn't have to write much new code. Just copy and paste from the labs and slides.
+    -   Your goal for today is to interpret that code and develop a mental map that allows you to say when I want to do this type of task (say "recode data"), I need to use some combination of these functions (`%>%`, `mutate()`, maybe `group_by()` or `case_when()`)
+-   **Practice wrangling data**
+    -   How do you load data?
+    -   How do you look at data?
+    -   How do you transform data?
+-   **Practice visualizing data**
+    -   Using the grammar of graphics to translate raw data into visual graphics
+    -   Understanding the components of this grammar:
+        -   data
+        -   aesthetics
+        -   geometries
+        -   facets
+        -   statistics
+        -   coordinates
+        -   themes
+    -   Exploring what happens when we change these components
+
+We'll work in pairs and periodically check in as a class to check our progress, review concepts, and share insights.
+
+
+If we finish early, you're free to go. If you want, we can take some time to [explore some additional figures](https://www.r-graph-gallery.com/index.html){target="_blank"} we might produce like [maps](https://jtr13.github.io/cc19/different-ways-of-plotting-u-s-map-in-r.html){target="_blank"} or [lollipop](https://www.r-graph-gallery.com/lollipop-plot.html){target="_blank"} plots.
+
+Ok, let's begin!
+
+# Please render this .qmd file to produce a .html file{.unnumbered}
+
+For every lab:
+
+-   Download the file
+-   Save it in your course folder
+-   Render the document
+-   Open the html file in your browser (Easier to read)
+-   Check `Render on Save` and render the document again after completing a section or chunk (Error checking)
+-   Upload the final lab to [Canvas](https://canvas.brown.edu/courses/1094972/assignments){target="_blank"}.
+
+# Describe the components of the figure you're trying to reprodce
+
+Recall, that we need `data`, `aesthetic` mappings and `geometries` to produce a figure. You can find the code from lab 1 [here](https://pols1600.paultesta.org/labs/01-lab-comments#uncomment-the-code-below-to-visualize-this-cases_by_month_and_policy)
+
+-   What is the data set used? (Hint it's a transformation of `covid_us`)
+-   What are the aesthetic mappings in this plot
+-   What is the geometry?
+
+# Outline and implement the steps you will need to complete this process {.unnumbered}
+
+# Step 1
+
+Describe in words what your code below is doing
+
+```{r}
+# Write the code for Step 1 here
+```
+
+# Step 2
+
+Perhaps Step 2 has multiple parts and code chunks
+
+Use sub headers to break down step 2 into its constituent parts
+
+## Step 2.1
+
+Describe briefly (in a sentence or two or a couple of bullet points) what this section does
+
+```{r}
+# Write the code for Step 2.1 here
+```
+
+## Step 2.2
+
+Describe briefly (in a sentence or two or a couple of bullet points) what this section does
+
+```{r}
+# Write the code for Step 2.2 here
+```
+
+# Revise the figure in some way
+
+- Perhaps add a title and label. Or change the aesthetic mappings. Or maybe facet the figure by some other variable.
+
+- Check out the examples from [Tuesday's slides](https://pols1600.paultesta.org/slides/02-slides#/dataviz-describing-distributions-and-associations)
+
+# CLASS SURVEY
+
+Finally, please take a moment to complete this week's [class survey](https://brown.co1.qualtrics.com/jfe/form/SV_9WCkw7pc2OlDLi6)

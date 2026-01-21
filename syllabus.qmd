@@ -9,9 +9,23 @@ format:
 
 # Overview
 
+## Course Information
+
+- Course Site: [https://josephessig-source.github.io/pols1600_site/](https://josephessig-source.github.io/pols1600_site/)
+
+- Canvas: Canvas Link Forthcoming
+
+- Where and When: Monday, Wednesday, and Friday, 12pm-12:50pm in Andrews House 310
+
+- Office Hours: Time TBD, in Taubman Center Offices, Stephen Roberts Hall Rm. 123, or by appointment (through email) - in-person or on Zoom. 
+
+- Teaching Assistant: Sara Ansari, M.Sc. Email: Sara_ansari@brown.edu 
+  + TA Office Hours: TBD 
+
+
 ## Description
 
-This class is an introduction to applied statistics as practiced in political science. It is computing intensive, and, as such, will enable students to execute basic quantitative analyses of social science data using the linear model with statistical inference arising from re-sampling and permutation based techniques as applied in the [R statistical computing language](https://cran.r-project.org/) with [RStudio](https://www.rstudio.com/). By the end of the course, a successful student will be able to find social science data online, download it, analyze it, and write about how the analyses bear on focused social science or policy questions.
+This course is an introduction to applied statistics as practiced in political science. It is computing intensive, and as such will enable students to execute basic quantitative analyses of social science data using the linear model with statistical inference arising from re-sampling and permutation based techniques as applied in the [R statistical computing language](https://cran.r-project.org/) with [RStudio](https://www.rstudio.com/). By the end of the course, a successful student will be able to find social science data online, download it, analyze it, and write about how the analyses bear on focused social science or policy questions.
 
 ## Expectations
 
@@ -19,7 +33,7 @@ More than anything I assume a willingness to engage with mathematics, data analy
 
 I also assume that you will read the syllabus and that you keep up to date on changes in the syllabus which will be announced in class. You should not expect a response to emails that ask a question already answered in the syllabus.
 
-This is an experimental class so you should expect that the syllabus will change throughout the term. Make sure you have the syllabus with the latest date stamp. I will announce syllabus changes via the emails sent from Canvas.
+You should expect that the syllabus will change throughout the term. Make sure you have the syllabus with the latest date stamp. I will announce syllabus changes via the emails sent from Canvas.
 
 ## Academic Integrity
 
@@ -28,6 +42,22 @@ Neither the University nor I tolerate cheating or plagiarism. The Brown Writing 
 > In preparing assignments a student often needs or is required to employ outside sources of information or opinion. All such sources should be listed in the bibliography. Citations and footnote references are required for all specific facts that are not common knowledge and about which there is not general agreement. New discoveries or debatable opinions must be credited to the source, with specific references to edition and page even when the student restates the matter in his or her own words. Word-for-word inclusion of any part of someone else's written or oral sentence, even if only a phrase or sentence, requires citation in quotation marks and use of the appropriate conventions for attribution. Citations should normally include author, title, edition, and page. (Quotations longer than one sentence are generally indented from the text of the essay, without quotation marks, and identified by author, title, edition, and page.) Paraphrasing or summarizing the contents of another's work is not dishonest if the source or sources are clearly identified (author, title, edition, and page), but such paraphrasing does not constitute independent work and may be rejected by the instructor. Students who have questions about accurate and proper citation methods are expected to consult reference guides as well as course instructors.
 
 We will discuss specific information about your written work in class in more detail, but if you are unsure of how to properly cite material, please ask for clarification. If you are having difficulty with writing or would like more information or assistance, consult the Writing Center, the Brown library and/or the [Academic Code](https://www.brown.edu/academics/college/degree/policies/academic-code) for more information.
+
+## Policy on Artificial Intelligence (AI)
+
+In this course, the use of any AI model (including ChatGPT, Gemini, Claude, or others) to complete labs, tutorials, assignments, or your final paper is strongly discouraged. In particular, AI models are not a replacement for your own intellectual effort. **Any use of AI tools must be disclosed.** 
+
+Use of AI without proper citation or disclosure in this course will be considered a violation of the academic code and will result in a zero on the associated assignment. Moreover, any AI use (even cited) must be consistent with the academic code as described above. If you choose to use AI tools in acceptable ways, such as to brainstorm ideas, debug your code, edit grammar, or “improve” your writing, you are solely responsible for its output including “hallucinations” in the content of your submissions, and will be graded accordingly. I will reiterate: AI is not a replacement for your own intellectual effort and learning. 
+
+## Support Resources 
+
+Your success at Brown involves more than just academic performance. I encourage you to feel comfortable speaking to me about any challenges you are experiencing in or out of the classroom so I may submit a Care Report on your behalf to help you get connected with the appropriate support resources on campus. 
+
+Free, easily accessible, confidential mental health services are available to assist you with addressing any mental health concerns you may be experiencing through Counseling and Psychological Services (CAPS). CAPS is available on demand 24/7 and 365 days/year to support students experiencing a mental health crisis, at 401-863-3476.  You can learn more about the broad range of mental health services available on campus at the Counseling and Psychological Services (CAPS) website: https://caps.brown.edu.
+
+## Brown Ever True 
+
+The Brown Ever True initiative encourages community members to access a wide range of existing and new support services and resources both on and off campus, including 24/7 crisis support. You can find more information about these community resources and mental health support at the Brown ever True website: https://evertrue.brown.edu/resources. 
 
 ## Community Standards
 
@@ -39,24 +69,26 @@ Brown University is committed to full inclusion of all students. Please inform m
 
 ## Academic Accommodations
 
-Any student with a documented disability is welcome to contact me as early in the semester as possible so that we may arrange reasonable accommodations. As part of this process, please be in touch with Student Accessibility Services by calling 401-863-9588 or [online](http://brown.edu/Student_Services/Office_of_Student_Life/seas/index.html)
+Brown University is committed to full inclusion of all students. Please inform me early in the term if you may require accommodations or modification of any of course procedures. You may speak with me after class, during office hours, or by appointment. If you need accommodations around online learning or in classroom accommodations, please be sure to reach out to Student Accessibility Services (SAS) for their assistance (sas@brown.edu, 401-863-9588). Undergraduates in need of short-term academic advice or support can contact an academic dean in the College by emailing college@brown.edu. Graduate students may contact one of the deans in the Graduate School by emailing graduate_school@brown.edu.
 
-## Diversity and Inclusion
+## Classroom Inclusion
 
-This course is designed to support an inclusive learning environment where diverse perspectives are recognized, respected and seen as a source of strength. It is my intent to provide materials and activities that are respectful of various levels of diversity: mathematical background, previous computing skills, gender, sexuality, disability, age, socioeconomic status, ethnicity, race, and culture. Toward that goal:
+Brown welcomes students from around the country and the world, and their unique perspectives enrich our learning community. To support students whose primary language is not English, services are available on campus including language workshops and individual appointments. For more information, contact English Language Support at ellwriting@brown.edu or (401) 863-5672.
+
+This course is designed to support an inclusive learning environment where diverse perspectives are recognized, respected and seen as a source of strength. It is my intent to provide materials and activities that are respectful of students' differences in: mathematical background, previous computing skills, gender, sexuality, disability, age, socioeconomic status, ethnicity, race, and culture. Toward that goal:
 
 -   If you have a name and/or set of pronouns that differ from those that appear in your official Brown records, please let me know!
 -   If there are things going on inside or outside of class that are affecting your performance in class, please don't hesitate to talk to me, provide anonymous feedback through our course survey, or [contact](https://college.brown.edu/seek-advising-support/speak-academic-dean) one of Brown's Academic Deans.
 
 # Goals
 
-In the bestiary of the social sciences, methodological training typically follows either the path of the tortoise or the hare. There\`s no right way to run this race. Going slow and steady ideally provides you with a foundation to learn the methods you need to know. The danger of this approach is that you can spend so much time up front doing proofs and problem sets that you lose sight of why you wanted to obtain this training in the first place. Similarly, ranging far and wide can provide an overview of the toolkit available you, but without a strong foundation in the motivations and assumptions behind these methods, there's a risk that you'll end up using a expensive table saw when a simple wrench would have sufficed.
+In your training in the social sciences, each individual's path of learning is unique. Going slow and steady ideally provides you with a strong foundation to learn the methods you need to know. The danger of this approach is that you can spend so much time up front doing proofs and problem sets that you lose sight of why you wanted to obtain this training in the first place (that is, to do social science). Similarly, ranging far and wide can provide an exciting overview of the tools available to you, but without a strong foundation in the motivations and assumptions behind these methods, you may run into more challenge than you anticipated. 
 
-This course aims to strike a middle ground. To continue the (belabored) animal metaphor, we'll start off as hedgehogs, focusing on knowing a few things well: inference (descriptive, statistical, and causal), linear models (as a tool for inference), and extensions and alternatives to the linear model (to facilitate better inferences). By the end of the course, we'll be ready to blossom (mutate?) into methodological foxes capable of learning the many things skills and methods needed for our research.
+This course aims to strike a middle ground between "too slow" and "too fast." We'll start off focusing on knowing a few things well: inference (descriptive, statistical, and causal), linear models (as a tool for inference), and extensions and alternatives to the linear model (to facilitate better inferences). By the end of the course, we'll be capable of expanding this knowledge to the many other skills and methods needed for research.
 
 ## Requirements
 
-To accomplish this metamorphosis, we'll need the following:
+To accomplish this, we'll need the following:
 
 -   Some math
 -   Some programming and computing skills
@@ -68,7 +100,7 @@ You either already know, or will learn, all the math you need to take this cours
 
 [^1]: This is not the same as all the math you need to know be a successful, methodologically sophisticated political scientist. But it's a start, and one that will hopefully help you figure out what additional training you'll need.
 
-[^2]: We'll do the proofs as well, but your focus should be on making sure you understand concepts and implications rather than specific derivations
+[^2]: We'll do the proofs as well, but your focus should be on making sure you understand concepts and implications rather than specific derivations.
 
 ## Computing
 
@@ -76,37 +108,41 @@ Doing quantitative, empirical social science research requires working with data
 
 [^3]: Available for free at <https://cran.r-project.org/>. Python is also increasingly common among social scientists.
 
-All the slides, notes, and assignments in this class are produced using R Markdown, a free, open-source tool for creating reproducible research. \textbf{All of your assignments and papers for this class will also be submitted using R Markdown.} It's a short but steep learning curve, the benefits of which (pretty documents, nicely formatted tables and figures, easy integration with citation managers) far outweigh the costs (finicky syntax)
+All the slides, notes, and assignments in this class are produced using R Markdown, a free, open-source tool for creating reproducible research. \textbf{All of your assignments and papers for this class will also be submitted using R Markdown.} It's a short but steep learning curve, the benefits of which (pretty documents, nicely formatted tables and figures, easy integration with citation managers) far outweigh the costs (finicky syntax). 
 
 ## General
 
-Like any course, success in this class requires preparation, participation and perseverance. In terms of preparation, I expect that you will have done the readings and submitted your assignments on time (more on that below). In short, you'll get out of this class what you put in. In terms of participation, I expect that you will come to class eager to learn and engage with that week's topics. If you have a question, ask it. If you're getting an error, share it. In some ways, your job is to make errors. To paraphrase Joyce: people of genius make no mistakes. Our errors are volitional and portals of discovery. While this experience can be challenging and frustrating, it is also incredibly rewarding. I fully expect you persevere through the problems and difficulties that inevitably arise in this course, and will do everything I can to help in this process.
+Like any course, success in this class requires preparation, participation and perseverance. In terms of preparation, I expect that you will have done the readings and submitted your assignments on time (more on that below). In short, you'll get out of this class what you put in. In terms of participation, I expect that you will come to class eager to learn and engage with that week's topics. If you have a question, ask it. If you're getting an error, share it. In some ways, your job is to make errors. To paraphrase Joyce: people of genius make no mistakes. Their errors are volitional and are the portals of discovery. 
+
+While this experience can be challenging and frustrating, it is also incredibly rewarding. I fully expect you persevere through the problems and difficulties that inevitably arise in this course, and will do everything I can to help in this process.
 
 # Course Structure and Policies
 
-## Class
+## Class Time 
 
-This course meets two times a week for 80 minutes on Tuesdays and Thursdays. Tuesday's class will be devoted to lecture, demonstration and review. Recorded versions of these lectures will be provided on Canvas after class. Thursday's class will focus on applications of these concepts through brief labs where you'll work with real data from a variety of sources. I assume that you will come to class having done each week's assigned readings and reviewed material from the previous week's lectures and labs. Slides and labs are available on Canvas and <https://pols1600.paultesta.org>
+This course meets three times a week (Monday, Wednesday, and Friday) for 50 minutes. Monday and Wednesday's classes will be devoted to lecture, demonstration and review. Friday's class will focus on applications of course concepts through labs where you'll work with real data from a variety of sources. I assume that you will come to class having done each week's assigned readings and reviewed material from the previous week's lectures and labs. Slides and labs are available on Canvas and on the course website. 
 
 ## Attendance
 
-You may miss two classes without it having any effect on the attendance portion of your grade. After two absences, each additional absence (without a written note from the University) will reduce your final grade by 1 percent.
+You may miss two classes without it having any effect on the attendance portion of your grade. After two absences, each additional absence (without a written explanation and at the discretion of the instructor) will reduce your final grade by 1 percent.
 
 ## Readings
 
-@Imai2022-pm required textbooks for the course (**Estimated cost:** $\sim$\$38.50 for the ebook, \$55.00 for the paperback):
+Required textbooks for the course (**Estimated cost:** $\sim$\$38.50 for the ebook, \$55.00 for the paperback):
 
 > Imai, Kosuke. 2022. *Quantitative Social Science An Introduction in Tidyverse.* Princeton University Press.
 
+This text is available at the Brown bookstore, as well as at several online retailers. 
+
 Most chapters are spread over multiple weeks. You should read this text with your laptop and R Studio open. Execute the code in the main text and ideally try to complete the assignments and exercises at the end of the chapter.[^4]
 
-[^4]: Seriously. Working carefully through these examples will be incredibly helpful and rewarding. If you're taking the time to read this footnote, send me picture of a cute animal and I'll add 1 point of extra credit to your final paper grade. See, your hard work is already paying off.
+[^4]: Working carefully through these examples will be incredibly helpful and rewarding. If you're taking the time to read this footnote, send me picture of a cute animal and I'll add 1 point of extra credit to your final paper grade. See, your hard work is already paying off.
 
-Additional readings will be listed below and available to download on the course website and Canvas.
+Throughout the course, additional readings will be made available to download on the course website and on Canvas.
 
 ## Labs
 
-The bulk of the work and learning you'll do in the course comes in the form of **weekly labs** in which you'll explore a given data set or paper using R. You'll be given an R Markdown document that will guide you through a set of exercises to teach concepts covered in the lectures and reading. You'll code in `R` and summaries of your findings in R Markdown. You will compile your document to produce an html document which you will **submit on Canvas by the end of each class.**
+The bulk of the work and learning you'll do in the course comes in the form of **weekly labs** in which you'll explore a given data set or paper using R. You'll be given an R Markdown document that will guide you through a set of exercises to teach concepts covered in the lectures and reading. You'll code in `R` and provide summaries of your findings using R Markdown. You will compile your document to produce an html document which you will **submit on Canvas by the end of each class.**
 
 All work in this class **MUST BE SUBMITTED ONLINE VIA CANVAS.**
 
@@ -114,13 +150,13 @@ You will work in groups on these labs. One member of your group will submit a la
 
 ## Tutorials
 
-In addition to weekly labs, you will also work through **weekly tutorials** made available to you through the \`qsslearnr' package. These tutorials provide you with an opportunity to practice your programming and review concepts from the text and lecture. After completing each tutorial, you will download your progress report and upload this file to Canvas by midnight on Friday each week a tutorial is assigned. If you upload a report by Friday, you receive a grade of 100 % on that Tutorial. If you upload a report after Friday, you receive a grade of 50 %. If you do not upload a report, you receive a grade of 0 %. There are 11 total tutorials for the course. Your lowest grade on the Tutorials will be dropped.
+In addition to weekly labs, you will also work through **weekly tutorials** made available to you through the \`qsslearnr' package. These tutorials provide you with an opportunity to practice your programming and review concepts from the text and lecture. After completing each tutorial, you will download your progress report and upload this file to Canvas by midnight on Friday each week a tutorial is assigned. If you upload a report by Friday, you receive a grade of 100 % on that Tutorial. If you upload a report after Friday (e.g. on or after 12:00am Saturday), you receive a grade of 50 %. If you do not upload a report, you receive a grade of 0 %. There are 11 total tutorials for the course. Your lowest grade on the Tutorials will be dropped.
 
-These Tutorials are for your personal benefit. You may collaborate with peers, but you must submit your own file.
+These Tutorials are for your personal benefit. You may collaborate with peers, but you must submit your own file. All work in this class **MUST BE SUBMITTED ONLINE VIA CANVAS.**
 
 ## Assignments
 
-In addition to weekly labs, you will complete periodic group assignments developing an original research presentation applying skills you have learned in this class to a topic of your choosing. All assignments are due the Friday after the class with which they are associated.
+In addition to weekly labs, you will complete periodic group assignments developing an original research presentation applying skills you have learned in this class to a topic of your choosing.You may choose to work with the same group as in your lab assignments, but this is not required. All assignments are due the Friday after the class with which they are associated (by 11:59pm).
 
 The timeline of assignments for your final paper is as follows:
 
@@ -142,14 +178,19 @@ Your final grade for this course will be calculated as follows:
 -   **10 % Tutorials**
 -   **30 % Labs**
 -   **20 % Assignments not including the final Paper**
--   **25 % Final Project**
+-   **25 % Final Paper**
 
-Labs, assignments excluding the final presentation, will be graded graded out of 100 roughly on a ✓ + (100, completed on time, acceptable), ✓ (85, completed on time, passable), ✓ - (0 not submitted on time, unacceptable). The lowest two lab grades will be dropped from your final lab grade. Tutorials are graded on pass (submitted on time = 100 % ) - fail (not submitted =0) based submitting your progress report from the tutorial by Friday each week. If you submit a Tutorial after the week it's do, you will receive partial credit (50 %). Your final projects will be graded on 100-point scales with rubrics provided beforehand.
+Final grades will be calculated as follows, unless a grade of Satisfactory/No Credit is elected: A (89.5-100%), B (79.5-89.5%), C (69.5-79.5%), NC (<69.5%). 
+
+Lab and assignments, excluding the final paper and presentation, will be graded out of 100 roughly on a check-plus (100, completed on time, acceptable), a check (85, completed on time, passable), a check-minus (0, unacceptable). The lowest two lab grades will be dropped from your final lab grade. Tutorials are graded on pass (submitted on time = 100 % ) - fail (not submitted =0) based on submitting your progress report from the tutorial by Friday each week. If you submit a Tutorial after the week it's due, the maximum possible grade will be half credit (50 %).
+
+Your final paper and presentation will be graded on 100-point scales with rubrics provided beforehand.
 
 **Incomplete Work** Assignments not turned in will be counted as zero in the calculation of the final grade.
 
-**Computers in class** Please bring your laptops if you have them. We will install [R](https://cran.r-project.org/) and [RStudio](https://posit.co/products/open-source/rstudio/#Desktop) together. If you do not own a laptop, you can still work in a group of other people who have laptops and will be able to complete the in-class worksheets without a problem. In fact, it is ideal if each group of 2-4 people works with one laptop and then shares the work among themselves. Of course, feel free to work on your own outside of class.
+**Computers in class** Please bring your laptops to class if you have them. We will install [R](https://cran.r-project.org/) and [RStudio](https://posit.co/products/open-source/rstudio/#Desktop) - both free - together. If you do not own a laptop, you can still work in a group of other people who have laptops and will be able to complete the in-class worksheets without a problem. In fact, it is ideal if each group of 2-4 people works with one laptop and then shares the work among themselves. Of course, feel free to work on your own outside of class.
 
 ## Time
 
-This course meets 27 times over 13 weeks in the semester. Each class is 80 minutes long so you should expect to spend approximately 36 hours total in class; approximately 4 hours per week reading the textbook and reviewing material (42 hours total); approximately 22 hours on tutorials each week, approximately 30 hours on assignments for the final paper; approximately 50 hours researching, writing, and revising your final presentation; and at least .5 hours meeting with me in person to discuss your work (Estimated Total Time: 180.5 hours)
+This course meets 36 times over 13 weeks in the semester (including lab sessions). Each session is 50 minutes long so you should expect to spend approximately 30 hours total in class; approximately 4 hours per week reading the textbook and reviewing course material (52 hours total); approximately 1.5 hours/week on assigned tutorials outside of class (19.5 hours total); approximately 30 hours on assignments leading up to the final paper/presentation; approximately 48 hours researching, writing, and revising your final paper and presentation; and at least 0.5 hours meeting with me in person to discuss your work (Estimated Total Time: 180 hours)
+
