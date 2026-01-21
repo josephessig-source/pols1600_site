@@ -1,16 +1,12 @@
 ---
 title: "Introductions"
-date: "2024-01-25"
+date: "2026-01-21"
 bibliography: ../files/paperpile.bib
 subtitle: "Welcome to POLS 1600"
 image: "featured.jpg"
 ---
 
--   Welcome! I'll see you in class on Thursday.
-
--   Tune in via Zoom: https://brown.zoom.us/j/97039852954
-
-```{r slides-videos, echo=FALSE, include=FALSE}
+```{r slides-videos, include=FALSE}
 source(here::here("R", "slide-things.R"))
 wk <- "00"
 ```
@@ -30,7 +26,6 @@ wk <- "00"
 slide_buttons(paste0("/slides/", wk, "-slides"))
 slide_frame(paste0("/slides/", wk, "-slides.html"))
 ```
-
 
 
 ## Lab

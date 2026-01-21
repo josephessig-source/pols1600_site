@@ -76,11 +76,6 @@ You will learn
 
 . . .
 
-::: r-stack
-![](https://i.kym-cdn.com/entries/icons/facebook/000/000/015/oreally.jpg){.fragment fig-align="center" width="50%"}
-
-![](https://www.brainfart.sg/wp-content/uploads/2008/05/yarly.jpg){.fragment fig-align="center" width="140%"}
-:::
 
 ##  {background-image="images/nyt.png" background-size="contain"}
 
@@ -89,8 +84,6 @@ You will learn
 ##  {background-image="images/pnas-2.png" background-size="contain"}
 
 ## Why is this study important?
-
-
 
 -   Findings provide evidence of benefits of social spending/universal basic income
 
@@ -149,7 +142,6 @@ Source: [Andrew Gelman](https://statmodeling.stat.columbia.edu/)
 
 ## Reasons to take this class
 
-::: incremental
 -   You want to change the world
 
     -   Data, design, and analysis are incredlibly powerful tools
@@ -163,14 +155,8 @@ Source: [Andrew Gelman](https://statmodeling.stat.columbia.edu/)
 
 -   You *have* to
 
--   You're just in it for the memes
-:::
+##  Expectations
 
-##  {background-image="images/00_distracted.jpg" background-size="contain"}
-
-## Great expectations {background-image="https://res.cloudinary.com/uktv/image/upload/v1426611188/ekyiync2zbmgdydizkok.jpg" background-size="cover"}
-
-::: incremental
 I expect that you will come to class ready to engage with:
 
 -   social science
@@ -180,7 +166,6 @@ I expect that you will come to class ready to engage with:
 -   programming
 
 -   math
-:::
 
 ## Requirements
 
@@ -266,9 +251,9 @@ y <- 2*x + rnorm(100)
 
 Here's a [link to a guide](../resources/00-software-setup.qmd) to get you setup for the course.
 
-Take a crack at it after class, over the weekend.
+Take a crack at it after class. 
 
-Email me with any issues (there are always issues), and drop by my office hours on Tuesday so we can trouble shoot.
+Email me with any issues (there are always issues), and we will get everyone up to speed on Friday. 
 
 ## Textbook
 
@@ -299,7 +284,7 @@ install_github("kosukeimai/qss-package",
 
 ## How to Read Imai
 
-Once you've rune the following
+Once you've run the following
 
 ```{r}
 #| eval: false
@@ -328,7 +313,7 @@ summary(afghan$age)
 
 ## Additional Readings
 
--   Occasionally, I will provide additional readings, available on both Canvas and [pols1600.paultesta.org](https://pols1600.paultesta.org)
+-   Occasionally, I will provide additional readings, available on both Canvas and the course website (under the Class tab). 
 
 # Assignments  {.inverse}
 
@@ -342,7 +327,7 @@ You have three types of assignments in this course
 
 ## Labs
 
--   Each Thursday we will work in groups to complete an in-class lab
+-   Each Friday we will work in groups to complete an in-class lab
 -   The labs are designed to reinforce and extend concepts from lecture using real world data.
 
 ## Labs
@@ -388,7 +373,7 @@ learnr::run_tutorial("00-intro", package = "qsslearnr")
 ```
 
 -   Complete the tutorial. Save output as "LASTNAME_TutorialNumber.pdf"
--   Upload output to Canvas by Friday by 11:59 pm
+-   Upload output to Canvas by the following Monday by 11:59 pm
 -   Grades:
     -   100% any upload
     -   0% no upload
@@ -399,24 +384,22 @@ learnr::run_tutorial("00-intro", package = "qsslearnr")
 
 -   Download and install R and R Studio
     -   Email me if you have troubles
-    -   Troubleshoot by Zoom or in-person (111 Thayer Room 339)
+    -   Troubleshoot by Zoom or in-person 
 -   Work through [00-software_setup](../resources/00-software-setup.qmd) before next class.
 
-## Portals of Discovery {background-image="https://rosenbach.org/wp-content/uploads/2018/05/joyce-in-field-825x447.jpg" background-size="cover"}
+## Making Mistakes
 
-## Errors
-
--   ish happens
--   Seeing red is a good thing
--   We learn by making errors
+-   To err is human! 
+-   Making mistakes is part of learning, even if it is frustrating. 
+-   Working through problems = improving. 
 
 ## Final Reports
 
 -   Can be on any topic you like
 -   More info to come
 -   Due dates:
-    -   Week 2 Groups assigned
-    -   Week 3 Research Topics
+    -   Week 3 Groups assigned
+    -   Week 4 Research Topics
     -   Week 6 Data Proposal
     -   Week 8 Data Explorations
     -   Week 11 Drafts
@@ -425,21 +408,6 @@ learnr::run_tutorial("00-intro", package = "qsslearnr")
 
 # Grading and Other Policies  {.inverse}
 
-## Grading
-
-![](https://upload.wikimedia.org/wikipedia/commons/5/59/Greuter_Socrates.jpg)
-
-## Grading
-
-![](https://pbs.twimg.com/media/D1oazHVWkAApoCM.jpg)
-
-## Grading
-
-![](http://www.youreduaction.it/wp-content/uploads/2017/11/mozione.jpg)
-
-## Grading
-
-![](https://upload.wikimedia.org/wikipedia/commons/8/8c/David_-_The_Death_of_Socrates.jpg)
 
 ## Grading
 
@@ -448,72 +416,29 @@ learnr::run_tutorial("00-intro", package = "qsslearnr")
 -   10% Tutorials
 -   30% Labs
 -   20% Assignments for final paper
--   20% Final paper
+-   25% Final paper
+
+## Grading
+
+- Labs: Check-plus (100), Check (85), no credit (0).
+  + Two lowest labs dropped 
+  
+- Tutorials: Pass (100%) or No Credit (not submitted) (0%).
+  +If late, max credit = 50%. 
+  
+  - Assignments: % out of 100. 
 
 ## Course policies
 
--   Academic honesty
-  - ChatGPT and generative AI
--   Community standards
--   Incomplete/late work
+- Attendance: Please come to class. After first 2 absences, lose 1% out of 5% possible for attendance, unless excused. 
 
-# Introductions  {.inverse}
+- Academic Integrity: See the syllabus and refer to the academic code.
 
-## Two Fundamental Truths
+- Generative AI: Discouraged, but if you use it, must be disclosed.(It doesn't replace your own effort and thinking)
 
-## Testa's first fundamental truth
+- If you don't disclose, this is a violation of the academic code. 
 
-. . .
-
-![](https://elephant.art/wp-content/uploads/2019/11/poop-emoji.jpg){width="50%"}
-
-## Testa's first fundamental truth
-
-Why would I profess my utter ignorance on the first day of class?
-
-Four possible reasons...
-
-## 1. Expectation Management
-
-```{r}
-#| echo = F,
-#| out.width = "50%"
-knitr::include_graphics("https://i.kym-cdn.com/photos/images/newsfeed/001/643/247/199.png")
-```
-
-## 2. Pedagogical Tomfoolery
-
-```{r}
-#| echo = F,
-#| out.width = "50%"
-knitr::include_graphics("https://cdn.vox-cdn.com/thumbor/MpA2HVftSFntl9HhmhlQA3MEjIU=/0x0:1409x785/1200x800/filters:focal(622x252:846x476)/cdn.vox-cdn.com/uploads/chorus_image/image/55701647/Screen_Shot_2017_07_13_at_1.09.20_PM.0.png")
-```
-
-## 3. Positionality
-
-```{r}
-#| out.width = "20%",
-#| echo = F
-knitr::include_graphics("images/prettyfly.jpeg")
-```
-
-## 4. Epistemology
-
-![](https://media.tenor.com/L-geRXQ8vrsAAAAC/tyrion-game-of-thrones.gif)
-
-## Testa's second fundamental truth
-
-## Testa's second fundamental truth
-
-![](images/dwight.jpg)
-
-## Two kinds of people in this world
-
-![](https://i5.walmartimages.com/asr/ed3b4b7e-a923-4413-b774-750c63189125.f1779c41278636a8ba5887339534f8d7.jpeg?odnHeight=612&odnWidth=612&odnBg=FFFFFF)
-
-## What is it that we say we do here
-
-![](https://media2.giphy.com/media/U1bCix41cllqYDdSFQ/200.gif)
+- If you choose to use GenAI, you are responsible for its output, and will be graded accordingly. 
 
 ## What does quantitative research do?
 
@@ -588,34 +513,7 @@ knitr::include_graphics("images/stops2.png")
 
 ![](https://www.dropletmeasurement.com/wp-content/uploads/2020/06/some-models-are-wrong-e1536948779198.jpg)
 
-## Two kinds of people in this world
+## Next Time:
 
-![](images/candy.png)
-
-## Introductions
-
-![](images/officehours.jpg)
-
-## My research
-
--   I study American Poltical Behavior with focus on poltics of race and criminal justice
--   How do we break cycles of inequality when those most affected by injustice are the least likely to participate and those unaffected are the least likely to care?
--   How can we use methodological tools to better answer these questions?
-
-## But enough about me
-
-![](https://helios-i.mashable.com/imagery/articles/00jdsdJ5TJ5j9pExdUWjQaC/hero-image.fill.size_1200x900.v1611611940.jpg)
-
-## Class survey
-
-Please click [here](https://brown.co1.qualtrics.com/jfe/form/SV_6nC2J3UIFZELI0u) to take a brief survey that will help me structure the class going forward.
-
-## Next Week:
-
--   Complete the [class survey](https://brown.co1.qualtrics.com/jfe/form/SV_6nC2J3UIFZELI0u)
--   [Download and Install R and R studio](https://pols1600.paultesta.org/labs/00-software-setup.html)
--   Read Chapters 1 (Friday) and start Chapter 3 in QSS
--   Tuesday: Lecture: Describing Data in R
--   Thursday: Lab: Exploring COVID-19 data in the US
--   Friday: Submit Tutorials: "00-intro" & "01-measurement"
-    -   Only time you'll have two tutorials due (Ok to submit late)
+-   Complete the class survey, which will be sent out in a canvas announcement. 
+-   On Friday, we will make sure everyone has [Downloaded and Installed R and R studio](https://pols1600.paultesta.org/labs/00-software-setup.html)
