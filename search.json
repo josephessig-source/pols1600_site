@@ -7458,7 +7458,7 @@
     "href": "slides/00-slides.html#reasons-to-take-this-class-1",
     "title": "Welcome to POLS 1600",
     "section": "Reasons to take this class",
-    "text": "Reasons to take this class\n\nYou want to change the world\n\nData, design, and analysis are incredlibly powerful tools\nYou want to understand their strengths and limits\n\nYou want to be a better consumer of data and knowledge\nYou want to be a better consumer of data and knowledge\nYou want to get a job / go to grad school\nYou have to"
+    "text": "Reasons to take this class\n\nYou want to change the world\n\nData, design, and analysis are incredlibly powerful tools\nYou want to understand their strengths and limits\n\nYou want to be a better consumer of data and knowledge\nYou want to get a job / go to grad school\nYou have to"
   },
   {
     "objectID": "slides/00-slides.html#great-expectations",
@@ -7591,7 +7591,7 @@
     "href": "slides/00-slides.html#problem-setstutorials",
     "title": "Welcome to POLS 1600",
     "section": "Problem Sets/Tutorials",
-    "text": "Problem Sets/Tutorials\n\nCoding tutorials to reinforce concepts from lecture and textbook.\nAccessed by running\n\n\nlearnr::run_tutorial(\"00-intro\", package = \"qsslearnr\")\n\n\nComplete the tutorial. Save output as “LASTNAME_TutorialNumber.pdf”\nUpload output to Canvas by the following Monday by 11:59 pm\nGrades:\n\n100% any upload\n0% no upload"
+    "text": "Problem Sets/Tutorials\n\nCoding tutorials to reinforce concepts from lecture and textbook.\nAccessed by running\n\n\nlearnr::run_tutorial(\"00-intro\", package = \"qsslearnr\")\n\n\nComplete the tutorial. Save output as “LASTNAME_TutorialNumber.pdf”\nUpload output to Canvas by the following Monday by 11:59 pm (Due date always posted in canvas)\nGrades:\n\n100% any upload\n0% no upload"
   },
   {
     "objectID": "slides/00-slides.html#final-project",
@@ -7640,7 +7640,7 @@
     "href": "slides/00-slides.html#grading-1",
     "title": "Welcome to POLS 1600",
     "section": "Grading",
-    "text": "Grading\n\nLabs: Check-plus (100), Check (85), no credit (0).\n\nTwo lowest labs dropped\n\nTutorials: Pass (100%) or No Credit (not submitted) (0%). +If late, max credit = 50%.\n\nAssignments: % out of 100."
+    "text": "Grading\n\nLabs: Check-plus (100), Check (85), no credit (0).\n\nTwo lowest labs dropped\n\nTutorials: Pass (100%) or No Credit (not submitted) (0%). +If late, max credit = 50%. (Due date always posted in canvas assignments)\n\nAssignments: % out of 100. (Due date always posted in canvas sssignments)"
   },
   {
     "objectID": "slides/00-slides.html#grading-2",
