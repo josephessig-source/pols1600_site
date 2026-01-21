@@ -174,7 +174,7 @@ ul.task-list li input[type="checkbox"] {
 <p><a href="#"><i class="fa-solid fa-map-location-dot fa-3x" aria-label="map-location-dot"></i></a></p>
 <section id="location" class="level3">
 <h3 data-anchor-id="location">Location</h3>
-<p>Location TBD</p>
+<p>Andrews House 310</p>
 </section>
 </div>
 <div class="g-col-4">
@@ -187,7 +187,7 @@ ul.task-list li input[type="checkbox"] {
 <p><a href="https://calendar.app.google"><i class="fa-solid fa-person-circle-question fa-3x" aria-label="person-circle-question"></i></a></p>
 <section id="office-hours" class="level3">
 <h3 data-anchor-id="office-hours">Office Hours</h3>
-<p><a href="https://calendar.app.google">Joe | Time TBD</a> <br> Stephen Roberts Hall, Rm. 123 (Taubman Center) <a href="https://calendar.app.google">Teaching Assistant | Time TBD</a> <br> Location TBD</p>
+<p><a href="https://calendar.app.google/UWc4GwjQXvZhMcnTA">Joe | 2-4pm, Thursdays</a> <br> Stephen Roberts Hall, Rm. 123 (Taubman Center) [Sara Ansari, TA | Time TBD <br> Location TBD</p>
 </section>
 </div>
 </div>
@@ -424,6 +424,12 @@ ul.task-list li input[type="checkbox"] {
 <p>Taubman Center for American Politics and Policy</p>
 <p>Brown University &lt;joseph_essig@brown.edu&gt;</p>
 </div>
+<div class="g-col-6">
+<p><a href="https://polisci.brown.edu/people/sara-ansari">Sara Ansari</a></p>
+<p>Teaching Assistant</p>
+<p>Department of Political Science</p>
+<p>Brown University &lt;maya_nunez@brown.edu&gt;</p>
+</div>
 </div>
 
 
@@ -496,7 +502,7 @@ ul.task-list li input[type="checkbox"] {
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/josephessig-source\.github\.io\/pols1600_site\/");
+        var filterRegex = new RegExp('/' + window.location.host + '/');
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
