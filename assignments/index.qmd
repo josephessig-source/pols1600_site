@@ -1,5 +1,6 @@
 ---
 title: "Assignments"
+draft: true
 ---
 
 You have three types of assignments in this course

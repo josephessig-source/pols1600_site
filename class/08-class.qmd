@@ -4,6 +4,7 @@ date: "2024-01-30"
 bibliography: ../files/paperpile.bib
 subtitle: "Probability, Random Variables, and Distributions"
 image: "featured.jpg"
+draft: true
 ---
 
 ```{r slides-videos, echo=FALSE, include=FALSE}

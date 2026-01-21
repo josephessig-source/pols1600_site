@@ -101,10 +101,6 @@ ul.task-list li input[type="checkbox"] {
     <a class="nav-link active" href="../class/index.html" aria-current="page"> 
 <span class="menu-text">Class</span></a>
   </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="../assignments/index.html"> 
-<span class="menu-text">Assignments</span></a>
-  </li>  
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
@@ -160,84 +156,6 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text">0: Introductions</span></a>
   </div>
 </li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../class/01-class.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">1: Data &amp; Measurement</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../class/02-class.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">2: Data Visualization</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../class/03-class.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">3: Causation – Experiments</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../class/04-class.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">4: Causation – Observational Studies</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../class/05-class.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">5: Bivariate Regression</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../class/06-class.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">6: Multiple Regression</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../class/07-class.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">7: Regression Extensions</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../class/08-class.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">8: Probability - Random Variables &amp; Distributions</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../class/09-class.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">9: Probability - Limit Theorems</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../class/10-class.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">10: Inference – Confidence Intervals</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../class/11-class.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">11: Inference – Hypothesis Testing</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../class/12-class.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">12: Workshop</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../class/13-class.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">13: Presentations</span></a>
-  </div>
-</li>
       </ul>
   </li>
     </ul>
@@ -269,19 +187,21 @@ ul.task-list li input[type="checkbox"] {
 
 
 <ul>
-<li><p>Before class on Tuesday</p>
+<li><p>Before class on Monday</p>
 <ul>
 <li><p>Do the assigned readings</p></li>
 <li><p>Review last week’s lab and slides</p></li>
 </ul></li>
-<li><p>Tuesday: Come to class ready to engage with lecture and slides</p></li>
+<li><p>Monday: Come to class ready to engage with lecture and slides</p></li>
 <li><p>Wednesday:</p>
 <ul>
 <li><p>Start the tutorials for that week</p></li>
-<li><p>Download, render, and skim Thursday’s lab</p></li>
+<li><p>Download, render, and skim Friday’s lab</p></li>
 </ul></li>
-<li><p>Thursday: Come to class ready to work through that week’s lab</p></li>
-<li><p>Friday: Upload that week’s tutorials to Canvas</p></li>
+<li><p>Friday: Come to class ready to work through that week’s lab</p>
+<ul>
+<li>Upload tutorial to Canvas</li>
+</ul></li>
 </ul>
 
 
@@ -359,7 +279,7 @@ ul.task-list li input[type="checkbox"] {
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp('/' + window.location.host + '/');
+        var filterRegex = new RegExp("https:\/\/josephessig-source\.github\.io\/pols1600_site\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
