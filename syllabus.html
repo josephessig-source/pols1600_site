@@ -20,27 +20,7 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for citations */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-  margin-bottom: 0em;
-}
-.hanging-indent div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}</style>
+</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -168,13 +148,17 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a>
   <ul class="collapse">
+  <li><a href="#course-information" id="toc-course-information" class="nav-link" data-scroll-target="#course-information">Course Information</a></li>
   <li><a href="#description" id="toc-description" class="nav-link" data-scroll-target="#description">Description</a></li>
   <li><a href="#expectations" id="toc-expectations" class="nav-link" data-scroll-target="#expectations">Expectations</a></li>
   <li><a href="#academic-integrity" id="toc-academic-integrity" class="nav-link" data-scroll-target="#academic-integrity">Academic Integrity</a></li>
+  <li><a href="#policy-on-artificial-intelligence-ai" id="toc-policy-on-artificial-intelligence-ai" class="nav-link" data-scroll-target="#policy-on-artificial-intelligence-ai">Policy on Artificial Intelligence (AI)</a></li>
+  <li><a href="#support-resources" id="toc-support-resources" class="nav-link" data-scroll-target="#support-resources">Support Resources</a></li>
+  <li><a href="#brown-ever-true" id="toc-brown-ever-true" class="nav-link" data-scroll-target="#brown-ever-true">Brown Ever True</a></li>
   <li><a href="#community-standards" id="toc-community-standards" class="nav-link" data-scroll-target="#community-standards">Community Standards</a></li>
   <li><a href="#accessibility" id="toc-accessibility" class="nav-link" data-scroll-target="#accessibility">Accessibility</a></li>
   <li><a href="#academic-accommodations" id="toc-academic-accommodations" class="nav-link" data-scroll-target="#academic-accommodations">Academic Accommodations</a></li>
-  <li><a href="#diversity-and-inclusion" id="toc-diversity-and-inclusion" class="nav-link" data-scroll-target="#diversity-and-inclusion">Diversity and Inclusion</a></li>
+  <li><a href="#classroom-inclusion" id="toc-classroom-inclusion" class="nav-link" data-scroll-target="#classroom-inclusion">Classroom Inclusion</a></li>
   </ul></li>
   <li><a href="#goals" id="toc-goals" class="nav-link" data-scroll-target="#goals">Goals</a>
   <ul class="collapse">
@@ -185,7 +169,7 @@ window.Quarto = {
   </ul></li>
   <li><a href="#course-structure-and-policies" id="toc-course-structure-and-policies" class="nav-link" data-scroll-target="#course-structure-and-policies">Course Structure and Policies</a>
   <ul class="collapse">
-  <li><a href="#class" id="toc-class" class="nav-link" data-scroll-target="#class">Class</a></li>
+  <li><a href="#class-time" id="toc-class-time" class="nav-link" data-scroll-target="#class-time">Class Time</a></li>
   <li><a href="#attendance" id="toc-attendance" class="nav-link" data-scroll-target="#attendance">Attendance</a></li>
   <li><a href="#readings" id="toc-readings" class="nav-link" data-scroll-target="#readings">Readings</a></li>
   <li><a href="#labs" id="toc-labs" class="nav-link" data-scroll-target="#labs">Labs</a></li>
@@ -194,6 +178,7 @@ window.Quarto = {
   <li><a href="#grades" id="toc-grades" class="nav-link" data-scroll-target="#grades">Grades</a></li>
   <li><a href="#time" id="toc-time" class="nav-link" data-scroll-target="#time">Time</a></li>
   </ul></li>
+  <li><a href="#course-schedule" id="toc-course-schedule" class="nav-link" data-scroll-target="#course-schedule">Course Schedule</a></li>
   </ul>
 </nav>
     </div>
@@ -221,15 +206,28 @@ window.Quarto = {
 
 <section id="overview" class="level1">
 <h1>Overview</h1>
+<section id="course-information" class="level2">
+<h2 class="anchored" data-anchor-id="course-information">Course Information</h2>
+<ul>
+<li><p>Course Site: <a href="https://josephessig-source.github.io/pols1600_site/">https://josephessig-source.github.io/pols1600_site/</a></p></li>
+<li><p>Canvas: Canvas Link Forthcoming</p></li>
+<li><p>Where and When: Monday, Wednesday, and Friday, 12pm-12:50pm in Andrews House 310</p></li>
+<li><p>Office Hours: Time TBD, in Taubman Center Offices, Stephen Roberts Hall Rm. 123, or by appointment (through email) - in-person or on Zoom.</p></li>
+<li><p>Teaching Assistant: Sara Ansari, M.Sc. Email: Sara_ansari@brown.edu</p>
+<ul>
+<li>TA Office Hours: TBD</li>
+</ul></li>
+</ul>
+</section>
 <section id="description" class="level2">
 <h2 class="anchored" data-anchor-id="description">Description</h2>
-<p>This class is an introduction to applied statistics as practiced in political science. It is computing intensive, and, as such, will enable students to execute basic quantitative analyses of social science data using the linear model with statistical inference arising from re-sampling and permutation based techniques as applied in the <a href="https://cran.r-project.org/">R statistical computing language</a> with <a href="https://www.rstudio.com/">RStudio</a>. By the end of the course, a successful student will be able to find social science data online, download it, analyze it, and write about how the analyses bear on focused social science or policy questions.</p>
+<p>This course is an introduction to applied statistics as practiced in political science. It is computing intensive, and as such will enable students to execute basic quantitative analyses of social science data using the linear model with statistical inference arising from re-sampling and permutation based techniques as applied in the <a href="https://cran.r-project.org/">R statistical computing language</a> with <a href="https://www.rstudio.com/">RStudio</a>. By the end of the course, a successful student will be able to find social science data online, download it, analyze it, and write about how the analyses bear on focused social science or policy questions.</p>
 </section>
 <section id="expectations" class="level2">
 <h2 class="anchored" data-anchor-id="expectations">Expectations</h2>
 <p>More than anything I assume a willingness to engage with mathematics, data analysis, computer programming, and the practice of social science thinking and writing. I also assume you’ve taken at least one class in algebra at the level taught in most high schools in the United States and have used a personal computer to read and type email and other documents and have some experience with the Internet.</p>
 <p>I also assume that you will read the syllabus and that you keep up to date on changes in the syllabus which will be announced in class. You should not expect a response to emails that ask a question already answered in the syllabus.</p>
-<p>This is an experimental class so you should expect that the syllabus will change throughout the term. Make sure you have the syllabus with the latest date stamp. I will announce syllabus changes via the emails sent from Canvas.</p>
+<p>You should expect that the syllabus will change throughout the term. Make sure you have the syllabus with the latest date stamp. I will announce syllabus changes via the emails sent from Canvas.</p>
 </section>
 <section id="academic-integrity" class="level2">
 <h2 class="anchored" data-anchor-id="academic-integrity">Academic Integrity</h2>
@@ -238,6 +236,20 @@ window.Quarto = {
 <p>In preparing assignments a student often needs or is required to employ outside sources of information or opinion. All such sources should be listed in the bibliography. Citations and footnote references are required for all specific facts that are not common knowledge and about which there is not general agreement. New discoveries or debatable opinions must be credited to the source, with specific references to edition and page even when the student restates the matter in his or her own words. Word-for-word inclusion of any part of someone else’s written or oral sentence, even if only a phrase or sentence, requires citation in quotation marks and use of the appropriate conventions for attribution. Citations should normally include author, title, edition, and page. (Quotations longer than one sentence are generally indented from the text of the essay, without quotation marks, and identified by author, title, edition, and page.) Paraphrasing or summarizing the contents of another’s work is not dishonest if the source or sources are clearly identified (author, title, edition, and page), but such paraphrasing does not constitute independent work and may be rejected by the instructor. Students who have questions about accurate and proper citation methods are expected to consult reference guides as well as course instructors.</p>
 </blockquote>
 <p>We will discuss specific information about your written work in class in more detail, but if you are unsure of how to properly cite material, please ask for clarification. If you are having difficulty with writing or would like more information or assistance, consult the Writing Center, the Brown library and/or the <a href="https://www.brown.edu/academics/college/degree/policies/academic-code">Academic Code</a> for more information.</p>
+</section>
+<section id="policy-on-artificial-intelligence-ai" class="level2">
+<h2 class="anchored" data-anchor-id="policy-on-artificial-intelligence-ai">Policy on Artificial Intelligence (AI)</h2>
+<p>In this course, the use of any AI model (including ChatGPT, Gemini, Claude, or others) to complete labs, tutorials, assignments, or your final paper is strongly discouraged. In particular, AI models are not a replacement for your own intellectual effort. <strong>Any use of AI tools must be disclosed.</strong></p>
+<p>Use of AI without proper citation or disclosure in this course will be considered a violation of the academic code and will result in a zero on the associated assignment. Moreover, any AI use (even cited) must be consistent with the academic code as described above. If you choose to use AI tools in acceptable ways, such as to brainstorm ideas, debug your code, edit grammar, or “improve” your writing, you are solely responsible for its output including “hallucinations” in the content of your submissions, and will be graded accordingly. I will reiterate: AI is not a replacement for your own intellectual effort and learning.</p>
+</section>
+<section id="support-resources" class="level2">
+<h2 class="anchored" data-anchor-id="support-resources">Support Resources</h2>
+<p>Your success at Brown involves more than just academic performance. I encourage you to feel comfortable speaking to me about any challenges you are experiencing in or out of the classroom so I may submit a Care Report on your behalf to help you get connected with the appropriate support resources on campus.</p>
+<p>Free, easily accessible, confidential mental health services are available to assist you with addressing any mental health concerns you may be experiencing through Counseling and Psychological Services (CAPS). CAPS is available on demand 24/7 and 365 days/year to support students experiencing a mental health crisis, at 401-863-3476. You can learn more about the broad range of mental health services available on campus at the Counseling and Psychological Services (CAPS) website: https://caps.brown.edu.</p>
+</section>
+<section id="brown-ever-true" class="level2">
+<h2 class="anchored" data-anchor-id="brown-ever-true">Brown Ever True</h2>
+<p>The Brown Ever True initiative encourages community members to access a wide range of existing and new support services and resources both on and off campus, including 24/7 crisis support. You can find more information about these community resources and mental health support at the Brown ever True website: https://evertrue.brown.edu/resources.</p>
 </section>
 <section id="community-standards" class="level2">
 <h2 class="anchored" data-anchor-id="community-standards">Community Standards</h2>
@@ -249,11 +261,12 @@ window.Quarto = {
 </section>
 <section id="academic-accommodations" class="level2">
 <h2 class="anchored" data-anchor-id="academic-accommodations">Academic Accommodations</h2>
-<p>Any student with a documented disability is welcome to contact me as early in the semester as possible so that we may arrange reasonable accommodations. As part of this process, please be in touch with Student Accessibility Services by calling 401-863-9588 or <a href="http://brown.edu/Student_Services/Office_of_Student_Life/seas/index.html">online</a></p>
+<p>Brown University is committed to full inclusion of all students. Please inform me early in the term if you may require accommodations or modification of any of course procedures. You may speak with me after class, during office hours, or by appointment. If you need accommodations around online learning or in classroom accommodations, please be sure to reach out to Student Accessibility Services (SAS) for their assistance (sas@brown.edu, 401-863-9588). Undergraduates in need of short-term academic advice or support can contact an academic dean in the College by emailing college@brown.edu. Graduate students may contact one of the deans in the Graduate School by emailing graduate_school@brown.edu.</p>
 </section>
-<section id="diversity-and-inclusion" class="level2">
-<h2 class="anchored" data-anchor-id="diversity-and-inclusion">Diversity and Inclusion</h2>
-<p>This course is designed to support an inclusive learning environment where diverse perspectives are recognized, respected and seen as a source of strength. It is my intent to provide materials and activities that are respectful of various levels of diversity: mathematical background, previous computing skills, gender, sexuality, disability, age, socioeconomic status, ethnicity, race, and culture. Toward that goal:</p>
+<section id="classroom-inclusion" class="level2">
+<h2 class="anchored" data-anchor-id="classroom-inclusion">Classroom Inclusion</h2>
+<p>Brown welcomes students from around the country and the world, and their unique perspectives enrich our learning community. To support students whose primary language is not English, services are available on campus including language workshops and individual appointments. For more information, contact English Language Support at ellwriting@brown.edu or (401) 863-5672.</p>
+<p>This course is designed to support an inclusive learning environment where diverse perspectives are recognized, respected and seen as a source of strength. It is my intent to provide materials and activities that are respectful of students’ differences in: mathematical background, previous computing skills, gender, sexuality, disability, age, socioeconomic status, ethnicity, race, and culture. Toward that goal:</p>
 <ul>
 <li>If you have a name and/or set of pronouns that differ from those that appear in your official Brown records, please let me know!</li>
 <li>If there are things going on inside or outside of class that are affecting your performance in class, please don’t hesitate to talk to me, provide anonymous feedback through our course survey, or <a href="https://college.brown.edu/seek-advising-support/speak-academic-dean">contact</a> one of Brown’s Academic Deans.</li>
@@ -262,11 +275,11 @@ window.Quarto = {
 </section>
 <section id="goals" class="level1">
 <h1>Goals</h1>
-<p>In the bestiary of the social sciences, methodological training typically follows either the path of the tortoise or the hare. There`s no right way to run this race. Going slow and steady ideally provides you with a foundation to learn the methods you need to know. The danger of this approach is that you can spend so much time up front doing proofs and problem sets that you lose sight of why you wanted to obtain this training in the first place. Similarly, ranging far and wide can provide an overview of the toolkit available you, but without a strong foundation in the motivations and assumptions behind these methods, there’s a risk that you’ll end up using a expensive table saw when a simple wrench would have sufficed.</p>
-<p>This course aims to strike a middle ground. To continue the (belabored) animal metaphor, we’ll start off as hedgehogs, focusing on knowing a few things well: inference (descriptive, statistical, and causal), linear models (as a tool for inference), and extensions and alternatives to the linear model (to facilitate better inferences). By the end of the course, we’ll be ready to blossom (mutate?) into methodological foxes capable of learning the many things skills and methods needed for our research.</p>
+<p>In your training in the social sciences, each individual’s path of learning is unique. Going slow and steady ideally provides you with a strong foundation to learn the methods you need to know. The danger of this approach is that you can spend so much time up front doing proofs and problem sets that you lose sight of why you wanted to obtain this training in the first place (that is, to do social science). Similarly, ranging far and wide can provide an exciting overview of the tools available to you, but without a strong foundation in the motivations and assumptions behind these methods, you may run into more challenge than you anticipated.</p>
+<p>This course aims to strike a middle ground between “too slow” and “too fast.” We’ll start off focusing on knowing a few things well: inference (descriptive, statistical, and causal), linear models (as a tool for inference), and extensions and alternatives to the linear model (to facilitate better inferences). By the end of the course, we’ll be capable of expanding this knowledge to the many other skills and methods needed for research.</p>
 <section id="requirements" class="level2">
 <h2 class="anchored" data-anchor-id="requirements">Requirements</h2>
-<p>To accomplish this metamorphosis, we’ll need the following:</p>
+<p>To accomplish this, we’ll need the following:</p>
 <ul>
 <li>Some math</li>
 <li>Some programming and computing skills</li>
@@ -280,46 +293,48 @@ window.Quarto = {
 <section id="computing" class="level2">
 <h2 class="anchored" data-anchor-id="computing">Computing</h2>
 <p>Doing quantitative, empirical social science research requires working with data. Today, working with data requires a computer and statistical software. I assume that you have, or will acquire, a laptop that you will bring to class. In terms of software, there are many possible options. In this class,<code>R</code>.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>.</p>
-<p>All the slides, notes, and assignments in this class are produced using R Markdown, a free, open-source tool for creating reproducible research. It’s a short but steep learning curve, the benefits of which (pretty documents, nicely formatted tables and figures, easy integration with citation managers) far outweigh the costs (finicky syntax)</p>
+<p>All the slides, notes, and assignments in this class are produced using R Markdown, a free, open-source tool for creating reproducible research. It’s a short but steep learning curve, the benefits of which (pretty documents, nicely formatted tables and figures, easy integration with citation managers) far outweigh the costs (finicky syntax).</p>
 </section>
 <section id="general" class="level2">
 <h2 class="anchored" data-anchor-id="general">General</h2>
-<p>Like any course, success in this class requires preparation, participation and perseverance. In terms of preparation, I expect that you will have done the readings and submitted your assignments on time (more on that below). In short, you’ll get out of this class what you put in. In terms of participation, I expect that you will come to class eager to learn and engage with that week’s topics. If you have a question, ask it. If you’re getting an error, share it. In some ways, your job is to make errors. To paraphrase Joyce: people of genius make no mistakes. Our errors are volitional and portals of discovery. While this experience can be challenging and frustrating, it is also incredibly rewarding. I fully expect you persevere through the problems and difficulties that inevitably arise in this course, and will do everything I can to help in this process.</p>
+<p>Like any course, success in this class requires preparation, participation and perseverance. In terms of preparation, I expect that you will have done the readings and submitted your assignments on time (more on that below). In short, you’ll get out of this class what you put in. In terms of participation, I expect that you will come to class eager to learn and engage with that week’s topics. If you have a question, ask it. If you’re getting an error, share it. In some ways, your job is to make errors. To paraphrase Joyce: people of genius make no mistakes. Their errors are volitional and are the portals of discovery.</p>
+<p>While this experience can be challenging and frustrating, it is also incredibly rewarding. I fully expect you persevere through the problems and difficulties that inevitably arise in this course, and will do everything I can to help in this process.</p>
 </section>
 </section>
 <section id="course-structure-and-policies" class="level1">
 <h1>Course Structure and Policies</h1>
-<section id="class" class="level2">
-<h2 class="anchored" data-anchor-id="class">Class</h2>
-<p>This course meets two times a week for 80 minutes on Tuesdays and Thursdays. Tuesday’s class will be devoted to lecture, demonstration and review. Recorded versions of these lectures will be provided on Canvas after class. Thursday’s class will focus on applications of these concepts through brief labs where you’ll work with real data from a variety of sources. I assume that you will come to class having done each week’s assigned readings and reviewed material from the previous week’s lectures and labs. Slides and labs are available on Canvas and <a href="https://pols1600.paultesta.org" class="uri">https://pols1600.paultesta.org</a></p>
+<section id="class-time" class="level2">
+<h2 class="anchored" data-anchor-id="class-time">Class Time</h2>
+<p>This course meets three times a week (Monday, Wednesday, and Friday) for 50 minutes. Monday and Wednesday’s classes will be devoted to lecture, demonstration and review. Friday’s class will focus on applications of course concepts through labs where you’ll work with real data from a variety of sources. I assume that you will come to class having done each week’s assigned readings and reviewed material from the previous week’s lectures and labs. Slides and labs are available on Canvas and on the course website.</p>
 </section>
 <section id="attendance" class="level2">
 <h2 class="anchored" data-anchor-id="attendance">Attendance</h2>
-<p>You may miss two classes without it having any effect on the attendance portion of your grade. After two absences, each additional absence (without a written note from the University) will reduce your final grade by 1 percent.</p>
+<p>You may miss two classes without it having any effect on the attendance portion of your grade. After two absences, each additional absence (without a written explanation and at the discretion of the instructor) will reduce your final grade by 1 percent.</p>
 </section>
 <section id="readings" class="level2">
 <h2 class="anchored" data-anchor-id="readings">Readings</h2>
-<p><span class="citation" data-cites="Imai2022-pm">Imai (<a href="#ref-Imai2022-pm" role="doc-biblioref">2022</a>)</span> required textbooks for the course (<strong>Estimated cost:</strong> <span class="math inline">\(\sim\)</span>$38.50 for the ebook, $55.00 for the paperback):</p>
+<p>Required textbooks for the course (<strong>Estimated cost:</strong> <span class="math inline">\(\sim\)</span>$38.50 for the ebook, $55.00 for the paperback):</p>
 <blockquote class="blockquote">
 <p>Imai, Kosuke. 2022. <em>Quantitative Social Science An Introduction in Tidyverse.</em> Princeton University Press.</p>
 </blockquote>
+<p>This text is available at the Brown bookstore, as well as at several online retailers.</p>
 <p>Most chapters are spread over multiple weeks. You should read this text with your laptop and R Studio open. Execute the code in the main text and ideally try to complete the assignments and exercises at the end of the chapter.<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></p>
-<p>Additional readings will be listed below and available to download on the course website and Canvas.</p>
+<p>Throughout the course, additional readings will be made available to download on the course website and on Canvas.</p>
 </section>
 <section id="labs" class="level2">
 <h2 class="anchored" data-anchor-id="labs">Labs</h2>
-<p>The bulk of the work and learning you’ll do in the course comes in the form of <strong>weekly labs</strong> in which you’ll explore a given data set or paper using R. You’ll be given an R Markdown document that will guide you through a set of exercises to teach concepts covered in the lectures and reading. You’ll code in <code>R</code> and summaries of your findings in R Markdown. You will compile your document to produce an html document which you will <strong>submit on Canvas by the end of each class.</strong></p>
+<p>The bulk of the work and learning you’ll do in the course comes in the form of <strong>weekly labs</strong> in which you’ll explore a given data set or paper using R. You’ll be given an R Markdown document that will guide you through a set of exercises to teach concepts covered in the lectures and reading. You’ll code in <code>R</code> and provide summaries of your findings using R Markdown. You will compile your document to produce an html document which you will <strong>submit on Canvas by the end of each class.</strong></p>
 <p>All work in this class <strong>MUST BE SUBMITTED ONLINE VIA CANVAS.</strong></p>
 <p>You will work in groups on these labs. One member of your group will submit a lab. One question from the lab will be randomly selected for grading.</p>
 </section>
 <section id="tutorials" class="level2">
 <h2 class="anchored" data-anchor-id="tutorials">Tutorials</h2>
-<p>In addition to weekly labs, you will also work through <strong>weekly tutorials</strong> made available to you through the `qsslearnr’ package. These tutorials provide you with an opportunity to practice your programming and review concepts from the text and lecture. After completing each tutorial, you will download your progress report and upload this file to Canvas by midnight on Friday each week a tutorial is assigned. If you upload a report by Friday, you receive a grade of 100 % on that Tutorial. If you upload a report after Friday, you receive a grade of 50 %. If you do not upload a report, you receive a grade of 0 %. There are 11 total tutorials for the course. Your lowest grade on the Tutorials will be dropped.</p>
-<p>These Tutorials are for your personal benefit. You may collaborate with peers, but you must submit your own file.</p>
+<p>In addition to weekly labs, you will also work through <strong>weekly tutorials</strong> made available to you through the `qsslearnr’ package. These tutorials provide you with an opportunity to practice your programming and review concepts from the text and lecture. After completing each tutorial, you will download your progress report and upload this file to Canvas by midnight on Friday each week a tutorial is assigned. If you upload a report by Friday, you receive a grade of 100 % on that Tutorial. If you upload a report after Friday (e.g.&nbsp;on or after 12:00am Saturday), you receive a grade of 50 %. If you do not upload a report, you receive a grade of 0 %. There are 11 total tutorials for the course. Your lowest grade on the Tutorials will be dropped.</p>
+<p>These Tutorials are for your personal benefit. You may collaborate with peers, but you must submit your own file. All work in this class <strong>MUST BE SUBMITTED ONLINE VIA CANVAS.</strong></p>
 </section>
 <section id="assignments" class="level2">
 <h2 class="anchored" data-anchor-id="assignments">Assignments</h2>
-<p>In addition to weekly labs, you will complete periodic group assignments developing an original research presentation applying skills you have learned in this class to a topic of your choosing. All assignments are due the Friday after the class with which they are associated.</p>
+<p>In addition to weekly labs, you will complete periodic group assignments developing an original research presentation applying skills you have learned in this class to a topic of your choosing.You may choose to work with the same group as in your lab assignments, but this is not required. All assignments are due the Friday after the class with which they are associated (by 11:59pm).</p>
 <p>The timeline of assignments for your final paper is as follows:</p>
 <ul>
 <li>Week 4: Research Topics</li>
@@ -340,33 +355,102 @@ window.Quarto = {
 <li><strong>10 % Tutorials</strong></li>
 <li><strong>30 % Labs</strong></li>
 <li><strong>20 % Assignments not including the final Paper</strong></li>
-<li><strong>25 % Final Project</strong></li>
+<li><strong>25 % Final Paper</strong></li>
 </ul>
-<p>Labs, assignments excluding the final presentation, will be graded graded out of 100 roughly on a ✓ + (100, completed on time, acceptable), ✓ (85, completed on time, passable), ✓ - (0 not submitted on time, unacceptable). The lowest two lab grades will be dropped from your final lab grade. Tutorials are graded on pass (submitted on time = 100 % ) - fail (not submitted =0) based submitting your progress report from the tutorial by Friday each week. If you submit a Tutorial after the week it’s do, you will receive partial credit (50 %). Your final projects will be graded on 100-point scales with rubrics provided beforehand.</p>
+<p>Final grades will be calculated as follows, unless a grade of Satisfactory/No Credit is elected: A (89.5-100%), B (79.5-89.5%), C (69.5-79.5%), NC (&lt;69.5%).</p>
+<p>Lab and assignments, excluding the final paper and presentation, will be graded out of 100 roughly on a check-plus (100, completed on time, acceptable), a check (85, completed on time, passable), a check-minus (0, unacceptable). The lowest two lab grades will be dropped from your final lab grade. Tutorials are graded on pass (submitted on time = 100 % ) - fail (not submitted =0) based on submitting your progress report from the tutorial by Friday each week. If you submit a Tutorial after the week it’s due, the maximum possible grade will be half credit (50 %).</p>
+<p>Your final paper and presentation will be graded on 100-point scales with rubrics provided beforehand.</p>
 <p><strong>Incomplete Work</strong> Assignments not turned in will be counted as zero in the calculation of the final grade.</p>
-<p><strong>Computers in class</strong> Please bring your laptops if you have them. We will install <a href="https://cran.r-project.org/">R</a> and <a href="https://posit.co/products/open-source/rstudio/#Desktop">RStudio</a> together. If you do not own a laptop, you can still work in a group of other people who have laptops and will be able to complete the in-class worksheets without a problem. In fact, it is ideal if each group of 2-4 people works with one laptop and then shares the work among themselves. Of course, feel free to work on your own outside of class.</p>
+<p><strong>Computers in class</strong> Please bring your laptops to class if you have them. We will install <a href="https://cran.r-project.org/">R</a> and <a href="https://posit.co/products/open-source/rstudio/#Desktop">RStudio</a> - both free - together. If you do not own a laptop, you can still work in a group of other people who have laptops and will be able to complete the in-class worksheets without a problem. In fact, it is ideal if each group of 2-4 people works with one laptop and then shares the work among themselves. Of course, feel free to work on your own outside of class.</p>
 </section>
 <section id="time" class="level2">
 <h2 class="anchored" data-anchor-id="time">Time</h2>
-<p>This course meets 27 times over 13 weeks in the semester. Each class is 80 minutes long so you should expect to spend approximately 36 hours total in class; approximately 4 hours per week reading the textbook and reviewing material (42 hours total); approximately 22 hours on tutorials each week, approximately 30 hours on assignments for the final paper; approximately 50 hours researching, writing, and revising your final presentation; and at least .5 hours meeting with me in person to discuss your work (Estimated Total Time: 180.5 hours)</p>
+<p>This course meets 36 times over 13 weeks in the semester (including lab sessions). Each session is 50 minutes long so you should expect to spend approximately 30 hours total in class; approximately 4 hours per week reading the textbook and reviewing course material (52 hours total); approximately 1.5 hours/week on assigned tutorials outside of class (19.5 hours total); approximately 30 hours on assignments leading up to the final paper/presentation; approximately 48 hours researching, writing, and revising your final paper and presentation; and at least 0.5 hours meeting with me in person to discuss your work (Estimated Total Time: 180 hours)</p>
+</section>
+</section>
+<section id="course-schedule" class="level1">
+<h1>Course Schedule</h1>
+<p>Note: This schedule is tentative and may change. Updates will be sent out on Canvas and email with a new timestamped syllabus document.</p>
+<p>*QSS = Imai 2022, Quantitative Social Science</p>
+<p>In general, you will:</p>
+<p> What am I getting myself into? Course overview </p>
+<p></p>
+<p>QSS, Chapter 1 (if you have the textbook)</p>
+<p>Download and install R and R Studio following the steps outlined in </p>
+<p>QSS, Finish Chapter 1 QSS, Chapter 3 pp.&nbsp;88-105</p>
+<p> How do we describe the world around us? </p>
+<p> Continued </p>
+<p> Loading and manipulating data in R; Levels of measurement; Measures of central tendency and dispersion. – QSS Tutorial 0 &amp; 1</p>
+<p>QSS, Chapter 3 pp.&nbsp;105-141</p>
+<p>R 4 Data Science Chapter 3, Data Visualization: </p>
+<p> How can we visualize data to help us understand the world around us? </p>
+<p> Continued </p>
+<p> Visualizing distributions and relationships with ggplot; QSS Tutorial 2 </p>
+<p>QSS, Chapter 2 pp.&nbsp;38-65</p>
+<p>Broockman and Kalla (2016), skim for understanding of basic question, data and design (posted on Canvas)</p>
+<p> Making Causal Claims in Experimental Studies: How do we know if X causes Y? </p>
+<p> Continued; further discussion of Broockman </p>
+<p> Estimating causal effects with experimental data; QSS Tutorial 3 </p>
+<p>QSS, Chapter 2 pp.&nbsp;65-88</p>
+<p></p>
+<p> Making Causal Claims in Observational Studies: How do we know if X causes Y without randomly assigning X?</p>
 
+<p> Causation in observational data; QSS Tutorial 4 </p>
+<p></p>
+<p>QSS, Chapter 4 pp.&nbsp;144-188</p>
+<p> Causation in observational data continued. </p>
+<p> How do we make predictions? Simple linear regression. OLS as a linear approximation to the conditional mean function. </p>
+<p> Using simple linear regression to explore the phenomenon of Red Covid; QSS Tutorial 5 </p>
+<p>QSS, Chapter 4 pp.&nbsp;188-214</p>
+<p> How do we make predictions adjusting for potentially confounding factors? Multiple regression. What it means to “control for education” or “hold age constant’’</p>
+<p> Predictions/Regression continued</p>
+
+<p> Exploring alternative explanations for Red Covid; QSS Tutorial 6 </p>
+<p></p>
+<p>Review QSS, Chapter 4</p>
+<p>Read Grumbach and Hill (2022) (posted on canvas)</p>
+<p> How do we evaluate our model’s predictions?</p>
+<p> Continued</p>
+<p> Detailed look at Grumbach and Hill (2022)</p>
+<p>QSS, Chapter 6 pp.&nbsp;279-342</p>
+<p> What is probability and how do we use it? Axioms of probability; Discrete and continuous probability distributions; Expectations, variance, and moments </p>
+<p> Probability continued. </p>
+<p> Replicating the results of Grumbach and Hill (2022) (posted on canvas); QSS Tutorial 7 </p>
+<p></p>
+<p>QSS, Chapter 6 pp.&nbsp;342-354</p>
+<p> What is probability and how do we use it? Conditional probability; Bayes Rule; The Law of Large Numbers and The Central Limit Theorem; </p>
+<p> Continued </p>
+<p> Exploring data from the 2024 ; QSS Tutorial 8 </p>
+<p>QSS, Chapter 7 pp.&nbsp;357-417</p>
+<p> How do we quantify uncertainty? Asymptotic and simulation based approaches to sampling distributions, standard errors, and confidence intervals.&nbsp;</p>
+<p> Permutation approaches continued. </p>
+<p> Exploring data from the 2024 ; QSS Tutorial 9 </p>
+<p>QSS, Chapter 7 pp.&nbsp;418-445</p>
+<p> How do we quantify uncertainty? Asymptotic and permutation based approaches to hypothesis test and p-values </p>
+<p> Permutation approaches continued. </p>
+<p> Workshopping your final papers; QSS Tutorial 10 </p>
+<p></p>
+<p> Course Review and Final Paper Workshop </p>
+<p> Course Review and Final Paper Workshop</p>
+<p> Review slides on creating graphics with R posted to canvas, spend time prepping for presentations.</p>
+<p> </p>
+<p> Class Presentations </p>
+<p> Class Presentations </p>
+<p> Class Presentations</p>
+<p></p>
+<p>This document last updated January 18th, 2026.</p>
 
 
 </section>
-</section>
 
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
-<div id="ref-Imai2022-pm" class="csl-entry" role="listitem">
-Imai, Kosuke. 2022. <em><span class="nocase">Quantitative Social Science An Introduction in Tidyverse</span></em>. Princeton University Press.
-</div>
-</div></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
 
 <ol>
 <li id="fn1"><p>This is not the same as all the math you need to know be a successful, methodologically sophisticated political scientist. But it’s a start, and one that will hopefully help you figure out what additional training you’ll need.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p>We’ll do the proofs as well, but your focus should be on making sure you understand concepts and implications rather than specific derivations<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>We’ll do the proofs as well, but your focus should be on making sure you understand concepts and implications rather than specific derivations.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn3"><p>Available for free at <a href="https://cran.r-project.org/" class="uri">https://cran.r-project.org/</a>. Python is also increasingly common among social scientists.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn4"><p>Seriously. Working carefully through these examples will be incredibly helpful and rewarding. If you’re taking the time to read this footnote, send me picture of a cute animal and I’ll add 1 point of extra credit to your final paper grade. See, your hard work is already paying off.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>Working carefully through these examples will be incredibly helpful and rewarding. If you’re taking the time to read this footnote, send me picture of a cute animal and I’ll add 1 point of extra credit to your final paper grade. See, your hard work is already paying off.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -441,7 +525,7 @@ Imai, Kosuke. 2022. <em><span class="nocase">Quantitative Social Science An Intr
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/josephessig-source\.github\.io\/pols1600_site\/");
+        var filterRegex = new RegExp('/' + window.location.host + '/');
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
