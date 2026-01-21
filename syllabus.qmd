@@ -13,7 +13,7 @@ format:
 
 - Course Site: [https://josephessig-source.github.io/pols1600_site/](https://josephessig-source.github.io/pols1600_site/)
 
-- Canvas: Canvas Link Forthcoming
+- Canvas: [Canvas Link](https://canvas.brown.edu/courses/1102109)
 
 - Where and When: Monday, Wednesday, and Friday, 12pm-12:50pm in Andrews House 310
 

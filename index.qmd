@@ -40,7 +40,7 @@ Fridays, 12-12:50pm
 
 ### Assignments
 
-Due on [Canvas](#)
+Due on [Canvas](https://canvas.brown.edu/courses/1102109)
 :::
 
 ::: g-col-4
@@ -48,7 +48,7 @@ Due on [Canvas](#)
 
 ### Location
 
-Location TBD
+Andrews House 310
 :::
 
 ::: g-col-4
@@ -58,13 +58,13 @@ Location TBD
 :::
 
 ::: g-col-4
-[{{< fa person-circle-question size=3x >}}](https://calendar.app.google)
+[{{< fa person-circle-question size=3x >}}](https://calendar.app.google/UWc4GwjQXvZhMcnTA)
 
 ### Office Hours
 
-[Joe | Time TBD](https://calendar.app.google) <br>
-Stephen Roberts Hall, Rm. 123 (Taubman Center)
-[Teaching Assistant | Time TBD](https://calendar.app.google) <br>
+[Joe | 2-4pm, Thursdays](https://calendar.app.google/UWc4GwjQXvZhMcnTA) <br>
+Stephen Roberts Hall, Rm. 123 (Taubman Center) <br>
+[Sara Ansari, TA | Time TBD] <br>
 Location TBD
 :::
 :::
@@ -235,5 +235,13 @@ Taubman Center for American Politics and Policy
 
 Brown University \<joseph_essig\@brown.edu\>
 :::
+::: g-col-6
+[Sara Ansari](https://polisci.brown.edu/people/sara-ansari)
 
+Teaching Assistant
+
+Department of Political Science
+
+Brown University \<maya_nunez\@brown.edu\>
+:::
 :::
