@@ -53,20 +53,13 @@ library(babynames)
 
 -   Course Policies
 
-
-
--   A Few Fundamental Truths
-
 # Goals and Expectations  {.inverse}
 
 ## What you will learn
 
 You will learn
 
-
-
 -   how to think like a social scientist
-
 
 
 -   how to use data to make descriptive, predictive, and causal claims
@@ -216,15 +209,15 @@ I assume that you will
 
 ## Class
 
--   Tuesday: Lecture/Demonstration
+-   Monday and Wednesday: Lecture/Demonstration (and start lab if time permits)
 
--   Thursday: Lab/Exploration
+-   Friday: Lab/Hands-on with R
 
 ## Class websites
 
--   Slides, labs and additional resources available here: [pols1600.paultesta.org](https://pols1600.paultesta.org)
+-   Slides, labs and additional resources available here: [Pols 1600 Site](https://josephessig-source.github.io/pols1600_site/)
 
--   Assignments uploaded here: [Canvas](https://canvas.brown.edu/courses/1087979)
+-   Assignments uploaded here: [Canvas](https://canvas.brown.edu/courses/1102109)
 
 ## Software and computing
 

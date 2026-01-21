@@ -1,6 +1,6 @@
 ---
 title: 'Getting started with R'
-author: "Paul Testa"
+author: "Joseph Essig (Adapted Directly from Paul Testa)"
 date: "Last Updated `r format(Sys.Date())`"
 format:
   html:
@@ -92,7 +92,7 @@ remotes::install_github("kosukeimai/qss-package", build_vignettes = TRUE)
 
 To work, so make sure you've copied and pasted the code above into your console
 
-> If you have a question or somethings not working, don't hesitate to ask. Please email me at [paul_testa\@brown.edu](mailto:paul_testa@brown.edu){.email} or come to my office at 111 Thayer St Rm 339.
+> If you have a question or somethings not working, don't hesitate to ask. Please email me at [joseph_essig\@brown.edu](joseph_essig@brown.edu){.email} or come to my office at 123 Stephen Roberts Hall (Taubman Center).
 
 # Update your operating system
 
@@ -109,10 +109,8 @@ If you're still getting errors / having trouble installing R, R Studio, or relat
 # Download `R`
 
 -   **Download R here:** <https://cran.r-project.org/>
-  - It should be `R version 4.4.2 (2024-10-31) -- "Pile of Leaves"`
+  - It should be `R version 4.5.2`
   -   Make sure your operating systems are up to date.
-        -   Mac: at least macOS 12 (Monterey) (Latest: macOS Sequoia 15.2 ). Note different versions for Intel vs Apple M1/M2/M3 chips
-        -   PC: It should work on most versions you have installed
 
 ![](images/00_r01.png) - Just click yes, on everything the installer asks
 
