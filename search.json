@@ -4442,7 +4442,7 @@
     "href": "resources/00-software-setup.html#tldr",
     "title": "Getting started with R",
     "section": "TLDR",
-    "text": "TLDR\nIf you’re pressed for time here’s the short version of what you should do before next class.\n\nUpdate your operating system\nDownload R\nDownload R Studio\nOpen R Studio on your computer\nCreate an Quarto Markdown Document (.qmd) in R Studio\n\n\nFile &gt; New File &gt; Quarto Document\nInstall any requested packages\n\n\nRender this .Qmd into an html file.\n\n\nClick the render arrow with the needle OR:\nUse the hot keys: Mac: cmd + shift + k PC: crtl + shift + k\n\n\nInstall some additional packages for the course\n\nSpecifically copy and paste the following into the console in R Studio and hit enter:\n\ninstall.packages(\"rmarkdown\")\ninstall.packages(\"devtools\")\ninstall.packages(\"remotes\")\nremotes::install_github(\"kosukeimai/qss-package\", build_vignettes = TRUE)\nremotes::install_github(\"rstudio/learnr\")\nremotes::install_github(\"rstudio-education/gradethis\")\nremotes::install_github(\"PaulTestaBrown/qsslearnr\")\n\nYou’ll need to have the package rmarkdown installed for\n\nremotes::install_github(\"kosukeimai/qss-package\", build_vignettes = TRUE)\n\nTo work, so make sure you’ve copied and pasted the code above into your console\n\nIf you have a question or somethings not working, don’t hesitate to ask. Please email me at paul_testa@brown.edu or come to my office at 111 Thayer St Rm 339."
+    "text": "TLDR\nIf you’re pressed for time here’s the short version of what you should do before next class.\n\nUpdate your operating system\nDownload R\nDownload R Studio\nOpen R Studio on your computer\nCreate an Quarto Markdown Document (.qmd) in R Studio\n\n\nFile &gt; New File &gt; Quarto Document\nInstall any requested packages\n\n\nRender this .Qmd into an html file.\n\n\nClick the render arrow with the needle OR:\nUse the hot keys: Mac: cmd + shift + k PC: crtl + shift + k\n\n\nInstall some additional packages for the course\n\nSpecifically copy and paste the following into the console in R Studio and hit enter:\n\ninstall.packages(\"rmarkdown\")\ninstall.packages(\"devtools\")\ninstall.packages(\"remotes\")\nremotes::install_github(\"kosukeimai/qss-package\", build_vignettes = TRUE)\nremotes::install_github(\"rstudio/learnr\")\nremotes::install_github(\"rstudio-education/gradethis\")\nremotes::install_github(\"PaulTestaBrown/qsslearnr\")\n\nYou’ll need to have the package rmarkdown installed for\n\nremotes::install_github(\"kosukeimai/qss-package\", build_vignettes = TRUE)\n\nTo work, so make sure you’ve copied and pasted the code above into your console\n\nIf you have a question or somethings not working, don’t hesitate to ask. Please email me at joseph_essig@brown.edu or come to my office at 123 Stephen Roberts Hall (Taubman Center)."
   },
   {
     "objectID": "resources/00-software-setup.html#install-the-devtools-and-remotes-packages",
@@ -6273,7 +6273,7 @@
     "href": "class/00-class.html",
     "title": "Introductions",
     "section": "",
-    "text": "Welcome! I’ll see you in class on Thursday.\nTune in via Zoom: https://brown.zoom.us/j/97039852954",
+    "text": "None this week",
     "crumbs": [
       "Class",
       "Weekly Content",
@@ -6284,8 +6284,8 @@
     "objectID": "class/00-class.html#readings",
     "href": "class/00-class.html#readings",
     "title": "Introductions",
-    "section": "Readings",
-    "text": "Readings\n\nNone this week",
+    "section": "",
+    "text": "None this week",
     "crumbs": [
       "Class",
       "Weekly Content",
@@ -6321,7 +6321,7 @@
     "href": "class/00-class.html#assignments",
     "title": "Introductions",
     "section": "Assignments",
-    "text": "Assignments\n\nWork through Software Setup before class next week",
+    "text": "Assignments\n\nWork through Software Setup before class next week\n\n\n\n{r slides-videos, echo=FALSE, include=FALSE} source(here::here(\"R\", \"slide-things.R\")) wk &lt;- \"00\"",
     "crumbs": [
       "Class",
       "Weekly Content",
@@ -6331,9 +6331,9 @@
   {
     "objectID": "class/index.html",
     "href": "class/index.html",
-    "title": "General Workflow for POLS 1600",
+    "title": "Introductions",
     "section": "",
-    "text": "Before class on Monday\n\nDo the assigned readings\nReview last week’s lab and slides\n\nMonday: Come to class ready to engage with lecture and slides\nWednesday:\n\nStart the tutorials for that week\nDownload, render, and skim Friday’s lab\n\nFriday: Come to class ready to work through that week’s lab\n\nUpload tutorial to Canvas",
+    "text": "Before class on Monday\n\nDo the assigned readings\nReview last week’s lab and slides\n\nMonday: Come to class ready to engage with lecture and slides\nWednesday:\n\nStart the tutorials for that week\nDownload, render, and skim Friday’s lab\n\nFriday: Come to class ready to work through that week’s lab\n\nUpload tutorial to Canvas\n{r slides-videos, echo=FALSE, include=FALSE} source(here::here(\"R\", \"slide-things.R\")) wk &lt;- \"00\"",
     "crumbs": [
       "Class",
       "Overview",
@@ -11925,5 +11925,101 @@
     "title": "Syllabus",
     "section": "Class Time",
     "text": "Class Time\nThis course meets three times a week (Monday, Wednesday, and Friday) for 50 minutes. Monday and Wednesday’s classes will be devoted to lecture, demonstration and review. Friday’s class will focus on applications of course concepts through labs where you’ll work with real data from a variety of sources. I assume that you will come to class having done each week’s assigned readings and reviewed material from the previous week’s lectures and labs. Slides and labs are available on Canvas and on the course website."
+  },
+  {
+    "objectID": "class/index.html#readings",
+    "href": "class/index.html#readings",
+    "title": "Introductions",
+    "section": "Readings",
+    "text": "Readings\n\nNone this week",
+    "crumbs": [
+      "Class",
+      "Overview",
+      "General Workflow for POLS 1600"
+    ]
+  },
+  {
+    "objectID": "class/index.html#lecture",
+    "href": "class/index.html#lecture",
+    "title": "Introductions",
+    "section": "Lecture",
+    "text": "Lecture\n#| label: show-slide-tabs\n#| echo: false\n#| results: \"asis\"\nslide_buttons(paste0(\"/slides/\", wk, \"-slides\"))\nslide_frame(paste0(\"/slides/\", wk, \"-slides.html\"))",
+    "crumbs": [
+      "Class",
+      "Overview",
+      "General Workflow for POLS 1600"
+    ]
+  },
+  {
+    "objectID": "class/index.html#lab",
+    "href": "class/index.html#lab",
+    "title": "Introductions",
+    "section": "Lab",
+    "text": "Lab\n\nNone",
+    "crumbs": [
+      "Class",
+      "Overview",
+      "General Workflow for POLS 1600"
+    ]
+  },
+  {
+    "objectID": "class/index.html#assignments",
+    "href": "class/index.html#assignments",
+    "title": "Introductions",
+    "section": "Assignments",
+    "text": "Assignments\n\nWork through Software Setup before class next week",
+    "crumbs": [
+      "Class",
+      "Overview",
+      "General Workflow for POLS 1600"
+    ]
+  },
+  {
+    "objectID": "class/00-class.html#readings-1",
+    "href": "class/00-class.html#readings-1",
+    "title": "Introductions",
+    "section": "Readings",
+    "text": "Readings\n\nNone this week",
+    "crumbs": [
+      "Class",
+      "Weekly Content",
+      "0: Introductions"
+    ]
+  },
+  {
+    "objectID": "class/00-class.html#lecture-1",
+    "href": "class/00-class.html#lecture-1",
+    "title": "Introductions",
+    "section": "Lecture",
+    "text": "Lecture\n#| label: show-slide-tabs\n#| echo: false\n#| results: \"asis\"\nslide_buttons(paste0(\"/slides/\", wk, \"-slides\"))\nslide_frame(paste0(\"/slides/\", wk, \"-slides.html\"))",
+    "crumbs": [
+      "Class",
+      "Weekly Content",
+      "0: Introductions"
+    ]
+  },
+  {
+    "objectID": "class/00-class.html#lab-1",
+    "href": "class/00-class.html#lab-1",
+    "title": "Introductions",
+    "section": "Lab",
+    "text": "Lab\n\nNone",
+    "crumbs": [
+      "Class",
+      "Weekly Content",
+      "0: Introductions"
+    ]
+  },
+  {
+    "objectID": "class/00-class.html#assignments-1",
+    "href": "class/00-class.html#assignments-1",
+    "title": "Introductions",
+    "section": "Assignments",
+    "text": "Assignments\n\nWork through Software Setup before class next week",
+    "crumbs": [
+      "Class",
+      "Weekly Content",
+      "0: Introductions"
+    ]
   }
 ]

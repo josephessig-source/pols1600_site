@@ -6,7 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2024-01-25">
+<meta name="dcterms.date" content="2026-01-21">
 
 <title>Introductions – POLS 1600</title>
 <style>
@@ -182,7 +182,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">January 25, 2024</p>
+      <p class="date">2026-01-21</p>
     </div>
   </div>
   
@@ -194,10 +194,6 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<ul>
-<li><p>Welcome! I’ll see you in class on Thursday.</p></li>
-<li><p>Tune in via Zoom: https://brown.zoom.us/j/97039852954</p></li>
-</ul>
 <section id="readings" class="level2">
 <h2 class="anchored" data-anchor-id="readings">Readings</h2>
 <ul>
@@ -226,6 +222,33 @@ ul.task-list li input[type="checkbox"] {
 </ul>
 
 
+<p><code>{r slides-videos, echo=FALSE, include=FALSE} source(here::here("R", "slide-things.R")) wk &lt;- "00"</code></p>
+</section>
+<section id="readings-1" class="level2">
+<h2 class="anchored" data-anchor-id="readings-1">Readings</h2>
+<ul>
+<li>None this week</li>
+</ul>
+</section>
+<section id="lecture-1" class="level2">
+<h2 class="anchored" data-anchor-id="lecture-1">Lecture</h2>
+<pre class="{r }"><code>#| label: show-slide-tabs
+#| echo: false
+#| results: "asis"
+slide_buttons(paste0("/slides/", wk, "-slides"))
+slide_frame(paste0("/slides/", wk, "-slides.html"))</code></pre>
+</section>
+<section id="lab-1" class="level2">
+<h2 class="anchored" data-anchor-id="lab-1">Lab</h2>
+<ul>
+<li>None</li>
+</ul>
+</section>
+<section id="assignments-1" class="level2">
+<h2 class="anchored" data-anchor-id="assignments-1">Assignments</h2>
+<ul>
+<li>Work through <a href="../resources/00-software-setup.html">Software Setup</a> before class next week</li>
+</ul>
 </section>
 
 </main> <!-- /main -->
@@ -301,7 +324,7 @@ ul.task-list li input[type="checkbox"] {
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/josephessig-source\.github\.io\/pols1600_site\/");
+        var filterRegex = new RegExp('/' + window.location.host + '/');
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }

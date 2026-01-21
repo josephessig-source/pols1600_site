@@ -6,8 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="dcterms.date" content="2026-01-21">
 
-<title>General Workflow for POLS 1600 – POLS 1600</title>
+<title>Introductions – POLS 1600</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -169,7 +170,8 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../class/index.html">Overview</a></li><li class="breadcrumb-item"><a href="../class/index.html">General Workflow for POLS 1600</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">General Workflow for POLS 1600</h1>
+<h1 class="title">Introductions</h1>
+<p class="subtitle lead">Welcome to POLS 1600</p>
 </div>
 
 
@@ -177,6 +179,12 @@ ul.task-list li input[type="checkbox"] {
 <div class="quarto-title-meta">
 
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">2026-01-21</p>
+    </div>
+  </div>
   
     
   </div>
@@ -205,6 +213,33 @@ ul.task-list li input[type="checkbox"] {
 </ul>
 
 
+<p><code>{r slides-videos, echo=FALSE, include=FALSE} source(here::here("R", "slide-things.R")) wk &lt;- "00"</code></p>
+<section id="readings" class="level2">
+<h2 class="anchored" data-anchor-id="readings">Readings</h2>
+<ul>
+<li>None this week</li>
+</ul>
+</section>
+<section id="lecture" class="level2">
+<h2 class="anchored" data-anchor-id="lecture">Lecture</h2>
+<pre class="{r }"><code>#| label: show-slide-tabs
+#| echo: false
+#| results: "asis"
+slide_buttons(paste0("/slides/", wk, "-slides"))
+slide_frame(paste0("/slides/", wk, "-slides.html"))</code></pre>
+</section>
+<section id="lab" class="level2">
+<h2 class="anchored" data-anchor-id="lab">Lab</h2>
+<ul>
+<li>None</li>
+</ul>
+</section>
+<section id="assignments" class="level2">
+<h2 class="anchored" data-anchor-id="assignments">Assignments</h2>
+<ul>
+<li>Work through <a href="../resources/00-software-setup.html">Software Setup</a> before class next week</li>
+</ul>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -279,7 +314,7 @@ ul.task-list li input[type="checkbox"] {
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/josephessig-source\.github\.io\/pols1600_site\/");
+        var filterRegex = new RegExp('/' + window.location.host + '/');
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
