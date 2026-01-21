@@ -6321,7 +6321,7 @@
     "href": "class/00-class.html#assignments",
     "title": "Introductions",
     "section": "Assignments",
-    "text": "Assignments\n\nWork through Software Setup before class next week\n\n\n\n{r slides-videos, echo=FALSE, include=FALSE} source(here::here(\"R\", \"slide-things.R\")) wk &lt;- \"00\"",
+    "text": "Assignments\n\nWork through Software Setup before class next week",
     "crumbs": [
       "Class",
       "Weekly Content",
@@ -7381,7 +7381,7 @@
     "href": "slides/00-slides.html#overview",
     "title": "Welcome to POLS 1600",
     "section": "Overview",
-    "text": "Overview\n\nGoals and Expectations\nCourse Structure\nCourse Policies\nA Few Fundamental Truths"
+    "text": "Overview\n\nGoals and Expectations\nCourse Structure\nCourse Policies"
   },
   {
     "objectID": "slides/00-slides.html#what-you-will-learn",
@@ -7458,7 +7458,7 @@
     "href": "slides/00-slides.html#reasons-to-take-this-class-1",
     "title": "Welcome to POLS 1600",
     "section": "Reasons to take this class",
-    "text": "Reasons to take this class\n\nYou want to change the world\n\nData, design, and analysis are incredlibly powerful tools\nYou want to understand their strengths and limits\n\nYou want to be a better consumer of data and knowledge\nYou want to be a better consumer of data and knowledge\nYou want to get a job / go to grad school\nYou have to\nYou’re just in it for the memes"
+    "text": "Reasons to take this class\n\nYou want to change the world\n\nData, design, and analysis are incredlibly powerful tools\nYou want to understand their strengths and limits\n\nYou want to be a better consumer of data and knowledge\nYou want to be a better consumer of data and knowledge\nYou want to get a job / go to grad school\nYou have to\n\n\nExpectations\nI expect that you will come to class ready to engage with:\n\nsocial science\ndata\nprogramming\nmath\n\n\n\nRequirements\nI assume that you will\n\n\nDo the readings\n\n\n\n\nBring your computers 1\n\n\n\n\nWork through classwork\n\n\n\n\nAsk questions\n\n\n\n\nCourse structure\n\n\n\nClass\n\nMonday and Wednesday: Lecture/Demonstration (and start lab if time permits)\nFriday: Lab/Hands-on with R\n\n\n\nClass websites\n\nSlides, labs and additional resources available here: Pols 1600 Site\nAssignments uploaded here: Canvas\n\n\n\nSoftware and computing\n\nStatistics done using R\n\nOpen source (free) statistical language\n\nThrough R Studio\n\nAn integrated development environment for R\n\nResults written up using R Markdown\n\nLanguage for combing R code with html Markdown\n\n\n\n\n\nR\n\n\n\nR Studio\n\n\n\nQuarto\n\n\n\nProject options in YAML\nCode in triple backtick chunks:\n\nChunk options set with “#|” (hashpipe)\n\n\n```{r}\n#| label = \"simulate_data\"\nx &lt;- rnorm(100)\ny &lt;- 2*x + rnorm(100)\n```\n\nWrite up in Markdown\nOutput rendered as an html file\n\n\n\n\n\n\nGetting set up for the course:\nHere’s a link to a guide to get you setup for the course.\nTake a crack at it after class, over the weekend.\nEmail me with any issues (there are always issues), and drop by my office hours on Tuesday so we can trouble shoot.\n\n\nTextbook\n\nhttps://press.princeton.edu/books/paperback/9780691222288/quantitative-social-science\n\n\nHow to Read Imai\n\nActive reading\nCopy and run the code in the text. To do so, do the following:\n\n\nif (!require(\"devtools\")){\n  install.packages(\"devtools\")\n  }\nlibrary(\"devtools\")\ninstall_github(\"kosukeimai/qss-package\",  \n               build_vignettes  =  TRUE)\n\n\n\nHow to Read Imai\nOnce you’ve rune the following\n\ninstall.packages(\"devtools\")\ninstall.packages(\"remotes\")\nremotes::install_github(\"kosukeimai/qss-package\", build_vignettes = TRUE)\n\nAnywhere the text loads data:\n\nafghan &lt;- read_csv(\"afgahn.csv\")\n\nYou can do\n\nlibrary(\"qss\")\ndata(\"afghan\")\nsummary(afghan$age)\n\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. \n  15.00   22.00   30.00   32.39   40.00   80.00 \n\n\n\n\nAdditional Readings\n\nOccasionally, I will provide additional readings, available on both Canvas and pols1600.paultesta.org\n\n\n\n\nAssignments\n\n\n\nAssignments\nYou have three types of assignments in this course\n\nLabs\nTutorials\nFinal Project\n\n\n\nLabs\n\nEach Thursday we will work in groups to complete an in-class lab\nThe labs are designed to reinforce and extend concepts from lecture using real world data.\n\n\n\nLabs\n\n\n\nLabs\n\n\n\nLabs\n\nWeeks 1 and 2 we’ll work collectively\nWeeks 3 on, you’ll be assigned to small groups\nEach week:\n\nLog on to the Canvas, download the lab .qmd file\nOpen R Studio\nRender the qmd file to get ready to work\nComplete the lab\nUpload the rendered html file to Canvas by the end of class\n\nOne question randomly graded\n\n100% if correct\n85% if incorrect, but you tried\n0% if you did not try/absent for the lab\n\nComments/Answers posted immediately after class\n\n\n\nProblem Sets/Tutorials\n\nCoding tutorials to reinforce concepts from lecture and textbook.\nAccessed by running\n\n\nlearnr::run_tutorial(\"00-intro\", package = \"qsslearnr\")\n\n\nComplete the tutorial. Save output as “LASTNAME_TutorialNumber.pdf”\nUpload output to Canvas by Friday by 11:59 pm\nGrades:\n\n100% any upload\n0% no upload\n\n\n\n\nFinal Project\n\n\nYour First Assignment:\n\nDownload and install R and R Studio\n\nEmail me if you have troubles\nTroubleshoot by Zoom or in-person (111 Thayer Room 339)\n\nWork through 00-software_setup before next class.\n\n\n\nPortals of Discovery\n\n\nErrors\n\nish happens\nSeeing red is a good thing\nWe learn by making errors\n\n\n\nFinal Reports\n\nCan be on any topic you like\nMore info to come\nDue dates:\n\nWeek 2 Groups assigned\nWeek 3 Research Topics\nWeek 6 Data Proposal\nWeek 8 Data Explorations\nWeek 11 Drafts\nWeek 12 Presentations\nWeek 13 Final Paper\n\n\n\n\n\nGrading and Other Policies\n\n\n\nGrading\n\n\n\nGrading\n\n\n\nGrading\n\n\n\nGrading\n\n\n\nGrading\n\n5% Attendance\n10% Class involvement and participation\n10% Tutorials\n30% Labs\n20% Assignments for final paper\n20% Final paper\n\n\n\nCourse policies\n\nAcademic honesty\nChatGPT and generative AI\nCommunity standards\nIncomplete/late work\n\n\n\n\nIntroductions\n\n\n\nTwo Fundamental Truths\n\n\nTesta’s first fundamental truth\n\n\n\n\n\nTesta’s first fundamental truth\nWhy would I profess my utter ignorance on the first day of class?\nFour possible reasons…\n\n\n1. Expectation Management\n\n\n\n2. Pedagogical Tomfoolery\n\n\n\n3. Positionality\n\n\n\n4. Epistemology\n\n\n\nTesta’s second fundamental truth\n\n\nTesta’s second fundamental truth\n\n\n\nTwo kinds of people in this world\n\n\n\nWhat is it that we say we do here\n\n\n\nWhat does quantitative research do?\n\nDescriptions\n\n\n\nDescriptions\n\n\n\nWhat does quantitative research do?\n\nDescriptions\nExplanations\n\n\n\nExplanations\n\n\n\nExplanations\n\n\n\nWhat does quantitative research do?\n\nDescriptions\nExplanations\nPredictions and Uncertainty\n\n\n\nPredictions and Uncertainty\n\n\n\nPredictions and Uncertainty\n\n\n\nPredictions and Uncertainty\n\n\n\nWhat does quantitative research do?\n\nDescriptions\nExplanations\nPredictions and Uncertainty\n\n\n\n\n\n\n\nTwo kinds of people in this world\n\n\n\nIntroductions\n\n\n\nMy research\n\nI study American Poltical Behavior with focus on poltics of race and criminal justice\nHow do we break cycles of inequality when those most affected by injustice are the least likely to participate and those unaffected are the least likely to care?\nHow can we use methodological tools to better answer these questions?\n\n\n\nBut enough about me\n\n\n\nClass survey\nPlease click here to take a brief survey that will help me structure the class going forward.\n\n\nNext Week:\n\nComplete the class survey\nDownload and Install R and R studio\nRead Chapters 1 (Friday) and start Chapter 3 in QSS\nTuesday: Lecture: Describing Data in R\nThursday: Lab: Exploring COVID-19 data in the US\nFriday: Submit Tutorials: “00-intro” & “01-measurement”\n\nOnly time you’ll have two tutorials due (Ok to submit late)\n\n\n\n\n\n\nIf you only have a desktop/or tablet let me know and we’ll figure out a solution."
   },
   {
     "objectID": "slides/00-slides.html#great-expectations",
@@ -7472,21 +7472,21 @@
     "href": "slides/00-slides.html#requirements",
     "title": "Welcome to POLS 1600",
     "section": "Requirements",
-    "text": "Requirements\nI assume that you will\n\n\nDo the readings\n\n\n\n\nBring your computers 1\n\n\n\n\nWork through classwork\n\n\n\n\nAsk questions\n\n\nIf you only have a desktop/or tablet let me know and we’ll figure out a solution."
+    "text": "Requirements\nI assume that you will\n\n\nDo the readings\n\n\n\n\nBring your computers 1\n\n\n\n\nWork through classwork\n\n\n\n\nAsk questions"
   },
   {
     "objectID": "slides/00-slides.html#class",
     "href": "slides/00-slides.html#class",
     "title": "Welcome to POLS 1600",
     "section": "Class",
-    "text": "Class\n\nTuesday: Lecture/Demonstration\nThursday: Lab/Exploration"
+    "text": "Class\n\nMonday and Wednesday: Lecture/Demonstration (and start lab if time permits)\nFriday: Lab/Hands-on with R"
   },
   {
     "objectID": "slides/00-slides.html#class-websites",
     "href": "slides/00-slides.html#class-websites",
     "title": "Welcome to POLS 1600",
     "section": "Class websites",
-    "text": "Class websites\n\nSlides, labs and additional resources available here: pols1600.paultesta.org\nAssignments uploaded here: Canvas"
+    "text": "Class websites\n\nSlides, labs and additional resources available here: Pols 1600 Site\nAssignments uploaded here: Canvas"
   },
   {
     "objectID": "slides/00-slides.html#software-and-computing",
@@ -12021,5 +12021,12 @@
       "Weekly Content",
       "0: Introductions"
     ]
+  },
+  {
+    "objectID": "slides/00-slides.html#expectations",
+    "href": "slides/00-slides.html#expectations",
+    "title": "Welcome to POLS 1600",
+    "section": "Expectations",
+    "text": "Expectations\nI expect that you will come to class ready to engage with:\n\nsocial science\ndata\nprogramming\nmath"
   }
 ]
