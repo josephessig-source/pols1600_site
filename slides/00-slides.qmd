@@ -149,8 +149,6 @@ Source: [Andrew Gelman](https://statmodeling.stat.columbia.edu/)
 
 -   You want to be a better consumer of data and knowledge
 
--   You want to be a better consumer of data and knowledge
-
 -   You want to get a job / go to grad school
 
 -   You *have* to
@@ -373,7 +371,7 @@ learnr::run_tutorial("00-intro", package = "qsslearnr")
 ```
 
 -   Complete the tutorial. Save output as "LASTNAME_TutorialNumber.pdf"
--   Upload output to Canvas by the following Monday by 11:59 pm
+-   Upload output to Canvas by the following Monday by 11:59 pm (Due date always posted in canvas)
 -   Grades:
     -   100% any upload
     -   0% no upload
@@ -424,9 +422,9 @@ learnr::run_tutorial("00-intro", package = "qsslearnr")
   + Two lowest labs dropped 
   
 - Tutorials: Pass (100%) or No Credit (not submitted) (0%).
-  +If late, max credit = 50%. 
+  +If late, max credit = 50%. (Due date always posted in canvas assignments)
   
-  - Assignments: % out of 100. 
+  - Assignments: % out of 100. (Due date always posted in canvas sssignments)
 
 ## Course policies
 
@@ -440,80 +438,80 @@ learnr::run_tutorial("00-intro", package = "qsslearnr")
 
 - If you choose to use GenAI, you are responsible for its output, and will be graded accordingly. 
 
-## What does quantitative research do?
+<!-- ## What does quantitative research do? -->
 
--   Descriptions
+<!-- -   Descriptions -->
 
-## Descriptions
+<!-- ## Descriptions -->
 
-```{r}
-#| echo = F,
-#| out.width = 500
-knitr::include_graphics("images/stops.png")
-```
+<!-- ```{r} -->
+<!-- #| echo = F, -->
+<!-- #| out.width = 500 -->
+<!-- knitr::include_graphics("images/stops.png") -->
+<!-- ``` -->
 
-## What does quantitative research do?
+<!-- ## What does quantitative research do? -->
 
--   Descriptions
--   Explanations
+<!-- -   Descriptions -->
+<!-- -   Explanations -->
 
-## Explanations
+<!-- ## Explanations -->
 
-```{r}
-#| echo = F,
-#| out.width = 500
-knitr::include_graphics("images/csf.png")
-```
+<!-- ```{r} -->
+<!-- #| echo = F, -->
+<!-- #| out.width = 500 -->
+<!-- knitr::include_graphics("images/csf.png") -->
+<!-- ``` -->
 
-## Explanations
+<!-- ## Explanations -->
 
-```{r}
-#| echo = F,
-#| out.width = 600
-knitr::include_graphics("images/idotvod.png")
-```
+<!-- ```{r} -->
+<!-- #| echo = F, -->
+<!-- #| out.width = 600 -->
+<!-- knitr::include_graphics("images/idotvod.png") -->
+<!-- ``` -->
 
-## What does quantitative research do?
+<!-- ## What does quantitative research do? -->
 
--   Descriptions
--   Explanations
--   Predictions and Uncertainty
+<!-- -   Descriptions -->
+<!-- -   Explanations -->
+<!-- -   Predictions and Uncertainty -->
 
-## Predictions and Uncertainty
+<!-- ## Predictions and Uncertainty -->
 
-```{r}
-#| echo = F,
-#| out.width = 500
-knitr::include_graphics("images/stops1.png")
-```
+<!-- ```{r} -->
+<!-- #| echo = F, -->
+<!-- #| out.width = 500 -->
+<!-- knitr::include_graphics("images/stops1.png") -->
+<!-- ``` -->
 
-## Predictions and Uncertainty
+<!-- ## Predictions and Uncertainty -->
 
-```{r}
-#| echo = F,
-#| out.width = 400
-knitr::include_graphics("images/neighbor.png")
-```
+<!-- ```{r} -->
+<!-- #| echo = F, -->
+<!-- #| out.width = 400 -->
+<!-- knitr::include_graphics("images/neighbor.png") -->
+<!-- ``` -->
 
-## Predictions and Uncertainty
+<!-- ## Predictions and Uncertainty -->
 
-```{r}
-#| echo = F,
-#| out.width = 450
-knitr::include_graphics("images/stops2.png")
-```
+<!-- ```{r} -->
+<!-- #| echo = F, -->
+<!-- #| out.width = 450 -->
+<!-- knitr::include_graphics("images/stops2.png") -->
+<!-- ``` -->
 
-## What does quantitative research do?
+<!-- ## What does quantitative research do? -->
 
--   Descriptions
--   Explanations
--   Predictions and Uncertainty
+<!-- -   Descriptions -->
+<!-- -   Explanations -->
+<!-- -   Predictions and Uncertainty -->
 
-## 
+<!-- ##  -->
 
-![](https://www.dropletmeasurement.com/wp-content/uploads/2020/06/some-models-are-wrong-e1536948779198.jpg)
+<!-- ![](https://www.dropletmeasurement.com/wp-content/uploads/2020/06/some-models-are-wrong-e1536948779198.jpg) -->
 
 ## Next Time:
 
 -   Complete the class survey, which will be sent out in a canvas announcement. 
--   On Friday, we will make sure everyone has [Downloaded and Installed R and R studio](https://pols1600.paultesta.org/labs/00-software-setup.html)
+-   On Friday, we will make sure everyone has [Downloaded and Installed R and R studio](https://josephessig-source.github.io/pols1600_site/resources/00-software-setup.html)
