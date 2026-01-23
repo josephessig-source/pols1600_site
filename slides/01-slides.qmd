@@ -44,20 +44,14 @@ library(labelled)
 library(DeclareDesign)
 library(easystats)
 
-# Class survey
-
-df <- haven::read_spss("../files/data/class_surveys/wk00.sav")
-
-
 ```
 
 # {{< fa map-location>}} Overview {.inverse}
 
 ## Class Plan {.smaller}
 
--   Logistics (15 minutes)
+-   Logistics
     -   Announcements
-    -   Feedback
 -   Class plan (60 minutes)
     -   Introduction to R, R Studio and Quarto
     -   Loading and Looking at Data in R
@@ -103,81 +97,7 @@ learnr::run_tutorial("00-intro", package = "qsslearnr")
 ```
 
 
-:::{.callout-important}
-
-Please upload tutorials 00-intro and 01-measurement1 to [Canvas](https://canvas.brown.edu/courses/1098409/assignments) by Friday
-
-:::
-
-##  {background-image="https://upload.wikimedia.org/wikipedia/en/thumb/0/04/How_to_Get_Away_with_Murder_season_5_poster.jpg/220px-How_to_Get_Away_with_Murder_season_5_poster.jpg" background-size="contain"}
-
-## You've committed a murder
-
-```{r}
-#| echo: false
-#| label: murder
-
-
-df %>%
-  filter(!is.na(murder)) %>%
-  mutate(
-    Murder = to_factor(murder)
-  )%>%
-  ggplot(aes(Murder, fill=Murder))+
-  geom_bar()+
-  geom_text(stat='count', aes(label=after_stat(count)), hjust=-0.25)+
-  coord_flip()+
-  ylim(0,11)+
-  theme_bw()+
-  labs(
-    y="Count",
-    x="",
-    fill = "Tell",
-    title = "Who would you tell?"
-  )
-
-```
-
-## Why {.smaller}
-
-```{r}
-#| echo = FALSE,
-#| message = F,
-#| warning = F
-df %>%
-  mutate(
-    `Who would you tell?` = as_factor(murder),
-    `Why?`= murder_why
-  )%>%
-  select(`Who would you tell?`, `Why?`)%>%
-  DT::datatable(options = list("pageLength" = 5))
-
-```
-
-## Why do you ask?
-
-It's cousin Nick's fault...
-
--   Funny icebreaker, but lots of assumptions...
-
-    -   You're not a murderer
-
-    -   You don't know someone who's committed a murder or been murdered
-
-    -   You've got a mom and dad
-
-## Why do you ask?
-
--   How might we make this question better?
-
-    -   Use a screener question
-        -   "Would you feel comfortable..."
-    -   "Pipe" in responses from a prior question
-        -   "Who are two people who raised you..."
-
-. . .
-
-[**What questions we ask and how we ask them matters**]{.blue}
+Please upload tutorials 00-intro and 01-measurement1 to Canvas by Monday, February 2nd. 
 
 ## Hopes and Dreams, Fears and Worries
 
@@ -218,9 +138,9 @@ What are we [excited]{.blue} about?
 
 -   [Quarto]{.blue} is a [publishing system]{.blue} that allows us to write and present code in [different formats]{.blue} ([cheatsheet](https://rstudio.github.io/cheatsheets/html/quarto.html?_gl=1*nz9m6y*_ga*MTE1MDU5MzUyNC4xNzAzMTgzMDI2*_ga_2C0WZ1JHG0*MTcwNjU3MDk4Mi43LjAuMTcwNjU3MDk4Mi4wLjAuMA..))
 
-## General Tuesday Workflow
+## General Monday/Wednesday Workflow
 
--   Go to <https://pols1600.paultesta.org>
+-   Go to <https://josephessig-source.github.io/pols1600_site/>
 
 -   Go to class content for current week
 
@@ -228,7 +148,7 @@ What are we [excited]{.blue} about?
 
 -   Open R Studio
 
--   Create .qmd file titled `wk01-notes.qmd` and save in course folder
+-   Create .qmd file and save in course folder
 
 -   Get set up to work
 
@@ -437,26 +357,27 @@ grades = factor(c("A","B","C"))
 #| echo: true
 #| code-fold: false
 
-# What type are they?
-class(x)
-class(y)
-class(only_two_types_of_people)
-class(me)
-class(grades)
+data("iris")
+head(iris)
+class(iris["Sepal.Length"])
+class(iris$Sepal.Length)
 ```
 :::
-:::
 
-::::{.fragment}
+## Data Types 
 
-:::{.callout-tip}
+One common ocurrence is that a function in R is expecting data of one type but (e.g. `numeric`) but actually gets data of different type (e.g. `character`)
 
-One common portal of discovery, is that a function in R is expecting data of one type but (e.g. `numeric`) but actually gets data of different type (e.g. `character`)
+The `class()` function is a useful `base R` for troubleshooting such errors. 
 
-The `class()` function is a useful `base R` for troubleshooting such errors.
+For example, different operatinos on data frames return different objects. 
 
-:::
-::::
+```{r}
+#| echo: true
+
+# What type are they?
+
+```
 
 
 ## Data come in different "shapes" and "sizes"

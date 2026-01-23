@@ -6345,7 +6345,7 @@
     "href": "index.html",
     "title": "POLS 1600",
     "section": "",
-    "text": "This course provides a foundation in the principles and practice of quantitative social science, with a focus on building tools to make descriptive, causal, and predictive inferences.\n\nLogistics\nWe meet three times a week from 12-12:50pm with lectures on Monday and Wednesday and lab sessions on Friday. You will need a laptop that can run R and Rstudio for both lectures and labs. test\n\n\n\n\nLecture\nMondays and Wednesdays, 12-12:50pm\n\n\n\n\n\nLabs\nFridays, 12-12:50pm\n\n\n\n\n\nAssignments\nDue on Canvas\n\n\n\n\n\nLocation\nAndrews House 310\n\n\n\n\n\nZoom\n\n\n\n\n\nOffice Hours\nJoe | 2-4pm, Thursdays  Stephen Roberts Hall, Rm. 123 (Taubman Center)  [Sara Ansari, TA | Time TBD  Location TBD\n\n\n\n\n\nSchedule\n\n\n\n\n\n\n\n\n\n\n\nLecture\nLabs\nSolutions\nAssignments\n\n\n\n\nWeek 0\n\n\n\n\n\n\nIntroductions\n\n\n\n\n\n\n\n\n\n\nWeek 1\n\n\n\n\n\n\nData & Measurement\n\n\n\n\n\n\nWeek 2\n\n\n\n\n\n\nData Visualization\n\n\n\n\n\n\nWeek 3\n\n\n\n\n\n\nCausation -- Experiments\n\n\n\n\n\n\nWeek 4\n\n\n\n\n\n\nCausation -- Observational Studies\n\n\n\n\n\n\nWeek 5\n\n\n\n\n\n\nBivariate Regression\n\n\n\n\n\n\nWeek 6\n\n\n\n\n\n\nMultiple Regression\n\n\n\n\n\n\nWeek 7\n\n\n\n\n\n\nRegression Extensions\n\n\n\n\n\n\nWeek 8\n\n\n\n\n\n\nProbability - Random Variables & Distributions\n\n\n\n\n\n\nWeek 9\n\n\n\n\n\n\nProbability - Limit Theorems\n\n\n\n\n\n\nWeek 10\n\n\n\n\n\n\nInference -- Confidence Intervals\n\n\n\n\n\n\nWeek 11\n\n\n\n\n\n\nInference -- Hypothesis Testing\n\n\n\n\n\n\nWeek 12\n\n\n\n\n\n\nWorkshop\n\n\n\n\n\n\nWeek 13\n\n\n\n\n\n\nPresentations\n\n\n\n\n\n\n\n\n\nInstructors\n\n\nJoseph Essig\nPostdoctoral Research Associate\nTaubman Center for American Politics and Policy\nBrown University &lt;joseph_essig@brown.edu&gt;\n\n\nSara Ansari\nTeaching Assistant\nDepartment of Political Science\nBrown University &lt;maya_nunez@brown.edu&gt;"
+    "text": "This course provides a foundation in the principles and practice of quantitative social science, with a focus on building tools to make descriptive, causal, and predictive inferences.\n\nLogistics\nWe meet three times a week from 12-12:50pm with lectures on Monday and Wednesday and lab sessions on Friday. You will need a laptop that can run R and Rstudio for both lectures and labs.\n\n\n\n\nLecture\nMondays and Wednesdays, 12-12:50pm\n\n\n\n\n\nLabs\nFridays, 12-12:50pm\n\n\n\n\n\nAssignments\nDue on Canvas\n\n\n\n\n\nLocation\nAndrews House 310\n\n\n\n\n\nZoom\n\n\n\n\n\nOffice Hours\nJoe | 2-4pm, Thursdays  Stephen Roberts Hall, Rm. 123 (Taubman Center)  [Sara Ansari, TA | 10 am to 11 am Wednesdays]  Room 325, 111 Thayer St\n\n\n\n\n\nSchedule\n\n\n\n\n\n\n\n\n\n\n\nLecture\nLabs\nSolutions\nAssignments\n\n\n\n\nWeek 0\n\n\n\n\n\n\nIntroductions\n\n\n\n\n\n\n\n\n\n\nWeek 1\n\n\n\n\n\n\nData & Measurement\n\n\n\n\n\n\n\n\n\n\nWeek 2\n\n\n\n\n\n\nData Visualization\n\n\n\n\n\n\nWeek 3\n\n\n\n\n\n\nCausation -- Experiments\n\n\n\n\n\n\nWeek 4\n\n\n\n\n\n\nCausation -- Observational Studies\n\n\n\n\n\n\nWeek 5\n\n\n\n\n\n\nBivariate Regression\n\n\n\n\n\n\nWeek 6\n\n\n\n\n\n\nMultiple Regression\n\n\n\n\n\n\nWeek 7\n\n\n\n\n\n\nRegression Extensions\n\n\n\n\n\n\nWeek 8\n\n\n\n\n\n\nProbability - Random Variables & Distributions\n\n\n\n\n\n\nWeek 9\n\n\n\n\n\n\nProbability - Limit Theorems\n\n\n\n\n\n\nWeek 10\n\n\n\n\n\n\nInference -- Confidence Intervals\n\n\n\n\n\n\nWeek 11\n\n\n\n\n\n\nInference -- Hypothesis Testing\n\n\n\n\n\n\nWeek 12\n\n\n\n\n\n\nWorkshop\n\n\n\n\n\n\nWeek 13\n\n\n\n\n\n\nPresentations\n\n\n\n\n\n\n\n\n\nInstructors\n\n\nJoseph Essig\nPostdoctoral Research Associate\nTaubman Center for American Politics and Policy\nBrown University &lt;joseph_essig@brown.edu&gt;\n\n\nSara Ansari\nTeaching Assistant\nDepartment of Political Science\nBrown University &lt;sara_ansari@brown.edu&gt;"
   },
   {
     "objectID": "labs/01-lab.html",
@@ -12049,5 +12049,65 @@
     "title": "Syllabus",
     "section": "",
     "text": "PDF with latest detailed schedule is posted here on Canvas."
+  },
+  {
+    "objectID": "class/01-class.html",
+    "href": "class/01-class.html",
+    "title": "Data and Measurement",
+    "section": "",
+    "text": "Qss Chapter 1 here’s a free version of the first chapter",
+    "crumbs": [
+      "Class",
+      "Weekly Content",
+      "1: Data & Measurement"
+    ]
+  },
+  {
+    "objectID": "class/01-class.html#readings",
+    "href": "class/01-class.html#readings",
+    "title": "Data and Measurement",
+    "section": "",
+    "text": "Qss Chapter 1 here’s a free version of the first chapter",
+    "crumbs": [
+      "Class",
+      "Weekly Content",
+      "1: Data & Measurement"
+    ]
+  },
+  {
+    "objectID": "class/01-class.html#slides",
+    "href": "class/01-class.html#slides",
+    "title": "Data and Measurement",
+    "section": "Slides",
+    "text": "Slides\nSlides will be posted here soon.",
+    "crumbs": [
+      "Class",
+      "Weekly Content",
+      "1: Data & Measurement"
+    ]
+  },
+  {
+    "objectID": "class/01-class.html#lab",
+    "href": "class/01-class.html#lab",
+    "title": "Data and Measurement",
+    "section": "Lab",
+    "text": "Lab\n\nDownload this week’s r lab (link forthcoming)\nUpload the rendered html file to Canvas.\nReview the commented solutions after class (will be posted Friday night)",
+    "crumbs": [
+      "Class",
+      "Weekly Content",
+      "1: Data & Measurement"
+    ]
+  },
+  {
+    "objectID": "class/01-class.html#assignments",
+    "href": "class/01-class.html#assignments",
+    "title": "Data and Measurement",
+    "section": "Assignments",
+    "text": "Assignments\n\nWork through Software Setup before class next week\nComplete QSS Tutorial 0: Introduction to R; QSS Tutorial 1: Measurement 1\n\n\n# After completing the software setup you should be able to to run the following to launch the tutorials\n\nlearnr::run_tutorial(\"00-intro\", package = \"qsslearnr\")\n\nlearnr::run_tutorial(\"01-measurement1\", package = \"qsslearnr\")\n\n\n Upload the rendered html tutorial files to Canvas here\nTutorials due: Monday February 2nd.",
+    "crumbs": [
+      "Class",
+      "Weekly Content",
+      "1: Data & Measurement"
+    ]
   }
 ]
