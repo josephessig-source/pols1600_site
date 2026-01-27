@@ -64,8 +64,8 @@ Andrews House 310
 
 [Joe | 2-4pm, Thursdays](https://calendar.app.google/UWc4GwjQXvZhMcnTA) <br>
 Stephen Roberts Hall, Rm. 123 (Taubman Center) <br>
-[Sara Ansari, TA | Time TBD] <br>
-Location TBD
+[Sara Ansari, TA | 10 am to 11 am Wednesdays] <br>
+Room 325, 111 Thayer St
 :::
 :::
 
@@ -81,7 +81,7 @@ library(kableExtra)
 # library(icons)
 library(fontawesome)
 start_date <- "2025-01-23"
-show_up_to_week <- 0
+show_up_to_week <- 1
 show_solutions_up_to_week <- 0
 fa_html_dependency()
 week <- paste0("Week ", 0:13)
@@ -208,6 +208,7 @@ schedule_tibble <- tibble(
   "Assignments" = assignments
   )
 
+schedule_tibble$Labs[4] <- "" ##remove after updating lab
 
 ```
 
