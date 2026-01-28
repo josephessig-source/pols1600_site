@@ -183,7 +183,8 @@ the_packages <- c(
   
   ## Extensions for ggplot
   "ggmap","ggrepel", "ggridges", 
-  "ggthemes", "ggpubr", "GGally",
+  "ggthemes", "ggpubr", 
+  #"GGally",
   "scales", "dagitty", "ggdag", #<<
   
   # Data 

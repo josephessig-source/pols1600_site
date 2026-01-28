@@ -101,24 +101,16 @@ Please upload tutorials 00-intro and 01-measurement1 to Canvas by Monday, Februa
 
 ## Hopes and Dreams, Fears and Worries
 
-:::: columns
-::: {.column width="48%"}
-What are we [excited]{.blue} about?
+Class survey results: 
 
--   Engaging with social science
--   Learning statistics and math
--   Learning to code
-:::
+- Mostly no experience with stats, less with coding/R
 
-::: {.column width="48%"}
+- Worries:
+  + Programming/Coding
+  + Lack of experience
+  + Less familiar with quant research 
 
-[What are we [worried]{.blue} about?]{.fragment}
-
--   Engaging with social science
--   Learning statistics and math
--   Learning to code
-:::
-::::
+- Don't worry -- you are in the right place. 
 
 # {{< fa lightbulb >}} Introduction to R, R Studio and Quarto {.inverse}
 
@@ -446,25 +438,23 @@ They have:
 :::
 :::
 
-## Can I kick it?
+## Example Function
 
 ```{r}
 #| echo: true
 #| code-fold: false
-can_x_kick_it <- function(x){
-  # Determine if x can kick it
-  # If x in A Tribe Called Quest
-  if(x %in% c("Q-Tip","Phife Dawg",
-              "Ali Shaheed Muhammad", 
-              "Jarobi White")){
-    return("Yes you can")
+is_it_the_weekend <- function(x){
+  # Determine if I have to go to work today
+  # If x is in the weekend
+  if(x %in% c("Saturday","Sunday")){
+    return("Yes, take it easy!")
   }else{
-    return("Before this, did you really know what live was?")
+    return("Sorry, back to work.")
   }
 
 }
-can_x_kick_it("Q-Tip")
-can_x_kick_it("Paul")
+is_it_the_weekend("Saturday")
+is_it_the_weekend("Monday")
 ```
 
 ## Getting setup to work in R
@@ -560,12 +550,11 @@ There are three ways to load data.
 
 ```{r}
 #| eval: false
-
 # EXAMPLE CODE (Won't actually run)
 # Read a .csv file saved locally on my Desktop
 df_csv <- readr::read_csv("~/Desktop/data.csv")
 # Read a .dta file saved on the web
-df_dta <- haven::read_dta("https://paultesta.org/data.dta")
+df_dta <- haven::read_dta("https://josephessig-source.github.io/pols1600_site/files/data/covid.rda")
 ```
 
 :::
@@ -615,8 +604,10 @@ Please run the following[^3]
 
 ```{r}
 
-load(url("https://pols1600.paultesta.org/files/data/covid.rda"))
+load(url("https://josephessig-source.github.io/pols1600_site/files/data/covid.rda"))
 
+#load() tells R to load a .rda file, which is one way to store data.
+#In this case, the rda file is stored at a URL, not on your computer. 
 
 
 ```
