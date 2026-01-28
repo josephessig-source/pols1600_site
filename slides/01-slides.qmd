@@ -52,7 +52,7 @@ library(easystats)
 
 -   Logistics
     -   Announcements
--   Class plan (60 minutes)
+-   Class plan (50 minutes)
     -   Introduction to R, R Studio and Quarto
     -   Loading and Looking at Data in R
     -   Transforming, Recoding, and Cleaning Data in R
@@ -763,14 +763,7 @@ covid %>%
 macOS: `CMD` + `SHIFT` + `M`
 
 PC: `CTRL` + `SHIFT` + `M`
-
-n.b. `|>` is the `base` R or native pipe. It's [similar in function but also subtlely different in execution](https://ivelasq.rbind.io/blog/understanding-the-r-pipe/) to the `%>%` in ways that won't matter for us right now.  
 :::
-
-## 
-
-![](https://ivelasq.rbind.io/blog/understanding-the-r-pipe/padme.jpg)
-[Source]((https://ivelasq.rbind.io/blog/understanding-the-r-pipe/))
 
 
 # {{< fa lightbulb >}} Describing Data in R {.inverse}
@@ -1143,5 +1136,3 @@ After today, you should have a better sense of
 -   Don't worry if everything didn't make sense.
 
     -   Eventually it will, but this takes time and practice
-    -   Testa's 50-50 rule
-    -   FAAFO
