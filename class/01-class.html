@@ -225,7 +225,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">January 23, 2026</p>
+      <p class="date">2026-01-23</p>
     </div>
   </div>
   
@@ -256,7 +256,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="lab" class="level2">
 <h2 class="anchored" data-anchor-id="lab">Lab</h2>
 <ul>
-<li><p>Download this week’s r lab (link forthcoming)</p></li>
+<li><p>Download this week’s lab <a href="https://josephessig-source.github.io/pols1600_site/labs/01-lab.qmd">here.</a></p></li>
 <li><p>Upload the rendered html file to Canvas <a href="https://canvas.brown.edu/courses/1102109/assignments/8102891">here</a>.</p></li>
 <li><p>Review the commented solutions after class (will be posted Friday night)</p></li>
 </ul>
@@ -280,6 +280,50 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 
 
+<p><code>{r slides-videos, echo=FALSE, include=FALSE} source(here::here("R", "slide-things.R")) wk &lt;- "01" lab &lt;- paste0(     "&lt;a href=\"",     paste0(     "../labs/",   wk,   "-lab.qmd ",   "\" download &gt;"   ),   "here &lt;/a&gt;"   ) comments &lt;- paste0(     "&lt;a href=\"",     paste0(     "../labs/",   wk,   "-lab-comments.qmd",   "\" target=\"_blank\" &gt;"   ),   "here &lt;/a&gt;"   )</code></p>
+</section>
+<section id="readings-1" class="level2">
+<h2 class="anchored" data-anchor-id="readings-1">Readings</h2>
+<ul>
+<li><p>QSS Chapter 1 <a href="https://www.marcialpons.es/media/pdf/9780691222288.pdf">here’s a free version of the first chapter</a></p></li>
+<li><p>QSS, Chapter 3 pp.&nbsp;88-105 (We will finish this chapter next week.)</p></li>
+</ul>
+</section>
+<section id="slides-1" class="level2">
+<h2 class="anchored" data-anchor-id="slides-1">Slides</h2>
+<pre class="{r}"><code>#| label: show-slide-tabs
+#| echo: false
+#| results: "asis"
+slide_buttons(paste0("/slides/", wk, "-slides"))
+slide_frame(paste0("/slides/", wk, "-slides.html"))
+</code></pre>
+</section>
+<section id="lab-1" class="level2">
+<h2 class="anchored" data-anchor-id="lab-1">Lab</h2>
+<ul>
+<li><p>Download this week’s lab <a href="https://josephessig-source.github.io/pols1600_site/labs/01-lab.qmd">here.</a></p></li>
+<li><p>Upload the rendered html file to Canvas <a href="https://canvas.brown.edu/courses/1102109/assignments/8102891">here</a>.</p></li>
+<li><p>Review the commented solutions after class (will be posted Friday night)</p></li>
+</ul>
+</section>
+<section id="assignments-1" class="level2">
+<h2 class="anchored" data-anchor-id="assignments-1">Assignments</h2>
+<ul>
+<li><p>Work through <a href="../resources/00-software-setup.html">Software Setup</a> before class next week</p></li>
+<li><p>Complete QSS Tutorial 0: Introduction to R; QSS Tutorial 1: Measurement 1</p></li>
+</ul>
+<pre class="{r}"><code>#| eval: false
+
+# After completing the software setup you should be able to to run the following to launch the tutorials
+
+learnr::run_tutorial("00-intro", package = "qsslearnr")
+
+learnr::run_tutorial("01-measurement1", package = "qsslearnr")
+</code></pre>
+<ul>
+<li><p><i class="fa-solid fa-paintbrush" aria-label="paintbrush"></i> Upload the rendered html tutorial files to Canvas <a href="https://canvas.brown.edu/courses/1102109/assignments">here</a></p></li>
+<li><p>Tutorials due: Monday February 2nd.</p></li>
+</ul>
 </section>
 
 </main> <!-- /main -->
@@ -355,7 +399,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/josephessig-source\.github\.io\/pols1600_site\/");
+        var filterRegex = new RegExp('/' + window.location.host + '/');
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }

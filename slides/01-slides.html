@@ -203,7 +203,7 @@
 <div class="quarto-title-authors">
 </div>
 
-  <p class="date">Updated Jan 27, 2026</p>
+  <p class="date">Updated Jan 28, 2026</p>
 </section>
 <section>
 <section id="overview" class="title-slide slide level1 inverse center">
@@ -261,22 +261,17 @@
 </section>
 <section id="hopes-and-dreams-fears-and-worries" class="slide level2">
 <h2>Hopes and Dreams, Fears and Worries</h2>
-<div class="columns">
-<div class="column" style="width:48%;">
-<p>What are we <span class="blue">excited</span> about?</p>
+<p>Class survey results:</p>
 <ul>
-<li class="fragment">Engaging with social science</li>
-<li class="fragment">Learning statistics and math</li>
-<li class="fragment">Learning to code</li>
-</ul>
-</div><div class="column" style="width:48%;">
-<p><span class="fragment">What are we <span class="blue">worried</span> about?</span></p>
+<li class="fragment"><p>Mostly no experience with stats, less with coding/R</p></li>
+<li class="fragment"><p>Worries:</p>
 <ul>
-<li class="fragment">Engaging with social science</li>
-<li class="fragment">Learning statistics and math</li>
-<li class="fragment">Learning to code</li>
+<li class="fragment">Programming/Coding</li>
+<li class="fragment">Lack of experience</li>
+<li class="fragment">Less familiar with quant research</li>
+</ul></li>
+<li class="fragment"><p>Don’t worry – you are in the right place.</p></li>
 </ul>
-</div></div>
 </section></section>
 <section>
 <section id="introduction-to-r-r-studio-and-quarto" class="title-slide slide level1 inverse center">
@@ -751,28 +746,26 @@
 </div><div class="column" style="width:60%;">
 <p><img data-src="https://www.rforecology.com/functions_image0_new.png"> <a href="https://www.rforecology.com/post/how-to-create-your-own-function-in-r/" target="_blank">(Source)</a></p>
 </div></div>
-</section><section id="can-i-kick-it" class="slide level2">
-<h2>Can I kick it?</h2>
+</section><section id="example-function" class="slide level2">
+<h2>Example Function</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a></a>can_x_kick_it <span class="ot">&lt;-</span> <span class="cf">function</span>(x){</span>
-<span id="cb29-2"><a></a>  <span class="co"># Determine if x can kick it</span></span>
-<span id="cb29-3"><a></a>  <span class="co"># If x in A Tribe Called Quest</span></span>
-<span id="cb29-4"><a></a>  <span class="cf">if</span>(x <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Q-Tip"</span>,<span class="st">"Phife Dawg"</span>,</span>
-<span id="cb29-5"><a></a>              <span class="st">"Ali Shaheed Muhammad"</span>, </span>
-<span id="cb29-6"><a></a>              <span class="st">"Jarobi White"</span>)){</span>
-<span id="cb29-7"><a></a>    <span class="fu">return</span>(<span class="st">"Yes you can"</span>)</span>
-<span id="cb29-8"><a></a>  }<span class="cf">else</span>{</span>
-<span id="cb29-9"><a></a>    <span class="fu">return</span>(<span class="st">"Before this, did you really know what live was?"</span>)</span>
-<span id="cb29-10"><a></a>  }</span>
-<span id="cb29-11"><a></a></span>
-<span id="cb29-12"><a></a>}</span>
-<span id="cb29-13"><a></a><span class="fu">can_x_kick_it</span>(<span class="st">"Q-Tip"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a></a>is_it_the_weekend <span class="ot">&lt;-</span> <span class="cf">function</span>(x){</span>
+<span id="cb29-2"><a></a>  <span class="co"># Determine if I have to go to work today</span></span>
+<span id="cb29-3"><a></a>  <span class="co"># If x is in the weekend</span></span>
+<span id="cb29-4"><a></a>  <span class="cf">if</span>(x <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Saturday"</span>,<span class="st">"Sunday"</span>)){</span>
+<span id="cb29-5"><a></a>    <span class="fu">return</span>(<span class="st">"Yes, take it easy!"</span>)</span>
+<span id="cb29-6"><a></a>  }<span class="cf">else</span>{</span>
+<span id="cb29-7"><a></a>    <span class="fu">return</span>(<span class="st">"Sorry, back to work."</span>)</span>
+<span id="cb29-8"><a></a>  }</span>
+<span id="cb29-9"><a></a></span>
+<span id="cb29-10"><a></a>}</span>
+<span id="cb29-11"><a></a><span class="fu">is_it_the_weekend</span>(<span class="st">"Saturday"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "Yes you can"</code></pre>
+<pre><code>[1] "Yes, take it easy!"</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a></a><span class="fu">can_x_kick_it</span>(<span class="st">"Paul"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a></a><span class="fu">is_it_the_weekend</span>(<span class="st">"Monday"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "Before this, did you really know what live was?"</code></pre>
+<pre><code>[1] "Sorry, back to work."</code></pre>
 </div>
 </div>
 </section><section id="getting-setup-to-work-in-r" class="slide level2">
@@ -857,7 +850,7 @@
 <span id="cb36-2"><a></a><span class="co"># Read a .csv file saved locally on my Desktop</span></span>
 <span id="cb36-3"><a></a>df_csv <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">"~/Desktop/data.csv"</span>)</span>
 <span id="cb36-4"><a></a><span class="co"># Read a .dta file saved on the web</span></span>
-<span id="cb36-5"><a></a>df_dta <span class="ot">&lt;-</span> haven<span class="sc">::</span><span class="fu">read_dta</span>(<span class="st">"https://paultesta.org/data.dta"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb36-5"><a></a>df_dta <span class="ot">&lt;-</span> haven<span class="sc">::</span><span class="fu">read_dta</span>(<span class="st">"https://josephessig-source.github.io/pols1600_site/files/data/covid.rda"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </section><section id="working-with-data-in-r" class="title-slide slide level1 inverse center">
@@ -907,7 +900,10 @@
 </div>
 <p>Please run the following<sup>2</sup></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a></a><span class="fu">load</span>(<span class="fu">url</span>(<span class="st">"https://pols1600.paultesta.org/files/data/covid.rda"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a></a><span class="fu">load</span>(<span class="fu">url</span>(<span class="st">"https://josephessig-source.github.io/pols1600_site/files/data/covid.rda"</span>))</span>
+<span id="cb38-2"><a></a></span>
+<span id="cb38-3"><a></a><span class="co">#load() tells R to load a .rda file, which is one way to store data.</span></span>
+<span id="cb38-4"><a></a><span class="co">#In this case, the rda file is stored at a URL, not on your computer. </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="loading-state-level-covid-data-2" class="slide level2 smaller">
