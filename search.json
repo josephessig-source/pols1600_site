@@ -6271,7 +6271,7 @@
   {
     "objectID": "class/00-class.html",
     "href": "class/00-class.html",
-    "title": "Data and Measurement",
+    "title": "Introductions",
     "section": "",
     "text": "QSS, chapter 1. If you don’t have the book yet, the first chapter is posted here",
     "crumbs": [
@@ -6283,7 +6283,7 @@
   {
     "objectID": "class/00-class.html#readings",
     "href": "class/00-class.html#readings",
-    "title": "Data and Measurement",
+    "title": "Introductions",
     "section": "",
     "text": "QSS, chapter 1. If you don’t have the book yet, the first chapter is posted here",
     "crumbs": [
@@ -6295,7 +6295,7 @@
   {
     "objectID": "class/00-class.html#lecture",
     "href": "class/00-class.html#lecture",
-    "title": "Data and Measurement",
+    "title": "Introductions",
     "section": "Lecture",
     "text": "Lecture\n\n View all slides in new window",
     "crumbs": [
@@ -6307,7 +6307,7 @@
   {
     "objectID": "class/00-class.html#lab",
     "href": "class/00-class.html#lab",
-    "title": "Data and Measurement",
+    "title": "Introductions",
     "section": "Lab",
     "text": "Lab\n\nNone",
     "crumbs": [
@@ -6319,9 +6319,9 @@
   {
     "objectID": "class/00-class.html#assignments",
     "href": "class/00-class.html#assignments",
-    "title": "Data and Measurement",
+    "title": "Introductions",
     "section": "Assignments",
-    "text": "Assignments\n\nWork through Software Setup before class next week\n\n\n\n{r slides-videos, echo=FALSE, include=FALSE} source(here::here(\"R\", \"slide-things.R\")) wk &lt;- \"01\" lab &lt;- paste0(     \"&lt;a href=\\\"\",     paste0(     \"../labs/\",   wk,   \"-lab.qmd \",   \"\\\" download &gt;\"   ),   \"here &lt;/a&gt;\"   ) comments &lt;- paste0(     \"&lt;a href=\\\"\",     paste0(     \"../labs/\",   wk,   \"-lab-comments.qmd\",   \"\\\" target=\\\"_blank\\\" &gt;\"   ),   \"here &lt;/a&gt;\"   )",
+    "text": "Assignments\n\nWork through Software Setup before class next week",
     "crumbs": [
       "Class",
       "Weekly Content",
@@ -6331,9 +6331,9 @@
   {
     "objectID": "class/index.html",
     "href": "class/index.html",
-    "title": "Data and Measurement",
+    "title": "General Workflow for POLS 1600",
     "section": "",
-    "text": "Before class on Monday\n\nDo the assigned readings\nReview last week’s lab and slides\n\nMonday: Come to class ready to engage with lecture and slides\nWednesday:\n\nStart the tutorials for that week\nDownload, render, and skim Friday’s lab\n\nFriday: Come to class ready to work through that week’s lab\n\nUpload tutorial to Canvas\n{r slides-videos, echo=FALSE, include=FALSE} source(here::here(\"R\", \"slide-things.R\")) wk &lt;- \"01\" lab &lt;- paste0(     \"&lt;a href=\\\"\",     paste0(     \"../labs/\",   wk,   \"-lab.qmd \",   \"\\\" download &gt;\"   ),   \"here &lt;/a&gt;\"   ) comments &lt;- paste0(     \"&lt;a href=\\\"\",     paste0(     \"../labs/\",   wk,   \"-lab-comments.qmd\",   \"\\\" target=\\\"_blank\\\" &gt;\"   ),   \"here &lt;/a&gt;\"   )",
+    "text": "Before class on Monday\n\nDo the assigned readings\nReview last week’s lab and slides\n\nMonday: Come to class ready to engage with lecture and slides\nWednesday:\n\nStart the tutorials for that week\nDownload, render, and skim Friday’s lab\n\nFriday: Come to class ready to work through that week’s lab\n\nUpload tutorial to Canvas",
     "crumbs": [
       "Class",
       "Overview",
@@ -12103,7 +12103,7 @@
     "href": "class/01-class.html#assignments",
     "title": "Data and Measurement",
     "section": "Assignments",
-    "text": "Assignments\n\nWork through Software Setup before class next week\nComplete QSS Tutorial 0: Introduction to R; QSS Tutorial 1: Measurement 1\n\n\n# After completing the software setup you should be able to to run the following to launch the tutorials\n\nlearnr::run_tutorial(\"00-intro\", package = \"qsslearnr\")\n\nlearnr::run_tutorial(\"01-measurement1\", package = \"qsslearnr\")\n\n\n Upload the rendered html tutorial files to Canvas here\nTutorials due: Monday February 2nd.\n\n\n\n{r slides-videos, echo=FALSE, include=FALSE} source(here::here(\"R\", \"slide-things.R\")) wk &lt;- \"01\" lab &lt;- paste0(     \"&lt;a href=\\\"\",     paste0(     \"../labs/\",   wk,   \"-lab.qmd \",   \"\\\" download &gt;\"   ),   \"here &lt;/a&gt;\"   ) comments &lt;- paste0(     \"&lt;a href=\\\"\",     paste0(     \"../labs/\",   wk,   \"-lab-comments.qmd\",   \"\\\" target=\\\"_blank\\\" &gt;\"   ),   \"here &lt;/a&gt;\"   )",
+    "text": "Assignments\n\nWork through Software Setup before class next week\nComplete QSS Tutorial 0: Introduction to R; QSS Tutorial 1: Measurement 1\n\n\n# After completing the software setup you should be able to to run the following to launch the tutorials\n\nlearnr::run_tutorial(\"00-intro\", package = \"qsslearnr\")\n\nlearnr::run_tutorial(\"01-measurement1\", package = \"qsslearnr\")\n\n\n Upload the rendered html tutorial files to Canvas here\nTutorials due: Monday February 2nd.",
     "crumbs": [
       "Class",
       "Weekly Content",
