@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Your Group Members Names Here">
-<meta name="dcterms.date" content="2025-03-03">
+<meta name="dcterms.date" content="2026-01-28">
 
 <title>Lab 06 - Examining Alternative Explanations for Red Covid – POLS 1600</title>
 <style>
@@ -110,7 +110,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <link href="../site_libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
 
-<script src="../site_libs/datatables-binding-0.33/datatables.js"></script>
+<script src="../site_libs/datatables-binding-0.34.0/datatables.js"></script>
 
 <script src="../site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 
@@ -120,9 +120,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <script src="../site_libs/dt-core-1.13.6/js/jquery.dataTables.min.js"></script>
 
-<link href="../site_libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet">
+<link href="../site_libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
 
-<script src="../site_libs/crosstalk-1.2.1/js/crosstalk.min.js"></script>
+<script src="../site_libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
 
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
@@ -276,7 +276,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">March 3, 2025</p>
+      <p class="date">January 28, 2026</p>
     </div>
   </div>
   
@@ -390,35 +390,242 @@ window.Quarto = {
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">"tidyverse"</span>, <span class="st">"lubridate"</span>, <span class="st">"forcats"</span>, <span class="st">"haven"</span>, <span class="st">"labelled"</span>,</span>
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="do">## Extensions for ggplot</span></span>
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">"ggmap"</span>,<span class="st">"ggrepel"</span>, <span class="st">"ggridges"</span>, <span class="st">"ggthemes"</span>, <span class="st">"ggpubr"</span>, </span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="st">"GGally"</span>, <span class="st">"scales"</span>, <span class="st">"dagitty"</span>, <span class="st">"ggdag"</span>, <span class="st">"ggforce"</span>,</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Data </span></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  <span class="st">"COVID19"</span>,<span class="st">"maps"</span>,<span class="st">"mapdata"</span>,<span class="st">"qss"</span>,<span class="st">"tidycensus"</span>, <span class="st">"dataverse"</span>,</span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Analysis</span></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  <span class="st">"DeclareDesign"</span>, <span class="st">"easystats"</span>, <span class="st">"zoo"</span></span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Define function to load packages</span></span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>ipak <span class="ot">&lt;-</span> <span class="cf">function</span>(pkg){</span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>    new.pkg <span class="ot">&lt;-</span> pkg[<span class="sc">!</span>(pkg <span class="sc">%in%</span> <span class="fu">installed.packages</span>()[, <span class="st">"Package"</span>])]</span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="fu">length</span>(new.pkg)) </span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>        <span class="fu">install.packages</span>(new.pkg, <span class="at">dependencies =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sapply</span>(pkg, require, <span class="at">character.only =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a><span class="fu">ipak</span>(the_packages)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="co">#"GGally",</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="st">"scales"</span>, <span class="st">"dagitty"</span>, <span class="st">"ggdag"</span>, <span class="st">"ggforce"</span>,</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Data </span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  <span class="st">"COVID19"</span>,<span class="st">"maps"</span>,<span class="st">"mapdata"</span>,<span class="st">"qss"</span>,<span class="st">"tidycensus"</span>, <span class="st">"dataverse"</span>,</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Analysis</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>  <span class="st">"DeclareDesign"</span>, <span class="st">"easystats"</span>, <span class="st">"zoo"</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Define function to load packages</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="fu">lapply</span>(the_packages, library, <span class="at">character.only =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>   kableExtra            DT        texreg     htmltools     tidyverse 
-         TRUE          TRUE          TRUE          TRUE          TRUE 
-    lubridate       forcats         haven      labelled         ggmap 
-         TRUE          TRUE          TRUE          TRUE          TRUE 
-      ggrepel      ggridges      ggthemes        ggpubr        GGally 
-         TRUE          TRUE          TRUE          TRUE          TRUE 
-       scales       dagitty         ggdag       ggforce       COVID19 
-         TRUE          TRUE          TRUE          TRUE          TRUE 
-         maps       mapdata           qss    tidycensus     dataverse 
-         TRUE          TRUE          TRUE          TRUE          TRUE 
-DeclareDesign     easystats           zoo 
-         TRUE          TRUE          TRUE </code></pre>
+<pre><code>[[1]]
+[1] "kableExtra" "stats"      "graphics"   "grDevices"  "utils"     
+[6] "datasets"   "methods"    "base"      
+
+[[2]]
+[1] "DT"         "kableExtra" "stats"      "graphics"   "grDevices" 
+[6] "utils"      "datasets"   "methods"    "base"      
+
+[[3]]
+ [1] "texreg"     "DT"         "kableExtra" "stats"      "graphics"  
+ [6] "grDevices"  "utils"      "datasets"   "methods"    "base"      
+
+[[4]]
+ [1] "htmltools"  "texreg"     "DT"         "kableExtra" "stats"     
+ [6] "graphics"   "grDevices"  "utils"      "datasets"   "methods"   
+[11] "base"      
+
+[[5]]
+ [1] "lubridate"  "forcats"    "stringr"    "dplyr"      "purrr"     
+ [6] "readr"      "tidyr"      "tibble"     "ggplot2"    "tidyverse" 
+[11] "htmltools"  "texreg"     "DT"         "kableExtra" "stats"     
+[16] "graphics"   "grDevices"  "utils"      "datasets"   "methods"   
+[21] "base"      
+
+[[6]]
+ [1] "lubridate"  "forcats"    "stringr"    "dplyr"      "purrr"     
+ [6] "readr"      "tidyr"      "tibble"     "ggplot2"    "tidyverse" 
+[11] "htmltools"  "texreg"     "DT"         "kableExtra" "stats"     
+[16] "graphics"   "grDevices"  "utils"      "datasets"   "methods"   
+[21] "base"      
+
+[[7]]
+ [1] "lubridate"  "forcats"    "stringr"    "dplyr"      "purrr"     
+ [6] "readr"      "tidyr"      "tibble"     "ggplot2"    "tidyverse" 
+[11] "htmltools"  "texreg"     "DT"         "kableExtra" "stats"     
+[16] "graphics"   "grDevices"  "utils"      "datasets"   "methods"   
+[21] "base"      
+
+[[8]]
+ [1] "haven"      "lubridate"  "forcats"    "stringr"    "dplyr"     
+ [6] "purrr"      "readr"      "tidyr"      "tibble"     "ggplot2"   
+[11] "tidyverse"  "htmltools"  "texreg"     "DT"         "kableExtra"
+[16] "stats"      "graphics"   "grDevices"  "utils"      "datasets"  
+[21] "methods"    "base"      
+
+[[9]]
+ [1] "labelled"   "haven"      "lubridate"  "forcats"    "stringr"   
+ [6] "dplyr"      "purrr"      "readr"      "tidyr"      "tibble"    
+[11] "ggplot2"    "tidyverse"  "htmltools"  "texreg"     "DT"        
+[16] "kableExtra" "stats"      "graphics"   "grDevices"  "utils"     
+[21] "datasets"   "methods"    "base"      
+
+[[10]]
+ [1] "ggmap"      "labelled"   "haven"      "lubridate"  "forcats"   
+ [6] "stringr"    "dplyr"      "purrr"      "readr"      "tidyr"     
+[11] "tibble"     "ggplot2"    "tidyverse"  "htmltools"  "texreg"    
+[16] "DT"         "kableExtra" "stats"      "graphics"   "grDevices" 
+[21] "utils"      "datasets"   "methods"    "base"      
+
+[[11]]
+ [1] "ggrepel"    "ggmap"      "labelled"   "haven"      "lubridate" 
+ [6] "forcats"    "stringr"    "dplyr"      "purrr"      "readr"     
+[11] "tidyr"      "tibble"     "ggplot2"    "tidyverse"  "htmltools" 
+[16] "texreg"     "DT"         "kableExtra" "stats"      "graphics"  
+[21] "grDevices"  "utils"      "datasets"   "methods"    "base"      
+
+[[12]]
+ [1] "ggridges"   "ggrepel"    "ggmap"      "labelled"   "haven"     
+ [6] "lubridate"  "forcats"    "stringr"    "dplyr"      "purrr"     
+[11] "readr"      "tidyr"      "tibble"     "ggplot2"    "tidyverse" 
+[16] "htmltools"  "texreg"     "DT"         "kableExtra" "stats"     
+[21] "graphics"   "grDevices"  "utils"      "datasets"   "methods"   
+[26] "base"      
+
+[[13]]
+ [1] "ggthemes"   "ggridges"   "ggrepel"    "ggmap"      "labelled"  
+ [6] "haven"      "lubridate"  "forcats"    "stringr"    "dplyr"     
+[11] "purrr"      "readr"      "tidyr"      "tibble"     "ggplot2"   
+[16] "tidyverse"  "htmltools"  "texreg"     "DT"         "kableExtra"
+[21] "stats"      "graphics"   "grDevices"  "utils"      "datasets"  
+[26] "methods"    "base"      
+
+[[14]]
+ [1] "ggpubr"     "ggthemes"   "ggridges"   "ggrepel"    "ggmap"     
+ [6] "labelled"   "haven"      "lubridate"  "forcats"    "stringr"   
+[11] "dplyr"      "purrr"      "readr"      "tidyr"      "tibble"    
+[16] "ggplot2"    "tidyverse"  "htmltools"  "texreg"     "DT"        
+[21] "kableExtra" "stats"      "graphics"   "grDevices"  "utils"     
+[26] "datasets"   "methods"    "base"      
+
+[[15]]
+ [1] "scales"     "ggpubr"     "ggthemes"   "ggridges"   "ggrepel"   
+ [6] "ggmap"      "labelled"   "haven"      "lubridate"  "forcats"   
+[11] "stringr"    "dplyr"      "purrr"      "readr"      "tidyr"     
+[16] "tibble"     "ggplot2"    "tidyverse"  "htmltools"  "texreg"    
+[21] "DT"         "kableExtra" "stats"      "graphics"   "grDevices" 
+[26] "utils"      "datasets"   "methods"    "base"      
+
+[[16]]
+ [1] "dagitty"    "scales"     "ggpubr"     "ggthemes"   "ggridges"  
+ [6] "ggrepel"    "ggmap"      "labelled"   "haven"      "lubridate" 
+[11] "forcats"    "stringr"    "dplyr"      "purrr"      "readr"     
+[16] "tidyr"      "tibble"     "ggplot2"    "tidyverse"  "htmltools" 
+[21] "texreg"     "DT"         "kableExtra" "stats"      "graphics"  
+[26] "grDevices"  "utils"      "datasets"   "methods"    "base"      
+
+[[17]]
+ [1] "ggdag"      "dagitty"    "scales"     "ggpubr"     "ggthemes"  
+ [6] "ggridges"   "ggrepel"    "ggmap"      "labelled"   "haven"     
+[11] "lubridate"  "forcats"    "stringr"    "dplyr"      "purrr"     
+[16] "readr"      "tidyr"      "tibble"     "ggplot2"    "tidyverse" 
+[21] "htmltools"  "texreg"     "DT"         "kableExtra" "stats"     
+[26] "graphics"   "grDevices"  "utils"      "datasets"   "methods"   
+[31] "base"      
+
+[[18]]
+ [1] "ggforce"    "ggdag"      "dagitty"    "scales"     "ggpubr"    
+ [6] "ggthemes"   "ggridges"   "ggrepel"    "ggmap"      "labelled"  
+[11] "haven"      "lubridate"  "forcats"    "stringr"    "dplyr"     
+[16] "purrr"      "readr"      "tidyr"      "tibble"     "ggplot2"   
+[21] "tidyverse"  "htmltools"  "texreg"     "DT"         "kableExtra"
+[26] "stats"      "graphics"   "grDevices"  "utils"      "datasets"  
+[31] "methods"    "base"      
+
+[[19]]
+ [1] "COVID19"    "ggforce"    "ggdag"      "dagitty"    "scales"    
+ [6] "ggpubr"     "ggthemes"   "ggridges"   "ggrepel"    "ggmap"     
+[11] "labelled"   "haven"      "lubridate"  "forcats"    "stringr"   
+[16] "dplyr"      "purrr"      "readr"      "tidyr"      "tibble"    
+[21] "ggplot2"    "tidyverse"  "htmltools"  "texreg"     "DT"        
+[26] "kableExtra" "stats"      "graphics"   "grDevices"  "utils"     
+[31] "datasets"   "methods"    "base"      
+
+[[20]]
+ [1] "maps"       "COVID19"    "ggforce"    "ggdag"      "dagitty"   
+ [6] "scales"     "ggpubr"     "ggthemes"   "ggridges"   "ggrepel"   
+[11] "ggmap"      "labelled"   "haven"      "lubridate"  "forcats"   
+[16] "stringr"    "dplyr"      "purrr"      "readr"      "tidyr"     
+[21] "tibble"     "ggplot2"    "tidyverse"  "htmltools"  "texreg"    
+[26] "DT"         "kableExtra" "stats"      "graphics"   "grDevices" 
+[31] "utils"      "datasets"   "methods"    "base"      
+
+[[21]]
+ [1] "mapdata"    "maps"       "COVID19"    "ggforce"    "ggdag"     
+ [6] "dagitty"    "scales"     "ggpubr"     "ggthemes"   "ggridges"  
+[11] "ggrepel"    "ggmap"      "labelled"   "haven"      "lubridate" 
+[16] "forcats"    "stringr"    "dplyr"      "purrr"      "readr"     
+[21] "tidyr"      "tibble"     "ggplot2"    "tidyverse"  "htmltools" 
+[26] "texreg"     "DT"         "kableExtra" "stats"      "graphics"  
+[31] "grDevices"  "utils"      "datasets"   "methods"    "base"      
+
+[[22]]
+ [1] "qss"        "mapdata"    "maps"       "COVID19"    "ggforce"   
+ [6] "ggdag"      "dagitty"    "scales"     "ggpubr"     "ggthemes"  
+[11] "ggridges"   "ggrepel"    "ggmap"      "labelled"   "haven"     
+[16] "lubridate"  "forcats"    "stringr"    "dplyr"      "purrr"     
+[21] "readr"      "tidyr"      "tibble"     "ggplot2"    "tidyverse" 
+[26] "htmltools"  "texreg"     "DT"         "kableExtra" "stats"     
+[31] "graphics"   "grDevices"  "utils"      "datasets"   "methods"   
+[36] "base"      
+
+[[23]]
+ [1] "tidycensus" "qss"        "mapdata"    "maps"       "COVID19"   
+ [6] "ggforce"    "ggdag"      "dagitty"    "scales"     "ggpubr"    
+[11] "ggthemes"   "ggridges"   "ggrepel"    "ggmap"      "labelled"  
+[16] "haven"      "lubridate"  "forcats"    "stringr"    "dplyr"     
+[21] "purrr"      "readr"      "tidyr"      "tibble"     "ggplot2"   
+[26] "tidyverse"  "htmltools"  "texreg"     "DT"         "kableExtra"
+[31] "stats"      "graphics"   "grDevices"  "utils"      "datasets"  
+[36] "methods"    "base"      
+
+[[24]]
+ [1] "dataverse"  "tidycensus" "qss"        "mapdata"    "maps"      
+ [6] "COVID19"    "ggforce"    "ggdag"      "dagitty"    "scales"    
+[11] "ggpubr"     "ggthemes"   "ggridges"   "ggrepel"    "ggmap"     
+[16] "labelled"   "haven"      "lubridate"  "forcats"    "stringr"   
+[21] "dplyr"      "purrr"      "readr"      "tidyr"      "tibble"    
+[26] "ggplot2"    "tidyverse"  "htmltools"  "texreg"     "DT"        
+[31] "kableExtra" "stats"      "graphics"   "grDevices"  "utils"     
+[36] "datasets"   "methods"    "base"      
+
+[[25]]
+ [1] "DeclareDesign" "estimatr"      "fabricatr"     "randomizr"    
+ [5] "dataverse"     "tidycensus"    "qss"           "mapdata"      
+ [9] "maps"          "COVID19"       "ggforce"       "ggdag"        
+[13] "dagitty"       "scales"        "ggpubr"        "ggthemes"     
+[17] "ggridges"      "ggrepel"       "ggmap"         "labelled"     
+[21] "haven"         "lubridate"     "forcats"       "stringr"      
+[25] "dplyr"         "purrr"         "readr"         "tidyr"        
+[29] "tibble"        "ggplot2"       "tidyverse"     "htmltools"    
+[33] "texreg"        "DT"            "kableExtra"    "stats"        
+[37] "graphics"      "grDevices"     "utils"         "datasets"     
+[41] "methods"       "base"         
+
+[[26]]
+ [1] "see"           "report"        "parameters"    "performance"  
+ [5] "modelbased"    "insight"       "effectsize"    "datawizard"   
+ [9] "correlation"   "bayestestR"    "easystats"     "DeclareDesign"
+[13] "estimatr"      "fabricatr"     "randomizr"     "dataverse"    
+[17] "tidycensus"    "qss"           "mapdata"       "maps"         
+[21] "COVID19"       "ggforce"       "ggdag"         "dagitty"      
+[25] "scales"        "ggpubr"        "ggthemes"      "ggridges"     
+[29] "ggrepel"       "ggmap"         "labelled"      "haven"        
+[33] "lubridate"     "forcats"       "stringr"       "dplyr"        
+[37] "purrr"         "readr"         "tidyr"         "tibble"       
+[41] "ggplot2"       "tidyverse"     "htmltools"     "texreg"       
+[45] "DT"            "kableExtra"    "stats"         "graphics"     
+[49] "grDevices"     "utils"         "datasets"      "methods"      
+[53] "base"         
+
+[[27]]
+ [1] "zoo"           "see"           "report"        "parameters"   
+ [5] "performance"   "modelbased"    "insight"       "effectsize"   
+ [9] "datawizard"    "correlation"   "bayestestR"    "easystats"    
+[13] "DeclareDesign" "estimatr"      "fabricatr"     "randomizr"    
+[17] "dataverse"     "tidycensus"    "qss"           "mapdata"      
+[21] "maps"          "COVID19"       "ggforce"       "ggdag"        
+[25] "dagitty"       "scales"        "ggpubr"        "ggthemes"     
+[29] "ggridges"      "ggrepel"       "ggmap"         "labelled"     
+[33] "haven"         "lubridate"     "forcats"       "stringr"      
+[37] "dplyr"         "purrr"         "readr"         "tidyr"        
+[41] "tibble"        "ggplot2"       "tidyverse"     "htmltools"    
+[45] "texreg"        "DT"            "kableExtra"    "stats"        
+[49] "graphics"      "grDevices"     "utils"         "datasets"     
+[53] "methods"       "base"         </code></pre>
 </div>
 </div>
 </section>
@@ -481,7 +688,7 @@ $ percent_vaccinated_std &lt;dbl&gt; 0.5889289, 0.5623160, 0.2765518, -1.5018949
                                        Max.   :2021-09-23   Max.   :1.81515    
  percent_vaccinated   winner   rep_voteshare       med_age        med_income   
  Min.   :43.58      Trump:25   Min.   : 5.397   Min.   :30.80   Min.   :45081  
- 1st Qu.:49.40      Biden:26   1st Qu.:40.975   1st Qu.:36.95   1st Qu.:55560  
+ 1st Qu.:49.40      Biden:26   1st Qu.:40.975   1st Qu.:36.95   1st Qu.:55561  
  Median :54.65                 Median :49.237   Median :38.20   Median :61439  
  Mean   :56.16                 Mean   :49.157   Mean   :38.39   Mean   :63098  
  3rd Qu.:62.07                 3rd Qu.:57.866   3rd Qu.:39.50   3rd Qu.:71464  
@@ -861,7 +1068,7 @@ Residuals:
 
 Coefficients:
               Estimate Std. Error t value Pr(&gt;|t|)
-(Intercept) -2.883e-16  1.403e-01   0.000    1.000
+(Intercept) -2.755e-16  1.403e-01   0.000    1.000
 med_age_std -1.246e-01  1.417e-01  -0.879    0.384
 
 Residual standard error: 1.002 on 49 degrees of freedom

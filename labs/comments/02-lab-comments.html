@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Your Name HERE">
-<meta name="dcterms.date" content="2024-01-24">
+<meta name="dcterms.date" content="2026-01-28">
 
 <title>Lab 02 - Visualizing data on COVID-19 in the U.S. – POLS 1600</title>
 <style>
@@ -212,7 +212,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">January 24, 2024</p>
+      <p class="date">January 28, 2026</p>
     </div>
   </div>
   
@@ -386,7 +386,8 @@ div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ipak</span>(the_packages)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-error">
-<pre><code>Error in contrib.url(repos, "source"): trying to use CRAN without setting a mirror</code></pre>
+<pre><code>Error in `contrib.url()`:
+! trying to use CRAN without setting a mirror</code></pre>
 </div>
 </div>
 </section>
@@ -417,7 +418,7 @@ div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(covid)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 80156    47</code></pre>
+<pre><code>[1] 86724    47</code></pre>
 </div>
 </div>
 <ul>
@@ -518,7 +519,7 @@ div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(covid<span class="sc">$</span>confirmed)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>    Min.  1st Qu.   Median     Mean  3rd Qu.     Max.     NA's 
-       1    70784   351496   889830  1043231 12169158    18214 </code></pre>
+       1    70784   351496   889830  1043231 12169158    24782 </code></pre>
 </div>
 </div>
 </section>
@@ -572,16 +573,18 @@ div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}
 <span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>covid_us <span class="ot">&lt;-</span> covid <span class="sc">%&gt;%</span></span>
 <span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span>administrative_area_level_2 <span class="sc">%in%</span> territories)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-error">
-<pre><code>Error in covid %&gt;% filter(!administrative_area_level_2 %in% territories): could not find function "%&gt;%"</code></pre>
+<pre><code>Error in `covid %&gt;% filter(!administrative_area_level_2 %in% territories)`:
+! could not find function "%&gt;%"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check to make sure covid_us contains only 50 states and D.C.</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(covid)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 80156    47</code></pre>
+<pre><code>[1] 86724    47</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(covid_us)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-error">
-<pre><code>Error in eval(expr, envir, enclos): object 'covid_us' not found</code></pre>
+<pre><code>Error:
+! object 'covid_us' not found</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(<span class="fu">unique</span>(covid<span class="sc">$</span>administrative_area_level_2)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -589,7 +592,8 @@ div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}
 </div>
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(<span class="fu">unique</span>(covid_us<span class="sc">$</span>administrative_area_level_2)) <span class="sc">==</span> <span class="dv">51</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-error">
-<pre><code>Error in eval(expr, envir, enclos): object 'covid_us' not found</code></pre>
+<pre><code>Error in `unique()`:
+! object 'covid_us' not found</code></pre>
 </div>
 </div>
 </section>
@@ -604,7 +608,8 @@ div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">state =</span> administrative_area_level_2,</span>
 <span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  ) <span class="ot">-&gt;</span> covid_us</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-error">
-<pre><code>Error in covid_us %&gt;% mutate(state = administrative_area_level_2, ): could not find function "%&gt;%"</code></pre>
+<pre><code>Error in `covid_us %&gt;% mutate(state = administrative_area_level_2, )`:
+! could not find function "%&gt;%"</code></pre>
 </div>
 </div>
 </section>
@@ -619,7 +624,9 @@ div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}
 <span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">new_cases_pc =</span> new_cases <span class="sc">/</span> population <span class="sc">*</span><span class="dv">100000</span></span>
 <span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>    ) <span class="ot">-&gt;</span> covid_us</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-error">
-<pre><code>Error in covid_us %&gt;% dplyr::group_by(state) %&gt;% mutate(new_cases = confirmed - : could not find function "%&gt;%"</code></pre>
+<pre><code>Error in `covid_us %&gt;% dplyr::group_by(state) %&gt;% mutate(new_cases = confirmed - lag(
+    confirmed), new_cases_pc = new_cases / population * 1e+05)`:
+! could not find function "%&gt;%"</code></pre>
 </div>
 </div>
 <p>The slides from Tuesday, helped demonstrate what this code was doing, and why we wanted to group by state.</p>
@@ -635,7 +642,10 @@ div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}
 <span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">new_cases =</span> confirmed <span class="sc">-</span> <span class="fu">lag</span>(confirmed)</span>
 <span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-error">
-<pre><code>Error in covid_us %&gt;% filter(date &gt;= "2020-04-01" &amp; date &lt; "2020-04-07") %&gt;% : could not find function "%&gt;%"</code></pre>
+<pre><code>Error in `covid_us %&gt;% filter(date &gt;= "2020-04-01" &amp; date &lt; "2020-04-07") %&gt;% group_by(
+    state) %&gt;% select(state, date, confirmed) %&gt;% mutate(confirmed_lag1 = lag(
+    confirmed), new_cases = confirmed - lag(confirmed))`:
+! could not find function "%&gt;%"</code></pre>
 </div>
 </div>
 <p>If we hadn’t grouped by state, then when we lagged the <code>confirmed</code> variable, R thinks the number of confirmed cases in California before April 1, 2020, is 986 which is actually the number of cases in Minnesota on April 7, 2020</p>
@@ -649,7 +659,10 @@ div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}
 <span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">new_cases =</span> confirmed <span class="sc">-</span> <span class="fu">lag</span>(confirmed)</span>
 <span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-error">
-<pre><code>Error in covid_us %&gt;% filter(date &gt;= "2020-04-01" &amp; date &lt; "2020-04-07") %&gt;% : could not find function "%&gt;%"</code></pre>
+<pre><code>Error in `covid_us %&gt;% filter(date &gt;= "2020-04-01" &amp; date &lt; "2020-04-07") %&gt;% ungroup() %&gt;%
+    select(state, date, confirmed) %&gt;% mutate(confirmed_lag1 = lag(confirmed),
+  new_cases = confirmed - lag(confirmed))`:
+! could not find function "%&gt;%"</code></pre>
 </div>
 </div>
 </section>
@@ -683,7 +696,13 @@ div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}
 <span id="cb32-14"><a href="#cb32-14" aria-hidden="true" tabindex="-1"></a>    ) </span>
 <span id="cb32-15"><a href="#cb32-15" aria-hidden="true" tabindex="-1"></a>    ) <span class="ot">-&gt;</span> covid_us</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-error">
-<pre><code>Error in covid_us %&gt;% mutate(face_masks = case_when(facial_coverings == : could not find function "%&gt;%"</code></pre>
+<pre><code>Error in `covid_us %&gt;% mutate(face_masks = case_when(facial_coverings == 0 ~ "No policy",
+  abs(facial_coverings) == 1 ~ "Recommended", abs(facial_coverings) == 2 ~
+    "Some requirements", abs(facial_coverings) == 3 ~ "Required shared places",
+  abs(facial_coverings) == 4 ~ "Required all times", ) %&gt;% factor(., levels = c(
+    "No policy", "Recommended", "Some requirements", "Required shared places",
+    "Required all times")))`:
+! could not find function "%&gt;%"</code></pre>
 </div>
 </div>
 </section>
@@ -706,7 +725,10 @@ div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}
 <span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">percent_vaccinated =</span> people_fully_vaccinated<span class="sc">/</span>population<span class="sc">*</span><span class="dv">100</span>  </span>
 <span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>    ) <span class="ot">-&gt;</span> covid_us</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-error">
-<pre><code>Error in covid_us %&gt;% mutate(year = year(date), month = month(date), year_month = paste(year, : could not find function "%&gt;%"</code></pre>
+<pre><code>Error in `covid_us %&gt;% mutate(year = year(date), month = month(date), year_month = paste(
+    year, str_pad(month, width = 2, pad = 0), sep = "-"), percent_vaccinated = people_fully_vaccinated /
+    population * 100)`:
+! could not find function "%&gt;%"</code></pre>
 </div>
 </div>
 <p>Creating separte <code>year</code> and <code>month</code> variables aren’t strictly necessary,</p>
@@ -747,7 +769,10 @@ div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}
 <span id="cb37-14"><a href="#cb37-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">total_cases =</span> <span class="fu">round</span>(<span class="fu">mean</span>(confirmed,<span class="at">na.rm=</span>T))</span>
 <span id="cb37-15"><a href="#cb37-15" aria-hidden="true" tabindex="-1"></a>  ) <span class="ot">-&gt;</span> cases_by_month_and_policy</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-error">
-<pre><code>Error in covid_us %&gt;% filter(!is.na(face_masks)) %&gt;% group_by(year_month, : could not find function "%&gt;%"</code></pre>
+<pre><code>Error in `covid_us %&gt;% filter(!is.na(face_masks)) %&gt;% group_by(year_month, face_masks) %&gt;%
+    summarise(n = length(unique(state)), new_cases_pc = round(mean(new_cases_pc,
+      na.rm = T)), total_cases = round(mean(confirmed, na.rm = T)))`:
+! could not find function "%&gt;%"</code></pre>
 </div>
 </div>
 </section>
@@ -783,11 +808,13 @@ div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}
 <span id="cb39-12"><a href="#cb39-12" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Coordinates</span></span>
 <span id="cb39-13"><a href="#cb39-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="ot">-&gt;</span> fig1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-error">
-<pre><code>Error in cases_by_month_and_policy %&gt;% ggplot(aes(x = year_month, y = new_cases_pc, : could not find function "%&gt;%"</code></pre>
+<pre><code>Error in `cases_by_month_and_policy %&gt;% ggplot(aes(x = year_month, y = new_cases_pc, col = face_masks))`:
+! could not find function "%&gt;%"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>fig1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-error">
-<pre><code>Error in eval(expr, envir, enclos): object 'fig1' not found</code></pre>
+<pre><code>Error:
+! object 'fig1' not found</code></pre>
 </div>
 </div>
 </section>
@@ -816,14 +843,16 @@ div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}
 <span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">col =</span> <span class="st">"Face Mask</span><span class="sc">\n</span><span class="st"> Policy"</span></span>
 <span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-error">
-<pre><code>Error in eval(expr, envir, enclos): object 'fig1' not found</code></pre>
+<pre><code>Error:
+! object 'fig1' not found</code></pre>
 </div>
 </div>
 <p>Note the code above didn’t update <code>fig1</code></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>fig1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-error">
-<pre><code>Error in eval(expr, envir, enclos): object 'fig1' not found</code></pre>
+<pre><code>Error:
+! object 'fig1' not found</code></pre>
 </div>
 </div>
 <p>We have to save the output (if we like it) for our changes to persist.</p>
@@ -835,11 +864,13 @@ div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}
 <span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">col =</span> <span class="st">"Face Mask</span><span class="sc">\n</span><span class="st">Policy"</span></span>
 <span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a>  ) <span class="ot">-&gt;</span> fig1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-error">
-<pre><code>Error in eval(expr, envir, enclos): object 'fig1' not found</code></pre>
+<pre><code>Error:
+! object 'fig1' not found</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>fig1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-error">
-<pre><code>Error in eval(expr, envir, enclos): object 'fig1' not found</code></pre>
+<pre><code>Error:
+! object 'fig1' not found</code></pre>
 </div>
 </div>
 </section>
@@ -851,19 +882,22 @@ div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}
 <span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>fig1 <span class="sc">+</span></span>
 <span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-error">
-<pre><code>Error in eval(expr, envir, enclos): object 'fig1' not found</code></pre>
+<pre><code>Error:
+! object 'fig1' not found</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Minimal</span></span>
 <span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>fig1 <span class="sc">+</span></span>
 <span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-error">
-<pre><code>Error in eval(expr, envir, enclos): object 'fig1' not found</code></pre>
+<pre><code>Error:
+! object 'fig1' not found</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Classic</span></span>
 <span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>fig1 <span class="sc">+</span></span>
 <span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-error">
-<pre><code>Error in eval(expr, envir, enclos): object 'fig1' not found</code></pre>
+<pre><code>Error:
+! object 'fig1' not found</code></pre>
 </div>
 </div>
 <p>This is pretty personal, and depends of the figure itself. I like a white background and some guide lines:</p>
@@ -871,11 +905,13 @@ div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}
 <div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>fig1 <span class="sc">+</span></span>
 <span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="ot">-&gt;</span> fig1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-error">
-<pre><code>Error in eval(expr, envir, enclos): object 'fig1' not found</code></pre>
+<pre><code>Error:
+! object 'fig1' not found</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>fig1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-error">
-<pre><code>Error in eval(expr, envir, enclos): object 'fig1' not found</code></pre>
+<pre><code>Error:
+! object 'fig1' not found</code></pre>
 </div>
 </div>
 </section>
@@ -887,7 +923,8 @@ div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}
 <div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a>fig1 <span class="sc">+</span></span>
 <span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">size =</span> n) <span class="ot">-&gt;</span> fig1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-error">
-<pre><code>Error in eval(expr, envir, enclos): object 'fig1' not found</code></pre>
+<pre><code>Error:
+! object 'fig1' not found</code></pre>
 </div>
 </div>
 <p>We call this type of plot a <a href="https://www.r-graph-gallery.com/bubble-chart.html">bubble plot</a>{target=“_blank”</p>
@@ -896,7 +933,8 @@ div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}
 <div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a>fig1 <span class="sc">+</span></span>
 <span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_size</span>(<span class="at">guide =</span> <span class="st">"none"</span>) <span class="ot">-&gt;</span> fig1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-error">
-<pre><code>Error in eval(expr, envir, enclos): object 'fig1' not found</code></pre>
+<pre><code>Error:
+! object 'fig1' not found</code></pre>
 </div>
 </div>
 </section>
@@ -908,11 +946,13 @@ div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}
 <div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a>fig1 <span class="sc">+</span></span>
 <span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>face_masks) <span class="ot">-&gt;</span> fig1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-error">
-<pre><code>Error in eval(expr, envir, enclos): object 'fig1' not found</code></pre>
+<pre><code>Error:
+! object 'fig1' not found</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a>fig1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-error">
-<pre><code>Error in eval(expr, envir, enclos): object 'fig1' not found</code></pre>
+<pre><code>Error:
+! object 'fig1' not found</code></pre>
 </div>
 </div>
 <p>Now I think also want a second legend for the number of states</p>
@@ -923,11 +963,13 @@ div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}
 <span id="cb69-4"><a href="#cb69-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">size =</span> <span class="st">"# of States</span><span class="sc">\n</span><span class="st">with Policy"</span></span>
 <span id="cb69-5"><a href="#cb69-5" aria-hidden="true" tabindex="-1"></a>  )<span class="ot">-&gt;</span> fig1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-error">
-<pre><code>Error in eval(expr, envir, enclos): object 'fig1' not found</code></pre>
+<pre><code>Error:
+! object 'fig1' not found</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a>fig1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-error">
-<pre><code>Error in eval(expr, envir, enclos): object 'fig1' not found</code></pre>
+<pre><code>Error:
+! object 'fig1' not found</code></pre>
 </div>
 </div>
 <p>This seems pretty good if our goal was to show in general terms</p>

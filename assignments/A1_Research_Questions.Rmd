@@ -12,40 +12,40 @@ output:
 ---
 
 
-```{r init,echo=F, message=F,results=F}
-knitr::opts_chunk$set(error = TRUE, 
-                      comment = NA, 
-                      warnings = FALSE, 
-                      errors = FALSE, 
-                      messages = FALSE, 
-                      cache = TRUE,
-                      tidy = FALSE)
-
-the_packages <- c(
-  ## R Markdown
-  "kableExtra","DT","texreg",
-  ## Tidyverse
-  "tidyverse", "lubridate", "forcats", "haven", "labelled",
-  ## Extensions for ggplot
-  "ggmap","ggrepel", "ggridges", "ggthemes", "ggpubr", 
-  "GGally", "scales", "dagitty", "ggdag", "ggforce",
-  # Data 
-  "COVID19","maps","mapdata","qss","tidycensus", "dataverse",
-  # Analysis
-  "DeclareDesign", "easystats", "zoo"
-)
-
-# Define function to load packages
-ipak <- function(pkg){
-    new.pkg <- pkg[!(pkg %in% installed.packages()[, "Package"])]
-    if (length(new.pkg)) 
-        install.packages(new.pkg, dependencies = TRUE)
-    sapply(pkg, require, character.only = TRUE)
-}
-
-ipak(the_packages)
-
-```
+# ```{r init,echo=F, message=F,results=F}
+# knitr::opts_chunk$set(error = TRUE, 
+#                       comment = NA, 
+#                       warnings = FALSE, 
+#                       errors = FALSE, 
+#                       messages = FALSE, 
+#                       cache = TRUE,
+#                       tidy = FALSE)
+# 
+# the_packages <- c(
+#   ## R Markdown
+#   "kableExtra","DT","texreg",
+#   ## Tidyverse
+#   "tidyverse", "lubridate", "forcats", "haven", "labelled",
+#   ## Extensions for ggplot
+#   "ggmap","ggrepel", "ggridges", "ggthemes", "ggpubr", 
+#   "GGally", "scales", "dagitty", "ggdag", "ggforce",
+#   # Data 
+#   "COVID19","maps","mapdata","qss","tidycensus", "dataverse",
+#   # Analysis
+#   "DeclareDesign", "easystats", "zoo"
+# )
+# 
+# # Define function to load packages
+# ipak <- function(pkg){
+#     new.pkg <- pkg[!(pkg %in% installed.packages()[, "Package"])]
+#     if (length(new.pkg)) 
+#         install.packages(new.pkg, dependencies = TRUE)
+#     sapply(pkg, require, character.only = TRUE)
+# }
+# 
+# ipak(the_packages)
+# 
+# ```
 
 # Overview {-}
 
