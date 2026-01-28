@@ -102,22 +102,23 @@ load(url("https://pols1600.paultesta.org/files/data/covid.rda"))
 
 # Replicate the data cleaning and recoding from class
 
-Specifically please do the following:
+Now, we will do the following: 
 
 1.  Create a object called `territories` that is a vector containing the names of U.S. territories
 
--   Use `<-` and `c()` ([slides](https://pols1600.paultesta.org/slides/01-slides#107))
+-   Use `<-` and `c()`
 
-2.  Create a new dataframe, called `covid_us`, by filtering out observations from the U.S. territories `- Use`\<-`,`%\>%`,`filter()`,`!`and`%in%\` ([slides](https://pols1600.paultesta.org/slides/01-slides#108))
+2.  Create a new dataframe, called `covid_us`, by filtering out observations from the U.S. territories `- Use`\<-`,`%\>%`,`filter()`,`!`and`%in%\` 
+
 3.  Create a `state` variable that is a copy of the `administrative_area_level_2`
 
 -   Use `%>%`, `mutate()` and `->`
 
 4.  Create a variable called `new_cases` from the `confirmed`. Create a variable called `new_cases_pc` that is the number of new Covid-19 cases per 100,000 citizens
 
--   Use `%>%`,`group_by()`,`mutate()` and `lag()`, \``/` and `*` ([slides](https://pols1600.paultesta.org/slides/01-slides#110))
+-   Use `%>%`,`group_by()`,`mutate()` and `lag()`, \``/` and `*`
 
-5.  Create a variable called `face_masks` from the `facial_coverings` variable. ([slides](https://pols1600.paultesta.org/slides/01-slides#111))
+5.  Create a variable called `face_masks` from the `facial_coverings` variable.
 
 -   Treat negative and positive values the same.
 -   Recode numeric values so that they have meaningful labels
