@@ -3987,7 +3987,7 @@
     "href": "slides/01-slides.html#three-components-of-a-.qmd",
     "title": "POLS 1600",
     "section": "Three components of a .qmd",
-    "text": "Three components of a .qmd\n\nControl output with YAML header\n\n  ---\n  title: \"Title here\"\n  author: \"Your name\"\n  format:\n    html:\n      toc: true\n  ---\n\nWrite code Blocks/Chunks\n\n```{r}\n#| echo: true\n2+2\n```\n\nDescribe code using Markdown\n\nSee Help &gt; Markdown quick reference"
+    "text": "Three components of a .qmd\n\n\nControl output with YAML header\n\n  ---\n  title: \"Title here\"\n  author: \"Your name\"\n  format:\n    html:\n      toc: true\n  ---\n\nWrite code Blocks/Chunks\n\n#| echo: true\n2+2\n\nDescribe code using Markdown\n\nSee Help &gt; Markdown quick reference"
   },
   {
     "objectID": "slides/01-slides.html#the-basics-of-r",
@@ -4008,14 +4008,14 @@
     "href": "slides/01-slides.html#r-is-a-calculator",
     "title": "POLS 1600",
     "section": "R is a Calculator",
-    "text": "R is a Calculator\n\n\n\nOperator\nDescription\nUsage\n\n\n\n\n+\naddition\nx + y\n\n\n-\nsubtraction\nx - y\n\n\n*\nmultiplication\nx * y\n\n\n/\ndivision\nx / y\n\n\n^\nraised to the power of\nx ^ y\n\n\nabs\nabsolute value\nabs(x)\n\n\n%/%\ninteger division\nx %/% y\n\n\n%%\nremainder after division\nx %% y"
+    "text": "R is a Calculator\n\n\n\n\nOperator\nDescription\nUsage\n\n\n\n\n+\naddition\nx + y\n\n\n-\nsubtraction\nx - y\n\n\n*\nmultiplication\nx * y\n\n\n/\ndivision\nx / y\n\n\n^\nraised to the power of\nx ^ y\n\n\nabs\nabsolute value\nabs(x)\n\n\n%/%\ninteger division\nx %/% y\n\n\n%%\nremainder after division\nx %% y"
   },
   {
     "objectID": "slides/01-slides.html#r-is-logical",
     "href": "slides/01-slides.html#r-is-logical",
     "title": "POLS 1600",
     "section": "R is logical",
-    "text": "R is logical\n\n\n\nOperator\nDescription\nUsage\n\n\n\n\n&\nand\nx & y\n\n\n|\nor\nx | y\n\n\nxor\nexactly x or y\nxor(x, y)\n\n\n!\nnot\n!x"
+    "text": "R is logical\n\n\n\n\nOperator\nDescription\nUsage\n\n\n\n\n&\nand\nx & y\n\n\n|\nor\nx | y\n\n\nxor\nexactly x or y\nxor(x, y)\n\n\n!\nnot\n!x"
   },
   {
     "objectID": "slides/01-slides.html#r-is-logical-1",
@@ -4029,14 +4029,14 @@
     "href": "slides/01-slides.html#r-can-make-comparisons",
     "title": "POLS 1600",
     "section": "R can make comparisons",
-    "text": "R can make comparisons\n\n\n\nOperator\nDescription\nUsage\n\n\n\n\n&lt;\nless than\nx &lt; y\n\n\n&lt;=\nless than or equal to\nx &lt;= y\n\n\n&gt;\ngreater than\nx &gt; y\n\n\n&gt;=\ngreater than or equal to\nx &gt;= y\n\n\n==\nexactly equal to\nx == y\n\n\n!=\nnot equal to\nx != y\n\n\n%in%\ngroup membership*\nx %in% y\n\n\nis.na\nis missing\nis.na(x)\n\n\n!is.na\nis not missing\n!is.na(x)"
+    "text": "R can make comparisons\n\n\n\n\nOperator\nDescription\nUsage\n\n\n\n\n&lt;\nless than\nx &lt; y\n\n\n&lt;=\nless than or equal to\nx &lt;= y\n\n\n&gt;\ngreater than\nx &gt; y\n\n\n&gt;=\ngreater than or equal to\nx &gt;= y\n\n\n==\nexactly equal to\nx == y\n\n\n!=\nnot equal to\nx != y\n\n\n%in%\ngroup membership*\nx %in% y\n\n\nis.na\nis missing\nis.na(x)\n\n\n!is.na\nis not missing\n!is.na(x)"
   },
   {
     "objectID": "slides/01-slides.html#everything-that-exists-in-r-is-an-object",
     "href": "slides/01-slides.html#everything-that-exists-in-r-is-an-object",
     "title": "POLS 1600",
     "section": "Everything that exists in R is an object",
-    "text": "Everything that exists in R is an object\n\nThe number 5 is an object in R\n\n\n5\n\n[1] 5\n\n\n\nWe can assign the object 5, the name x, using the assignment operator &lt;-\n\n\nx &lt;- 5 # Read this as \"x gets 5\"\n\n\nNow if we tell R to show us x, we’ll get\n\n\nx\n\n[1] 5\n\nprint(x)\n\n[1] 5"
+    "text": "Everything that exists in R is an object\n\n\nThe number 5 is an object in R\n\n\n5\n\n[1] 5\n\n\n\nWe can assign the object 5, the name x, using the assignment operator &lt;-\n\n\nx &lt;- 5 # Read this as \"x gets 5\"\n\n\nNow if we tell R to show us x, we’ll get\n\n\nx\n\n[1] 5\n\nprint(x)\n\n[1] 5"
   },
   {
     "objectID": "slides/01-slides.html#data-come-in-different-types",
@@ -4050,7 +4050,7 @@
     "href": "slides/01-slides.html#data-come-in-different-types-1",
     "title": "POLS 1600",
     "section": "Data come in different types",
-    "text": "Data come in different types\n\n\n\n# Create some data\n\n# Numeric\nx &lt;- 2 # Double\ny &lt;- 6L # Integer\n\n# Logical\nonly_two_types_of_people &lt;- TRUE \n\n# Character\nme &lt;- \"Paul\"\n\n# Factor\ngrades = factor(c(\"A\",\"B\",\"C\"))\n\n\n\ndata(\"iris\")\nhead(iris)\n\n  Sepal.Length Sepal.Width Petal.Length Petal.Width Species\n1          5.1         3.5          1.4         0.2  setosa\n2          4.9         3.0          1.4         0.2  setosa\n3          4.7         3.2          1.3         0.2  setosa\n4          4.6         3.1          1.5         0.2  setosa\n5          5.0         3.6          1.4         0.2  setosa\n6          5.4         3.9          1.7         0.4  setosa\n\nclass(iris[\"Sepal.Length\"])\n\n[1] \"data.frame\"\n\nclass(iris$Sepal.Length)\n\n[1] \"numeric\"\n\n\n\nData Types\nOne common ocurrence is that a function in R is expecting data of one type but (e.g. numeric) but actually gets data of different type (e.g. character)\nThe class() function is a useful base R for troubleshooting such errors.\nFor example, different operatinos on data frames return different objects.\n\n# What type are they?\n\n\nData come in different “shapes” and “sizes”\n\nSource: Gaurav Tiwari\n\n\n\n\n\n\n\n\n\n\n\nName\n“Size”\nType of Data\nR code\n\n\n\n\nscalar\n1\nnumeric, character, factor, logical\nx &lt;- 5\n\n\nvector\nN elements: length(x)\nall the same\nv &lt;- c(1, 2, T, \"false\")\n\n\nmatrix\nN rows by columns K: dim(x)\nall the same\nm &lt;- matrix(y,2,2)\n\n\narray\nN row by K column by J dimensions: dim(x)\nall the same\na &lt;- array(m,c(2,2,3))\n\n\ndata frames\nN row by K column matrix\ncan be different\nd &lt;-data.frame(x=x, y=y)\n\n\ntibbles\nN row by K column matrix\ncan be different\nd &lt;-tibble(x=x, y=y)\n\n\nlists\ncan vary\ncan be different\nl &lt;-list(x,y,m,a,d)\n\n\n\n\nEverything that happens in R is the result of a function\n\nYou’ve already seen and used some R functions\n\nthe &lt;- is the assignement operator that assigns a value to a name\nc() is the combine function that combines elements together\ninstall.packages() installs packages\nlibrary() loads packages you’ve installed so you can use functions and data that are part of that package\n\n\n\nThree sources of functions\nThree sources of functions:\n\nbase R\n\n&lt;-; mean(x); library(\"package_name\")\n\npackages\n\ninstall.packages(\"packageName)\"\nremotes::intall_github(\"user/repository\")\n\nYou\n\nmy_function &lt;- function(x){x^2}\n\n\n\n\n\n\n\n\n\nTip\n\n\nCan you spot the portal of discovery in the code above?\n\n\n\n\n\nFunctions are like recipes\nThey have:\n\n\n\nnames\ningredients (inputs)\nsteps that tell you what to do with the ingredients (statements/code)\ntasty results from applying those steps to given ingredients (outputs)\n\n\n (Source)\n\n\nExample Function\n\nis_it_the_weekend &lt;- function(x){\n  # Determine if I have to go to work today\n  # If x is in the weekend\n  if(x %in% c(\"Saturday\",\"Sunday\")){\n    return(\"Yes, take it easy!\")\n  }else{\n    return(\"Sorry, back to work.\")\n  }\n\n}\nis_it_the_weekend(\"Saturday\")\n\n[1] \"Yes, take it easy!\"\n\nis_it_the_weekend(\"Monday\")\n\n[1] \"Sorry, back to work.\"\n\n\n\nGetting setup to work in R\nEach time you start a project in R, you will want to:\n\nSet your working directory in R Studio\nLoad (and if needed, install) the R packages you will use\nSet any “global” options you want\nLoad the data you’ll be using\n\n\nSet your working directory\n\n\nLoad (and if needed, install) the R packages you will use\n\nInstall packages once1 with install.packages(\"package_name\")\nLoad packages every session with library(\"package_name\")\n\n\n Install packages for the lab\n\nInstall packages for the lab\nLet’s install the tidyverse and COVID19.\n\nCreate a new code chunk\nLabel it libraries\nCopy and paste the following into your console\n\n\ninstall.packages(\"tidyverse\")\ninstall.packages(\"COVID19\")\n\n\nOnce you’ve installed these packages comment out the code (Why?)\n\n\n# install.packages(\"tidyverse\")\n# install.packages(\"COVID19\")\n\n\n\n\n\n\n\nKeyboard Shortcuts to toggle # comments\n\n\nmacOS: CMD + SHIFT + C\nPC: CTRL + SHIFT + C\n\n\n\n\nLoading the tidyverse and COVID19 packages\n\nType the following into your code chunk:\n\n\nlibrary(\"tidyverse\")\nlibrary(COVID19)\n\n\nLoad the data you’ll be using\nThere are three ways to load data.\n\nLoad a pre-existing dataset\n\ndata(\"dataset\") will load the dataset named “dataset”\n\ndata() will list all datasets\n\n\nLoad a .Rdata/.rda file using load(\"dataset.rda\")\nRead data of a different format (.csv, .dta, .spss) into R using specific functions from packages like haven and readr\n\n\n\n# EXAMPLE CODE (Won't actually run)\n# Read a .csv file saved locally on my Desktop\ndf_csv &lt;- readr::read_csv(\"~/Desktop/data.csv\")\n# Read a .dta file saved on the web\ndf_dta &lt;- haven::read_dta(\"https://josephessig-source.github.io/pols1600_site/files/data/covid.rda\")\n\n\n\n Working with Data in R\n\n\n\nOverview: Working with Data in R\n\nLoading data into R\nLooking at your data\nCleaning and transforming your data\n\n\n\nLoading data into R\nThere are three ways to load data.\n\nLoad a pre-existing dataset\n\ndata(\"dataset\") will load the dataset named “dataset”\ndata() will list all datasets\nUseful for tutorials, working through examples/help\n\nLoad a .Rdata/.rda file using load(\"dataset.rda\")\nRead data of a different format (.csv, .dta, .spss) into R using specific functions\n\nWe will use functions from the haven and readr packages to read data from the web and stored locally on your computer\n\n\n\n\n Loading state-level Covid data\n\n\nLoading state-level Covid data\nThe code below downloads two years of daily state-level Covid data:\n\ncovid &lt;- COVID19::covid19(\n  country = \"US\",\n  start = \"2020-01-01\",\n  end = \"2022-12-31\",\n  level = 2,\n  verbose = F\n    \n)\n\nPlease run the following2\n\nload(url(\"https://josephessig-source.github.io/pols1600_site/files/data/covid.rda\"))\n\n#load() tells R to load a .rda file, which is one way to store data.\n#In this case, the rda file is stored at a URL, not on your computer. \n\n\n\nLoading state-level Covid data\n\ncountry = US tells the function we want data for the US\nstart = \"2020-01-01\" sets the start date for the data\nend = \"2022-12-31\"\" sets the end date for the data\nlevel = 2 tells the function we want state-level data\nverbose = F tells the function not to print other stuff\n\n\ncovid &lt;- COVID19::covid19(\n  country = \"US\",\n  start = \"2020-01-01\",\n  end = \"2022-12-31\",\n  level = 2,\n  verbose = F\n    \n)\n\n\n\nLooking at your data\nThe first time you load a dataset into R, you should try to get a high-level overview (HLO) of the data\n\n\n\n\n\n\nTip\n\n\nThis is an iterative, dynamic process. Something you do “live” but won’t necessarily save in your final code you submit. Over time you’ll develop intuitions about what to look for, what questions to ask of your data, and what functions and code will help you answer these questions.\nFor example, I might want to know, how many unique values the variable school_closing in the covid dataset takes?\n\n\n\n\ntable(covid$school_closing)\n\n\n   -3    -2    -1     0     1     2     3 \n 3357 20721  3831  9509  9581  1366  5313 \n\n\n\n\nHLOs allow you to\n\nDescribe the structure of your data:\n\nHow many observations (rows)\nHow many variables (columns)\n\nDescribe the unit of observation\n\nIn plain language, what is a row in your data\n\nIdentify the class and type of variables (columns)\n\nNumeric, character, logical\nIs there missing data (NAs)\n\nFigure out what transformations, cleaning, and recoding you need to do\n\n\n\nFunctions to help you get a high level overview\n\ndim(data) gives you the dimensions (# of rows and columns)\nView(data) opens data in a separate pane\nprint(data); data will display a truncated view of data in your console\nglimpse(data) will show a transposed (switch columns and rows) version of data with information on variable type\nhead(data) shows you the first 5 rows\ntail(data) shows you the last 5 rows\ndata$variable extracts variable from data\ntable(data$variable) creates a frequency table\n\nGood for categorical data\n\ntable(data$variable1, data$variable2) creates a “crosstab” or contingency table\n\nGreat for checking recodes of data\n\nsummary(data$variable) summary statistics\n\nGood for numeric data\n\n\n\n\n Data Wrangling in the Tidyverse\n\n\n\nThe Tidyverse\n\n\n\nThe tidyverse is an opinionated collection of R packages designed for data science. All packages share an underlying design philosophy, grammar, and data structures.\n\nFor more check out R for Data Science\n\n\n\n\n\nTidy Data\nTidy data is a standard way of mapping the meaning of a dataset to its structure.\nA dataset is messy or tidy depending on how rows, columns and tables are matched up with observations, variables and types. In tidy data:\n\nEvery column is a variable.\nEvery row is an observation.\nEvery cell is a single value.\n\nMore\n\n\ndplyr functions for data wrangling\nToday and this week will begin learning some tools for selecting and transforming data:\n\nselect() to select columns from a dataframe\nfilter() to select rows from a dataframe when some statement is TRUE\nmutate() to create new colums\n\ncase_when() to recode values when some statement is TRUE\n\nsummarise() to transform many values into one value\ngroup_by() to create a grouped table so that other functions are applied separately to each group and then combined\n\n\n\nThe %&gt;% (“pipe” operator)\nThe %&gt;% lets us chain functions together so we can read left to right\n\nslice(filter(covid, administrative_area_level_2 == \"Rhode Island\"), 1)\n\nBecomes\n\ncovid %&gt;% \n  filter(administrative_area_level_2 == \"Rhode Island\") %&gt;% \n  slice(1)\n\n\n\n\n\n\n\nKeyboard Shortcuts for %&gt;%\n\n\nmacOS: CMD + SHIFT + M\nPC: CTRL + SHIFT + M\n\n\n\n\n\n Describing Data in R\n\n\n\nDescriptive Statistics\nWhen social scientists talk about descriptive inference, we’re trying to summarize our data and make claims about what’s typical of our data\n\nWhat’s a typical value\n\nMeasures of central tendency\nmean, median, mode\n\nHow do our data vary around typical values\n\nMeasures of dispersion\nvariance, standard deviation, range, percentile ranges\n\nHow does variation in one variable relate to variation in another\n\nMeasures of association\ncovariance, correlation\n\n\n\n\nUsing R to Summarize Data\nHere are some common ways of summarizing data and how to calculate them with R\n\n\n\nDescription\nUsage\n\n\n\n\nsum\nsum(x)\n\n\nminimum\nmin(x)\n\n\nmaximum\nmax(x)\n\n\nrange\nrange(x)\n\n\nmean\nmean(x)\n\n\nmedian\nmedian(x)\n\n\npercentile\nquantile(x)\n\n\nvariance\nvar(x)\n\n\nstandard deviation\nsd(x)\n\n\nrank\nrank(x)\n\n\n\nAll of these functions have an argument called na.rm=F. If your data have missing values, you’ll need to set na.rm=F (e.g. mean(x, na.rm=T))\n\n\n Exploring Covid-19 Data for Lab\n\n\n\nExploring Covid-19 Data for Lab\nLet’s spend the rest of class, exploring what seems like a simple question\n\nOn average, did states that adopted mask mandates have lower rates of new cases?\n\n\n\nTasks\n\nGet a high level overview of our data\nSubset the data to just U.S. States\nRecode our data to get a measure of new Covid cases and what face mask policy policy was in place\nSummarize the average number of new cases by face mask policy.\n\n\n\n1. Get a high level overview of our data\n\n\n\nCreate a new chunk\nLabel it #| label:\"HLO\"\nRun the following code\nComment code with #\n\n\n\ndim(covid)\nhead(covid)\nglimpse(covid)\ntable(covid$administrative_area_level_2)\nlength(unique(covid$administrative_area_level_2))\ncovid$confirmed[1:10]\ncovid %&gt;%\n  select(administrative_area_level_2, date, confirmed) %&gt;%\n  slice(10:20)\nsummary(covid$confirmed)\ntable(covid$facial_coverings)\n\n\n\n\nAnswer the following\n\nHow many observations are there (rows)\nHow many variables (columns)\nWhat’s the unit of observation?\n\nIn words, how would you describe what a row in your data set corresponds to?\n\nAre there any missing values for confirmed\nWhat range of values can facial_coverings take?3\n\n\n\nSubsetting our data to only U.S. States\nGoal: Subset our Covid data to include only the 50 states + DC\nSteps:\n\nCreate a vector of the territories we don’t want\nUse the filter() command to “filter” out these territories\n\n\n\n1. Create a vector of the territories we don’t want\n\nterritories &lt;- c(\n  \"American Samoa\",\n  \"Guam\",\n  \"Northern Mariana Islands\",\n  \"Puerto Rico\",\n  \"Virgin Islands\"\n  )\n\n\n\n2. Use the filter() command to “filter” out these territories\n\ncovid_us &lt;- covid %&gt;%\n  filter(!administrative_area_level_2 %in% territories )\n\ndim(covid)\n\n[1] 58809    47\n\ndim(covid_us)\n\n[1] 53678    47\n\n\n\n\nCreating new variables for analysis\n\nGoal: We need new variables that describe:\n\nthe number of new Covid-19 cases on a given date\nthe face mask policy in place\n\nSteps:\n\nUse mutate(), group_by() and lag() to calculate new_cases from total confirmed cases\nUse mutate(), case_when() and abs() to turn numeric facial_coverings into categorical factor variable\n\n\n\n\nCalculate new Covid-19 cases\nPlease run and comment the following code:\n\ndim(covid_us)\n\n[1] 53678    47\n\ncovid_us %&gt;%\n  mutate(\n    state = administrative_area_level_2,\n  ) %&gt;%\n  dplyr::group_by(state) %&gt;%\n  mutate(\n    new_cases = confirmed - lag(confirmed),\n    new_cases_pc = new_cases/population *100000\n    ) -&gt; covid_us\ndim(covid_us)\n\n[1] 53678    50\n\n\n\n\nCreate Face Mask Policy variable\n\ncovid_us %&gt;%\n  mutate(\n    face_masks = case_when(\n      facial_coverings == 0 ~ \"No policy\",\n      abs(facial_coverings) == 1 ~ \"Recommended\",\n      abs(facial_coverings) == 2 ~ \"Some requirements\",\n      abs(facial_coverings) == 3 ~ \"Required shared places\",\n      abs(facial_coverings) == 4 ~ \"Required all times\",\n      \n    ) \n  ) -&gt; covid_us\n\nlevels(factor(covid_us$face_masks))\n\n[1] \"No policy\"              \"Recommended\"            \"Required all times\"    \n[4] \"Required shared places\" \"Some requirements\"     \n\n\n\n\nMake face_masks a factor to reflect order of policies\n\nlevels(factor(covid_us$face_masks))\n\n[1] \"No policy\"              \"Recommended\"            \"Required all times\"    \n[4] \"Required shared places\" \"Some requirements\"     \n\ncovid_us %&gt;%\n  mutate(\n    face_masks = factor(\n      face_masks,\n      levels = c(\n        \"No policy\", \n        \"Recommended\", \n        \"Some requirements\",\n        \"Required shared places\",\n        \"Required all times\"\n        )\n    )\n  ) -&gt; covid_us\n\nlevels(covid_us$face_masks)\n\n[1] \"No policy\"              \"Recommended\"            \"Some requirements\"     \n[4] \"Required shared places\" \"Required all times\"    \n\n\n\n\nCalculate the Average Number of Covid-19 cases by Face Mask Policy\n\nGoal: On average, did states that adopted mask mandates have lower rates of new cases?\nSteps: use filter(), group_by() and summarise() and mean() to calculate the average number of cases for each level of the face_masks policy variable\n\n\n\nFace Masks and New Covid-19 Cases (per 100k)\n\ncovid_us %&gt;%\n  filter(!is.na(face_masks))%&gt;%\n  group_by(face_masks)%&gt;%\n  summarize(\n    `Average No. of New Cases` = round(mean(new_cases_pc, na.rm=T),2)\n  )%&gt;%\n  rename(\n    \"Face Mask Policy\" = face_masks\n  ) -&gt; face_mask_summary\n\n\n\nFace Masks and New Covid-19 Cases (per 100k)\n\n\n\nWhat should we conclude?\nWhat’s wrong with this simple comparison?\nWhat’s a better comparison? (Thursday)\n\n\n\n\n\nFace Mask Policy\nAverage No. of New Cases\n\n\n\n\nNo policy\n10.26\n\n\nRecommended\n16.61\n\n\nSome requirements\n36.18\n\n\nRequired shared places\n29.38\n\n\nRequired all times\n32.18\n\n\n\n\n\n\nCommented Code\n\n# ---- Libraries ----\n## Uncomment to install\n# install.packages(\"tidyverse\")\n# install.packages(\"COVID19\")\n\nlibrary(\"tidyverse\")\nlibrary(\"COVID19\")\n\n# ---- Load data ----\nload(url(\"https://pols1600.paultesta.org/files/data/covid.rda\"))\n\n# ---- Subset to US states and DC ----\n\nterritories &lt;- c(\n  \"American Samoa\",\n  \"Guam\",\n  \"Northern Mariana Islands\",\n  \"Puerto Rico\",\n  \"Virgin Islands\"\n  )\n\n\ncovid_us &lt;- covid %&gt;%\n  filter(!administrative_area_level_2 %in% territories )\n\n## Check subsetting\ndim(covid)[1] &gt; dim(covid_us)[1]\n\n# ---- Recode covid_us ----\n\ncovid_us %&gt;%\n  mutate(\n    state = administrative_area_level_2,\n  ) %&gt;%\n  dplyr::group_by(state) %&gt;%\n  mutate(\n    new_cases = confirmed - lag(confirmed),\n    new_cases_pc = new_cases/population *100000\n    ) %&gt;%\n  mutate(\n    face_masks = case_when(\n      facial_coverings == 0 ~ \"No policy\",\n      abs(facial_coverings) == 1 ~ \"Recommended\",\n      abs(facial_coverings) == 2 ~ \"Some requirements\",\n      abs(facial_coverings) == 3 ~ \"Required shared places\",\n      abs(facial_coverings) == 4 ~ \"Required all times\"\n      ) \n    ) %&gt;%\n  mutate(\n    face_masks = factor(\n      face_masks,\n      levels = c(\n        \"No policy\", \n        \"Recommended\", \n        \"Some requirements\",\n        \"Required shared places\",\n        \"Required all times\"\n        )\n      )\n    )-&gt; covid_us\n\n\n# ---- Calculate new cases per capita by facemask policy\ncovid_us %&gt;%\n  filter(!is.na(face_masks))%&gt;%\n  group_by(face_masks)%&gt;%\n  summarize(\n    `Average No. of New Cases` = round(mean(new_cases_pc, na.rm=T),2)\n  )%&gt;%\n  rename(\n    \"Face Mask Policy\" = face_masks\n  ) -&gt; face_mask_summary\n\nface_mask_summary\n\n\n\n Summary\n\n\n\nSummary\nAfter today, you should have a better sense of\n\nHow to write R code using Quarto and R Markdown\nHow to install packages and load libraries\nSome of different types and shapes of data\nHow to get a high level overview of your data\nHow to transform, recode, and summarise data using dplyr and the tidyverse\nHow describe typical values and variation in data\nHow to explore substantive questions using these these typical values\n\n\n\nCongrats!\n\nWe covered A LOT\nIt’s OK to feel overwhelmed\n\nBut please don’t suffer in silence\n\nDon’t worry if everything didn’t make sense.\n\nEventually it will, but this takes time and practice\n\n\n\n\n\n\n\nOccasionally, you’ll have to update packages to newer versions and will likely need to reinstall when you upgrade R30 people trying to download this data live sometimes causes errors with the serverSee: https://covid19datahub.io/articles/docs.html"
+    "text": "Data come in different types\n::: columns ::: {.column width=“50%”}\n\n# Create some data\n\n# Numeric\nx &lt;- 2 # Double\ny &lt;- 6L # Integer\n\n# Logical\nonly_two_types_of_people &lt;- TRUE \n\n# Character\nme &lt;- \"Joe\"\n\n# Factor\ngrades = factor(c(\"A\",\"B\",\"C\"))\n\n:::\n\n\ndata(\"iris\")\nhead(iris)\n\n  Sepal.Length Sepal.Width Petal.Length Petal.Width Species\n1          5.1         3.5          1.4         0.2  setosa\n2          4.9         3.0          1.4         0.2  setosa\n3          4.7         3.2          1.3         0.2  setosa\n4          4.6         3.1          1.5         0.2  setosa\n5          5.0         3.6          1.4         0.2  setosa\n6          5.4         3.9          1.7         0.4  setosa\n\nclass(iris[\"Sepal.Length\"])\n\n[1] \"data.frame\"\n\nclass(iris$Sepal.Length)\n\n[1] \"numeric\""
   },
   {
     "objectID": "slides/01-slides.html#data-come-in-different-shapes-and-sizes",
@@ -4078,7 +4078,7 @@
     "href": "slides/01-slides.html#three-sources-of-functions",
     "title": "POLS 1600",
     "section": "Three sources of functions",
-    "text": "Three sources of functions\nThree sources of functions:\n\nbase R\n\n&lt;-; mean(x); library(\"package_name\")\n\npackages\n\ninstall.packages(\"packageName)\"\nremotes::intall_github(\"user/repository\")\n\nYou\n\nmy_function &lt;- function(x){x^2}\n\n\n\n\n\n\n\n\n\nTip\n\n\nCan you spot the portal of discovery in the code above?"
+    "text": "Three sources of functions\nThree sources of functions:\n\nbase R\n\n&lt;-; mean(x); library(\"package_name\")\n\npackages\n\ninstall.packages(\"packageName)\"\nremotes::intall_github(\"user/repository\")\n\nYou\n\nmy_function &lt;- function(x){x^2}"
   },
   {
     "objectID": "slides/01-slides.html#functions-are-like-recipes",
@@ -4113,21 +4113,21 @@
     "href": "slides/01-slides.html#load-and-if-needed-install-the-r-packages-you-will-use",
     "title": "POLS 1600",
     "section": "Load (and if needed, install) the R packages you will use",
-    "text": "Load (and if needed, install) the R packages you will use\n\nInstall packages once1 with install.packages(\"package_name\")\nLoad packages every session with library(\"package_name\")"
+    "text": "Load (and if needed, install) the R packages you will use\n\n\nInstall packages once1 with install.packages(\"package_name\")\nLoad packages every session with library(\"package_name\")\n\n\nOccasionally, you’ll have to update packages to newer versions and will likely need to reinstall when you upgrade R"
   },
   {
     "objectID": "slides/01-slides.html#install-packages-for-the-lab",
     "href": "slides/01-slides.html#install-packages-for-the-lab",
     "title": "POLS 1600",
-    "section": " Install packages for the lab",
-    "text": "Install packages for the lab"
+    "section": "{{}} Install packages for the lab",
+    "text": "{{}} Install packages for the lab"
   },
   {
     "objectID": "slides/01-slides.html#install-packages-for-the-lab-1",
     "href": "slides/01-slides.html#install-packages-for-the-lab-1",
     "title": "POLS 1600",
     "section": "Install packages for the lab",
-    "text": "Install packages for the lab\nLet’s install the tidyverse and COVID19.\n\nCreate a new code chunk\nLabel it libraries\nCopy and paste the following into your console\n\n\ninstall.packages(\"tidyverse\")\ninstall.packages(\"COVID19\")\n\n\nOnce you’ve installed these packages comment out the code (Why?)\n\n\n# install.packages(\"tidyverse\")\n# install.packages(\"COVID19\")\n\n\n\n\n\n\n\nKeyboard Shortcuts to toggle # comments\n\n\nmacOS: CMD + SHIFT + C\nPC: CTRL + SHIFT + C"
+    "text": "Install packages for the lab\nLet’s install the tidyverse and COVID19.\n\n\nCreate a new code chunk\nLabel it libraries\nCopy and paste the following into your console\n\n\n\ninstall.packages(\"tidyverse\")\ninstall.packages(\"COVID19\")\n\n\n\nOnce you’ve installed these packages comment out the code (Why?)\n\n\n\n# install.packages(\"tidyverse\")\n# install.packages(\"COVID19\")\n\n\n\n\n\n\n\nKeyboard Shortcuts to toggle # comments\n\n\nmacOS: CMD + SHIFT + C\nPC: CTRL + SHIFT + C"
   },
   {
     "objectID": "slides/01-slides.html#loading-the-tidyverse-and-covid19-packages",
@@ -4161,22 +4161,22 @@
     "objectID": "slides/01-slides.html#loading-state-level-covid-data",
     "href": "slides/01-slides.html#loading-state-level-covid-data",
     "title": "POLS 1600",
-    "section": " Loading state-level Covid data",
-    "text": "Loading state-level Covid data"
+    "section": "{{}} Loading state-level Covid data",
+    "text": "{{}} Loading state-level Covid data"
   },
   {
     "objectID": "slides/01-slides.html#loading-state-level-covid-data-1",
     "href": "slides/01-slides.html#loading-state-level-covid-data-1",
     "title": "POLS 1600",
     "section": "Loading state-level Covid data",
-    "text": "Loading state-level Covid data\nThe code below downloads two years of daily state-level Covid data:\n\ncovid &lt;- COVID19::covid19(\n  country = \"US\",\n  start = \"2020-01-01\",\n  end = \"2022-12-31\",\n  level = 2,\n  verbose = F\n    \n)\n\nPlease run the following2\n\nload(url(\"https://josephessig-source.github.io/pols1600_site/files/data/covid.rda\"))\n\n#load() tells R to load a .rda file, which is one way to store data.\n#In this case, the rda file is stored at a URL, not on your computer."
+    "text": "Loading state-level Covid data\nThe code below downloads two years of daily state-level Covid data:\n\ncovid &lt;- COVID19::covid19(\n  country = \"US\",\n  start = \"2020-01-01\",\n  end = \"2022-12-31\",\n  level = 2,\n  verbose = F\n    \n)\n\nPlease run the following1\n\nload(url(\"https://josephessig-source.github.io/pols1600_site/files/data/covid.rda\"))\n\n#load() tells R to load a .rda file, which is one way to store data.\n#In this case, the rda file is stored at a URL, not on your computer. \n\n30 people trying to download this data live sometimes causes errors with the server"
   },
   {
     "objectID": "slides/01-slides.html#loading-state-level-covid-data-2",
     "href": "slides/01-slides.html#loading-state-level-covid-data-2",
     "title": "POLS 1600",
     "section": "Loading state-level Covid data",
-    "text": "Loading state-level Covid data\n\ncountry = US tells the function we want data for the US\nstart = \"2020-01-01\" sets the start date for the data\nend = \"2022-12-31\"\" sets the end date for the data\nlevel = 2 tells the function we want state-level data\nverbose = F tells the function not to print other stuff\n\n\ncovid &lt;- COVID19::covid19(\n  country = \"US\",\n  start = \"2020-01-01\",\n  end = \"2022-12-31\",\n  level = 2,\n  verbose = F\n    \n)"
+    "text": "Loading state-level Covid data\n\n\ncountry = US tells the function we want data for the US\nstart = \"2020-01-01\" sets the start date for the data\nend = \"2022-12-31\"\" sets the end date for the data\nlevel = 2 tells the function we want state-level data\nverbose = F tells the function not to print other stuff\n\n\n\ncovid &lt;- COVID19::covid19(\n  country = \"US\",\n  start = \"2020-01-01\",\n  end = \"2022-12-31\",\n  level = 2,\n  verbose = F\n    \n)"
   },
   {
     "objectID": "slides/01-slides.html#looking-at-your-data",
@@ -4246,7 +4246,7 @@
     "href": "slides/01-slides.html#using-r-to-summarize-data",
     "title": "POLS 1600",
     "section": "Using R to Summarize Data",
-    "text": "Using R to Summarize Data\nHere are some common ways of summarizing data and how to calculate them with R\n\n\n\nDescription\nUsage\n\n\n\n\nsum\nsum(x)\n\n\nminimum\nmin(x)\n\n\nmaximum\nmax(x)\n\n\nrange\nrange(x)\n\n\nmean\nmean(x)\n\n\nmedian\nmedian(x)\n\n\npercentile\nquantile(x)\n\n\nvariance\nvar(x)\n\n\nstandard deviation\nsd(x)\n\n\nrank\nrank(x)\n\n\n\nAll of these functions have an argument called na.rm=F. If your data have missing values, you’ll need to set na.rm=F (e.g. mean(x, na.rm=T))"
+    "text": "Using R to Summarize Data\nHere are some common ways of summarizing data and how to calculate them with R\n\n\n\n\nDescription\nUsage\n\n\n\n\nsum\nsum(x)\n\n\nminimum\nmin(x)\n\n\nmaximum\nmax(x)\n\n\nrange\nrange(x)\n\n\nmean\nmean(x)\n\n\nmedian\nmedian(x)\n\n\npercentile\nquantile(x)\n\n\nvariance\nvar(x)\n\n\nstandard deviation\nsd(x)\n\n\nrank\nrank(x)\n\n\n\n\n\n\nAll of these functions have an argument called na.rm=F. If your data have missing values, you’ll need to set na.rm=F (e.g. mean(x, na.rm=T))"
   },
   {
     "objectID": "slides/01-slides.html#exploring-covid-19-data-for-lab-1",
@@ -4267,14 +4267,14 @@
     "href": "slides/01-slides.html#get-a-high-level-overview-of-our-data",
     "title": "POLS 1600",
     "section": "1. Get a high level overview of our data",
-    "text": "1. Get a high level overview of our data\n\n\n\nCreate a new chunk\nLabel it #| label:\"HLO\"\nRun the following code\nComment code with #\n\n\n\ndim(covid)\nhead(covid)\nglimpse(covid)\ntable(covid$administrative_area_level_2)\nlength(unique(covid$administrative_area_level_2))\ncovid$confirmed[1:10]\ncovid %&gt;%\n  select(administrative_area_level_2, date, confirmed) %&gt;%\n  slice(10:20)\nsummary(covid$confirmed)\ntable(covid$facial_coverings)"
+    "text": "1. Get a high level overview of our data\n\n\n\n\nCreate a new chunk\nLabel it #| label:\"HLO\"\nRun the following code\nComment code with #\n\n\n\n\ndim(covid)\nhead(covid)\nglimpse(covid)\ntable(covid$administrative_area_level_2)\nlength(unique(covid$administrative_area_level_2))\ncovid$confirmed[1:10]\ncovid %&gt;%\n  select(administrative_area_level_2, date, confirmed) %&gt;%\n  slice(10:20)\nsummary(covid$confirmed)\ntable(covid$facial_coverings)"
   },
   {
     "objectID": "slides/01-slides.html#answer-the-following",
     "href": "slides/01-slides.html#answer-the-following",
     "title": "POLS 1600",
     "section": "Answer the following",
-    "text": "Answer the following\n\nHow many observations are there (rows)\nHow many variables (columns)\nWhat’s the unit of observation?\n\nIn words, how would you describe what a row in your data set corresponds to?\n\nAre there any missing values for confirmed\nWhat range of values can facial_coverings take?3"
+    "text": "Answer the following\n\n\nHow many observations are there (rows)\nHow many variables (columns)\nWhat’s the unit of observation?\n\nIn words, how would you describe what a row in your data set corresponds to?\n\nAre there any missing values for confirmed\nWhat range of values can facial_coverings take?1\n\n\nSee: https://covid19datahub.io/articles/docs.html"
   },
   {
     "objectID": "slides/01-slides.html#subsetting-our-data-to-only-u.s.-states",
@@ -4344,7 +4344,7 @@
     "href": "slides/01-slides.html#face-masks-and-new-covid-19-cases-per-100k-1",
     "title": "POLS 1600",
     "section": "Face Masks and New Covid-19 Cases (per 100k)",
-    "text": "Face Masks and New Covid-19 Cases (per 100k)\n\n\n\nWhat should we conclude?\nWhat’s wrong with this simple comparison?\nWhat’s a better comparison? (Thursday)\n\n\n\n\n\nFace Mask Policy\nAverage No. of New Cases\n\n\n\n\nNo policy\n10.26\n\n\nRecommended\n16.61\n\n\nSome requirements\n36.18\n\n\nRequired shared places\n29.38\n\n\nRequired all times\n32.18"
+    "text": "Face Masks and New Covid-19 Cases (per 100k)\n\n\n\n\nWhat should we conclude?\nWhat’s wrong with this simple comparison?\nWhat’s a better comparison? (Thursday)\n\n\n\n\n\n\n\nFace Mask Policy\nAverage No. of New Cases\n\n\n\n\nNo policy\n10.26\n\n\nRecommended\n16.61\n\n\nSome requirements\n36.18\n\n\nRequired shared places\n29.38\n\n\nRequired all times\n32.18"
   },
   {
     "objectID": "slides/01-slides.html#commented-code",
@@ -4365,7 +4365,7 @@
     "href": "slides/01-slides.html#congrats",
     "title": "POLS 1600",
     "section": "Congrats!",
-    "text": "Congrats!\n\nWe covered A LOT\nIt’s OK to feel overwhelmed\n\nBut please don’t suffer in silence\n\nDon’t worry if everything didn’t make sense.\n\nEventually it will, but this takes time and practice"
+    "text": "Congrats!\n\nWe covered A LOT\nIt’s OK to feel overwhelmed\n\nBut please don’t suffer in silence\n\nDon’t worry if everything didn’t make sense.\n\nEventually it will, but this takes time and practice\n\n\n\n\n\nPOLS 1600"
   },
   {
     "objectID": "slides/00-slides-template.html#class-plan",
@@ -12122,7 +12122,7 @@
     "href": "slides/01-slides.html#data-types",
     "title": "POLS 1600",
     "section": "Data Types",
-    "text": "Data Types\nOne common ocurrence is that a function in R is expecting data of one type but (e.g. numeric) but actually gets data of different type (e.g. character)\nThe class() function is a useful base R for troubleshooting such errors.\nFor example, different operatinos on data frames return different objects.\n\n# What type are they?"
+    "text": "Data Types\nOne common ocurrence is that a function in R is expecting data of one type but (e.g. numeric) but actually gets data of different type (e.g. character)\nThe class() function is a useful base R for troubleshooting such errors.\nFor example, different operations on data frames return different objects.\n\n# What type are they?"
   },
   {
     "objectID": "slides/01-slides.html#section",
@@ -12209,5 +12209,33 @@
       "Weekly Content",
       "1: Data & Measurement"
     ]
+  },
+  {
+    "objectID": "slides/01-slides.html#overview",
+    "href": "slides/01-slides.html#overview",
+    "title": "POLS 1600",
+    "section": "Overview",
+    "text": "Overview\n\nR, R Studio and Quarto\nGetting set up to work in R\nBasic Programming in R"
+  },
+  {
+    "objectID": "slides/01-slides.html#fa-code-lets-create-a-.qmd-file",
+    "href": "slides/01-slides.html#fa-code-lets-create-a-.qmd-file",
+    "title": "POLS 1600",
+    "section": " Let’s create a .qmd file",
+    "text": "Let’s create a .qmd file"
+  },
+  {
+    "objectID": "slides/01-slides.html#exploring-covid-19-data-for-lab",
+    "href": "slides/01-slides.html#exploring-covid-19-data-for-lab",
+    "title": "POLS 1600",
+    "section": "Exploring Covid-19 Data for Lab",
+    "text": "Exploring Covid-19 Data for Lab\nLet’s spend the rest of class, exploring what seems like a simple question\n\nOn average, did states that adopted mask mandates have lower rates of new cases?"
+  },
+  {
+    "objectID": "slides/01-slides.html#summary",
+    "href": "slides/01-slides.html#summary",
+    "title": "POLS 1600",
+    "section": "Summary",
+    "text": "Summary\nAfter today, you should have a better sense of\n\nHow to write R code using Quarto and R Markdown\nHow to install packages and load libraries\nSome of different types and shapes of data\nHow to get a high level overview of your data\nHow to transform, recode, and summarise data using dplyr and the tidyverse\nHow describe typical values and variation in data\nHow to explore substantive questions using these these typical values"
   }
 ]
