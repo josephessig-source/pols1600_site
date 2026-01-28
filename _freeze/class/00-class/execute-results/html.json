@@ -3,7 +3,9 @@
   "result": {
     "engine": "knitr",
     "markdown": "---\ntitle: \"Introductions\"\ndate: \"2026-01-21\"\nbibliography: ../files/paperpile.bib\nsubtitle: \"Welcome to POLS 1600\"\nimage: \"featured.jpg\"\n---\n\n\n\n## Readings\n\n-   QSS, chapter 1. If you don't have the book yet, the first chapter [is posted here](https://www.marcialpons.es/media/pdf/9780691222288.pdf)\n\n## Lecture\n\n\n\n<p class=\"buttons\"><a class=\"btn btn-danger\" target=\"_blank\" href=\"/slides/00-slides.html\"><i class=\"fa-solid fa-arrow-up-right-from-square\"></i> View all slides in new window</a>\n<div class=\"ratio ratio-16x9\">\n<iframe src=\"/slides/00-slides.html\"></iframe>\n</div>\n\n\n## Lab\n\n-   None\n\n## Assignments\n\n- Work through [Software Setup](../resources/00-software-setup.qmd) before class next week",
-    "supporting": [],
+    "supporting": [
+      "00-class_files"
+    ],
     "filters": [
       "rmarkdown/pagebreak.lua"
     ],

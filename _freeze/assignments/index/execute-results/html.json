@@ -3,9 +3,7 @@
   "result": {
     "engine": "knitr",
     "markdown": "---\ntitle: \"Assignments\"\ndraft: true\n---\n\nYou have three types of assignments in this course\n\n## Labs\n\n\n- Each Thursday we will work in groups to complete an in-class lab\n\n- The labs are designed to reinforce and extend concepts from lecture using real world data.\n\n## Tutorials\n\nCoding tutorials to reinforce concepts from lecture and textbook.\n\nAccessed by running in the console of R Studio\n\n\n::: {.cell}\n\n```{.r .cell-code}\nlearnr::run_tutorial(\"00-intro\", package = \"qsslearnr\")\n```\n:::\n\n\nComplete the tutorial. Save output as \"LASTNAME_TutorialNumber.html\"\n\nUpload output to Canvas by Friday by 11:59 pm\n\n\n## Final Project\n\nFinally, throughout the semester you will be have periodic assignments to ensure that you're making progress on your final projects.\n\n- **Week 4: ** [Research Topics](a1.qmd)\n- **Week 6: ** [Potential Data](a2.qmd)\n- **Week 8: ** [Explortatory Analysis](a3.qmd)\n- **Week 11:**  [Draft](a4.qmd)\n- **Week 12:**  [Presentations](a5.qmd)\n- **Week 13:**  [Final Paper](final.qmd)\n\n",
-    "supporting": [
-      "index_files"
-    ],
+    "supporting": [],
     "filters": [
       "rmarkdown/pagebreak.lua"
     ],

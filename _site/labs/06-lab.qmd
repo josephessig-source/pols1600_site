@@ -127,7 +127,8 @@ the_packages <- c(
   "tidyverse", "lubridate", "forcats", "haven", "labelled",
   ## Extensions for ggplot
   "ggmap","ggrepel", "ggridges", "ggthemes", "ggpubr", 
-  "GGally", "scales", "dagitty", "ggdag", "ggforce",
+  #"GGally",
+  "scales", "dagitty", "ggdag", "ggforce",
   # Data 
   "COVID19","maps","mapdata","qss","tidycensus", "dataverse",
   # Analysis
@@ -135,14 +136,7 @@ the_packages <- c(
 )
 
 # Define function to load packages
-ipak <- function(pkg){
-    new.pkg <- pkg[!(pkg %in% installed.packages()[, "Package"])]
-    if (length(new.pkg)) 
-        install.packages(new.pkg, dependencies = TRUE)
-    sapply(pkg, require, character.only = TRUE)
-}
-
-ipak(the_packages)
+lapply(the_packages, library, character.only = TRUE)
 ```
 
 ## Load the data

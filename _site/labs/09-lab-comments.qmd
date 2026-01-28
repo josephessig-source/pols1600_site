@@ -269,6 +269,8 @@ Please uncomment and run the code below
 
 ```{r}
 #| label: dvhlo_me
+#| eval: FALSE
+#| include: FALSE
 
 # Vote Choice
 get_variable_labels(df$vchoice_rematch)
@@ -331,7 +333,8 @@ Please uncomment and run the code below
 
 ```{r}
 #| label: ivhlo_me
-
+#| eval: FALSE
+#| include: FALSE
 # Age
 get_variable_labels(df$age)
 get_value_labels(df$age)
@@ -417,7 +420,8 @@ Please uncomment and run the following code chunk:
 
 ```{r}
 #| label: dvrecode_me
-
+#| eval: FALSE
+#| include: FALSE
 df %>%
   # Recode 2024 Vote Choice
   mutate(
@@ -469,23 +473,24 @@ Please uncomment and run the following:
 ```{r}
 #| label: check_recode_me
 # Check recodes
-
-table(
-  recode = df$dv_vote_trump2024,
-  original = df$vchoice_rematch, 
-  useNA = "ifany"
-  )
-
-table(
-  recode = df$polpart_mobil_button,
-  original = df$mobil_button, 
-  useNA = "ifany"
-  )
-table(
-  total = df$dv_participation,
-  item = df$polpart_mobil_button,
-  useNA = "ifany"
-  )
+#| eval: FALSE
+#| include: FALSE
+# table(
+#   recode = df$dv_vote_trump2024,
+#   original = df$vchoice_rematch, 
+#   useNA = "ifany"
+#   )
+# 
+# table(
+#   recode = df$polpart_mobil_button,
+#   original = df$mobil_button, 
+#   useNA = "ifany"
+#   )
+# table(
+#   total = df$dv_participation,
+#   item = df$polpart_mobil_button,
+#   useNA = "ifany"
+#   )
 
 ```
 
@@ -512,40 +517,41 @@ Please uncomment and run the following
 
 ```{r}
 #| label: ivrecode_me
-
-df %>% 
-  mutate(
-    # Age
-    age = ifelse(age < 0, NA, age),
-    # Education
-    education = educ,
-    educ_f = to_factor(educ), #Convert to Factor for Plotting
-    is_college_grad = ifelse(educ > 4,1,0),
-    # Income
-    income = case_when(
-      faminc_new < 0 ~ NA,
-      faminc_new > 0 & faminc_new >16 ~ NA,
-      T ~ faminc_new
-    ),
-    # Race
-    race_5cat = case_when(
-      race < 5 ~ to_factor(race),
-      T ~ "Other"
-    ) %>% factor(., levels = c("White","Black","Hispanic","Asian","Other")),
-    is_white = ifelse(race == 1, 1, 0),
-    is_black = ifelse(race == 2, 1, 0),
-    is_hispanic = ifelse(race == 3, 1, 0),
-    is_asian = ifelse(race == 4, 1, 0),
-    is_other = ifelse(race == 5, 1, 0),
-    # Partisanship
-    partyid = case_when(
-      pid7 == 8 ~ 4,
-      T ~ pid7
-    ),
-    is_dem = ifelse(partyid  < 4, 1, 0),
-    is_rep = ifelse(partyid  > 4, 1, 0),
-    is_ind = ifelse(partyid  == 4, 1, 0),
-  ) -> df
+#| eval: FALSE
+#| include: FALSE
+# df %>% 
+#   mutate(
+#     # Age
+#     age = ifelse(age < 0, NA, age),
+#     # Education
+#     education = educ,
+#     educ_f = to_factor(educ), #Convert to Factor for Plotting
+#     is_college_grad = ifelse(educ > 4,1,0),
+#     # Income
+#     income = case_when(
+#       faminc_new < 0 ~ NA,
+#       faminc_new > 0 & faminc_new >16 ~ NA,
+#       T ~ faminc_new
+#     ),
+#     # Race
+#     race_5cat = case_when(
+#       race < 5 ~ to_factor(race),
+#       T ~ "Other"
+#     ) %>% factor(., levels = c("White","Black","Hispanic","Asian","Other")),
+#     is_white = ifelse(race == 1, 1, 0),
+#     is_black = ifelse(race == 2, 1, 0),
+#     is_hispanic = ifelse(race == 3, 1, 0),
+#     is_asian = ifelse(race == 4, 1, 0),
+#     is_other = ifelse(race == 5, 1, 0),
+#     # Partisanship
+#     partyid = case_when(
+#       pid7 == 8 ~ 4,
+#       T ~ pid7
+#     ),
+#     is_dem = ifelse(partyid  < 4, 1, 0),
+#     is_rep = ifelse(partyid  > 4, 1, 0),
+#     is_ind = ifelse(partyid  == 4, 1, 0),
+#   ) -> df
 
 
 ```
@@ -572,45 +578,46 @@ Please uncomment and run the code below which demonstrates how to **produce a ni
 
 ```{r}
 #| label: datasummary_me
-
+#| eval: FALSE
+#| include: FALSE
 # Vector of numeric variables to summarize
-the_vars <- c(
-  "dv_vote_trump2024", 
-  "dv_participation",
-  "age","education","income",
-  "is_white","is_black","is_hispanic","is_asian","is_other",
-  "partyid","is_dem","is_rep","is_ind"
-)
-
-# Vector of nicely formatted labels for variables
-the_labels <- c(
-  "Vote for Trump in '24",
-  "Acts of Participation in `20",
-  "Age","Education", "Income",
-  "White", "Black","Hispanic","Asian","Other",
-  "Party ID", "Democrat","Republican","Independent"
-)
-
-df_summary <- df %>% 
-  select(all_of(the_vars)) %>%
-  rename_with(~the_labels) %>% 
-  pivot_longer(
-    cols = everything(),
-    names_to = "Variable"
-  ) %>% 
-  mutate(
-    Variable = factor(Variable, levels = the_labels)
-  ) %>% 
-  group_by(Variable) %>% 
-  summarise(
-    Min = min(value,na.rm = T),
-    p25 = quantile(value, prob = .25,na.rm = T),
-    Median = quantile(value, prob = .5,na.rm = T),
-    Mean = mean(value, na.rm = T),
-    p75 = quantile(value, prob = .75,na.rm = T),
-    Max = max(value,na.rm = T),
-    `N missing` = sum(is.na(value))
-  )
+# the_vars <- c(
+#   "dv_vote_trump2024", 
+#   "dv_participation",
+#   "age","education","income",
+#   "is_white","is_black","is_hispanic","is_asian","is_other",
+#   "partyid","is_dem","is_rep","is_ind"
+# )
+# 
+# # Vector of nicely formatted labels for variables
+# the_labels <- c(
+#   "Vote for Trump in '24",
+#   "Acts of Participation in `20",
+#   "Age","Education", "Income",
+#   "White", "Black","Hispanic","Asian","Other",
+#   "Party ID", "Democrat","Republican","Independent"
+# )
+# 
+# df_summary <- df %>% 
+#   select(all_of(the_vars)) %>%
+#   rename_with(~the_labels) %>% 
+#   pivot_longer(
+#     cols = everything(),
+#     names_to = "Variable"
+#   ) %>% 
+#   mutate(
+#     Variable = factor(Variable, levels = the_labels)
+#   ) %>% 
+#   group_by(Variable) %>% 
+#   summarise(
+#     Min = min(value,na.rm = T),
+#     p25 = quantile(value, prob = .25,na.rm = T),
+#     Median = quantile(value, prob = .5,na.rm = T),
+#     Mean = mean(value, na.rm = T),
+#     p75 = quantile(value, prob = .75,na.rm = T),
+#     Max = max(value,na.rm = T),
+#     `N missing` = sum(is.na(value))
+#   )
 
 # Look at results
 df_summary
@@ -622,14 +629,14 @@ We can then format `df_summary` as table using `knitr()` and styling options fro
 
 ```{r}
 #| label: summarytab_me
-#| echo: true
-
-kable(df_summary,
-      digits = 2) %>% 
-  kable_styling() %>% 
-  pack_rows("Outcomes", start_row = 1, end_row = 2) %>% 
-  pack_rows("Demographic Predictors", 3, 10) %>% 
-  pack_rows("Political Predictors", 11, 14)
+#| eval: FALSE
+#| include: FALSE
+# kable(df_summary,
+#       digits = 2) %>% 
+#   kable_styling() %>% 
+#   pack_rows("Outcomes", start_row = 1, end_row = 2) %>% 
+#   pack_rows("Demographic Predictors", 3, 10) %>% 
+#   pack_rows("Political Predictors", 11, 14)
 ```
 
 ## Modify the table to include your predictors
@@ -638,7 +645,8 @@ Using the two **previous code chunks as a template**, update the code so that th
 
 ```{r}
 #| label: datasummary_YOU
-
+#| eval: FALSE
+#| include: FALSE
 # Copy, paste, and update code from datasummary_me to include your variables
 
 
@@ -647,7 +655,8 @@ Using the two **previous code chunks as a template**, update the code so that th
 ```{r}
 #| label: summarytab_YOU
 #| echo: false
-
+#| eval: FALSE
+#| include: FALSE
 # Copy, paste, and update code from summarytab_me to display your results
 
 ```
@@ -677,16 +686,8 @@ Survey weights are complicated things, but the basically idea is that each obser
 Quick look at the highest and lowest survey weights seems to suggest to me that weighting procedure is giving more weight to respondents with lower levels of education, and income, and less weight to higher incomes and education levels.
 
 ```{r}
-
-df %>% filter(
- weight > quantile(weight, .99, na.rm=T)
- ) %>% 
-  select(weight, gender, age, race_5cat, education, income, partyid)
-
-df %>% filter(
-  weight < quantile(weight, .01, na.rm=T)
-) %>% 
-  select(weight, gender, age, race_5cat, education, income, partyid)
+#| eval: FALSE
+#| include: FALSE
 
 ```
 
@@ -696,7 +697,8 @@ Sampling weights are a can worms we won't deal with in this class. Check out the
 
 ```{r}
 #| label: weights
-
+#| eval: FALSE
+#| include: FALSE
 # install.packages("survey")
 # install.packages("srvyr")
 library(survey)
@@ -777,7 +779,8 @@ And combine these 3 plots into a single figure using two calls to the `ggarrange
 ```{r}
 #| label: dataviz_me
 #| fig-height: 8
-
+#| eval: FALSE
+#| include: FALSE
 fig_age_race <- df %>% 
   ggplot(aes(race_5cat,age,
              col = race_5cat))+

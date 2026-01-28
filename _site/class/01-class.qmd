@@ -6,19 +6,43 @@ subtitle: "How do we describe the world around us."
 image: "featured.jpg"
 ---
 
+```{r slides-videos, echo=FALSE, include=FALSE}
+source(here::here("R", "slide-things.R"))
+wk <- "01"
+lab <- paste0(
+    "<a href=\"",
+    paste0(
+    "../labs/",
+  wk,
+  "-lab.qmd ",
+  "\" download >"
+  ),
+  "here </a>"
+  )
+comments <- paste0(
+    "<a href=\"",
+    paste0(
+    "../labs/",
+  wk,
+  "-lab-comments.qmd",
+  "\" target=\"_blank\" >"
+  ),
+  "here </a>"
+  )
+```
+
 ## Readings
 
--   Qss Chapter 1 [here's a free version of the first chapter](https://www.marcialpons.es/media/pdf/9780691222288.pdf)
+-   QSS Chapter 1 [here's a free version of the first chapter](https://www.marcialpons.es/media/pdf/9780691222288.pdf)
+
+- QSS, Chapter 3 pp. 88-105 (We will finish this chapter next week.)
 
 ## Slides
 
-Slides will be posted here soon. 
-
 ```{r}
 #| label: show-slide-tabs
-#| eval: false
-#| include: false
-#| results: asis
+#| echo: false
+#| results: "asis"
 slide_buttons(paste0("/slides/", wk, "-slides"))
 slide_frame(paste0("/slides/", wk, "-slides.html"))
 
@@ -29,7 +53,7 @@ slide_frame(paste0("/slides/", wk, "-slides.html"))
 
 -   Download this week's r lab (link forthcoming)
 
--    Upload the rendered html file to Canvas.
+-    Upload the rendered html file to Canvas [here](https://canvas.brown.edu/courses/1102109/assignments/8102891).
 
 -    Review the commented solutions after class (will be posted Friday night)
 
@@ -50,6 +74,6 @@ learnr::run_tutorial("01-measurement1", package = "qsslearnr")
 
 ```
 
--   {{< fa paintbrush >}} Upload the rendered html tutorial files to Canvas [here](https://canvas.brown.edu/courses/1094972/assignments)
+-   {{< fa paintbrush >}} Upload the rendered html tutorial files to Canvas [here](https://canvas.brown.edu/courses/1102109/assignments)
 
 - Tutorials due: Monday February 2nd. 

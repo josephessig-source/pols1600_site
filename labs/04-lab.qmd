@@ -48,7 +48,7 @@ Please run the following command to load the data:
 
 ```{r}
 # Load the data
-load(url("https://pols2580.paultesta.org/files/data/04_lab.rda"))
+#load(url("https://pols2580.paultesta.org/files/data/04_lab.rda"))
 ```
 
 And write code to load any packages you think you might need to analyze the data.
@@ -61,8 +61,8 @@ And write code to load any packages you think you might need to analyze the data
 The next commands tell us a little about the dataset. Specifically, there are 1371 observations (rows) and 14 variables (columns)
 
 ```{r}
-dim(wrk)
-names(wrk)
+#dim(wrk)
+#names(wrk)
 
 
 ```
@@ -193,7 +193,8 @@ For now, we'll use as a rough rule of thumb, that **standardized differences gre
 The code below **defines a function** to calculate these standardized differences and returns the standardized difference (as well as the means, difference of means, and standard error of that difference) for the `distancetotrain` variable.
 
 ```{r}
-
+#| eval: false
+#| include: false
 std_diff_fn <- function(x){
   # inputs
   # x: the variable we want to calculate a standardized difference of
@@ -248,7 +249,9 @@ Specifically, we'll look at whether for communes within a narrower window or ban
 
 To do so, we'll modify our `std_diff_fn` and create a new function called `new_std_diff_fn`
 
-```{r}
+```{r }
+#| eval: false
+#| include: false
 new_std_diff_fn <- function(x, c = max(wrk$near_km,na.rm=T)){
   # inputs
   # x: the variable we want to calculate a standardized difference of
@@ -332,6 +335,8 @@ Comment on the relative similarity of or differences in the findings from estima
 Below is some code to get you started the hard way, you could also try modifying the `new_std_diff_fn`
 
 ```{r}
+#| eval: false
+#| include: false
 # Here's some code to get you started
 
 # 10k

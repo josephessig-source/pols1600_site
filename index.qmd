@@ -208,8 +208,6 @@ schedule_tibble <- tibble(
   "Assignments" = assignments
   )
 
-schedule_tibble$Labs[4] <- "" ##remove after updating lab
-
 ```
 
 ```{r}

@@ -67,7 +67,7 @@ website:
         - section: "Overview"
           contents:
             - assignments/index.qmd
-        - section: "Assignemnts"
+        - section: "Assignments"
           contents:
             - text: "A1: Introductions"
               file: assignments/a1.qmd
@@ -94,7 +94,6 @@ resources:
   - "/assets"
   - "/files"
   - "/slides"
-  - "/class"
   - "/labs"
   - "/assignments"
   - "*.html"

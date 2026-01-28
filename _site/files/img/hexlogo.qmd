@@ -7,10 +7,10 @@ title: "Hex Logo for POLS 1600"
 #| echo: false
 #| 
 
-# install.packages("cropcircles")
-# install.packages("showtext")
-# install.packages("ggpath")
-# install.packages("ggtext")
+#install.packages("cropcircles")
+#install.packages("showtext")
+#nstall.packages("ggpath")
+#install.packages("ggtext")
 
 
 

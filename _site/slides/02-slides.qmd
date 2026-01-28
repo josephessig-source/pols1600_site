@@ -144,7 +144,7 @@ the_packages <- c(
   
   ## Extensions for ggplot
   "ggmap","ggrepel", "ggridges", "ggthemes","ggpubr",
-  "GGally",
+#  "GGally",
   
   # Data 
   "maps","mapdata","DT"
@@ -163,12 +163,14 @@ Next we'll create a function called `ipak` (thanks [Steven](https://gist.github.
 
 ```{r}
 #| label = "ipak"
-ipak <- function(pkg){
-    new.pkg <- pkg[!(pkg %in% installed.packages()[, "Package"])]
-    if (length(new.pkg)) 
-        install.packages(new.pkg, dependencies = TRUE)
-    sapply(pkg, require, character.only = TRUE)
-}
+# ipak <- function(pkg){
+#     new.pkg <- pkg[!(pkg %in% installed.packages()[, "Package"])]
+#     if (length(new.pkg)) 
+#         install.packages(new.pkg, dependencies = TRUE)
+#     sapply(pkg, require, character.only = TRUE)
+# }
+lapply(the_packages, library, character.only = TRUE)
+
 
 ```
 
@@ -190,7 +192,7 @@ some_function(some_input)
 ```{r}
 #| label = "libraries",
 #| cache = F
-ipak(the_packages)
+##ipak(the_packages)
 ```
 
 -   `R` may ask you to install a package's dependencies (other packages your package needs). Try entering the number `1` into your console

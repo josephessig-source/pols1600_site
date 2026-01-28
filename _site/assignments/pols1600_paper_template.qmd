@@ -95,22 +95,16 @@ the_packages <- c(
   "modelr", "purrr",
   ## Extensions for ggplot
   "ggmap","ggrepel", "ggridges", "ggthemes", "ggpubr", 
-  "GGally", "scales", "dagitty", "ggdag", "ggforce",
+  #"GGally", 
+  "scales", "dagitty", "ggdag", "ggforce",
   # Data 
   "COVID19","maps","mapdata","qss","tidycensus", "dataverse",
   # Analysis
   "DeclareDesign", "boot"
 )
+lapply(the_packages, library, character.only = TRUE)
 
-# Define function to load packages
-ipak <- function(pkg){
-    new.pkg <- pkg[!(pkg %in% installed.packages()[, "Package"])]
-    if (length(new.pkg)) 
-        install.packages(new.pkg, dependencies = TRUE)
-    sapply(pkg, require, character.only = TRUE)
-}
 
-ipak(the_packages)
 ```
 
 A code chunk here labelled `data` loading data
@@ -367,7 +361,7 @@ fig2
 
 And similarly for `fig3`
 
-```{r fig3}
+```{r}
 #| label: fig3
 #| include: true
 #| fig-cap: "Figure 3: Average Trust in Government by Arrest Status"
@@ -483,7 +477,7 @@ texreg::htmlreg(
 
 Here's an example reporting the confidence intervals instead of standard errors
 
-```{r tab2, results="asis"}
+```{r, results="asis"}
 #| label: tab2
 #| results: asis
 
@@ -506,7 +500,7 @@ texreg::htmlreg(
 
 And produce a plot of predicted values to illustrate a key relationship
 
-```{r predictions}
+```{r}
 #| label: predicitions
 
 

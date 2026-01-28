@@ -103,15 +103,8 @@ the_packages <- c(
 
 ## Define a function to load (and if needed install) packages
 
-ipak <- function(pkg){
-    new.pkg <- pkg[!(pkg %in% installed.packages()[, "Package"])]
-    if (length(new.pkg)) 
-        install.packages(new.pkg, dependencies = TRUE)
-    sapply(pkg, require, character.only = TRUE)
-}
+lapply(the_packages, library, character.only = TRUE)
 
-## Install (if needed) and load libraries in the_packages
-ipak(the_packages)
 ```
 
 # {{< fa magnifying-glass>}} Presentations {.inverse}
