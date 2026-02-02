@@ -1,10 +1,9 @@
 ---
 title: "Data Visualization"
-date: "2024-01-30"
+date: "2026-02-02"
 bibliography: ../files/paperpile.bib
 subtitle: "Describing and Visualizing Data in R"
 image: "featured.jpg"
-draft: true
 ---
 
 ```{r slides-videos, echo=FALSE, include=FALSE}
