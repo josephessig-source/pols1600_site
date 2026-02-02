@@ -12244,5 +12244,65 @@
     "title": "POLS 1600",
     "section": "An Example Figure",
     "text": "An Example Figure"
+  },
+  {
+    "objectID": "class/02-class.html",
+    "href": "class/02-class.html",
+    "title": "Data Visualization",
+    "section": "",
+    "text": "QSS, Chapter 3 (to end)\n R 4 Data Science Chapter 3 (Optional but very helpful)",
+    "crumbs": [
+      "Class",
+      "Weekly Content",
+      "2: Data Visualization"
+    ]
+  },
+  {
+    "objectID": "class/02-class.html#readings",
+    "href": "class/02-class.html#readings",
+    "title": "Data Visualization",
+    "section": "",
+    "text": "QSS, Chapter 3 (to end)\n R 4 Data Science Chapter 3 (Optional but very helpful)",
+    "crumbs": [
+      "Class",
+      "Weekly Content",
+      "2: Data Visualization"
+    ]
+  },
+  {
+    "objectID": "class/02-class.html#slides",
+    "href": "class/02-class.html#slides",
+    "title": "Data Visualization",
+    "section": "Slides",
+    "text": "Slides\n\n View all slides in new window",
+    "crumbs": [
+      "Class",
+      "Weekly Content",
+      "2: Data Visualization"
+    ]
+  },
+  {
+    "objectID": "class/02-class.html#lab",
+    "href": "class/02-class.html#lab",
+    "title": "Data Visualization",
+    "section": "Lab",
+    "text": "Lab\n\n Download this week’s here  here\n Upload the rendered html file to Canvas here\n Review the commented solutions after class",
+    "crumbs": [
+      "Class",
+      "Weekly Content",
+      "2: Data Visualization"
+    ]
+  },
+  {
+    "objectID": "class/02-class.html#assignments",
+    "href": "class/02-class.html#assignments",
+    "title": "Data Visualization",
+    "section": "Assignments",
+    "text": "Assignments\n\n Make sure to upload Lab 1 and Tutorials 0 and 1 by tonight. (Let me know if you had technical issues)\n QSS Tutorial 2: Measurement II\n\n\n# After completing the software setup you should be able to to run the following to launch the tutorials\n\nlearnr::run_tutorial(\"02-measurement2\", package = \"qsslearnr\")\n\n\n Upload the rendered html tutorial files to Canvas here",
+    "crumbs": [
+      "Class",
+      "Weekly Content",
+      "2: Data Visualization"
+    ]
   }
 ]
