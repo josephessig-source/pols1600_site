@@ -33,7 +33,7 @@ I don't expect anyone to be able to recite from memory the exact code, functions
 
 That said, you've already seen the code you need.
 
-It's available to you in multiple places like the [slides](https://pols1600.paultesta.org/slides/01-slides#/commented-code) and the comments to last week's [labs](https://pols1600.paultesta.org/labs/01-lab-comments.html)
+It's available to you in multiple places like the [slides](https://josephessig-source.github.io/pols1600_site/slides/01-slides#/commented-code) and the comments to last week's lab. 
 
 My hope is that this lab will help you do the following:
 
@@ -85,11 +85,11 @@ For every lab:
 -   Render the document
 -   Open the html file in your browser (Easier to read)
 -   Check `Render on Save` and render the document again after completing a section or chunk (Error checking)
--   Upload the final lab to [Canvas](https://canvas.brown.edu/courses/1094972/assignments){target="_blank"}.
+-   Upload the final lab to [Canvas](https://canvas.brown.edu/courses/1102109/assignments).
 
 # Describe the components of the figure you're trying to reprodce
 
-Recall, that we need `data`, `aesthetic` mappings and `geometries` to produce a figure. You can find the code from lab 1 [here](https://pols1600.paultesta.org/labs/01-lab-comments#uncomment-the-code-below-to-visualize-this-cases_by_month_and_policy)
+Recall, that we need `data`, `aesthetic` mappings and `geometries` to produce a figure. You can find the code from lab 1 in the commented solutions. 
 
 -   What is the data set used? (Hint it's a transformation of `covid_us`)
 -   What are the aesthetic mappings in this plot
@@ -131,8 +131,5 @@ Describe briefly (in a sentence or two or a couple of bullet points) what this s
 
 - Perhaps add a title and label. Or change the aesthetic mappings. Or maybe facet the figure by some other variable.
 
-- Check out the examples from [Tuesday's slides](https://pols1600.paultesta.org/slides/02-slides#/dataviz-describing-distributions-and-associations)
+- Check out the examples from [Tuesday's slides](https://josephessig-source.github.io/pols1600_site/slides/02-slides#/dataviz-describing-distributions-and-associations)
 
-# CLASS SURVEY
-
-Finally, please take a moment to complete this week's [class survey](https://brown.co1.qualtrics.com/jfe/form/SV_9WCkw7pc2OlDLi6)

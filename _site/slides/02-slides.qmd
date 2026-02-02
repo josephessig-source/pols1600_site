@@ -46,10 +46,11 @@ library(labelled)
 library(haven)
 library(DeclareDesign)
 library(easystats)
+library(crosstalk)
 
-# Class survey from previous week
-
+#previous class survey
 df <- haven::read_spss("../files/data/class_surveys/wk01.sav")
+
 ```
 
 # {{< fa map-location>}} Overview {.inverse}
@@ -68,18 +69,6 @@ df <- haven::read_spss("../files/data/class_surveys/wk01.sav")
         -   Distributions
         -   Associations
         
-## Concept check {.smaller}
-
-Suppose you want to do the following, what function or functions would you use:
-
--   Read data into `R`
--   Look at the data to get a high level overview of its structure
--   Subset or filter the data to include just observations with certain values
--   Select specific columns from data
--   Add new columns to the data
--   Summarize multiple values by collapsing them into a single value
--   Doing some function group-by-group?        
-
 ## Announcements
 
 - Submit tutorials from last week by tonight.
@@ -147,7 +136,7 @@ the_packages <- c(
 #  "GGally",
   
   # Data 
-  "maps","mapdata","DT"
+  "maps","mapdata","DT","crosstalk"
 )
 the_packages
 ```
@@ -174,7 +163,6 @@ Let's load the Covid-19 data we worked with last week:
 load(url("https://josephessig-source.github.io/pols1600_site/files/data/covid.rda"))
 
 ```
-
 # {{< fa magnifying-glass>}} Troubleshooting Errors {.inverse}
 
 ## 
@@ -320,10 +308,6 @@ All of these "verb" functions from the `dplyr` package (e.g. `filter()`,`mutate(
 3.  The output is a new data frame
 
 [More](https://r4ds.had.co.nz/transform.html)
-
-## You trying to get the `%>%`?
-
-![](https://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/2444.png){fig-align="center"}
 
 ## The pipe command `%>%` {.smaller}
 
@@ -819,7 +803,7 @@ Should you know exactly how to do all of this?
 
 . . .
 
-**NO! Of course not. For Pete's sake, Paul, It's only the second week**
+**NO! Of course not. For Pete's sake, It's only the second week**
 
 . . .
 
@@ -986,28 +970,8 @@ In R, we'll implement this grammar of graphics using the `ggplot` package
 
 -   Let's take a look at your feedback to last week's survey and see how we can visualize some of the in formation you provided
 
+## An Example Figure {.smaller}
 
-# {{< fa bullhorn >}} Feedback {.inverse}
-
-## What we liked {.smaller}
-
-```{r}
-#| echo: false
-
-DT::datatable(df %>% 
-                select(like))
-```
-
-## What we disliked {.smaller}
-
-```{r}
-#| echo: false
-
-DT::datatable(df %>% 
-                select(dislike))
-```
-
-## 
 
 ```{r}
 #| echo: false
