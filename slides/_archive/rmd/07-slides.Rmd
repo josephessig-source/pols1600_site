@@ -1,0 +1,1057 @@
+---
+title: "Week 07:"
+subtitle: "Interpreting and Evaluating Linear Models"
+author: "Paul Testa"
+output:
+  xaringan::moon_reader:
+    css: ["default", "css/brown.css"]
+    lib_dir: libs
+    nature:
+      highlightStyle: atelier-lakeside-light
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, 
+  comment = NA, dpi = 300,
+  fig.align = "center", out.width = "80%", cache = TRUE)
+library("tidyverse")
+```
+
+```{r xaringan-tile-view, echo=FALSE}
+xaringanExtra::use_tile_view()
+```
+
+```{r xaringanExtra-clipboard, echo=FALSE}
+htmltools::tagList(
+  xaringanExtra::use_clipboard(
+    button_text = "<i class=\"fa fa-clipboard\"></i>",
+    success_text = "<i class=\"fa fa-check\" style=\"color: #90BE6D\"></i>",
+  ),
+  rmarkdown::html_dependency_font_awesome()
+)
+```
+
+
+
+```{r packages, include=F}
+the_packages <- c(
+  ## R Markdown
+  "kableExtra","DT","texreg","htmltools",
+  ## Tidyverse
+  "tidyverse", "lubridate", "forcats", "haven", "labelled",
+  ## Extensions for ggplot
+  "ggmap","ggrepel", "ggridges", "ggthemes", "ggpubr", 
+  "GGally", "scales", "dagitty", "ggdag", "ggforce",
+  # Graphics:
+  "scatterplot3d", #<<
+  # Data 
+  "COVID19","maps","mapdata","qss","tidycensus", "dataverse", 
+  # Analysis
+  "DeclareDesign", "easystats", "zoo"
+)
+```
+
+```{r ipak, include=F}
+ipak <- function(pkg){
+    new.pkg <- pkg[!(pkg %in% installed.packages()[, "Package"])]
+    if (length(new.pkg)) 
+        install.packages(new.pkg, dependencies = TRUE)
+    sapply(pkg, require, character.only = TRUE)
+}
+
+```
+
+
+```{r loadpackages, cache=F, include=F}
+ipak(the_packages)
+```
+
+
+class: inverse, center, middle
+# Overview
+
+---
+## General Plan
+
+- Group Assignment 2: Data
+- Setup
+  - Packages
+  - Data
+- Review
+  - Multiple Regression
+  - Regression Discontinuity Designs
+- Interpreting regression models
+  - What does it mean to control for "variables"
+  - Producing predicted values from our models
+  - Evaluating model performance
+
+
+---
+class:inverse, middle, center
+# 💪
+## Get set up to work
+
+---
+## New packages
+
+No new packages this week
+
+
+
+---
+## Packages for today
+
+
+```{r, ref.label=c("packages")}
+
+```
+
+---
+## Define a function to load (and if needed install) packages
+
+
+```{r, ref.label="ipak"}
+```
+
+---
+## Load packages for today
+
+```{r ref.label="loadpackages"}
+```
+
+
+---
+class:inverse, center, middle
+# 💪
+## Load Data for today
+
+---
+## Data: Red Covid
+
+Today we'll work with the data from last week's lab
+
+```{r}
+load(url("https://pols1600.paultesta.org/files/data/06_lab.rda"))
+
+```
+
+---
+## Data: Russian Opinion on the War In Ukraine 
+
+- We'll also load the data for this week's lab, which examines a public opinion survey from Russia conducted by Alexei Miniailo's ["Do Russians Want War"](https://www.dorussianswantwar.com/en) project
+
+- The code chunk below [sources](https://www.earthdatascience.org/courses/earth-analytics/multispectral-remote-sensing-data/source-function-in-R/) a script I wrote called [`drww_english_recode.R`](https://gist.github.com/PaulTestaBrown/7565987b8eedc743fa5a57e451abed40) to download the raw data and recode Cyrilic into English
+
+```{r}
+
+load(url("https://pols1600.paultesta.org/files/data/df_drww.rda"))
+```
+
+---
+## HLO of data
+
+```{r}
+glimpse(df_drww)
+```
+
+
+---
+
+```{r, echo=F}
+DT::datatable(df_drww %>% select(age, sex,31:42, starts_with("social")))
+```
+
+---
+class:inverse, center, middle
+# 📢
+## Feedback
+
+
+---
+
+Still time to take weekly survey from last week, which will have a real, measurable impact on class on Thursday:
+
+<https://brown.co1.qualtrics.com/jfe/form/SV_6mUeyI7tqVURHQW>
+
+
+---
+## What do you need to know?
+
+--
+
+- It depends. What do you want to do?
+
+--
+
+- Students who want to do their own research (in a good way)
+
+  - Skills to work with data (Data Wrangling)
+  - Tools to think about questions and theory (Causal Inference)
+  - Tools to describe relationships and test claims (Estimation with Linear Models)
+  - Tools to describe uncertainty in these relationships (Statistical inference)
+  
+---
+## Do you need to know the math?
+
+--
+- Yes! 
+
+  - Math is a precise and concise way to describe what we're doing
+  - A whole range of studies can be described by the same design (experiment, Diff-in-Diff, regression, etc) represented with the same formula
+  - If you want to prove some property of some formula (e.g. show that under the Gauss-Markov assumptions [linear regression is BLUE](https://www.albert.io/blog/ultimate-properties-of-ols-estimators-guide/#:~:text=OLS%20estimators%20are%20BLUE%20(i.e.,all%20linear%20and%20unbiased%20estimators))), you will do this with Math.
+
+---
+## Do you need to know the math?
+
+- No! 
+
+  - Computers love math. Humans not so much.
+  - We can understand and demonstrate a lot of methods and theories through programming
+    - It's easier to [simulate the Central Limit Theorem](https://towardsdatascience.com/proof-of-central-limit-theorem-using-monte-carlo-simulation-34925a7bc64a) than it is to [prove it.](https://www.cs.toronto.edu/~yuvalf/CLT.pdf)
+    - But the reasons the simulations "work" is because of the underlying math
+
+---
+## Do you need to know the math?
+
+- Maybe!
+
+  - I assume very little background math
+  - I show you some mathematical concepts because:
+    - For some people it's helpful
+    - You'll encounter these symbols and formulas elsewhere 
+    - Even if you don't understand/remember the chain rule you can hopefully understand at a conceptual level what's going on when we minimize the SSR
+    - If you want to go to grad school, you'll have to do the math
+    - If you want to do research, you'll have understand the implications of the math
+
+---
+## Do you need to know how to program?
+
+- Yes. 
+
+- It's unavoidable, if you want to do applied, empirical work
+
+- It lets us avoid having to walk through formal proofs
+
+- It's incredibly marketable.
+
+
+---
+class:inverse, middle, center
+# 🔍
+## Review: Regression
+
+---
+## What you need to know about Regression: Conceptual
+  - Simple linear regression estimates a line of best fit that summarizes relationships between two variables
+
+$$y_i = \beta_0 + \beta_1x_i + \epsilon_i $$
+
+  - Multiple regression generalizes this approach to include multiple predictors
+  
+$$y_i = \beta_0 + \beta_1x_1 +  \beta_2 x_2 + \dots + \beta_j x_j + \epsilon_i $$
+$$y_i = X\beta + \epsilon_i $$
+- The coefficients in regression models tell us how the outcome $y$ is expected to change as some predictor, $x$ changes.
+
+---
+## What you need to know about Regression: Practical
+
+- We estimate regressions using the `lm()` function
+
+```{r, eval=F}
+m1 <- lm(y ~ x, data = df)
+```
+
+- We control for additional variables by *adding* them to the formula
+
+```{r, eval=F}
+m2 <- lm(y ~ x + z, data = df)
+```
+
+- We can interact variables using the `*` operator. This creates a new variable that is the  product of the two
+
+```{r, eval = F}
+m3 <- lm(y ~ x*z, data = df)
+# Same as
+m3 <- lm(y ~ x + z + x:z, data = df)
+
+```
+
+---
+## What you need to know about Regression: Practical
+
+- We can get statistical summaries of regression models using the `summary()` function
+
+```{r, eval=F}
+summary(m1)
+```
+
+- We display this information in a regression table:
+  - Each column is a model
+  - Each named row is a coefficient
+  - The values in parantheses are standard errors
+  - Coefficients with `*`'s are *statistically significant*
+  
+
+```{r, eval=F}
+texreg::htmlreg(list(m1, m2, m3))
+```
+
+
+
+---
+## What is good but not strictly necessary to know about Regression
+
+- *Technical/Definitional*
+  - Linear regression chooses coefficients to minimize the Sum of Squared Residuals (SSR): 
+
+$$\textrm{Find }\hat{\beta
+} \text{ arg min}_{\hat{\beta
+}} \sum (y_i-(X\hat{\beta}))^2$$
+
+- *Theoretical*
+  - Linear regression provides a **linear** estimate of the conditional expectation function (CEF): $E[Y|X]$
+
+---
+class: inverse, center, middle
+# 💡 Regression Discontinuity Design
+
+---
+## Motivating Example
+
+.pull-left[
+- Do Members of Parliament in the UK get richer from holding office (QSS Chapter 4.3.4)
+]
+.pull-right[
+```{r eggers1, echo=F}
+knitr::include_graphics("./images/04_eggers.png")
+```
+[Eggers and Hainmueller (2009)](https://www.cambridge.org/core/journals/american-political-science-review/article/abs/mps-for-sale-returns-to-office-in-postwar-british-politics/E4C2B102194AA1EA0D2F1F777EAE3C08)
+]
+
+
+---
+## Logic of the Regression Discontinuity Design (RDD) 
+
+- What's the effect of holding elected office in the UK on personal wealth?
+
+- People who win elections differ in many ways from people who lose elections.
+
+- Logic of an RDD: 
+
+  - Just look at the wealth of individuals who either narrowly won or lost elections.
+
+  - Candidates close to 50 percent cutoff (discontinuity) should be more comparable (better counterfactuals)
+
+---
+## Data from Eggers and Hainmueller (2009)
+
+```{r mpdata}
+library(qss)
+data(MPs)
+glimpse(MPs)
+
+```
+
+---
+## Variables
+
+```{r rddtab,echo=F}
+rdd_vars <- data.frame(
+Variable = c("surname", "firstname", "party", "ln.gross", "ln.net", "yob", "yod", "margin.pre", "region", "margin"),
+Description = c(
+"surname of the candidate",
+"first name of the candidate",
+"party of the candidate (labour or tory)",
+"log gross wealth at the time of death",
+"log net wealth at the time of death",
+"year of birth of the candidate",
+"year of death of the candidate",
+"margin of the candidate’s party in the previous election electoral", 
+"region",
+"margin of victory (vote share)")
+)
+# DT::datatable(rdd_vars,
+#               options = list(pageLength = "5"))
+kable(rdd_vars)
+```
+
+
+
+---
+```{r rddfigcode, eval = F}
+MPs %>%
+  ggplot(aes(margin, ln.net))+
+  geom_point(shape=1)+
+  facet_grid(~party)+
+  geom_smooth(data =MPs %>%
+                filter(margin <0),
+              method = "lm")+
+  geom_smooth(data =MPs %>%
+                filter(margin >0),
+              method = "lm")+
+  theme_bw() -> fig_rdd
+fig_rdd
+```
+
+---
+```{r rddfig, echo = F}
+MPs %>%
+  ggplot(aes(margin, ln.net))+
+  geom_point(shape=1)+
+  facet_grid(~party)+
+  geom_smooth(data =MPs %>%
+                filter(margin <0),
+              method = "lm")+
+  geom_smooth(data =MPs %>%
+                filter(margin >0),
+              method = "lm")+
+  theme_bw() -> fig_rdd
+fig_rdd
+```
+---
+## RDD Notation
+
+- $X$ is a **forcing** variable
+- Treatment $D$ is a determined by $X$
+
+$$
+D_i = 1\{X_i > c\}
+$$
+
+- $X$ is the `margin` variable in the example data, and $D=1$ if `margin` is greater than 0 (i.e. the candidate won the election)
+
+- Interested in the differences in the outcome at the threshold
+
+$$\lim_{x \downarrow  c} E[Y_i|X=x] - \lim_{x \uparrow  c} E[Y_i|X=x]$$
+
+---
+## Causal Identification with an RDD
+
+If we assume $E[Y_i(0)|X=x]$ and $E[Y_i(1)|X=x]$ are continuous in x, then we can estimate a (local) ATE at the threshold:
+
+$$\begin{align}
+ATE_{RDD} &= E[Y(1)-Y(0)|X_i=c] \\
+&=  E[Y(1)|X_i=c] -  E[Y(0)|X_i=c]\\
+&= \lim_{x \downarrow  c} E[Y_i|X=x] - \lim_{x \uparrow  c} E[Y_i|X=x] \\
+\end{align}$$
+
+---
+## Continuity Assumption
+
+```{r continuity, echo=F}
+knitr::include_graphics("https://mixtape.scunning.com/graphics/rdd_simul_ex.jpg")
+```
+
+[Cunningham (2022)](https://mixtape.scunning.com/regression-discontinuity.html#continuity-assumption)
+
+---
+## Causal Identification with an RDD
+
+- The continuity assumption is a formal way of saying that observations close to the threshold are good counterfactuals for each other
+
+- We can't prove this assumption
+
+- But if it holds, we should observe
+ 
+  - no sorting around the cutoff (no self selection)
+ 
+  - similar distributions of covariates around the cutoff (balance tests)
+  
+  - no effect of treatment on things measured pre-treatment (placebo tests)
+
+
+---
+## Summary: Regression Discontinuity Designs
+
+- Regression discontinuity designs (RDD) leverage natural **discontinuities** in the probability of receiving treatment to estimate *local average treatment effects
+
+  - Common discontinuities include: elections, test score cutoffs, time/events
+
+  - A local average treatment effect means the effect applies only to a subset of observations, here those observations at or close to the cutoff.
+
+- The identifying assumption of an RDD is continuity at the cutoff
+  - This implies that observations just below the cutoff for receiving treatment provide reasonable counterfactuals to those just above the cutoff
+  - We can't prove this, but we can test it's empirical implications (i.e. covariate balance near the cutoff)
+
+---
+class: inverse, center, middle
+# 💡
+# What does it mean to "control for x"
+
+---
+## Models partion variance
+
+- Regression models "partition variance"
+
+- They separate the variation in the outcome (the thing we're trying to explain), into variation explained by the predictors in our model and the remaining variation not explained by these predictors
+
+---
+## Models partion variance
+
+$$\begin{aligned}
+\textrm{Total Variance} &= \textrm{Variance Explained by Model} + \textrm{Unexplained Variance} \\
+\textrm{Observed} &= \textrm{Predicted Value} + \textrm{Error}\\
+\textrm{Y} &=  E[Y|X] + \epsilon\\
+\textrm{Y} &=  X\hat{\beta} + \hat{\epsilon}\\
+\textrm{Y} &= \hat{Y} + \hat{\epsilon}
+\end{aligned}$$
+
+---
+## Coefficients describe the unique variance in Y explained by X (and only X)
+
+When we fit a multiple regression model, the coefficients in that model describe the variation in the outcome explained by that predictor, and only that predictor.
+
+Let's fit three models from last week's lab
+
+```{r}
+# load(url("https://pols1600.paultesta.org/files/data/06_lab.rda"))
+m1 <- lm(new_deaths_pc_14da ~ rep_voteshare_std, covid_lab)
+m2 <- lm(new_deaths_pc_14da ~ rep_voteshare_std + med_age_std, covid_lab)
+m3 <- lm(new_deaths_pc_14da ~ rep_voteshare_std + med_age_std + med_income_std, covid_lab)
+
+```
+
+
+---
+## Why do coefficients change when we control for variables?
+
+```{r}
+htmlreg(list(m1, m2, m3)) %>% HTML() %>% browsable()
+```
+
+
+---
+## Residualized Regression
+
+--
+
+- Residualized regression is way of understanding what it means to **control for variables** in a regression.
+
+--
+
+- Residuals are the part of the outcome variable, not explained by the predictors in a model
+
+$$y = \overbrace{\beta_0 + \beta_1x_1 + \beta_2 x_2  + \dots \beta_j x_j}^{\text{Predictors}} + \underbrace{\epsilon}_{\text{Residuals}}$$
+---
+## Residualized Regression
+
+- Residuals are uncorrelated with (orthogonal to) predictors $X$, and predicted values $X\beta$
+
+```{r, echo=FALSE}
+knitr::include_graphics("https://i.stack.imgur.com/UEOIP.png")
+```
+
+---
+## Residualized Regression
+
+- Residuals are uncorrelated with predictors $X$, and predicted values $X\beta$
+
+- We can verify this for `m2` below. We'd find the same for `m3`
+
+```{r}
+cor(resid(m2),covid_lab$rep_voteshare_std) 
+cor(resid(m2),covid_lab$med_age_std)
+cor(resid(m2),fitted(m2))
+
+
+```
+
+
+---
+### Residualized Regression
+
+We can think of coefficients in a multiple regression as describing the variation in the outcome explained by that predictor, **and only that predictor.** 
+
+---
+### Residualized Regression
+
+So for a model like `m2`:
+
+```{r}
+coef(m2)
+```
+
+We can recover the coefficient on `rep_voteshare_std` by:
+  
+1. Regressing `new_deaths_pc_14da` on `med_age_std`
+  - The **residuals** from this regression represent the **variation** in Covid-19 deaths **not explained** by the median age of a states' populations
+2. Regressing `rep_voteshare_std` on `med_age_std` 
+  - The **residuals** from this regression represent the **variation** in Republican Vote Share **not  explained** by age
+3. Regressing the residuals from 1. (Deaths not explained by age) on the residuals from 2. (Vote share not explained by age)
+  - The coefficient from this simple residualized regression will be exactly the same as the coefficient for `rep_voteshare_std` from `m2`
+
+
+---
+## Residualized Regression
+
+```{r}
+# 1. Regressing `new_deaths_pc_14da` on `med_age_std`
+m2_death_by_age <- lm(new_deaths_pc_14da ~ med_age_std, covid_lab)
+# Save residuals
+covid_lab$res_death_no_age <- resid(m2_death_by_age)
+
+# 2. Regressing `rep_voteshare_std` on `med_age_std` 
+m2_repvs_by_age <- lm(rep_voteshare_std ~ med_age_std, covid_lab)
+# Save residuals
+covid_lab$res_repvs_no_age <- resid(m2_repvs_by_age)
+
+# 3. Residualized regression of deaths on Rep Vote Share
+m2_res <- lm(res_death_no_age ~ res_repvs_no_age, covid_lab)
+
+```
+
+---
+background-image:url("https://i.imgflip.com/68by8w.jpg")
+backgroun-size:contain
+
+
+---
+## Residualized Regression
+
+```{r}
+# Mutliple regression
+coef(m2)[2]
+
+# Residualized regression
+coef(m2_res)[2]
+```
+
+---
+## Residualized Regression
+
+The same principle holds when controlling for multiple factors like `age` and `income`
+
+1. Regress the outcome on the other controls
+2. Regress the predictor of interest on the other controls
+3. Regress the residuals from 1. and on the residuals from 2 to get the multiple regression coefficient
+
+
+---
+
+```{r}
+# 1. Regressing `new_deaths_pc_14da` on `med_age_std`
+m3_death_by_age_income <- lm(new_deaths_pc_14da ~ med_age_std + med_income_std, covid_lab)
+# Save residuals
+covid_lab$res_death_no_age_income <- resid(m3_death_by_age_income)
+
+# 2. Regressing `rep_voteshare_std` on `med_age_std` 
+m3_repvs_by_age_income <- lm(rep_voteshare_std ~ med_age_std + med_income_std, covid_lab)
+# Save residuals
+covid_lab$res_repvs_no_age_income <- resid(m3_repvs_by_age_income)
+
+# 3. Residualized regression of deaths on Rep Vote Share
+m3_res <- lm(res_death_no_age_income ~ res_repvs_no_age_income, covid_lab)
+
+# multiple regression coefficient
+coef(m3)[2]
+# Same as  residualized regression coefficient
+coef(m3_res)[2]
+```
+
+---
+## Why did the coefficient on Rep Vote Share change in `m3` but not `m2`?
+
+
+---
+
+```{r, echo=F}
+htmlreg(list(m1,m2, m2_death_by_age,m2_repvs_by_age, m2_res),
+        custom.model.names = c("Baseline","Mutliple","Deaths","Vote Share","Deaths"),
+        custom.header = list("DV: Death"=1:3, "DV: Vote Share"=4, "DV: Res. Deaths"=5)) %>% HTML() %>% browsable()
+
+```
+
+
+---
+```{r venn_iv, echo = F, fig.height = 7.5}
+# Colors (order: x1, x2, x3, y, z)
+venn_colors <- c("grey", "blue", "grey", "red")
+venn_lab_colors <- c("white", "blue", "white", "red")
+
+# Line types (order: x1, x2, x3, y, z)
+venn_lines <- c("solid", "solid", "solid", "solid")
+# Locations of circles
+venn_df <- tibble(
+  x  = c( 0.0,   0,    1.3,    -2),
+  y  = c( 0.0,   -2.5,   -1.8,    -2.8)+1,
+  r  = c( 1.9,    1.5,    1.5,      1.3),
+  l  = c( "Deaths", "RepVS", "Income",   "Age"),
+  cc = c("grey", "red", "black", "blue"),
+  lc = c( "red", "blue", "white","white"),
+  xl = c( 0.0,    0,    1.3,  -2),
+  yl = c( 0.0,   -2.8,   -1.9,   -2.8)+1,
+  a = c(.3, .3 , .7, .7)
+)
+```
+
+```{r,echo=F}
+# Venn
+venn_df %>%
+  filter(l %in% c( "Deaths", "RepVS")) %>%
+ggplot(aes(x0 = x, y0 = y, r = r, fill = l, color = l)) +
+geom_circle(aes(linetype = l, alpha = a), size = 0.75) +
+theme_void() +
+theme(legend.position = "none") +
+scale_fill_manual(values = venn_colors[c(4,2)]) +
+scale_color_manual(values = venn_colors[c(4,2)]) +
+scale_linetype_manual(values = venn_lines) +
+geom_text(aes(x = xl, y = yl, label = l), col=c("red","blue"), size = 9, parse = T ) +
+annotate(
+  x = 0, y = -0.5,
+  geom = "text", label = expression(beta[2]), size = 10, hjust = .5
+) +
+xlim(-5.5, 4.5) +
+ylim(-4.2, 3.4) +
+coord_equal()
+```
+
+---
+
+```{r, echo=F}
+venn_df %>%
+  filter(l %in% c( "Deaths", "RepVS","Age")) %>%
+ggplot(aes(x0 = x, y0 = y, r = r, fill = l, color = l)) +
+geom_circle(aes(linetype = l, alpha = a), size = 0.75) +
+theme_void() +
+theme(legend.position = "none") +
+scale_fill_manual(values = venn_colors[c(1,2,4)]) +
+scale_color_manual(values = venn_colors[c(1,2,4)]) +
+scale_linetype_manual(values = venn_lines) +
+geom_text(aes(x = xl, y = yl, label = l), col=c("blue","red","white"), size = 9, parse = T ) +
+annotate(
+  x = 0, y = -.5,
+  geom = "text", label = expression(beta[2]), size = 10, hjust = .5
+) +
+xlim(-5.5, 4.5) +
+ylim(-4.2, 3.4) +
+coord_equal()
+```
+
+
+
+---
+
+```{r,echo=F}
+htmlreg(list(m1, m3, m3_death_by_age_income, m3_repvs_by_age_income,m3_res),
+          custom.model.names = c("Baseline","Mutliple","Deaths","Vote Share","Deaths"),
+        custom.header = list("DV: Death"=1:3, "DV: Vote Share"=4, "DV: Res. Death"=5)
+        ) %>% HTML() %>% browsable()
+
+```
+
+
+---
+
+```{r,echo=F}
+venn_df %>%
+ggplot(aes(x0 = x, y0 = y, r = r, fill = l, color = l)) +
+geom_circle(aes(linetype = l, alpha = a), size = 0.75) +
+theme_void() +
+theme(legend.position = "none") +
+scale_fill_manual(values = venn_colors) +
+scale_color_manual(values = venn_colors) +
+scale_linetype_manual(values = venn_lines) +
+geom_text(aes(x = xl, y = yl, label = l), col=c("blue","red","white","white"), size = 9, parse = T ) +
+annotate(
+  x = -0.45, y = -.45,
+  geom = "text", label = expression(beta[2]), size = 5, hjust = .5
+) +
+xlim(-5.5, 4.5) +
+ylim(-4.2, 3.4) +
+coord_equal()
+```
+
+---
+## Summary: What does it mean to control for "x"?
+
+- Models partition variance in a outcome into that which can be explained by the model's predictions, and the remaining unexplained variation
+
+--
+
+- Coefficients in a linear regression describe the "marginal effect" of a change in a predictor on the outcome, after accounting for (holding constat/controlling) the other predictors in the model.
+
+--
+
+- Residualized regression provides a way of illustrating how multiple regression isolates the  variance explained by specific predictors (and only those predictors)
+
+
+---
+class: inverse, center, middle
+# 💡
+# Producing predicted values from regression models
+
+---
+## Predicted Values
+
+- The coefficients in a regression model define a formula which produces a predcited value of the outcome $y$ when the predictors $X$ take particular values.
+
+- To produce predicted values, we simply need to plug in values for each $x$, multiply them by their corresponding coefficents, $\beta_x$ and ad them together.
+
+---
+## Predicted Values
+
+- In a simple, bivariate regression, the predicted values are the points are the points along the line defined by the intercept $\beta_0$ and the "slope" $\beta_1$
+
+- When we add predictors, we are adding dimensions to our model. In a model, with two predictors, the predicted values are descibed by a *plane*
+
+
+---
+
+```{r partial, echo=F, fig.height=4}
+knitr::include_graphics("https://miro.medium.com/max/766/1*dToo8pNrhBmYfwmPLp6WrQ.png")
+```
+[Source](https://towardsdatascience.com/linear-regression-detailed-view-ea73175f6e86)
+
+
+---
+## Predicted Values
+
+- In a simple, bivariate regression, the predicted values are the points are the points along the line defined by the intercept $\beta_0$ and the "slope" $\beta_1$
+
+- When we add predictors, we are adding dimensions to our model. In a model, with two predictors, the predicted values are descibed by a *plane*
+
+- With more than two predictors, the predicted values fall along a *hyperplane* that likely requires some mind altering substances to visualize.
+
+- In practice, to interpret mutliple regression models, we will produce predicted values for *a range of one variable*, holding other predictors constant at some typical value (what's a good typical value?)
+
+---
+## Producing Predicted Values in R
+
+The basic steps to producing predicted values in R as follows:
+
+1. Fit a model
+2. Produce a **prediction data frame**, where one (sometimes two) predictor(s) vary, and others are held  constant at a single value
+3. Use prediction data frame to obtain predicted values from model using the `predict()` function
+4. Plot predicted values to help interpret your model
+
+Let's demo this using the lab data.
+
+---
+## Fit a model that allows the relationship  of vaccines to vary
+
+Suppose we think that an additional increase in the percent of population vaccinated has a declining impact on Covid-19 deaths. We could estimate this model as follows:
+
+$$\text{Deaths} = \beta_0 + \beta_1 \text{% Vaxxed} + + \beta_1 \text{% Vaxxed}^2 + \episolon$$ 
+
+Let's fit two models
+
+```{r}
+m4 <- lm(new_deaths_pc_14da ~ percent_vaccinated + I(percent_vaccinated^2), 
+         data = covid_lab)
+m5 <- lm(new_deaths_pc_14da ~ percent_vaccinated + I(percent_vaccinated^2)+  
+           rep_voteshare_std + med_age_std + med_income_std, 
+         data = covid_lab)
+```
+
+
+---
+And take a quick look at the results:
+
+```{r}
+summary(m4)
+```
+
+---
+```{r}
+summary(m5)
+```
+
+
+---
+## Interpretting our model
+
+So the coefficient on `percent_vaccinated` is negative, while the coefficient on `I(percent_vaccinated^2)` is positive. 
+
+This implies that the relationship between vaccination rates and Covid-19 deaths is not constant, but **changes with the percent of population vaccinated.**
+
+To help interpreted this model, let's **create a prediction data frame.**
+
+---
+## Create a prediction data frame
+
+```{r}
+pred_df <- expand_grid(
+  percent_vaccinated = seq(
+    min(covid_lab$percent_vaccinated, na.rm =T),
+    max(covid_lab$percent_vaccinated, na.rm =T),
+    length.out = 10
+  ),
+  rep_voteshare_std = 0,
+  med_age_std = 0,
+  med_income_std = 0
+)
+```
+
+---
+
+```{r,echo=F}
+pred_df
+```
+
+---
+## Use `predict()` to obtain predicted values
+
+```{r}
+pred_df$m4_pred <- predict(m4, newdata = pred_df)
+pred_df$m5_pred <- predict(m5, newdata = pred_df)
+
+```
+
+---
+
+```{r,echo=F}
+pred_df
+```
+
+
+---
+
+```{r}
+pred_df %>%
+  pivot_longer(
+    cols = c("m4_pred","m5_pred"),
+    names_to = "Model",
+    values_to = "Predicted Values"
+  )
+
+```
+
+
+---
+
+```{r,eval=F}
+pred_df %>%
+  pivot_longer(
+    cols = c("m4_pred","m5_pred"),
+    names_to = "Model",
+    values_to = "Predicted Deaths"
+  )%>%
+  ggplot(aes(percent_vaccinated, `Predicted Deaths`,col = Model))+
+  geom_line()
+  
+
+```
+
+---
+
+```{r,echo=F}
+pred_df %>%
+  pivot_longer(
+    cols = c("m4_pred","m5_pred"),
+    names_to = "Model",
+    values_to = "Predicted Deaths"
+  )%>%
+  ggplot(aes(percent_vaccinated, `Predicted Deaths`,col = Model))+
+  geom_line()
+  
+
+```
+
+
+---
+# Summary producing predicted values from regression models
+
+- Predicted values help provide substantive interpretations of linear models
+
+--
+
+- To produce predicted values we create **prediction dataframes** which generally vary one key predictor(s) predictors in the model constant at fixed values (typically their mean or modal values)
+
+
+- We create prediction data frames (e.g. `pred_df`) using `expand_grid()` 
+
+- We generate predicted values using the `predict()` function and save the predictions back into the prediction data frame (e.g. `pred_df$fit <- predict(m, newdata = pred_df)`) so we can display the predictions graphically.
+
+
+---
+class: inverse, center, middle
+background-image:url("https://media.gq.com/photos/6153752c430fd1b65067ee50/16:9/w_2560%2Cc_limit/GettyImages-1195887867.jpeg)
+background-size:cover
+
+# 💡
+# Evaluating model performance
+
+---
+#### How should we decide between the following models
+
+
+```{r, echo = F}
+m6 <- lm(new_deaths_pc_14da ~ percent_vaccinated +  
+           rep_voteshare_std + med_age_std + med_income_std, 
+         data = covid_lab)
+
+texreg::htmlreg(list(m4,m5,m6))%>%HTML()%>%browsable()
+```
+
+---
+## R^2: A measure of the variance explained by the model:
+
+
+A simple way to compare models is to look at the proportion of the variance explained by the models predictions, relative to total variance in the outcome: 
+
+$$R^2 = \frac{\text{variance(fitted model values)}}{ \text{variance(response values )}}$$
+
+We call this value the model's "R-squared" $(R^2)$
+
+---
+## R^2
+
+More formally, you'll see $R^2$ defined in terms of "Sums of Squares"
+
+- TSS = Total Summ of Squares = Variance of the Outcome
+- ESS = Explained Sum of Squares = Variance of the Predicted Values
+- RSS = Sum of Squared Residuals = Variance of the Residuals
+
+$$R^2 = \frac{ESS}{TSS}= 1 - \frac{RSS}{TSS}$$
+---
+## Adjusted R^2 
+
+- As we will explore in your lab, a models $R^2$ always increases as we add predictors 
+
+- The adjusted $R^2$ is an attempt to adjust for this by weighting a the $R^2$ of a model by the number of predictors
+
+$$\text{adj. }R^2 = 1 - \frac{RSS/(n-k)}{TSS/(n-1)}$$
+
+---
+## Comparing models with $R^2$
+
+- When models are *nested* (larger models contain all the predictors of smaller models), we can ask, does including the additional predictors in the larger model explain more variation in the outcome than we would expect would happen if we just added additional, random variable.
+
+- Formally we call this process an [Analysis of Variance (ANOVA)](https://towardsdatascience.com/anova-for-regression-fdb49cf5d684#:~:text=It%20is%20the%20same%20as,or%20more%20categorical%20predictor%20variables.)
+
+
+---
+
+```{r,echo=F}
+texreg::htmlreg(list(m4,m6,m5))%>%HTML()%>%browsable()
+```
+
+
+---
+
+```{r}
+# Square term vs Square with controls
+anova(m4,m5)
+```
+
+
+---
+
+```{r}
+# No square vs square with controls 
+anova(m5,m6)
+```
+
+---
+## Summary
+
+- R-Squared is a useful heuristic for evaluating models in terms of variance explained
+
+- R-Squared always increases as we add more predictors
+  - Even if they have no relationship with the outcome
+  - Adjusted R-Squared includes weights the variance explained by number of predictors needed to explain it.
+
+- Comparing nested models involves assessing whether the added variance explained is more than we would expect by chance using an ANOVA (analysis of variance) to compare models.

@@ -228,7 +228,7 @@ sp_df <- tibble(
                "ggplot(), aes(), geom_")
 )
 
-kable(sp_df, 
+knitr::kable(sp_df, 
       caption = "You're learning how to map conceptual tasks to commands in R",
       caption.above=T)
 

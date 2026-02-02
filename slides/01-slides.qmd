@@ -336,7 +336,7 @@ y <- 6L # Integer
 only_two_types_of_people <- TRUE 
 
 # Character
-me <- "Paul"
+me <- "Joe"
 
 # Factor
 grades = factor(c("A","B","C"))
@@ -362,7 +362,7 @@ One common ocurrence is that a function in R is expecting data of one type but (
 
 The `class()` function is a useful `base R` for troubleshooting such errors. 
 
-For example, different operatinos on data frames return different objects. 
+For example, different operations on data frames return different objects. 
 
 ```{r}
 #| echo: true
@@ -410,13 +410,8 @@ Three sources of functions:
 -   You
     -   `my_function <- function(x){x^2}`
 
-::::{.fragment}
 
-:::{.callout-tip}
-Can you spot the portal of discovery in the code above?
-:::
 
-::::
 
 ## Functions are like recipes {.smaller}
 
