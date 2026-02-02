@@ -82,7 +82,7 @@ Suppose you want to do the following, what function or functions would you use:
 
 ## Announcements
 
-- Submit tutorials from last week for full credit by this Sunday.
+- Submit tutorials from last week by tonight.
 
 - Groups for the course assigned next week
 
@@ -120,7 +120,7 @@ learnr::run_tutorial("00-intro", package = "qsslearnr")
 
 :::{.callout-important}
 
-Please upload tutorials 00-intro and 01-measurement1 to [Canvas](https://canvas.brown.edu/courses/1098409/assignments) by Friday
+Please upload tutorials 00-intro and 01-measurement1 to [Canvas](https://canvas.brown.edu/courses/1102109/assignments) by tonight. 
 
 :::
 
@@ -154,46 +154,12 @@ the_packages
 
 ## Installing and loading new packages
 
-Next we'll create a function called `ipak` (thanks [Steven](https://gist.github.com/stevenworthington/3178163)) which:
-
--   Takes a list of packages (`pkg`)
--   Checks to see if these packages are installed
--   Installs any new packages
--   Loads all the packages so we can use them
-
 ```{r}
-#| label = "ipak"
-# ipak <- function(pkg){
-#     new.pkg <- pkg[!(pkg %in% installed.packages()[, "Package"])]
-#     if (length(new.pkg)) 
-#         install.packages(new.pkg, dependencies = TRUE)
-#     sapply(pkg, require, character.only = TRUE)
-# }
-lapply(the_packages, library, character.only = TRUE)
-
-
+new_packages <- the_packages[!(the_packages %in% installed.packages()[,"Package"])]
+if(length(new_packages)) install.packages(new_packages)
+invisible(lapply(the_packages, library, character.only = TRUE))
 ```
 
-Again, run this code on your machines
-
-## Installing and loading new packages {.smaller}
-
-Finally, let's use `ipak` to install and load `the_packages`
-
-What should we replace `some_function` and `some_input` with to do this?
-
-```{r}
-#| eval = F
-some_function(some_input)
-```
-
-. . .
-
-```{r}
-#| label = "libraries",
-#| cache = F
-##ipak(the_packages)
-```
 
 -   `R` may ask you to install a package's dependencies (other packages your package needs). Try entering the number `1` into your console
 -   `R` may tell you need to restart `R` Try saying yes. If it doesn't start downloading, say no
@@ -205,7 +171,7 @@ Let's load the Covid-19 data we worked with last week:
 
 ```{r}
 #| label = "covid"
-load(url("https://pols1600.paultesta.org/files/data/covid.rda"))
+load(url("https://josephessig-source.github.io/pols1600_site/files/data/covid.rda"))
 
 ```
 

@@ -46,10 +46,11 @@ library(labelled)
 library(haven)
 library(DeclareDesign)
 library(easystats)
+library(crosstalk)
 
-# Class survey from previous week
-
+#previous class survey
 df <- haven::read_spss("../files/data/class_surveys/wk01.sav")
+
 ```
 
 # {{< fa map-location>}} Overview {.inverse}
@@ -68,21 +69,9 @@ df <- haven::read_spss("../files/data/class_surveys/wk01.sav")
         -   Distributions
         -   Associations
         
-## Concept check {.smaller}
-
-Suppose you want to do the following, what function or functions would you use:
-
--   Read data into `R`
--   Look at the data to get a high level overview of its structure
--   Subset or filter the data to include just observations with certain values
--   Select specific columns from data
--   Add new columns to the data
--   Summarize multiple values by collapsing them into a single value
--   Doing some function group-by-group?        
-
 ## Announcements
 
-- Submit tutorials from last week for full credit by this Sunday.
+- Submit tutorials from last week by tonight.
 
 - Groups for the course assigned next week
 
@@ -120,7 +109,7 @@ learnr::run_tutorial("00-intro", package = "qsslearnr")
 
 :::{.callout-important}
 
-Please upload tutorials 00-intro and 01-measurement1 to [Canvas](https://canvas.brown.edu/courses/1098409/assignments) by Friday
+Please upload tutorials 00-intro and 01-measurement1 to [Canvas](https://canvas.brown.edu/courses/1102109/assignments) by tonight. 
 
 :::
 
@@ -147,53 +136,19 @@ the_packages <- c(
 #  "GGally",
   
   # Data 
-  "maps","mapdata","DT"
+  "maps","mapdata","DT","crosstalk"
 )
 the_packages
 ```
 
 ## Installing and loading new packages
 
-Next we'll create a function called `ipak` (thanks [Steven](https://gist.github.com/stevenworthington/3178163)) which:
-
--   Takes a list of packages (`pkg`)
--   Checks to see if these packages are installed
--   Installs any new packages
--   Loads all the packages so we can use them
-
 ```{r}
-#| label = "ipak"
-# ipak <- function(pkg){
-#     new.pkg <- pkg[!(pkg %in% installed.packages()[, "Package"])]
-#     if (length(new.pkg)) 
-#         install.packages(new.pkg, dependencies = TRUE)
-#     sapply(pkg, require, character.only = TRUE)
-# }
-lapply(the_packages, library, character.only = TRUE)
-
-
+new_packages <- the_packages[!(the_packages %in% installed.packages()[,"Package"])]
+if(length(new_packages)) install.packages(new_packages)
+invisible(lapply(the_packages, library, character.only = TRUE))
 ```
 
-Again, run this code on your machines
-
-## Installing and loading new packages {.smaller}
-
-Finally, let's use `ipak` to install and load `the_packages`
-
-What should we replace `some_function` and `some_input` with to do this?
-
-```{r}
-#| eval = F
-some_function(some_input)
-```
-
-. . .
-
-```{r}
-#| label = "libraries",
-#| cache = F
-##ipak(the_packages)
-```
 
 -   `R` may ask you to install a package's dependencies (other packages your package needs). Try entering the number `1` into your console
 -   `R` may tell you need to restart `R` Try saying yes. If it doesn't start downloading, say no
@@ -205,10 +160,9 @@ Let's load the Covid-19 data we worked with last week:
 
 ```{r}
 #| label = "covid"
-load(url("https://pols1600.paultesta.org/files/data/covid.rda"))
+load(url("https://josephessig-source.github.io/pols1600_site/files/data/covid.rda"))
 
 ```
-
 # {{< fa magnifying-glass>}} Troubleshooting Errors {.inverse}
 
 ## 
@@ -354,10 +308,6 @@ All of these "verb" functions from the `dplyr` package (e.g. `filter()`,`mutate(
 3.  The output is a new data frame
 
 [More](https://r4ds.had.co.nz/transform.html)
-
-## You trying to get the `%>%`?
-
-![](https://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/2444.png){fig-align="center"}
 
 ## The pipe command `%>%` {.smaller}
 
@@ -853,7 +803,7 @@ Should you know exactly how to do all of this?
 
 . . .
 
-**NO! Of course not. For Pete's sake, Paul, It's only the second week**
+**NO! Of course not. For Pete's sake, It's only the second week**
 
 . . .
 
@@ -1020,28 +970,8 @@ In R, we'll implement this grammar of graphics using the `ggplot` package
 
 -   Let's take a look at your feedback to last week's survey and see how we can visualize some of the in formation you provided
 
+## An Example Figure {.smaller}
 
-# {{< fa bullhorn >}} Feedback {.inverse}
-
-## What we liked {.smaller}
-
-```{r}
-#| echo: false
-
-DT::datatable(df %>% 
-                select(like))
-```
-
-## What we disliked {.smaller}
-
-```{r}
-#| echo: false
-
-DT::datatable(df %>% 
-                select(dislike))
-```
-
-## 
 
 ```{r}
 #| echo: false

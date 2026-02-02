@@ -7870,7 +7870,7 @@
     "objectID": "slides/02-slides.html#concept-check",
     "href": "slides/02-slides.html#concept-check",
     "title": "POLS 1600",
-    "section": "Concept check",
+    "section": " Concept check",
     "text": "Concept check\nSuppose you want to do the following, what function or functions would you use:\n\nRead data into R\nLook at the data to get a high level overview of its structure\nSubset or filter the data to include just observations with certain values\nSelect specific columns from data\nAdd new columns to the data\nSummarize multiple values by collapsing them into a single value\nDoing some function group-by-group?"
   },
   {
@@ -7878,7 +7878,7 @@
     "href": "slides/02-slides.html#announcements",
     "title": "POLS 1600",
     "section": "Announcements",
-    "text": "Announcements\n\nSubmit tutorials from last week for full credit by this Sunday.\nGroups for the course assigned next week"
+    "text": "Announcements\n\nSubmit tutorials from last week by tonight.\nGroups for the course assigned next week"
   },
   {
     "objectID": "slides/02-slides.html#tutorials-1",
@@ -7892,7 +7892,7 @@
     "href": "slides/02-slides.html#tutorials-2",
     "title": "POLS 1600",
     "section": "Tutorials",
-    "text": "Tutorials\nAnd start a specific tutorial by running:\n\nlearnr::run_tutorial(\"00-intro\", package = \"qsslearnr\")\n\n\n\n\n\n\n\nImportant\n\n\nPlease upload tutorials 00-intro and 01-measurement1 to Canvas by Friday"
+    "text": "Tutorials\nAnd start a specific tutorial by running:\n\nlearnr::run_tutorial(\"00-intro\", package = \"qsslearnr\")\n\n\n\n\n\n\n\nImportant\n\n\nPlease upload tutorials 00-intro and 01-measurement1 to Canvas by tonight."
   },
   {
     "objectID": "slides/02-slides.html#setup-for-today",
@@ -7906,14 +7906,14 @@
     "href": "slides/02-slides.html#libraries",
     "title": "POLS 1600",
     "section": "Libraries",
-    "text": "Libraries\nThis week we’ll use the following libraries.\n\nthe_packages &lt;- c(\n  ## R Markdown\n  \"tinytex\", \"kableExtra\",\n  \n  ## Tidyverse\n  \"tidyverse\",\"lubridate\", \"forcats\", \"haven\",\"labelled\",\n  \n  ## Extensions for ggplot\n  \"ggmap\",\"ggrepel\", \"ggridges\", \"ggthemes\",\"ggpubr\",\n  \"GGally\",\n  \n  # Data \n  \"maps\",\"mapdata\",\"DT\"\n)\nthe_packages\n\n [1] \"tinytex\"    \"kableExtra\" \"tidyverse\"  \"lubridate\"  \"forcats\"   \n [6] \"haven\"      \"labelled\"   \"ggmap\"      \"ggrepel\"    \"ggridges\"  \n[11] \"ggthemes\"   \"ggpubr\"     \"GGally\"     \"maps\"       \"mapdata\"   \n[16] \"DT\""
+    "text": "Libraries\nThis week we’ll use the following libraries.\n\nthe_packages &lt;- c(\n  ## R Markdown\n  \"tinytex\", \"kableExtra\",\n  \n  ## Tidyverse\n  \"tidyverse\",\"lubridate\", \"forcats\", \"haven\",\"labelled\",\n  \n  ## Extensions for ggplot\n  \"ggmap\",\"ggrepel\", \"ggridges\", \"ggthemes\",\"ggpubr\",\n#  \"GGally\",\n  \n  # Data \n  \"maps\",\"mapdata\",\"DT\",\"crosstalk\"\n)\nthe_packages\n\n [1] \"tinytex\"    \"kableExtra\" \"tidyverse\"  \"lubridate\"  \"forcats\"   \n [6] \"haven\"      \"labelled\"   \"ggmap\"      \"ggrepel\"    \"ggridges\"  \n[11] \"ggthemes\"   \"ggpubr\"     \"maps\"       \"mapdata\"    \"DT\"        \n[16] \"crosstalk\""
   },
   {
     "objectID": "slides/02-slides.html#installing-and-loading-new-packages",
     "href": "slides/02-slides.html#installing-and-loading-new-packages",
     "title": "POLS 1600",
     "section": "Installing and loading new packages",
-    "text": "Installing and loading new packages\nNext we’ll create a function called ipak (thanks Steven) which:\n\nTakes a list of packages (pkg)\nChecks to see if these packages are installed\nInstalls any new packages\nLoads all the packages so we can use them\n\n\nipak &lt;- function(pkg){\n    new.pkg &lt;- pkg[!(pkg %in% installed.packages()[, \"Package\"])]\n    if (length(new.pkg)) \n        install.packages(new.pkg, dependencies = TRUE)\n    sapply(pkg, require, character.only = TRUE)\n}\n\nAgain, run this code on your machines"
+    "text": "Installing and loading new packages\n\nnew_packages &lt;- the_packages[!(the_packages %in% installed.packages()[,\"Package\"])]\nif(length(new_packages)) install.packages(new_packages)\ninvisible(lapply(the_packages, library, character.only = TRUE))\n\n\nR may ask you to install a package’s dependencies (other packages your package needs). Try entering the number 1 into your console\nR may tell you need to restart R Try saying yes. If it doesn’t start downloading, say no\nR may then ask if you want to compile some packages from source. Type Y into your console. If this doesn’t work, try again, but this time type N when asked"
   },
   {
     "objectID": "slides/02-slides.html#installing-and-loading-new-packages-1",
@@ -7927,7 +7927,7 @@
     "href": "slides/02-slides.html#loading-the-covid-19-data",
     "title": "POLS 1600",
     "section": "Loading the Covid-19 Data",
-    "text": "Loading the Covid-19 Data\nLet’s load the Covid-19 data we worked with last week:\n\nload(url(\"https://pols1600.paultesta.org/files/data/covid.rda\"))"
+    "text": "Loading the Covid-19 Data\nLet’s load the Covid-19 data we worked with last week:\n\nload(url(\"https://josephessig-source.github.io/pols1600_site/files/data/covid.rda\"))"
   },
   {
     "objectID": "slides/02-slides.html#section",
@@ -8136,22 +8136,22 @@
     "objectID": "slides/02-slides.html#concept-check-1",
     "href": "slides/02-slides.html#concept-check-1",
     "title": "POLS 1600",
-    "section": " Concept check",
-    "text": "Concept check\nSuppose you want to do the following, what function or functions would you use:\n\nRead data into R\nLook at the data to get a high level overview of its structure\nSubset or filter the data to include just observations with certain values\nSelect specific columns from data\nAdd new columns to the data\nSummarize multiple values by collapsing them into a single value\nDoing some function group-by-group?"
+    "section": "Concept check",
+    "text": "Concept check\nSuppose you want to do the following, what function or functions would you use:\n\nRead data into R\n\nread_xxx() (tidy), read.xxx() (base)\n\nLook at the data to get a high level overview of its structure\n\nhead(), tail(), glimpse(), table(), summary(), View()\n\nFilter the data to include just observations with certain values\n\ndata %&gt;% filter(x &gt; 0), data[data$x &gt; 0], subset(data, x &gt; 0)\n\nSelect specific columns from data\n\ndata$variable, data %&gt;% select(variable1, variable2), data[,c(\"x1\",\"x2\")]\n\nAdd new columns to the data\n\ndata %&gt;% mutate(x = y/10) data$x &lt;- data$y/10\n\nSummarize multiple values by collapsing them into a single value\n\ndata %&gt;% summarise(x_mn = mean(x, na.rm=T))\n\nDoing some function group-by-group?\n\ndata %&gt;% group_by(g) %&gt;% summarise(x_mn = mean(x, na.rm=T))"
   },
   {
     "objectID": "slides/02-slides.html#concept-check-2",
     "href": "slides/02-slides.html#concept-check-2",
     "title": "POLS 1600",
     "section": "Concept check",
-    "text": "Concept check\nSuppose you want to do the following, what function or functions would you use:\n\nRead data into R\n\nread_xxx() (tidy), read.xxx() (base)\n\nLook at the data to get a high level overview of its structure\n\nhead(), tail(), glimpse(), table(), summary(), View()\n\nFilter the data to include just observations with certain values\n\ndata %&gt;% filter(x &gt; 0), data[data$x &gt; 0], subset(data, x &gt; 0)\n\nSelect specific columns from data\n\ndata$variable, data %&gt;% select(variable1, variable2), data[,c(\"x1\",\"x2\")]\n\nAdd new columns to the data\n\ndata %&gt;% mutate(x = y/10) data$x &lt;- data$y/10\n\nSummarize multiple values by collapsing them into a single value\n\ndata %&gt;% summarise(x_mn = mean(x, na.rm=T))\n\nDoing some function group-by-group?\n\ndata %&gt;% group_by(g) %&gt;% summarise(x_mn = mean(x, na.rm=T))"
+    "text": "Concept check\nShould you know exactly how to do all of this?\n\nNO! Of course not. For Pete’s sake, It’s only the second week\n\n\nWill you learn how to do much of this?\n\n\nMaybe, but I’m feeling pretty overwhelmed…\n\n\nHow will you learn how do these things?\n\n\nWith lots of practice, patience, and repetition motivated by a sense that these skills will help me learn about things I care about"
   },
   {
     "objectID": "slides/02-slides.html#concept-check-3",
     "href": "slides/02-slides.html#concept-check-3",
     "title": "POLS 1600",
     "section": "Concept check",
-    "text": "Concept check\nShould you know exactly how to do all of this?\n\nNO! Of course not. For Pete’s sake, Paul, It’s only the second week\n\n\nWill you learn how to do much of this?\n\n\nMaybe, but I’m feeling pretty overwhelmed…\n\n\nHow will you learn how do these things?\n\n\nWith lots of practice, patience, and repetition motivated by a sense that these skills will help me learn about things I care about"
+    "text": "Concept check\nShould you know exactly how to do all of this?\n\nNO! Of course not. For Pete’s sake, It’s only the second week\n\n\nWill you learn how to do much of this?\n\n\nMaybe, but I’m feeling pretty overwhelmed…\n\n\nHow will you learn how do these things?\n\n\nWith lots of practice, patience, and repetition motivated by a sense that these skills will help me learn about things I care about"
   },
   {
     "objectID": "slides/02-slides.html#advice-on-learning-how-to-code",
@@ -12237,5 +12237,12 @@
     "title": "POLS 1600",
     "section": "Summary",
     "text": "Summary\nAfter today, you should have a better sense of\n\nHow to write R code using Quarto and R Markdown\nHow to install packages and load libraries\nSome of different types and shapes of data\nHow to get a high level overview of your data\nHow to transform, recode, and summarise data using dplyr and the tidyverse\nHow describe typical values and variation in data\nHow to explore substantive questions using these these typical values"
+  },
+  {
+    "objectID": "slides/02-slides.html#an-example-figure",
+    "href": "slides/02-slides.html#an-example-figure",
+    "title": "POLS 1600",
+    "section": "An Example Figure",
+    "text": "An Example Figure"
   }
 ]
