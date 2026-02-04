@@ -1,6 +1,6 @@
 ---
 title: 'Lab 01 - Exploring data on COVID-19 in the U.S.'
-author: "Your Name HERE"
+author: "Comments/Solutions"
 date: "Last Updated `r format(Sys.Date())`"
 format:
   html:
@@ -10,6 +10,8 @@ format:
     toc-depth: 2
     number-sections: true
 ---
+
+To view this document more easily and see the output, please render and view as an HTML document. 
 
 
 # Overview {.unnumbered}
@@ -77,26 +79,20 @@ library(DT)
 
 # Download the COVID19 Data for U.S.
 
-Open up the [slides](https://pols1600.paultesta.org/slides/01-slides.html#81) from last class and copy and paste the relevant code into the code chunk below.
 
 ```{r}
 #| label: covid
 # Download the COVID-19 data
+covid <- COVID19::covid19(
+  country = "US",
+  start = "2020-01-01",
+  end = "2022-12-31",
+  level = 2,
+  verbose = F
 
-# # Code below produces:
-# 
-# covid <- COVID19::covid19(
-#   country = "US",
-#   start = "2020-01-01",
-#   end = "2022-12-31",
-#   level = 2,
-#   verbose = F
-# 
-# )
-# 
-# # Produces file saved here:
+)
 
-load(url("https://pols1600.paultesta.org/files/data/covid.rda"))
+
 
 ```
 
@@ -175,12 +171,7 @@ Uncomment the following code and replace the generic terms `data`, `variable1`, 
 
 ```{r}
 #| label: crosstab
-# table(data$variable1, data$variable2, useNA="ifany")
-```
-
-```{r}
-#| label: crosstab_sol
-table(covid_us$face_masks, covid_us$facial_coverings,useNA="ifany")
+ table(covid_us$face_masks, covid_us$facial_coverings, useNA="ifany")
 ```
 
 You've just created a "crosstab" a frequency table showing the joint distribution of two variables.
@@ -243,8 +234,6 @@ covid_us %>%
   arrange(earliest_date)
 ```
 
-## Please explain in words your best understanding of what each line of code is doing:
-
 -   `covid_us %>%` tells R that every line of code after will use `covid_us` dataframe
 -   `filter(facial_coverings == -4) %>%` tells R to filter out only the rows where the facial coverings variable equals -4
 -   `select(date, state) %>%` tells R to select the columns named `date` and `state`
@@ -266,68 +255,6 @@ Substantively, what does the previous chunk of code tell us?
 > Filtering data, selecting specific variables, and summarizing variables are important skills that let us "know our data"
 :::
 
-# Look at the source data for face mask policies
-
-To make sure we understand what this policy variable `facial_coverings` is measuring, let's download the source data from Oxford
-
-```{r}
-#| label: oxford
-oxford_us <- read_csv("https://github.com/OxCGRT/USA-covid-policy/raw/master/data/OxCGRT_US_latest.csv")
-```
-
-Now let's look at the policy on face masks for Illinois. From Oxford's [codebook](https://github.com/OxCGRT/covid-policy-tracker/blob/master/documentation/codebook.md), we learn that variables describing face mask policies all begin with the prefix `H6_`
-
-::: blue
-> Using common prefixes for a variable is a good habit that will help you organize and work with your data
-:::
-
-## Please run the following code:
-
-```{r}
-#| label: ilfacemask
-oxford_us %>%
-  mutate(
-    date = ymd(Date)
-  )%>%
-  filter(RegionName == "Illinois", 
-         date > "2020-08-01", 
-         date < "2021-01-01",
-         !is.na(H6_Notes)) %>%
-  select(date,starts_with("H6_")) -> il_facemasks
-il_facemasks
-```
-
-## Again, explain in words, what the components of this code are doing:
-
--   `oxford_us %>%` Tells R to use the Oxford policy data
--   `mutate(date = ymd(Date))%>%` Creates a `date` variable of class `date` from the original `Date` variable (which was class `numeric`)
--   `filter(RegionName == "Illinois",` subsets the data to just Illinois
--   `date > "2020-08-01",` filters out dates before August 1, 2020
--   `date < "2021-01-01",` filters out observations with dates after January 1,2021
--   `!is.na(H6_Notes)) %>%` filters out observations without notes (which appear in the data when policy changes)
--   `select(date,starts_with("H6_")) -> il_facemasks` Selects just the date and notes variables and saves them to an object called `il_facemasks`
--   `il_facemasks` prints the obejct in the console
-
-Let's take a look at the `H6_Notes` variable for 2020-09-18
-
-```{r}
-#| label: ilpol1
-il_facemasks$H6_Notes[3]
-```
-
-Now update the code to select `H6_Notes` variable for 2020-10-01
-
-```{r}
-#| label: ilpol2
-il_facemasks$H6_Notes[il_facemasks$date == "2020-10-01"]
-```
-
-## What have we learned about our variables measuring `face_mask` policy
-
-In Illinois, the -4's seem to correspond to more stringent mask policies implemented in Chicago relative to the rest of the state. So by collapsing negative and positive values of `facial_coverings` to construct our `face_mask` variable, we're probably over stating the extent the extensiveness of policies in effect.
-
-So we should be cautious in how we interpret our collapsed variable, `face_mask`. Perhaps we could construct another variable that distinguished state-level policies from more localized policies, or we could only look at cases where there was a uniform state policy.
-
 # Explore R's functions for generating summary statistics
 
 In class, we kind of rushed through our discussion of descriptive statistics. Let's take a little time to review these concepts in more detail and see how to calculate them in R.
@@ -346,7 +273,7 @@ One of the most frequent measures of central tendency we'll use in this course i
 
 Suppose we have $n$ observations of some variable $x$. We can calculate the mean of $\bar{x}$ ("x bar), by adding up all the values of x
 
-\[ \bar{x}=\frac{1}{n}\sum\_{i=1}\^n x_i \]
+$$\bar{x}=\frac{1}{n}\sum_{i=1}^n x_i$$
 
 We'll see later in the course that means are closely related to the concept of expected values in probability and that conditional means (which we'll calculate below) are central to thinking about linear regression.
 
@@ -361,11 +288,11 @@ Last class, when we calculated the the average number of new cases under each ty
 
 Formally, you'll often see this written in terms of **Expected Values**: Something like
 
-\[ E\[Y\|X=x\] \]
+$$E[Y\|X=x]$$
 
 Or to make it more concrete:
 
-\[ E\[\text{New Cases} \| \text{Policy = "recommended"}\] \]
+$$E[\text{New Cases} | \text{Policy = "recommended"}]$$
 
 In code, we could accomplish this manually, using the index operator:
 
@@ -406,9 +333,9 @@ The median would be the value in the exact middle of that sequence, also known a
 
 Formally, we can define that median as:
 
-\[ M_x = X_i : \int*{-*\infty}\^{x_i} f_x(X)dx=\int{x_i}\^\infty f_x(X)dx=1/2 \]
+$$M_x = X_i : \int_{-\infty}^{x_i} f_x(X)dx=\int_{x_i}^\infty f_x(X)dx=1/2$$
 
-Which might look like Greek to you, which is fine. Just think of it as the middle value.
+Which might look like Greek to you, which is fine. Just think of it as the middle value. 
 
 #### Please calculate the median number of new Covid-19 cases per 100,000 using the `median()` function. How does it compare to the mean?
 
@@ -486,7 +413,7 @@ covid_us %>%
 
 The $p$-th percentile is the value of the observation such that 100\*p percent of the data are to the left and 100-100\*p are two the right.
 
-\[ p_x = X_i : \int*{-*\infty}\^{x_i} f_x(X)dx= p; \int{x_i}\^\infty f_x(X)dx=1-p \]
+$$p_x = X_i : \int_{-\infty}^{x_i} f_x(X)dx= p; \int_{x_i}^\infty f_x(X)dx=1-p$$
 
 The median is just the 50th percentile
 
@@ -507,10 +434,10 @@ Variance describes how much observations of a given measure vary around that mea
 
 The variance in a given sample is calculated by taking the average of the sum of squared deviations (i.e. differences) around a measure's mean.
 
-\[ \sigma\^2_x=\frac{1}{n-1}\sum\_{i=1}^n(x_i-^\bar{x})2 \]
+$$\sigma^2_x=\frac{1}{n-1}\sum_{i=1}^n(x_i-\bar{x})^2$$
 
 -   $x_i-\bar{x}$ is the deviation of each observation from the overall mean
--   $(x_i-\bar{x})^2}$ squaring this ensures that we treat positive and negative deviations the same when calculating the overall variance
+-   $(x_{i} - \bar{x})^2$ squaring this ensures that we treat positive and negative deviations the same when calculating the overall variance
 -   $\sum_{i=1}$ sums up all the differences
 -   $\frac{1}{n-1}$ is like taking the average of these differences (we divide by $n-1$ instead of $n$ for [statistical reasons](https://web.ma.utexas.edu/users/mks/M358KInstr/SampleSDPf.pdf) that we'll return two when we talk about estimation)
 
@@ -520,7 +447,7 @@ Use the `var()` function to calculate the variance of the `new_cases_pc` variabl
 #| label: var
 var(covid_us$new_cases_pc,na.rm=T)
 
-# Calculate by hand
+# To calculate by hand: 
 
 sum(
   (covid_us$new_cases_pc - mean(covid_us$new_cases_pc,na.rm=T))^2, 
@@ -535,7 +462,7 @@ Variance will be important for thinking about uncertainty and inference (e.g. ho
 
 A standard deviation is simply the square root of variable's variance.
 
-\[ \sigma\_x=\sqrt{\sigma^2_x}=\sqrt{\frac{1}{n-1}\sum_{i=1}^n(x_i-\bar{x})^2} \]
+$$\sigma\_x=\sqrt{\sigma^2_x}=\sqrt{\frac{1}{n-1}\sum_{i=1}^n(x_i-\bar{x})^2}$$
 
 Standard deviations are easier to interpet because their units are the same as variable.
 
@@ -564,7 +491,7 @@ Formally, the sample[^2] covariance of two variables can written as follows:
 
 [^2]: Astute readers might ask, why are you talking about samples? We'll come back to this later in the course when we talk about probability, estimation and statistical inference.
 
-\[ cov(x,y)=\frac{1}{n-1}\sum\_{i=1}\^n(x_i-\bar{x})(y_i-\bar{y}) \]
+$$cov(x,y)=\frac{1}{n-1}\sum_{i=1}^n(x_i-\bar{x})(y_i-\bar{y})$$
 
 #### Please calculate the covariance between the percent of state's population that is fully vaccinated (`percent_vaccinated`) and `new_cases_pc` using the `var()` function
 
@@ -581,7 +508,7 @@ The correlation between two variables takes their covariance and scales this by 
 
 Again, we can write this formally
 
-\[ \rho\_{x,y} = \frac{cov(x_y)}{\sigma_x,\sigma_y} \]
+$$\rho_{x,y} = \frac{cov(x_y)}{\sigma_x,\sigma_y}$$
 
 But don't sweat the formulas too much. I'm just contractually obligated to show you math.
 
@@ -611,8 +538,26 @@ covid_us %>%
     cor = cor(new_cases_pc, percent_vaccinated, use = "complete.obs")
   )
 
+```
+
+We can see that as the vaccination rate changes over time, the correlation between vaccination rate and new cases per capita is also changing over time. There seems to be no single stable relationship between percent vaccinated and the correlation between vaccination rate and new cases per capita. We can look at this further by also calculating the mean number of new cases per capita, in addition to the correlation. 
+
+```{r}
+covid_us %>%
+  filter(year > 2020)%>%
+  ungroup() %>%
+  group_by(year,month)%>%
+  summarise(
+    mn_per_vax = mean(percent_vaccinated, na.rm=T),
+    mn_newcases_pc = mean(new_cases_pc, na.rm=T),
+    cor = cor(new_cases_pc, percent_vaccinated, use = "complete.obs")
+  )
 
 ```
+
+After doing this, it seems like  the rate of vaccination increases quickly at first, and there is at first a clear negative relationship between vaccination and new  the number of new cases in 2021. However, new cases continue to fluctuate up and down over time, and the relationship between percent vaccinated and new cases seems to disappear after the first year.
+
+If we wanted to, we could continue to interpret this result further by looking at particular states one at a time, or by accounting for other factors that might confound the relationship between vaccination and new cases, which might include population density, behavior, policies, etc. 
 
 # Facemasks and New Cases of Covid-19
 
@@ -723,9 +668,9 @@ After October 2020, every state has at least some requirement, and the differenc
 
 Again this stuff is complicated. Lots of things are changing and these month comparisons are by no means perfect. Lot's of things differ between states with different mask policies. What we'd really like to know is a sort of counterfactual comparison between the number new cases in a state with a given policy and what those new cases would have been had that state had a different policy.
 
-The problem is, we don't get to see that counterfactual outcome. So how can we make causal claims about the effects of facemasks, or any other policy that interests us? Finding creative ways to answer these questions is the key to making credible causal claims.
+The problem is, we don't get to see that counterfactual outcome. So how can we make causal claims about the effects of facemasks, or any other policy that interests us? Finding creative ways to answer these questions is the key to making credible causal claims, which we will hear more about later in the class. 
 
-Next week, we'll explore how to make this figure and many more from our data
+Next week, we'll explore how to make this figure and many more from our data.
 
 # Summary
 
@@ -757,6 +702,3 @@ When you encounter a problem you can solve, send me an email, or ask your friend
 
 The only dumb question in this course is a question you don't ask!
 
-Please upload the html file produced by your .Rmd file to [Canvas]https://canvas.brown.edu/courses/1098409/assignments)
-
-Finally, please take a moment to complete this weeks [class survey](https://brown.co1.qualtrics.com/jfe/form/SV_bPGJjZUbZ55PR2K)
