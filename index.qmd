@@ -78,11 +78,11 @@ Room 325, 111 Thayer St
 library(knitr)
 library(tidyverse)
 library(kableExtra)
-# library(icons)
+#library(icons)
 library(fontawesome)
 start_date <- "2025-01-23"
 show_up_to_week <- 2
-show_solutions_up_to_week <- 0
+show_solutions_up_to_week <- 1
 fa_html_dependency()
 week <- paste0("Week ", 0:13)
 topic <- c(
