@@ -33,7 +33,7 @@ I don't expect anyone to be able to recite from memory the exact code, functions
 
 That said, you've already seen the code you need.
 
-It's available to you in multiple places like the [slides](https://josephessig-source.github.io/pols1600_site/slides/01-slides#/commented-code) and the comments to last week's lab. 
+It's available to you in multiple places like the [slides](https://josephessig-source.github.io/pols1600_site/slides/01-slides#/commented-code) and the comments to last week's lab [here](https://josephessig-source.github.io/pols1600_site/labs/01-lab-comments.html)
 
 My hope is that this lab will help you do the following:
 
@@ -87,9 +87,9 @@ For every lab:
 -   Check `Render on Save` and render the document again after completing a section or chunk (Error checking)
 -   Upload the final lab to [Canvas](https://canvas.brown.edu/courses/1102109/assignments).
 
-# Describe the components of the figure you're trying to reprodce
+# Q1: Describe the components of the figure you're trying to reprodce
 
-Recall, that we need `data`, `aesthetic` mappings and `geometries` to produce a figure. You can find the code from lab 1 in the commented solutions. 
+Recall, that we need `data`, `aesthetic` mappings and `geometries` to produce a figure. You can find the code from lab 1 [here](https://josephessig-source.github.io/pols1600_site/labs/01-lab-comments#uncomment-the-code-below-to-visualize-this-cases_by_month_and_policy)
 
 -   What is the data set used? (Hint it's a transformation of `covid_us`)
 -   What are the aesthetic mappings in this plot
@@ -99,7 +99,7 @@ Recall, that we need `data`, `aesthetic` mappings and `geometries` to produce a 
 
 # Step 1
 
-Describe in words what your code below is doing
+Q2: Describe in words what your code below is doing
 
 ```{r}
 # Write the code for Step 1 here
@@ -113,7 +113,7 @@ Use sub headers to break down step 2 into its constituent parts
 
 ## Step 2.1
 
-Describe briefly (in a sentence or two or a couple of bullet points) what this section does
+Q3: Describe briefly (in a sentence or two or a couple of bullet points) what this section does
 
 ```{r}
 # Write the code for Step 2.1 here
@@ -121,13 +121,13 @@ Describe briefly (in a sentence or two or a couple of bullet points) what this s
 
 ## Step 2.2
 
-Describe briefly (in a sentence or two or a couple of bullet points) what this section does
+Q4: Describe briefly (in a sentence or two or a couple of bullet points) what this section does
 
 ```{r}
 # Write the code for Step 2.2 here
 ```
 
-# Revise the figure in some way
+# Q5: Revise the figure in some way
 
 - Perhaps add a title and label. Or change the aesthetic mappings. Or maybe facet the figure by some other variable.
 
