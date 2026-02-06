@@ -92,40 +92,70 @@ For every lab:
 Recall, that we need `data`, `aesthetic` mappings and `geometries` to produce a figure. You can find the code from lab 1 [here](https://josephessig-source.github.io/pols1600_site/labs/01-lab-comments#uncomment-the-code-below-to-visualize-this-cases_by_month_and_policy)
 
 -   What is the data set used? (Hint it's a transformation of `covid_us`)
+
+your answer here. 
+
 -   What are the aesthetic mappings in this plot
+
+your answer here. 
+
 -   What is the geometry?
 
-# Outline and implement the steps you will need to complete this process {.unnumbered}
+your answer here. 
 
-# Step 1
 
-Q2: Describe in words what your code below is doing
+# Q2: Outline and implement (Q3) the steps you will need to complete this process {.unnumbered}
+
+1.  Set up our work space
+2.  _________________________
+3.  _________________________ 
+4.  Clean the data, creating the _________ dataframe. 
+5.  Recode a few variables: 
+  - create ____________________ per capita (hint: you will use lag() here) 
+  - create ____________________
+  - create ____________________
+5.  Calculate _________________________ using summarize and group_by
+6.  Reproduce the original figure using the data frame from step 5. 
+7.  Refine the figure
+
+# Q4: Describe in words what your code is doing
+
+For each chunk of code, describe in your own words what you are doing (e.g. we are loading the packages we need; I am adding a legend to the plot, etc.)
+
+# Step 1: Set up your workspace 
 
 ```{r}
-# Write the code for Step 1 here
+#| label: packages
+library(tidyverse)
+library(COVID19)
+library(lubridate)
+library(DT)
 ```
 
-# Step 2
+Describe what this code is doing here. 
 
-Perhaps Step 2 has multiple parts and code chunks
-
-Use sub headers to break down step 2 into its constituent parts
-
-## Step 2.1
-
-Q3: Describe briefly (in a sentence or two or a couple of bullet points) what this section does
+# Step 2 (fill this in yourself) 
 
 ```{r}
 # Write the code for Step 2.1 here
 ```
 
-## Step 2.2
+Describe briefly (in a sentence or two or a couple of bullet points) what this section does
 
-Q4: Describe briefly (in a sentence or two or a couple of bullet points) what this section does
+
+## Step 3 (continue filling in the steps)
+
 
 ```{r}
 # Write the code for Step 2.2 here
 ```
+
+Describe briefly (in a sentence or two or a couple of bullet points) what this section does
+
+
+## Step 4
+
+And so on, until you reach step 7 and reproduce the original figure. 
 
 # Q5: Revise the figure in some way
 

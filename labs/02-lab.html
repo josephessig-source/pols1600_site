@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Your Name HERE">
-<meta name="dcterms.date" content="2026-01-27">
+<meta name="dcterms.date" content="2026-02-06">
 
 <title>Lab 02 - Visualizing data on COVID-19 in the U.S. – POLS 1600</title>
 <style>
@@ -3886,16 +3886,16 @@ vertical-align: -.125em;
   <ul class="collapse">
   <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
   <li><a href="#please-render-this-.qmd-file-to-produce-a-.html-file" id="toc-please-render-this-.qmd-file-to-produce-a-.html-file" class="nav-link" data-scroll-target="#please-render-this-.qmd-file-to-produce-a-.html-file">Please render this .qmd file to produce a .html file</a></li>
-  <li><a href="#describe-the-components-of-the-figure-youre-trying-to-reprodce" id="toc-describe-the-components-of-the-figure-youre-trying-to-reprodce" class="nav-link" data-scroll-target="#describe-the-components-of-the-figure-youre-trying-to-reprodce"><span class="header-section-number">1</span> Describe the components of the figure you’re trying to reprodce</a></li>
-  <li><a href="#outline-and-implement-the-steps-you-will-need-to-complete-this-process" id="toc-outline-and-implement-the-steps-you-will-need-to-complete-this-process" class="nav-link" data-scroll-target="#outline-and-implement-the-steps-you-will-need-to-complete-this-process">Outline and implement the steps you will need to complete this process</a></li>
-  <li><a href="#step-1" id="toc-step-1" class="nav-link" data-scroll-target="#step-1"><span class="header-section-number">2</span> Step 1</a></li>
-  <li><a href="#step-2" id="toc-step-2" class="nav-link" data-scroll-target="#step-2"><span class="header-section-number">3</span> Step 2</a>
+  <li><a href="#q1-describe-the-components-of-the-figure-youre-trying-to-reprodce" id="toc-q1-describe-the-components-of-the-figure-youre-trying-to-reprodce" class="nav-link" data-scroll-target="#q1-describe-the-components-of-the-figure-youre-trying-to-reprodce"><span class="header-section-number">1</span> Q1: Describe the components of the figure you’re trying to reprodce</a></li>
+  <li><a href="#q2-outline-and-implement-q3-the-steps-you-will-need-to-complete-this-process" id="toc-q2-outline-and-implement-q3-the-steps-you-will-need-to-complete-this-process" class="nav-link" data-scroll-target="#q2-outline-and-implement-q3-the-steps-you-will-need-to-complete-this-process">Q2: Outline and implement (Q3) the steps you will need to complete this process</a></li>
+  <li><a href="#q4-describe-in-words-what-your-code-is-doing" id="toc-q4-describe-in-words-what-your-code-is-doing" class="nav-link" data-scroll-target="#q4-describe-in-words-what-your-code-is-doing"><span class="header-section-number">2</span> Q4: Describe in words what your code is doing</a></li>
+  <li><a href="#step-1-set-up-your-workspace" id="toc-step-1-set-up-your-workspace" class="nav-link" data-scroll-target="#step-1-set-up-your-workspace"><span class="header-section-number">3</span> Step 1: Set up your workspace</a></li>
+  <li><a href="#step-2-fill-this-in-yourself" id="toc-step-2-fill-this-in-yourself" class="nav-link" data-scroll-target="#step-2-fill-this-in-yourself"><span class="header-section-number">4</span> Step 2 (fill this in yourself)</a>
   <ul class="collapse">
-  <li><a href="#step-2.1" id="toc-step-2.1" class="nav-link" data-scroll-target="#step-2.1"><span class="header-section-number">3.1</span> Step 2.1</a></li>
-  <li><a href="#step-2.2" id="toc-step-2.2" class="nav-link" data-scroll-target="#step-2.2"><span class="header-section-number">3.2</span> Step 2.2</a></li>
+  <li><a href="#step-3-continue-filling-in-the-steps" id="toc-step-3-continue-filling-in-the-steps" class="nav-link" data-scroll-target="#step-3-continue-filling-in-the-steps"><span class="header-section-number">4.1</span> Step 3 (continue filling in the steps)</a></li>
+  <li><a href="#step-4" id="toc-step-4" class="nav-link" data-scroll-target="#step-4"><span class="header-section-number">4.2</span> Step 4</a></li>
   </ul></li>
-  <li><a href="#revise-the-figure-in-some-way" id="toc-revise-the-figure-in-some-way" class="nav-link" data-scroll-target="#revise-the-figure-in-some-way"><span class="header-section-number">4</span> Revise the figure in some way</a></li>
-  <li><a href="#class-survey" id="toc-class-survey" class="nav-link" data-scroll-target="#class-survey"><span class="header-section-number">5</span> CLASS SURVEY</a></li>
+  <li><a href="#q5-revise-the-figure-in-some-way" id="toc-q5-revise-the-figure-in-some-way" class="nav-link" data-scroll-target="#q5-revise-the-figure-in-some-way"><span class="header-section-number">5</span> Q5: Revise the figure in some way</a></li>
   </ul>
 </nav>
     </div>
@@ -3921,7 +3921,7 @@ vertical-align: -.125em;
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">January 27, 2026</p>
+      <p class="date">February 6, 2026</p>
     </div>
   </div>
   
@@ -3948,7 +3948,7 @@ vertical-align: -.125em;
 <p>And then adapt and improve this figure (or other figures) to explore questions we have about the data</p>
 <p>I don’t expect anyone to be able to recite from memory the exact code, functions, and syntax to accomplish this task.</p>
 <p>That said, you’ve already seen the code you need.</p>
-<p>It’s available to you in multiple places like the <a href="https://pols1600.paultesta.org/slides/01-slides#/commented-code">slides</a> and the comments to last week’s <a href="https://pols1600.paultesta.org/labs/01-lab-comments.html">labs</a></p>
+<p>It’s available to you in multiple places like the <a href="https://josephessig-source.github.io/pols1600_site/slides/01-slides#/commented-code">slides</a> and the comments to last week’s lab <a href="https://josephessig-source.github.io/pols1600_site/labs/01-lab-comments.html">here</a></p>
 <p>My hope is that this lab will help you do the following:</p>
 <ul>
 <li><strong>Chunk big tasks into smaller concrete steps</strong>
@@ -4012,57 +4012,83 @@ vertical-align: -.125em;
 <li>Render the document</li>
 <li>Open the html file in your browser (Easier to read)</li>
 <li>Check <code>Render on Save</code> and render the document again after completing a section or chunk (Error checking)</li>
-<li>Upload the final lab to <a href="https://canvas.brown.edu/courses/1094972/assignments" target="_blank">Canvas</a>.</li>
+<li>Upload the final lab to <a href="https://canvas.brown.edu/courses/1102109/assignments">Canvas</a>.</li>
 </ul>
 </section>
-<section id="describe-the-components-of-the-figure-youre-trying-to-reprodce" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Describe the components of the figure you’re trying to reprodce</h1>
-<p>Recall, that we need <code>data</code>, <code>aesthetic</code> mappings and <code>geometries</code> to produce a figure. You can find the code from lab 1 <a href="https://pols1600.paultesta.org/labs/01-lab-comments#uncomment-the-code-below-to-visualize-this-cases_by_month_and_policy">here</a></p>
+<section id="q1-describe-the-components-of-the-figure-youre-trying-to-reprodce" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Q1: Describe the components of the figure you’re trying to reprodce</h1>
+<p>Recall, that we need <code>data</code>, <code>aesthetic</code> mappings and <code>geometries</code> to produce a figure. You can find the code from lab 1 <a href="https://josephessig-source.github.io/pols1600_site/labs/01-lab-comments#uncomment-the-code-below-to-visualize-this-cases_by_month_and_policy">here</a></p>
 <ul>
 <li>What is the data set used? (Hint it’s a transformation of <code>covid_us</code>)</li>
+</ul>
+<p>your answer here.</p>
+<ul>
 <li>What are the aesthetic mappings in this plot</li>
+</ul>
+<p>your answer here.</p>
+<ul>
 <li>What is the geometry?</li>
 </ul>
+<p>your answer here.</p>
 </section>
-<section id="outline-and-implement-the-steps-you-will-need-to-complete-this-process" class="level1 unnumbered">
-<h1 class="unnumbered">Outline and implement the steps you will need to complete this process</h1>
+<section id="q2-outline-and-implement-q3-the-steps-you-will-need-to-complete-this-process" class="level1 unnumbered">
+<h1 class="unnumbered">Q2: Outline and implement (Q3) the steps you will need to complete this process</h1>
+<ol type="1">
+<li>Set up our work space</li>
+<li><hr></li>
+<li><hr></li>
+<li>Clean the data, creating the _________ dataframe.</li>
+<li>Recode a few variables:</li>
+</ol>
+<ul>
+<li>create ____________________ per capita (hint: you will use lag() here)</li>
+<li>create ____________________</li>
+<li>create ____________________</li>
+</ul>
+<ol start="5" type="1">
+<li>Calculate _________________________ using summarize and group_by</li>
+<li>Reproduce the original figure using the data frame from step 5.</li>
+<li>Refine the figure</li>
+</ol>
 </section>
-<section id="step-1" class="level1" data-number="2">
-<h1 data-number="2"><span class="header-section-number">2</span> Step 1</h1>
-<p>Describe in words what your code below is doing</p>
+<section id="q4-describe-in-words-what-your-code-is-doing" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Q4: Describe in words what your code is doing</h1>
+<p>For each chunk of code, describe in your own words what you are doing (e.g. we are loading the packages we need; I am adding a legend to the plot, etc.)</p>
+</section>
+<section id="step-1-set-up-your-workspace" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Step 1: Set up your workspace</h1>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Write the code for Step 1 here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(COVID19)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DT)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p>Describe what this code is doing here.</p>
 </section>
-<section id="step-2" class="level1" data-number="3">
-<h1 data-number="3"><span class="header-section-number">3</span> Step 2</h1>
-<p>Perhaps Step 2 has multiple parts and code chunks</p>
-<p>Use sub headers to break down step 2 into its constituent parts</p>
-<section id="step-2.1" class="level2" data-number="3.1">
-<h2 data-number="3.1" class="anchored" data-anchor-id="step-2.1"><span class="header-section-number">3.1</span> Step 2.1</h2>
-<p>Describe briefly (in a sentence or two or a couple of bullet points) what this section does</p>
+<section id="step-2-fill-this-in-yourself" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Step 2 (fill this in yourself)</h1>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Write the code for Step 2.1 here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section>
-<section id="step-2.2" class="level2" data-number="3.2">
-<h2 data-number="3.2" class="anchored" data-anchor-id="step-2.2"><span class="header-section-number">3.2</span> Step 2.2</h2>
 <p>Describe briefly (in a sentence or two or a couple of bullet points) what this section does</p>
+<section id="step-3-continue-filling-in-the-steps" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="step-3-continue-filling-in-the-steps"><span class="header-section-number">4.1</span> Step 3 (continue filling in the steps)</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Write the code for Step 2.2 here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p>Describe briefly (in a sentence or two or a couple of bullet points) what this section does</p>
+</section>
+<section id="step-4" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="step-4"><span class="header-section-number">4.2</span> Step 4</h2>
+<p>And so on, until you reach step 7 and reproduce the original figure.</p>
 </section>
 </section>
-<section id="revise-the-figure-in-some-way" class="level1" data-number="4">
-<h1 data-number="4"><span class="header-section-number">4</span> Revise the figure in some way</h1>
+<section id="q5-revise-the-figure-in-some-way" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Q5: Revise the figure in some way</h1>
 <ul>
 <li><p>Perhaps add a title and label. Or change the aesthetic mappings. Or maybe facet the figure by some other variable.</p></li>
-<li><p>Check out the examples from <a href="https://pols1600.paultesta.org/slides/02-slides#/dataviz-describing-distributions-and-associations">Tuesday’s slides</a></p></li>
+<li><p>Check out the examples from <a href="https://josephessig-source.github.io/pols1600_site/slides/02-slides#/dataviz-describing-distributions-and-associations">Tuesday’s slides</a></p></li>
 </ul>
-</section>
-<section id="class-survey" class="level1" data-number="5">
-<h1 data-number="5"><span class="header-section-number">5</span> CLASS SURVEY</h1>
-<p>Finally, please take a moment to complete this week’s <a href="https://brown.co1.qualtrics.com/jfe/form/SV_9WCkw7pc2OlDLi6">class survey</a></p>
 
 
 </section>
@@ -4140,7 +4166,7 @@ vertical-align: -.125em;
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/josephessig-source\.github\.io\/pols1600_site\/");
+        var filterRegex = new RegExp('/' + window.location.host + '/');
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
