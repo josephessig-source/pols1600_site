@@ -1,0 +1,643 @@
+---
+title: "Week 13:"
+subtitle: "Last Class"
+author: "Paul Testa"
+output:
+  xaringan::moon_reader:
+    css: ["default", "css/brown.css"]
+    lib_dir: libs
+    nature:
+      highlightStyle: atelier-lakeside-light
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+```{r}
+#| label = "setup",
+#| include = FALSE
+options(htmltools.dir.version = FALSE)
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, 
+  comment = NA, dpi = 300,
+  fig.align = "center", out.width = "80%", cache = FALSE)
+library("tidyverse")
+```
+
+```{r}
+#| label = "xaringan-tile-view",
+#| echo = FALSE
+xaringanExtra::use_tile_view()
+```
+
+```{r}
+#| label = "xaringanExtra-clipboard",
+#| echo = FALSE
+htmltools::tagList(
+  xaringanExtra::use_clipboard(
+    button_text = "<i class=\"fa fa-clipboard\"></i>",
+    success_text = "<i class=\"fa fa-check\" style=\"color: #90BE6D\"></i>",
+  ),
+  rmarkdown::html_dependency_font_awesome()
+)
+```
+
+
+
+```{r}
+#| label = "packages",
+#| include = F
+the_packages <- c(
+  ## R Markdown
+  "kableExtra","DT","texreg",
+  ## Tidyverse
+  "tidyverse", "lubridate", "forcats", "haven", "labelled",
+  ## Extensions for ggplot
+  "ggmap","ggrepel", "ggridges", "ggthemes", "ggpubr", 
+  "GGally", "scales", "dagitty", "ggdag", "ggforce",
+  # Graphics:
+  "scatterplot3d", #<<
+  # Data 
+  "COVID19","maps","mapdata","qss","tidycensus", "dataverse", 
+  # Analysis
+  "DeclareDesign", "easystats", "zoo"
+)
+```
+
+```{r}
+#| label = "ipak",
+#| include = F
+ipak <- function(pkg){
+    new.pkg <- pkg[!(pkg %in% installed.packages()[, "Package"])]
+    if (length(new.pkg)) 
+        install.packages(new.pkg, dependencies = TRUE)
+    sapply(pkg, require, character.only = TRUE)
+}
+
+```
+
+
+```{r}
+#| label = "loadpackages",
+#| cache = F,
+#| include = F
+ipak(the_packages)
+```
+
+
+```{r}
+#| label = "feedback",
+#| echo = F,
+#| message = F
+df <- haven::read_spss("../files/data/wk13.sav")
+
+```
+
+
+```{r}
+#| label = "data",
+#| echo = F,
+#| results = "hide"
+df$g2_project
+df %>%
+   unite("group_contrib_1", ends_with("_contrib_1"),na.rm = T)%>%
+   unite("group_contrib_2", ends_with("_contrib_2"),na.rm = T)%>%
+   unite("group_contrib_3", ends_with("_contrib_3"),na.rm = T)%>%
+   unite("group_contrib_4", ends_with("_contrib_4"),na.rm = T)%>%
+   unite("group_grp_ind", ends_with("_grp_ind"),na.rm = T)%>%
+   unite("group_project", ends_with("_project"),na.rm = T) %>%
+   mutate_at(c("group_contrib_1","group_contrib_2","group_contrib_3","group_contrib_4"), ~as.numeric(.)) -> df
+
+df$group_project
+ayuvedic_groups <- sample(c("Sweet", "Sour","Salty","Pungent","Bitter","Astringent"),6)
+ayuvedic_groups
+turtles <- sample(c("Leonardo", "Donatello","Raphael","Michelangelo"))
+df$groups
+df %>%
+  mutate(
+    Tastes = case_when(
+      groups == 1 ~ ayuvedic_groups[1],
+      groups == 2 ~ ayuvedic_groups[2],
+      groups == 3 ~ ayuvedic_groups[3],
+      groups == 4 ~ ayuvedic_groups[4],
+      groups == 5 ~ ayuvedic_groups[5],
+      groups == 6 ~ ayuvedic_groups[6]
+    )
+  ) -> df
+
+df %>%
+  select(starts_with("group_contrib"),"Tastes") %>%
+  pivot_longer(
+    cols = starts_with("group_contrib")
+  ) %>%
+  mutate(
+    Turtles = case_when(
+      name == "group_contrib_1" ~ turtles[1],
+      name == "group_contrib_2" ~ turtles[2],
+      name == "group_contrib_3" ~ turtles[3],
+      name == "group_contrib_4" ~ turtles[4]
+
+    )
+  ) %>%
+  na.omit()%>%
+  ggplot(aes(value, Tastes))+
+  geom_density_ridges(
+    alpha = 0.1, scale = 0.9,
+    jittered_points = F,
+  )+ 
+  geom_density_ridges(
+    jittered_points = TRUE,
+    alpha = 0, scale = 0.9,
+    color = NA,
+    point_alpha = 1,
+    aes(point_color = Turtles, group = Tastes)
+  ) +
+  theme_bw()+
+  labs(x="") -> fig_group
+
+```
+
+
+
+class:inverse, bottom, center
+
+background-image: url("https://www.visitithaca.com/sites/default/files/inline-images/lucifer%20falls%20Brad%20Marzolf%20-%20web%20size_1.PNG")
+background-size: cover
+
+# Overview
+
+---
+## General Plan
+
+- Course Summary
+
+- Course Feedback
+
+- AMA
+
+- Paper Workshop
+
+
+---
+class: bottom, center
+background-image: url("https://www.powerthesaurus.org/_images/terms/summery-synonyms-2.png")
+bacground-size: contain
+
+
+---
+## What was this course about?
+
+--
+
+- How would you know?
+
+--
+
+- How would convince someone who thinks they know different?
+
+--
+
+- What would it take to change what you think you know?
+
+---
+## Why Quantitative Social Science?
+
+What makes for quantitative social science 
+
+- Compelling?
+
+- Useful?
+
+- Hard?
+
+--
+
+Statistical methods and programming are tools not answers 
+
+--
+
+Producing knowledge requires us to match theory with empirical design
+
+--
+
+Being "right" is less important than understanding all the ways you might be wrong. 
+
+--
+
+Good social science is urgent, eclectic, transparent, contingent, and ?
+
+
+## What you've learned
+
+Skills and concepts to help understand and practice quantitative social science
+
+- **Causal Inference** is about counterfactual comparisons
+  
+  - Experimental designs $\to$ random assignment
+  
+  - Observational design $\to$ identifying assumptions $\to$ conditional independence
+
+- **Regression** is a tool for describing relationships
+
+  - OLS provides a linear approximation of the Conditional Expectation Function
+  
+  - Regression can be used for descriptive, predictive, and causal inference. 
+
+- **Statistical inference** is about quantifying uncertainty about what could have happened
+
+  - Confidence intervals provide a range of plausible values for we observed
+  
+  - Hypothesis tests describe the conditional probability of observing what we did, if some hypothesis were true.
+
+
+
+
+---
+class:inverse, bottom, center
+background-image: url("https://i.imgflip.com/6f1aul.jpg")
+bacground-size: cover
+# 📢
+## Feedback
+
+
+---
+## What we liked
+
+```{r}
+#| label = "likes",
+#| echo = F,
+#| out.height = "90%"
+DT::datatable(df %>% 
+                select(Likes),
+               fillContainer = F,
+              height = "90%",
+              options = list(
+                pageLength = 4
+              )
+              )
+```
+
+
+---
+## What we disliked
+
+```{r}
+#| label = "dislikes",
+#| echo = F
+
+DT::datatable(df %>% 
+                select(Disliked),
+               fillContainer = F,
+              height = "90%",
+              options = list(
+                pageLength = 3
+              )
+              )
+```
+
+---
+## What we learned
+
+```{r}
+#| label = "learn",
+#| echo = F
+
+DT::datatable(df %>% 
+                select(Learned),
+               fillContainer = F,
+              height = "90%",
+              options = list(
+                pageLength = 3
+              )
+              )
+```
+
+---
+## What we're still learning
+
+```{r}
+#| label = "lacked",
+#| echo = F
+
+DT::datatable(df %>% 
+                select(Lacked),
+               fillContainer = F,
+              height = "90%",
+              options = list(
+                pageLength = 3
+              )
+              )
+```
+
+---
+## How'd I do?
+
+.pull-left[
+```{r}
+#| echo = FALSE
+knitr::include_graphics("02-slides_files/figure-html/unnamed-chunk-29-1.png")
+```
+]
+
+--
+
+.pull-right[
+```{r}
+#| echo = F
+
+df%>%
+  ggplot(aes(eval_2))+
+  geom_density()+
+  geom_rug()
+```
+]
+
+---
+## How'd you do?
+
+```{r}
+#| echo = F,
+#| fig.height = 6
+
+df%>%
+  ggplot(aes(eval_1,eval_3, col = eval_2))+
+  geom_point()+
+  geom_abline(intercept = 0, slope =1)+
+  xlim(0,100)+
+  ylim(0,100)+
+  labs(
+    x = "You",
+    y = "Your Peers",
+    col = "Me"
+  )+theme_bw()
+```
+
+
+---
+## Are you happy you took POLS 1600?
+
+
+---
+```{r}
+#| echo = F
+df %>%
+  mutate(
+    Happy = case_when(
+      happy == 1 ~ "Yes",
+      happy == 2 ~ "No",
+      T ~ "Just here for the tacos"
+    ),
+    Happy = factor(Happy, levels = c("Just here for the tacos","No","Yes"))
+  )  %>%
+  ggplot(aes(Happy, fill = Happy))+
+  geom_bar(stat = "count")+
+  scale_fill_brewer()+
+  coord_flip()
+```
+
+---
+
+
+```{r}
+#| label = "happy",
+#| echo = F
+DT::datatable(df %>% 
+                select(happy_why),
+               fillContainer = F,
+              height = "90%",
+              options = list(
+                pageLength = 2
+              )
+              )
+```
+
+
+
+
+---
+## What I'll Do
+
+
+- Lectures: 
+  - Less is more
+  - How much math...
+  - More supplemental content (class notes)
+  - More active learning
+  - Integrating the textbook
+
+--
+
+- Labs: 
+  - Seemed to work ok
+  - Group work vs individual learning?
+  - Greater integration with textbook and lecture
+
+--
+
+- Assignments and Grading
+  - Mostly liked the group project
+  - Tutorials were helpful
+  - More individualized assignments/accountability?
+
+
+
+---
+class:inverse, middle, center
+# 🔍
+## AMA
+
+
+---
+## Ask *you* anthing? Ok boomer...
+
+```{r}
+sum(df$ama == "")
+```
+
+
+---
+
+> "how many cats do you have"
+
+
+--
+
+We've had three cats, Isla, Abby and, currently Toby.
+
+
+---
+
+> "What is the craziest moment from your time in undergrad?"
+
+--
+
+```{r }
+#| echo = F,
+#| fig.height = 5
+knitr::include_graphics("https://static1.srcdn.com/wordpress/wp-content/uploads/2020/08/andy-went-to-cornell.jpg?q=50&fit=crop&w=740&h=370&dpr=1.5")
+```
+
+
+---
+
+<iframe src="https://www.google.com/maps/embed?pb=!4v1651767189392!6m8!1m7!1s0BKSYVIOjXGXLO03JSCPNw!2m2!1d42.44124098544037!2d-76.48233296418469!3f200.43895!4f0!5f0.7820865974627469" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+
+---
+
+> "I am interested to know why you decided to go to graduate school, what other career paths you were deciding between, and whether you believe you made the right decision to go into academia and why?"
+
+--
+
+```{r }
+#| echo = F,
+#| fig.height = 5
+knitr::include_graphics("https://aces.illinois.edu/sites/aces.illinois.edu/files/inline-images/aces-research-history-morrow-plots--uw.jpg")
+```
+
+
+
+
+---
+
+> "What’s your favorite musical"
+
+--
+
+```{r }
+#| echo = F,
+#| fig.height = 5
+knitr::include_graphics("https://upload.wikimedia.org/wikipedia/en/f/f7/Newsies_%28musical%29_poster.jpg")
+```
+
+
+
+---
+
+
+>"If we want to, how should we develop our R skills by ourselves at Brown? 
+
+> Best book you ever read? 
+
+> Book you think someone in their early 20s should read?"
+
+
+---
+# Use it or lose it
+
+- Classes at Brown
+
+- Write a Thesis
+
+- RA for a professor/grad student
+
+- Online resources:
+
+  - Mastering the tidyverse: <https://r4ds.had.co.nz/>
+
+  - Casual Inference Mixtape: <https://mixtape.scunning.com/>
+
+  - Declare Design: <https://book.declaredesign.org/index.html>
+
+---
+
+> "What's your favorite part of teaching this class?"
+
+--
+
+
+
+```{r }
+#| echo = F,
+#| fig.height = 5
+knitr::include_graphics("https://tvseriesfinale.com/wp-content/uploads/2019/11/you-tv-series.jpg")
+```
+
+
+---
+
+
+> "What is your favorite pair of sneakers?"
+
+
+> "What is your favorite spot in providence?"
+
+
+> "Doing anything fun this summer?"
+
+---
+
+![](https://i.ebayimg.com/images/g/1CIAAOSwnuJex-Tg/s-l300.jpg)
+
+---
+
+> "IAPA or Poli Sci?"
+
+--
+
+- Do you really have to ask?
+
+
+---
+
+> "Should I ask you to hook me up with an opportunity in the future?  How should I go about it?" 
+
+--
+
+> How consistent were people's ratings in the previous survey question (did people generally agree/disagree on who did the most/least work.)
+
+---
+
+```{r}
+#| echo = F
+fig_group
+```
+
+
+---
+
+> "Should I ask you to hook me up with an opportunity in the future?  How should I go about it?" 
+
+
+> How consistent were people's ratings in the previous survey question (did people generally agree/disagree on who did the most/least work.)
+
+--
+
+> I feel like we as a class didn't engage very much during lecture.  How was that like?
+
+--
+
+> Is doing data science really dry and gonna make me hate the next 40 years of my life just living"
+
+
+---
+
+> "What’s one thing (or more, if applicable) that you’re really glad to did in college?"
+
+- Wrote for the school paper
+
+> "What’s one thing (or more) you wish you had done?" 
+
+- Taken more math classes...
+
+> "What’s one thing (or more) you wish you hadn’t done? Can be school or social or planning for post college related"
+
+- Slept in because I worked late at the paper
+
+---
+
+> "Are there academic careers in PoliSci that aren't math/statistics based?"
+
+--
+
+- Yes! Why do you ask?
+
+---
+
+> "Did you doubt yourself throughout your higher education career? How did you overcome it? Oftentimes, I have very high standards for myself that I am not capable of meeting and which bring a lot of shame. I fear my ability to succeed and actually obtain the career I seek requires skills, abilities, and experience that I never seem any closer to acquiring. Did you think you would end up here at Brown? How DID you end up at Brown?"
+
+
+
+---
+# Thank You
+
+<iframe src="https://player.vimeo.com/video/19216275?h=1dac696474" width="640" height="480" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+<p><a href="https://vimeo.com/19216275">Good Riddance (Time of your life) - Green Day</a> from <a href="https://vimeo.com/user5835576">Temazo Mal</a> on <a href="https://vimeo.com">Vimeo</a>.</p>

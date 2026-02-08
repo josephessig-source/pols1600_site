@@ -1,0 +1,835 @@
+---
+title: "Comments for Lab 09 - Exploring Russians' Attitudes About the War in Ukraine with OLS and Logistic Regression"
+author: "Your Group Members Names Here"
+date: "Last Updated `r format(Sys.Date())`"
+output:
+  html_document:
+    theme: journal
+    toc: TRUE
+    toc_float: TRUE
+    toc_depth: 2
+    number_sections: TRUE
+---
+
+```{r setup, include = FALSE, cache = FALSE}
+knitr::opts_chunk$set(error = TRUE, 
+                      comment = NA, 
+                      warnings = FALSE, 
+                      errors = FALSE, 
+                      message = FALSE, 
+                      cache = TRUE,
+                      tidy = FALSE)
+
+htmltools::tagList(
+  xaringanExtra::use_clipboard(
+    button_text = "<i class=\"fa fa-clipboard\"></i>",
+    success_text = "<i class=\"fa fa-check\" style=\"color: #90BE6D\"></i>",
+  ),
+  rmarkdown::html_dependency_font_awesome()
+)
+```
+
+```{css sidenote, echo = FALSE}
+.sidenote, .marginnote { 
+  float: right;
+  clear: right;
+  margin-right: -60%;
+  width: 50%;         # best between 50% and 60%
+  margin-top: 0;
+  margin-bottom: 0;
+  font-size: 1.1rem;
+  line-height: 1.3;
+  vertical-align: baseline;
+  position: relative;
+  }
+```
+
+<style>
+div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}
+</style>
+
+
+
+# Overview {-}
+
+Today, we will return to exploring Russians' support the war in Ukraine using a public opinion survey from Russia conducted by Alexei Miniailo's ["Do Russians Want War"](https://www.dorussianswantwar.com/en) project. 
+
+The survey was conducted by phone using a random sample of mobile phone numbers to produce a sample of respondents representative of the population in terms of age, sex, and geography. It was in the field from February 28 to March 2.
+
+First, we will explore how support for the war varies with the demographic predictors  `age`, `sex` and `education`. We will compare the results of modeling this relationship using **Ordinary Least Squares** regression and **Logisitic Regression**
+
+We'll talk more about the [technical aspects](https://pols1600.paultesta.org/slides/09-slides.html#116){target="_blank"} of logistic regression next week.  For today we'll simply compare the results from these two approaches.
+
+Next, we will gain insight into how our estimates from these models might vary using the statistical process of **bootstrapping**. Specifically, we will simulate the idea of **repeated sampling** that is the foundation of frequentist interpretations of probability, by sampling from our sample **with replacement**. 
+
+We'll walk through the mechanics of simulation together. Then you'll quantify the uncertainty described by these bootstrapped sampling distributions.
+
+Finally, we'll see what other questions we might ask of these data and practice various skills we've developed through out the course.
+
+Plan to spend the following amount of time on each section
+
+1. Get set up to work (5 minutes)
+
+2. Model the relationship between demographic predictors and war support using OLS and Logistic regression (20 minutes)
+
+3. Assess the uncertainty around your estimated coefficients (15 minutes)
+
+4. Quantify the uncertainy described by your sampling distributions (10 minutes)
+
+5. Explore other relationships in the data. (30 minutes)
+
+The graded question for today is:
+
+```{r graded}
+set.seed(472022)
+graded_question <- sample(1:5,size = 1)
+paste("Question",graded_question,"is the graded question for this week")
+```
+
+You will work in your assigned groups. Only one member of each group needs to submit the html file produced by knitting the lab.
+
+This lab **must** contain the names of the group members in attendance.
+
+If you are attending remotely, you will submit your labs individually. 
+
+You can find your assigned groups in previous [labs](https://pols1600.paultesta.org/labs/06-lab-comments.html){target="_blank"}
+
+# Goals {-}
+
+Today's lab covers a little bit of everything. You will
+
+- learn how to model binary outcomes using logistic regression
+
+- develop an intuition for how to think about uncertainty using simulations to describe what might have happened
+
+- practice formulating, estimating, presenting and interpreting regression models.
+
+
+
+
+# Workflow {-}
+
+# Please knit this .Rmd file {-}
+
+As with every lab, you should:
+
+- Download the file
+- Save it in your course folder
+- **Update the `author:` section of the YAML header to include the names of your group members in attendance.**
+- Knit the document
+- Open the html file in your browser (Easier to read)
+- Write yourcode in the chunks provided
+- Comment out or delete any test code you do not need
+- **Knit the document again after completing a section or chunk** (Error checking)
+- Upload the final lab to [Canvas](https://canvas.brown.edu/courses/1087979/assignments/7870531?module_item_id=10762404){target="_blank"}.
+
+
+# Get setup to work
+
+
+## Load Packages
+
+First lets load the libraries we'll need for today.
+
+```{r packages, message=F}
+the_packages <- c(
+  ## R Markdown
+  "kableExtra","DT","texreg","htmltools",
+  "flair", # Comments only
+  ## Tidyverse
+  "tidyverse", "lubridate", "forcats", "haven", "labelled",
+  "modelr", "purrr",
+  ## Extensions for ggplot
+  "ggmap","ggrepel", "ggridges", "ggthemes", "ggpubr", 
+  "GGally", "scales", "dagitty", "ggdag", "ggforce",
+  # Data 
+  "COVID19","maps","mapdata","qss","tidycensus", "dataverse",
+  # Analysis
+  "DeclareDesign", "boot"
+)
+
+# Define function to load packages
+ipak <- function(pkg){
+    new.pkg <- pkg[!(pkg %in% installed.packages()[, "Package"])]
+    if (length(new.pkg)) 
+        install.packages(new.pkg, dependencies = TRUE)
+    sapply(pkg, require, character.only = TRUE)
+}
+
+ipak(the_packages)
+```
+
+There are three packages in particular that we'll need to maker sure are installed and loaded 
+
+- `modelr`
+- `purrr`
+- `broom`
+
+If `ipak` didn't return `TRUE` for each of these, please uncomment and run:
+
+```{r installifneeded}
+# install.packages("modelr")
+# install.packages("purrr")
+# install.packages("broom")
+```
+
+
+## Load the data
+
+Next we'll load the recoded data for the lab 
+
+Our primary outcome of interest (dependent variable) for today is a binary measure of support for war:
+
+- `support_war01` "Please tell me, do you support or do not support Russia's military actions on the territory of Ukraine?" (1=yes, 0 = no)
+
+Our key predictors (independent variables) are the following demographic variables:
+
+- `age` "How old are you?"
+
+- `sex` "Gender of respondent" (As assessed by the interviewer)
+
+- `education_n` "What is your highest level of education (confirmed by a diploma, certificate)?" (1 = Primary school, 2 = "High School", 3 = "Vocational School" 4 = "College", 5 = Graduate Degree)^[I think, google translate was a bit unclear. But higher numbers equal more education.]
+
+```{r data}
+load(url("https://pols1600.paultesta.org/files/data/df_drww.rda"))
+
+df_drww %>%
+  mutate(
+    person_id = 1:n()
+  ) -> df_drww
+
+```
+
+# Model the relationship between demographic predictors and war support using OLS and Logistic regression.
+
+## Fit the models
+
+Please estimate the following models:
+
+- An OLS regression model called `m1` using `lm()`
+- A Logistic regression model called `m2` using `glm()` with `family=binomial`
+
+```{r models}
+# OLS
+m1 <- lm(support_war01 ~ age + sex + education_n, df_drww)
+
+# Logisitic 
+m2 <- glm(support_war01 ~ age + sex + education_n, df_drww,
+          family = binomial)
+
+
+```
+
+
+## Display the results in a regression table
+
+Next, please display the results of your regressions in a table using `htmlreg()`
+
+```{r table, results="asis"}
+# Regression Table
+htmlreg(list(m1,m2))
+```
+
+
+## Produce predicted values from the model
+
+The coefficients from a logistic regression aren't easy to directly interpret.
+
+Instead, we will produce predicted values for each model
+
+To do this, we will need to create a **prediction dataframe** called `pred_df` Every variable in your model, needs to be represented in your prediction data frame.
+
+- Use `expand_grid()` to create a data frame where 
+
+  - `age` varies from 18 to 99
+  - `sex` is held constant at "Female"
+  - `education_n` is held constant at it's mean
+
+```{r preddf}
+## Create prediction data frame
+pred_df <- expand_grid(
+  age = 18 : 99,
+  sex = "Female",
+  education_n = mean(df_drww$education_n, na.rm = T)
+)
+```
+
+Then you use the `predict()` function to produce predicted values from each model. 
+
+Save the output of `predict()` for `m1` to a new column in pred_df called `pred_ols`.
+
+For `m2` you need to tell are to transform the predictions from `m2` back into the units of the **response** (outcome) variable, by setting the argument `type = "response"`. Save the output of `predict()` for `m1` to a new column in pred_df called `pred_logit`.
+
+```{r predictions}
+# #Predicted values for m1
+pred_df$pred_ols <- predict(m1,
+                            newdata = pred_df)
+# Predicted values for m2
+# Remember to add type = "response"
+pred_df$pred_logit <- predict(m2,
+                            newdata = pred_df,
+                            type = "response")
+```
+
+
+
+
+## Plot the predicted values and interpet the results
+
+Now we can compare the predictions of OLS and Logistic regression by plotting the predicted values of support for the war from each model.
+
+To produce this plot you'll need to 
+
+- specify `data` (you want to use the values from `pred_df`)
+- map values from your data `aes`thetics in `ggplot` 
+  - put `age` on the x axis and and `pred_ols` on the y-axis
+- specify the `geom`etries to plot
+  - add *two* `geom_line()` to the plot
+  - leave the first one empty (e.g. `geom_line()`)
+  - for the second, specify a new `aes` of `y=pred_logit`
+
+```{r fig1}
+# data
+pred_df%>%
+  # aesthetics
+  ggplot(aes(age, pred_ols, col = "OLS"))+
+  # geometries
+  geom_line()+
+  geom_line(aes(y = pred_logit, col = "Logistic"))+
+  geom_jitter(data=df_drww, aes(age, support_war01),
+              col = "black",
+              height = .05,
+              size = .5,
+              alpha = .5)+
+  labs(
+    col = "Model",
+    x = "Age",
+    y = "Predicted Values"
+  )
+
+```
+
+**How do the predictions of the two models compare**
+
+So the predictions from OLS produce impossible values (levels of support above 100 percent) at for very old respondents, while the predictions from logistic regression are constrained to be between 0 and 1. 
+
+If we think that logistic regression provides a more credible way of modeling support for the war, then our OLS regression appears to overstate the level of support among young and old, while possibly understating the level of support among the middle age. The differences aren't huge -- a few percentage points -- but for a binary outcome we will often prefer to model it with logistic regression.
+
+Also note that marginal effect for age in the logistic regression is not constant. An increase in age from 25 to 26 is associated with a larger increase in support, than an increase in age from 75 to 76. 
+
+
+--------------
+
+# Assess the uncertainty around your estimated coefficients
+
+How confident are we that the true relationship between age and support for the war is positive? How different might the coefficient be if we had taken a different random sample of Russians in early March 2022?
+
+In this section, we will explore how we can simulate the idea "repeated" sampling using just the sample we have to quantify uncertainty about the estimates in our model.
+
+
+To do this we will.
+
+1. Take 1,000 *bootstrap* samples from `df_drww` **with replacement** using the `bootstrap` function from the `modelr` package.
+  
+  - By sampling with replacement, we allow the same observation to be included multiple times (or not all), in our bootstrapped sample.
+
+2. For each bootstrap sample, we will estimate the same model as above, using the `map` function from the `purrr` package.
+
+  - We will end up with 1,000 bootstrapped estimates for each coefficient in our model
+  - These bootstrapped estimates describe the **sampling distribution** of coefficient.
+
+3. Put the coefficients from this bootstrapped model into into a **tidy** data frame, using the `tidy` function from the `broom` package, and the `map_df` function from the `purrr` package.
+
+4. Visualize the sampling distribution for coefficients in our model.
+
+In the code below I demonstrate this process for `m1`. Then you will repeat this process for `m2`
+
+## Take 1,000 bootstrap samples from `df_drww`
+
+Below we create 1,000 boostrapped samples
+
+```{r bootstrap}
+# Make sure these packages are loaded
+library(modelr)
+library(purrr)
+library(broom)
+# Set random seed for reproducability
+
+set.seed(1234)
+
+# 1,000 bootstrap samples
+boot <- modelr::bootstrap(df_drww, 1000)
+```
+
+Let's take a moment to understand what `boot` is and why we're sampling with replacement.
+
+The object `boot` contains 1,000 bootstrapped samples from `df_drww`. 
+
+If we look at the first bootstrap we see:
+
+```{r bs1ex}
+boot$strap[[1]]
+```
+
+
+The numbers  `1308, 1018, 1125, 1004, 623, 905, ...` correspond to rows in `df_drww`. So person `1308` is the first observation in this boot strap sample, then person `1018` and so on.
+
+Because we are sampling **with replacement** observations from `df_drww` can appear multiple times. In our first bootstrap sample:
+
+- 666 observations appeared once
+- 342 appeared twice
+- 105 appeared three times
+- 27 appeared four times
+- 5 appeared five times.
+- 2 appeared six times
+
+```{r bs1multi}
+table(table(boot$strap[[1]]$idx))
+```
+
+Why would we want to sample with replacement? 
+
+Well, what we'd really love are 1,000 separate random surveys all drawn from the same population in the same way.
+
+Since that's not feasible, we instead use the one sample we do have to learn things like how much our estimate might vary in repeated sampling. [Efron (1979)](https://projecteuclid.org/journals/annals-of-statistics/volume-7/issue-1/Bootstrap-Methods-Another-Look-at-the-Jackknife/10.1214/aos/1176344552.full) called this procedure "bootstrapping" after the idiom "to pull oneself up by one’s own bootstraps"
+
+We do this by sampling from our sample **with replacement**. 
+
+When we sample with replacement, we are sampling from our sample, as our sample was sampled from the population. 
+
+**With replacement** means that some observations will appear multiple times in our bootstrapped sample (while others will not be included at all).
+
+When an observation appears multiple times in a bootstrap sample, conceptually, we're using that original observation to represent the other people like that observation in the population who -- had we taken a different sample -- might have been included in our data.
+
+Note each bootstrap sample is a different random sample with replacement. In our second bootstrap sample, one observation (person 1496) appeared five times.
+
+```{r bs2multi}
+table(table(boot$strap[[2]]$idx))
+
+# Person 406
+sum(boot$strap[[2]]$idx == 1496)
+
+# Person 1 is not in boostrap 2
+sum(boot$strap[[2]]$idx == 1)
+
+
+```
+
+
+## Estimate 1,000 models from the 1,000 bootstrapped samples
+
+Now let's estimate our model for each bootstrapped sample, using the `map` function.
+
+- In the code below, for every sample in `boot`, map estimates the model `lm(support_war01 ~ age + sex + education_n)` plugging in the bootstrap sample into the `data=.`.
+
+```{r bsols}
+# bootstrap simulations
+bs_ols <- purrr::map(boot$strap, ~ lm(support_war01 ~ age + sex + education_n, data =.))
+```
+
+The end result is a large list with 1,000 separate linear regression models estimated on each bootstrapped sample.
+
+The coefficients from each bootstrap vary from one simulation
+
+```{r bs1ols}
+# First bootstrap
+bs_ols[[1]]
+```
+
+to the next:
+
+```{r bs2ols}
+# Second boostrap
+bs_ols[[2]]
+```
+
+Because they're estimated off of different bootstrapped samples.
+
+We will visualize and quantify that variation to describe the uncertainty associated with our estimates.
+
+But first, we need to transform our large list of linear models, into a more tidy data frame that's easier to manipulate.
+
+## Tidy the results of our bootstrapping
+
+In the code below we transform this large list of models into a `tidy` data frame of coefficients.
+
+```{r tidybs}
+# Tidy bootstrapp sims
+bs_ols_df <- map_df(bs_ols, tidy, .id = "id")
+```
+
+In the resulting data frame the `id` variable identifies the bootstrap simulation (1 to 1,000), the `term` variable indentifies the specific coefficient from the model estimated for that simulation.
+
+```{r lookatbs}
+head(bs_ols_df)
+```
+
+
+## Plot the bootstrapped sampling distribution of the coefficient for age
+
+Finally, let's get a sense of how our coefficients could vary. 
+
+Specifically, let's compare the the observed coefficient from `m1` for age, to the bootstrapped `sampling distribution` of coefficients in  `bs_ols_df`
+
+- First, we'll create a basic plot called `p_ols_age` that shows the distribution of the coefficients for age from our simulation
+
+```{r p1}
+p_ols_age <- bs_ols_df %>%
+  filter(term == "age") %>%
+  ggplot(aes(estimate))+
+    geom_density()
+
+p_ols_age
+```
+
+Next we'll add some additional geometries and labels to our figure
+
+- First we'll put a rug to show the individual coefficients
+
+```{r p2}
+p_ols_age +
+  geom_rug() -> p_ols_age
+
+p_ols_age
+```
+
+- Then we'll add a vertical line where our observed coefficient on `age`
+
+```{r p3}
+p_ols_age +
+  geom_vline(xintercept =  coef(m1)[2],
+             linetype = 2) -> p_ols_age
+p_ols_age
+```
+
+- Finally, let's add some nice labels
+
+```{r p4}
+p_ols_age +
+  theme_bw()+
+  labs(
+    x = "Age",
+    y = "",
+    title = "Bootstrapped Sampling Distribution of Age Coefficient"
+  ) -> p_ols_age
+
+p_ols_age
+```
+
+Congratulations you've just produced and visualized your first bootstrapped sampling distribution!
+
+Conceptually, this distribution describes *how much we would expect the coefficient on age in model to vary** from sample to sample. 
+
+Just from eyeballing the figure above, it looks like the observed the relationship between age and support for war or 0.009 could be about as high as 0.011, and as low as 0.007.
+
+Of course, as the budding quantitative social scientists that we are, we can do better than just eyeballing the data.
+
+# Quantify the uncertainy described by your sampling distributions
+
+Specifically, please calculate the standard deviations, 97.5 and 2.5 percentiles of each coefficient in `bs_old_df`
+
+You'll want to
+
+- `group_by()` the `term` variable in `bs_ols_df`
+- `summarize()` the output of functions applied to the `estimate` column in `bs_ols_df`
+
+```{r bs_se}
+bs_ols_df %>%
+  group_by(term)%>%
+  summarize(
+    mean_estimate = mean(estimate),
+    sd = sd(estimate,na.rm=T),
+    p2_5 = quantile(estimate, prob =.025),
+    p97_5 = quantile(estimate, prob =.975)
+  )
+```
+
+Please compare these these estimates to those by the following functions
+
+```{r asymptinf}
+# summary(m1)
+# confint(m1)
+```
+
+They're similar to a few thousandsth of a decimal place. 
+
+In fact, we can approximate the sampling distribution of coefficients two ways:
+
+- Using simulation based approaches like the bootstrap procedure we implemented above
+
+- Using asymptotic theory (i.e the Central Limit Theorem) to derive the theoretical sampling distributions
+
+Below we see compare the two approaches (bootstrapped distribution in black, asymptotic normal distribution in red dots) and see they look quite similar. 
+
+```{r p5}
+p_ols_age +
+  stat_function(
+    fun = "dnorm", 
+    args = list(mean =coef(m1)[2],
+                sd = summary(m1)$coef[2,2]),
+    col = "red",
+    linetype = 3
+  )
+
+
+```
+
+# Explore other relationships in the data.
+
+
+Finally, let's take some time to explore other variables and relationships in the data.
+
+Please do the following:
+
+- **Research Question**: Formulate a brief research question here
+
+- **Data**: Identify the relevant outcome and predictor variables in the data.
+
+  - Outcome:
+  - Key Predictor:
+  - Covariates:
+    - Covariate 1
+
+
+```{r q5hlo}
+# Explore the data
+
+```
+
+
+- If necessary, transform and recode the data as needed
+
+```{r q5data}
+# Data transformations if necessary
+```
+
+
+- **Models and Expecations** Specify a model or models to test your question in terms of our outcome and predictor variables. 
+
+$$\text{Outcome} = \beta_0 + \beta_1 \text{Key Predictor} + \beta_2 \text{Covariate}$$
+
+- **Expectations** Discuss the expected sign and significance of the coefficients in your model. If you think a coefficient could be either positive or negative, explain what each of these results means in the context of your question.
+
+
+- **Estimation** Estimate a model or models to test your question.
+
+```{r q5models}
+# Models
+```
+
+
+- **Results** Present and interpret your results using tables and figures.
+
+```{r q5tabels}
+# Regression table
+```
+
+
+```{r q5figures}
+# Figures
+
+```
+
+------
+
+- Research Question: What effect does social media use have on Russian's Support for the War? Does the effect of social media vary with age
+
+- Data: 
+
+  - Outcome: `support_war01`
+  
+  - Key Predictor: `total_social_media_use` a count from 0 (none) to 9 social media sites
+  
+  - Additional predictors:
+  
+    - Age 
+    - Sex
+    - Education
+    - Employment
+
+- Data transformations: To simplify interpretation, I will create some indicator variables
+
+  - `under30` an indicator that takes a value of 1  the respondent is under 30 and 0 otherwise
+
+
+- Models and Expectations
+
+- Baseline Model:
+  
+$$\text{Support} = \beta_0 + \beta_1 \text{social media}  +\epsilon$$
+- Expectations: 
+  
+  - If $\beta_1$ is positive this would suggest that higher social media use associated with greater support for the war. Perhaps respondents in russia are more likely to encounter state propaganda
+  
+  - If $\beta_1$ is negative, this implies that greater social media use is associated with less support. Perhaps sites like Twitter/Facebook/TikTok in early March allowed Russians to encounter non-state media
+    
+- Baseline Model with Controls:
+  
+$$\text{Support} = \beta_0 + \beta_1 \text{social media} + X\beta +\epsilon$$
+- Expectations: 
+  - If the coefficient on $\beta_1$ is no longer signficant, this suggests that the bivariate relationship was spurious, driven by factors $X$ that predict both support and social media use. For example, it may be that the educated are more likely to use social media and less likely to support the war. Controlling for education then might remove the association between social media use and support.
+
+
+- Interaction Model with Controls:
+  
+$$\text{Support} = \beta_0 + \beta_1 \text{Social Media} +\beta_2\text{Under 30} + \beta_3\text{SM}\times\text{U30} + X\beta +\epsilon$$
+- Expectations: 
+  - The key coefficient in this model is $\beta_3$ which assesses whether the relationship between social media use and support differs for those under 30 compared to those over 30. It's possible that young people use social media differently than older folks, and so I'd expect this coefficient to be negative.
+  
+
+
+```{r ex_data}
+## ---- Data
+df_drww %>%
+  mutate(
+    under30 = case_when(
+      age < 30 ~ 1,
+      T ~ 0
+    ),
+    any_social = case_when(
+      total_social_media_use ==0 ~ 0,
+      T ~ 1
+    )
+  ) -> df_drww
+
+```
+
+
+```{r ex_models}
+m1_ex <- glm(support_war01 ~ total_social_media_use, 
+             df_drww, family = binomial)
+
+m2_ex <- glm(support_war01 ~ total_social_media_use + 
+               age + sex + education_n +employ_working, 
+             df_drww, family = binomial)
+
+m3_ex <- glm(support_war01 ~ total_social_media_use*under30 + 
+               sex + education_n + employ_working, 
+             df_drww, family = binomial)
+```
+
+```{r ex_tab, results ='asis'}
+htmlreg(list(m1_ex,m2_ex, m3_ex))
+```
+
+Overall, social media use appears to be associated with less support for the war in Ukraine among Russians. 
+
+As the first figure below shows, the baseline model, predicting support with only social media use appears to show a dramatic decline of nearly 40 percentage points in support. 
+
+Controlling for other factors likely to predict support and social media use, the decrease is less dramatic, but still, going from no social media use to a using a lot (nine) sites is associated with a about a 17 percentage point decrease in support for the war.
+
+Contray to my expectations, the effect of social media doesn't appear to vary by age cohort. Support decreases with social medial use for both those over and under 30 but the rate of decrease is not statistically different. 
+
+
+```{r ex_pred1}
+pred_df_ex1 <- expand_grid(
+  total_social_media_use = 0:9,
+  age = mean(df_drww$age, na.rm = T),
+  sex = "Female",
+  education_n = mean(df_drww$education_n, na.rm = T),
+  employ_working = 1
+)
+
+pred_df_ex1$pred_m1 <- predict(m1_ex, pred_df_ex1, type ="response")
+pred_df_ex1$pred_m2 <- predict(m2_ex, pred_df_ex1, type ="response")
+
+pred_df_ex1%>%
+  ggplot(aes(total_social_media_use, pred_m1))+
+  geom_line(aes(col = "Bivariate"))+
+  geom_line(aes(y=pred_m2, col = "Controls"))+
+  theme_bw()+
+  labs(
+    col = "Model",
+    x = "Number of Social Media Sites Used",
+    y = "Predicted Support for the War"
+  )
+```
+
+```{r ex_pred2}
+pred_df_ex2 <- expand_grid(
+  total_social_media_use = 0:9,
+  under30 = c(0,1),
+  sex = "Female",
+  education_n = mean(df_drww$education_n, na.rm = T),
+  employ_working = 1
+)
+
+pred_df_ex2$pred_m3 <- predict(m3_ex, pred_df_ex2, type ="response")
+
+pred_df_ex2%>%
+  mutate(
+    Age = case_when(
+      under30 == 1 ~ "Under 30",
+      T ~ "30 and Over"
+    )
+  ) %>%
+  ggplot(aes(total_social_media_use, pred_m3, col = Age))+
+  geom_line()+
+  theme_bw()+
+  labs(
+    x = "Number of Social Media Sites Used",
+    y = "Predicted Support for the War"
+  )
+```
+
+
+Young folk are considerably more likely to use social media
+
+```{r ex_dist}
+df_drww %>%
+  mutate(
+    Age = case_when(
+      under30 == 1 ~ "Under 30",
+      T ~ "30 and Over"
+    )
+  ) %>%
+  ggplot(aes(total_social_media_use,fill =Age))+
+  geom_histogram(aes(y= ..density..))+
+  facet_grid(~Age)+
+  labs(
+    x = "Social Media Sites Used"
+  )
+```
+
+
+If we were to instead compare those over and under 30 by any social media use vs no social media use, we see that the decrease in support is much larger among the young (although not statistically significant...) 
+
+```{r ex_pred3}
+m4_ex <- glm(support_war01 ~ any_social*under30 + 
+               sex + education_n + employ_working, 
+             df_drww, family = binomial)
+summary(m4_ex)
+
+pred_df_ex3 <- expand_grid(
+  any_social = 0:1,
+  under30 = c(0,1),
+  sex = "Female",
+  education_n = mean(df_drww$education_n, na.rm = T),
+  employ_working = 1
+)
+
+pred_df_ex3$pred_m4 <- predict(m4_ex, pred_df_ex3, type ="response")
+
+pred_df_ex3%>%
+  mutate(
+    Age = case_when(
+      under30 == 1 ~ "Under 30",
+      T ~ "30 and Over"
+    ),
+    Media = case_when(
+      any_social == 1 ~ "Social Media",
+      T ~ "No Social Media"
+    )
+  ) %>%
+  ggplot(aes(Media, pred_m4, fill = Age))+
+  geom_bar( stat = "identity")+
+  facet_grid(~Age)+
+  theme_bw()+
+  labs(
+    x = "Number of Social Media Sites Used",
+    y = "Predicted Support for the War"
+  )
+```
+
+
+

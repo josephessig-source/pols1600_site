@@ -1,0 +1,376 @@
+---
+title: "Lab 10 The final lab!!"
+author: "Your Group Members Names Here"
+date: "Last Updated `r format(Sys.Date())`"
+output:
+  html_document:
+    theme: journal
+    toc: TRUE
+    toc_float: TRUE
+    toc_depth: 2
+    number_sections: TRUE
+---
+
+```{r setup, include = FALSE, cache = FALSE}
+knitr::opts_chunk$set(error = TRUE, 
+                      comment = NA, 
+                      warnings = FALSE, 
+                      errors = FALSE, 
+                      message = FALSE, 
+                      cache = TRUE,
+                      tidy = FALSE)
+
+
+```
+
+
+
+# Overview {-}
+
+In our final lab, you will apply concepts and skills from this course to explore data from the [2020 American National Election Study](https://electionstudies.org/data-center/2020-time-series-study/). Specifically you will
+
+1. Identify an outcome of interest (5-10 minutes)
+2. Identify key predictors and covariates (5-10 minutes)
+3. Recode your data (20 minutes)
+4. Describe your data (20 minutes)
+4. Describe your question, expectations, and models (10 minutes)
+5. Estimate, present, and interpret your models (20 minutes, Graded Question)
+
+Ideally, each group will pursue a question that interests them. I will also complete these tasks live, so, if you're not feeling confident, you can follow along with me and submit the code I demo in class as your lab for a grade of 85..
+
+
+
+# Set up your workspace and load data  {-}
+
+Here's some code to get you started. Feel free to add additional packages as needed
+
+```{r}
+# Libraries ----
+# Add any additional needed packages below 
+library(tidyverse)
+library(labelled)
+library(texreg)
+
+
+
+# Load 2020 NES ----
+# Uncomment if nencessary
+# library(devtools)
+# install_github("jamesmartherus/anesr")
+
+library(anesr)
+data("timeseries_2020")
+
+# Rename to df
+df <- timeseries_2020
+
+
+```
+
+
+# Identify an outcome of interest
+
+1. Open up the [list of variables](https://electionstudies.org/wp-content/uploads/2021/07/anes_timeseries_2020_varlist_20210719.pdf) in the survey
+
+2. Do a command/ctrl+F find to quickly search for keywords of potential outcomes of interest
+
+3. If you have questions about how a variable is measured, how the question was asked, search the variable name (e.g `V201144x`) in the [codebook](https://electionstudies.org/wp-content/uploads/2022/02/anes_timeseries_2020_userguidecodebook_20220210.pdf)
+
+4. Pick one variable that you wish to explore.
+
+Some potential variables of interest:
+
+
+- `V202143`-`V202187` various post election feeling thermometers
+- `V202073` POST: Presidential vote choice
+- `V202231x` - `V202248x` attitudes toward immigration
+-  `V201246` - `V201262` ideological policy placements of self and parties
+- `V201233` Trust in government
+
+Once you've settled on an outcome of interest, please fill in the following:
+
+- **Conceptual Name:** Feelings toward the Police (0-100 Feeling Thermometer)
+  - **Raw variable name:** `V202171`
+  - **Recoded variable name:** `ft_police`
+
+For example:
+
+- **Conceptual Name:** Trust in government
+  - **Raw variable name:** `V201233`
+  - **Recoded variable name:** `dv_trust_in_gov`
+
+
+# Indentify at least one key predictor of interest, and at least two covariates of interest
+
+Your key predictor of interest should be something you think explains variation in your outcome of interest.
+
+Your additional covariates should be things you think are:
+
+- Correlated with both the outcome and predictor
+- Things that might moderate the relationship between your key predictor, and your outcome of interest
+
+Some commonly used covariates:
+
+- **V201507x** PRE: SUMMARY: Respondent age
+- **V201511x** PRE: SUMMARY: Respondent 5 Category level of education
+- **V202468x** PRE‐POST: SUMMARY: Total (family) income
+- **V201600** PRE: What is your (R) sex? [revised]
+- **V201549x** PRE: SUMMARY: R self‐identified race/ethnicity
+- **V201231x** PRE: SUMMARY: Party ID
+- **V201200** PRE: 7pt scale liberal‐conservative self‐placement
+
+In general, if there is a SUMMARY version of the variable, use that.
+
+As you did above, list your key predictor here:
+
+- Conceptual name: Race/Ethnicity
+  - Raw variable name: V201549x
+  - Recoded variable name: race_f
+
+
+List your covariates here:
+
+- Conceptual Name: Ever been Arrested,
+  - Raw variable name: V202457
+  - Recoded variable name: been_arrested
+  
+- Conceptual Name: Income
+  - Raw variable name: V202468x
+  - Recoded variable name: income
+
+
+# Recode your data
+
+
+
+1. Look at the distributions of your raw variables, perhaps using `table()` or `summary()`
+
+```{r}
+# Frequency distribution
+# table(df$V201231x)
+# # Look at variable and value labels
+# var_label(df$V201231x)
+# val_labels(df$V201231x)
+
+```
+
+
+2. Identify values that need to be recode or transformed 
+  - For example are there negative values that need to be recoded as NA
+  - Do you wish to create a summary measure that is the average of multiple variables, or the difference or two variables?
+  
+3. Use `%>%` and `mutate()` along with `ifelse()` and `case_when()` to recode your data as needed. 
+
+Below is some pseudo-code to help get you started
+
+
+```{r ex_recode}
+# # Pseudo code
+# # Recode DV ----
+df %>%
+  # Recode DV
+  mutate(
+    ft_police = ifelse(V202171 < 0, NA, V202171) # Replace Negative Values with NA
+  ) -> df
+# 
+# # Check recode
+# table(df$ft_police, df$V202171<0, useNA = "ifany")
+
+# # Recode IVs ----
+df %>%
+  # Recode IV
+  mutate(
+    race_f = case_when(
+  V201549x == 1 ~ "White",
+  V201549x == 2 ~ "Black",
+  V201549x == 3 ~ "Hispanic",
+  V201549x == 4 ~ "AAIP",
+  V201549x == 5 ~ "Native American",
+  V201549x == 6 ~ "Multiracial",
+  T ~ NA_character_
+  ) %>% fct_relevel(. , "White"),
+  is_white = ifelse(race_f == "White", 1, 0),
+  is_nonwhite = ifelse(race_f != "White", 1, 0),
+  been_arrested = case_when(
+    V202457 == 1 ~ 1,
+    V202457 == 2 ~ 0,
+    T ~ NA_real_
+  ),
+  income = ifelse(V202468x < 0, NA, V202468x)
+
+) -> df
+
+# # Check recodes
+# table(df$pid_3cat, df$V201231x, useNA = "ifany")
+
+table(df$V202457)
+
+```
+
+
+
+
+# Describe your data
+
+Once you've recoded your data:
+
+- Create a table of summary statistics for your outcome, key predictor(s), and covariates
+
+- Present at least one descriptive figure, that illustrates the distribution of your outcome or key predictor, or shows an interesting relationship between variables.
+
+- Interpret your results
+
+## Summary statistics:
+
+Producing a table of summary statistics requires a little foresight. 
+
+Essentially you want to make a data frame where each row is a (numeric) variable, and each column is a statistic (minimum, 25th percentile, median, mean, 75th percentile, max, Number of missing).
+
+To do this, I would:
+
+- create a object called `the_vars` which contains the names (in quotation marks) of the variables you want to summarize.
+
+- Select these variables from your data set. using `df%>%select(all_of(the_vars))`
+
+- Use `%>%pivot_longer()` specifying `cols=select(all_of(the_vars))`, and `names_to` equals `"Variable"` and `values_to = "value"`  to transform this wide dataset into a long dataset
+
+- Then use `%>%group_by(Variable)%>%` and `summarise()` to calculate the statistics for each variable of interest (e.g. `%>%summarise(Mean = mean(value, na.rm=T)))`)
+
+- Save the output to an object called something like `sum_df`
+
+- In a new chunk use `knitr::kable(sum_df) %>% kableExtra::kable_styling()` to format your table. Set `echo=F` in the code chunk head
+
+```{r}
+# Summarise data
+
+the_vars <- c("ft_police",
+              "is_white",
+              "been_arrested",
+              "income")
+
+df%>%
+  select(all_of(the_vars)) %>%
+  pivot_longer(
+    cols = all_of(the_vars),
+    names_to = "Variable",
+    values_to = "value"
+  )%>%group_by(Variable)%>%
+  summarise(
+    Min = min(value, na.rm=T),
+    p25 = quantile(value, probs = .25,na.rm=T),
+    Median = median(value, na.rm=T),
+    Mean = mean(value, na.rm=T),
+    p75 = quantile(value, probs = .75,na.rm=T),
+    Max = max(value, na.rm=T)
+
+            ) %>% 
+  mutate(
+    Variable = factor(Variable, levels = the_vars)
+  ) %>% 
+  arrange(Variable) -> sum_df
+
+```
+
+
+```{r, results="asis"}
+# Display results
+knitr::kable(sum_df, digits = 2) %>% kableExtra::kable_styling()
+```
+
+
+## Descriptive Figures
+
+To create a figure, you'll need to specificy the following
+
+- `data` (e.g. `df %>%`)
+
+- aesthetic mappings, `ggplot(aes(x = predictor, y = outcome))`
+
+- geometries 
+
+  - Univariate: `geom_density()`, `geom_boxplot()` `geom_histogram()`
+  
+  - Bivariate: `geom_point()` (for a scatterplot), `geom_line()` for a trend.
+
+Once you have a minimal working example, play around with other grammars of graphics:
+
+- `labs()` for custom labels
+
+- `theme_XXX` for custom themes
+
+- `facet_wrap(~group)` to produce the same plot *facetted* by some categorical grouping variable
+
+When you're happy with your figure, save it as object in R (e.g. `fig1 <- df %>% ggplot(aes(predictor, outcome))+geom_point())`. Put that object in its own chunk to display it in your document.
+
+Don't let the perfect be the enemy of the good.
+
+
+```{r}
+# Descriptive figures
+
+```
+
+## Descrptive Interpretation:
+
+Please provide an overview of the data (source, number of observations, unit of analysis).
+
+Describe a typical observation, making reference to the statistics in your summary table.
+
+Offer a substantive interpretation of your descriptive figure(s). What do they tell us about the distribution of a key variable, or the relationship between two variables.
+
+
+# Summarize your research question, expecations and empirical models
+
+
+First, summarize your research question and motivation:
+
+> We're interested in how Y varies with X. Specifically, we expect that .... , since ..... To address concerns about omitted variable bias, we will control for A and B, since ....
+
+
+Next, describe a simple bivariate model between your outcome and key predictor
+
+$$\text{DV name here} = \beta_0 + \beta_1 \text{Key Predictor here}$$
+If your expectations are correct, then what should should the sign and signficance be $\beta_1$
+
+
+Then describe a multiple regression model
+
+
+$$\text{DV name here} = \beta_0 + \beta_1 \text{Key Predictor here} + \beta_2 \text{Covariate 1 here} ... + \beta_k\text{Covariate k here}$$
+Explain how you expect the coefficient for your key predictor to change $(\beta_1)$, if at all
+
+If you're feeling frisky, you might describe additional models (interaction models, models with polynomial terms, etc.), but you need not.
+
+
+# Estimate the models described above
+
+## Fit the models
+
+```{r models}
+# Model 1: Bivariate Model
+
+# Model 2: Multiple Regression
+```
+
+
+## Display the models in a regression table
+
+
+```{r, table}
+# Regression table
+```
+
+
+## Interpet your models
+
+Please write a 1 paragraph summary interpreting your results in terms of both their statistical and substantive significance. Assume your audience is smart, but has never taken POLS 1600. Explain to them what a regression model is, what a standard error, p-value, and/or confidence interval is. How should they interepret the substantive findings of your model. How should they assess the statistical uncertainty around these results?
+
+Perhaps you might reade create a plot of predicted values from a model to help facilitate the substantive interpretation of your results. If so, here's a code chunk for you:
+
+```{r interpetation}
+# Additional code chunk to facilitate interpretation of models
+```
+
+
+
+

@@ -1,0 +1,732 @@
+---
+title: "Lab 07 - Exploring Russians' Attitudes About the War in Ukraine"
+author: "Your Group Members Names Here"
+date: "Last Updated `r format(Sys.Date())`"
+output:
+  html_document:
+    theme: journal
+    toc: TRUE
+    toc_float: TRUE
+    toc_depth: 2
+    number_sections: TRUE
+---
+
+```{r setup, include = FALSE, cache = FALSE}
+knitr::opts_chunk$set(error = TRUE, 
+                      comment = NA, 
+                      warnings = FALSE, 
+                      errors = FALSE, 
+                      message = FALSE, 
+                      cache = F,
+                      tidy = FALSE)
+
+# htmltools::tagList(
+#   xaringanExtra::use_clipboard(
+#     button_text = "<i class=\"fa fa-clipboard\"></i>",
+#     success_text = "<i class=\"fa fa-check\" style=\"color: #90BE6D\"></i>",
+#   ),
+#   rmarkdown::html_dependency_font_awesome()
+# )
+```
+
+```{css sidenote, echo = FALSE}
+.sidenote, .marginnote { 
+  float: right;
+  clear: right;
+  margin-right: -60%;
+  width: 50%;         # best between 50% and 60%
+  margin-top: 0;
+  margin-bottom: 0;
+  font-size: 1.1rem;
+  line-height: 1.3;
+  vertical-align: baseline;
+  position: relative;
+  }
+```
+
+<style>
+div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}
+</style>
+
+
+
+# Overview {-}
+
+Today, we'll explore Russians' support the war in Ukraine using a public opinion survey from Russia conducted by Alexei Miniailo's ["Do Russians Want War"](https://www.dorussianswantwar.com/en) project. 
+
+The survey was conducted by phone using a random sample of mobile phone numbers to produce a sample of respondents representative of the population in terms of age, sex, and geography. It was in the field from February 28 to March 2.
+
+We will look at how support for the war varies with the demographic predictors `age`, `sex` and `education`. We will see how multiple regression can be used to describe more complex relationships. From our baseline model, we will ask:
+
+- Does the relationship between age and support for the war vary among male and female respondents (Interaction model)
+
+- Does the relationship between age and support vary at different levels of age (Polynomial regression model)
+
+- Does the relationship between age and support vary at different levels of age and does the nature of this variation differ  among male and female respondents (Polynomial regression model with an interaction term)
+
+To accomplish this, we will do the following:
+
+1. Get set up to work and describe our data (10 minutes)
+
+2. Get practice interpreting long chunks of codes with lots of `%>%`s (10 minutes)
+
+3. Estimate four models of increasing complexity (15 minutes)
+
+4. Present these models in a regression table and interpret the results (10 minutes)
+
+5. Evaluate the relative performance of these models in terms of their variance explained $R^2$'s (15 minutes)
+
+6. Produce predicted values to help us interpret and compare our baseline model to a model where the "effect" of an increase in age changes with age (10 minutes)
+
+7. Produce predicted values to help us interpret and compare models where the "effect" of age is allowed to vary with respondent's sex (10 minutes)
+
+Finally, if there's time, we will:
+
+8. Explore additional questions of our choosing in the data
+
+One of questions 1-7 will be randomly selected as the graded question for the lab.
+
+You will work in your assigned groups. Only one member of each group needs to submit the html file produced by knitting the lab.
+
+This lab **must** contain the names of the group members in attendance.
+
+If you are attending remotely, you will submit your labs individually. 
+
+You can find your assigned groups in previous [labs](https://pols1600.paultesta.org/labs/06-lab-comments.html){target="_blank"}
+
+# Goals {-}
+
+Broadly, our goals in this assignment are to:
+
+<div class="sidenote">$$y = \beta_0 + \beta_1 x + \beta_2 z + \overbrace{\beta_3 x\cdot z}^{\text{Interaction term}} $$ </div>
+
+- Get comfortable estimating and interpreting regression models with **interaction terms** 
+  
+  - Including an interaction between two variables is useful if we think the "effect" of one variable depends on the value of another variable. 
+  
+  - Today, we test whether the association between support for the war and age differs between male and female respondents.
+
+<div class="sidenote">$$x^1 = x; \, x^2 = x\cdot x; \,   x^{nth} = \prod_{i=1}^{i=n} x_i = x_1\cdot x_2 \cdot x_3 \dots \cdot x_n $$</div> 
+
+- Get comfortable estimating and interpreting regression models with **polynomial terms** 
+
+  - Polynomial terms are a way of incorporating non-linearity in our predictors.^[Mathematically, recall that the slope/first derivative of the line $y = f(x) = 2x$ is constant $(f'(x) = 2)$. If we increase x by 1, we expect y to increase by 2, while the derivative of a parabola  $y = f(z) = z^2$ varies with $z$ $(f'(z) = 2x)$. Going from z= 2 to z= 3 is associated with a greater increase in y, then going from z=1 to z=2. Our model, however, is still [linear in *parameters*](https://blog.minitab.com/en/adventures-in-statistics-2/what-is-the-difference-between-linear-and-nonlinear-equations-in-regression-analysis#:~:text=In%20statistics%2C%20a%20regression%20equation,produce%20a%20U%2Dshaped%20curve.) $\beta$. That is, it is still a linear regression. If our model included some parameter $\theta^2$, then it would be a non-linear regression.]
+
+  - If we think the relationship between a predictor and an outcome varies at different levels of the predictor, we can include a polynomial term(s) for that predictor. Now our model will describe the relationship between $x$ and $y$ with a curve (varying slope), rather than a line (constant slope)
+
+- Learn how to generate predicted values from our model to help us interpret **complex regression models** 
+  
+  - Regression tables are great for summarizing basic regression models.
+  
+  - Models with interaction terms or polynomial terms (or both) are difficult to interpret by looking at just the coefficients themselves
+  
+  - Producing predicted values that show how the model's predictions change as variables in a interaction or polynomial change help us understand what these coefficients are telling us.
+
+- Practice **comparing *nested* models** using the proportion of the variance explained by each model.
+  
+  - Recall that a model's $R^2$ describes the proportion of the total variance in our outcome, explained by the model's predictions.
+  
+  - When we add predictors to a model, the model becomes more flexible, and can explain more variance in the outcome. 
+  
+  - *adjusted* $R^2$ adjusts models's $R^2$ by penalizing models for total number of predictors needed to explain given amount of variance
+
+  - When models are *nested* (the predictors in a smaller model are a subset of the predictors in a larger model), we can compare the relative performance of the two using tools like $R^2$ and adjusted $R^2$.
+  
+  - When comparing  models, we make trade offs between our desire to explain as much variation in the outcome as possible with a general preference for more parsimonious models.^[In a machine learning framework, we trying to find an [optimal tradeoff](https://towardsdatascience.com/understanding-the-bias-variance-tradeoff-165e6942b229) between reducing bias in our predictors by including more predictors and minimizing variance in predictions by not overfitting the data.]
+  
+    - For example, a simple bivariate regression and a complicated multiple regression could have the same $R^2$ (i.e. the both explain 50 percent of the total variance in the outcome), but the adjusted $R^2$ will be higher for the simple regression compared to the multiple regression, because it needed fewer predictors to explain the same amount of variance.
+
+
+
+
+
+# Workflow {-}
+
+# Please knit this .Rmd file {-}
+
+As with every lab, you should:
+
+- Download the file
+- Save it in your course folder
+- **Update the `author:` section of the YAML header to include the names of your group members in attendance.**
+- Knit the document
+- Open the html file in your browser (Easier to read)
+- Write your code in the chunks provided
+- Comment out or delete any test code you do not need
+- **Knit the document again after completing a section or chunk** (Error checking)
+- Upload the final lab to [Canvas](https://canvas.brown.edu/courses/1091286/assignments/7925689?module_item_id=10882050){target="_blank"}.
+
+
+# Get setup to work
+
+
+## Load Packages
+
+First lets load the libraries we'll need for today.
+
+```{r packages, message=F}
+the_packages <- c(
+  ## R Markdown
+  "kableExtra","DT","texreg","htmltools",
+  #"flair", # Comments only
+  ## Tidyverse
+  "tidyverse", "lubridate", "forcats", "haven", "labelled",
+  ## Extensions for ggplot
+  "ggmap","ggrepel", "ggridges", "ggthemes", "ggpubr", 
+  "GGally", "scales", "dagitty", "ggdag", "ggforce",
+  # Data 
+  "COVID19","maps","mapdata","qss","tidycensus", "dataverse",
+  # Analysis
+  "DeclareDesign", "zoo"
+)
+
+# Define function to load packages
+ipak <- function(pkg){
+    new.pkg <- pkg[!(pkg %in% installed.packages()[, "Package"])]
+    if (length(new.pkg)) 
+        install.packages(new.pkg, dependencies = TRUE)
+    sapply(pkg, require, character.only = TRUE)
+}
+
+ipak(the_packages)
+```
+
+
+## Load the data
+
+Next we'll load the recoded data for the lab. 
+
+```{r data}
+
+load(url("https://pols1600.paultesta.org/files/data/df_drww.rda"))
+
+```
+
+
+## Describe the data
+
+As always, it's important to get a high level overview of data when we first load it into R.
+
+Below we take a look at the first few values of all the data. You'll see that `df_drww` includes both the Russian data and recoded revisions of the data (which are typically appended with `_n` for numeric data or `_f` for factor data).
+
+```{r hlo}
+glimpse(df_drww)
+```
+
+
+In the first part of this lab, we'll work with the following variables
+
+- `support_war01` "Please tell me, do you support or do not support Russia's military actions on the territory of Ukraine?" (1=yes, 0 = no)
+
+- `age` "How old are you?"
+
+- `sex` "Gender of respondent" (As assessed by the interviewer)
+
+- `education_n` "What is your highest level of education (confirmed by a diploma, certificate)?" (1 = Primary school, 2 = "High School", 3 = "Vocational School" 4 = "College", 5 = Graduate Degree)^[I think, google translate was a bit unclear. But higher numbers equal more education.]
+
+
+In the code chunk below, I create a data frame of summary statistics:
+
+```{r summary_stats}
+the_vars <- c("support_war01","age", "is_female", "education_n")
+
+df_drww %>%
+  mutate(
+    is_female = ifelse(sex == "Female",1, 0)
+  ) %>%
+  select(all_of(the_vars)) %>%
+  pivot_longer(
+    cols = all_of(the_vars ),
+    names_to = "Variable",
+    values_to = "Value"
+  ) %>%
+  group_by(Variable) %>%
+  summarise(
+    `N obs` = n(),
+    Missing = sum(is.na(Value)),
+    Min = min(Value, na.rm = T),
+    `25th perc` = quantile(Value, .25, na.rm=T),
+    Mean = mean(Value, na.rm=T),
+    Median = median(Value, na.rm = T),
+    `75th perc` = quantile(Value, .75, na.rm=T),
+    Max = max(Value, na.rm = T)
+  ) %>%
+  mutate(
+    Variable = case_when(
+      Variable == "age" ~ "Age",
+      Variable == "education_n" ~ "Education",
+      Variable == "is_female" ~ "Female",
+      Variable == "support_war01" ~ "Support for War",
+      
+    ),
+    Variable = factor(Variable, levels = c("Support for War","Age","Female","Education"))
+    ) %>%
+  arrange(Variable) ->  summary_table
+
+summary_table
+
+```
+
+
+Which we can then format into a table of summary statistics:
+
+```{r summary_table}
+
+knitr::kable(summary_table,
+      digits = 2) %>% 
+  kableExtra::kable_styling(bootstrap_options = c("striped", "hover")) %>%
+  kableExtra::pack_rows(
+    group_label = "Outcome",
+    start_row = 1,
+    end_row = 1
+  )%>%
+  kableExtra::pack_rows(
+    group_label = "Predictors",
+    start_row = 2,
+    end_row = 4
+  )
+
+```
+
+
+**Please use this table to describe a typical respondent to the survey** 
+
+YOUR DESCRIPTION HERE
+
+
+--------------
+
+# Interpretting long chunks of code
+
+The previous section contained a fairly long chunk of code. 
+
+I suspect you had little trouble interpreting the table of summary statistics produced by the second code chunk (`summary_table`), but may not have followed everything that was happening in the first code chunk (`summary_stats`). 
+
+In this section, I want you to practice interpreting large chunks of code with lots of `%>%`
+
+- Recall, that the pipe command takes the outcome from a function that comes before the `%>%` and `pipes` it into the **first argument** of the function that comes after it. 
+
+- Each function in `summary_stats` expects  a `data.frame` in its first argument. The function then does something to this inputted data frame (add a column, pivot columns, etc) and returns a new data.frame which `%>%` then passes on to next function. 
+
+To learn how to produce a table of summary statistics (a common task for empirical work), it's helpful to understand what's happening at each step of the process in the `summary_stats` code chunk.
+
+In the code chunk below, starting from `df_drww %>%` please 
+
+- Copy and paste the all the code up until the next `%>%`
+
+- Run this code in your console
+
+- Write a comment above this code in code chunk
+
+Running code line-by-line, is great way to learn how to code, by understanding what happens in each line of code.
+
+There are about 8 or 9 steps of code to explain (depending on how you copy and paste.) I've done steps 1-3 below. 
+Please take the next 10 minutes or so to fill in the rest. 
+
+```{r summary_stats_explained, results = "hide"}
+# ---- Step 1 -----
+
+# Create a vector of variables we want to summarize
+the_vars <- c("support_war01","age", "is_female", "education_n")
+
+
+# ---- Step 2 -----
+
+# From df_drww create a new variable `is_female` that is 1 when sex == "Female, and 0 otherwise
+df_drww %>%
+  mutate(                             
+    is_female = ifelse(sex == "Female",1, 0) 
+  ) 
+
+
+# ---- Step 3 -----
+
+# Select just the columns we want to summarize
+df_drww %>%
+  mutate(
+    is_female = ifelse(sex == "Female",1, 0)
+  ) %>%
+  select(all_of(the_vars))
+
+
+# ---- Step 4 -----
+
+# Comment
+
+df_drww %>%
+  mutate(
+    is_female = ifelse(sex == "Female",1, 0)
+  ) %>%
+  select(all_of(the_vars)) %>%
+  pivot_longer(
+    cols = all_of(the_vars ),
+    names_to = "Variable",
+    values_to = "Value"
+  )
+
+# ---- Step 5 -----
+
+# Comment
+
+df_drww %>%
+  mutate(
+    is_female = ifelse(sex == "Female",1, 0)
+  ) %>%
+  select(all_of(the_vars)) %>%
+  pivot_longer(
+    cols = all_of(the_vars ),
+    names_to = "Variable",
+    values_to = "Value"
+  ) %>%
+  group_by(Variable)
+
+# ---- Step 6 -----
+
+# Comment
+
+df_drww %>%
+  mutate(
+    is_female = ifelse(sex == "Female",1, 0)
+  ) %>%
+  select(all_of(the_vars)) %>%
+  pivot_longer(
+    cols = all_of(the_vars ),
+    names_to = "Variable",
+    values_to = "Value"
+  ) %>%
+  group_by(Variable) %>%
+  summarise(
+    `N obs` = n(),
+    Missing = sum(is.na(Value)),
+    Min = min(Value, na.rm = T),
+    `25th perc` = quantile(Value, .25, na.rm=T),
+    Mean = mean(Value, na.rm=T),
+    Median = median(Value, na.rm = T),
+    `75th perc` = quantile(Value, .75, na.rm=T),
+    Max = max(Value, na.rm = T)
+  )
+
+# ---- Step 7 -----
+
+# Comment
+
+# ---- Step 8 -----
+
+# Comment
+
+
+# ---- Step 9 -----
+
+# Comment
+```
+
+
+--------------
+
+# Explore the demographic predictors of Russians' Support for the War in Ukraine
+
+Today, we will estimate four models to explore how Russian support for the war in Ukraine varies with demographic predictors.
+
+
+- `m1` provides a baseline model that predicts support for the war as a linear function of `age`, `sex`, and `education_n` measured as numeric scale (1 = Primary School, 5 = Graduate Degree).
+
+- `m2` is an **interaction regression model** that asks whether the relationship between `age` and `support` varies by `sex`
+
+- `m3` is a **polynomial regression model**, that includes a term for "age-squared" which allows the relationship between age and support to vary over different levels of age
+
+- `m4`  adds an interaction term to the *polynomial* regression from `m3` essentially allowing for separate curves for male and female respondents.
+
+
+--------------
+
+## Describe your expectations for these models
+
+Before you estimate these models, please answer the following:
+
+**In the baseline model, `m1`** what do you expect the sign of the coefficient for each predictor to be:
+
+- *Age* (**Positive/Negative**)
+
+- *Sex* (**Positive/Negative**)^[This is tricky, you need to know what the reference (excluded) category will be. ]
+
+- *Education* (**Positive/Negative**)
+
+**In the interaction model, `m2`** 
+
+- Do you think the relationship between age and support will vary by sex (**Yes/No**)
+
+- If you said yes, do you think the coefficient on the interaction between age and sex will be positive or negative (**Positive/Negative**)
+
+**In the polynomial model, `m3`** 
+
+- If the coefficient on `age` is positive and the coefficient on  `age^2` is positive, then as age increases, the increase in the predicted level of support will be (**increasing/decreasing**)
+
+- If the coefficient on `age` is positive and the coefficient on  `age^2` is negative, then as age increases, the increase in the predicted level of support will be (**increasing/decreasing**)
+
+**In `m4`** 
+
+- If the coefficients on the interaction terms between the `sex` variable and the age variables (`age` and `age^2`) is statistically significant, this implies that the relationship between `age` and support for the war is (**similar/different**) for male and female respondents.
+
+
+
+--------------
+
+## Estimate the regression models
+
+Uncomment the code below, and replace the `???` with the appropriate terms to fit the following models.
+
+```{r models}
+# Baseline Model
+# m1 <- lm(support_war01 ~ ??? + ??? + ???, ???)
+
+# Interaction model: Allow coefficient for age to vary with sex
+# m2 <- lm(support_war01 ~ age*??? + education_n, df_drww)
+
+# Polynomial model: Allow coefficient for age to vary by age
+# m3 <- lm(support_war01 ~ age + I(???^2) + sex + education_n, df_drww)
+
+# Separate Polynomial: Allow coefficient for age to vary by age separately  by sex
+# m4 <- lm(support_war01 ~ (age + I(age^2))*??? + education_n, df_drww)
+```
+
+
+-------------
+
+# Display your models in a regression table and offer some initial interpretations
+
+Using code from previous labs and lectures, please display the models from the previous section in a regression table and offer some initial interpretations.
+
+You can use the [code from last week's lab as a guide.](https://pols1600.paultesta.org/labs/06-lab-comments.html#4_Estimate_a_model_controlling_for_age_and_income){target="_blank"}
+
+  - Try adding the argument, `digits = 4` to `htmlreg`
+
+```{r regtab}
+# Display m1, m2, m3, m4 in a regression table
+# texreg::htmlreg(list(m1, m2, m3, m4), digits = 5) %>% HTML() %>% browsable()
+```
+
+
+**In particular, please answer the following:**
+
+For `m1` (Model 1) how do predicted levels of support for the war, change with
+
+- **Age** Write a sentence or two here describing the relationship in terms a human can understand.
+
+- **Sex**
+
+- **Education**
+
+For `m2`(Model 2) does the relationship between age and support appear to differ for male and female respondents  (**Yes/No**)
+
+For `m3` (Model 3) Does the relationship between age and support appear to be constant or does the predicted marginal effect of an increase in age differ^[Basically, I'm asking whether the coefficient on `I(age^2)` is statistically significant. If it is, then the change in predicted support for the war among say 20-year-olds compared to 30-year-olds, would be different than change between 30- to 40-year-olds.  Interpreting polynomials terms and interaction models is much easier if, as we do later, we simply obtain and plot the predicted values from this model] 
+
+- (**The marginal effect of age is constant / The marginal effect of age varies**)
+
+For `m4` (Model 4) do the varying marginal effects of age appear to also vary by gender?^[As in the previous question, basically you need to look at the table and see if the coefficients on the interaction terms are statistically significant. It's a little more complicated than this, but if they are significant, this is evidence of differences across Sex.] 
+
+- (**Yes/No**)
+
+
+-------------
+
+# Use $R^2$ to compare models 
+
+Now take a look at the bottom rows in your regression table which show each model's $R^2$ and adjusted $R^2$. 
+
+Recall from class, that $R^2$ describes the proportion of the variance in our outcome (support for the war), explained by the predictors in our model (age, sex, education, and some interactions/polynomials).
+
+You may also remember that $R^2$ always increases as we add more predictors to the model. To account for this, we often look at the adjusted $R^2$ which weights the increase in variance explained (decrease in variance unexplained) by the number of additional predictors needed to produce that increase.
+
+You regression table only reports results to a few decimal places. 
+
+Let's use the `summary()` function to extract and save the $R^2$ (`r.squared`) and adjusted $R^2$ (`adj.r.squared`) for each model. The code for `m1` is there as an example.
+
+```{r}
+
+# m1
+# m1_r_squared <- summary(m1)$r.squared
+# m1_r_squared
+# 
+# m1_adj_r_squared <- summary(m1)$adj.r.squared
+# m1_adj_r_squared
+
+# m2
+
+
+# m3
+
+
+# m4
+
+
+
+
+```
+
+Please answer the following:
+
+- **How does the $R^2$ change from `m1` to `m4`** 
+
+- **How does the adjusted $R^2$ change from `m1` to `m4`** 
+
+- **Overall, which model should we prefer?** 
+
+
+--------------
+
+# Produce and visualize predicted values for m1 and m3
+
+Now let's produce and visualize predicted values to help us interpret the relationship between age and support for the war `m1` (our baseline model) and `m3` (our polynomial model)
+
+We demonstrated the steps for producing predicted values in Tuesday's [lecture](https://pols1600.paultesta.org/slides/07-slides.html#64)
+
+To review: you'll need to
+
+1. Fit a model (already done)
+2. Create a prediction data frame (`pred_df`)
+  - use `expand_grid()`
+  - vary `age` using `seq()`
+  - hold `sex` and `education` constant at typical values
+3. Use this prediction data frame to obtain predicted values from each model and save the output as a new column in `pred_df`
+  - for example `pred_df$fit_m1 <- predict(m1, newdata = pred_df)` 
+4. Visualize the results using ggplot.
+  - use `pred_df` as your data
+  - map `age` to x axis
+  - map `fit_m1` or `fit_m3` to the y axis
+  - tell ggplot to draw a line using `geom_line()`
+
+
+```{r}
+# 2. Create a prediction data frame (`pred_df`)
+
+pred_df <- expand.grid(
+  age = seq(18, 99, length.out = 10),
+  sex = "Male",
+  education_n = mean(df_drww$education_n, na.rm = T)
+)
+pred_df
+
+# 3  Use this prediction data frame to obtain predicted values from our model
+# Save the output from predict() back into our prediction data frame
+
+# pred_df$fit_m1 <- predict(m1, newdata = pred_df)
+# pred_df$fit_m3 <- predict(m3, newdata = pred_df)
+
+
+## predicted values for m1
+
+
+## predicted values for m3
+
+
+# 4. Visualize the results using ggplot.
+
+
+## plot predicted values for m1
+# pred_df %>%
+#   ggplot(aes(x = age,
+#              y = fit_m1))+
+#   geom_line()
+
+## plot predicted values for m3
+
+# pred_df %>%
+#   ggplot(aes(x = age,
+#              y = fit_m3))+
+#   geom_line()
+
+```
+
+**Please offer a brief interpretation of these two figures**
+
+
+
+--------------
+
+# Produce and visualize predicted values for m2 and m4
+
+Finally, let's see how to produce and interpret predictions for models `m2` and `m4`.
+
+Recall, that in `m2` we allowed the coefficient on `age` to vary by `sex` and in `m4` our model estimates separate age curves for male and female respondents. 
+
+In the code chunk below 
+
+2. Create a new prediction data frame (`pred_df_int`)
+  - use `expand_grid()`
+  - vary `age` using `seq()`
+  - vary `sex = c("Male","Female")` 
+  - hold `education` constant at a typical value
+3. Use this prediction data frame to obtain predicted values from each model and save the output as a new column in `pred_df_int`
+  - for example: `pred_df_int$fit_m2 <- predict(m2, newdata = pred_df_int)`
+4. Visualize the results using ggplot.
+  - use `pred_df_int` as your data
+  - map `age` to x axis
+  - map `fit_m2` or `fit_m4` to the y axis
+  - map `sex` to `col` to produce separate lines by the values of `sex`
+  - tell ggplot to draw a line using `geom_line()`
+
+```{r}
+# 2. Create a prediction data frame (`pred_df_int`)
+
+pred_df_int <- expand.grid(
+  age = seq(18, 99, length.out = 10),
+  sex = c("Male","Female"),
+  education_n = mean(df_drww$education_n, na.rm = T)
+)
+pred_df_int
+
+
+# 3. Use this prediction data frame to obtain predicted values from our model
+# Save the output from predict() back into our prediction data frame
+
+## predicted values for m2
+
+
+## predicted values for m4
+
+
+
+
+# 4. Visualize the results using ggplot.
+
+
+## plot predicted values for m2
+
+
+## plot predicted values for m4
+
+
+```
+
+**Again,please offer a brief interpretation of these two figures**
+
+
+--------------
+
+# Explore another relationship in the data (Optional)
+
+Finally, if you're finished with all the sections above, take some time to explore the data:
+
+1. Formulate a question you could ask of the data
+2. Estimate a model (or models) that provides insights into this question
+3. Produce a table(s) and figure(s) that helps you interpret your model(s)
+
+For fun, let's say the group that produces the most combination of question/model/interpretation, gets some candy next class.
+
+Some questions you might explore:
+
+- How do demographic factors predict trust in Russia's government
+- Are their systematic differences in who chooses not to answers questions about support for the war or trust in government?
+- Are there noticeable regional differences in support/trust?
+- Should we model education as numeric scale or as a categorical factor?
+- How does the use of social media (either in general or particular types of social media) predict support for the war or Trust in government
+
+
+# Take the Class Survey {-}
+
+Please take a few moments to complete the [class survey](https://brown.co1.qualtrics.com/jfe/form/SV_5d2ZbPxo6uFcjRQ){target="_blank"} for this week.
+
+
+
+
+

@@ -52,14 +52,12 @@ library(easystats)
 ## Class Plan {.smaller}
 
 -   Announcements
--   Feedback
 -   Review
 -   Class plan
     -   Causal Inference
     -   Notation for Causal Inference
     -   Causal Identification
     -   Causal Identification in Experiments
-    -   `resume` data from QSS (Skipping, but their for your reference)
     -   Explore Broockman and Kalla (2016)
 
 ## Annoucements
@@ -69,11 +67,11 @@ library(easystats)
 - Readings for this week:
 
   - QSS Chapter 2: pp. 38--65
-  - [@Broockman2016-pi](https://pols1600.paultesta.org/files/readings/broockman_kalla_2016.pdf)
+  - [Broockman and Kalla (2016)](https://josephessig-source.github.io/pols1600_site/files/readings/broockman_kalla_2016.pdf)
 
-- No class next Tuesdays
+- No class on Monday the 16th. 
 
-- No lab next Thursday
+- First group assignment next week 
 
 - Meet your groups!
 
@@ -82,13 +80,12 @@ library(easystats)
 ```{r}
 #| echo: false
 groups_df <- tibble::tibble(
-`Group 1` = c("Gurpartap Singh","Niyah Whitten", "Marisa Coghlin", "Aidan Choi"),
-`Group 2` = c("Sylvie Watts","Amani Diallo", "Sinclair Harris","Peter Zucker"),
-`Group 3` = c("Joshua Okwaning","Eiffel Sunga","Jenna Hercher", "Ella Hendelman"),
-`Group 4` = c( "Jacqueline Zhang", "Charlie Jeffers","Meleah Neely", "Nene Mokonchu"),
-`Group 5` = c("Talib Reddick","Zoe Kaufman","Jenna Lowry", "Harry Laferriere"),
-`Group 6` = c("Tess	Naquet-Radiguet"," Anisha Kumar","Nash Riebe", "Sophia Wotman"),
-`Group 7` = c("Ben Buka","Ianthe Ince","Riya Srinivasan","Kaelah Kimura")
+`Group 1` = c("Kerem Koyluoglu","Adora Limani", "Jacob Lowrey", "Ellen Norell", "Hugo Ramirez"),
+`Group 2` = c("Jesse Eick","Hannah Husain", "Sydney Rosant","Kate Tobin", NA),
+`Group 3` = c("Marilyn Abney","Olha Burdeina","Samdol Sichoe", "Connor Swenson", NA),
+`Group 4` = c( "Aysha Alam", "Jackson Schwartz","Thomas Seeger", "Peter Zettl", NA),
+`Group 5` = c("Meilyn Farina","Gabriel Gold","Ayo Lin Ince", "Greyson Wisdom", NA),
+`Group 6` = c("Zander Bravo"," Ty Cohen","Ryan Samuels", "Thomas Yi", NA),
 )
 
 groups_df |> 
@@ -105,46 +102,6 @@ groups_df |>
               values_from = Name) -> groups_df
 #write_csv(groups_df, file = "../files/groups.csv" )
 DT::datatable(groups_df)
-```
-
-# Feedback
-
-```{r}
-
-df <- haven::read_spss("../files/data/class_surveys/wk02.sav")
-
-df %>%
-  mutate(
-    Likes = like,
-    Dislikes = dislike,
-  ) -> df
-```
-
-## What did we like {.smaller}
-
-```{r}
-DT::datatable(df %>% 
-                select(Likes),
-               fillContainer = F,
-              height = "90%",
-              options = list(
-                pageLength = 5
-              )
-              )
-```
-
-## What did we dislike {.smaller}
-
-```{r}
-#| echo = F
-DT::datatable(df %>% 
-                select(Dislikes),
-               fillContainer = F,
-              height = "90%",
-              options = list(
-                pageLength = 4
-              )
-              )
 ```
 
 ## Setup
@@ -192,7 +149,6 @@ the_packages <- c(
   "qss" #<<
 )
 
-## Define a function to load (and if needed install) packages
 
 lapply(the_packages, library, character.only = TRUE)
 
@@ -1472,7 +1428,7 @@ resume %>%
 3.  Only some are actually home or open the door when the canvassers knock.
 4.  These people are then recruited to participate in a series of surveys 3 days, 3 weeks, 6 weeks, and 3 months after the initial intervention.
 
-## Data for Thursday
+## Data for Friday
 
 Let's load the data from the orginal study
 
