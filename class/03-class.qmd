@@ -4,7 +4,6 @@ date: "2024-01-30"
 bibliography: ../files/paperpile.bib
 subtitle: "Making Causal Claims with Experimental Designs"
 image: "featured.jpg"
-draft: true
 ---
 
 ```{r slides-videos, echo=FALSE, include=FALSE}
@@ -34,8 +33,8 @@ comments <- paste0(
 
 ## Readings
 
--   {{< fa book >}} @Imai2022-pm Chapter 2
--   {{< fa book >}} @Broockman2016-pi [pdf](../files/readings/broockman_kalla_2016.pdf){target="blank"}
+-   {{< fa book >}} QSS chapter 2
+-   {{< fa book >}} Broockman and Kalla (2016) [pdf](../files/readings/broockman_kalla_2016.pdf){target="blank"}
 
 ## Slides
 
@@ -48,17 +47,11 @@ slide_frame(paste0("/slides/", wk, "-slides.html"))
 
 ```
 
-## Lecture
-
-<iframe src="https://brown.hosted.panopto.com/Panopto/Pages/Embed.aspx?id=c4552193-24fa-480c-a70e-b11701054c21&autoplay=false&offerviewer=true&showtitle=true&showbrand=true&captions=false&interactivity=all" height="405" width="720" style="border: 1px solid #464646;" allowfullscreen allow="autoplay" aria-label="Panopto Embedded Video Player"></iframe>
-
 ## Lab
 
 -   {{< fa laptop-file >}} Download this week's `r lab`
 
--   {{< fa paintbrush >}} Upload the rendered html file to Canvas [here](https://canvas.brown.edu/courses/1094972/assignments)
-
--   {{< fa graduation-cap >}} Review the commented solutions after class `r comments`
+-   {{< fa paintbrush >}} Upload the rendered html file to Canvas [here](https://canvas.brown.edu/courses/1102109/assignments)
 
 ## Assignments
 
@@ -72,4 +65,4 @@ learnr::run_tutorial("03-causality1", package = "qsslearnr")
 
 ```
 
--   {{< fa paintbrush >}} Upload the rendered html tutorial files to Canvas [here](https://canvas.brown.edu/courses/1094972/assignments)
+-   {{< fa paintbrush >}} Upload the rendered html tutorial files to Canvas [here](https://canvas.brown.edu/courses/1102109/assignments)

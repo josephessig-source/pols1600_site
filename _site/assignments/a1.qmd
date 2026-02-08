@@ -28,7 +28,7 @@ In this assignment, I would like your group to craft three potential research qu
 
 5.  How feasible would it be to do a study like this for the course
 
-You may use this .qmd file as a template (click [here](https://pols1600.paultesta.org/assignments/a1.qmd) to download) or create your own file. Please submit your responses to Canvas.
+You may use this .qmd file as a template (click [here](https://josephessig-source.github.io/pols1600_site/assignments/a1.qmd) to download) or create your own file. Please submit your responses to Canvas.
 
 You might start by writing down several questions of different forms about the same topic:
 
