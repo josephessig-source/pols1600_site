@@ -3427,14 +3427,14 @@
     "href": "slides/03-slides.html#class-plan",
     "title": "POLS 1600",
     "section": "Class Plan",
-    "text": "Class Plan\n\nAnnouncements\nReview\nClass plan\n\nCausal Inference\nNotation for Causal Inference\nCausal Identification\nCausal Identification in Experiments\nExplore Broockman and Kalla (2016)"
+    "text": "Class Plan\n\nAnnouncements\nClass plan\n\nCausal Inference\nNotation for Causal Inference\nCausal Identification\nCausal Identification in Experiments\nExplore Broockman and Kalla (2016)"
   },
   {
     "objectID": "slides/03-slides.html#annoucements",
     "href": "slides/03-slides.html#annoucements",
     "title": "POLS 1600",
     "section": "Annoucements",
-    "text": "Annoucements\n\nWe start taking attendance this week\nReadings for this week:\n\nQSS Chapter 2: pp. 38–65\nBroockman and Kalla (2016)\n\nNo class next Tuesdays\nNo lab next Thursday\nMeet your groups!"
+    "text": "Annoucements\n\nWe start taking attendance this week\nReadings for this week:\n\nQSS Chapter 2: pp. 38–65\nBroockman and Kalla (2016)\n\nNo class on Monday the 16th.\nFirst group assignment next week\nMeet your groups!"
   },
   {
     "objectID": "slides/03-slides.html#group-assignments",
@@ -3602,7 +3602,7 @@
     "href": "slides/03-slides.html#potential-outcomes-notation",
     "title": "POLS 1600",
     "section": "Potential outcomes notation",
-    "text": "Potential outcomes notation\n\n\\(Y_i(1)\\) describes individual \\(i\\)’s outcome, \\(Y_i\\) if they received the treatment \\((D_i = 1)\\)\n\nShorthand for \\(Y_i(D_i=1)\\)\nPaul’s Covid-19 status (\\(Y_i\\)) with the vaccine (\\(D_i = 1\\))\n\n\\(Y_i(0)\\) describes individual \\(i\\)’s outcome, \\(Y_i\\) if they did not receive the treatment \\((D_i = 0)_i\\)\n\nShorthand for \\(Y_i(D_i=0)\\)\nPaul’s Covid-19 status (\\(Y_i\\)) without the vaccine (\\(D_i=0\\))\n\n\n\nThe treatment received determines which potential outcome we actually observe:\n\\[\nY_i = (1 - D_i)*Y_i(0) + D_i*Y_i(1)\n\\]\nPotential outcomes are fixed, but we only observe one (of many) potential outcomes \\(\\to\\) Fundamental Problem of Causal Inference"
+    "text": "Potential outcomes notation\n\n\\(Y_i(1)\\) describes individual \\(i\\)’s outcome, \\(Y_i\\) if they received the treatment \\((D_i = 1)\\)\n\nShorthand for \\(Y_i(D_i=1)\\)\nJoe’s Covid-19 status (\\(Y_i\\)) with the vaccine (\\(D_i = 1\\))\n\n\\(Y_i(0)\\) describes individual \\(i\\)’s outcome, \\(Y_i\\) if they did not receive the treatment \\((D_i = 0)_i\\)\n\nShorthand for \\(Y_i(D_i=0)\\)\nJoe’s Covid-19 status (\\(Y_i\\)) without the vaccine (\\(D_i=0\\))\n\n\n\nThe treatment received determines which potential outcome we actually observe:\n\\[\nY_i = (1 - D_i)*Y_i(0) + D_i*Y_i(1)\n\\]\nPotential outcomes are fixed, but we only observe one (of many) potential outcomes \\(\\to\\) Fundamental Problem of Causal Inference"
   },
   {
     "objectID": "slides/03-slides.html#fundamental-problem-of-causal-inference",
@@ -3637,7 +3637,7 @@
     "href": "slides/03-slides.html#the-fpoci-is-a-problem-of-missing-data",
     "title": "POLS 1600",
     "section": "The FPoCI is a problem of missing data",
-    "text": "The FPoCI is a problem of missing data\nRecall that an individual causal effect \\(\\tau_i\\), is defined as:\n\\[\n\\tau_i \\equiv Y_i(1) - Y_i(0)\n\\]\nThe problem is that for any one individual, we only observe \\(Y_i(1)\\) or \\(Y_i(0)\\), but never both.\n\nIf Paul got the vaccine \\((Y_{Paul}(Vaxxed)=\\text{Covid Free})\\), then we don’t know what Paul’s health status would have been, had he not got the vaccine \\((Y_{Paul}(Unvaxxed) =???)\\)"
+    "text": "The FPoCI is a problem of missing data\nRecall that an individual causal effect \\(\\tau_i\\), is defined as:\n\\[\n\\tau_i \\equiv Y_i(1) - Y_i(0)\n\\]\nThe problem is that for any one individual, we only observe \\(Y_i(1)\\) or \\(Y_i(0)\\), but never both.\n\nIf Joe got the vaccine \\((Y_{Joe}(Vaxxed)=\\text{Covid Free})\\), then we don’t know what Joe’s health status would have been, had he not got the vaccine \\((Y_{Joe}(Unvaxxed) =???)\\)"
   },
   {
     "objectID": "slides/03-slides.html#a-statistical-solution-to-the-fpoci",
@@ -3658,35 +3658,35 @@
     "href": "slides/03-slides.html#section-1",
     "title": "POLS 1600",
     "section": "",
-    "text": "Potential Outcomes:\n\n\n\n\n\n\n\n\n\\(Y_i(1)\\)\n\\(Y_i(0)\\)\n\\(\\tau_i\\)\n\n\n\n\n7\n3\n4\n\n\n8\n6\n2\n\n\n5\n4\n1\n\n\n4\n3\n1\n\n\n6\n10\n-4\n\n\n8\n9\n-1\n\n\n5\n4\n1\n\n\n7\n8\n-1\n\n\n4\n3\n1\n\n\n6\n0\n6\n\n\n\n\n\n\n\\(E[Y_i(1)]\\)\n\\(E[Y_i(0)]\\)\n\\(E[\\tau_i]\\)\n\n\n\n\n6\n5\n1\n\n\n\n\n\nIf we could observe everyone’s potential outcomes, we could calculate the ICE\nOn average eating chocolate increases happiness by 1 point on our 10-point scale (ATE = 1)\nSuppose we conducted a study and let folks select what they wanted to eat."
+    "text": "Potential Outcomes:\n\n\n\n\n\n\n\n\n\n\n\\(Y_i(1)\\)\n\\(Y_i(0)\\)\n\\(\\tau_i\\)\n\n\n\n\n7\n3\n4\n\n\n8\n6\n2\n\n\n5\n4\n1\n\n\n4\n3\n1\n\n\n6\n10\n-4\n\n\n8\n9\n-1\n\n\n5\n4\n1\n\n\n7\n8\n-1\n\n\n4\n3\n1\n\n\n6\n0\n6\n\n\n\n\n\n\n\n\n\n\n\\(E[Y_i(1)]\\)\n\\(E[Y_i(0)]\\)\n\\(ATE\\)\n\n\n\n\n6\n5\n1\n\n\n\n\n\n\nObserved Treatment:\n\n\n\n\n\n\n\n\n\n\n\\(x_i\\)\n\\(d_i\\)\n\\(y_i\\)\n\n\n\n\nchocolate\n1\n7\n\n\nchocolate\n1\n8\n\n\nchocolate\n1\n5\n\n\nchocolate\n1\n4\n\n\nfruit\n0\n10\n\n\nfruit\n0\n9\n\n\nchocolate\n1\n5\n\n\nfruit\n0\n8\n\n\nchocolate\n1\n4\n\n\nchocolate\n1\n6\n\n\n\n\n\n\n\n\n\n\n\\(\\bar{y}_{d=1}\\)\n\\(\\bar{y}_{d=0}\\)\n\\(\\hat{ATE}\\)\n\n\n\n\n5.57\n9\n-3.43"
   },
   {
     "objectID": "slides/03-slides.html#section-2",
     "href": "slides/03-slides.html#section-2",
     "title": "POLS 1600",
     "section": "",
-    "text": "Potential Outcomes:\n\n\n\n\n\n\n\n\n\n\n\\(Y_i(1)\\)\n\\(Y_i(0)\\)\n\\(\\tau_i\\)\n\n\n\n\n7\n3\n4\n\n\n8\n6\n2\n\n\n5\n4\n1\n\n\n4\n3\n1\n\n\n6\n10\n-4\n\n\n8\n9\n-1\n\n\n5\n4\n1\n\n\n7\n8\n-1\n\n\n4\n3\n1\n\n\n6\n0\n6\n\n\n\n\n\n\n\n\n\n\n\\(E[Y_i(1)]\\)\n\\(E[Y_i(0)]\\)\n\\(ATE\\)\n\n\n\n\n6\n5\n1\n\n\n\n\n\n\nObserved Treatment:\n\n\n\n\n\n\n\n\n\n\n\\(x_i\\)\n\\(d_i\\)\n\\(y_i\\)\n\n\n\n\nchocolate\n1\n7\n\n\nchocolate\n1\n8\n\n\nchocolate\n1\n5\n\n\nchocolate\n1\n4\n\n\nfruit\n0\n10\n\n\nfruit\n0\n9\n\n\nchocolate\n1\n5\n\n\nfruit\n0\n8\n\n\nchocolate\n1\n4\n\n\nchocolate\n1\n6\n\n\n\n\n\n\n\n\n\n\n\\(\\bar{y}_{d=1}\\)\n\\(\\bar{y}_{d=0}\\)\n\\(\\hat{ATE}\\)\n\n\n\n\n5.57\n9\n-3.43"
+    "text": "Observed Treatment:\n\n\n\n\n\n\n\n\n\n\n\\(x_i\\)\n\\(d_i\\)\n\\(y_i\\)\n\n\n\n\nchocolate\n1\n7\n\n\nchocolate\n1\n8\n\n\nchocolate\n1\n5\n\n\nchocolate\n1\n4\n\n\nfruit\n0\n10\n\n\nfruit\n0\n9\n\n\nchocolate\n1\n5\n\n\nfruit\n0\n8\n\n\nchocolate\n1\n4\n\n\nchocolate\n1\n6\n\n\n\n\n\n\n\n\n\n\n\\(\\bar{y}_{d=1}\\)\n\\(\\bar{y}_{d=0}\\)\n\\(\\hat{ATE}\\)\n\n\n\n\n5.57\n9\n-3.43\n\n\n\n\n\n\nSelection Bias\n\nOur estimate of the ATE is biased by the fact that folks who prefer fruit seem to be happier than folks who prefer chocolate in this example\nIn general, selection bias occurs when folks who receive the treatment differ systematically from folks who don’t\nWhat if instead of letting people pick and choose, we randomly assigned half our respondents to chocolate and half to receive fruit"
   },
   {
     "objectID": "slides/03-slides.html#section-3",
     "href": "slides/03-slides.html#section-3",
     "title": "POLS 1600",
     "section": "",
-    "text": "Observed Treatment:\n\n\n\n\n\n\n\n\n\n\n\\(x_i\\)\n\\(d_i\\)\n\\(y_i\\)\n\n\n\n\nchocolate\n1\n7\n\n\nchocolate\n1\n8\n\n\nchocolate\n1\n5\n\n\nchocolate\n1\n4\n\n\nfruit\n0\n10\n\n\nfruit\n0\n9\n\n\nchocolate\n1\n5\n\n\nfruit\n0\n8\n\n\nchocolate\n1\n4\n\n\nchocolate\n1\n6\n\n\n\n\n\n\n\n\n\n\n\\(\\bar{y}_{d=1}\\)\n\\(\\bar{y}_{d=0}\\)\n\\(\\hat{ATE}\\)\n\n\n\n\n5.57\n9\n-3.43\n\n\n\n\n\n\nSelection Bias\n\nOur estimate of the ATE is biased by the fact that folks who prefer fruit seem to be happier than folks who prefer chocolate in this example\nIn general, selection bias occurs when folks who receive the treatment differ systematically from folks who don’t\nWhat if instead of letting people pick and choose, we randomly assigned half our respondents to chocolate and half to receive fruit"
+    "text": "Potential Outcomes:\n\n\n\n\n\n\n\n\n\n\n\\(Y_i(1)\\)\n\\(Y_i(0)\\)\n\\(\\tau_i\\)\n\n\n\n\n7\n3\n4\n\n\n8\n6\n2\n\n\n5\n4\n1\n\n\n4\n3\n1\n\n\n6\n10\n-4\n\n\n8\n9\n-1\n\n\n5\n4\n1\n\n\n7\n8\n-1\n\n\n4\n3\n1\n\n\n6\n0\n6\n\n\n\n\n\n\n\n\n\n\n\\(E[Y_i(1)]\\)\n\\(E[Y_i(0)]\\)\n\\(ATE\\)\n\n\n\n\n6\n5\n1\n\n\n\n\n\n\nRandomly Assigned Treatment:\n\n\n\n\n\n\n\n\n\n\n\\(x_i\\)\n\\(d_i\\)\n\\(y_i\\)\n\n\n\n\nchocolate\n1\n7\n\n\nchocolate\n1\n8\n\n\nchocolate\n0\n4\n\n\nchocolate\n1\n4\n\n\nfruit\n0\n10\n\n\nfruit\n1\n8\n\n\nchocolate\n0\n4\n\n\nfruit\n0\n8\n\n\nchocolate\n1\n4\n\n\nchocolate\n0\n0\n\n\n\n\n\n\n\n\n\n\n\\(\\bar{y}_{d=1}\\)\n\\(\\bar{y}_{d=0}\\)\n\\(\\hat{ATE}\\)\n\n\n\n\n6.2\n5.2\n1"
   },
   {
     "objectID": "slides/03-slides.html#section-4",
     "href": "slides/03-slides.html#section-4",
     "title": "POLS 1600",
     "section": "",
-    "text": "Potential Outcomes:\n\n\n\n\n\n\n\n\n\n\n\\(Y_i(1)\\)\n\\(Y_i(0)\\)\n\\(\\tau_i\\)\n\n\n\n\n7\n3\n4\n\n\n8\n6\n2\n\n\n5\n4\n1\n\n\n4\n3\n1\n\n\n6\n10\n-4\n\n\n8\n9\n-1\n\n\n5\n4\n1\n\n\n7\n8\n-1\n\n\n4\n3\n1\n\n\n6\n0\n6\n\n\n\n\n\n\n\n\n\n\n\\(E[Y_i(1)]\\)\n\\(E[Y_i(0)]\\)\n\\(ATE\\)\n\n\n\n\n6\n5\n1\n\n\n\n\n\n\nRandomly Assigned Treatment:\n\n\n\n\n\n\n\n\n\n\n\\(x_i\\)\n\\(d_i\\)\n\\(y_i\\)\n\n\n\n\nchocolate\n1\n7\n\n\nchocolate\n1\n8\n\n\nchocolate\n0\n4\n\n\nchocolate\n1\n4\n\n\nfruit\n0\n10\n\n\nfruit\n1\n8\n\n\nchocolate\n0\n4\n\n\nfruit\n0\n8\n\n\nchocolate\n1\n4\n\n\nchocolate\n0\n0\n\n\n\n\n\n\n\n\n\n\n\\(\\bar{y}_{d=1}\\)\n\\(\\bar{y}_{d=0}\\)\n\\(\\hat{ATE}\\)\n\n\n\n\n6.2\n5.2\n1"
+    "text": "Randomly Assigned Treatment:\n\n\n\n\n\n\n\n\n\n\n\\(x_i\\)\n\\(d_i\\)\n\\(y_i\\)\n\n\n\n\nchocolate\n1\n7\n\n\nchocolate\n1\n8\n\n\nchocolate\n0\n4\n\n\nchocolate\n1\n4\n\n\nfruit\n0\n10\n\n\nfruit\n1\n8\n\n\nchocolate\n0\n4\n\n\nfruit\n0\n8\n\n\nchocolate\n1\n4\n\n\nchocolate\n0\n0\n\n\n\n\n\n\n\n\n\n\n\\(\\bar{y}_{d=1}\\)\n\\(\\bar{y}_{d=0}\\)\n\\(\\hat{ATE}\\)\n\n\n\n\n6.2\n5.2\n1\n\n\n\n\n\n\nRandom Assignment\n\nWhen treatment has been randomly assigned, a difference in sample means provides an unbiased estimate of the ATE\nThe fact that our \\(\\hat{ATE} = ATE\\) in this example is pure coincidence.\nIf we randomly assigned treatment a different way, we’d get a different estimate.\nIn general unbiased estimators will tend to be neither too high nor too low (e.g. \\(E[\\hat{\\theta} - \\theta] = 0\\)])"
   },
   {
     "objectID": "slides/03-slides.html#section-5",
     "href": "slides/03-slides.html#section-5",
     "title": "POLS 1600",
     "section": "",
-    "text": "Randomly Assigned Treatment:\n\n\n\n\n\n\n\n\n\n\n\\(x_i\\)\n\\(d_i\\)\n\\(y_i\\)\n\n\n\n\nchocolate\n1\n7\n\n\nchocolate\n1\n8\n\n\nchocolate\n0\n4\n\n\nchocolate\n1\n4\n\n\nfruit\n0\n10\n\n\nfruit\n1\n8\n\n\nchocolate\n0\n4\n\n\nfruit\n0\n8\n\n\nchocolate\n1\n4\n\n\nchocolate\n0\n0\n\n\n\n\n\n\n\n\n\n\n\\(\\bar{y}_{d=1}\\)\n\\(\\bar{y}_{d=0}\\)\n\\(\\hat{ATE}\\)\n\n\n\n\n6.2\n5.2\n1\n\n\n\n\n\n\nRandom Assignment\n\nWhen treatment has been randomly assigned, a difference in sample means provides an unbiased estimate of the ATE\nThe fact that our \\(\\hat{ATE} = ATE\\) in this example is pure coincidence.\nIf we randomly assigned treatment a different way, we’d get a different estimate.\nIn general unbiased estimators will tend to be neither too high nor too low (e.g. \\(E[\\hat{\\theta} - \\theta] = 0\\)])"
+    "text": "Random Assignment 1\n\n\n\n\n\n\n\n\n\n\n\\(x_i\\)\n\\(d_i\\)\n\\(y_i\\)\n\n\n\n\nchocolate\n1\n7\n\n\nchocolate\n1\n8\n\n\nchocolate\n0\n4\n\n\nchocolate\n1\n4\n\n\nfruit\n0\n10\n\n\nfruit\n1\n8\n\n\nchocolate\n0\n4\n\n\nfruit\n0\n8\n\n\nchocolate\n1\n4\n\n\nchocolate\n0\n0\n\n\n\n\n\n\n\n\n\n\n\\(\\bar{y}_{d=1}\\)\n\\(\\bar{y}_{d=0}\\)\n\\(\\hat{ATE}\\)\n\n\n\n\n6.2\n5.2\n1\n\n\n\n\n\n\nRandom Assignment 2\n\n\n\n\n\n\n\n\n\n\n\\(x_i\\)\n\\(d_i\\)\n\\(y_i\\)\n\n\n\n\nchocolate\n0\n3\n\n\nchocolate\n1\n8\n\n\nchocolate\n0\n4\n\n\nchocolate\n1\n4\n\n\nfruit\n1\n6\n\n\nfruit\n1\n8\n\n\nchocolate\n0\n4\n\n\nfruit\n1\n7\n\n\nchocolate\n0\n3\n\n\nchocolate\n0\n0\n\n\n\n\n\n\n\n\n\n\n\\(\\bar{y}_{d=1}\\)\n\\(\\bar{y}_{d=0}\\)\n\\(\\hat{ATE}\\)\n\n\n\n\n6.6\n2.8\n3.8\n\n\n\n\n\n\nRandom Assignment 3\n\n\n\n\n\n\n\n\n\n\n\\(x_i\\)\n\\(d_i\\)\n\\(y_i\\)\n\n\n\n\nchocolate\n1\n7\n\n\nchocolate\n0\n6\n\n\nchocolate\n1\n5\n\n\nchocolate\n1\n4\n\n\nfruit\n0\n10\n\n\nfruit\n0\n9\n\n\nchocolate\n0\n4\n\n\nfruit\n1\n7\n\n\nchocolate\n1\n4\n\n\nchocolate\n0\n0\n\n\n\n\n\n\n\n\n\n\n\\(\\bar{y}_{d=1}\\)\n\\(\\bar{y}_{d=0}\\)\n\\(\\hat{ATE}\\)\n\n\n\n\n5.4\n5.8\n-0.4"
   },
   {
     "objectID": "slides/03-slides.html#estimating-an-average-treatment-effect",
@@ -12384,6 +12384,20 @@
     "href": "slides/03-slides.html#data-for-friday",
     "title": "POLS 1600",
     "section": "Data for Friday",
-    "text": "Data for Friday\nLet’s load the data from the orginal study\n\nload(url(\"https://pols1600.paultesta.org/files/data/03_lab.rda\"))"
+    "text": "Data for Friday\nLet’s load the data from the orginal study\n\nload(url(\"https://josephessig-source.github.io/pols1600_site/files/data/03_lab.rda\"))"
+  },
+  {
+    "objectID": "slides/03-slides.html#section",
+    "href": "slides/03-slides.html#section",
+    "title": "POLS 1600",
+    "section": "",
+    "text": "Potential Outcomes:\n\n\n\n\n\n\n\n\n\\(Y_i(1)\\)\n\\(Y_i(0)\\)\n\\(\\tau_i\\)\n\n\n\n\n7\n3\n4\n\n\n8\n6\n2\n\n\n5\n4\n1\n\n\n4\n3\n1\n\n\n6\n10\n-4\n\n\n8\n9\n-1\n\n\n5\n4\n1\n\n\n7\n8\n-1\n\n\n4\n3\n1\n\n\n6\n0\n6\n\n\n\n\n\n\n\\(E[Y_i(1)]\\)\n\\(E[Y_i(0)]\\)\n\\(E[\\tau_i]\\)\n\n\n\n\n6\n5\n1\n\n\n\n\n\nIf we could observe everyone’s potential outcomes, we could calculate the ICE\nOn average eating chocolate increases happiness by 1 point on our 10-point scale (ATE = 1)\nSuppose we conducted a study and let folks select what they wanted to eat."
+  },
+  {
+    "objectID": "slides/03-slides.html#summary-1",
+    "href": "slides/03-slides.html#summary-1",
+    "title": "POLS 1600",
+    "section": "Summary",
+    "text": "Summary\n\nCausal Claims involve counterfactual comparisons\nThe fundamental problem of causal inference is that for an individual only observe one of many potential outcomes\nCausal identification refers to the assumptions necessary to generate credible causal estimates\nIdentification for experimental designs follows from the random assignment of treatment which allows us to produce unbiased estimates of the Average Treatment Effect"
   }
 ]
