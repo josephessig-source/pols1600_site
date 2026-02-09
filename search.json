@@ -3602,7 +3602,7 @@
     "href": "slides/03-slides.html#potential-outcomes-notation",
     "title": "POLS 1600",
     "section": "Potential outcomes notation",
-    "text": "Potential outcomes notation\n\n\\(Y_i(1)\\) describes individual \\(i\\)’s outcome, \\(Y_i\\) if they received the treatment \\((D_i = 1)\\)\n\nShorthand for \\(Y_i(D_i=1)\\)\nPaul’s Covid-19 status (\\(Y_i\\)) with the vaccine (\\(D_i = 1\\))\n\n\\(Y_i(0)\\) describes individual \\(i\\)’s outcome, \\(Y_i\\) if they did not receive the treatment \\((D_i = 0)_i\\)\n\nShorthand for \\(Y_i(D_i=0)\\)\nPaul’s Covid-19 status (\\(Y_i\\)) without the vaccine (\\(D_i=0\\))\n\n\n\nThe treatment received determines which potential outcome we actually observe:\n\\[\nY_i = (1 - D_i)*Y_i(0) + D_i*Y_i(1)\n\\]\nPotential outcomes are fixed, but we only observe one (of many) potential outcomes \\(\\to\\) Fundamental Problem of Causal Inference"
+    "text": "Potential outcomes notation\n\n\\(Y_i(1)\\) describes individual \\(i\\)’s outcome, \\(Y_i\\) if they received the treatment \\((D_i = 1)\\)\n\nShorthand for \\(Y_i(D_i=1)\\)\nJoe’s Covid-19 status (\\(Y_i\\)) with the vaccine (\\(D_i = 1\\))\n\n\\(Y_i(0)\\) describes individual \\(i\\)’s outcome, \\(Y_i\\) if they did not receive the treatment \\((D_i = 0)_i\\)\n\nShorthand for \\(Y_i(D_i=0)\\)\nJoe’s Covid-19 status (\\(Y_i\\)) without the vaccine (\\(D_i=0\\))\n\n\n\nThe treatment received determines which potential outcome we actually observe:\n\\[\nY_i = (1 - D_i)*Y_i(0) + D_i*Y_i(1)\n\\]\nPotential outcomes are fixed, but we only observe one (of many) potential outcomes \\(\\to\\) Fundamental Problem of Causal Inference"
   },
   {
     "objectID": "slides/03-slides.html#fundamental-problem-of-causal-inference",
@@ -3637,7 +3637,7 @@
     "href": "slides/03-slides.html#the-fpoci-is-a-problem-of-missing-data",
     "title": "POLS 1600",
     "section": "The FPoCI is a problem of missing data",
-    "text": "The FPoCI is a problem of missing data\nRecall that an individual causal effect \\(\\tau_i\\), is defined as:\n\\[\n\\tau_i \\equiv Y_i(1) - Y_i(0)\n\\]\nThe problem is that for any one individual, we only observe \\(Y_i(1)\\) or \\(Y_i(0)\\), but never both.\n\nIf Paul got the vaccine \\((Y_{Paul}(Vaxxed)=\\text{Covid Free})\\), then we don’t know what Paul’s health status would have been, had he not got the vaccine \\((Y_{Paul}(Unvaxxed) =???)\\)"
+    "text": "The FPoCI is a problem of missing data\nRecall that an individual causal effect \\(\\tau_i\\), is defined as:\n\\[\n\\tau_i \\equiv Y_i(1) - Y_i(0)\n\\]\nThe problem is that for any one individual, we only observe \\(Y_i(1)\\) or \\(Y_i(0)\\), but never both.\n\nIf Joe got the vaccine \\((Y_{Joe}(Vaxxed)=\\text{Covid Free})\\), then we don’t know what Joe’s health status would have been, had he not got the vaccine \\((Y_{Joe}(Unvaxxed) =???)\\)"
   },
   {
     "objectID": "slides/03-slides.html#a-statistical-solution-to-the-fpoci",
@@ -12384,7 +12384,7 @@
     "href": "slides/03-slides.html#data-for-friday",
     "title": "POLS 1600",
     "section": "Data for Friday",
-    "text": "Data for Friday\nLet’s load the data from the orginal study\n\nload(url(\"https://pols1600.paultesta.org/files/data/03_lab.rda\"))"
+    "text": "Data for Friday\nLet’s load the data from the orginal study\n\nload(url(\"https://josephessig-source.github.io/pols1600_site/files/data/03_lab.rda\"))"
   },
   {
     "objectID": "slides/03-slides.html#section",

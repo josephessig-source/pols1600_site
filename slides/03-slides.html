@@ -260,8 +260,8 @@
 <h2>Group Assignments</h2>
 <div class="cell">
 <div class="cell-output-display">
-<div class="datatables html-widget html-fill-item" id="htmlwidget-96982b1049db6f725a02" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-96982b1049db6f725a02">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6"],["Group 1","Group 2","Group 3","Group 4","Group 5","Group 6"],["Kerem Koyluoglu","Jesse Eick","Marilyn Abney","Aysha Alam","Meilyn Farina","Zander Bravo"],["Adora Limani","Hannah Husain","Olha Burdeina","Jackson Schwartz","Gabriel Gold"," Ty Cohen"],["Jacob Lowrey","Sydney Rosant","Samdol Sichoe","Thomas Seeger","Ayo Lin Ince","Ryan Samuels"],["Ellen Norell","Kate Tobin","Connor Swenson","Peter Zettl","Greyson Wisdom","Thomas Yi"],["Hugo Ramirez",null,null,null,null,null]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Group<\/th>\n      <th>1<\/th>\n      <th>2<\/th>\n      <th>3<\/th>\n      <th>4<\/th>\n      <th>5<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"Group","targets":1},{"name":"1","targets":2},{"name":"2","targets":3},{"name":"3","targets":4},{"name":"4","targets":5},{"name":"5","targets":6}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-f5673f007891d71c9348" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-f5673f007891d71c9348">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6"],["Group 1","Group 2","Group 3","Group 4","Group 5","Group 6"],["Kerem Koyluoglu","Jesse Eick","Marilyn Abney","Aysha Alam","Meilyn Farina","Zander Bravo"],["Adora Limani","Hannah Husain","Olha Burdeina","Jackson Schwartz","Gabriel Gold"," Ty Cohen"],["Jacob Lowrey","Sydney Rosant","Samdol Sichoe","Thomas Seeger","Ayo Lin Ince","Ryan Samuels"],["Ellen Norell","Kate Tobin","Connor Swenson","Peter Zettl","Greyson Wisdom","Thomas Yi"],["Hugo Ramirez",null,null,null,null,null]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Group<\/th>\n      <th>1<\/th>\n      <th>2<\/th>\n      <th>3<\/th>\n      <th>4<\/th>\n      <th>5<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"Group","targets":1},{"name":"1","targets":2},{"name":"2","targets":3},{"name":"3","targets":4},{"name":"4","targets":5},{"name":"5","targets":6}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </section>
@@ -681,22 +681,18 @@ E[\epsilon] = E[\hat{\theta} -\theta] = 0
 <h2>Bias vs.&nbsp;variance</h2>
 
 <img data-src="https://www.cs.cornell.edu/courses/cs4780/2018fa/lectures/images/bias_variance/bullseye.png" class="r-stretch"></section>
-<section id="the-bias-variance-tradeoff" class="slide level2">
-<h2>The bias-variance tradeoff</h2>
-
-<img data-src="http://scott.fortmann-roe.com/docs/docs/BiasVariance/biasvariance.png" class="r-stretch"></section>
 <section id="potential-outcomes-notation" class="slide level2 smaller">
 <h2>Potential outcomes notation</h2>
 <ul>
 <li class="fragment"><span class="math inline">\(Y_i(1)\)</span> describes individual <span class="math inline">\(i\)</span>’s outcome, <span class="math inline">\(Y_i\)</span> if they <span class="blue">received the treatment</span> <span class="math inline">\((D_i = 1)\)</span>
 <ul>
 <li class="fragment">Shorthand for <span class="math inline">\(Y_i(D_i=1)\)</span></li>
-<li class="fragment">Paul’s Covid-19 status (<span class="math inline">\(Y_i\)</span>) with the vaccine (<span class="math inline">\(D_i = 1\)</span>)</li>
+<li class="fragment">Joe’s Covid-19 status (<span class="math inline">\(Y_i\)</span>) with the vaccine (<span class="math inline">\(D_i = 1\)</span>)</li>
 </ul></li>
 <li class="fragment"><span class="math inline">\(Y_i(0)\)</span> describes individual <span class="math inline">\(i\)</span>’s outcome, <span class="math inline">\(Y_i\)</span> if they <span class="blue">did not receive the treatment</span> <span class="math inline">\((D_i = 0)_i\)</span>
 <ul>
 <li class="fragment">Shorthand for <span class="math inline">\(Y_i(D_i=0)\)</span></li>
-<li class="fragment">Paul’s Covid-19 status (<span class="math inline">\(Y_i\)</span>) without the vaccine (<span class="math inline">\(D_i=0\)</span>)</li>
+<li class="fragment">Joe’s Covid-19 status (<span class="math inline">\(Y_i\)</span>) without the vaccine (<span class="math inline">\(D_i=0\)</span>)</li>
 </ul></li>
 </ul>
 <div class="fragment">
@@ -763,7 +759,7 @@ Y_i = (1 - D_i)*Y_i(0) + D_i*Y_i(1)
 \]</span></p>
 <p>The problem is that for any one individual, we only observe <span class="math inline">\(Y_i(1)\)</span> or <span class="math inline">\(Y_i(0)\)</span>, but never both.</p>
 <ul>
-<li class="fragment">If Paul got the vaccine <span class="math inline">\((Y_{Paul}(Vaxxed)=\text{Covid Free})\)</span>, then we don’t know what Paul’s health status would have been, had he not got the vaccine <span class="math inline">\((Y_{Paul}(Unvaxxed) =???)\)</span></li>
+<li class="fragment">If Joe got the vaccine <span class="math inline">\((Y_{Joe}(Vaxxed)=\text{Covid Free})\)</span>, then we don’t know what Joe’s health status would have been, had he not got the vaccine <span class="math inline">\((Y_{Joe}(Unvaxxed) =???)\)</span></li>
 </ul>
 </section>
 <section id="a-statistical-solution-to-the-fpoci" class="slide level2 smaller">
@@ -1769,7 +1765,7 @@ E \left[ \frac{\sum_1^m Y_i}{m}-\frac{\sum_{m+1}^N Y_i}{N-m}\right]&amp;=\overbr
 <section id="distribution-of-sample-ates" class="slide level2">
 <h2>Distribution of Sample ATEs</h2>
 
-<img data-src="03-slides_files/figure-revealjs/unnamed-chunk-30-1.png" width="960" class="r-stretch"></section>
+<img data-src="03-slides_files/figure-revealjs/unnamed-chunk-29-1.png" width="960" class="r-stretch"></section>
 <section id="why-random-assignment-matters" class="slide level2 smaller">
 <h2>Why Random Assignment Matters?</h2>
 <p>Formally, randomly assigning treatments creates <span class="blue">statistical independence</span> <span class="math inline">\((\unicode{x2AEB})\)</span> between treatment ( <span class="math inline">\(D\)</span> ) and potential outcomes ( <span class="math inline">\(Y(1),Y(0)\)</span> ) as well as any observed ( <span class="math inline">\(X\)</span> ) or unobserved confounders ( <span class="math inline">\(U\)</span> ):</p>
@@ -2007,7 +2003,7 @@ base          BlackFemale BlackMale WhiteFemale WhiteMale
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="03-slides_files/figure-revealjs/unnamed-chunk-42-1.png" width="960"></p>
+<p><img data-src="03-slides_files/figure-revealjs/unnamed-chunk-41-1.png" width="960"></p>
 </figure>
 </div>
 </div>
@@ -2047,7 +2043,7 @@ base          BlackFemale BlackMale WhiteFemale WhiteMale
 <h2>Data for Friday</h2>
 <p>Let’s load the data from the orginal study</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a></a><span class="fu">load</span>(<span class="fu">url</span>(<span class="st">"https://pols1600.paultesta.org/files/data/03_lab.rda"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a></a><span class="fu">load</span>(<span class="fu">url</span>(<span class="st">"https://josephessig-source.github.io/pols1600_site/files/data/03_lab.rda"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="codebook" class="slide level2 smaller">
