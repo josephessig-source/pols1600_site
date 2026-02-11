@@ -52,7 +52,6 @@ library(easystats)
 ## Class Plan {.smaller}
 
 -   Announcements
--   Review
 -   Class plan
     -   Causal Inference
     -   Notation for Causal Inference
@@ -154,219 +153,6 @@ lapply(the_packages, library, character.only = TRUE)
 
 ```
 
-# {{< fa magnifying-glass>}} Review {.inverse}
-
-## Review: Data wrangling
-
-## Data transformations {.smaller}
-
-::: columns
-::: {.column width="30%"}
-You want to:
-
--   Load some data
-
--   Combine multiple functions
-
--   Look at your data
-
--   Recode your data
-
--   Transform your data
-:::
-
-::: {.column width="70%"}
-::: fragment
-You could use
-
--   `read_*` functions
-
--   `%>%` the "pipe" operator
-
--   `glimpse()` `head()`, `filter()`, `select()`, `arrange()`
-
--   `mutate()`, `case_when()`, `ifelse()`
-
--   `summarize()`, `group_by()`
-:::
-:::
-:::
-
-## Data Visualization {.smaller}
-
--   The grammar of graphics
-
--   At minimum you need:
-
-    -   `data`
-    -   `aesthetic` mappings
-    -   `geometries`
-
--   Hey Jude, take a sad plot and make it better by:
-
-    -   `labels`
-    -   `themes`
-    -   `statistics`
-    -   `cooridnates`
-    -   `facets`
-    -   transforming your data before plotting
-
-## Practice {.smaller}
-
-
-
-- Create two variables `x` and `y`
-  - `x` should be a random variable with 100 observations from a random normal (`rnorm`) distribution  with mean 0 and standard deviation 1
-  - `y` should be a function of x plus the square of a random normal distribution with mean 0 and standard deviation 1
-- Combine  `x` and `y` into a `data.frame` called `df` 
-- `summarize` the `mean`, `median`, standard deviation (`sd`), 16th and 84th percentile (`quantile`) of `x` and `y` and save this to an object called `df_sum`
-- Plot the distributions of `x` and `y`, separately, using a density plot (`geom_density`)
-  - Add a rug to each density plot
-  - Add vertical lines for the mean and median of each variable
-  - A vertical lines at the 16th and and 84th percentile of each plot
-    - Hint use your object `df_sum` as the data for these geometries
-
-
-## Practice {.smaller}
-
-:::: panel-tabset
-
-## Tasks
-
-:::{.nonincremental}
-
-- Create two variables `x` and `y`
-  - `x` should be a random variable with 100 observations from a random normal (`rnorm`) distribution  with mean 0 and standard deviation 1
-  - `y` should be a function of x plus the square of a random normal distribution with mean 0 and standard deviation 1
-- Combine  `x` and `y` into a `data.frame` called `df` 
-- `summarize` the `mean`, `median`, standard deviation (`sd`), 16th and 84th percentile (`quantile`) of `x` and `y` and save this to an object called `df_sum`
-- Plot the distributions of `x` and `y`, separately, using a density plot (`geom_density`)
-  - Add a rug to each density plot
-  - Add vertical lines for the mean and median of each variable
-  - A vertical lines at the 16th and and 84th percentile of each plot
-    - Hint: use your object `df_sum` as the data for these geometries
-
-:::
-
-## {{<fa code>}}
-
-```{r}
-#| echo: true
-
-# Load libraries
-library(tidyverse)
-
-# Set seed for reproducibility
-set.seed(123)
-
-# Number of observations
-n <- 1000
-
-# Generate data
-x <- rnorm(n, mean = 0, sd = 1)
-y <- x + (rnorm(n, mean = 0, sd = 1))^2
-
-# Create dataframe
-df <- data.frame(x = x, y = y)
-
-# Calculate summary statistics
-
-df_sum <- df %>% 
-  dplyr::summarise(
-    x_mean = mean(x),
-    x_median = median(x),
-    x_sd = sd(x),
-    x_16th = quantile(x, probs = .16),
-    x_84th = quantile(x, probs = .84),
-    y_mean = mean(y),
-    y_median = median(y),
-    y_sd = sd(y),
-    y_16th = quantile(y, probs = .16),
-    y_84th = quantile(y, probs = .84)
-  )
-
-df_sum
-
-fig_x <- df %>% 
-  ggplot(aes(x))+
-  geom_density()+
-  geom_rug()+
-  geom_vline(
-    data = df_sum,
-    aes(xintercept = x_mean, col="Mean"))+
-  geom_vline(
-    data = df_sum,
-    aes(xintercept = x_median, col="Median"),
-    linetype = "dashed")+
-  geom_vline(
-    data = df_sum,
-    aes(xintercept = x_16th, col="16th percentile"))+
-  geom_vline(
-    data = df_sum,
-    aes(xintercept = x_84th, col="84th percentile"))+
-  geom_segment(
-    aes(y=.45, yend=.45,
-        x = df_sum$x_mean - df_sum$x_sd,
-        xend = df_sum$x_mean + df_sum$x_sd)
-  )+
-  ylim(0,.5)+
-  labs(
-    col = "Statistic"
-  )
-
-fig_y <- df %>% 
-  ggplot(aes(y))+
-  geom_density()+
-  geom_rug()+
-  geom_vline(
-    data = df_sum,
-    aes(xintercept = y_mean, col="Mean"))+
-  geom_vline(
-    data = df_sum,
-    aes(xintercept = y_median, col="Median"),
-    linetype = "dashed")+
-  geom_vline(
-    data = df_sum,
-    aes(xintercept = y_16th, col="16th percentile"))+
-  geom_vline(
-    data = df_sum,
-    aes(xintercept = y_84th, col="84th percentile"))+
-  geom_segment(
-    aes(y=.45, yend=.45,
-        x = df_sum$y_mean - df_sum$y_sd,
-        xend = df_sum$y_mean + df_sum$y_sd)
-  )+
-  ylim(0,.5)+
-  labs(
-    col = "Statistic"
-  )
-
-cor(df$x, df$y)
-
-fig_xy <- df %>% 
-  ggplot(aes(x,y))+
-  geom_point()+
-  geom_smooth(method="lm")
-
-```
-
-## Figures
-
-```{r}
-fig_x
-
-fig_y
-
-fig_xy
-```
-
-## Summary
-
-- Measures of central tendency describe [what's typical]{.blue}
-
-- Measures of dispersion describe [variation around what's typical]{.blue}
-
-:::
 
 # {{< fa lightbulb >}} Causal Inference {.inverse}
 
@@ -509,21 +295,15 @@ $$
 knitr::include_graphics("https://www.cs.cornell.edu/courses/cs4780/2018fa/lectures/images/bias_variance/bullseye.png")
 ```
 
-## The bias-variance tradeoff
-
-```{r}
-
-knitr::include_graphics("http://scott.fortmann-roe.com/docs/docs/BiasVariance/biasvariance.png")
-```
 
 ## Potential outcomes notation {.smaller}
 
 -   $Y_i(1)$ describes individual $i$'s outcome, $Y_i$ if they [received the treatment]{.blue} $(D_i = 1)$
     -   Shorthand for $Y_i(D_i=1)$
-    -   Paul's Covid-19 status ($Y_i$) with the vaccine ($D_i = 1$)
+    -   Joe's Covid-19 status ($Y_i$) with the vaccine ($D_i = 1$)
 -   $Y_i(0)$ describes individual $i$'s outcome, $Y_i$ if they [did not receive the treatment]{.blue} $(D_i = 0)_i$
     -   Shorthand for $Y_i(D_i=0)$
-    -   Paul's Covid-19 status ($Y_i$) without the vaccine ($D_i=0$)
+    -   Joe's Covid-19 status ($Y_i$) without the vaccine ($D_i=0$)
 
 . . .
 
@@ -587,7 +367,7 @@ $$
 
 The problem is that for any one individual, we only observe $Y_i(1)$ or $Y_i(0)$, but never both.
 
--   If Paul got the vaccine $(Y_{Paul}(Vaxxed)=\text{Covid Free})$, then we don't know what Paul's health status would have been, had he not got the vaccine $(Y_{Paul}(Unvaxxed) =???)$
+-   If Joe got the vaccine $(Y_{Joe}(Vaxxed)=\text{Covid Free})$, then we don't know what Joe's health status would have been, had he not got the vaccine $(Y_{Joe}(Unvaxxed) =???)$
 
 ## A statistical solution to the FPoCI {.smaller}
 
@@ -1434,7 +1214,7 @@ Let's load the data from the orginal study
 
 ```{r}
 #| echo: true
-load(url("https://pols1600.paultesta.org/files/data/03_lab.rda"))
+load(url("https://josephessig-source.github.io/pols1600_site/files/data/03_lab.rda"))
 ```
 
 ## Codebook {.smaller}
