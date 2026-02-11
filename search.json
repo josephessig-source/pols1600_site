@@ -5733,30 +5733,6 @@
     "text": "Appendix\n\nAdditional slides go here"
   },
   {
-    "objectID": "assignments/a5.html",
-    "href": "assignments/a5.html",
-    "title": "A5: Presentation",
-    "section": "",
-    "text": "On Thursday you will present the initial results of your group projects.\nHere is a template which you can:  download . Please upload the rendered to Canvas before class on Thursday.",
-    "crumbs": [
-      "Assignments",
-      "Assignemnts",
-      "A5: Presentations"
-    ]
-  },
-  {
-    "objectID": "assignments/a3.html",
-    "href": "assignments/a3.html",
-    "title": "A3: Initial Analyses",
-    "section": "",
-    "text": "Overview\nThe broad goal for this assignment is to ensure that you’re making progress on your final project.\nThe final project that you will submit for this class consists of the following:\n\nIntroduction (5 percent, ~ 4 paragraphs)\nTheory and Expectations (10 percent, ~4+ paragraphs)\nData (20 percent ~ 4+ paragraphs)\nDesign (25 percent ~ 5+ paragraphs)\nResults (25 percent ~ 5+ paragraphs)\nConclusion (5 percent ~ 3+ paragraphs)\nAppendix (10 percent ~ Variable codebook and all the R code for your project)\n\nThe specific expectations for each section are discussed in further detail in Assignment 4\nOur focus this week will be on the logistical aspects of your final project\n\nDownloading the template for your final paper\nMaking sure you’re set up for collaboration with GoogleDrive\nFinish wrangling your data in the code of your final paper\n\nLoading the data into R\nInspect the data\nCompleting recoding and if necessary, merging of the data\n\nBegin describing the data\nBegin outlining the other sections of your document (Intro, Theory, Data & Design, etc.)\n\nNext week, we will focus on estimating, interpreting and presenting your results.",
-    "crumbs": [
-      "Assignments",
-      "Assignemnts",
-      "A3: Exploratory Analysis"
-    ]
-  },
-  {
     "objectID": "assignments/A1_Research_Questions.html",
     "href": "assignments/A1_Research_Questions.html",
     "title": "POLS 2580 Assignment 1",
@@ -5876,7 +5852,6 @@
     "text": "Asking a good research question is one of the most important skills you will develop in your academic careers. It’s also one of the hardest.\nWe often think we’re asking one question, when in fact the study we conduct really addresses a related but distinct question. When a priest asked Willie Sutton why he robbed banks, he replied the “Well, that’s where the money is”. The priest’s question was about why rob at all, while Sutton answered the different question “Given one robs, why rob banks?” Similarly, Medieval philosophers might ask why objects stay in motion, while Newton suggests what really need is not an explanation of motion itself but of changes in motion.\nThe object of our question shapes the form of our explanation.\nIn this assignment, I would like your group to craft three potential research questions that we might explore in our research project for this class. Each question, should be a single sentence, with a few sentences answering the following questions (More details below):\n\nWhy do we care about the answer to this research question?\nWhat’s would a hypothetical “ideal experiment” to answer this question look like?\nWhat would a study with observational data look like?\nA published study that relates to this question\nHow feasible would it be to do a study like this for the course\n\nYou may use this .qmd file as a template (click here to download) or create your own file. Please submit your responses to Canvas.\nYou might start by writing down several questions of different forms about the same topic:\n\nWhy do people vote?\nWhy do people not vote?\nWhy do the rich vote at higher rates than the poor?\nWhen might people who don’t vote, be motivated to vote?\nWhat is the effect of encouraging someone to vote via a phone call?\nAre phone calls more or less effective than in-person contact for get-out the vote efforts?\n\nEach of these questions addresses a general topic that political scientists seem to think is important. Each carries some suppositions and assumptions that in turn influence the type of explanation we might find convincing. Why do people vote feels a bit broad to me. People probably vote for many reasons. How can we hope to adjudicate between all the possible reasons for voting? (Further are these the same reasons for not voting or do we need another set of explanations altogether?)\nWhether phone calls are more or less effective than in-person contacts for GOTV efforts seems more tractable, but also perhaps to narrow. Do we really care? If we’re confident we can identify an effect or difference in one study, are we sure we’ll see similar effects in a different study conducted under different circumstances?\nIn crafting your research questions, you want to strike a balance between things we actually care about (why do people vote) and things we can actually assess (what’s effect of a particularly type of encouragement to vote). A few thoughts on this process:\n\n“Why” questions tend to be more compelling than “What” or “How” or “Do” questions, I think in part because “why” questions often imply a theory and suggest a counterfactual (why this and not that), while other ways of asking questions feel more descriptive. For example, why do the rich vote at higher rates than the poor. Well, one explanation may be that their relative social and economic status means they are more likely to be targets of mobilization efforts by campaigns (among many things). So a natural follow up to this larger question might be, what’s the effect of providing similar mobilization efforts to the poor. Would they vote at similar rates to the rich? If so, then we’ve learned something about how mobilization explains class differences in participation.\nThinking about questions in terms of puzzles is another useful trick. Why do parties exist when politicians’ ideological preferences can explain the vast majority of their legislative behavior? Note this type of question contains a lot of presuppositions (how do we measure ideological preferences? Do they really explain legislative behavior? Is that what we care about?), but as point of departure for a study these type arguments can be useful\nTry to be simple and clear. Don’t worry about asking the perfect question right away. Your questions can and should evolve over time, and I suspect some of you will write a paper that has nothing to do with the questions you posed here.\n\nFor each question, please discuss the following:\n\nWhy do we care? Why we should care about the answer to this question. A strong justification is often that existing theories yield conflicting predictions and so your study will offer some insight into how to adjudicate betweeen these theories. A less strong justification is that no one has ever studied this before. Even if this is true (and it’s often not) it may be true for good reason. No need for formal citations, but if there are specific theories or claims your addressing feel free to name names.\nThe ideal experiment Please describe an “ideal” experiment that you could run that would give you some purchase on your question. Note the key feature of an experiment, is that you the researcher are able to manipulate (through random assignment) some facet of the world. Assume money, resources, physics, and even ethics are not an object. If you could randomly assign anything, what would you manipulate. At what level of analysis would your manipulation occur (i.e. are your units of analysis individuals or countries or something else). How would you measure your outcome, again assuming you were all power and all-seeing. If that manipulation isn’t feasible, what does that say about the ability to make a causal claim about your question?\nThe observational study Finally, considering some of the potential limitations that might prevent you from implementing your ideal experiment (it’s hard to randomly assign democratic government), what is one way you might address your research question with observational data. Would your study use cross-sectional or longitudinal data. What are some of the concerns (selection on observables) that arise in this setting. Is there a natural experiment or some sort of discontinuity you might leverage to approximate this experimental ideal.\n\nAgain, each paragraph should be brief and to the point. No need to specify a full research design–just give me the broad strokes. You’re writing for each question should not exceed a page.\nAfter you’ve thought through how you might go about answering your question, please find\n\nA published study that relates to this question. It need not be exactly your question as posed, but it should be in a similar area. Include a full citation, and link to the study. Then in a paragraph sentences try to summarize:\n\n\nThe study’s research question\nEmprical design\nCore findings.\n\nFinally on a scale of 1 (least feasible) to 10 (most feasible), please evaluate how likely you think it is you could write an empirical paper on this question for this course.\nDon’t worry about getting everything right. Your final projects can, will, and probably should change. The point of this exercise is to get some practice thinking about questions that interest you in the language of causal inference and potential outcomes.",
     "crumbs": [
       "Assignments",
-      "Assignemnts",
       "A1: Introductions"
     ]
   },
@@ -5888,7 +5863,6 @@
     "text": "Why do we care:",
     "crumbs": [
       "Assignments",
-      "Assignemnts",
       "A1: Introductions"
     ]
   },
@@ -5900,7 +5874,6 @@
     "text": "The ideal experiment:",
     "crumbs": [
       "Assignments",
-      "Assignemnts",
       "A1: Introductions"
     ]
   },
@@ -5912,7 +5885,6 @@
     "text": "The observational study:",
     "crumbs": [
       "Assignments",
-      "Assignemnts",
       "A1: Introductions"
     ]
   },
@@ -5924,7 +5896,6 @@
     "text": "A published study:",
     "crumbs": [
       "Assignments",
-      "Assignemnts",
       "A1: Introductions"
     ]
   },
@@ -5936,7 +5907,6 @@
     "text": "Feasibility: (X/10)",
     "crumbs": [
       "Assignments",
-      "Assignemnts",
       "A1: Introductions"
     ]
   },
@@ -5948,7 +5918,6 @@
     "text": "Why do we care:",
     "crumbs": [
       "Assignments",
-      "Assignemnts",
       "A1: Introductions"
     ]
   },
@@ -5960,7 +5929,6 @@
     "text": "The ideal experiment:",
     "crumbs": [
       "Assignments",
-      "Assignemnts",
       "A1: Introductions"
     ]
   },
@@ -5972,7 +5940,6 @@
     "text": "The observational study:",
     "crumbs": [
       "Assignments",
-      "Assignemnts",
       "A1: Introductions"
     ]
   },
@@ -5984,7 +5951,6 @@
     "text": "A published study:",
     "crumbs": [
       "Assignments",
-      "Assignemnts",
       "A1: Introductions"
     ]
   },
@@ -5996,7 +5962,6 @@
     "text": "Feasibility: (X/10)",
     "crumbs": [
       "Assignments",
-      "Assignemnts",
       "A1: Introductions"
     ]
   },
@@ -6008,7 +5973,6 @@
     "text": "Why do we care:",
     "crumbs": [
       "Assignments",
-      "Assignemnts",
       "A1: Introductions"
     ]
   },
@@ -6020,7 +5984,6 @@
     "text": "The ideal experiment:",
     "crumbs": [
       "Assignments",
-      "Assignemnts",
       "A1: Introductions"
     ]
   },
@@ -6032,7 +5995,6 @@
     "text": "The observational study:",
     "crumbs": [
       "Assignments",
-      "Assignemnts",
       "A1: Introductions"
     ]
   },
@@ -6044,7 +6006,6 @@
     "text": "A published study:",
     "crumbs": [
       "Assignments",
-      "Assignemnts",
       "A1: Introductions"
     ]
   },
@@ -6056,188 +6017,7 @@
     "text": "Feasibility: (X/10)",
     "crumbs": [
       "Assignments",
-      "Assignemnts",
       "A1: Introductions"
-    ]
-  },
-  {
-    "objectID": "assignments/a2.html",
-    "href": "assignments/a2.html",
-    "title": "POLS 1600: Research Topics",
-    "section": "",
-    "text": "For this assignment, please upload to Canvas an html file named a2_group0X_data.html produced from an Quarto Markdown file called a2_group0X_data.qmd (changing group0X to your group’s number group0X) that contains the following:\n\nA revised description of your group’s research project\nA description of a linear model implied by your question\nR code that loads some potentially relevant data to your question and at least one descriptive summary of that data.\nSome information about your group such as:\n\nA group name1\nA group color or color scheme\nA group motto, mascot, crest, etc.\nYour group’s theme song\nYour group’s astrological sign\nAnything else that you think well help you form strong ingroup bounds that facilitate collaboration\n\n\nYour files (.qmd file, .html file, and maybe a data file2) should be saved in the shared Google drive folder Group_XX for your group.\n\n\n\n\n\n\nNote\n\n\n\nGoogle is great for sharing files but not so great for version control. When working on this assignment, please Coordinate with your group so only ONE PERSON is editing the file at a given time",
-    "crumbs": [
-      "Assignments",
-      "Assignemnts",
-      "A2: Data"
-    ]
-  },
-  {
-    "objectID": "assignments/a2.html#gathering-data-from-existing-data-sets",
-    "href": "assignments/a2.html#gathering-data-from-existing-data-sets",
-    "title": "POLS 1600: Research Topics",
-    "section": "Gathering Data from Existing Data Sets",
-    "text": "Gathering Data from Existing Data Sets\nBelow are some common data sets in American, Comparative and International Relations. Again your question doesn’t have to be political and you can look elsewhere for data – (the U.S. Census, Data.gov).",
-    "crumbs": [
-      "Assignments",
-      "Assignemnts",
-      "A2: Data"
-    ]
-  },
-  {
-    "objectID": "assignments/a2.html#american-politics",
-    "href": "assignments/a2.html#american-politics",
-    "title": "POLS 1600: Research Topics",
-    "section": "American Politics",
-    "text": "American Politics\n\nThe American National Elections Studies (NES)\n\nhttp://www.electionstudies.org/\n\nCCES\n\nhttp://projects.iq.harvard.edu/cces/home\n\nGeneral Social Survey\n\nhttp://www3.norc.org/GSS+Website/\n\nRoper Center\n\nhttps://ropercenter.cornell.edu//\n\nPew\n\nhttp://www.pewresearch.org/data/",
-    "crumbs": [
-      "Assignments",
-      "Assignemnts",
-      "A2: Data"
-    ]
-  },
-  {
-    "objectID": "assignments/a2.html#comparative-politicsinternational-relations",
-    "href": "assignments/a2.html#comparative-politicsinternational-relations",
-    "title": "POLS 1600: Research Topics",
-    "section": "Comparative Politics/International Relations",
-    "text": "Comparative Politics/International Relations\n\nWorld Values Survey\n\nhttp://www.worldvaluessurvey.org/wvs.jsp\n\nEurobarometer\n\nhttp://ec.europa.eu/public_opinion/index_en.htm\n\nLatinobarometer\n\nhttp://www.latinobarometro.org/lat.jsp\n\nOECD\n\nhttps://data.oecd.org/\n\nQuality of Government Data (I love this)\n\nhttp://qog.pol.gu.se/data\n\nUppsala Conflict Data (I hate this8)\n\nhttp://www.pcr.uu.se/research/UCDP/\n\nThreat and imposition of sanctions\n\nhttp://www.unc.edu/~bapat/TIES.htm\n\nCorrelates of War (Also hate this)\n\nhttp://www.correlatesofwar.org/",
-    "crumbs": [
-      "Assignments",
-      "Assignemnts",
-      "A2: Data"
-    ]
-  },
-  {
-    "objectID": "assignments/a2.html#general-research",
-    "href": "assignments/a2.html#general-research",
-    "title": "POLS 1600: Research Topics",
-    "section": "General Research",
-    "text": "General Research\n\nHarvard Dataverse (Good for finding replication data from published studies)\n\nhttps://dataverse.harvard.edu/\n\nICPSR (Same)\n\nhttps://www.icpsr.umich.edu/icpsrweb/landing.jsp",
-    "crumbs": [
-      "Assignments",
-      "Assignemnts",
-      "A2: Data"
-    ]
-  },
-  {
-    "objectID": "assignments/a2.html#footnotes",
-    "href": "assignments/a2.html#footnotes",
-    "title": "POLS 1600: Research Topics",
-    "section": "Footnotes",
-    "text": "Footnotes\n\n\nIf you’re Group 01 don’t change your name to Group 4↩︎\nPlease don’t upload terabytes of data though.↩︎\nThat is, don’t worry about whether your question is causally identified.↩︎\nThis is a common explanation for socio-economic differences in political participation.↩︎\nAlso known as a dummy variable, or binary variable because it only takes values of 0 or 1↩︎\nYou’d probably also want to some clarity about how you’re treating Independents and people who say they’re Independents but when asked if they lean toward one party or the other. Typically, these partisan leaners tend to behave like partisans.↩︎\nAssuming for simplicity that we’re excluding independents from our analysis…↩︎\nBasically conflict data is real pain to work with, and it’s not always clear what statitistical inference means for these type of questions. But if your group is desperate to study these types of questions we can talk. I’d recommend trying to replicate and extend someone else’s analysis of these data, rather than starting from scratch↩︎",
-    "crumbs": [
-      "Assignments",
-      "Assignemnts",
-      "A2: Data"
-    ]
-  },
-  {
-    "objectID": "assignments/a4.html",
-    "href": "assignments/a4.html",
-    "title": "A4: Project Drafts",
-    "section": "",
-    "text": "You final will paper consists of seven sections. There is no minimum (or maximum) length for the final paper, but I’ve included rough estimates in parentheses of how long I think each section should be along with the relative contribution of each section to your final grade.\nSpecific guidance, expectations, and grading criteria for each section are provided below.\nYou need not have every section completely finished in this draft, but the more you have done the more feedback you will get. Remember, the data, design, and results section make up 70 percent of your grade, so while a good introduction, compelling theory, and thoughtful conclusion are important, you should budget your time accordingly.\nYour actual grade for the draft will reflect a general assessment of the status of your project\nAdditionally, I will assign points to each section as if it were you final paper to give you a sense of where to focus your efforts. This is not your actual grade for this assignment, but can be though of as a rough estimate of the grade you would receive on a section if you were to submit it, as is, for your final paper. Your grade for that section on the final paper may increase or decrease depending on the changes you make to your draft. Additionally, I will assign points to each section as if it were you final paper to give you a sense of where to focus your efforts. This is not your actual grade for this assignment, but can be though of as a rough estimate of the grade you would receive on a section if you were to submit it, as is, for your final paper. Your grade for that section on the final paper may increase or decrease depending on the changes you make to your draft.\nI have also posted a  template for the final paper and an example of a final paper from a previous version of POLS 1600.",
-    "crumbs": [
-      "Assignments",
-      "Assignemnts",
-      "A4: Draft"
-    ]
-  },
-  {
-    "objectID": "assignments/a4.html#grading-criteria-5-points",
-    "href": "assignments/a4.html#grading-criteria-5-points",
-    "title": "A4: Project Drafts",
-    "section": "Grading Criteria (5 points)",
-    "text": "Grading Criteria (5 points)\n\n5 points\n\nArticulates clear and compelling research question\nOffers a strong motivation for pursuing this question tied to existing social science theory\nDescribes a convincing empirical strategy with appropriate data and research design\nPreviews interesting results with substantive interpretation\nMakes reader excited to read the rest of the paper\nWriting throughout is clear, precise, and engaging, with correct spelling and grammar and consistent citations\n\n4 points\n\nArticulates research question\nLink between research question and social science theory could be more developed\nDescribes empirical strategy with data and research design\nPreview of results with little to no interpretation\nLeaves reader moderately interested in the rest of the paper.\nWriting throughout is clear and precise, with correct spelling and grammar and consistent citations\n\n&lt; 4 points\n\nResearch question unclear or absent\nLittle to no discussion of why this research question is of interest to social scientists and citizens\nLittle to no discussion of the data and research design used to pursue this question.\nNo discussion of empirical results\nDoes little to pique reader’s interest in the rest of the paper.\nWriting throughout is muddled and vague, with uncorrekt spellung and grammur and consistent citations",
-    "crumbs": [
-      "Assignments",
-      "Assignemnts",
-      "A4: Draft"
-    ]
-  },
-  {
-    "objectID": "assignments/a4.html#grading-criteria-10-points",
-    "href": "assignments/a4.html#grading-criteria-10-points",
-    "title": "A4: Project Drafts",
-    "section": "Grading Criteria (10 points)",
-    "text": "Grading Criteria (10 points)\n\n9-10 points:\n\nCareful discussion of relevant theoretical, empirical, and/or substantive contexts that motivates research question.\nCites at least three relevant pieces of academic literature on research topic. Uses this literature to articulate theoretical framework for thinking about research question.\nTheoretical framework clearly defines:\nthe outcome (or outcomes) of interest\nthe factors expected to explain variation in that outcome\nsome potential alternative explanations/omitted variables, that might explain variation in both the outcome and predictors\nDevelops a clear set of expectations informed by theoretical framework for how these explanatory factors should relate to the outcome (and possibly each other)\n\n8 points:\n\nBrief discussion of theoretical, empirical, and/or substantive contexts that motivates research question.\nCites less than three relevant pieces of academic literature on research topic. Uses this literature to articulate theoretical framework for thinking about research question.\nTheoretical framework broadly defines:\nthe outcome (or outcomes) of interest\nthe factors expected to explain variation in that outcome\nsome potential alternative explanations/omitted variables, that might explain variation in both the outcome and predictors\nDevelops a set of expectations for how these explanatory factors should relate to the outcome (and possibly each other, but connection to larger theoretical framework is unclear\n\n&lt;8 points:\n\nLittle to no discussion of theoretical, empirical, and/or substantive contexts that motivates research question.\nNo citation of relevant pieces of academic literature on research topic. Broader theoretical framework absent.\nFails to clearly define:\nthe outcome (or outcomes) of interest\nthe factors expected to explain variation in that outcome\nsome potential alternative explanations/omitted variables, that might explain variation in both the outcome and predictors\nFails to articulate a clear set of expectations for how these explanatory factors should relate to the outcome",
-    "crumbs": [
-      "Assignments",
-      "Assignemnts",
-      "A4: Draft"
-    ]
-  },
-  {
-    "objectID": "assignments/a4.html#grading-criteria-20-points",
-    "href": "assignments/a4.html#grading-criteria-20-points",
-    "title": "A4: Project Drafts",
-    "section": "Grading Criteria (20 points)",
-    "text": "Grading Criteria (20 points)\n\n18-20 points:\n\nData sources are clear and appropriate\nUnit of analysis is clear and appropriate\nOutcomes, key predictors, and covariates are clearly defined and carefully described\nDescriptive tables and figures are thoroughly discussed in text with correct interpretations\nData appear to be clean and tidy\n\n16-17 points:\n\nData sources are clear and appropriate\nUnit of analysis is unclear\nOutcomes, key predictors, and covariates are briefly defined and described\nDescriptive tables and figures are briefly discussed in text with mostly correct interpretations\nData appear to be clean and tidy\n\n&lt; 16 points:\n\nData sources are not identified\nUnit of analysis is is not discussed or incorrect\nOutcomes, key predictors, and covariates are not defined and described\nDescriptive tables and figures absent, not discussed or interpreted incorrectly\nClear errors in coding (e.g. failing to recode values as NA)",
-    "crumbs": [
-      "Assignments",
-      "Assignemnts",
-      "A4: Draft"
-    ]
-  },
-  {
-    "objectID": "assignments/a4.html#grading-criteria-30-points",
-    "href": "assignments/a4.html#grading-criteria-30-points",
-    "title": "A4: Project Drafts",
-    "section": "Grading Criteria (30 points)",
-    "text": "Grading Criteria (30 points)\n\n23-25 points:\n\nCorrectly specifies multiple models to test empirical expectations\nExpresses empirical expectations in terms of coefficients from linear models\nExplains motivation and interpretation of specified models\nConveys a clear understanding of\n\nIdentifying assumptions of empirical design\nWhat linear regression is\nWhat it means to control for variables\nHow to interpret coefficients from regression\nHow to quantify uncertainty around regression estimates, using both confidence intervals and hypothesis tests\n\n\n20-22 points:\n\nCorrectly specifies two models to test empirical expectations\nExpresses empirical expectations in terms of coefficients from linear models\nExplains motivation and interpretation of specified models\nConveys some understanding of\n\nIdentifying assumptions of empirical design\nWhat linear regression is\nWhat it means to control for variables\nHow to interpret coefficients from regression\nHow to quantify uncertainty around regression estimates, using both confidence intervals and hypothesis tests\n\n\n&lt; 20 points:\n\nIncorrectly specifies one models to test empirical expectations\nDoes not express empirical expectations in terms of coefficients from linear models\nLittle to no discussion of the motivation and interpretation of specified models\nConveys little to no understanding of\n\nIdentifying assumptions of empirical design\nWhat linear regression is\nWhat it means to control for variables\nHow to interpret coefficients from regression\nHow to quantify uncertainty around regression estimates, using both confidence intervals and hypothesis tests",
-    "crumbs": [
-      "Assignments",
-      "Assignemnts",
-      "A4: Draft"
-    ]
-  },
-  {
-    "objectID": "assignments/a4.html#grading-criteria-25-points",
-    "href": "assignments/a4.html#grading-criteria-25-points",
-    "title": "A4: Project Drafts",
-    "section": "Grading Criteria (25 points)",
-    "text": "Grading Criteria (25 points)\n\n23-25 points:\n\nEmpirical results are\n\nclearly presented in tables and figures appropriate variable names and labels\ncorrectly interpreted in terms of substantive and statistical significance\nused to evaluate theoretical expectations\ninterpreted to demonstrate mastery of the concepts of\n\nbivariate and multiple regression\nconfidence intervals\nhypothesis testing\n\ntell a coherent and compelling story that provides insights into research question\n\n\n20-22 points:\n\nEmpirical results are\n\nroughly presented in tables and figures with awkward variable names and labels\ninterpreted mostly correctly in terms of substantive and statistical significance\nused to evaluate theoretical expectations\ninterpreted to demonstrate general understanding of the concepts of\n\nbivariate and multiple regression\nconfidence intervals\nhypothesis testing\n\ntell a coherent story that provides partial insights into research question\n\n\n&lt; 20 points:\n\nEmpirical results are\n\npoorly presented in tables and figures with awkward variable names and labels\ninterpreted mostly incorrectly in terms of substantive and statistical significance\nare not used to evaluate theoretical expectations\ninterpreted to demonstrate little to no understanding of the concepts of\n\nbivariate and multiple regression\nconfidence intervals\nhypothesis testing\n\nfail to tell a coherent story that provides little to no insights into research question",
-    "crumbs": [
-      "Assignments",
-      "Assignemnts",
-      "A4: Draft"
-    ]
-  },
-  {
-    "objectID": "assignments/a4.html#grading-criteria-25-points-1",
-    "href": "assignments/a4.html#grading-criteria-25-points-1",
-    "title": "A4: Project Drafts",
-    "section": "Grading Criteria (25 points)",
-    "text": "Grading Criteria (25 points)\n\n5 points\n\nClear summary of the project’s findings\nDiscussion of the strengths and weaknesses of the project\nInteresting suggestions for further research that seem likely to add additional insights and/or address limitations of the present study.\nCorrectly formatted references/works cited\n\n4 points\n\nCursory summary of the project’s findings\nDiscussion of the strengths and weaknesses of the project\nSome suggestions for further research informed by the present project\nCorrectly formatted references/works cited\n\n&lt; 4 points\n\nLittle to no summary of the project’s findings\nLittle to no discussion of the strengths and weaknesses of the project\nNo suggestions for further research informed by the present project\nNo references/works cited",
-    "crumbs": [
-      "Assignments",
-      "Assignemnts",
-      "A4: Draft"
-    ]
-  },
-  {
-    "objectID": "assignments/a4.html#grading-criteria-25-points-2",
-    "href": "assignments/a4.html#grading-criteria-25-points-2",
-    "title": "A4: Project Drafts",
-    "section": "Grading Criteria (25 points)",
-    "text": "Grading Criteria (25 points)\n\n10 points\n\nCodebook is\n\neasy to read and informative\ndescribes all the variables used in the analysis.\n\nCode appendix is\n\nnicely formatted\nwell-commented\nable to to reproduces all the analysis in text without errors\n\nNo R code, raw output, error messages appears in the main text of the paper.\n\n8-9 points\n\nCodebook is\n\ndescribes all of the variables used in the analysis.\n\nCode appendix:\n\nCould be more cleanly formatted and needs more comments\nable to reproduces all the analysis in text without errors or only minor errors\n\nNo R code, raw output, error messages appears in the main text of the paper.\n\n&lt; 8 points\n\nCodebook is absent, incomplete, and/or incorrect\nCode appendix is:\n\nPoorly formatted\nContains no explanatory comments\nunable to reproduce most of the analysis in the text.\nContains clear errors\n\nR code, raw R output, error messages appear throughout the main text of the paper.",
-    "crumbs": [
-      "Assignments",
-      "Assignemnts",
-      "A4: Draft"
-    ]
-  },
-  {
-    "objectID": "assignments/final.html",
-    "href": "assignments/final.html",
-    "title": "A5: Presentation",
-    "section": "",
-    "text": "Check back soon",
-    "crumbs": [
-      "Assignments",
-      "Assignemnts",
-      "Final Paper"
     ]
   },
   {
@@ -12454,5 +12234,33 @@
       "Overview",
       "Assignments"
     ]
+  },
+  {
+    "objectID": "assignments/pols1600_paper_template.html",
+    "href": "assignments/pols1600_paper_template.html",
+    "title": "POLS 1600: Final Paper Template",
+    "section": "",
+    "text": "This document provides a template for the structure of your final paper for POLS 1600.\nReplace this markdown text with the introduction to your paper that:\n\nClearly articulates your group’s research question\nLays out the theoretical framework that motivates your inquiry\nDescribes your empirical strategy\nProvides an outline of the rest of the paper and previews your results."
+  },
+  {
+    "objectID": "assignments/pols1600_paper_template.html#references",
+    "href": "assignments/pols1600_paper_template.html#references",
+    "title": "POLS 1600: Final Paper Template",
+    "section": "6.1 References",
+    "text": "6.1 References\nI’d use a bulleted list to format your references. Aim for at least three, academic citations.\n\nCitrin, J. (1974). Comment: The political relevance of trust in government. American Political Science Review, 68(3), 973-988.\nLerman, Amy E., and Vesla M. Weaver. (2014) Arresting Citizenship. University of Chicago Press, 2014.\nJeong, J., & Han, S. (2020). Trust in police as an influencing factor on trust in government: 2SLS analysis using perception of safety. Policing: An International Journal."
+  },
+  {
+    "objectID": "assignments/pols1600_paper_template.html#code-book",
+    "href": "assignments/pols1600_paper_template.html#code-book",
+    "title": "POLS 1600: Final Paper Template",
+    "section": "7.1 Code book",
+    "text": "7.1 Code book\nYour code book should describe be organized conceptually by variable type:\n\nOutcome\nKey Predictors\nCovariates\n\nFor each variable, provide:\n\nvariable_name_used_in_code | Conceptual name\n\nDescription of variable/Survey Question Wording\nOriginal name in raw data.\nSummary of any recoding, transformations (e.g. Collapsing categories, or reverse coding endpoints of scales)\nSummary of range of values (e.g. 1= Strong Democrat … 7 = Strong Republican)\n\ntrust_in_gov | Trust in Government\n\nQuestion: “How often can you trust the federal government in Washington to do what is right?”\nOriginal variable: V201233\nRecoding: V201233 reverse coded so that in trust_in_gov, 0 = “Never”, 1 = “Some of the Time”, 2 = “About half the time”, 3 = “Most of the time” and 4 = “Always”\nRange: 0 (“Never) to 4 (”Always)"
+  },
+  {
+    "objectID": "assignments/pols1600_paper_template.html#code-appendix",
+    "href": "assignments/pols1600_paper_template.html#code-appendix",
+    "title": "POLS 1600: Final Paper Template",
+    "section": "7.2 Code Appendix",
+    "text": "7.2 Code Appendix\nFinally, in your code appendix you will display the all the code from the previous code chunks in one single code chunk by:\n\nsetting echo = T, eval = F in the code chunk’s header\ntyping the &lt;&lt;chunk_label&gt;&gt; for each of your code chunks sequentially where chunk_label is replaced with the of the corresponding code chunk (e.g. `&lt;&gt;)\n\n\n# Pacakges used in analysis\nthe_packages &lt;- c(\n  ## R Markdown\n  \"kableExtra\",\"DT\",\"texreg\",\"htmltools\",\n  ## Tidyverse\n  \"tidyverse\", \"lubridate\", \"forcats\", \"haven\", \"labelled\",\n  \"modelr\", \"purrr\",\n  ## Extensions for ggplot\n  \"ggmap\",\"ggrepel\", \"ggridges\", \"ggthemes\", \"ggpubr\", \n  #\"GGally\", \n  \"scales\", \"dagitty\", \"ggdag\", \"ggforce\",\n  # Data \n  \"COVID19\",\"maps\",\"mapdata\",\"qss\",\"tidycensus\", \"dataverse\",\n  # Analysis\n  \"DeclareDesign\", \"boot\"\n)\nlapply(the_packages, library, character.only = TRUE)\n\n\n\n# Uncomment to install | Recomment after installing\n# remotes::install_github(\"jamesmartherus/anesr\")\nlibrary(anesr)\n\n# Load 2020 NES\ndata(\"timeseries_2020\", package =\"anesr\")\n\n# rename timeseries_2020 to df\ndf &lt;- timeseries_2020\n\n\ndf %&gt;%\n  mutate(\n    # ---- OUTCOMES ----\n    \n    ## V201233 PRE: HOW OFTEN TRUST GOVERNMENT IN WASHINGTON TO DO WHAT IS RIGHT\n    ### Reverse code so 0 = Never, 4 = Always\n    trust_gov = ifelse(V201233 &lt; 0, NA, (V201233-5)*-1),\n    \n    # ---- KEY PREDICTORs ----\n    \n    ## V202457 POST: HAS R EVER BEEN ARRESTED\n    been_arrested = case_when(\n      V202457 == 2 ~ 0,\n      V202457 == 1 ~ 1,\n      T ~ NA_real_\n    ),\n    ## V202456: DURING PAST 12 MONTHS, R OR ANY FAMILY MEMBERS STOPPED BY POLICE\n    police_stop_12mo = case_when(\n      V202456 == 2 ~ 0,\n      V202456 == 1 ~ 1,\n      T ~ NA_real_\n    ),\n    \n    # ---- COVARIATES ----\n    \n    ## V201549x  PRE: SUMMARY: R self‐identified race/ethnicity\n    race_f = ifelse(\n      V201549x &lt; 0, NA,\n      # Remove numbers from race variable labels\n      gsub(\"^[[:graph:]]* \", \"\", as_factor(V201549x))\n    ),\n    # Relevel race_f so white is reference category\n    race_f = forcats::fct_relevel(race_f,\"White, non-Hispanic\"),\n    # Create label variable with line breaks for plotting\n    race_l = stringr::str_wrap(race_f, width = 20),\n    is_white = ifelse(race_f == \"White, non-Hispanic\", 1, 0),\n    is_black = ifelse(race_f == \"Black, non-Hispanic\", 1, 0),\n    is_asian = ifelse(race_f == \"Asian or Native Hawaiian/other Pacific Islander, non-Hispanic alone\", 1, 0),\n    is_hispanic = ifelse(race_f == \"Hispanic\", 1, 0),\n    is_multiracial = ifelse(race_f == \"Multiple races, non-Hispanic\", 1, 0),\n    is_NA_AN_other = ifelse(race_f == \"Native American/Alaska Native or other race, non-Hispanic alone\", 1, 0),\n    is_nonwhite = ifelse(is_white == 1, 0, 1),\n    ## V201617x PRE: SUMMARY: Total (family) income\n    income  = ifelse(V201617x &lt; 0, NA, V201617x),\n    income_class = case_when(\n      income &lt;= 6 ~ \"Low income\",\n      income &gt; 6 & income &lt; 17 ~ \"Middle income\",\n      income &gt;= 17 ~ \"High income\",\n      T ~ NA_character_\n    ) %&gt;% factor(., levels = c(\"Middle income\",\"Low income\",\"High income\")) # Make middle income reference category\n    \n  ) -&gt; df\n\n\n\n# ---- Check Recodes ----\n\n## Trust\ntable(df$V201233, df$trust_gov, useNA = \"ifany\")\n## CJS Contact\n\n### Respondented Arrested Ever\ntable(df$V202457, df$been_arrested, useNA = \"ifany\")\n\n### Respondent or peers/family been stopped by police in past year\ntable(df$V202456, df$police_stop_12mo, useNA = \"ifany\")\n\n## Race\ntable(df$race_f, df$V201549x, useNA = \"ifany\")\n### White indicator\ntable(df$race_f, df$is_white, useNA = \"ifany\")\n\n### Non-White indicator\ntable(df$race_f, df$is_nonwhite, useNA = \"ifany\")\n\n## Income\ntable(df$income, df$income_class)\n\n# ---- Descriptive Statistics ----\n\n# Variables for table of descriptive statistics:\nthe_vars &lt;- c(\"trust_gov\",\n              \"been_arrested\", \"police_stop_12mo\",\n              \"income\", df%&gt;%select(starts_with(\"is_\"))%&gt;%names())\n\n# Create table of summary statistics\n\ndf %&gt;%\n  select(all_of(the_vars))%&gt;%\n  pivot_longer(\n    cols = all_of(the_vars),\n    names_to = \"Variable\"\n  )%&gt;%\n  mutate(\n    Variable = factor(Variable, levels = the_vars)\n  )%&gt;%\n  arrange(Variable)%&gt;%\n  dplyr::group_by(Variable)%&gt;%\n  dplyr::summarise(\n    min = min(value, na.rm=T),\n    p25 = quantile(value, na.rm=T, prob = 0.25),\n    Median = quantile(value, na.rm=T, prob = 0.5),\n    mean = mean(value, na.rm=T),\n    p75 = quantile(value, na.rm=T, prob = 0.25),\n    max = max(value, na.rm=T),\n    missing = sum(is.na(value))\n  ) %&gt;%\n  mutate(\n    Variable = case_when(\n      Variable == \"been_arrested\" ~ \"Ever Arrested\",\n      Variable == \"income\" ~ \"Income\",\n      Variable == \"police_stop_12mo\" ~ \"Stopped by Police in Past Year\",\n      Variable == \"is_nonwhite\" ~ \"Non-White\",\n      Variable == \"is_white\" ~ \"White\",\n      Variable == \"is_black\" ~ \"Black\",\n      Variable == \"is_hispanic\" ~ \"Hispanic\",\n      Variable == \"is_asian\" ~ \"Asian\",\n      Variable == \"is_NA_AN_other\" ~ \"Native American, Alaskan Native, or Other\",\n      Variable == \"is_multiracial\" ~ \"Multiracial\",\n      Variable == \"trust_gov\" ~ \"Trust in Government\"\n    )\n  ) -&gt; sum_df\n\n\n\n# ---- Descriptive Figures ----\n\n\n## Distribution of trust in Government\nfig1 &lt;- df %&gt;%\n  ggplot(aes(trust_gov))+\n  geom_histogram()+\n  labs(\n    x = \"Trust in Government\"\n  )\n\n## Average proportion of respendents reporting Police Stops by Race\n\nfig2 &lt;- df %&gt;%\n  filter(!is.na(race_l))%&gt;%\n  group_by(race_l)%&gt;%\n  summarise(\n    stop = mean(police_stop_12mo, na.rm=T)\n  )%&gt;%\n  mutate(\n    race_l = fct_reorder(race_l,stop)\n  )%&gt;%\n  ggplot(aes(race_l, stop, \n             fill = race_l,\n             label = scales::percent(stop),\n             ))+\n  geom_bar(stat = \"identity\")+\n  scale_y_continuous(labels = scales::percent,\n                     expand = expansion(mult = c(0,0.5))\n                     )+\n  labs(\n    y = \"% Experiencing Police Stop\\nin Past Year\",\n    x= \"\"\n  )+\n  geom_text_repel(direction = \"x\", hjust = 1)+\n  coord_flip()+\n  guides(fill = \"none\")+\n\n  theme_bw()\n\n## Average trust by Arrest Status\nfig3 &lt;- df %&gt;%\n  mutate(\n    `Ever Arrested` = ifelse(been_arrested == 1, \"Yes\", \"No\")\n  ) %&gt;%\n  filter(!is.na(`Ever Arrested`))%&gt;%\n  ggplot(aes(`Ever Arrested`,trust_gov, \n             fill = `Ever Arrested`,\n             group = `Ever Arrested`))+\n  stat_summary()+\n  labs(\n    y = \"Trust in Government\\n(0 = Never, 4 = Always)\"\n  )\n\n\n# Table of descriptive statistics\nknitr::kable(sum_df,\n             caption = \"Descriptive Statistics\",\n             digits = 2) %&gt;%\n  kableExtra::kable_styling() %&gt;%\n  kableExtra::pack_rows(\"Outcome\", start_row = 1, end_row =1) %&gt;%\n  kableExtra::pack_rows(\"Key Predictors\", start_row = 2, end_row =3) %&gt;%\n  kableExtra::pack_rows(\"Covariates\", start_row = 4, end_row =11)\n\n\nfig1\n\nfig2\n\n# Figure 3\nfig3\n\n# ---- Regression Models ----\n\n\n# Bivariate\nm1 &lt;- lm(trust_gov ~ been_arrested, df)\nm2 &lt;- lm(trust_gov ~ police_stop_12mo, df)\nm3 &lt;- lm(trust_gov ~ race_f, df)\nm4 &lt;- lm(trust_gov ~ income_class, df)\n\n# Mutliple regression\nm5 &lt;- lm(trust_gov ~ been_arrested + police_stop_12mo + race_f + income_class, df)\n\n\n\ntexreg::htmlreg(\n  list(m1, m2, m3,m4),\n  custom.coef.names = c(\"(Intercept)\",\n                        \"Ever Arrested\", \"Police Stopped in Past Yr\", \n                        \"Asian\",\n                        \"Black\",\n                        \"Hispanic\",\n                        \"Multiracial\",\n                        \"NA, AN, or Other\",\n                        \"Low Income\",\n                        \"High Income\"),\n  custom.model.names = c(\"Arrests\",\"Stops\",\"Race\",\"Class\"),\n  custom.header = list(\"Outcome: Trust in Government\" = 1:4),\n  caption = \"Baseline Models\"\n  \n)\n\ntexreg::htmlreg(\n  list(m5),\n  custom.coef.names = c(\"(Intercept)\",\n                        \"Ever Arrested\", \"Police Stopped in Past Yr\", \n                        \"Asian\",\n                        \"Black\",\n                        \"Hispanic\",\n                        \"Multiracial\",\n                        \"NA, AN, or Other\",\n                        \"Low Income\",\n                        \"High Income\"),\n  ci.force = T,\n  caption = \"Multiple regression\"\n  \n)\n\n&lt;&lt;predictions&gt;&gt;\n\n# Figure 4\nfig4"
   }
 ]
