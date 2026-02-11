@@ -6,6 +6,7 @@ format:
     toc_float: TRUE
     toc_depth: 2
     number_sections: TRUE
+draft: TRUE
 ---
 
 You final will paper consists of seven sections. There is no minimum (or maximum) length for the final paper, but I've included rough estimates in parentheses of how long I think each section should be along with the relative contribution of each section to your final grade.

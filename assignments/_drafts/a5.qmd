@@ -6,6 +6,7 @@ format:
     toc_float: TRUE
     toc_depth: 2
     number_sections: TRUE
+draft: TRUE
 ---
 
 On Thursday you will present the initial results of your group projects.

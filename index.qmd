@@ -181,7 +181,11 @@ comments[2] <- " "
 labs[c(10,26, 28)] <- as.character(fa("laptop-file"))
 comments[base::seq(26,28,by=2)] <- as.character(fa("graduation-cap"))
 assignments <- rep(" ", 28)
-
+assignments[9] <- paste0(
+    "<a href=\"assignments/a1.html\" target=\"_blank\">",
+    as.character(fa("check-to-slot")),
+    "</a>"
+)
 
 slides_show <- rep(" ", length(slides))
 labs_show <- rep(" ", length(labs))

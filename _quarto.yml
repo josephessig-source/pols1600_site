@@ -71,16 +71,16 @@ website:
           contents:
             - text: "A1: Introductions"
               file: assignments/a1.qmd
-            - text: "A2: Data"
-              file: assignments/a2.qmd
-            - text: "A3: Exploratory Analysis"
-              file: assignments/a3.qmd
-            - text: "A4: Draft"
-              file: assignments/a4.qmd
-            - text: "A5: Presentations"
-              file: assignments/a5.qmd
-            - text: "Final Paper"
-              file: assignments/final.qmd
+            #- text: "A2: Data"
+            #  file: assignments/a2.qmd
+            #- text: "A3: Exploratory Analysis"
+            #  file: assignments/a3.qmd
+            #- text: "A4: Draft"
+            #  file: assignments/a4.qmd
+            #- text: "A5: Presentations"
+            #  file: assignments/a5.qmd
+            #- text: "Final Paper"
+            #  file: assignments/final.qmd
           
 format:
   html:
