@@ -1,0 +1,264 @@
+---
+title: 'Lab 03 - Replicating Broockman and Kalla (2016)'
+author: "Your Group Members Names Here"
+date: "Last Updated `r format(Sys.Date())`"
+format:
+  html:
+    toc: true
+    toc-location: right
+    toc-float: true
+    toc-depth: 2
+    number-sections: true
+    embed-resources: true
+---
+
+```{r}
+#| label: setup
+#| include: false
+#| cache: false
+knitr::opts_chunk$set(error = TRUE, 
+                      comment = NA, 
+                      warnings = FALSE, 
+                      errors = FALSE, 
+                      messages = FALSE, 
+                      cache = TRUE,
+                      tidy = FALSE)
+
+```
+
+# Overview {.unnumbered}
+
+Today we will explore **the logic and design** of Broockman and Kalla's 2016 study, ["Durably reducing transphobia: A field experiment on door-to-door canvassing"](https://www.science.org/doi/10.1126/science.aad9713){target="_blank"}, from the recruitment of subjects for the study to the delivery of their interventions. Then we will explore **whether the intervention had any effect on respondents' feelings toward transgender individuals.**
+
+To accomplish this we will:
+
+1.  Summarize the study (5 Minutes)
+2.  Set up our work space (2-3 Minutes)
+3.  Load a portion of the replication data (1-2 Minutes)
+4.  Get a high level overview of the data (5 minutes)
+5.  Examine the difference in covariates between those assigned to each treatment condition in the study. (10 minutes)
+6.  Estimate the average treatment effect of the intervention (10 minutes)
+7.  Plot the results and comment on the study (10 minutes)
+One of these 7 tasks  will be randomly selected as the graded question for the lab.
+
+You will work in your assigned groups. Only one member of each group needs to submit the html file of lab.
+
+This lab **must** contain the names of the group members in attendance.
+
+Here are your assigned groups for the semester.
+
+```{r}
+#| echo: false
+groups_df <- tibble::tibble(
+`Group 1` = c("Kerem Koyluoglu","Adora Limani", "Jacob Lowrey", "Ellen Norell", "Hugo Ramirez"),
+`Group 2` = c("Jesse Eick","Hannah Husain", "Sydney Rosant","Kate Tobin", NA),
+`Group 3` = c("Marilyn Abney","Olha Burdeina","Samdol Sichoe", "Connor Swenson", NA),
+`Group 4` = c( "Aysha Alam", "Jackson Schwartz","Thomas Seeger", "Peter Zettl", NA),
+`Group 5` = c("Meilyn Farina","Gabriel Gold","Ayo Lin Ince", "Greyson Wisdom", NA),
+`Group 6` = c("Zander Bravo"," Ty Cohen","Ryan Samuels", "Thomas Yi", NA),
+)
+
+groups_df |> 
+  pivot_longer(cols = starts_with("Group"),
+               names_to = "Group",
+               values_to = "Name") |> 
+  arrange(Group) |>
+  group_by(Group) |> 
+  mutate(
+    id = 1:n()
+  ) |> 
+  pivot_wider(id_cols = Group,
+              names_from = id,
+              values_from = Name) -> groups_df
+#write_csv(groups_df, file = "../files/groups.csv" )
+DT::datatable(groups_df)
+```
+
+# Goals {.unnumbered}
+
+Conceptually, this lab will give you lots of practice calculating **means** and **conditional means**. We will use these means to
+
+-   **Assess the empirical implications of the identifying assumptions of this design** If treatment was randomly assigned, then participants assigned to treatment condition should on average look similar to participants in the control condition (Question 5)
+-   **Estimate the average treatment effect over multiple time periods** (question 6). You'll recall from lecture that the ATE is simply a difference of conditional means:
+
+$$
+\begin{align*}
+E \left[ \frac{\sum_1^m Y_i}{m}-\frac{\sum_{m+1}^N Y_i}{N-m}\right]&=\overbrace{E \left[ \frac{\sum_1^m Y_i}{m}\right]}^{\substack{\text{Average outcome}\\
+\text{among treated}\\ \text{units}}}
+-\overbrace{E \left[\frac{\sum_{m+1}^N Y_i}{N-m}\right]}^{\substack{\text{Average outcome}\\
+\text{among control}\\ \text{units}}}\\
+&= E [Y_i(1)|D_i=1] -E[Y_i(0)|D_i=0]
+\end{align*}
+$$
+
+We'll see that these quantities can be calculated quickly for multiple variables using the following commands:
+
+-   We will use the `group_by` and `summarise` commands to quickly calculate average values for different groups, and the `mutate` function to calculate differences between these averages
+-   We will introduce the `across()` and `starts_with()` functions to calculate summaries like a `mean` across multiple variables that start the the same pre-fixes.
+-   We will introduce the `pivot_longer()`, `pivot_wider()` and `left_join()` commands to gather, spread, and merge data so that we can calculate the difference of means simply by subtracting means for one group in one column from means for another group in a different column
+-   We will use `ggplot()` and related functions to graphically display our results.
+
+# Please render this .qmd file {.unnumbered}
+
+As with every lab, you should:
+
+-   Download the file
+-   Save it in your course folder
+-   **Update the `author:` section of the YAML header to include the names of your group members in attendance.**
+-   Render the document (Check `[X] Render on Save` if desired)
+-   Open the html file in your browser (Easier to read)
+-   Render the document again after completing a section or chunk (Error checking)
+-   Upload the final lab to [Canvas](https://canvas.brown.edu/courses/1102109/assignments){target="_blank"}.
+
+# Summarize the study
+
+Before we get started working with the data, please provide some brief answers (1-3 sentences) to the following questions
+
+-   **What's the research question?**
+
+-   **What's the empirical design?**
+
+-   **What are the main results?**
+
+# Set up your workspace
+
+Here is the code to set up your workspace. 
+
+```{r}
+#| label: packages
+#| echo: true
+
+library(tidyverse)
+library(lubridate)
+library(forcats)
+library(haven)
+```
+
+------------------------------------------------------------------------
+
+# Load the replication data
+
+Next we'll load the data for today, which is a subset of Broockman and Kalla's full data set[^1]
+
+[^1]: You can find the full set of replication files [here](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/WKR39N){target="_blank"}
+
+1.  **Please run the code chunk below to load the data** That's it. That's the task for this question
+
+```{r}
+#| label: data
+
+load(url("https://josephessig-source.github.io/pols1600_site/files/data/03_lab.rda"))
+```
+
+The will load a data frame called `df` containing the following variables:
+
+-   `completed_baseline` whether someone completed the baseline survey ("Survey") or not ("No Survey")
+-   `treatment_assigned` what intervention someone who completed the baseline survey was assigned two (treatment= "Trans-Equality", placebo = "Recycling")
+-   `answered_door` whether someone answered the door ("Yes") or not ("No") when a canvasser came to their door
+-   `treatment_group` the treatment assignments of those who answered the door and the received the treatment or placebo (treatment= "Trans-Equality", placebo = "Recycling")
+-   `vf_age` the age of the person in years
+-   `vf_female` the respondent's sex (female = 1, male = 0)
+-   `vf_democrat` whether the person was a registered Democract (Democrat=1, 0 otherwise)
+-   `vf_white` whether the person was white (White=1, 0 otherwise)
+-   `vf_vg_12` whether the person voted in the 2012 general election (voted = 1, 0 otherwise)
+-   `therm_trans_tX` a feeling thermometer,[^2] where respondents are asked to rate how warmly they feel toward transgender people on a scale of 0 (Very Cold) to 100 (Very Warm), with 50 corresponding to neither warm nor cold. The `_tX` corresponds to the time the measure was taken:
+    -   `_t0` pre-treatment measure from baseline survey
+    -   `_t1` post-treatment measure 3-days after intervention
+    -   `_t2` post-treatment measure 3-weeks after intervention
+    -   `_t3` post-treatment measure 6-weeks after intervention
+    -   `_t4` post-treatment measure 3-months after intervention
+
+[^2]: The actual study contains a number of measures about transgender attitudes and policies which are scaled together to produce a single measure of subjects latent tolerance. For simplicity, we'll focus on this single survey item.
+
+# Provide a high level overview of the data
+
+In the code chunk below, please write code to provide a *high level overview* of the data that allows you to answer the following questions.
+
+Please interpret the results of your code by writing brief answers in Markdown after each question.
+
+1.  **How many observations are there in `df`?**
+2.  **How many variables are there in the `df`?**
+3.  **What's the unit of analysis?**\
+4.  **How many registered voters completed the baseline survey?**
+5.  **How many treatment conditions are there?**
+6.  **How many participants were assigned to each condition?**
+7.  **How many participants answered the door when a canvasser came?**
+8.  **How many participants actually received each treatment condition?**
+
+```{r}
+#| label: hlo
+
+
+```
+
+# Examine the difference in covariates between those assigned to each treatment condition in the study.
+
+One of the identifying assumptions of an experimental design like Broockman and Kalla's is that treatment is independent of potential outcomes and covariates.
+
+One of the empirical implications of this assumption is that, that the differences in observable covariates between treatment and control should be small.
+
+To the extent the groups are comparable on observable covariates, we are more confident that the random assignment of treatment conditions has created a credible counterfactual comparison.
+
+#| label: baltreat
+
+```{r}
+df %>%
+  filter(!is.na(treatment_assigned)) %>% # Keep only those assigned a treatment
+  group_by(treatment_assigned) %>%
+  summarise(across(starts_with("vf_"), \(x) mean(x, na.rm=TRUE))) %>%
+  pivot_longer(
+    cols = starts_with("vf_"),
+    values_to = "Means"
+  ) %>%
+  pivot_wider(
+    names_from = treatment_assigned,
+    values_from = Means
+  ) %>%
+  mutate(
+    Diff = `Trans-Equality` - Recycling
+  )
+```
+
+1.  **Please describe the covariate differences between each treatment condition. Are these differences large or small? 
+
+# Calculate the Average Treatment Effect
+
+Now let's take the same approach to calculate the Average Treatment Effect (ATE) for each time period.
+
+Using the code from the previous sections as a template,
+
+-   Add a `filter(!is.na(treatment_group))%>%` after `df%>%` to filter out subjects who didn't receive the treatment.[^3]
+-   Change `summarise(across(starts_with("vf_"), \(x) mean(x, na.rm=T))%>%` code to select variables that start with `therm_trans`
+-   Change the `cols` argument in `pivot_longer()` to select the columns that start with `therm_trans`
+-   Everywhere you see `treatment_assigned` in the code replace it with `treatement_group`
+-   In the `mutate()` function, change:
+    -   `Diff_Treatment` to `ATE`
+    -   Add the following line `Days = c(0,3,21,42,90)` to create a column called Days (\*make sure to put a comma after `ATE =`Trans-Equality`- Recycling,` ) Be sure to wrap `Trans-Equality` in backticks \` before and after the phrase
+-   Change `-> cov_treatment` to `ate_df`
+
+[^3]: Recall that only some people who completed the baseline and were assigned to receive the treatment actually answered the door when canvassers came knocking.
+
+```{r}
+#| label: ate
+
+```
+
+1.  **Did the treatment seem to effect respondents feelings toward transgender people?**
+2.  **Does this effect appear to last?**
+
+# Plot the results and comment on the study
+
+Using `ate_df` with commands from the `ggplot` package please produce a figure that displays these differences
+
+-   You'll need to provide
+    -   `data`
+    -   `aes`
+    -   `geom`
+
+1.  **Finally, use this space to share some thoughts on the study**
+
+-   **Do you find it convincing?**
+-   **What makes the design credible?**
+-   **Are there things you would do differently?**
+-   **Do you think the results would "travel" to other topics and issues?**
+
