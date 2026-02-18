@@ -1,15 +1,18 @@
 ---
-title: "Data and Measurement"
-date: "2024-01-30"
+title: "Causation II: Observational studies"
+date: "2026-02-18"
 bibliography: ../files/paperpile.bib
-subtitle: "How do we describe the world around us."
+subtitle: "Making Causal Claims with Observational Studies"
 image: "featured.jpg"
-draft: true
 ---
+
+## Readings
+
+-   {{< fa book >}} Read: QSS, Chapter 2 pp. 65-88
 
 ```{r slides-videos, echo=FALSE, include=FALSE}
 source(here::here("R", "slide-things.R"))
-wk <- "01"
+wk <- "04"
 lab <- paste0(
     "<a href=\"",
     paste0(
@@ -32,14 +35,6 @@ comments <- paste0(
   )
 ```
 
-
-
-## Readings
-
--   {{< fa book >}} @Imai2022-pm Chapter 1 [here's a free version of an older, non-tidyverse version](files/readings/QSS_ch01_and_ch03.pdf)
-
-
-
 ## Lecture
 
 
@@ -52,34 +47,26 @@ slide_frame(paste0("/slides/", wk, "-slides.html"))
 
 ```
 
-
-
 ## Lab
 
+-   No lab this week.
 
--   {{< fa laptop-file >}} Download this week's `r lab`
-
-- {{< fa paintbrush >}} Upload the rendered html file to Canvas [here](https://canvas.brown.edu/courses/1094972/assignments) 
-- {{< fa graduation-cap >}} Review the commented solutions after class `r comments`
+-  We will cover the slides on Wednesday and Friday.
 
 
 ## Assignments
 
-- {{< fa lightbulb >}} Work through [Software Setup](../resources/00-software-setup.qmd) before class next week
+- {{< fa lightbulb >}} Your first group assignment, found [here](https://josephessig-source.github.io/pols1600_site/assignments/a1.html) will be due Sunday, Feb. 22nd. Please upload to Canvas [here](https://canvas.brown.edu/courses/1102109/assignments/8104775) with all your group members listed in the html file.  
 
-- {{< fa chalkboard-user >}} Complete QSS Tutorial 0: Introduction to R; QSS Tutorial 1: Measurement 1
+- {{< fa chalkboard-user >}} Complete QSS tutorial 4. 
 
 ```{r}
 #| eval: false
 
-# After completing the software setup you should be able to to run the following to launch the tutorials
-
-learnr::run_tutorial("00-intro", package = "qsslearnr")
-
-learnr::run_tutorial("01-measurement1", package = "qsslearnr")
+learnr::run_tutorial("04-causality2", package = "qsslearnr")
 
 ```
 
-- {{< fa paintbrush >}} Upload the rendered html tutorial files to Canvas [here](https://canvas.brown.edu/courses/1094972/assignments) 
+- {{< fa paintbrush >}} Upload the rendered html tutorial files to Canvas [here](https://canvas.brown.edu/courses/1102109/assignments) 
 
 
