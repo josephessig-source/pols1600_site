@@ -876,7 +876,7 @@ The key assumption in this design is what's known as the parallel trends assumpt
 
 - In words: If Lambeth hadn't moved its pumps, it would have followed a similar path as S&V
 
-## Parralel Trends
+## Parallel Trends
 
 ```{r}
 #| label: paralleltrends
