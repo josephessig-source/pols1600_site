@@ -64,7 +64,7 @@ slide_frame(paste0("/slides/", wk, "-slides.html"))
 
 ## Assignments
 
-- Complete QSS tutorial 5 (due Monday 3-2)
+- Complete QSS tutorial 5 (due Wednesday 3-5)
 
 ```{r}
 #| eval: false

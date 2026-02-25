@@ -7,14 +7,11 @@ format:
     toc_float: TRUE
     toc_depth: 2
     number_sections: TRUE
-draft: TRUE
 ---
-
-
 
 # Overview {-}
 
-For this assignment, please upload to [Canvas](https://canvas.brown.edu/courses/1094972/assignments){target="_blank"} an html file named `a2_group0X_data.html` produced from an Quarto Markdown file called `a2_group0X_data.qmd` (changing `group0X` to your group's number `group0X`) that contains the following:
+For this assignment, please upload to [Canvas](https://canvas.brown.edu/courses/1102109/assignments){target="_blank"} an html file named `a2_group0X_data.html` produced from an Quarto Markdown file called `a2_group0X_data.qmd` (changing `group0X` to your group's number `group0X`) that contains the following:
 
 1. A revised description of your group's research project
 2. A description of a linear model implied by your question
@@ -27,11 +24,11 @@ For this assignment, please upload to [Canvas](https://canvas.brown.edu/courses/
     - Your group's astrological sign
     - Anything else that you think well help you form strong ingroup bounds that facilitate collaboration
 
-Your files (.qmd file, .html file, and maybe a data file^[Please don't upload terabytes of data though.]) should be saved in the shared Google drive folder `Group_XX` for your group.
+An easy option for collaborating is to create a shared Google drive for your group that holds your data and assignment files. 
 
 :::{.callout-note}
 
-Google is great for sharing files but not so great for version control. When working on this assignment, please **Coordinate with your group so only ONE PERSON is editing the file at a given time**
+Google is great for sharing files but not so great for version control. When working on this assignment, please **Coordinate with your group so only ONE PERSON is editing a file at a given time**
 
 :::
 
@@ -43,7 +40,6 @@ Please write no more than a brief paragraph laying out your revised research que
 For this assignment, a simple descriptive question of a theoretically interesting relationship is fine.^[That is, don't worry about whether your question is causally identified.]
 
 Perhaps your initial question was something like "Why do Republicans tend to vote at higher rates in midterm elections." 
-
 Perhaps my feedback was something unhelpful like this "question lacks conceptual clarity" or "there are many reasons why Republicans may vote at higher rates in midterm elections," or "instead of trying to identify all the causes of an effect, an experiment helps us identify the effect of cause."
 
 A revised research question might look something like:
@@ -105,9 +101,9 @@ I don't expect you to have the final data you will use in for your analysis all 
 
 I do expect you to try and find at least some potential data set that might be useful. 
 
-It can be something we've worked with in class like the Covid-19 data or something you've downloaded from the web, pulled from the replication files of a published paper, or constructed yourself in a .csv file. See these slides [on loading data into R](https://pols1600.paultesta.org/slides/01-slides#/loading-data-into-r){target="_blank"}. 
+It can be something we've worked with in class like the Covid-19 data or something you've downloaded from the web, pulled from the replication files of a published paper, or constructed yourself in a .csv file. See these slides [on loading data into R](https://josephessig-source.github.io/pols1600_site/loading-data-into-r){target="_blank"}. 
 
-Similarly, I don't expect you to produce a full set of descriptive tables and figures, although you're welcome to do as much as you like. At a minimum, after you've successfully loaded the data into R, try to get a [High Level Overview of the Data,](https://pols1600.paultesta.org/slides/05-slides#/q3-describe-the-structure-of-each-dataset-1){target="_blank"}  and calculate some simple summary [statistics](https://pols1600.paultesta.org/labs/comments/01-lab-comments#explore-rs-functions-for-generating-summary-statistics){target="_blank"} like [measures of central tendency](https://pols1600.paultesta.org/slides/02-slides.html#114){target="_blank"} and/or [figures](https://pols1600.paultesta.org/slides/02-slides#/dataviz-describing-distributions-and-associations){target="_blank"}.
+Similarly, I don't expect you to produce a full set of descriptive tables and figures, although you're welcome to do as much as you like. At a minimum, after you've successfully loaded the data into R, try to get a High Level Overview of the Data and calculate some simple summary statistics. 
 
 
 Again, use the slides and past assignments as templates. Use Quarto's sections and code chunks  to structure your tasks. 
@@ -199,18 +195,16 @@ hist(df$iv)
 
 # Group Bounding Exercises
 
-- Group Name: The Groupers
-- Group Mascot: A grouper fish
-- Group Color: Mud
-- Group Motto: Give a man a fish, if you must, just not a grouper. Teach a man to fish for groupers and he'll go to jail.
-- Theme Song: Fish Bass, Phish
-- Astrological Sign: Pisces
+- Group Name: 
+- Group Mascot: 
+- Group Color: 
+- Group Motto: 
+- Theme Song: 
+- Astrological Sign: 
+- Anything else you want to add: 
 
 
 ````    
-
-
-
 # Advice for finding a data set {-}
 
 
@@ -220,17 +214,15 @@ You can do the following:
   
 - **Use existing datasets** I'll provide some useful sources below.
 
-- **Collect your own data** Rewarding but time consuming. An example of how to scrape data from Twitter is provided below
+- **Collect your own data** Rewarding but time consuming -- might be a lot to do! 
 
 - **Combining datasets** Can be a clever strategy. Take an existing study and merge in data from a different study or data set to test some additional question. 
-  - Check out the [slides](https://pols1600.paultesta.org/slides/05-slides.html#29){target="_blank"} [labs](https://pols1600.paultesta.org/labs/05-lab-comments.html#5_Merge_the_election_data_into_the_Covid-19_data){target="_blank"} and [outside resources](https://r4ds.had.co.nz/relational-data.html#mutating-joins){target="_blank"}
+  - Check out the [slides](https://josephessig-source.github.io/pols1600_site/slides/05-slides.html#/q5-merging-data){target="_blank"} and [outside resources](https://r4ds.had.co.nz/relational-data.html#mutating-joins){target="_blank"}
 
 
 ## Gathering Data from Existing Data Sets
 
-
-Below are some common data sets in American, Comparative and International Relations. Again your question doesn't have to be political and you can look elsewhere for data -- (the U.S. Census, Data.gov).
-
+Below are some common data sets in American, Comparative and International Relations. Of course, you can look elsewhere for data -- (for example, the U.S. Census, Data.gov).
 
 ## American Politics
 
@@ -255,13 +247,13 @@ Below are some common data sets in American, Comparative and International Relat
   - <http://www.latinobarometro.org/lat.jsp>
 - OECD
   - <https://data.oecd.org/>
-- Quality of Government Data (I love this)
+- Quality of Government Data 
   - <http://qog.pol.gu.se/data>
-- Uppsala Conflict Data (I hate this^[Basically conflict data is real pain to work with, and it's not always clear what statitistical inference means for these type of questions. But if your group is desperate to study these types of questions we can talk. I'd recommend trying to replicate and extend someone else's analysis of these data, rather than starting from scratch])
+- Uppsala Conflict Data^[Basically conflict data is real pain to work with, and it's not always clear what statistical inference means for these type of questions. But if your group is desperate to study these types of questions we can talk. I'd recommend trying to replicate and extend someone else's analysis of these data, rather than starting from scratch]
   - <http://www.pcr.uu.se/research/UCDP/>
 - Threat and imposition of sanctions
   - <http://www.unc.edu/~bapat/TIES.htm>
-- Correlates of War (Also hate this)
+- Correlates of War 
   - <http://www.correlatesofwar.org/>
   
   

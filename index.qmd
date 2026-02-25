@@ -81,7 +81,7 @@ library(kableExtra)
 #library(icons)
 library(fontawesome)
 start_date <- "2025-01-23"
-show_up_to_week <- 4
+show_up_to_week <- 5
 show_solutions_up_to_week <- 4
 fa_html_dependency()
 week <- paste0("Week ", 0:13)
@@ -187,7 +187,21 @@ assignments[9] <- paste0(
     "</a>"
 )
 
+assignments[9] <- paste0(
+    "<a href=\"assignments/a1.html\" target=\"_blank\">",
+    as.character(fa("check-to-slot")),
+    "</a>"
+)
+
+assignments[13] <- paste0(
+    "<a href=\"assignments/a2.html\" target=\"_blank\">",
+    as.character(fa("check-to-slot")),
+    "</a>"
+)
+
 comments[10] <- " "
+labs[10] <- " "
+
 
 
 slides_show <- rep(" ", length(slides))

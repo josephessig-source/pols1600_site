@@ -6,11 +6,10 @@
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-234273d1456647dabc34a594ac50e507.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
 <link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.3.353">
+  <meta name="generator" content="quarto-1.7.32">
 
   <title>POLS 1600</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -31,6 +30,7 @@
       vertical-align: middle;
     }
     /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
     pre > code.sourceCode { white-space: pre; position: relative; }
     pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
     pre > code.sourceCode > span:empty { height: 1.2em; }
@@ -96,210 +96,13 @@
     code span.vs { color: #032f62; } /* VerbatimString */
     code span.wa { color: #ff5555; } /* Warning */
   </style>
-  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-8979bb8451ddc1038f930ac611262c50.css">
   <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
-  <style type="text/css">
-
-  .callout {
-    margin-top: 1em;
-    margin-bottom: 1em;  
-    border-radius: .25rem;
-  }
-
-  .callout.callout-style-simple { 
-    padding: 0em 0.5em;
-    border-left: solid #acacac .3rem;
-    border-right: solid 1px silver;
-    border-top: solid 1px silver;
-    border-bottom: solid 1px silver;
-    display: flex;
-  }
-
-  .callout.callout-style-default {
-    border-left: solid #acacac .3rem;
-    border-right: solid 1px silver;
-    border-top: solid 1px silver;
-    border-bottom: solid 1px silver;
-  }
-
-  .callout .callout-body-container {
-    flex-grow: 1;
-  }
-
-  .callout.callout-style-simple .callout-body {
-    font-size: 1rem;
-    font-weight: 400;
-  }
-
-  .callout.callout-style-default .callout-body {
-    font-size: 0.9rem;
-    font-weight: 400;
-  }
-
-  .callout.callout-titled.callout-style-simple .callout-body {
-    margin-top: 0.2em;
-  }
-
-  .callout:not(.callout-titled) .callout-body {
-      display: flex;
-  }
-
-  .callout:not(.no-icon).callout-titled.callout-style-simple .callout-content {
-    padding-left: 1.6em;
-  }
-
-  .callout.callout-titled .callout-header {
-    padding-top: 0.2em;
-    margin-bottom: -0.2em;
-  }
-
-  .callout.callout-titled .callout-title  p {
-    margin-top: 0.5em;
-    margin-bottom: 0.5em;
-  }
-    
-  .callout.callout-titled.callout-style-simple .callout-content  p {
-    margin-top: 0;
-  }
-
-  .callout.callout-titled.callout-style-default .callout-content  p {
-    margin-top: 0.7em;
-  }
-
-  .callout.callout-style-simple div.callout-title {
-    border-bottom: none;
-    font-size: .9rem;
-    font-weight: 600;
-    opacity: 75%;
-  }
-
-  .callout.callout-style-default  div.callout-title {
-    border-bottom: none;
-    font-weight: 600;
-    opacity: 85%;
-    font-size: 0.9rem;
-    padding-left: 0.5em;
-    padding-right: 0.5em;
-  }
-
-  .callout.callout-style-default div.callout-content {
-    padding-left: 0.5em;
-    padding-right: 0.5em;
-  }
-
-  .callout.callout-style-simple .callout-icon::before {
-    height: 1rem;
-    width: 1rem;
-    display: inline-block;
-    content: "";
-    background-repeat: no-repeat;
-    background-size: 1rem 1rem;
-  }
-
-  .callout.callout-style-default .callout-icon::before {
-    height: 0.9rem;
-    width: 0.9rem;
-    display: inline-block;
-    content: "";
-    background-repeat: no-repeat;
-    background-size: 0.9rem 0.9rem;
-  }
-
-  .callout-title {
-    display: flex
-  }
-    
-  .callout-icon::before {
-    margin-top: 1rem;
-    padding-right: .5rem;
-  }
-
-  .callout.no-icon::before {
-    display: none !important;
-  }
-
-  .callout.callout-titled .callout-body > .callout-content > :last-child {
-    margin-bottom: 0.5rem;
-  }
-
-  .callout.callout-titled .callout-icon::before {
-    margin-top: .5rem;
-    padding-right: .5rem;
-  }
-
-  .callout:not(.callout-titled) .callout-icon::before {
-    margin-top: 1rem;
-    padding-right: .5rem;
-  }
-
-  /* Callout Types */
-
-  div.callout-note {
-    border-left-color: #4582ec !important;
-  }
-
-  div.callout-note .callout-icon::before {
-    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEU0lEQVRYCcVXTWhcVRQ+586kSUMMxkyaElstCto2SIhitS5Ek8xUKV2poatCcVHtUlFQk8mbaaziwpWgglJwVaquitBOfhQXFlqlzSJpFSpIYyXNjBNiTCck7x2/8/LeNDOZxDuEkgOXe++553zfefee+/OYLOXFk3+1LLrRdiO81yNqZ6K9cG0P3MeFaMIQjXssE8Z1JzLO9ls20MBZX7oG8w9GxB0goaPrW5aNMp1yOZIa7Wv6o2ykpLtmAPs/vrG14Z+6d4jpbSKuhdcSyq9wGMPXjonwmESXrriLzFGOdDBLB8Y6MNYBu0dRokSygMA/mrun8MGFN3behm6VVAwg4WR3i6FvYK1T7MHo9BK7ydH+1uurECoouk5MPRyVSBrBHMYwVobG2aOXM07sWrn5qgB60rc6mcwIDJtQrnrEr44kmy+UO9r0u9O5/YbkS9juQckLed3DyW2XV/qWBBB3ptvI8EUY3I9p/67OW+g967TNr3Sotn3IuVlfMLVnsBwH4fsnebJvyGm5GeIUA3jljERmrv49SizPYuq+z7c2H/jlGC+Ghhupn/hcapqmcudB9jwJ/3jvnvu6vu5lVzF1fXyZuZZ7U8nRmVzytvT+H3kilYvH09mLWrQdwFSsFEsxFVs5fK7A0g8gMZjbif4ACpKbjv7gNGaD8bUrlk8x+KRflttr22JEMRUbTUwwDQScyzPgedQHZT0xnx7ujw2jfVfExwYHwOsDTjLdJ2ebmeQIlJ7neo41s/DrsL3kl+W2lWvAga0tR3zueGr6GL78M3ifH0rGXrBC2aAR8uYcIA5gwV8zIE8onoh8u0Fca/ciF7j1uOzEnqcIm59sEXoGc0+z6+H45V1CvAvHcD7THztu669cnp+L0okAeIc6zjbM/24LgGM1gZk7jnRu1aQWoU9sfUOuhrmtaPIO3YY1KLLWZaEO5TKUbMY5zx8W9UJ6elpLwKXbsaZ4EFl7B4bMtDv0iRipKoDQT2sNQI9b1utXFdYisi+wzZ/ri/1m7QfDgEuvgUUEIJPq3DhX/5DWNqIXDOweC2wvIR90Oq3lDpdMIgD2r0dXvGdsEW5H6x6HLRJYU7C69VefO1x8Gde1ZFSJLfWS1jbCnhtOPxmpfv2LXOA2Xk2tvnwKKPFuZ/oRmwBwqRQDcKNeVQkYcOjtWVBuM/JuYw5b6isojIkYxyYAFn5K7ZBF10fea52y8QltAg6jnMqNHFBmGkQ1j+U43HMi2xMar1Nv0zGsf1s8nUsmUtPOOrbFIR8bHFDMB5zL13Gmr/kGlCkUzedTzzmzsaJXhYawnA3UmARpiYj5ooJZiUoxFRtK3X6pgNPv+IZVPcnwbOl6f+aBaO1CNvPW9n9LmCp01nuSaTRF2YxHqZ8DYQT6WsXT+RD6eUztwYLZ8rM+rcPxamv1VQzFUkzFXvkiVrySGQgJNvXHJAxiU3/NwiC03rSf05VBaPtu/Z7/B8Yn/w7eguloAAAAAElFTkSuQmCC');
-  }
-
-  div.callout-note.callout-style-default .callout-title {
-    background-color: #dae6fb
-  }
-
-  div.callout-important {
-    border-left-color: #d9534f !important;
-  }
-
-  div.callout-important .callout-icon::before {
-    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEKklEQVRYCcVXTWhcVRS+575MJym48A+hSRFr00ySRQhURRfd2HYjk2SSTokuBCkU2o0LoSKKraKIBTcuFCoidGFD08nkBzdREbpQ1EDNIv8qSGMFUboImMSZd4/f9zJv8ibJMC8xJQfO3HPPPef7zrvvvnvviIkpC9nsw0UttFunbUhpFzFtarSd6WJkStVMw5xyVqYTvkwfzuf/5FgtkVoB0729j1rjXwThS7Vio+Mo6DNnvLfahoZ+i/o32lULuJ3NNiz7q6+pyAUkJaFF6JwaM2lUJlV0MlnQn5aTRbEu0SEqHUa0A4AdiGuB1kFXRfVyg5d87+Dg4DL6m2TLAub60ilj7A1Ec4odSAc8X95sHh7+ZRPCFo6Fnp7HfU/fBng/hi10CjCnWnJjsxvDNxWw0NfV6Rv5GgP3I3jGWXumdTD/3cbEOP2ZbOZp69yniG3FQ9z1jD7bnBu9Fc2tKGC2q+uAJOQHBDRiZX1x36o7fWBs7J9ownbtO+n0/qWkvW7UPIfc37WgT6ZGR++EOJyeQDSb9UB+DZ1G6DdLDzyS+b/kBCYGsYgJbSQHuThGKRcw5xdeQf8YdNHsc6ePXrlSYMBuSIAFTGAtQo+VuALo4BX83N190NWZWbynBjhOHsmNfFWLeL6v+ynsA58zDvvAC8j5PkbOcXCMg2PZFk3q8MjI7WAG/Dp9AwP7jdGBOOQkAvlFUB+irtm16I1Zw9YBcpGTGXYmk3kQIC/Cds55l+iMI3jqhjAuaoe+am2Jw5GT3Nbz3CkE12NavmzN5+erJW7046n/CH1RO/RVa8lBLozXk9uqykkGAyRXLWlLv5jyp4RFsG5vGVzpDLnIjTWgnRy2Rr+tDKvRc7Y8AyZq10jj8DqXdnIRNtFZb+t/ZRtXcDiVnzpqx8mPcDWxgARUqx0W1QB9MeUZiNrV4qP+Ehc+BpNgATsTX8ozYKL2NtFYAHc84fG7ndxUPr+AR/iQSns7uSUufAymwDOb2+NjK27lEFocm/EE2WpyIy/Hi66MWuMKJn8RvxIcj87IM5Vh9663ziW36kR0HNenXuxmfaD8JC7tfKbrhFr7LiZCrMjrzTeGx+PmkosrkNzW94ObzwocJ7A1HokLolY+AvkTiD/q1H0cN48c5EL8Crkttsa/AXQVDmutfyku0E7jShx49XqV3MFK8IryDhYVbj7Sj2P2eBxwcXoe8T8idsKKPRcnZw1b+slFTubwUwhktrfnAt7J++jwQtLZcm3sr9LQrjRzz6cfMv9aLvgmnAGvpoaGLxM4mAEaLV7iAzQ3oU0IvD5x9ix3yF2RAAuYAOO2f7PEFWCXZ4C9Pb2UsgDeVnFSpbFK7/IWu7TPTvBqzbGdCHOJQSxiEjt6IyZmxQyEJHv6xyQsYk//moVFsN2zP6fRImjfq7/n/wFDguUQFNEwugAAAABJRU5ErkJggg==');
-  }
-
-  div.callout-important.callout-style-default .callout-title {
-    background-color: #f7dddc
-  }
-
-  div.callout-warning {
-    border-left-color: #f0ad4e !important;
-  }
-
-  div.callout-warning .callout-icon::before {
-    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAETklEQVRYCeVWW2gcVRg+58yaTUnizqbipZeX4uWhBEniBaoUX1Ioze52t7sRq6APio9V9MEaoWlVsFasRq0gltaAPuxms8lu0gcviE/FFOstVbSIxgcv6SU7EZqmdc7v9+9mJtNks51NTUH84ed889/PP+cmxP+d5FIbMJmNbpREu4WUkiTtCicKny0l1pIKmBzovF2S+hIJHX8iEu3hZJ5lNZGqyRrGSIQpq15AzF28jgpeY6yk6GVdrfFqdrD6Iw+QlB8g0YS2g7dyQmXM/IDhBhT0UCiRf59lfqmmDvzRt6kByV/m4JjtzuaujMUM2c5Z2d6JdKrRb3K2q6mA+oYVz8JnDdKPmmNthzkAk/lN63sYPgevrguc72aZX/L9C6x09GYyxBgCX4NlvyGUHOKELlm5rXeR1kchuChJt4SSwyddZRXgvwMGvYo4QSlk3/zkHD8UHxwVJA6zjZZqP8v8kK8OWLnIZtLyCAJagYC4rTGW/9Pqj92N/c+LUaAj27movwbi19tk/whRCIE7Q9vyI6yvRpftAKVTdUjOW40X3h5OXsKCdmFcx0xlLJoSuQngnrJe7Kcjm4OMq9FlC7CMmScQANuNvjfP3PjGXDBaUQmbp296S5L4DrpbrHN1T87ZVEZVCzg1FF0Ft+dKrlLukI+/c9ENo+TvlTDbYFvuKPtQ9+l052rXrgKoWkDAFnvh0wTOmYn8R5f4k/jN/fZiCM1tQx9jQQ4ANhqG4hiL0qIFTGViG9DKB7GYzgubnpofgYRwO+DFjh0Zin2m4b/97EDkXkc+f6xYAPX0KK2I/7fUQuwzuwo/L3AkcjugPNixC8cHf0FyPjWlItmLxWw4Ou9YsQCr5fijMGoD/zpdRy95HRysyXA74MWOnscpO4j2y3HAVisw85hX5+AFBRSHt4ShfLFkIMXTqyKFc46xdzQM6XbAi702a7sy04J0+feReMFKp5q9esYLCqAZYw/k14E/xcLLsFElaornTuJB0svMuJINy8xkIYuL+xPAlWRceH6+HX7THJ0djLUom46zREu7tTkxwmf/FdOZ/sh6Q8qvEAiHpm4PJ4a/doJe0gH1t+aHRgCzOvBvJedEK5OFE5jpm4AGP2a8Dxe3gGJ/pAutug9Gp6he92CsSsWBaEcxGx0FHytmIpuqGkOpldqNYQK8cSoXvd+xLxXADw0kf6UkJNFtdo5MOgaLjiQOQHcn+A6h5NuL2s0qsC2LOM75PcF3yr5STuBSAcGG+meA14K/CI21HcS4LBT6tv0QAh8Dr5l93AhZzG5ZJ4VxAqdZUEl9z7WJ4aN+svMvwHHL21UKTd1mqvChH7/Za5xzXBBKrUcB0TQ+Ulgkfbi/H/YT5EptrGzsEK7tR1B7ln9BBwckYfMiuSqklSznIuoIIOM42MQO+QnduCoFCI0bpkzjCjddHPN/F+2Yu+sd9bKNpVwHhbS3LluK/0zgfwD0xYI5dXuzlQAAAABJRU5ErkJggg==');
-  }
-
-  div.callout-warning.callout-style-default .callout-title {
-    background-color: #fcefdc
-  }
-
-  div.callout-tip {
-    border-left-color: #02b875 !important;
-  }
-
-  div.callout-tip .callout-icon::before {
-    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAADr0lEQVRYCe1XTWgTQRj9ZjZV8a9SPIkKgj8I1bMHsUWrqYLVg4Ue6v9BwZOxSYsIerFao7UiUryIqJcqgtpimhbBXoSCVxUFe9CTiogUrUp2Pt+3aUI2u5vdNh4dmMzOzHvvezuz8xNFM0mjnbXaNu1MvFWRXkXEyE6aYOYJpdW4IXuA4r0fo8qqSMDBU0v1HJUgVieAXxzCsdE/YJTdFcVIZQNMyhruOMJKXYFoLfIfIvVIMWdsrd+Rpd86ZmyzzjJmLStqRn0v8lzkb4rVIXvnpScOJuAn2ACC65FkPzEdEy4TPWRLJ2h7z4cArXzzaOdKlbOvKKX25Wl00jSnrwVxAg3o4dRxhO13RBSdNvH0xSARv3adTXbBdTf64IWO2vH0LT+cv4GR1DJt+DUItaQogeBX/chhbTBxEiZ6gftlDNXTrvT7co4ub5A6gp9HIcHvzTa46OS5fBeP87Qm0fQkr4FsYgVQ7Qg+ZayaDg9jhg1GkWj8RG6lkeSacrrHgDaxdoBiZPg+NXV/KifMuB6//JmYH4CntVEHy/keA6x4h4CU5oFy8GzrBS18cLJMXcljAKB6INjWsRcuZBWVaS3GDrqB7rdapVIeA+isQ57Eev9eCqzqOa81CY05VLd6SamW2wA2H3SiTbnbSxmzfp7WtKZkqy4mdyAlGx7ennghYf8voqp9cLSgKdqNfa6RdRsAAkPwRuJZNbpByn+RrJi1RXTwdi8RQF6ymDwGMAtZ6TVE+4uoKh+MYkcLsT0Hk8eAienbiGdjJHZTpmNjlbFJNKDVAp2fJlYju6IreQxQ08UJDNYdoLSl6AadO+fFuCQqVMB1NJwPm69T04Wv5WhfcWyfXQB+wXRs1pt+nCknRa0LVzSA/2B+a9+zQJadb7IyyV24YAxKp2Jqs3emZTuNnKxsah+uabKbMk7CbTgJx/zIgQYErIeTKRQ9yD9wxVof5YolPHqaWo7TD6tJlh7jQnK5z2n3+fGdggIOx2kaa2YI9QWarc5Ce1ipNWMKeSG4DysFF52KBmTNMmn5HqCFkwy34rDg05gDwgH3bBi+sgFhN/e8QvRn8kbamCOhgrZ9GJhFDgfcMHzFb6BAtjKpFhzTjwv1KCVuxHvCbsSiEz4CANnj84cwHdFXAbAOJ4LTSAawGWFn5tDhLMYz6nWeU2wJfIhmIJBefcd/A5FWQWGgrWzyORZ3Q6HuV+Jf0Bj+BTX69fm1zWgK7By1YTXchFDORywnfQ7GpzOo6S+qECrsx2ifVQAAAABJRU5ErkJggg==');
-  }
-
-  div.callout-tip.callout-style-default .callout-title {
-    background-color: #ccf1e3
-  }
-
-  div.callout-caution {
-    border-left-color: #fd7e14 !important;
-  }
-
-  div.callout-caution .callout-icon::before {
-    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAACV0lEQVRYCdVWzWoUQRCuqp2ICBLJXgITZL1EfQDBW/bkzUMUD7klD+ATSHBEfAIfQO+iXsWDxJsHL96EHAwhgzlkg8nBg25XWb0zIb0zs9muYYWkoKeru+vn664fBqElyZNuyh167NXJ8Ut8McjbmEraKHkd7uAnAFku+VWdb3reSmRV8PKSLfZ0Gjn3a6Xlcq9YGb6tADjn+lUfTXtVmaZ1KwBIvFI11rRXlWlatwIAAv2asaa9mlB9wwygiDX26qaw1yYPzFXg2N1GgG0FMF8Oj+VIx7E/03lHx8UhvYyNZLN7BwSPgekXXLribw7w5/c8EF+DBK5idvDVYtEEwMeYefjjLAdEyQ3M9nfOkgnPTEkYU+sxMq0BxNR6jExrAI31H1rzvLEfRIdgcv1XEdj6QTQAS2wtstEALLG1yEZ3QhH6oDX7ExBSFEkFINXH98NTrme5IOaaA7kIfiu2L8A3qhH9zRbukdCqdsA98TdElyeMe5BI8Rs2xHRIsoTSSVFfCFCWGPn9XHb4cdobRIWABNf0add9jakDjQJpJ1bTXOJXnnRXHRf+dNL1ZV1MBRCXhMbaHqGI1JkKIL7+i8uffuP6wVQAzO7+qVEbF6NbS0LJureYcWXUUhH66nLR5rYmva+2tjRFtojkM2aD76HEGAD3tPtKM309FJg5j/K682ywcWJ3PASCcycH/22u+Bh7Aa0ehM2Fu4z0SAE81HF9RkB21c5bEn4Dzw+/qNOyXr3DCTQDMBOdhi4nAgiFDGCinIa2owCEChUwD8qzd03PG+qdW/4fDzjUMcE1ZpIAAAAASUVORK5CYII=');
-  }
-
-  div.callout-caution.callout-style-default .callout-title {
-    background-color: #ffe5d0
-  }
-
-  </style>
   <style type="text/css">
     .reveal div.sourceCode {
       margin: 0;
@@ -388,19 +191,6 @@
       margin-right: 0; 
     }
   </style>
-  
-  <script src="../site_libs/kePrint-0.0.1/kePrint.js"></script>
-  <link href="../site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
-  <link href="../site_libs/htmltools-fill-0.5.9/fill.css" rel="stylesheet">
-  <script src="../site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
-  <link href="../site_libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
-  <script src="../site_libs/datatables-binding-0.34.0/datatables.js"></script>
-  <script src="../site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
-  <link href="../site_libs/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
-  <link href="../site_libs/dt-core-1.13.6/css/jquery.dataTables.extra.css" rel="stylesheet">
-  <script src="../site_libs/dt-core-1.13.6/js/jquery.dataTables.min.js"></script>
-  <link href="../site_libs/crosstalk-1.2.2/css/crosstalk.min.css" rel="stylesheet">
-  <script src="../site_libs/crosstalk-1.2.2/js/crosstalk.min.js"></script>
 </head>
 <body class="quarto-light">
   <div class="reveal">
@@ -413,421 +203,43 @@
 <div class="quarto-title-authors">
 </div>
 
-  <p class="date">Updated Feb 19, 2026</p>
+  <p class="date">Updated Feb 24, 2026</p>
 </section>
 <section>
-<section id="fa-map-location-overview" class="title-slide slide level1 inverse center">
-<h1></h1>
+<section id="overview" class="title-slide slide level1 inverse center">
+<h1><i class="fa-solid fa-map-location" aria-label="map-location"></i> Overview</h1>
 
 </section>
-<section id="overview" class="slide level2">
+<section id="overview-1" class="slide level2">
 <h2>Overview</h2>
 <ul>
 <li class="fragment">Class goals</li>
 <li class="fragment">Announcements</li>
 </ul>
 </section>
-<section id="learing-goals" class="slide level2 smaller">
-<h2>Learing goals</h2>
+<section id="learning-goals" class="slide level2 smaller">
+<h2>Learning goals</h2>
 <ul>
 <li class="fragment"><p>Focus on making predictions with linear regression</p></li>
-<li class="fragment"><p>Introduce use of research design to make causal claims with observational data</p>
-<ul>
-<li class="fragment"><span class="blue">Differences-in-Differences</span></li>
-</ul></li>
+<li class="fragment"><p>Preview and get set up for Friday’s lab</p></li>
 </ul>
 </section>
 <section id="annoucements" class="slide level2">
 <h2>Annoucements</h2>
 <ul>
-<li class="fragment"><p>Tutorial 5 due on Monday 3-2.</p></li>
+<li class="fragment"><p>Tutorial 5 due on Wednesday 3-4.</p></li>
 <li class="fragment"><p>Resuming labs on Friday - <a href="https://josephessig-source.github.io/pols1600_site/labs/05-lab.qmd" target="_blank">link here</a></p></li>
-<li class="fragment"><p>If any issues with group assignment, let me know after class.</p></li>
+<li class="fragment"><p>If any issues with last group assignment, let me know after class.</p></li>
 <li class="fragment"><p>2nd group assignment next week - will be due Sunday, 3-8.</p></li>
 </ul>
-</section>
-<section id="packages-for-today" class="slide level2">
-<h2>Packages for today</h2>
-<div class="cell" data-hash="05-slides_cache/revealjs/packages_0f17e68e5f1679afe47a4c940dfa7f83">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="do">## Pacakges for today</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a>the_packages <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb1-3"><a href="#cb1-3"></a>  <span class="do">## R Markdown</span></span>
-<span id="cb1-4"><a href="#cb1-4"></a>  <span class="st">"kableExtra"</span>,<span class="st">"DT"</span>,<span class="st">"texreg"</span>,</span>
-<span id="cb1-5"><a href="#cb1-5"></a>  <span class="do">## Tidyverse</span></span>
-<span id="cb1-6"><a href="#cb1-6"></a>  <span class="st">"tidyverse"</span>, <span class="st">"lubridate"</span>, <span class="st">"forcats"</span>, <span class="st">"haven"</span>, <span class="st">"labelled"</span>,</span>
-<span id="cb1-7"><a href="#cb1-7"></a>  <span class="do">## Extensions for ggplot</span></span>
-<span id="cb1-8"><a href="#cb1-8"></a>  <span class="st">"ggmap"</span>,<span class="st">"ggrepel"</span>, <span class="st">"ggridges"</span>, <span class="st">"ggthemes"</span>, <span class="st">"ggpubr"</span>, </span>
-<span id="cb1-9"><a href="#cb1-9"></a>  <span class="st">"scales"</span>, <span class="st">"dagitty"</span>, <span class="st">"ggdag"</span>, <span class="st">"ggforce"</span>,</span>
-<span id="cb1-10"><a href="#cb1-10"></a>  <span class="co"># Data </span></span>
-<span id="cb1-11"><a href="#cb1-11"></a>  <span class="st">"COVID19"</span>,<span class="st">"maps"</span>,<span class="st">"mapdata"</span>,<span class="st">"qss"</span>,<span class="st">"tidycensus"</span>, <span class="st">"dataverse"</span>, </span>
-<span id="cb1-12"><a href="#cb1-12"></a>  <span class="co"># Analysis</span></span>
-<span id="cb1-13"><a href="#cb1-13"></a>  <span class="st">"DeclareDesign"</span>, <span class="st">"easystats"</span>, <span class="st">"zoo"</span></span>
-<span id="cb1-14"><a href="#cb1-14"></a>)</span>
-<span id="cb1-15"><a href="#cb1-15"></a></span>
-<span id="cb1-16"><a href="#cb1-16"></a><span class="co">#new.packages &lt;- the_packages[!(the_packages %in% installed.packages()[,"Package"])]</span></span>
-<span id="cb1-17"><a href="#cb1-17"></a><span class="co"># </span></span>
-<span id="cb1-18"><a href="#cb1-18"></a><span class="co"># # 3. If there are any missing packages, install them</span></span>
-<span id="cb1-19"><a href="#cb1-19"></a><span class="co"># if(length(new.packages)) {</span></span>
-<span id="cb1-20"><a href="#cb1-20"></a><span class="co">#     install.packages(new.packages, dependencies = TRUE)}</span></span>
-<span id="cb1-21"><a href="#cb1-21"></a><span class="co">#</span></span>
-<span id="cb1-22"><a href="#cb1-22"></a><span class="do">## Define a function to load packages</span></span>
-<span id="cb1-23"><a href="#cb1-23"></a></span>
-<span id="cb1-24"><a href="#cb1-24"></a><span class="fu">lapply</span>(the_packages, library, <span class="at">character.only =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[[1]]
- [1] "kableExtra"    "see"           "report"        "parameters"   
- [5] "performance"   "modelbased"    "insight"       "effectsize"   
- [9] "datawizard"    "correlation"   "bayestestR"    "easystats"    
-[13] "DeclareDesign" "estimatr"      "fabricatr"     "randomizr"    
-[17] "haven"         "labelled"      "lubridate"     "forcats"      
-[21] "stringr"       "dplyr"         "purrr"         "readr"        
-[25] "tidyr"         "tibble"        "ggplot2"       "tidyverse"    
-[29] "stats"         "graphics"      "grDevices"     "utils"        
-[33] "datasets"      "methods"       "base"         
-
-[[2]]
- [1] "DT"            "kableExtra"    "see"           "report"       
- [5] "parameters"    "performance"   "modelbased"    "insight"      
- [9] "effectsize"    "datawizard"    "correlation"   "bayestestR"   
-[13] "easystats"     "DeclareDesign" "estimatr"      "fabricatr"    
-[17] "randomizr"     "haven"         "labelled"      "lubridate"    
-[21] "forcats"       "stringr"       "dplyr"         "purrr"        
-[25] "readr"         "tidyr"         "tibble"        "ggplot2"      
-[29] "tidyverse"     "stats"         "graphics"      "grDevices"    
-[33] "utils"         "datasets"      "methods"       "base"         
-
-[[3]]
- [1] "texreg"        "DT"            "kableExtra"    "see"          
- [5] "report"        "parameters"    "performance"   "modelbased"   
- [9] "insight"       "effectsize"    "datawizard"    "correlation"  
-[13] "bayestestR"    "easystats"     "DeclareDesign" "estimatr"     
-[17] "fabricatr"     "randomizr"     "haven"         "labelled"     
-[21] "lubridate"     "forcats"       "stringr"       "dplyr"        
-[25] "purrr"         "readr"         "tidyr"         "tibble"       
-[29] "ggplot2"       "tidyverse"     "stats"         "graphics"     
-[33] "grDevices"     "utils"         "datasets"      "methods"      
-[37] "base"         
-
-[[4]]
- [1] "texreg"        "DT"            "kableExtra"    "see"          
- [5] "report"        "parameters"    "performance"   "modelbased"   
- [9] "insight"       "effectsize"    "datawizard"    "correlation"  
-[13] "bayestestR"    "easystats"     "DeclareDesign" "estimatr"     
-[17] "fabricatr"     "randomizr"     "haven"         "labelled"     
-[21] "lubridate"     "forcats"       "stringr"       "dplyr"        
-[25] "purrr"         "readr"         "tidyr"         "tibble"       
-[29] "ggplot2"       "tidyverse"     "stats"         "graphics"     
-[33] "grDevices"     "utils"         "datasets"      "methods"      
-[37] "base"         
-
-[[5]]
- [1] "texreg"        "DT"            "kableExtra"    "see"          
- [5] "report"        "parameters"    "performance"   "modelbased"   
- [9] "insight"       "effectsize"    "datawizard"    "correlation"  
-[13] "bayestestR"    "easystats"     "DeclareDesign" "estimatr"     
-[17] "fabricatr"     "randomizr"     "haven"         "labelled"     
-[21] "lubridate"     "forcats"       "stringr"       "dplyr"        
-[25] "purrr"         "readr"         "tidyr"         "tibble"       
-[29] "ggplot2"       "tidyverse"     "stats"         "graphics"     
-[33] "grDevices"     "utils"         "datasets"      "methods"      
-[37] "base"         
-
-[[6]]
- [1] "texreg"        "DT"            "kableExtra"    "see"          
- [5] "report"        "parameters"    "performance"   "modelbased"   
- [9] "insight"       "effectsize"    "datawizard"    "correlation"  
-[13] "bayestestR"    "easystats"     "DeclareDesign" "estimatr"     
-[17] "fabricatr"     "randomizr"     "haven"         "labelled"     
-[21] "lubridate"     "forcats"       "stringr"       "dplyr"        
-[25] "purrr"         "readr"         "tidyr"         "tibble"       
-[29] "ggplot2"       "tidyverse"     "stats"         "graphics"     
-[33] "grDevices"     "utils"         "datasets"      "methods"      
-[37] "base"         
-
-[[7]]
- [1] "texreg"        "DT"            "kableExtra"    "see"          
- [5] "report"        "parameters"    "performance"   "modelbased"   
- [9] "insight"       "effectsize"    "datawizard"    "correlation"  
-[13] "bayestestR"    "easystats"     "DeclareDesign" "estimatr"     
-[17] "fabricatr"     "randomizr"     "haven"         "labelled"     
-[21] "lubridate"     "forcats"       "stringr"       "dplyr"        
-[25] "purrr"         "readr"         "tidyr"         "tibble"       
-[29] "ggplot2"       "tidyverse"     "stats"         "graphics"     
-[33] "grDevices"     "utils"         "datasets"      "methods"      
-[37] "base"         
-
-[[8]]
- [1] "texreg"        "DT"            "kableExtra"    "see"          
- [5] "report"        "parameters"    "performance"   "modelbased"   
- [9] "insight"       "effectsize"    "datawizard"    "correlation"  
-[13] "bayestestR"    "easystats"     "DeclareDesign" "estimatr"     
-[17] "fabricatr"     "randomizr"     "haven"         "labelled"     
-[21] "lubridate"     "forcats"       "stringr"       "dplyr"        
-[25] "purrr"         "readr"         "tidyr"         "tibble"       
-[29] "ggplot2"       "tidyverse"     "stats"         "graphics"     
-[33] "grDevices"     "utils"         "datasets"      "methods"      
-[37] "base"         
-
-[[9]]
- [1] "ggmap"         "texreg"        "DT"            "kableExtra"   
- [5] "see"           "report"        "parameters"    "performance"  
- [9] "modelbased"    "insight"       "effectsize"    "datawizard"   
-[13] "correlation"   "bayestestR"    "easystats"     "DeclareDesign"
-[17] "estimatr"      "fabricatr"     "randomizr"     "haven"        
-[21] "labelled"      "lubridate"     "forcats"       "stringr"      
-[25] "dplyr"         "purrr"         "readr"         "tidyr"        
-[29] "tibble"        "ggplot2"       "tidyverse"     "stats"        
-[33] "graphics"      "grDevices"     "utils"         "datasets"     
-[37] "methods"       "base"         
-
-[[10]]
- [1] "ggrepel"       "ggmap"         "texreg"        "DT"           
- [5] "kableExtra"    "see"           "report"        "parameters"   
- [9] "performance"   "modelbased"    "insight"       "effectsize"   
-[13] "datawizard"    "correlation"   "bayestestR"    "easystats"    
-[17] "DeclareDesign" "estimatr"      "fabricatr"     "randomizr"    
-[21] "haven"         "labelled"      "lubridate"     "forcats"      
-[25] "stringr"       "dplyr"         "purrr"         "readr"        
-[29] "tidyr"         "tibble"        "ggplot2"       "tidyverse"    
-[33] "stats"         "graphics"      "grDevices"     "utils"        
-[37] "datasets"      "methods"       "base"         
-
-[[11]]
- [1] "ggridges"      "ggrepel"       "ggmap"         "texreg"       
- [5] "DT"            "kableExtra"    "see"           "report"       
- [9] "parameters"    "performance"   "modelbased"    "insight"      
-[13] "effectsize"    "datawizard"    "correlation"   "bayestestR"   
-[17] "easystats"     "DeclareDesign" "estimatr"      "fabricatr"    
-[21] "randomizr"     "haven"         "labelled"      "lubridate"    
-[25] "forcats"       "stringr"       "dplyr"         "purrr"        
-[29] "readr"         "tidyr"         "tibble"        "ggplot2"      
-[33] "tidyverse"     "stats"         "graphics"      "grDevices"    
-[37] "utils"         "datasets"      "methods"       "base"         
-
-[[12]]
- [1] "ggthemes"      "ggridges"      "ggrepel"       "ggmap"        
- [5] "texreg"        "DT"            "kableExtra"    "see"          
- [9] "report"        "parameters"    "performance"   "modelbased"   
-[13] "insight"       "effectsize"    "datawizard"    "correlation"  
-[17] "bayestestR"    "easystats"     "DeclareDesign" "estimatr"     
-[21] "fabricatr"     "randomizr"     "haven"         "labelled"     
-[25] "lubridate"     "forcats"       "stringr"       "dplyr"        
-[29] "purrr"         "readr"         "tidyr"         "tibble"       
-[33] "ggplot2"       "tidyverse"     "stats"         "graphics"     
-[37] "grDevices"     "utils"         "datasets"      "methods"      
-[41] "base"         
-
-[[13]]
- [1] "ggpubr"        "ggthemes"      "ggridges"      "ggrepel"      
- [5] "ggmap"         "texreg"        "DT"            "kableExtra"   
- [9] "see"           "report"        "parameters"    "performance"  
-[13] "modelbased"    "insight"       "effectsize"    "datawizard"   
-[17] "correlation"   "bayestestR"    "easystats"     "DeclareDesign"
-[21] "estimatr"      "fabricatr"     "randomizr"     "haven"        
-[25] "labelled"      "lubridate"     "forcats"       "stringr"      
-[29] "dplyr"         "purrr"         "readr"         "tidyr"        
-[33] "tibble"        "ggplot2"       "tidyverse"     "stats"        
-[37] "graphics"      "grDevices"     "utils"         "datasets"     
-[41] "methods"       "base"         
-
-[[14]]
- [1] "scales"        "ggpubr"        "ggthemes"      "ggridges"     
- [5] "ggrepel"       "ggmap"         "texreg"        "DT"           
- [9] "kableExtra"    "see"           "report"        "parameters"   
-[13] "performance"   "modelbased"    "insight"       "effectsize"   
-[17] "datawizard"    "correlation"   "bayestestR"    "easystats"    
-[21] "DeclareDesign" "estimatr"      "fabricatr"     "randomizr"    
-[25] "haven"         "labelled"      "lubridate"     "forcats"      
-[29] "stringr"       "dplyr"         "purrr"         "readr"        
-[33] "tidyr"         "tibble"        "ggplot2"       "tidyverse"    
-[37] "stats"         "graphics"      "grDevices"     "utils"        
-[41] "datasets"      "methods"       "base"         
-
-[[15]]
- [1] "dagitty"       "scales"        "ggpubr"        "ggthemes"     
- [5] "ggridges"      "ggrepel"       "ggmap"         "texreg"       
- [9] "DT"            "kableExtra"    "see"           "report"       
-[13] "parameters"    "performance"   "modelbased"    "insight"      
-[17] "effectsize"    "datawizard"    "correlation"   "bayestestR"   
-[21] "easystats"     "DeclareDesign" "estimatr"      "fabricatr"    
-[25] "randomizr"     "haven"         "labelled"      "lubridate"    
-[29] "forcats"       "stringr"       "dplyr"         "purrr"        
-[33] "readr"         "tidyr"         "tibble"        "ggplot2"      
-[37] "tidyverse"     "stats"         "graphics"      "grDevices"    
-[41] "utils"         "datasets"      "methods"       "base"         
-
-[[16]]
- [1] "ggdag"         "dagitty"       "scales"        "ggpubr"       
- [5] "ggthemes"      "ggridges"      "ggrepel"       "ggmap"        
- [9] "texreg"        "DT"            "kableExtra"    "see"          
-[13] "report"        "parameters"    "performance"   "modelbased"   
-[17] "insight"       "effectsize"    "datawizard"    "correlation"  
-[21] "bayestestR"    "easystats"     "DeclareDesign" "estimatr"     
-[25] "fabricatr"     "randomizr"     "haven"         "labelled"     
-[29] "lubridate"     "forcats"       "stringr"       "dplyr"        
-[33] "purrr"         "readr"         "tidyr"         "tibble"       
-[37] "ggplot2"       "tidyverse"     "stats"         "graphics"     
-[41] "grDevices"     "utils"         "datasets"      "methods"      
-[45] "base"         
-
-[[17]]
- [1] "ggforce"       "ggdag"         "dagitty"       "scales"       
- [5] "ggpubr"        "ggthemes"      "ggridges"      "ggrepel"      
- [9] "ggmap"         "texreg"        "DT"            "kableExtra"   
-[13] "see"           "report"        "parameters"    "performance"  
-[17] "modelbased"    "insight"       "effectsize"    "datawizard"   
-[21] "correlation"   "bayestestR"    "easystats"     "DeclareDesign"
-[25] "estimatr"      "fabricatr"     "randomizr"     "haven"        
-[29] "labelled"      "lubridate"     "forcats"       "stringr"      
-[33] "dplyr"         "purrr"         "readr"         "tidyr"        
-[37] "tibble"        "ggplot2"       "tidyverse"     "stats"        
-[41] "graphics"      "grDevices"     "utils"         "datasets"     
-[45] "methods"       "base"         
-
-[[18]]
- [1] "COVID19"       "ggforce"       "ggdag"         "dagitty"      
- [5] "scales"        "ggpubr"        "ggthemes"      "ggridges"     
- [9] "ggrepel"       "ggmap"         "texreg"        "DT"           
-[13] "kableExtra"    "see"           "report"        "parameters"   
-[17] "performance"   "modelbased"    "insight"       "effectsize"   
-[21] "datawizard"    "correlation"   "bayestestR"    "easystats"    
-[25] "DeclareDesign" "estimatr"      "fabricatr"     "randomizr"    
-[29] "haven"         "labelled"      "lubridate"     "forcats"      
-[33] "stringr"       "dplyr"         "purrr"         "readr"        
-[37] "tidyr"         "tibble"        "ggplot2"       "tidyverse"    
-[41] "stats"         "graphics"      "grDevices"     "utils"        
-[45] "datasets"      "methods"       "base"         
-
-[[19]]
- [1] "maps"          "COVID19"       "ggforce"       "ggdag"        
- [5] "dagitty"       "scales"        "ggpubr"        "ggthemes"     
- [9] "ggridges"      "ggrepel"       "ggmap"         "texreg"       
-[13] "DT"            "kableExtra"    "see"           "report"       
-[17] "parameters"    "performance"   "modelbased"    "insight"      
-[21] "effectsize"    "datawizard"    "correlation"   "bayestestR"   
-[25] "easystats"     "DeclareDesign" "estimatr"      "fabricatr"    
-[29] "randomizr"     "haven"         "labelled"      "lubridate"    
-[33] "forcats"       "stringr"       "dplyr"         "purrr"        
-[37] "readr"         "tidyr"         "tibble"        "ggplot2"      
-[41] "tidyverse"     "stats"         "graphics"      "grDevices"    
-[45] "utils"         "datasets"      "methods"       "base"         
-
-[[20]]
- [1] "mapdata"       "maps"          "COVID19"       "ggforce"      
- [5] "ggdag"         "dagitty"       "scales"        "ggpubr"       
- [9] "ggthemes"      "ggridges"      "ggrepel"       "ggmap"        
-[13] "texreg"        "DT"            "kableExtra"    "see"          
-[17] "report"        "parameters"    "performance"   "modelbased"   
-[21] "insight"       "effectsize"    "datawizard"    "correlation"  
-[25] "bayestestR"    "easystats"     "DeclareDesign" "estimatr"     
-[29] "fabricatr"     "randomizr"     "haven"         "labelled"     
-[33] "lubridate"     "forcats"       "stringr"       "dplyr"        
-[37] "purrr"         "readr"         "tidyr"         "tibble"       
-[41] "ggplot2"       "tidyverse"     "stats"         "graphics"     
-[45] "grDevices"     "utils"         "datasets"      "methods"      
-[49] "base"         
-
-[[21]]
- [1] "qss"           "mapdata"       "maps"          "COVID19"      
- [5] "ggforce"       "ggdag"         "dagitty"       "scales"       
- [9] "ggpubr"        "ggthemes"      "ggridges"      "ggrepel"      
-[13] "ggmap"         "texreg"        "DT"            "kableExtra"   
-[17] "see"           "report"        "parameters"    "performance"  
-[21] "modelbased"    "insight"       "effectsize"    "datawizard"   
-[25] "correlation"   "bayestestR"    "easystats"     "DeclareDesign"
-[29] "estimatr"      "fabricatr"     "randomizr"     "haven"        
-[33] "labelled"      "lubridate"     "forcats"       "stringr"      
-[37] "dplyr"         "purrr"         "readr"         "tidyr"        
-[41] "tibble"        "ggplot2"       "tidyverse"     "stats"        
-[45] "graphics"      "grDevices"     "utils"         "datasets"     
-[49] "methods"       "base"         
-
-[[22]]
- [1] "tidycensus"    "qss"           "mapdata"       "maps"         
- [5] "COVID19"       "ggforce"       "ggdag"         "dagitty"      
- [9] "scales"        "ggpubr"        "ggthemes"      "ggridges"     
-[13] "ggrepel"       "ggmap"         "texreg"        "DT"           
-[17] "kableExtra"    "see"           "report"        "parameters"   
-[21] "performance"   "modelbased"    "insight"       "effectsize"   
-[25] "datawizard"    "correlation"   "bayestestR"    "easystats"    
-[29] "DeclareDesign" "estimatr"      "fabricatr"     "randomizr"    
-[33] "haven"         "labelled"      "lubridate"     "forcats"      
-[37] "stringr"       "dplyr"         "purrr"         "readr"        
-[41] "tidyr"         "tibble"        "ggplot2"       "tidyverse"    
-[45] "stats"         "graphics"      "grDevices"     "utils"        
-[49] "datasets"      "methods"       "base"         
-
-[[23]]
- [1] "dataverse"     "tidycensus"    "qss"           "mapdata"      
- [5] "maps"          "COVID19"       "ggforce"       "ggdag"        
- [9] "dagitty"       "scales"        "ggpubr"        "ggthemes"     
-[13] "ggridges"      "ggrepel"       "ggmap"         "texreg"       
-[17] "DT"            "kableExtra"    "see"           "report"       
-[21] "parameters"    "performance"   "modelbased"    "insight"      
-[25] "effectsize"    "datawizard"    "correlation"   "bayestestR"   
-[29] "easystats"     "DeclareDesign" "estimatr"      "fabricatr"    
-[33] "randomizr"     "haven"         "labelled"      "lubridate"    
-[37] "forcats"       "stringr"       "dplyr"         "purrr"        
-[41] "readr"         "tidyr"         "tibble"        "ggplot2"      
-[45] "tidyverse"     "stats"         "graphics"      "grDevices"    
-[49] "utils"         "datasets"      "methods"       "base"         
-
-[[24]]
- [1] "dataverse"     "tidycensus"    "qss"           "mapdata"      
- [5] "maps"          "COVID19"       "ggforce"       "ggdag"        
- [9] "dagitty"       "scales"        "ggpubr"        "ggthemes"     
-[13] "ggridges"      "ggrepel"       "ggmap"         "texreg"       
-[17] "DT"            "kableExtra"    "see"           "report"       
-[21] "parameters"    "performance"   "modelbased"    "insight"      
-[25] "effectsize"    "datawizard"    "correlation"   "bayestestR"   
-[29] "easystats"     "DeclareDesign" "estimatr"      "fabricatr"    
-[33] "randomizr"     "haven"         "labelled"      "lubridate"    
-[37] "forcats"       "stringr"       "dplyr"         "purrr"        
-[41] "readr"         "tidyr"         "tibble"        "ggplot2"      
-[45] "tidyverse"     "stats"         "graphics"      "grDevices"    
-[49] "utils"         "datasets"      "methods"       "base"         
-
-[[25]]
- [1] "dataverse"     "tidycensus"    "qss"           "mapdata"      
- [5] "maps"          "COVID19"       "ggforce"       "ggdag"        
- [9] "dagitty"       "scales"        "ggpubr"        "ggthemes"     
-[13] "ggridges"      "ggrepel"       "ggmap"         "texreg"       
-[17] "DT"            "kableExtra"    "see"           "report"       
-[21] "parameters"    "performance"   "modelbased"    "insight"      
-[25] "effectsize"    "datawizard"    "correlation"   "bayestestR"   
-[29] "easystats"     "DeclareDesign" "estimatr"      "fabricatr"    
-[33] "randomizr"     "haven"         "labelled"      "lubridate"    
-[37] "forcats"       "stringr"       "dplyr"         "purrr"        
-[41] "readr"         "tidyr"         "tibble"        "ggplot2"      
-[45] "tidyverse"     "stats"         "graphics"      "grDevices"    
-[49] "utils"         "datasets"      "methods"       "base"         
-
-[[26]]
- [1] "zoo"           "dataverse"     "tidycensus"    "qss"          
- [5] "mapdata"       "maps"          "COVID19"       "ggforce"      
- [9] "ggdag"         "dagitty"       "scales"        "ggpubr"       
-[13] "ggthemes"      "ggridges"      "ggrepel"       "ggmap"        
-[17] "texreg"        "DT"            "kableExtra"    "see"          
-[21] "report"        "parameters"    "performance"   "modelbased"   
-[25] "insight"       "effectsize"    "datawizard"    "correlation"  
-[29] "bayestestR"    "easystats"     "DeclareDesign" "estimatr"     
-[33] "fabricatr"     "randomizr"     "haven"         "labelled"     
-[37] "lubridate"     "forcats"       "stringr"       "dplyr"        
-[41] "purrr"         "readr"         "tidyr"         "tibble"       
-[45] "ggplot2"       "tidyverse"     "stats"         "graphics"     
-[49] "grDevices"     "utils"         "datasets"      "methods"      
-[53] "base"         </code></pre>
-</div>
-</div>
 </section></section>
 <section>
-<section id="fa-lightbulb-simple-linear-regression" class="title-slide slide level1 inverse center">
+<section id="simple-linear-regression" class="title-slide slide level1 inverse center">
 <h1><i class="fa-solid fa-lightbulb" aria-label="lightbulb"></i> Simple Linear Regression</h1>
 
 </section>
 <section id="understanding-linear-regression" class="slide level2 smaller">
 <h2>Understanding Linear Regression</h2>
-<div>
 <ul>
 <li><strong>Conceptual</strong>
 <ul>
@@ -843,14 +255,12 @@ y_i = \beta_0 + \beta_1x_i + \epsilon_i
 <li>We estimate linear models in R using the <code>lm()</code> function</li>
 </ul></li>
 </ul>
-<div class="cell" data-hash="05-slides_cache/revealjs/unnamed-chunk-1_10ecd4d008764f4f2fcaec420c886484">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">lm</span>(y <span class="sc">~</span> x, <span class="at">data =</span> df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="fu">lm</span>(y <span class="sc">~</span> x, <span class="at">data =</span> df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="understanding-linear-regression-1" class="slide level2 smaller">
 <h2>Understanding Linear Regression</h2>
-<div>
 <ul>
 <li><em>Technical/Definitional</em>
 <ul>
@@ -864,14 +274,13 @@ y_i = \beta_0 + \beta_1x_i + \epsilon_i
 <li>Linear regression provides a <strong>linear</strong> estimate of the conditional expectation function (CEF): <span class="math inline">\(E[Y|X]\)</span></li>
 </ul></li>
 </ul>
-</div>
 </section></section>
 <section>
-<section id="fa-lightbulb-conceptual-linear-regression" class="title-slide slide level1 inverse center">
+<section id="conceptual-linear-regression" class="title-slide slide level1 inverse center">
 <h1><i class="fa-solid fa-lightbulb" aria-label="lightbulb"></i> Conceptual: Linear Regression</h1>
 
 </section>
-<section id="conceptual-linear-regression" class="slide level2">
+<section id="conceptual-linear-regression-1" class="slide level2">
 <h2>Conceptual: Linear Regression</h2>
 <ul>
 <li class="fragment"><p>Regression is a tool for describing relationships.</p>
@@ -885,9 +294,8 @@ y_i = \beta_0 + \beta_1x_i + \epsilon_i
 </ul></li>
 </ul>
 </section>
-<section id="conceptual-linear-regression-1" class="slide level2 smaller">
+<section id="conceptual-linear-regression-2" class="slide level2 smaller">
 <h2>Conceptual: Linear Regression</h2>
-<div>
 <p>More formally:</p>
 <p><span class="math display">\[
 y_i = f(x_i) + \epsilon
@@ -899,11 +307,9 @@ y_i = f(x_i) + \epsilon
 <p><span class="math display">\[
 y_i = \beta_0 + \beta_1 x_i + \epsilon
 \]</span></p>
-</div>
 </section>
 <section id="linear-regression-and-the-line-of-best-fit" class="slide level2 smaller">
 <h2>Linear Regression and the Line of Best Fit</h2>
-<div>
 <ul>
 <li>The goal of linear regression is to choose coefficients <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span> to summarizes the relationship between <span class="math inline">\(y\)</span> and <span class="math inline">\(x\)</span></li>
 </ul>
@@ -915,7 +321,6 @@ y_i = \beta_0 + \beta_1 x_i + \epsilon
 <li><p>For linear regression, that criteria is minimizing the error between what our model predicts <span class="math inline">\(\hat{y_i} = \beta_0 + \beta_1 x_i\)</span> and what we actually observed <span class="math inline">\((y_i)\)</span></p></li>
 <li><p>More on this to come. But first…</p></li>
 </ul>
-</div>
 </section>
 <section id="regression-notation" class="slide level2 smaller">
 <h2>Regression Notation</h2>
@@ -936,7 +341,6 @@ y_i = \beta_0 + \beta_1 x_i + \epsilon
 </section>
 <section id="linear-regression" class="slide level2 smaller">
 <h2>Linear Regression</h2>
-<div>
 <ul>
 <li>We call this a bivariate regression, because there are only two variables</li>
 </ul>
@@ -950,11 +354,9 @@ y_i = \beta_0 + \beta_1 x_i + \epsilon_i
 <li><p><span class="math inline">\(\beta_1\)</span> corresponds to the slope, or how <span class="math inline">\(y\)</span> is predicted to change as <span class="math inline">\(x\)</span> changes.</p></li>
 </ul></li>
 </ul>
-</div>
 </section>
 <section id="linear-regression-1" class="slide level2 smaller">
 <h2>Linear Regression</h2>
-<div>
 <ul>
 <li>If you find this notation confusing, try plugging in substantive concepts for what <span class="math inline">\(y\)</span> and <span class="math inline">\(x\)</span> represent</li>
 <li>Say we wanted to know how attitudes to transgender people varied with age in the baseline survey from Lab 03.</li>
@@ -963,16 +365,14 @@ y_i = \beta_0 + \beta_1 x_i + \epsilon_i
 <p><span class="math display">\[y_i = \beta_0 + \beta_1 x_i + \epsilon_i\]</span></p>
 <p>Reflects:</p>
 <p><span class="math display">\[\text{Transgender Feeling Thermometer}_i = \beta_0 + \beta_1\text{Age}_i + \epsilon_i\]</span></p>
-</div>
 </section></section>
 <section>
-<section id="fa-lightbulb-practical-estimating-a-linear-regression" class="title-slide slide level1 inverse center">
+<section id="practical-estimating-a-linear-regression" class="title-slide slide level1 inverse center">
 <h1><i class="fa-solid fa-lightbulb" aria-label="lightbulb"></i> Practical: Estimating a Linear Regression</h1>
 
 </section>
-<section id="practical-estimating-a-linear-regression" class="slide level2 smaller">
+<section id="practical-estimating-a-linear-regression-1" class="slide level2 smaller">
 <h2>Practical: Estimating a Linear Regression</h2>
-<div>
 <ul>
 <li>We estimate linear regressions in <code>R</code> using the <code>lm()</code> function.</li>
 <li><code>lm()</code> requires two arguments:
@@ -981,10 +381,10 @@ y_i = \beta_0 + \beta_1 x_i + \epsilon_i
 <li>a <code>data</code> argument telling R where to find the variables in the formula</li>
 </ul></li>
 </ul>
-<div class="cell" data-hash="05-slides_cache/revealjs/lmdata_e7fea831c346e2659804d085a49db4a9">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">load</span>(<span class="fu">url</span>(<span class="st">"https://pols1600.paultesta.org/files/data/03_lab.rda"</span>))</span>
-<span id="cb4-2"><a href="#cb4-2"></a>m1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(therm_trans_t0 <span class="sc">~</span> vf_age, <span class="at">data =</span> df)</span>
-<span id="cb4-3"><a href="#cb4-3"></a>m1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a><span class="fu">load</span>(<span class="fu">url</span>(<span class="st">"https://josephessig-source.github.io/pols1600_site/files/data/03_lab.rda"</span>))</span>
+<span id="cb2-2"><a></a>m1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(therm_trans_t0 <span class="sc">~</span> vf_age, <span class="at">data =</span> df)</span>
+<span id="cb2-3"><a></a>m1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -995,14 +395,12 @@ Coefficients:
     62.8196      -0.2031  </code></pre>
 </div>
 </div>
-</div>
 </section>
 <section id="the-lm-function" class="slide level2 smaller">
 <h2>The <code>lm()</code> function</h2>
-<div>
 <p>The coefficients from <code>lm()</code> are saved in object called <code>m1</code></p>
-<div class="cell" data-hash="05-slides_cache/revealjs/printm1_c38befd6107e8f6760415071deff8496">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>m1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a>m1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -1014,40 +412,39 @@ Coefficients:
 </div>
 </div>
 <p><code>m1</code> actually contains a lot of information</p>
-<div class="cell" data-hash="05-slides_cache/revealjs/m1info_d04dcc4b05bcfb2f145b4ee1c3ff178b">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="fu">names</span>(m1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a><span class="fu">names</span>(m1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] "coefficients"  "residuals"     "effects"       "rank"         
  [5] "fitted.values" "assign"        "qr"            "df.residual"  
  [9] "na.action"     "xlevels"       "call"          "terms"        
 [13] "model"        </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>m1<span class="sc">$</span>coefficients</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a>m1<span class="sc">$</span>coefficients</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>(Intercept)      vf_age 
  62.8195994  -0.2030711 </code></pre>
-</div>
 </div>
 </div>
 </section>
 <section id="practical-interpreting-a-linear-regression" class="slide level2 smaller">
 <h2>Practical: Interpreting a Linear Regression</h2>
 <p>We can extract the intercept and slope from this simple bivariate model, using the <code>coef()</code> function</p>
-<div class="cell" data-hash="05-slides_cache/revealjs/m1coef_5112d36d47695b320e1f7fafe5024b5e">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="co"># All the coefficients</span></span>
-<span id="cb12-2"><a href="#cb12-2"></a><span class="fu">coef</span>(m1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a><span class="co"># All the coefficients</span></span>
+<span id="cb10-2"><a></a><span class="fu">coef</span>(m1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>(Intercept)      vf_age 
  62.8195994  -0.2030711 </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="co"># Just the intercept</span></span>
-<span id="cb14-2"><a href="#cb14-2"></a><span class="fu">coef</span>(m1)[<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a><span class="co"># Just the intercept</span></span>
+<span id="cb12-2"><a></a><span class="fu">coef</span>(m1)[<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>(Intercept) 
     62.8196 </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="co"># Just the slope</span></span>
-<span id="cb16-2"><a href="#cb16-2"></a><span class="fu">coef</span>(m1)[<span class="dv">2</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a></a><span class="co"># Just the slope</span></span>
+<span id="cb14-2"><a></a><span class="fu">coef</span>(m1)[<span class="dv">2</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>    vf_age 
 -0.2030711 </code></pre>
@@ -1063,25 +460,23 @@ Coefficients:
 </section>
 <section id="practical-predicted-values-from-a-linear-regression" class="slide level2 smaller">
 <h2>Practical: Predicted values from a Linear Regression</h2>
-<div>
 <ul>
 <li><p>Often it’s useful for interpretation to obtain <span class="blue">predicted values</span> from a regression.</p></li>
 <li><p>To obtain predicted vales <span class="math inline">\((\hat{y})\)</span>, we simply plug in a value for <span class="math inline">\(x\)</span> (In this case, <span class="math inline">\(Age\)</span>) and evaluate our equation.</p></li>
 <li><p>For example, might we expect attitudes to differ among an 18-year-old college student and their 68-year-old grandparent?</p></li>
 </ul>
 <p><span class="math display">\[\hat{FT}_{x=18} = 62.82 + -0.2 \times 18  = 59.16\]</span> <span class="math display">\[\hat{FT}_{x=65} = 62.82 + -0.2 \times 68  = 49.01\]</span></p>
-</div>
 </section>
 <section id="practical-predicted-values-from-a-linear-regression-1" class="slide level2">
 <h2>Practical: Predicted values from a Linear Regression</h2>
 <p>We could do this by hand</p>
-<div class="cell" data-hash="05-slides_cache/revealjs/pred_man_c762ba31963bb80cbf0114a3bc95f9f3">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="fu">coef</span>(m1)[<span class="dv">1</span>] <span class="sc">+</span> <span class="fu">coef</span>(m1)[<span class="dv">2</span>] <span class="sc">*</span> <span class="dv">18</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a></a><span class="fu">coef</span>(m1)[<span class="dv">1</span>] <span class="sc">+</span> <span class="fu">coef</span>(m1)[<span class="dv">2</span>] <span class="sc">*</span> <span class="dv">18</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>(Intercept) 
    59.16432 </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="fu">coef</span>(m1)[<span class="dv">1</span>] <span class="sc">+</span> <span class="fu">coef</span>(m1)[<span class="dv">2</span>] <span class="sc">*</span> <span class="dv">68</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a></a><span class="fu">coef</span>(m1)[<span class="dv">1</span>] <span class="sc">+</span> <span class="fu">coef</span>(m1)[<span class="dv">2</span>] <span class="sc">*</span> <span class="dv">68</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>(Intercept) 
    49.01076 </code></pre>
@@ -1099,20 +494,20 @@ Coefficients:
 </section>
 <section id="practical-predicted-values-from-a-linear-regression-3" class="slide level2">
 <h2>Practical: Predicted values from a Linear Regression</h2>
-<div class="cell" data-hash="05-slides_cache/revealjs/pred_df_58a9fb6c1c1064116d4d8f69403d4271">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a><span class="co"># Make prediction data frame</span></span>
-<span id="cb22-2"><a href="#cb22-2"></a>pred_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb22-3"><a href="#cb22-3"></a>  <span class="at">vf_age =</span> <span class="fu">c</span>(<span class="dv">18</span>, <span class="dv">68</span>)</span>
-<span id="cb22-4"><a href="#cb22-4"></a>)</span>
-<span id="cb22-5"><a href="#cb22-5"></a><span class="co"># Predict FT for 18 and 68 year-olds</span></span>
-<span id="cb22-6"><a href="#cb22-6"></a><span class="fu">predict</span>(m1, <span class="at">newdata =</span> pred_df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a></a><span class="co"># Make prediction data frame</span></span>
+<span id="cb20-2"><a></a>pred_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb20-3"><a></a>  <span class="at">vf_age =</span> <span class="fu">c</span>(<span class="dv">18</span>, <span class="dv">68</span>)</span>
+<span id="cb20-4"><a></a>)</span>
+<span id="cb20-5"><a></a><span class="co"># Predict FT for 18 and 68 year-olds</span></span>
+<span id="cb20-6"><a></a><span class="fu">predict</span>(m1, <span class="at">newdata =</span> pred_df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>       1        2 
 59.16432 49.01076 </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a><span class="co"># Save predictions to data frame</span></span>
-<span id="cb24-2"><a href="#cb24-2"></a>pred_df<span class="sc">$</span>ft_trans_hat <span class="ot">&lt;-</span> <span class="fu">predict</span>(m1, <span class="at">newdata =</span> pred_df)</span>
-<span id="cb24-3"><a href="#cb24-3"></a>pred_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a></a><span class="co"># Save predictions to data frame</span></span>
+<span id="cb22-2"><a></a>pred_df<span class="sc">$</span>ft_trans_hat <span class="ot">&lt;-</span> <span class="fu">predict</span>(m1, <span class="at">newdata =</span> pred_df)</span>
+<span id="cb22-3"><a></a>pred_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  vf_age ft_trans_hat
 1     18     59.16432
@@ -1134,52 +529,64 @@ Coefficients:
 </ul>
 </div>
 <div id="tabset-1-2">
-<div class="cell" data-hash="05-slides_cache/revealjs/fig_lm_code_33920b7b83eb852c62bc5f5d1bfa6c79">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a><span class="fu">load</span>(<span class="fu">url</span>(<span class="st">"https://pols1600.paultesta.org/files/data/03_lab.rda"</span>))</span>
-<span id="cb26-2"><a href="#cb26-2"></a>fig_lm <span class="ot">&lt;-</span> </span>
-<span id="cb26-3"><a href="#cb26-3"></a>  <span class="fu">ggplot</span>(<span class="at">data=</span>df, <span class="at">mapping=</span><span class="fu">aes</span>(vf_age,therm_trans_t0))<span class="sc">+</span></span>
-<span id="cb26-4"><a href="#cb26-4"></a>  <span class="fu">geom_point</span>(<span class="at">size=</span>.<span class="dv">5</span>, <span class="at">alpha=</span>.<span class="dv">5</span>)<span class="sc">+</span></span>
-<span id="cb26-5"><a href="#cb26-5"></a>  <span class="fu">geom_abline</span>(<span class="at">intercept =</span> <span class="fu">coef</span>(m1)[<span class="dv">1</span>],</span>
-<span id="cb26-6"><a href="#cb26-6"></a>              <span class="at">slope =</span> <span class="fu">coef</span>(m1)[<span class="dv">2</span>],</span>
-<span id="cb26-7"><a href="#cb26-7"></a>              <span class="at">col =</span> <span class="st">"blue"</span></span>
-<span id="cb26-8"><a href="#cb26-8"></a>              )<span class="sc">+</span></span>
-<span id="cb26-9"><a href="#cb26-9"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">0</span>,<span class="at">linetype =</span> <span class="dv">2</span>)<span class="sc">+</span></span>
-<span id="cb26-10"><a href="#cb26-10"></a>  <span class="fu">xlim</span>(<span class="dv">0</span>,<span class="dv">100</span>)<span class="sc">+</span></span>
-<span id="cb26-11"><a href="#cb26-11"></a>  <span class="fu">annotate</span>(<span class="st">"point"</span>,</span>
-<span id="cb26-12"><a href="#cb26-12"></a>           <span class="at">x =</span> <span class="dv">0</span>, <span class="at">y =</span> <span class="fu">coef</span>(m1)[<span class="dv">1</span>],</span>
-<span id="cb26-13"><a href="#cb26-13"></a>           <span class="at">col=</span> <span class="st">"red"</span>,</span>
-<span id="cb26-14"><a href="#cb26-14"></a>           )<span class="sc">+</span></span>
-<span id="cb26-15"><a href="#cb26-15"></a> <span class="fu">annotate</span>(<span class="st">"text"</span>,</span>
-<span id="cb26-16"><a href="#cb26-16"></a>           <span class="at">label =</span> <span class="st">"beta[0] == 62.81"</span>, </span>
-<span id="cb26-17"><a href="#cb26-17"></a>           <span class="at">parse =</span> <span class="cn">TRUE</span>,              </span>
-<span id="cb26-18"><a href="#cb26-18"></a>           <span class="at">x =</span> <span class="dv">1</span>, <span class="at">y =</span> <span class="fu">coef</span>(m1)[<span class="dv">1</span>]<span class="sc">+</span><span class="dv">5</span>,</span>
-<span id="cb26-19"><a href="#cb26-19"></a>           <span class="at">hjust =</span> <span class="st">"left"</span>,</span>
-<span id="cb26-20"><a href="#cb26-20"></a>           )<span class="sc">+</span></span>
-<span id="cb26-21"><a href="#cb26-21"></a>  <span class="fu">labs</span>(</span>
-<span id="cb26-22"><a href="#cb26-22"></a>    <span class="at">x =</span> <span class="st">"Age"</span>,</span>
-<span id="cb26-23"><a href="#cb26-23"></a>    <span class="at">y =</span> <span class="st">"Feeling Thermometer toward</span><span class="sc">\n</span><span class="st">Transgender People"</span></span>
-<span id="cb26-24"><a href="#cb26-24"></a>  )<span class="sc">+</span></span>
-<span id="cb26-25"><a href="#cb26-25"></a>  <span class="fu">theme_classic</span>() <span class="ot">-&gt;</span> fig_lm</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a></a><span class="fu">load</span>(<span class="fu">url</span>(<span class="st">"https://josephessig-source.github.io/pols1600_site/files/data/03_lab.rda"</span>))</span>
+<span id="cb24-2"><a></a>fig_lm <span class="ot">&lt;-</span> </span>
+<span id="cb24-3"><a></a>  <span class="fu">ggplot</span>(<span class="at">data=</span>df, <span class="at">mapping=</span><span class="fu">aes</span>(vf_age,therm_trans_t0))<span class="sc">+</span></span>
+<span id="cb24-4"><a></a>  <span class="fu">geom_point</span>(<span class="at">size=</span>.<span class="dv">5</span>, <span class="at">alpha=</span>.<span class="dv">5</span>)<span class="sc">+</span></span>
+<span id="cb24-5"><a></a>  <span class="fu">geom_abline</span>(<span class="at">intercept =</span> <span class="fu">coef</span>(m1)[<span class="dv">1</span>],</span>
+<span id="cb24-6"><a></a>              <span class="at">slope =</span> <span class="fu">coef</span>(m1)[<span class="dv">2</span>],</span>
+<span id="cb24-7"><a></a>              <span class="at">col =</span> <span class="st">"blue"</span></span>
+<span id="cb24-8"><a></a>              )<span class="sc">+</span></span>
+<span id="cb24-9"><a></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">0</span>,<span class="at">linetype =</span> <span class="dv">2</span>)<span class="sc">+</span></span>
+<span id="cb24-10"><a></a>  <span class="fu">xlim</span>(<span class="dv">0</span>,<span class="dv">100</span>)<span class="sc">+</span></span>
+<span id="cb24-11"><a></a>  <span class="fu">annotate</span>(<span class="st">"point"</span>,</span>
+<span id="cb24-12"><a></a>           <span class="at">x =</span> <span class="dv">0</span>, <span class="at">y =</span> <span class="fu">coef</span>(m1)[<span class="dv">1</span>],</span>
+<span id="cb24-13"><a></a>           <span class="at">col=</span> <span class="st">"red"</span>,</span>
+<span id="cb24-14"><a></a>           )<span class="sc">+</span></span>
+<span id="cb24-15"><a></a> <span class="fu">annotate</span>(<span class="st">"text"</span>,</span>
+<span id="cb24-16"><a></a>           <span class="at">label =</span> <span class="st">"beta[0] == 62.81"</span>, </span>
+<span id="cb24-17"><a></a>           <span class="at">parse =</span> <span class="cn">TRUE</span>,              </span>
+<span id="cb24-18"><a></a>           <span class="at">x =</span> <span class="dv">1</span>, <span class="at">y =</span> <span class="fu">coef</span>(m1)[<span class="dv">1</span>]<span class="sc">+</span><span class="dv">5</span>,</span>
+<span id="cb24-19"><a></a>           <span class="at">hjust =</span> <span class="st">"left"</span>,</span>
+<span id="cb24-20"><a></a>           )<span class="sc">+</span></span>
+<span id="cb24-21"><a></a>  <span class="fu">labs</span>(</span>
+<span id="cb24-22"><a></a>    <span class="at">x =</span> <span class="st">"Age"</span>,</span>
+<span id="cb24-23"><a></a>    <span class="at">y =</span> <span class="st">"Feeling Thermometer toward</span><span class="sc">\n</span><span class="st">Transgender People"</span></span>
+<span id="cb24-24"><a></a>  )<span class="sc">+</span></span>
+<span id="cb24-25"><a></a>  <span class="fu">theme_classic</span>() <span class="ot">-&gt;</span> fig_lm</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 <div id="tabset-1-3">
-<div class="cell" data-hash="05-slides_cache/revealjs/fig_lm_plot_8b115887ffcd54bd775fb764788187b0">
+<div class="cell">
 <div class="cell-output-display">
+<div>
+<figure>
 <p><img data-src="05-slides_files/figure-revealjs/fig_lm_plot-1.png" width="960"></p>
+</figure>
+</div>
 </div>
 </div>
 </div>
 <div id="tabset-1-4">
-<div class="cell" data-hash="05-slides_cache/revealjs/figlm1_710cc3ff2f2bba4d2999cae0288f13f0">
+<div class="cell">
 <div class="cell-output-display">
+<div>
+<figure>
 <p><img data-src="05-slides_files/figure-revealjs/figlm1-1.png" width="960"></p>
+</figure>
+</div>
 </div>
 </div>
 </div>
 <div id="tabset-1-5">
-<div class="cell" data-hash="05-slides_cache/revealjs/figlm1code_0b19f5ef534410b6789f61881e33865b">
+<div class="cell">
 <div class="cell-output-display">
+<div>
+<figure>
 <p><img data-src="05-slides_files/figure-revealjs/figlm1code-1.png" width="960"></p>
+</figure>
+</div>
 </div>
 </div>
 </div>
@@ -1187,13 +594,12 @@ Coefficients:
 </div>
 </section></section>
 <section>
-<section id="fa-lightbulb-technichal-mechanics-of-linear-regression" class="title-slide slide level1 center" data-background-color="lightgrey">
+<section id="technichal-mechanics-of-linear-regression" class="title-slide slide level1 center" data-background-color="lightgrey">
 <h1><i class="fa-solid fa-lightbulb" aria-label="lightbulb"></i> Technichal: Mechanics of Linear Regression</h1>
 
 </section>
 <section id="how-did-lm-choose-beta_0-and-beta_1" class="slide level2 smaller">
 <h2>How did <code>lm()</code> choose <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span></h2>
-<div>
 <ul>
 <li><p>P: By minimizing the sum of squared errors, in procedure called Ordinary Least Squares (OLS) regression</p></li>
 <li><p>Q: Ok, that’s not really that helpful…</p>
@@ -1204,7 +610,6 @@ Coefficients:
 </ul></li>
 </ul>
 <p>P: Good questions!</p>
-</div>
 </section>
 <section id="whats-an-error-whats-a-residual" class="slide level2 smaller">
 <h2>What’s an error? What’s a residual</h2>
@@ -1219,14 +624,12 @@ y_i = f(x_i) + \epsilon_i
 </section>
 <section id="why-are-we-squaring-and-summing-epsilon" class="slide level2 smaller">
 <h2>Why are we squaring and summing <span class="math inline">\(\epsilon\)</span></h2>
-<div>
 <p>There are more mathy reasons for this, but at intuitive level, the Sum of Squared Residuals (SSR)</p>
 <ul>
 <li><p>Squaring <span class="math inline">\(\epsilon\)</span> treats positive and negative residuals equally.</p></li>
 <li><p>Summing produces single value summarizing our models overall performance.</p></li>
 </ul>
 <p>There are other criteria we could use (e.g.&nbsp;minimizing the sum of absolute errors), but SSR has some nice properties</p>
-</div>
 </section>
 <section id="how-do-we-minimize-sum-epsilon2" class="slide level2 smaller">
 <h2>How do we minimize <span class="math inline">\(\sum \epsilon^2\)</span></h2>
@@ -1241,7 +644,7 @@ y_i = f(x_i) + \epsilon_i
 <p><span class="math display">\[ \beta_1 = \frac{Cov(x,y)}{Var(x)}\]</span></p>
 </section></section>
 <section>
-<section id="fa-lightbulb-theoretical-ols-provides-a-linear-estimate-of-cef-eyx" class="title-slide slide level1 inverse center">
+<section id="theoretical-ols-provides-a-linear-estimate-of-cef-eyx" class="title-slide slide level1 inverse center">
 <h1><i class="fa-solid fa-lightbulb" aria-label="lightbulb"></i> Theoretical: OLS provides a linear estimate of CEF: E[Y|X]</h1>
 
 </section>
@@ -1283,7 +686,6 @@ E[ (Y - g(Y))^2] \geq E[(Y - E[Y|X])^2]
 <ul id="tabset-2" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-2-1">Concept</a></li><li><a href="#tabset-2-2">CEF</a></li><li><a href="#tabset-2-3">OLS</a></li></ul>
 <div class="tab-content">
 <div id="tabset-2-1">
-<div>
 <ul>
 <li>We can then show (in a different class) that linear regression provides the best linear predictor of the CEF
 <ul>
@@ -1293,18 +695,25 @@ E[ (Y - g(Y))^2] \geq E[(Y - E[Y|X])^2]
 <li>Furthermore, when the CEF is linear, it’s equal exactly to OLS regression</li>
 </ul>
 </div>
-</div>
 <div id="tabset-2-2">
-<div class="cell" data-hash="05-slides_cache/revealjs/cef1code_452ea0b69ab8ca0cb06cacdfe424ee66">
+<div class="cell">
 <div class="cell-output-display">
+<div>
+<figure>
 <p><img data-src="05-slides_files/figure-revealjs/cef1code-1.png" width="960"></p>
+</figure>
+</div>
 </div>
 </div>
 </div>
 <div id="tabset-2-3">
-<div class="cell" data-hash="05-slides_cache/revealjs/cef2code_6185ff57f0e2ce6e61eeaaf57975bcfd">
+<div class="cell">
 <div class="cell-output-display">
+<div>
+<figure>
 <p><img data-src="05-slides_files/figure-revealjs/cef2code-1.png" width="960"></p>
+</figure>
+</div>
 </div>
 </div>
 </div>
@@ -1313,7 +722,6 @@ E[ (Y - g(Y))^2] \geq E[(Y - E[Y|X])^2]
 </section>
 <section id="what-you-need-to-know-about-regression" class="slide level2 smaller">
 <h2>What you need to know about Regression</h2>
-<div>
 <ul>
 <li><strong>Conceptual</strong>
 <ul>
@@ -1329,14 +737,12 @@ y_i = \beta_0 + \beta_1x_i + \epsilon_i
 <li>We estimate linear models in R using the <code>lm()</code> function</li>
 </ul></li>
 </ul>
-<div class="cell" data-hash="05-slides_cache/revealjs/ols_6192376b49d12ece04501bbe25676bd3">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a><span class="fu">lm</span>(y <span class="sc">~</span> x, <span class="at">data =</span> df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a></a><span class="fu">lm</span>(y <span class="sc">~</span> x, <span class="at">data =</span> df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="what-you-need-to-know-about-regression-1" class="slide level2 smaller">
 <h2>What you need to know about Regression</h2>
-<div>
 <ul>
 <li><em>Technical/Definitional</em>
 <ul>
@@ -1350,429 +756,9 @@ y_i = \beta_0 + \beta_1x_i + \epsilon_i
 <li>Linear regression provides a <strong>linear</strong> estimate of the conditional expectation function (CEF): <span class="math inline">\(E[Y|X]\)</span></li>
 </ul></li>
 </ul>
-</div>
 </section></section>
 <section>
-<section id="fa-lightbulb-difference-in-differences" class="title-slide slide level1 inverse center">
-<h1><i class="fa-solid fa-lightbulb" aria-label="lightbulb"></i> Difference-in-Differences</h1>
-
-</section>
-<section id="motivating-example-what-causes-cholera" class="slide level2 smaller" data-background-image="https://www.finebooksmagazine.com/sites/default/files/styles/gallery_item/public/media-images/2020-11/map-lead-4.jpg?h=2ded5a3f&amp;itok=Mn-K5rQc," data-background-opacity=".3">
-<h2>Motivating Example: What causes Cholera?</h2>
-<ul>
-<li class="fragment"><p>In the 1800s, cholera was thought to be transmitted through the air.</p></li>
-<li class="fragment"><p>John Snow (the physician, not the snack), to explore the origins eventunally concluding that cholera was transmitted through living organisms in water.</p></li>
-<li class="fragment"><p>Leveraged a <strong>natural experiment</strong> in which one water company in London moved its pipes further upstream (reducing contamination for Lambeth), while other companies kept their pumps serving Southwark and Vauxhall in the same location.</p></li>
-</ul>
-</section>
-<section id="notation" class="slide level2 smaller">
-<h2>Notation</h2>
-<p>Let’s adopt a little notation to help us think about the logic of Snow’s design:</p>
-<ul>
-<li class="fragment"><p><span class="math inline">\(D\)</span>: treatment indicator, 1 for treated neighborhoods (Lambeth), 0 for control neighborhoods (Southwark and Vauxhall)</p></li>
-<li class="fragment"><p><span class="math inline">\(T\)</span>: period indicator, 1 if post treatment (1854), 0 if pre-treatment (1849).</p></li>
-<li class="fragment"><p><span class="math inline">\(Y_{di}(t)\)</span> the potential outcome of unit <span class="math inline">\(i\)</span></p>
-<ul>
-<li class="fragment"><p><span class="math inline">\(Y_{1i}(t)\)</span> the potential outcome of unit <span class="math inline">\(i\)</span> when treated between the two periods</p></li>
-<li class="fragment"><p><span class="math inline">\(Y_{0i}(t)\)</span> the potential outcome of unit <span class="math inline">\(i\)</span> when control between the two periods</p></li>
-</ul></li>
-</ul>
-</section>
-<section id="causal-effects" class="slide level2 smaller">
-<h2>Causal Effects</h2>
-<p>The individual causal effect for unit i at time t is:</p>
-<p><span class="math display">\[\tau_{it} = Y_{1i}(t) − Y_{0i}(t)\]</span></p>
-<p>What we observe is</p>
-<p><span class="math display">\[Y_i(t) = Y_{0i}(t)\cdot(1 − D_i(t)) + Y_{1i}(t)\cdot D_i(t)\]</span></p>
-<p><span class="math inline">\(D\)</span> only equals 1, when <span class="math inline">\(T\)</span> equals 1, so we never observe <span class="math inline">\(Y_0i(1)\)</span> for the treated units.</p>
-<p>In words, we don’t know what Lambeth’s outcome would have been in the second period, had they not been treated.</p>
-</section>
-<section id="average-treatment-on-treated" class="slide level2 smaller">
-<h2>Average Treatment on Treated</h2>
-<p>Our goal is to estimate the average effect of treatment on treated (ATT):</p>
-<p><span class="math display">\[\tau_{ATT} = E[Y_{1i}(1) -  Y_{0i}(1)|D=1]\]</span></p>
-<p>That is, what would have happened in Lambeth, had their water company not moved their pipes</p>
-</section>
-<section id="average-treatment-on-treated-1" class="slide level2 smaller">
-<h2>Average Treatment on Treated</h2>
-<p>Our goal is to estimate the average effect of treatment on treated (ATT):</p>
-<p>We we can observe is:</p>
-<table>
-<colgroup>
-<col style="width: 25%">
-<col style="width: 50%">
-<col style="width: 25%">
-</colgroup>
-<thead>
-<tr class="header">
-<th></th>
-<th>Pre-Period (T=0)</th>
-<th>Post-Period (T=1)</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Treated <span class="math inline">\(D_{i}=1\)</span></td>
-<td><span class="math inline">\(E[Y_{0i}(0)\vert D_i = 1]\)</span></td>
-<td><span class="math inline">\(E[Y_{1i}(1)\vert D_i = 1]\)</span></td>
-</tr>
-<tr class="even">
-<td>Control <span class="math inline">\(D_i=0\)</span></td>
-<td><span class="math inline">\(E[Y_{0i}(0)\vert D_i = 0]\)</span></td>
-<td><span class="math inline">\(E[Y_{0i}(1)\vert D_i = 0]\)</span></td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="data" class="slide level2 smaller">
-<h2>Data</h2>
-<p>Because potential outcomes notation is abstract, let’s consider a modified description of the Snow’s cholera death data from <a href="https://mixtape.scunning.com/difference-in-differences.html" target="_blank">Scott Cunningham</a>:</p>
-<div class="cell" data-hash="05-slides_cache/revealjs/choleradat_1edc40de1f666c90a1f476fe85fbb1ea">
-<div class="cell-output-display">
-<table>
-<thead>
-<tr class="header">
-<th style="text-align: left;">Company</th>
-<th style="text-align: right;">1849 (T=0)</th>
-<th style="text-align: right;">1854 (T=1)</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">Lambeth (D=1)</td>
-<td style="text-align: right;">85</td>
-<td style="text-align: right;">19</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Southwark and Vauxhall (D=0)</td>
-<td style="text-align: right;">135</td>
-<td style="text-align: right;">147</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</section>
-<section id="how-can-we-estimate-the-effect-of-moving-pumps-upstream" class="slide level2 smaller">
-<h2>How can we estimate the effect of moving pumps upstream?</h2>
-<p>Recall, our goal is to estimate the effect of the the treatment on the treated:</p>
-<p><span class="math display">\[\tau_{ATT} = E[Y_{1i}(1) -  Y_{0i}(1)|D=1]\]</span></p>
-<p>Let’s conisder some strategies Snow could take to estimate this quantity:</p>
-</section>
-<section id="before-vs-after-comparisons" class="slide level2 smaller">
-<h2>Before vs after comparisons:</h2>
-<div>
-<ul>
-<li><p>Snow could have compared Labmeth in 1854 <span class="math inline">\((E[Y_i(1)|D_i = 1] = 19)\)</span> to Lambeth in 1849 <span class="math inline">\((E[Y_i(0)|D_i = 1]=85)\)</span>, and claimed that moving the pumps upstream led to <strong>66 fewer cholera deaths.</strong></p></li>
-<li><p>Assumes Lambeth’s pre-treatment outcomes in 1849 are a good proxy for what its outcomes would have been in 1954 if the pumps hadn’t moved <span class="math inline">\((E[Y_{0i}(1)|D_i = 1])\)</span>.</p></li>
-<li><p>A skeptic might argue that Lambeth in 1849 <span class="math inline">\(\neq\)</span> Lambeth in 1854</p></li>
-</ul>
-<div class="cell" data-hash="05-slides_cache/revealjs/unnamed-chunk-2_a62bca60098bd3d4b465530b8164863a">
-<div class="cell-output-display">
-<table class="table" data-quarto-postprocess="true" style="margin-left: auto; margin-right: auto;">
-<thead>
-<tr class="header">
-<th style="text-align: left;" data-quarto-table-cell-role="th">Company</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">1849 (T=0)</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">1854 (T=1)</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left; font-weight: bold; color: blue !important;">Lambeth (D=1)</td>
-<td style="text-align: right; font-weight: bold; color: blue !important;">85</td>
-<td style="text-align: right; font-weight: bold; color: blue !important;">19</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Southwark and Vauxhall (D=0)</td>
-<td style="text-align: right;">135</td>
-<td style="text-align: right;">147</td>
-</tr>
-</tbody>
-</table>
-
-
-</div>
-</div>
-</div>
-</section>
-<section id="treatment-control-comparisons-in-the-post-period." class="slide level2 smaller">
-<h2>Treatment-Control comparisons in the Post Period.</h2>
-<div>
-<ul>
-<li><p>Snow could have compared outcomes between Lambeth and S&amp;V in 1954 (<span class="math inline">\(E[Yi(1)|Di = 1] − E[Yi(1)|Di = 0]\)</span>), concluding that the change in pump locations led to <strong>128 fewer deaths.</strong></p></li>
-<li><p>Here the assumption is that the outcomes in S&amp;V and in 1854 provide a good proxy for what would have happened in Lambeth in 1954 had the pumps not been moved <span class="math inline">\((E[Y_{0i}(1)|D_i = 1])\)</span></p></li>
-<li><p>Again, our skeptic could argue Lambeth <span class="math inline">\(\neq\)</span> S&amp;V</p></li>
-</ul>
-<div class="cell" data-hash="05-slides_cache/revealjs/unnamed-chunk-3_6c050f02fcec86b56bda9439883da7c0">
-<div class="cell-output-display">
-<table class="table" data-quarto-postprocess="true" style="margin-left: auto; margin-right: auto;">
-<thead>
-<tr class="header">
-<th style="text-align: left;" data-quarto-table-cell-role="th">Company</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">1849 (T=0)</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">1854 (T=1)</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">Lambeth (D=1)</td>
-<td style="text-align: right;">85</td>
-<td style="text-align: right; font-weight: bold; color: red !important;">19</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Southwark and Vauxhall (D=0)</td>
-<td style="text-align: right;">135</td>
-<td style="text-align: right; font-weight: bold; color: red !important;">147</td>
-</tr>
-</tbody>
-</table>
-
-
-</div>
-</div>
-</div>
-</section>
-<section id="difference-in-differences" class="slide level2 smaller">
-<h2>Difference in Differences</h2>
-<div>
-<p>To address these concerns, Snow employed what we now call a <span class="blue">difference-in-differences</span> design,</p>
-<p>There are two, equivalent ways to view this design.</p>
-<p><span class="math display">\[\underbrace{\{E[Y_{i}(1)|D_{i} = 1] − E[Y_{i}(1)|D_{i} = 0]\}}_{\text{1. Treat-Control |Post }}− \overbrace{\{E[Y_{i}(0)|D_{i} = 1] − E[Y_{i}(0)|D_{i}=0 ]}^{\text{Treated-Control|Pre}}\]</span></p>
-<ul>
-<li><p>Difference 1: Average change between Treated and Control in Post Period</p></li>
-<li><p>Difference 2: Average change between Treated and Control in Pre Period</p></li>
-</ul>
-</div>
-</section>
-<section id="difference-in-differences-1" class="slide level2 smaller">
-<h2>Difference in Differences</h2>
-<div>
-<p><span class="math display">\[\underbrace{\{E[Y_{i}(1)|D_{i} = 1] − E[Y_{i}(1)|D_{i} = 0]\}}_{\text{1. Treat-Control |Post }}− \overbrace{\{E[Y_{i}(0)|D_{i} = 1] − E[Y_{i}(0)|D_{i}=0 ]}^{\text{Treated-Control|Pre}}\]</span> Is equivalent to:</p>
-<p><span class="math display">\[\underbrace{\{E[Y_{i}(1)|D_{i} = 1] − E[Y_{i}(0)|D_{i} = 1]\}}_{\text{Post - Pre |Treated }}− \overbrace{\{E[Y_{i}(1)|D_{i} = 0] − E[Y_{i}(0)|D_{i}=0 ]}^{\text{Post-Pre|Control}}\]</span></p>
-<ul>
-<li>Difference 1: Average change between Treated over time</li>
-<li>Difference 2: Average change between Control over time</li>
-</ul>
-</div>
-</section>
-<section id="difference-in-differences-2" class="slide level2 smaller">
-<h2>Difference in Differences</h2>
-<p>You’ll see the DiD design represented both ways, but they produce the same result:</p>
-<p><span class="math display">\[
-\tau_{ATT} = (19-147) - (85-135) = -78
-\]</span></p>
-<p><span class="math display">\[
-\tau_{ATT} = (19-85) - (147-135) = -78
-\]</span></p>
-</section>
-<section id="identifying-assumption-of-a-difference-in-differences-design" class="slide level2 smaller">
-<h2>Identifying Assumption of a Difference in Differences Design</h2>
-<p>The key assumption in this design is what’s known as the parallel trends assumption: <span class="math inline">\(E[Y_{0i}(1) − Y_{0i}(0)|D_i = 1] = E[Y_{0i}(1) − Y_{0i}(0)|D_i = 0]\)</span></p>
-<ul>
-<li class="fragment">In words: If Lambeth hadn’t moved its pumps, it would have followed a similar path as S&amp;V</li>
-</ul>
-</section>
-<section id="parralel-trends" class="slide level2">
-<h2>Parralel Trends</h2>
-
-<img data-src="05-slides_files/figure-revealjs/paralleltrends-1.png" width="960" class="r-stretch"></section>
-<section id="using-linear-regression-to-estimate-a-difference-in-difference" class="slide level2 smaller">
-<h2>Using linear regression to estimate a Difference in Difference</h2>
-<div class="panel-tabset">
-<ul id="tabset-3" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-3-1">Concept</a></li><li><a href="#tabset-3-2">Code</a></li><li><a href="#tabset-3-3">Data</a></li><li><a href="#tabset-3-4">DiD</a></li><li><a href="#tabset-3-5">Figure</a></li></ul>
-<div class="tab-content">
-<div id="tabset-3-1">
-<ul>
-<li class="fragment">Recall that linear regression provides a…
-<ul>
-<li class="fragment">linear estimate of the conditional expectation function</li>
-</ul></li>
-<li class="fragment">In the canonincal pre-post, treated and control DiD, <span class="math inline">\(\beta_3\)</span> from the following linear regression will give us the ATT:</li>
-</ul>
-<div class="fragment">
-<p><span class="math display">\[
-y = \beta_0 + \beta_1 Post + \beta_2 Treated + \underbrace{\beta_3Post\times Treated}_{\tau_{ATT}}
-\]</span></p>
-</div>
-</div>
-<div id="tabset-3-2">
-<div class="cell" data-hash="05-slides_cache/revealjs/didcode_ef513b460b742eb54d3bbea2a18d6535">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a>cholera_df <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb28-2"><a href="#cb28-2"></a>  <span class="at">Period =</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="st">"Pre"</span>,<span class="st">"Pre"</span>,<span class="st">"Post"</span>,<span class="st">"Post"</span>),</span>
-<span id="cb28-3"><a href="#cb28-3"></a>                  <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Pre"</span>,<span class="st">"Post"</span>)),</span>
-<span id="cb28-4"><a href="#cb28-4"></a>  <span class="at">Year =</span> <span class="fu">c</span>(<span class="dv">1849</span>,<span class="dv">1849</span>, <span class="dv">1854</span>,<span class="dv">1854</span>),</span>
-<span id="cb28-5"><a href="#cb28-5"></a>  <span class="at">Treated =</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="st">"Control"</span>,<span class="st">"Treated"</span>,<span class="st">"Control"</span>,<span class="st">"Treated"</span>)),</span>
-<span id="cb28-6"><a href="#cb28-6"></a>  <span class="at">Company =</span> <span class="fu">c</span>(<span class="st">"S&amp;V"</span>,<span class="st">"Lambeth"</span>,<span class="st">"S&amp;V"</span>,<span class="st">"Lambeth"</span>),</span>
-<span id="cb28-7"><a href="#cb28-7"></a>  <span class="at">Deaths =</span> <span class="fu">c</span>(<span class="dv">135</span>,<span class="dv">85</span>,<span class="dv">147</span>,<span class="dv">19</span>)</span>
-<span id="cb28-8"><a href="#cb28-8"></a>)</span>
-<span id="cb28-9"><a href="#cb28-9"></a></span>
-<span id="cb28-10"><a href="#cb28-10"></a>m_did <span class="ot">&lt;-</span> <span class="fu">lm</span>(Deaths<span class="sc">~</span>Period <span class="sc">+</span> Treated <span class="sc">+</span> Period<span class="sc">:</span>Treated, cholera_df)</span>
-<span id="cb28-11"><a href="#cb28-11"></a></span>
-<span id="cb28-12"><a href="#cb28-12"></a>m_did</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-Call:
-lm(formula = Deaths ~ Period + Treated + Period:Treated, data = cholera_df)
-
-Coefficients:
-              (Intercept)                 PeriodPost  
-                      135                         12  
-           TreatedTreated  PeriodPost:TreatedTreated  
-                      -50                        -78  </code></pre>
-</div>
-</div>
-</div>
-<div id="tabset-3-3">
-<div class="cell" data-hash="05-slides_cache/revealjs/diddata_4ebc5dbff10eb5ca3cff7ea0879bf2f2">
-<div class="cell-output-display">
-
-<div class="datatables html-widget html-fill-item" id="htmlwidget-3324fdf3e9c87c659172" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-3324fdf3e9c87c659172">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4"],["Pre","Pre","Post","Post"],[1849,1849,1854,1854],["Control","Treated","Control","Treated"],["S&amp;V","Lambeth","S&amp;V","Lambeth"],[135,85,147,19]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Period<\/th>\n      <th>Year<\/th>\n      <th>Treated<\/th>\n      <th>Company<\/th>\n      <th>Deaths<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[2,5]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"Period","targets":1},{"name":"Year","targets":2},{"name":"Treated","targets":3},{"name":"Company","targets":4},{"name":"Deaths","targets":5}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
-</div>
-</div>
-</div>
-<div id="tabset-3-4">
-<div class="cell" data-hash="05-slides_cache/revealjs/didtab_2263b6cafc3f72b094207847a7188167">
-
-<table class="texreg" style="margin: 10px auto;border-collapse: collapse;border-spacing: 0px;caption-side: bottom;color: #000000;border-top: 2px solid #000000;">
-<caption>
-Statistical models
-</caption>
-<thead>
-<tr>
-<th style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
-</th>
-<th style="padding-left: 5px;padding-right: 5px;">
-Model 1
-</th>
-</tr>
-</thead>
-<tbody>
-<tr style="border-top: 1px solid #000000;">
-<td style="padding-left: 5px;padding-right: 5px;">
-(Intercept)
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-135.00
-</td>
-</tr>
-<tr>
-<td style="padding-left: 5px;padding-right: 5px;">
-Post (1854)
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-12.00
-</td>
-</tr>
-<tr>
-<td style="padding-left: 5px;padding-right: 5px;">
-Treated (Lambeth)
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
--50.00
-</td>
-</tr>
-<tr>
-<td style="padding-left: 5px;padding-right: 5px;">
-Post X Treated (DID)
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
--78.00
-</td>
-</tr>
-<tr style="border-top: 1px solid #000000;">
-<td style="padding-left: 5px;padding-right: 5px;">
-R<sup>2</sup>
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-1.00
-</td>
-</tr>
-<tr>
-<td style="padding-left: 5px;padding-right: 5px;">
-Adj. R<sup>2</sup>
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
-</td>
-</tr>
-<tr style="border-bottom: 2px solid #000000;">
-<td style="padding-left: 5px;padding-right: 5px;">
-Num. obs.
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-4
-</td>
-</tr>
-</tbody>
-<tfoot>
-<tr>
-<td style="font-size: 0.8em;" colspan="2">
-<sup>***</sup>p &lt; 0.001; <sup>**</sup>p &lt; 0.01; <sup>*</sup>p &lt; 0.05
-</td>
-</tr>
-</tfoot>
-
-</table>
-</div>
-</div>
-<div id="tabset-3-5">
-<div class="cell" data-hash="05-slides_cache/revealjs/didfig_9983e4d33a937d2da037328edcab8a0e">
-<div class="cell-output-display">
-<p><img data-src="05-slides_files/figure-revealjs/didfig-1.png" width="960"></p>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="summary" class="slide level2 smaller">
-<h2>Summary</h2>
-<ul>
-<li class="fragment"><p>A Difference in Differences (DiD, or diff-in-diff) design combines a pre-post comparison, with a treated and control comparison</p>
-<ul>
-<li class="fragment"><p>Taking the pre-post difference removes any fixed differences between the units</p></li>
-<li class="fragment"><p>Then taking the difference between treated and control differences removes any common differences over time</p></li>
-</ul></li>
-<li class="fragment"><p>The key identifying assumption of a DiD design is the “assumption of parallel trends”</p>
-<ul>
-<li class="fragment">Absent treatment, treated and control groups would see the same changes over time.</li>
-<li class="fragment">Hard to prove, possible to test</li>
-</ul></li>
-</ul>
-</section>
-<section id="extensions-and-limitations" class="slide level2 smaller">
-<h2>Extensions and limitations</h2>
-<ul>
-<li class="fragment">Diff-in-Diff easy to estimate with linear regression</li>
-<li class="fragment">Generalizes to multiple periods and treatment interventions
-<ul>
-<li class="fragment">More pre-treatment periods allow you assess “parallel trends” assumption</li>
-</ul></li>
-<li class="fragment">Alternative methods
-<ul>
-<li class="fragment">Synthetic control</li>
-<li class="fragment">Event Study Designs</li>
-</ul></li>
-<li class="fragment">What if you have multiple treatments or treatments that come and go?
-<ul>
-<li class="fragment">Panel Matching</li>
-<li class="fragment">Generalized Synthetic control</li>
-</ul></li>
-</ul>
-</section>
-<section id="applications" class="slide level2 smaller">
-<h2>Applications</h2>
-<ul>
-<li class="fragment"><p><a href="https://www.nber.org/papers/w4509" target="_blank">Card and Krueger (1994)</a> What effect did raising the minimum wage in NJ have on employment</p></li>
-<li class="fragment"><p><a href="https://onlinelibrary.wiley.com/doi/full/10.1111/ajps.12116?casa_token=_ceCu4SwzTEAAAAA%3AP9aeaZpT_Zh1VdWKXx_tEmzaJTtMJ1n0eG7EaYlvJZYN000re33cfMAI2O8N8htFJjOsln2GyVeQql4" target="_blank">Abadie, Diamond, &amp; Hainmueller (2014)</a> What effect did German Unification have on economic development in West Germany</p></li>
-<li class="fragment"><p><a href="https://www.cambridge.org/core/journals/american-political-science-review/article/impact-of-recentralization-on-public-services-a-differenceindifferences-analysis-of-the-abolition-of-elected-councils-in-vietnam/3477854BAAFE152DC93C594169D64F58" target="_blank">Malesky, Nguyen and Tran (2014)</a> How does decentralization influence public services?</p></li>
-</ul>
-</section></section>
-<section>
-<section id="fa-code-previewing-the-lab" class="title-slide slide level1 center">
+<section id="previewing-the-lab" class="title-slide slide level1 center">
 <h1><i class="fa-solid fa-code" aria-label="code"></i>Previewing the Lab</h1>
 
 </section>
@@ -1784,8 +770,7 @@ Num. obs.
 <p><a href="https://www.nytimes.com/2021/09/27/briefing/covid-red-states-vaccinations.html" target="_blank">Red Covid</a> <em>New York Times</em>, 27 September, 2021</p>
 </div><div class="column" style="width:45%;">
 <p><img data-src="images/05_covid.png"> <a href="https://www.nytimes.com/2022/02/18/briefing/red-covid-partisan-deaths-vaccines.html" target="_blank">Red Covid, an Update</a> <em>New York Times</em>, 18 February, 2022</p>
-</div>
-</div>
+</div></div>
 </section>
 <section id="preview-of-the-lab" class="slide level2 smaller">
 <h2>Preview of the Lab</h2>
@@ -1826,11 +811,52 @@ Num. obs.
 <section id="q1-setup-your-workspace" class="slide level2">
 <h2>Q1: Setup your workspace</h2>
 <div class="panel-tabset">
-<ul id="tabset-4" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-4-1">Task</a></li></ul>
+<ul id="tabset-3" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-3-1">Task</a></li><li><a href="#tabset-3-2">Code</a></li></ul>
 <div class="tab-content">
-<div id="tabset-4-1">
+<div id="tabset-3-1">
 <p>Q1 asks you to setup your workspace</p>
 <p>This means <span class="blue">loading</span> and, if needed, <span class="blue">installing</span> the packages you will use</p>
+</div>
+<div id="tabset-3-2">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a></a>the_packages <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb26-2"><a></a>  <span class="do">## R Markdown</span></span>
+<span id="cb26-3"><a></a>  <span class="st">"kableExtra"</span>,<span class="st">"DT"</span>,<span class="st">"texreg"</span>,</span>
+<span id="cb26-4"><a></a>  <span class="do">## Tidyverse</span></span>
+<span id="cb26-5"><a></a>  <span class="st">"tidyverse"</span>, <span class="st">"lubridate"</span>, <span class="st">"forcats"</span>, <span class="st">"haven"</span>, <span class="st">"labelled"</span>,</span>
+<span id="cb26-6"><a></a>  <span class="do">## Extensions for ggplot</span></span>
+<span id="cb26-7"><a></a>  <span class="st">"ggmap"</span>,<span class="st">"ggrepel"</span>, <span class="st">"ggridges"</span>, <span class="st">"ggthemes"</span>, <span class="st">"ggpubr"</span>, </span>
+<span id="cb26-8"><a></a>  <span class="st">"GGally"</span>, <span class="st">"scales"</span>, <span class="st">"dagitty"</span>, <span class="st">"ggdag"</span>, <span class="st">"ggforce"</span>,</span>
+<span id="cb26-9"><a></a>  <span class="co"># Data </span></span>
+<span id="cb26-10"><a></a>  <span class="st">"COVID19"</span>,<span class="st">"maps"</span>,<span class="st">"mapdata"</span>,<span class="st">"qss"</span>,<span class="st">"tidycensus"</span>, <span class="st">"dataverse"</span>,</span>
+<span id="cb26-11"><a></a>  <span class="co"># Analysis</span></span>
+<span id="cb26-12"><a></a>  <span class="st">"DeclareDesign"</span>, <span class="st">"easystats"</span>, <span class="st">"zoo"</span></span>
+<span id="cb26-13"><a></a>)</span>
+<span id="cb26-14"><a></a></span>
+<span id="cb26-15"><a></a><span class="co"># Define function to load packages</span></span>
+<span id="cb26-16"><a></a>ipak <span class="ot">&lt;-</span> <span class="cf">function</span>(pkg){</span>
+<span id="cb26-17"><a></a>    new.pkg <span class="ot">&lt;-</span> pkg[<span class="sc">!</span>(pkg <span class="sc">%in%</span> <span class="fu">installed.packages</span>()[, <span class="st">"Package"</span>])]</span>
+<span id="cb26-18"><a></a>    <span class="cf">if</span> (<span class="fu">length</span>(new.pkg)) </span>
+<span id="cb26-19"><a></a>        <span class="fu">install.packages</span>(new.pkg, <span class="at">dependencies =</span> <span class="cn">TRUE</span>, <span class="at">repos =</span> <span class="st">"https://cloud.r-project.org"</span>)</span>
+<span id="cb26-20"><a></a>    <span class="fu">sapply</span>(pkg, require, <span class="at">character.only =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb26-21"><a></a>}</span>
+<span id="cb26-22"><a></a></span>
+<span id="cb26-23"><a></a><span class="fu">ipak</span>(the_packages)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   kableExtra            DT        texreg     tidyverse     lubridate 
+         TRUE          TRUE          TRUE          TRUE          TRUE 
+      forcats         haven      labelled         ggmap       ggrepel 
+         TRUE          TRUE          TRUE          TRUE          TRUE 
+     ggridges      ggthemes        ggpubr        GGally        scales 
+         TRUE          TRUE          TRUE         FALSE          TRUE 
+      dagitty         ggdag       ggforce       COVID19          maps 
+         TRUE          TRUE          TRUE          TRUE          TRUE 
+      mapdata           qss    tidycensus     dataverse DeclareDesign 
+         TRUE          TRUE          TRUE          TRUE          TRUE 
+    easystats           zoo 
+         TRUE          TRUE </code></pre>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -1846,34 +872,34 @@ Num. obs.
 <section id="q2.1-load-the-covid-19-data" class="slide level2 smaller">
 <h2>Q2.1 Load the Covid-19 Data</h2>
 <p>To load data on Covid-19 just run this</p>
-<div class="cell" data-hash="05-slides_cache/revealjs/covid_cc11f2d894d13cac06910e279c7b7482">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a><span class="fu">load</span>(<span class="fu">url</span>(<span class="st">"https://pols1600.paultesta.org/files/data/covid.rda"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a></a><span class="fu">load</span>(<span class="fu">url</span>(<span class="st">"https://josephessig-source.github.io/pols1600_site/files/data/covid.rda"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="q2.2-load-election-data" class="slide level2 smaller">
 <h2>Q2.2 Load Election Data</h2>
 <div class="panel-tabset">
-<ul id="tabset-5" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-5-1">Task</a></li><li><a href="#tabset-5-2">Code for Q2.2</a></li></ul>
+<ul id="tabset-4" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-4-1">Task</a></li><li><a href="#tabset-4-2">Code for Q2.2</a></li></ul>
 <div class="tab-content">
-<div id="tabset-5-1">
+<div id="tabset-4-1">
 <p>Q2.2. asks you to write code that will download data presidential elections from 1976 to 2020 from the MIT Election Lab’s dataverse</p>
 <ul>
 <li class="fragment">Once you’ve installed the <code>dataverse</code> package you should be able to do this:</li>
 </ul>
 </div>
-<div id="tabset-5-2">
-<div class="cell" data-hash="05-slides_cache/revealjs/pres_data_f250742120e5c9fd180b5f2c2d8a34d5">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a><span class="co"># Try this code first</span></span>
-<span id="cb31-2"><a href="#cb31-2"></a><span class="fu">Sys.setenv</span>(<span class="st">"DATAVERSE_SERVER"</span> <span class="ot">=</span> <span class="st">"dataverse.harvard.edu"</span>)</span>
-<span id="cb31-3"><a href="#cb31-3"></a></span>
-<span id="cb31-4"><a href="#cb31-4"></a>pres_df <span class="ot">&lt;-</span> dataverse<span class="sc">::</span><span class="fu">get_dataframe_by_name</span>(</span>
-<span id="cb31-5"><a href="#cb31-5"></a>  <span class="st">"1976-2020-president.tab"</span>,</span>
-<span id="cb31-6"><a href="#cb31-6"></a>  <span class="st">"doi:10.7910/DVN/42MVDX"</span></span>
-<span id="cb31-7"><a href="#cb31-7"></a>)</span>
-<span id="cb31-8"><a href="#cb31-8"></a></span>
-<span id="cb31-9"><a href="#cb31-9"></a><span class="co"># If the code above fails, comment out and uncomment the code below:</span></span>
-<span id="cb31-10"><a href="#cb31-10"></a></span>
-<span id="cb31-11"><a href="#cb31-11"></a><span class="co"># load(url("https://pols1600.paultesta.org/files/data/pres_df.rda"))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="tabset-4-2">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a></a><span class="co"># Try this code first</span></span>
+<span id="cb29-2"><a></a><span class="fu">Sys.setenv</span>(<span class="st">"DATAVERSE_SERVER"</span> <span class="ot">=</span> <span class="st">"dataverse.harvard.edu"</span>)</span>
+<span id="cb29-3"><a></a></span>
+<span id="cb29-4"><a></a>pres_df <span class="ot">&lt;-</span> dataverse<span class="sc">::</span><span class="fu">get_dataframe_by_name</span>(</span>
+<span id="cb29-5"><a></a>  <span class="st">"1976-2020-president.tab"</span>,</span>
+<span id="cb29-6"><a></a>  <span class="st">"doi:10.7910/DVN/42MVDX"</span></span>
+<span id="cb29-7"><a></a>)</span>
+<span id="cb29-8"><a></a></span>
+<span id="cb29-9"><a></a><span class="co"># If the code above fails, comment out and uncomment the code below:</span></span>
+<span id="cb29-10"><a></a></span>
+<span id="cb29-11"><a></a><span class="co"># load(url("https://josephessig-source.github.io/pols1600_site/files/data/pres_df.rda"))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -1894,85 +920,85 @@ Num. obs.
 <h2>Q3 Describe the structure of each dataset</h2>
 <p>Here’s some possible code you could use to get a quick <span class="blue">HLO</span> of each dataset:</p>
 <div class="panel-tabset">
-<ul id="tabset-6" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-6-1">HLO <code>covid</code></a></li><li><a href="#tabset-6-2">HLO <code>pres_df</code></a></li></ul>
+<ul id="tabset-5" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-5-1">HLO <code>covid</code></a></li><li><a href="#tabset-5-2">HLO <code>pres_df</code></a></li></ul>
 <div class="tab-content">
-<div id="tabset-6-1">
-<div class="cell" data-hash="05-slides_cache/revealjs/hlocovid_865d10e45037a25ae9f9cc91d31d220e">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a><span class="co"># check names in `covid`</span></span>
-<span id="cb32-2"><a href="#cb32-2"></a><span class="fu">names</span>(covid)</span>
-<span id="cb32-3"><a href="#cb32-3"></a></span>
-<span id="cb32-4"><a href="#cb32-4"></a><span class="co"># take a quick look values of each variable</span></span>
-<span id="cb32-5"><a href="#cb32-5"></a></span>
-<span id="cb32-6"><a href="#cb32-6"></a><span class="fu">glimpse</span>(covid)</span>
-<span id="cb32-7"><a href="#cb32-7"></a></span>
-<span id="cb32-8"><a href="#cb32-8"></a><span class="co"># Look at first few observations for:</span></span>
-<span id="cb32-9"><a href="#cb32-9"></a><span class="co"># date, administrative_area_level_2, </span></span>
-<span id="cb32-10"><a href="#cb32-10"></a></span>
-<span id="cb32-11"><a href="#cb32-11"></a>covid <span class="sc">%&gt;%</span> </span>
-<span id="cb32-12"><a href="#cb32-12"></a>  <span class="fu">select</span>(date, administrative_area_level_2) <span class="sc">%&gt;%</span></span>
-<span id="cb32-13"><a href="#cb32-13"></a>  <span class="fu">head</span>()</span>
-<span id="cb32-14"><a href="#cb32-14"></a></span>
-<span id="cb32-15"><a href="#cb32-15"></a><span class="co"># Summarize data to get a better sense of the unit of observastion</span></span>
-<span id="cb32-16"><a href="#cb32-16"></a></span>
-<span id="cb32-17"><a href="#cb32-17"></a>covid <span class="sc">%&gt;%</span> </span>
-<span id="cb32-18"><a href="#cb32-18"></a>  <span class="fu">group_by</span>(administrative_area_level_2) <span class="sc">%&gt;%</span></span>
-<span id="cb32-19"><a href="#cb32-19"></a>  <span class="fu">summarise</span>(</span>
-<span id="cb32-20"><a href="#cb32-20"></a>    <span class="at">n =</span> <span class="fu">n</span>(), <span class="co"># Number of observations for each state</span></span>
-<span id="cb32-21"><a href="#cb32-21"></a>    <span class="at">start_date =</span> <span class="fu">min</span>(date, <span class="at">na.rm =</span> T),</span>
-<span id="cb32-22"><a href="#cb32-22"></a>    <span class="at">end_date =</span> <span class="fu">max</span>(date, <span class="at">na.rm=</span>T)</span>
-<span id="cb32-23"><a href="#cb32-23"></a>  ) <span class="ot">-&gt;</span> hlo_covid_df</span>
-<span id="cb32-24"><a href="#cb32-24"></a></span>
-<span id="cb32-25"><a href="#cb32-25"></a>hlo_covid_df</span>
-<span id="cb32-26"><a href="#cb32-26"></a></span>
-<span id="cb32-27"><a href="#cb32-27"></a></span>
-<span id="cb32-28"><a href="#cb32-28"></a><span class="co"># How many unique values of date and state are their:</span></span>
-<span id="cb32-29"><a href="#cb32-29"></a></span>
-<span id="cb32-30"><a href="#cb32-30"></a>n_dates <span class="ot">&lt;-</span> <span class="fu">length</span>(<span class="fu">unique</span>(covid<span class="sc">$</span>date))</span>
-<span id="cb32-31"><a href="#cb32-31"></a>n_states <span class="ot">&lt;-</span> <span class="fu">length</span>(<span class="fu">unique</span>(covid<span class="sc">$</span>administrative_area_level_2))</span>
-<span id="cb32-32"><a href="#cb32-32"></a>n_dates</span>
-<span id="cb32-33"><a href="#cb32-33"></a>n_states</span>
-<span id="cb32-34"><a href="#cb32-34"></a></span>
-<span id="cb32-35"><a href="#cb32-35"></a><span class="co"># If we had observations for every state on every date then the number of rows </span></span>
-<span id="cb32-36"><a href="#cb32-36"></a><span class="co"># in the data </span></span>
-<span id="cb32-37"><a href="#cb32-37"></a><span class="fu">dim</span>(covid)[<span class="dv">1</span>]</span>
-<span id="cb32-38"><a href="#cb32-38"></a><span class="co"># Should equal</span></span>
-<span id="cb32-39"><a href="#cb32-39"></a><span class="fu">dim</span>(covid)[<span class="dv">1</span>] <span class="sc">==</span> n_dates <span class="sc">*</span> n_states</span>
-<span id="cb32-40"><a href="#cb32-40"></a></span>
-<span id="cb32-41"><a href="#cb32-41"></a><span class="co"># This is what economists would call an unbalanced panel</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="tabset-5-1">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a></a><span class="co"># check names in `covid`</span></span>
+<span id="cb30-2"><a></a><span class="fu">names</span>(covid)</span>
+<span id="cb30-3"><a></a></span>
+<span id="cb30-4"><a></a><span class="co"># take a quick look values of each variable</span></span>
+<span id="cb30-5"><a></a></span>
+<span id="cb30-6"><a></a><span class="fu">glimpse</span>(covid)</span>
+<span id="cb30-7"><a></a></span>
+<span id="cb30-8"><a></a><span class="co"># Look at first few observations for:</span></span>
+<span id="cb30-9"><a></a><span class="co"># date, administrative_area_level_2, </span></span>
+<span id="cb30-10"><a></a></span>
+<span id="cb30-11"><a></a>covid <span class="sc">%&gt;%</span> </span>
+<span id="cb30-12"><a></a>  <span class="fu">select</span>(date, administrative_area_level_2) <span class="sc">%&gt;%</span></span>
+<span id="cb30-13"><a></a>  <span class="fu">head</span>()</span>
+<span id="cb30-14"><a></a></span>
+<span id="cb30-15"><a></a><span class="co"># Summarize data to get a better sense of the unit of observastion</span></span>
+<span id="cb30-16"><a></a></span>
+<span id="cb30-17"><a></a>covid <span class="sc">%&gt;%</span> </span>
+<span id="cb30-18"><a></a>  <span class="fu">group_by</span>(administrative_area_level_2) <span class="sc">%&gt;%</span></span>
+<span id="cb30-19"><a></a>  <span class="fu">summarise</span>(</span>
+<span id="cb30-20"><a></a>    <span class="at">n =</span> <span class="fu">n</span>(), <span class="co"># Number of observations for each state</span></span>
+<span id="cb30-21"><a></a>    <span class="at">start_date =</span> <span class="fu">min</span>(date, <span class="at">na.rm =</span> T),</span>
+<span id="cb30-22"><a></a>    <span class="at">end_date =</span> <span class="fu">max</span>(date, <span class="at">na.rm=</span>T)</span>
+<span id="cb30-23"><a></a>  ) <span class="ot">-&gt;</span> hlo_covid_df</span>
+<span id="cb30-24"><a></a></span>
+<span id="cb30-25"><a></a>hlo_covid_df</span>
+<span id="cb30-26"><a></a></span>
+<span id="cb30-27"><a></a></span>
+<span id="cb30-28"><a></a><span class="co"># How many unique values of date and state are their:</span></span>
+<span id="cb30-29"><a></a></span>
+<span id="cb30-30"><a></a>n_dates <span class="ot">&lt;-</span> <span class="fu">length</span>(<span class="fu">unique</span>(covid<span class="sc">$</span>date))</span>
+<span id="cb30-31"><a></a>n_states <span class="ot">&lt;-</span> <span class="fu">length</span>(<span class="fu">unique</span>(covid<span class="sc">$</span>administrative_area_level_2))</span>
+<span id="cb30-32"><a></a>n_dates</span>
+<span id="cb30-33"><a></a>n_states</span>
+<span id="cb30-34"><a></a></span>
+<span id="cb30-35"><a></a><span class="co"># If we had observations for every state on every date then the number of rows </span></span>
+<span id="cb30-36"><a></a><span class="co"># in the data </span></span>
+<span id="cb30-37"><a></a><span class="fu">dim</span>(covid)[<span class="dv">1</span>]</span>
+<span id="cb30-38"><a></a><span class="co"># Should equal</span></span>
+<span id="cb30-39"><a></a><span class="fu">dim</span>(covid)[<span class="dv">1</span>] <span class="sc">==</span> n_dates <span class="sc">*</span> n_states</span>
+<span id="cb30-40"><a></a></span>
+<span id="cb30-41"><a></a><span class="co"># This is what economists would call an unbalanced panel</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
-<div id="tabset-6-2">
-<div class="cell" data-hash="05-slides_cache/revealjs/hlopresdf_001072669030114c56d798819f15d4fe">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a><span class="co"># check names in `pres_df`</span></span>
-<span id="cb33-2"><a href="#cb33-2"></a><span class="fu">names</span>(pres_df)</span>
-<span id="cb33-3"><a href="#cb33-3"></a></span>
-<span id="cb33-4"><a href="#cb33-4"></a><span class="co"># take a quick look values of each variable</span></span>
-<span id="cb33-5"><a href="#cb33-5"></a></span>
-<span id="cb33-6"><a href="#cb33-6"></a><span class="fu">glimpse</span>(pres_df)</span>
-<span id="cb33-7"><a href="#cb33-7"></a></span>
-<span id="cb33-8"><a href="#cb33-8"></a><span class="co"># Unit of analysis is a year-state-candidate</span></span>
-<span id="cb33-9"><a href="#cb33-9"></a>pres_df <span class="sc">%&gt;%</span> </span>
-<span id="cb33-10"><a href="#cb33-10"></a>  <span class="fu">select</span>(year, state_po, candidate) <span class="sc">%&gt;%</span></span>
-<span id="cb33-11"><a href="#cb33-11"></a>  <span class="fu">head</span>()</span>
-<span id="cb33-12"><a href="#cb33-12"></a></span>
-<span id="cb33-13"><a href="#cb33-13"></a><span class="co"># How many states?</span></span>
-<span id="cb33-14"><a href="#cb33-14"></a><span class="fu">length</span>(<span class="fu">unique</span>(pres_df<span class="sc">$</span>state_po))</span>
-<span id="cb33-15"><a href="#cb33-15"></a></span>
-<span id="cb33-16"><a href="#cb33-16"></a></span>
-<span id="cb33-17"><a href="#cb33-17"></a></span>
-<span id="cb33-18"><a href="#cb33-18"></a><span class="co"># How many candidates and parties on the ballot in a given election year</span></span>
-<span id="cb33-19"><a href="#cb33-19"></a>pres_df <span class="sc">%&gt;%</span> </span>
-<span id="cb33-20"><a href="#cb33-20"></a>  <span class="fu">group_by</span>(year) <span class="sc">%&gt;%</span></span>
-<span id="cb33-21"><a href="#cb33-21"></a>  <span class="fu">summarise</span>(</span>
-<span id="cb33-22"><a href="#cb33-22"></a>    <span class="at">n_candidates =</span> <span class="fu">length</span>(<span class="fu">unique</span>(candidate)),</span>
-<span id="cb33-23"><a href="#cb33-23"></a>    <span class="co"># Look at both party_detailed and party_simplified</span></span>
-<span id="cb33-24"><a href="#cb33-24"></a>    <span class="at">n_parties_detailed =</span> <span class="fu">length</span>(<span class="fu">unique</span>(party_detailed)),</span>
-<span id="cb33-25"><a href="#cb33-25"></a>    <span class="at">n_parties_simplified =</span> <span class="fu">length</span>(<span class="fu">unique</span>(party_simplified))</span>
-<span id="cb33-26"><a href="#cb33-26"></a>  ) <span class="ot">-&gt;</span> hlo_pres_df</span>
-<span id="cb33-27"><a href="#cb33-27"></a>hlo_pres_df</span>
-<span id="cb33-28"><a href="#cb33-28"></a></span>
-<span id="cb33-29"><a href="#cb33-29"></a><span class="co"># Look at 2020</span></span>
-<span id="cb33-30"><a href="#cb33-30"></a><span class="co"># pres_df$candidate[pres_df$year == "2020"]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="tabset-5-2">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a></a><span class="co"># check names in `pres_df`</span></span>
+<span id="cb31-2"><a></a><span class="fu">names</span>(pres_df)</span>
+<span id="cb31-3"><a></a></span>
+<span id="cb31-4"><a></a><span class="co"># take a quick look values of each variable</span></span>
+<span id="cb31-5"><a></a></span>
+<span id="cb31-6"><a></a><span class="fu">glimpse</span>(pres_df)</span>
+<span id="cb31-7"><a></a></span>
+<span id="cb31-8"><a></a><span class="co"># Unit of analysis is a year-state-candidate</span></span>
+<span id="cb31-9"><a></a>pres_df <span class="sc">%&gt;%</span> </span>
+<span id="cb31-10"><a></a>  <span class="fu">select</span>(year, state_po, candidate) <span class="sc">%&gt;%</span></span>
+<span id="cb31-11"><a></a>  <span class="fu">head</span>()</span>
+<span id="cb31-12"><a></a></span>
+<span id="cb31-13"><a></a><span class="co"># How many states?</span></span>
+<span id="cb31-14"><a></a><span class="fu">length</span>(<span class="fu">unique</span>(pres_df<span class="sc">$</span>state_po))</span>
+<span id="cb31-15"><a></a></span>
+<span id="cb31-16"><a></a></span>
+<span id="cb31-17"><a></a></span>
+<span id="cb31-18"><a></a><span class="co"># How many candidates and parties on the ballot in a given election year</span></span>
+<span id="cb31-19"><a></a>pres_df <span class="sc">%&gt;%</span> </span>
+<span id="cb31-20"><a></a>  <span class="fu">group_by</span>(year) <span class="sc">%&gt;%</span></span>
+<span id="cb31-21"><a></a>  <span class="fu">summarise</span>(</span>
+<span id="cb31-22"><a></a>    <span class="at">n_candidates =</span> <span class="fu">length</span>(<span class="fu">unique</span>(candidate)),</span>
+<span id="cb31-23"><a></a>    <span class="co"># Look at both party_detailed and party_simplified</span></span>
+<span id="cb31-24"><a></a>    <span class="at">n_parties_detailed =</span> <span class="fu">length</span>(<span class="fu">unique</span>(party_detailed)),</span>
+<span id="cb31-25"><a></a>    <span class="at">n_parties_simplified =</span> <span class="fu">length</span>(<span class="fu">unique</span>(party_simplified))</span>
+<span id="cb31-26"><a></a>  ) <span class="ot">-&gt;</span> hlo_pres_df</span>
+<span id="cb31-27"><a></a>hlo_pres_df</span>
+<span id="cb31-28"><a></a></span>
+<span id="cb31-29"><a></a><span class="co"># Look at 2020</span></span>
+<span id="cb31-30"><a></a><span class="co"># pres_df$candidate[pres_df$year == "2020"]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -1990,90 +1016,90 @@ Num. obs.
 <section id="q4.1-recode-the-covid-19" class="slide level2 smaller">
 <h2>Q4.1 Recode the Covid-19</h2>
 <div class="panel-tabset">
-<ul id="tabset-7" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-7-1">Task</a></li><li><a href="#tabset-7-2">Code for Q4.1</a></li><li><a href="#tabset-7-3">Template Code for Q4.2</a></li></ul>
+<ul id="tabset-6" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-6-1">Task</a></li><li><a href="#tabset-6-2">Code for Q4.1</a></li><li><a href="#tabset-6-3">Template Code for Q4.2</a></li></ul>
 <div class="tab-content">
-<div id="tabset-7-1">
+<div id="tabset-6-1">
 <p>This is the same code we’ve used before to create <code>covid_us</code> from <code>covid</code> with the addition of code to calculate a <span class="blue">rolling mean</span> or <span class="blue">moving average</span> of the number of new cases</p>
 </div>
-<div id="tabset-7-2">
-<div class="cell" data-hash="05-slides_cache/revealjs/covid19recode_3a7e22079856cee39cf10f9a37948553">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a><span class="co"># Create a vector containing of US territories</span></span>
-<span id="cb34-2"><a href="#cb34-2"></a>territories <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb34-3"><a href="#cb34-3"></a>  <span class="st">"American Samoa"</span>,</span>
-<span id="cb34-4"><a href="#cb34-4"></a>  <span class="st">"Guam"</span>,</span>
-<span id="cb34-5"><a href="#cb34-5"></a>  <span class="st">"Northern Mariana Islands"</span>,</span>
-<span id="cb34-6"><a href="#cb34-6"></a>  <span class="st">"Puerto Rico"</span>,</span>
-<span id="cb34-7"><a href="#cb34-7"></a>  <span class="st">"Virgin Islands"</span></span>
-<span id="cb34-8"><a href="#cb34-8"></a>  )</span>
-<span id="cb34-9"><a href="#cb34-9"></a></span>
-<span id="cb34-10"><a href="#cb34-10"></a><span class="co"># Filter out Territories and create state variable</span></span>
-<span id="cb34-11"><a href="#cb34-11"></a>covid_us <span class="ot">&lt;-</span> covid <span class="sc">%&gt;%</span></span>
-<span id="cb34-12"><a href="#cb34-12"></a>  <span class="fu">filter</span>(<span class="sc">!</span>administrative_area_level_2 <span class="sc">%in%</span> territories)<span class="sc">%&gt;%</span></span>
-<span id="cb34-13"><a href="#cb34-13"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb34-14"><a href="#cb34-14"></a>    <span class="at">state =</span> administrative_area_level_2</span>
-<span id="cb34-15"><a href="#cb34-15"></a>  )</span>
-<span id="cb34-16"><a href="#cb34-16"></a></span>
-<span id="cb34-17"><a href="#cb34-17"></a><span class="co"># Calculate new cases, new cases per capita, and 7-day average</span></span>
-<span id="cb34-18"><a href="#cb34-18"></a></span>
-<span id="cb34-19"><a href="#cb34-19"></a>covid_us <span class="sc">%&gt;%</span></span>
-<span id="cb34-20"><a href="#cb34-20"></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(state) <span class="sc">%&gt;%</span></span>
-<span id="cb34-21"><a href="#cb34-21"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb34-22"><a href="#cb34-22"></a>    <span class="at">new_cases =</span> confirmed <span class="sc">-</span> <span class="fu">lag</span>(confirmed),</span>
-<span id="cb34-23"><a href="#cb34-23"></a>    <span class="at">new_cases_pc =</span> new_cases <span class="sc">/</span> population <span class="sc">*</span><span class="dv">100000</span>,</span>
-<span id="cb34-24"><a href="#cb34-24"></a>    <span class="at">new_cases_pc_7da =</span> zoo<span class="sc">::</span><span class="fu">rollmean</span>(new_cases_pc, </span>
-<span id="cb34-25"><a href="#cb34-25"></a>                                     <span class="at">k =</span> <span class="dv">7</span>, </span>
-<span id="cb34-26"><a href="#cb34-26"></a>                                     <span class="at">align =</span> <span class="st">"right"</span>,</span>
-<span id="cb34-27"><a href="#cb34-27"></a>                                     <span class="at">fill=</span><span class="cn">NA</span> )</span>
-<span id="cb34-28"><a href="#cb34-28"></a>    ) <span class="ot">-&gt;</span> covid_us</span>
-<span id="cb34-29"><a href="#cb34-29"></a></span>
-<span id="cb34-30"><a href="#cb34-30"></a><span class="co"># Recode facemask policy</span></span>
-<span id="cb34-31"><a href="#cb34-31"></a></span>
-<span id="cb34-32"><a href="#cb34-32"></a>covid_us <span class="sc">%&gt;%</span></span>
-<span id="cb34-33"><a href="#cb34-33"></a><span class="fu">mutate</span>(</span>
-<span id="cb34-34"><a href="#cb34-34"></a>  <span class="co"># Recode facial_coverings to create face_masks</span></span>
-<span id="cb34-35"><a href="#cb34-35"></a>    <span class="at">face_masks =</span> <span class="fu">case_when</span>(</span>
-<span id="cb34-36"><a href="#cb34-36"></a>      facial_coverings <span class="sc">==</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">"No policy"</span>,</span>
-<span id="cb34-37"><a href="#cb34-37"></a>      <span class="fu">abs</span>(facial_coverings) <span class="sc">==</span> <span class="dv">1</span> <span class="sc">~</span> <span class="st">"Recommended"</span>,</span>
-<span id="cb34-38"><a href="#cb34-38"></a>      <span class="fu">abs</span>(facial_coverings) <span class="sc">==</span> <span class="dv">2</span> <span class="sc">~</span> <span class="st">"Some requirements"</span>,</span>
-<span id="cb34-39"><a href="#cb34-39"></a>      <span class="fu">abs</span>(facial_coverings) <span class="sc">==</span> <span class="dv">3</span> <span class="sc">~</span> <span class="st">"Required shared places"</span>,</span>
-<span id="cb34-40"><a href="#cb34-40"></a>      <span class="fu">abs</span>(facial_coverings) <span class="sc">==</span> <span class="dv">4</span> <span class="sc">~</span> <span class="st">"Required all times"</span>,</span>
-<span id="cb34-41"><a href="#cb34-41"></a>    ),</span>
-<span id="cb34-42"><a href="#cb34-42"></a>    <span class="co"># Turn face_masks into a factor with ordered policy levels</span></span>
-<span id="cb34-43"><a href="#cb34-43"></a>    <span class="at">face_masks =</span> <span class="fu">factor</span>(face_masks,</span>
-<span id="cb34-44"><a href="#cb34-44"></a>      <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"No policy"</span>,<span class="st">"Recommended"</span>,</span>
-<span id="cb34-45"><a href="#cb34-45"></a>                 <span class="st">"Some requirements"</span>,</span>
-<span id="cb34-46"><a href="#cb34-46"></a>                 <span class="st">"Required shared places"</span>,</span>
-<span id="cb34-47"><a href="#cb34-47"></a>                 <span class="st">"Required all times"</span>)</span>
-<span id="cb34-48"><a href="#cb34-48"></a>    ) </span>
-<span id="cb34-49"><a href="#cb34-49"></a>    ) <span class="ot">-&gt;</span> covid_us</span>
-<span id="cb34-50"><a href="#cb34-50"></a></span>
-<span id="cb34-51"><a href="#cb34-51"></a><span class="co"># Create year-month and percent vaccinated variables</span></span>
-<span id="cb34-52"><a href="#cb34-52"></a></span>
-<span id="cb34-53"><a href="#cb34-53"></a>covid_us <span class="sc">%&gt;%</span></span>
-<span id="cb34-54"><a href="#cb34-54"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb34-55"><a href="#cb34-55"></a>    <span class="at">year =</span> <span class="fu">year</span>(date),</span>
-<span id="cb34-56"><a href="#cb34-56"></a>    <span class="at">month =</span> <span class="fu">month</span>(date),</span>
-<span id="cb34-57"><a href="#cb34-57"></a>    <span class="at">year_month =</span> <span class="fu">paste</span>(year, </span>
-<span id="cb34-58"><a href="#cb34-58"></a>                       <span class="fu">str_pad</span>(month, <span class="at">width =</span> <span class="dv">2</span>, <span class="at">pad=</span><span class="dv">0</span>), </span>
-<span id="cb34-59"><a href="#cb34-59"></a>                       <span class="at">sep =</span> <span class="st">"-"</span>),</span>
-<span id="cb34-60"><a href="#cb34-60"></a>    <span class="at">percent_vaccinated =</span> people_fully_vaccinated<span class="sc">/</span>population<span class="sc">*</span><span class="dv">100</span>  </span>
-<span id="cb34-61"><a href="#cb34-61"></a>    ) <span class="ot">-&gt;</span> covid_us</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="tabset-6-2">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a></a><span class="co"># Create a vector containing of US territories</span></span>
+<span id="cb32-2"><a></a>territories <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb32-3"><a></a>  <span class="st">"American Samoa"</span>,</span>
+<span id="cb32-4"><a></a>  <span class="st">"Guam"</span>,</span>
+<span id="cb32-5"><a></a>  <span class="st">"Northern Mariana Islands"</span>,</span>
+<span id="cb32-6"><a></a>  <span class="st">"Puerto Rico"</span>,</span>
+<span id="cb32-7"><a></a>  <span class="st">"Virgin Islands"</span></span>
+<span id="cb32-8"><a></a>  )</span>
+<span id="cb32-9"><a></a></span>
+<span id="cb32-10"><a></a><span class="co"># Filter out Territories and create state variable</span></span>
+<span id="cb32-11"><a></a>covid_us <span class="ot">&lt;-</span> covid <span class="sc">%&gt;%</span></span>
+<span id="cb32-12"><a></a>  <span class="fu">filter</span>(<span class="sc">!</span>administrative_area_level_2 <span class="sc">%in%</span> territories)<span class="sc">%&gt;%</span></span>
+<span id="cb32-13"><a></a>  <span class="fu">mutate</span>(</span>
+<span id="cb32-14"><a></a>    <span class="at">state =</span> administrative_area_level_2</span>
+<span id="cb32-15"><a></a>  )</span>
+<span id="cb32-16"><a></a></span>
+<span id="cb32-17"><a></a><span class="co"># Calculate new cases, new cases per capita, and 7-day average</span></span>
+<span id="cb32-18"><a></a></span>
+<span id="cb32-19"><a></a>covid_us <span class="sc">%&gt;%</span></span>
+<span id="cb32-20"><a></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(state) <span class="sc">%&gt;%</span></span>
+<span id="cb32-21"><a></a>  <span class="fu">mutate</span>(</span>
+<span id="cb32-22"><a></a>    <span class="at">new_cases =</span> confirmed <span class="sc">-</span> <span class="fu">lag</span>(confirmed),</span>
+<span id="cb32-23"><a></a>    <span class="at">new_cases_pc =</span> new_cases <span class="sc">/</span> population <span class="sc">*</span><span class="dv">100000</span>,</span>
+<span id="cb32-24"><a></a>    <span class="at">new_cases_pc_7da =</span> zoo<span class="sc">::</span><span class="fu">rollmean</span>(new_cases_pc, </span>
+<span id="cb32-25"><a></a>                                     <span class="at">k =</span> <span class="dv">7</span>, </span>
+<span id="cb32-26"><a></a>                                     <span class="at">align =</span> <span class="st">"right"</span>,</span>
+<span id="cb32-27"><a></a>                                     <span class="at">fill=</span><span class="cn">NA</span> )</span>
+<span id="cb32-28"><a></a>    ) <span class="ot">-&gt;</span> covid_us</span>
+<span id="cb32-29"><a></a></span>
+<span id="cb32-30"><a></a><span class="co"># Recode facemask policy</span></span>
+<span id="cb32-31"><a></a></span>
+<span id="cb32-32"><a></a>covid_us <span class="sc">%&gt;%</span></span>
+<span id="cb32-33"><a></a><span class="fu">mutate</span>(</span>
+<span id="cb32-34"><a></a>  <span class="co"># Recode facial_coverings to create face_masks</span></span>
+<span id="cb32-35"><a></a>    <span class="at">face_masks =</span> <span class="fu">case_when</span>(</span>
+<span id="cb32-36"><a></a>      facial_coverings <span class="sc">==</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">"No policy"</span>,</span>
+<span id="cb32-37"><a></a>      <span class="fu">abs</span>(facial_coverings) <span class="sc">==</span> <span class="dv">1</span> <span class="sc">~</span> <span class="st">"Recommended"</span>,</span>
+<span id="cb32-38"><a></a>      <span class="fu">abs</span>(facial_coverings) <span class="sc">==</span> <span class="dv">2</span> <span class="sc">~</span> <span class="st">"Some requirements"</span>,</span>
+<span id="cb32-39"><a></a>      <span class="fu">abs</span>(facial_coverings) <span class="sc">==</span> <span class="dv">3</span> <span class="sc">~</span> <span class="st">"Required shared places"</span>,</span>
+<span id="cb32-40"><a></a>      <span class="fu">abs</span>(facial_coverings) <span class="sc">==</span> <span class="dv">4</span> <span class="sc">~</span> <span class="st">"Required all times"</span>,</span>
+<span id="cb32-41"><a></a>    ),</span>
+<span id="cb32-42"><a></a>    <span class="co"># Turn face_masks into a factor with ordered policy levels</span></span>
+<span id="cb32-43"><a></a>    <span class="at">face_masks =</span> <span class="fu">factor</span>(face_masks,</span>
+<span id="cb32-44"><a></a>      <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"No policy"</span>,<span class="st">"Recommended"</span>,</span>
+<span id="cb32-45"><a></a>                 <span class="st">"Some requirements"</span>,</span>
+<span id="cb32-46"><a></a>                 <span class="st">"Required shared places"</span>,</span>
+<span id="cb32-47"><a></a>                 <span class="st">"Required all times"</span>)</span>
+<span id="cb32-48"><a></a>    ) </span>
+<span id="cb32-49"><a></a>    ) <span class="ot">-&gt;</span> covid_us</span>
+<span id="cb32-50"><a></a></span>
+<span id="cb32-51"><a></a><span class="co"># Create year-month and percent vaccinated variables</span></span>
+<span id="cb32-52"><a></a></span>
+<span id="cb32-53"><a></a>covid_us <span class="sc">%&gt;%</span></span>
+<span id="cb32-54"><a></a>  <span class="fu">mutate</span>(</span>
+<span id="cb32-55"><a></a>    <span class="at">year =</span> <span class="fu">year</span>(date),</span>
+<span id="cb32-56"><a></a>    <span class="at">month =</span> <span class="fu">month</span>(date),</span>
+<span id="cb32-57"><a></a>    <span class="at">year_month =</span> <span class="fu">paste</span>(year, </span>
+<span id="cb32-58"><a></a>                       <span class="fu">str_pad</span>(month, <span class="at">width =</span> <span class="dv">2</span>, <span class="at">pad=</span><span class="dv">0</span>), </span>
+<span id="cb32-59"><a></a>                       <span class="at">sep =</span> <span class="st">"-"</span>),</span>
+<span id="cb32-60"><a></a>    <span class="at">percent_vaccinated =</span> people_fully_vaccinated<span class="sc">/</span>population<span class="sc">*</span><span class="dv">100</span>  </span>
+<span id="cb32-61"><a></a>    ) <span class="ot">-&gt;</span> covid_us</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
-<div id="tabset-7-3">
-<div class="cell" data-hash="05-slides_cache/revealjs/unnamed-chunk-4_880447c066531c75b1a511d55ac6bad1">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1"></a><span class="co"># Calculate new cases, new cases per capita, and 7-day average</span></span>
-<span id="cb35-2"><a href="#cb35-2"></a></span>
-<span id="cb35-3"><a href="#cb35-3"></a>covid_us <span class="sc">%&gt;%</span></span>
-<span id="cb35-4"><a href="#cb35-4"></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(state) <span class="sc">%&gt;%</span></span>
-<span id="cb35-5"><a href="#cb35-5"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb35-6"><a href="#cb35-6"></a>    <span class="at">new_cases =</span> confirmed <span class="sc">-</span> <span class="fu">lag</span>(confirmed),</span>
-<span id="cb35-7"><a href="#cb35-7"></a>    <span class="at">new_cases_pc =</span> new_cases <span class="sc">/</span> population <span class="sc">*</span><span class="dv">100000</span>,</span>
-<span id="cb35-8"><a href="#cb35-8"></a>    <span class="at">new_cases_pc_7day =</span> zoo<span class="sc">::</span><span class="fu">rollmean</span>(new_cases_pc, </span>
-<span id="cb35-9"><a href="#cb35-9"></a>                                     <span class="at">k =</span> <span class="dv">7</span>, </span>
-<span id="cb35-10"><a href="#cb35-10"></a>                                     <span class="at">align =</span> <span class="st">"right"</span>,</span>
-<span id="cb35-11"><a href="#cb35-11"></a>                                     <span class="at">fill=</span><span class="cn">NA</span> )</span>
-<span id="cb35-12"><a href="#cb35-12"></a>    ) <span class="ot">-&gt;</span> covid_us</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="tabset-6-3">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a></a><span class="co"># Calculate new cases, new cases per capita, and 7-day average</span></span>
+<span id="cb33-2"><a></a></span>
+<span id="cb33-3"><a></a>covid_us <span class="sc">%&gt;%</span></span>
+<span id="cb33-4"><a></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(state) <span class="sc">%&gt;%</span></span>
+<span id="cb33-5"><a></a>  <span class="fu">mutate</span>(</span>
+<span id="cb33-6"><a></a>    <span class="at">new_cases =</span> confirmed <span class="sc">-</span> <span class="fu">lag</span>(confirmed),</span>
+<span id="cb33-7"><a></a>    <span class="at">new_cases_pc =</span> new_cases <span class="sc">/</span> population <span class="sc">*</span><span class="dv">100000</span>,</span>
+<span id="cb33-8"><a></a>    <span class="at">new_cases_pc_7day =</span> zoo<span class="sc">::</span><span class="fu">rollmean</span>(new_cases_pc, </span>
+<span id="cb33-9"><a></a>                                     <span class="at">k =</span> <span class="dv">7</span>, </span>
+<span id="cb33-10"><a></a>                                     <span class="at">align =</span> <span class="st">"right"</span>,</span>
+<span id="cb33-11"><a></a>                                     <span class="at">fill=</span><span class="cn">NA</span> )</span>
+<span id="cb33-12"><a></a>    ) <span class="ot">-&gt;</span> covid_us</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -2082,29 +1108,29 @@ Num. obs.
 <section id="q4.2-calculate-rolling-means-of-covid-deaths" class="slide level2 smaller">
 <h2>Q4.2 Calculate Rolling Means of Covid Deaths</h2>
 <div class="panel-tabset">
-<ul id="tabset-8" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-8-1">Task</a></li><li><a href="#tabset-8-2">Code for Q4.2</a></li></ul>
+<ul id="tabset-7" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-7-1">Task</a></li><li><a href="#tabset-7-2">Code for Q4.2</a></li></ul>
 <div class="tab-content">
-<div id="tabset-8-1">
+<div id="tabset-7-1">
 <p>Q4.2 asks you to create new measures of the 7-day and 14-day averages of new deaths from Covid-19 per 100,000 residents</p>
 <p>It encourages you to use the code <code>new_cases_pc_7da</code> as a template</p>
 <p>To build your coding skills, try writing this yourself, then comparing it to the code in the next tab:</p>
 </div>
-<div id="tabset-8-2">
-<div class="cell" data-hash="05-slides_cache/revealjs/unnamed-chunk-5_abadf61e1d6c806414cc193c596e414a">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a>covid_us <span class="sc">%&gt;%</span></span>
-<span id="cb36-2"><a href="#cb36-2"></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(state) <span class="sc">%&gt;%</span></span>
-<span id="cb36-3"><a href="#cb36-3"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb36-4"><a href="#cb36-4"></a>    <span class="at">new_deaths =</span> deaths <span class="sc">-</span> <span class="fu">lag</span>(deaths),</span>
-<span id="cb36-5"><a href="#cb36-5"></a>    <span class="at">new_deaths_pc =</span> new_deaths <span class="sc">/</span> population <span class="sc">*</span><span class="dv">100000</span>,</span>
-<span id="cb36-6"><a href="#cb36-6"></a>    <span class="at">new_deaths_pc_7day =</span> zoo<span class="sc">::</span><span class="fu">rollmean</span>(new_deaths_pc, </span>
-<span id="cb36-7"><a href="#cb36-7"></a>                                     <span class="at">k =</span> <span class="dv">7</span>, </span>
-<span id="cb36-8"><a href="#cb36-8"></a>                                     <span class="at">align =</span> <span class="st">"right"</span>,</span>
-<span id="cb36-9"><a href="#cb36-9"></a>                                     <span class="at">fill=</span><span class="cn">NA</span> ),</span>
-<span id="cb36-10"><a href="#cb36-10"></a>    <span class="at">new_deaths_pc_14day =</span> zoo<span class="sc">::</span><span class="fu">rollmean</span>(new_deaths_pc, </span>
-<span id="cb36-11"><a href="#cb36-11"></a>                                     <span class="at">k =</span> <span class="dv">14</span>, </span>
-<span id="cb36-12"><a href="#cb36-12"></a>                                     <span class="at">align =</span> <span class="st">"right"</span>,</span>
-<span id="cb36-13"><a href="#cb36-13"></a>                                     <span class="at">fill=</span><span class="cn">NA</span> )</span>
-<span id="cb36-14"><a href="#cb36-14"></a>    ) <span class="ot">-&gt;</span> covid_us</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="tabset-7-2">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a></a>covid_us <span class="sc">%&gt;%</span></span>
+<span id="cb34-2"><a></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(state) <span class="sc">%&gt;%</span></span>
+<span id="cb34-3"><a></a>  <span class="fu">mutate</span>(</span>
+<span id="cb34-4"><a></a>    <span class="at">new_deaths =</span> deaths <span class="sc">-</span> <span class="fu">lag</span>(deaths),</span>
+<span id="cb34-5"><a></a>    <span class="at">new_deaths_pc =</span> new_deaths <span class="sc">/</span> population <span class="sc">*</span><span class="dv">100000</span>,</span>
+<span id="cb34-6"><a></a>    <span class="at">new_deaths_pc_7day =</span> zoo<span class="sc">::</span><span class="fu">rollmean</span>(new_deaths_pc, </span>
+<span id="cb34-7"><a></a>                                     <span class="at">k =</span> <span class="dv">7</span>, </span>
+<span id="cb34-8"><a></a>                                     <span class="at">align =</span> <span class="st">"right"</span>,</span>
+<span id="cb34-9"><a></a>                                     <span class="at">fill=</span><span class="cn">NA</span> ),</span>
+<span id="cb34-10"><a></a>    <span class="at">new_deaths_pc_14day =</span> zoo<span class="sc">::</span><span class="fu">rollmean</span>(new_deaths_pc, </span>
+<span id="cb34-11"><a></a>                                     <span class="at">k =</span> <span class="dv">14</span>, </span>
+<span id="cb34-12"><a></a>                                     <span class="at">align =</span> <span class="st">"right"</span>,</span>
+<span id="cb34-13"><a></a>                                     <span class="at">fill=</span><span class="cn">NA</span> )</span>
+<span id="cb34-14"><a></a>    ) <span class="ot">-&gt;</span> covid_us</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -2121,10 +1147,10 @@ Num. obs.
 </section>
 <section id="look-at-the-output-of-zoorollmean" class="slide level2">
 <h2>Look at the output of <code>zoo::rollmean()</code></h2>
-<div class="cell" data-hash="05-slides_cache/revealjs/rollmean_ecfa8eafe1c53e30ef50f2c2aa3cb016">
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1"></a>covid_us <span class="sc">%&gt;%</span></span>
-<span id="cb37-2"><a href="#cb37-2"></a>  <span class="fu">filter</span>(date <span class="sc">&gt;</span> <span class="st">"2020-03-05"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb37-3"><a href="#cb37-3"></a>  <span class="fu">select</span>(date,new_cases_pc,new_cases_pc_7day)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a></a>covid_us <span class="sc">%&gt;%</span></span>
+<span id="cb35-2"><a></a>  <span class="fu">filter</span>(date <span class="sc">&gt;</span> <span class="st">"2020-03-05"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb35-3"><a></a>  <span class="fu">select</span>(date,new_cases_pc,new_cases_pc_7day)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 52,580 × 4
 # Groups:   state [51]
@@ -2148,33 +1174,37 @@ Num. obs.
 <h2>Comparing Daily Cases to Rolling Average</h2>
 <p>The following code illustrates how a 7-day rolling mean smooths (<code>new_cases_pc_7da</code>) over the <span class="blue"><em>noisiness</em></span> of the daily measure</p>
 <div class="panel-tabset">
-<ul id="tabset-9" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-9-1">Code</a></li><li><a href="#tabset-9-2">Figure</a></li></ul>
+<ul id="tabset-8" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-8-1">Code</a></li><li><a href="#tabset-8-2">Figure</a></li></ul>
 <div class="tab-content">
-<div id="tabset-9-1">
-<div class="cell" data-hash="05-slides_cache/revealjs/plotmean_1056752e5355e1504daffbb3f70a3f8e">
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1"></a>covid_us <span class="sc">%&gt;%</span></span>
-<span id="cb39-2"><a href="#cb39-2"></a>  <span class="fu">filter</span>(date <span class="sc">&gt;</span> <span class="st">"2020-03-05"</span>, </span>
-<span id="cb39-3"><a href="#cb39-3"></a>         state <span class="sc">==</span> <span class="st">"Minnesota"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb39-4"><a href="#cb39-4"></a>  <span class="fu">select</span>(date,</span>
-<span id="cb39-5"><a href="#cb39-5"></a>         new_cases_pc,</span>
-<span id="cb39-6"><a href="#cb39-6"></a>         new_cases_pc_7day)<span class="sc">%&gt;%</span></span>
-<span id="cb39-7"><a href="#cb39-7"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(date,new_cases_pc ))<span class="sc">+</span></span>
-<span id="cb39-8"><a href="#cb39-8"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">col=</span><span class="st">"Daily"</span>))<span class="sc">+</span></span>
-<span id="cb39-9"><a href="#cb39-9"></a>  <span class="co"># set y aesthetic for second line of rolling average</span></span>
-<span id="cb39-10"><a href="#cb39-10"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> new_cases_pc_7day,</span>
-<span id="cb39-11"><a href="#cb39-11"></a>                <span class="at">col =</span> <span class="st">"7-day average"</span>)</span>
-<span id="cb39-12"><a href="#cb39-12"></a>            ) <span class="sc">+</span></span>
-<span id="cb39-13"><a href="#cb39-13"></a>  <span class="fu">theme</span>(<span class="at">legend.position=</span><span class="st">"bottom"</span>)<span class="sc">+</span></span>
-<span id="cb39-14"><a href="#cb39-14"></a>    <span class="fu">labs</span>( <span class="at">col =</span> <span class="st">"Measure"</span>,</span>
-<span id="cb39-15"><a href="#cb39-15"></a>    <span class="at">y =</span> <span class="st">"New Cases Per 100k"</span>, <span class="at">x =</span> <span class="st">""</span>,</span>
-<span id="cb39-16"><a href="#cb39-16"></a>    <span class="at">title =</span> <span class="st">"Minnesota"</span></span>
-<span id="cb39-17"><a href="#cb39-17"></a>  ) <span class="ot">-&gt;</span> fig_covid_mn </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="tabset-8-1">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a></a>covid_us <span class="sc">%&gt;%</span></span>
+<span id="cb37-2"><a></a>  <span class="fu">filter</span>(date <span class="sc">&gt;</span> <span class="st">"2020-03-05"</span>, </span>
+<span id="cb37-3"><a></a>         state <span class="sc">==</span> <span class="st">"Minnesota"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb37-4"><a></a>  <span class="fu">select</span>(date,</span>
+<span id="cb37-5"><a></a>         new_cases_pc,</span>
+<span id="cb37-6"><a></a>         new_cases_pc_7day)<span class="sc">%&gt;%</span></span>
+<span id="cb37-7"><a></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(date,new_cases_pc ))<span class="sc">+</span></span>
+<span id="cb37-8"><a></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">col=</span><span class="st">"Daily"</span>))<span class="sc">+</span></span>
+<span id="cb37-9"><a></a>  <span class="co"># set y aesthetic for second line of rolling average</span></span>
+<span id="cb37-10"><a></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> new_cases_pc_7day,</span>
+<span id="cb37-11"><a></a>                <span class="at">col =</span> <span class="st">"7-day average"</span>)</span>
+<span id="cb37-12"><a></a>            ) <span class="sc">+</span></span>
+<span id="cb37-13"><a></a>  <span class="fu">theme</span>(<span class="at">legend.position=</span><span class="st">"bottom"</span>)<span class="sc">+</span></span>
+<span id="cb37-14"><a></a>    <span class="fu">labs</span>( <span class="at">col =</span> <span class="st">"Measure"</span>,</span>
+<span id="cb37-15"><a></a>    <span class="at">y =</span> <span class="st">"New Cases Per 100k"</span>, <span class="at">x =</span> <span class="st">""</span>,</span>
+<span id="cb37-16"><a></a>    <span class="at">title =</span> <span class="st">"Minnesota"</span></span>
+<span id="cb37-17"><a></a>  ) <span class="ot">-&gt;</span> fig_covid_mn </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
-<div id="tabset-9-2">
-<div class="cell" data-hash="05-slides_cache/revealjs/plotmean2_7576687414cefddfbe6c9d20b8430e1c">
+<div id="tabset-8-2">
+<div class="cell">
 <div class="cell-output-display">
+<div>
+<figure>
 <p><img data-src="05-slides_files/figure-revealjs/plotmean2-1.png" width="960"></p>
+</figure>
+</div>
 </div>
 </div>
 </div>
@@ -2184,37 +1214,37 @@ Num. obs.
 <section id="q4.3-recode-presidential-data" class="slide level2 smaller">
 <h2>Q4.3 Recode Presidential data</h2>
 <div class="panel-tabset">
-<ul id="tabset-10" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-10-1">Task</a></li><li><a href="#tabset-10-2">Code for Q4.3</a></li></ul>
+<ul id="tabset-9" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-9-1">Task</a></li><li><a href="#tabset-9-2">Code for Q4.3</a></li></ul>
 <div class="tab-content">
-<div id="tabset-10-1">
+<div id="tabset-9-1">
 <p>Q4.3 Gives you a long list of steps to recode, reshape, and filter <code>pres_df</code> to produce <code>pres_df2020</code></p>
 <p>Most of this is review but it can seem like a lot.</p>
 <p>Walk through the provided code and see if you can <span class="blue">map each conceptual step</span> in Q4.3 to its <span class="blue">implementation in the code</span></p>
 </div>
-<div id="tabset-10-2">
-<div class="cell" data-hash="05-slides_cache/revealjs/pres_wrangle_dc4c50d6a6c8cce47ae3d34653cd0bb7">
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1"></a>pres_df <span class="sc">%&gt;%</span></span>
-<span id="cb40-2"><a href="#cb40-2"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb40-3"><a href="#cb40-3"></a>    <span class="at">year_election =</span> year,</span>
-<span id="cb40-4"><a href="#cb40-4"></a>    <span class="at">state =</span> <span class="fu">str_to_title</span>(state),</span>
-<span id="cb40-5"><a href="#cb40-5"></a>    <span class="co"># Fix DC</span></span>
-<span id="cb40-6"><a href="#cb40-6"></a>    <span class="at">state =</span> <span class="fu">ifelse</span>(state <span class="sc">==</span> <span class="st">"District Of Columbia"</span>, <span class="st">"District of Columbia"</span>, state)</span>
-<span id="cb40-7"><a href="#cb40-7"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb40-8"><a href="#cb40-8"></a>  <span class="fu">filter</span>(party_simplified <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"DEMOCRAT"</span>,<span class="st">"REPUBLICAN"</span>))<span class="sc">%&gt;%</span></span>
-<span id="cb40-9"><a href="#cb40-9"></a>  <span class="fu">filter</span>(year <span class="sc">==</span> <span class="dv">2020</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb40-10"><a href="#cb40-10"></a>  <span class="fu">select</span>(state, state_po, year_election, party_simplified, candidatevotes, totalvotes</span>
-<span id="cb40-11"><a href="#cb40-11"></a>         ) <span class="sc">%&gt;%</span></span>
-<span id="cb40-12"><a href="#cb40-12"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> party_simplified,</span>
-<span id="cb40-13"><a href="#cb40-13"></a>              <span class="at">values_from =</span> candidatevotes) <span class="sc">%&gt;%</span></span>
-<span id="cb40-14"><a href="#cb40-14"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb40-15"><a href="#cb40-15"></a>    <span class="at">dem_voteshare =</span> DEMOCRAT<span class="sc">/</span>totalvotes <span class="sc">*</span><span class="dv">100</span>,</span>
-<span id="cb40-16"><a href="#cb40-16"></a>    <span class="at">rep_voteshare =</span> REPUBLICAN<span class="sc">/</span>totalvotes<span class="sc">*</span><span class="dv">100</span>,</span>
-<span id="cb40-17"><a href="#cb40-17"></a>    <span class="at">winner =</span> forcats<span class="sc">::</span><span class="fu">fct_rev</span>(<span class="fu">factor</span>(<span class="fu">ifelse</span>(rep_voteshare <span class="sc">&gt;</span> dem_voteshare,<span class="st">"Trump"</span>,<span class="st">"Biden"</span>)))</span>
-<span id="cb40-18"><a href="#cb40-18"></a>  ) <span class="ot">-&gt;</span> pres2020_df</span>
-<span id="cb40-19"><a href="#cb40-19"></a></span>
-<span id="cb40-20"><a href="#cb40-20"></a><span class="co"># Check Output:</span></span>
-<span id="cb40-21"><a href="#cb40-21"></a></span>
-<span id="cb40-22"><a href="#cb40-22"></a><span class="fu">glimpse</span>(pres2020_df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="tabset-9-2">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a></a>pres_df <span class="sc">%&gt;%</span></span>
+<span id="cb38-2"><a></a>  <span class="fu">mutate</span>(</span>
+<span id="cb38-3"><a></a>    <span class="at">year_election =</span> year,</span>
+<span id="cb38-4"><a></a>    <span class="at">state =</span> <span class="fu">str_to_title</span>(state),</span>
+<span id="cb38-5"><a></a>    <span class="co"># Fix DC</span></span>
+<span id="cb38-6"><a></a>    <span class="at">state =</span> <span class="fu">ifelse</span>(state <span class="sc">==</span> <span class="st">"District Of Columbia"</span>, <span class="st">"District of Columbia"</span>, state)</span>
+<span id="cb38-7"><a></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb38-8"><a></a>  <span class="fu">filter</span>(party_simplified <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"DEMOCRAT"</span>,<span class="st">"REPUBLICAN"</span>))<span class="sc">%&gt;%</span></span>
+<span id="cb38-9"><a></a>  <span class="fu">filter</span>(year <span class="sc">==</span> <span class="dv">2020</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb38-10"><a></a>  <span class="fu">select</span>(state, state_po, year_election, party_simplified, candidatevotes, totalvotes</span>
+<span id="cb38-11"><a></a>         ) <span class="sc">%&gt;%</span></span>
+<span id="cb38-12"><a></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> party_simplified,</span>
+<span id="cb38-13"><a></a>              <span class="at">values_from =</span> candidatevotes) <span class="sc">%&gt;%</span></span>
+<span id="cb38-14"><a></a>  <span class="fu">mutate</span>(</span>
+<span id="cb38-15"><a></a>    <span class="at">dem_voteshare =</span> DEMOCRAT<span class="sc">/</span>totalvotes <span class="sc">*</span><span class="dv">100</span>,</span>
+<span id="cb38-16"><a></a>    <span class="at">rep_voteshare =</span> REPUBLICAN<span class="sc">/</span>totalvotes<span class="sc">*</span><span class="dv">100</span>,</span>
+<span id="cb38-17"><a></a>    <span class="at">winner =</span> forcats<span class="sc">::</span><span class="fu">fct_rev</span>(<span class="fu">factor</span>(<span class="fu">ifelse</span>(rep_voteshare <span class="sc">&gt;</span> dem_voteshare,<span class="st">"Trump"</span>,<span class="st">"Biden"</span>)))</span>
+<span id="cb38-18"><a></a>  ) <span class="ot">-&gt;</span> pres2020_df</span>
+<span id="cb38-19"><a></a></span>
+<span id="cb38-20"><a></a><span class="co"># Check Output:</span></span>
+<span id="cb38-21"><a></a></span>
+<span id="cb38-22"><a></a><span class="fu">glimpse</span>(pres2020_df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 51
 Columns: 9
@@ -2236,26 +1266,26 @@ $ winner        &lt;fct&gt; Trump, Trump, Biden, Trump, Biden, Biden, Biden, Bid
 <section id="q5-merging-data" class="slide level2 smaller">
 <h2>Q5 merging data</h2>
 <div class="panel-tabset">
-<ul id="tabset-11" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-11-1">Task</a></li><li><a href="#tabset-11-2">Merge election data into Covid data</a></li></ul>
+<ul id="tabset-10" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-10-1">Task</a></li><li><a href="#tabset-10-2">Merge election data into Covid data</a></li></ul>
 <div class="tab-content">
-<div id="tabset-11-1">
+<div id="tabset-10-1">
 <p>Q5 asks you to merge the 2020 election data from <code>pres2020_df</code> into <code>covid_us</code> using the common <code>state</code> variable in each dataset using the function <code>left_join()</code></p>
 </div>
-<div id="tabset-11-2">
-<div class="cell" data-hash="05-slides_cache/revealjs/merge_pres_494746b6b037a1ab399f3ffb357fa7bf">
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1"></a><span class="fu">dim</span>(covid_us)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="tabset-10-2">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a></a><span class="fu">dim</span>(covid_us)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 53678    61</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1"></a><span class="fu">dim</span>(pres2020_df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a></a><span class="fu">dim</span>(pres2020_df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 51  9</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1"></a>covid_us <span class="ot">&lt;-</span> covid_us <span class="sc">%&gt;%</span> <span class="fu">left_join</span>(</span>
-<span id="cb46-2"><a href="#cb46-2"></a>  pres2020_df,</span>
-<span id="cb46-3"><a href="#cb46-3"></a>  <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"state"</span> <span class="ot">=</span> <span class="st">"state"</span>)</span>
-<span id="cb46-4"><a href="#cb46-4"></a>)</span>
-<span id="cb46-5"><a href="#cb46-5"></a><span class="fu">dim</span>(covid_us) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a></a>covid_us <span class="ot">&lt;-</span> covid_us <span class="sc">%&gt;%</span> <span class="fu">left_join</span>(</span>
+<span id="cb44-2"><a></a>  pres2020_df,</span>
+<span id="cb44-3"><a></a>  <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"state"</span> <span class="ot">=</span> <span class="st">"state"</span>)</span>
+<span id="cb44-4"><a></a>)</span>
+<span id="cb44-5"><a></a><span class="fu">dim</span>(covid_us) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 53678    69</code></pre>
 </div>
@@ -2267,9 +1297,9 @@ $ winner        &lt;fct&gt; Trump, Trump, Biden, Trump, Biden, Biden, Biden, Bid
 <section id="advice-for-merging" class="slide level2 smaller">
 <h2>Advice for merging</h2>
 <div class="panel-tabset">
-<ul id="tabset-12" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-12-1">Advice</a></li><li><a href="#tabset-12-2">Illustration</a></li></ul>
+<ul id="tabset-11" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-11-1">Advice</a></li><li><a href="#tabset-11-2">Illustration</a></li></ul>
 <div class="tab-content">
-<div id="tabset-12-1">
+<div id="tabset-11-1">
 <p>When merging datasets:</p>
 <ul>
 <li class="fragment">Check the matches in your joining variables
@@ -2283,62 +1313,62 @@ $ winner        &lt;fct&gt; Trump, Trump, Biden, Trump, Biden, Biden, Biden, Bid
 </ul></li>
 </ul>
 </div>
-<div id="tabset-12-2">
-<div class="cell" data-hash="05-slides_cache/revealjs/merge_check_4c58af2acf9fc0a2bbe303911bbf9041">
-<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1"></a><span class="co"># Should be 51 states and DC in each</span></span>
-<span id="cb48-2"><a href="#cb48-2"></a><span class="fu">sum</span>(<span class="fu">unique</span>(pres_df<span class="sc">$</span>state) <span class="sc">%in%</span> covid_us<span class="sc">$</span>state)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="tabset-11-2">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a></a><span class="co"># Should be 51 states and DC in each</span></span>
+<span id="cb46-2"><a></a><span class="fu">sum</span>(<span class="fu">unique</span>(pres_df<span class="sc">$</span>state) <span class="sc">%in%</span> covid_us<span class="sc">$</span>state)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1"></a><span class="co"># Look at each state variable</span></span>
-<span id="cb50-2"><a href="#cb50-2"></a><span class="do">## With [] index</span></span>
-<span id="cb50-3"><a href="#cb50-3"></a>pres_df<span class="sc">$</span>state[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a></a><span class="co"># Look at each state variable</span></span>
+<span id="cb48-2"><a></a><span class="do">## With [] index</span></span>
+<span id="cb48-3"><a></a>pres_df<span class="sc">$</span>state[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "ALABAMA" "ALABAMA" "ALABAMA" "ALABAMA" "ALABAMA"</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1"></a>covid_us<span class="sc">$</span>state[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a></a>covid_us<span class="sc">$</span>state[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Minnesota" "Minnesota" "Minnesota" "Minnesota" "Minnesota"</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1"></a><span class="co"># Matching is case sensitive </span></span>
-<span id="cb54-2"><a href="#cb54-2"></a></span>
-<span id="cb54-3"><a href="#cb54-3"></a><span class="co"># make pres_df$state title case</span></span>
-<span id="cb54-4"><a href="#cb54-4"></a></span>
-<span id="cb54-5"><a href="#cb54-5"></a><span class="do">## Base R:</span></span>
-<span id="cb54-6"><a href="#cb54-6"></a>pres_df<span class="sc">$</span>state <span class="ot">&lt;-</span> <span class="fu">str_to_title</span>(pres_df<span class="sc">$</span>state )</span>
-<span id="cb54-7"><a href="#cb54-7"></a><span class="do">## Tidy R:</span></span>
-<span id="cb54-8"><a href="#cb54-8"></a>pres_df <span class="sc">%&gt;%</span> </span>
-<span id="cb54-9"><a href="#cb54-9"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb54-10"><a href="#cb54-10"></a>    <span class="at">state =</span> <span class="fu">str_to_title</span>(state )</span>
-<span id="cb54-11"><a href="#cb54-11"></a>  ) <span class="ot">-&gt;</span> pres_df</span>
-<span id="cb54-12"><a href="#cb54-12"></a></span>
-<span id="cb54-13"><a href="#cb54-13"></a><span class="co"># Should be 51</span></span>
-<span id="cb54-14"><a href="#cb54-14"></a><span class="fu">sum</span>(<span class="fu">unique</span>(pres_df<span class="sc">$</span>state) <span class="sc">%in%</span> covid_us<span class="sc">$</span>state)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a></a><span class="co"># Matching is case sensitive </span></span>
+<span id="cb52-2"><a></a></span>
+<span id="cb52-3"><a></a><span class="co"># make pres_df$state title case</span></span>
+<span id="cb52-4"><a></a></span>
+<span id="cb52-5"><a></a><span class="do">## Base R:</span></span>
+<span id="cb52-6"><a></a>pres_df<span class="sc">$</span>state <span class="ot">&lt;-</span> <span class="fu">str_to_title</span>(pres_df<span class="sc">$</span>state )</span>
+<span id="cb52-7"><a></a><span class="do">## Tidy R:</span></span>
+<span id="cb52-8"><a></a>pres_df <span class="sc">%&gt;%</span> </span>
+<span id="cb52-9"><a></a>  <span class="fu">mutate</span>(</span>
+<span id="cb52-10"><a></a>    <span class="at">state =</span> <span class="fu">str_to_title</span>(state )</span>
+<span id="cb52-11"><a></a>  ) <span class="ot">-&gt;</span> pres_df</span>
+<span id="cb52-12"><a></a></span>
+<span id="cb52-13"><a></a><span class="co"># Should be 51</span></span>
+<span id="cb52-14"><a></a><span class="fu">sum</span>(<span class="fu">unique</span>(pres_df<span class="sc">$</span>state) <span class="sc">%in%</span> covid_us<span class="sc">$</span>state)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 50</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1"></a><span class="co"># Find the mismatch:</span></span>
-<span id="cb56-2"><a href="#cb56-2"></a><span class="fu">unique</span>(pres_df<span class="sc">$</span>state[<span class="sc">!</span>pres_df<span class="sc">$</span>state <span class="sc">%in%</span> covid_us<span class="sc">$</span>state])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a></a><span class="co"># Find the mismatch:</span></span>
+<span id="cb54-2"><a></a><span class="fu">unique</span>(pres_df<span class="sc">$</span>state[<span class="sc">!</span>pres_df<span class="sc">$</span>state <span class="sc">%in%</span> covid_us<span class="sc">$</span>state])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "District Of Columbia"</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1"></a><span class="co"># Two equivalent ways to fix this mismatch</span></span>
-<span id="cb58-2"><a href="#cb58-2"></a><span class="do">## Base R: Quick fix to change spelling of DC</span></span>
-<span id="cb58-3"><a href="#cb58-3"></a>pres_df<span class="sc">$</span>state[pres2020_df<span class="sc">$</span>state <span class="sc">==</span> <span class="st">"District Of Columbia"</span>] <span class="ot">&lt;-</span> <span class="st">"District of Columbia"</span></span>
-<span id="cb58-4"><a href="#cb58-4"></a></span>
-<span id="cb58-5"><a href="#cb58-5"></a><span class="do">## Tidy R: Quick fix to change spelling of DC</span></span>
-<span id="cb58-6"><a href="#cb58-6"></a></span>
-<span id="cb58-7"><a href="#cb58-7"></a>pres_df <span class="sc">%&gt;%</span> </span>
-<span id="cb58-8"><a href="#cb58-8"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb58-9"><a href="#cb58-9"></a>    <span class="at">state =</span> <span class="fu">ifelse</span>(<span class="at">test =</span> state <span class="sc">==</span> <span class="st">"District Of Columbia"</span>,</span>
-<span id="cb58-10"><a href="#cb58-10"></a>                   <span class="at">yes =</span> <span class="st">"District of Columbia"</span>,</span>
-<span id="cb58-11"><a href="#cb58-11"></a>                   <span class="at">no =</span> state</span>
-<span id="cb58-12"><a href="#cb58-12"></a>                   )</span>
-<span id="cb58-13"><a href="#cb58-13"></a>  ) <span class="ot">-&gt;</span> pres_df</span>
-<span id="cb58-14"><a href="#cb58-14"></a></span>
-<span id="cb58-15"><a href="#cb58-15"></a></span>
-<span id="cb58-16"><a href="#cb58-16"></a><span class="co"># Problem Solved</span></span>
-<span id="cb58-17"><a href="#cb58-17"></a><span class="fu">sum</span>(<span class="fu">unique</span>(pres2020_df<span class="sc">$</span>state) <span class="sc">%in%</span> covid_us<span class="sc">$</span>state)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a></a><span class="co"># Two equivalent ways to fix this mismatch</span></span>
+<span id="cb56-2"><a></a><span class="do">## Base R: Quick fix to change spelling of DC</span></span>
+<span id="cb56-3"><a></a>pres_df<span class="sc">$</span>state[pres2020_df<span class="sc">$</span>state <span class="sc">==</span> <span class="st">"District Of Columbia"</span>] <span class="ot">&lt;-</span> <span class="st">"District of Columbia"</span></span>
+<span id="cb56-4"><a></a></span>
+<span id="cb56-5"><a></a><span class="do">## Tidy R: Quick fix to change spelling of DC</span></span>
+<span id="cb56-6"><a></a></span>
+<span id="cb56-7"><a></a>pres_df <span class="sc">%&gt;%</span> </span>
+<span id="cb56-8"><a></a>  <span class="fu">mutate</span>(</span>
+<span id="cb56-9"><a></a>    <span class="at">state =</span> <span class="fu">ifelse</span>(<span class="at">test =</span> state <span class="sc">==</span> <span class="st">"District Of Columbia"</span>,</span>
+<span id="cb56-10"><a></a>                   <span class="at">yes =</span> <span class="st">"District of Columbia"</span>,</span>
+<span id="cb56-11"><a></a>                   <span class="at">no =</span> state</span>
+<span id="cb56-12"><a></a>                   )</span>
+<span id="cb56-13"><a></a>  ) <span class="ot">-&gt;</span> pres_df</span>
+<span id="cb56-14"><a></a></span>
+<span id="cb56-15"><a></a></span>
+<span id="cb56-16"><a></a><span class="co"># Problem Solved</span></span>
+<span id="cb56-17"><a></a><span class="fu">sum</span>(<span class="fu">unique</span>(pres2020_df<span class="sc">$</span>state) <span class="sc">%in%</span> covid_us<span class="sc">$</span>state)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 51</code></pre>
 </div>
@@ -2348,12 +1378,14 @@ $ winner        &lt;fct&gt; Trump, Trump, Biden, Trump, Biden, Biden, Biden, Bid
 </div>
 
 
-<img src="images/pols1600_hex.png" class="slide-logo r-stretch"><div class="footer footer-default">
-<p>POLS 1600</p>
-</div>
 </section></section>
     </div>
-  </div>
+  <div class="quarto-auto-generated-content" style="display: none;">
+<p><img src="images/pols1600_hex.png" class="slide-logo"></p>
+<div class="footer footer-default">
+<p>POLS 1600</p>
+</div>
+</div></div>
 
   <script>window.backupDefine = window.define; window.define = undefined;</script>
   <script src="../site_libs/revealjs/dist/reveal.js"></script>
@@ -2379,12 +1411,12 @@ $ winner        &lt;fct&gt; Trump, Trump, Biden, Trump, Biden, Biden, Biden, Bid
       Reveal.initialize({
 'controlsAuto': true,
 'previewLinksAuto': false,
-'smaller': false,
 'pdfSeparateFragments': false,
 'autoAnimateEasing': "ease",
 'autoAnimateDuration': 1,
 'autoAnimateUnmatched': true,
-'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'jumpToSlide': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"8\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
 'chalkboard': {"buttons":true},
 'smaller': false,
  
@@ -2566,189 +1598,248 @@ $ winner        &lt;fct&gt; Trump, Trump, Biden, Trump, Biden, Biden, Biden, Bid
       });
     </script>
     
+
     <script>
+
       // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+
       // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+
       // slide changes (different for each slide format).
+
       (function () {
+
         // dispatch for htmlwidgets
+
         function fireSlideEnter() {
+
           const event = window.document.createEvent("Event");
+
           event.initEvent("slideenter", true, true);
+
           window.document.dispatchEvent(event);
+
         }
+
+    
 
         function fireSlideChanged(previousSlide, currentSlide) {
+
           fireSlideEnter();
 
+    
+
           // dispatch for shiny
+
           if (window.jQuery) {
+
             if (previousSlide) {
+
               window.jQuery(previousSlide).trigger("hidden");
+
             }
+
             if (currentSlide) {
+
               window.jQuery(currentSlide).trigger("shown");
+
             }
+
           }
+
         }
+
+    
 
         // hookup for slidy
+
         if (window.w3c_slidy) {
+
           window.w3c_slidy.add_observer(function (slide_num) {
+
             // slide_num starts at position 1
+
             fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+
           });
+
         }
+
+    
 
       })();
+
     </script>
 
+    
+
     <script id="quarto-html-after-body" type="application/javascript">
-    window.document.addEventListener("DOMContentLoaded", function (event) {
-      const toggleBodyColorMode = (bsSheetEl) => {
-        const mode = bsSheetEl.getAttribute("data-mode");
-        const bodyEl = window.document.querySelector("body");
-        if (mode === "dark") {
-          bodyEl.classList.add("quarto-dark");
-          bodyEl.classList.remove("quarto-light");
-        } else {
-          bodyEl.classList.add("quarto-light");
-          bodyEl.classList.remove("quarto-dark");
-        }
-      }
-      const toggleBodyColorPrimary = () => {
-        const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
-        if (bsSheetEl) {
-          toggleBodyColorMode(bsSheetEl);
-        }
-      }
-      toggleBodyColorPrimary();  
-      const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
-      tabsets.forEach(function(tabset) {
-        const tabby = new Tabby('#' + tabset.id);
-      });
-      const isCodeAnnotation = (el) => {
-        for (const clz of el.classList) {
-          if (clz.startsWith('code-annotation-')) {                     
-            return true;
-          }
-        }
-        return false;
-      }
-      const clipboard = new window.ClipboardJS('.code-copy-button', {
-        text: function(trigger) {
-          const codeEl = trigger.previousElementSibling.cloneNode(true);
-          for (const childEl of codeEl.children) {
-            if (isCodeAnnotation(childEl)) {
-              childEl.remove();
+      window.document.addEventListener("DOMContentLoaded", function (event) {
+        const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+        tabsets.forEach(function(tabset) {
+          const tabby = new Tabby('#' + tabset.id);
+        });
+        const isCodeAnnotation = (el) => {
+          for (const clz of el.classList) {
+            if (clz.startsWith('code-annotation-')) {                     
+              return true;
             }
           }
-          return codeEl.innerText;
+          return false;
         }
-      });
-      clipboard.on('success', function(e) {
-        // button target
-        const button = e.trigger;
-        // don't keep focus
-        button.blur();
-        // flash "checked"
-        button.classList.add('code-copy-button-checked');
-        var currentTitle = button.getAttribute("title");
-        button.setAttribute("title", "Copied!");
-        let tooltip;
-        if (window.bootstrap) {
-          button.setAttribute("data-bs-toggle", "tooltip");
-          button.setAttribute("data-bs-placement", "left");
-          button.setAttribute("data-bs-title", "Copied!");
-          tooltip = new bootstrap.Tooltip(button, 
-            { trigger: "manual", 
-              customClass: "code-copy-button-tooltip",
-              offset: [0, -8]});
-          tooltip.show();    
-        }
-        setTimeout(function() {
-          if (tooltip) {
-            tooltip.hide();
-            button.removeAttribute("data-bs-title");
-            button.removeAttribute("data-bs-toggle");
-            button.removeAttribute("data-bs-placement");
+        const onCopySuccess = function(e) {
+          // button target
+          const button = e.trigger;
+          // don't keep focus
+          button.blur();
+          // flash "checked"
+          button.classList.add('code-copy-button-checked');
+          var currentTitle = button.getAttribute("title");
+          button.setAttribute("title", "Copied!");
+          let tooltip;
+          if (window.bootstrap) {
+            button.setAttribute("data-bs-toggle", "tooltip");
+            button.setAttribute("data-bs-placement", "left");
+            button.setAttribute("data-bs-title", "Copied!");
+            tooltip = new bootstrap.Tooltip(button, 
+              { trigger: "manual", 
+                customClass: "code-copy-button-tooltip",
+                offset: [0, -8]});
+            tooltip.show();    
           }
-          button.setAttribute("title", currentTitle);
-          button.classList.remove('code-copy-button-checked');
-        }, 1000);
-        // clear code selection
-        e.clearSelection();
-      });
-      function tippyHover(el, contentFn) {
-        const config = {
-          allowHTML: true,
-          content: contentFn,
-          maxWidth: 500,
-          delay: 100,
-          arrow: false,
-          appendTo: function(el) {
-              return el.closest('section.slide') || el.parentElement;
-          },
-          interactive: true,
-          interactiveBorder: 10,
-          theme: 'light-border',
-          placement: 'bottom-start'
-        };
-          config['offset'] = [0,0];
-          config['maxWidth'] = 700;
-        window.tippy(el, config); 
-      }
-      const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
-      for (var i=0; i<noterefs.length; i++) {
-        const ref = noterefs[i];
-        tippyHover(ref, function() {
-          // use id or data attribute instead here
-          let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
-          try { href = new URL(href).hash; } catch {}
-          const id = href.replace(/^#\/?/, "");
-          const note = window.document.getElementById(id);
-          return note.innerHTML;
-        });
-      }
-      const findCites = (el) => {
-        const parentEl = el.parentElement;
-        if (parentEl) {
-          const cites = parentEl.dataset.cites;
-          if (cites) {
-            return {
-              el,
-              cites: cites.split(' ')
-            };
-          } else {
-            return findCites(el.parentElement)
-          }
-        } else {
-          return undefined;
+          setTimeout(function() {
+            if (tooltip) {
+              tooltip.hide();
+              button.removeAttribute("data-bs-title");
+              button.removeAttribute("data-bs-toggle");
+              button.removeAttribute("data-bs-placement");
+            }
+            button.setAttribute("title", currentTitle);
+            button.classList.remove('code-copy-button-checked');
+          }, 1000);
+          // clear code selection
+          e.clearSelection();
         }
-      };
-      var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-      for (var i=0; i<bibliorefs.length; i++) {
-        const ref = bibliorefs[i];
-        const citeInfo = findCites(ref);
-        if (citeInfo) {
-          tippyHover(citeInfo.el, function() {
-            var popup = window.document.createElement('div');
-            citeInfo.cites.forEach(function(cite) {
-              var citeDiv = window.document.createElement('div');
-              citeDiv.classList.add('hanging-indent');
-              citeDiv.classList.add('csl-entry');
-              var biblioDiv = window.document.getElementById('ref-' + cite);
-              if (biblioDiv) {
-                citeDiv.innerHTML = biblioDiv.innerHTML;
+        const getTextToCopy = function(trigger) {
+            const codeEl = trigger.previousElementSibling.cloneNode(true);
+            for (const childEl of codeEl.children) {
+              if (isCodeAnnotation(childEl)) {
+                childEl.remove();
               }
-              popup.appendChild(citeDiv);
-            });
-            return popup.innerHTML;
+            }
+            return codeEl.innerText;
+        }
+        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+          text: getTextToCopy
+        });
+        clipboard.on('success', onCopySuccess);
+        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+            text: getTextToCopy,
+            container: window.document.getElementById('quarto-embedded-source-code-modal')
+          });
+          clipboardModal.on('success', onCopySuccess);
+        }
+          var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+          var mailtoRegex = new RegExp(/^mailto:/);
+            var filterRegex = new RegExp("https:\/\/josephessig-source\.github\.io\/pols1600_site\/");
+          var isInternal = (href) => {
+              return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+          }
+          // Inspect non-navigation links and adorn them if external
+         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          for (var i=0; i<links.length; i++) {
+            const link = links[i];
+            if (!isInternal(link.href)) {
+              // undo the damage that might have been done by quarto-nav.js in the case of
+              // links that we want to consider external
+              if (link.dataset.originalHref !== undefined) {
+                link.href = link.dataset.originalHref;
+              }
+            }
+          }
+        function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+          const config = {
+            allowHTML: true,
+            maxWidth: 500,
+            delay: 100,
+            arrow: false,
+            appendTo: function(el) {
+                return el.closest('section.slide') || el.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'light-border',
+            placement: 'bottom-start',
+          };
+          if (contentFn) {
+            config.content = contentFn;
+          }
+          if (onTriggerFn) {
+            config.onTrigger = onTriggerFn;
+          }
+          if (onUntriggerFn) {
+            config.onUntrigger = onUntriggerFn;
+          }
+            config['offset'] = [0,0];
+            config['maxWidth'] = 700;
+          window.tippy(el, config); 
+        }
+        const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+        for (var i=0; i<noterefs.length; i++) {
+          const ref = noterefs[i];
+          tippyHover(ref, function() {
+            // use id or data attribute instead here
+            let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+            try { href = new URL(href).hash; } catch {}
+            const id = href.replace(/^#\/?/, "");
+            const note = window.document.getElementById(id);
+            if (note) {
+              return note.innerHTML;
+            } else {
+              return "";
+            }
           });
         }
-      }
-    });
-    </script>
+        const findCites = (el) => {
+          const parentEl = el.parentElement;
+          if (parentEl) {
+            const cites = parentEl.dataset.cites;
+            if (cites) {
+              return {
+                el,
+                cites: cites.split(' ')
+              };
+            } else {
+              return findCites(el.parentElement)
+            }
+          } else {
+            return undefined;
+          }
+        };
+        var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+        for (var i=0; i<bibliorefs.length; i++) {
+          const ref = bibliorefs[i];
+          const citeInfo = findCites(ref);
+          if (citeInfo) {
+            tippyHover(citeInfo.el, function() {
+              var popup = window.document.createElement('div');
+              citeInfo.cites.forEach(function(cite) {
+                var citeDiv = window.document.createElement('div');
+                citeDiv.classList.add('hanging-indent');
+                citeDiv.classList.add('csl-entry');
+                var biblioDiv = window.document.getElementById('ref-' + cite);
+                if (biblioDiv) {
+                  citeDiv.innerHTML = biblioDiv.innerHTML;
+                }
+                popup.appendChild(citeDiv);
+              });
+              return popup.innerHTML;
+            });
+          }
+        }
+      });
+      </script>
     
 
 </body></html>

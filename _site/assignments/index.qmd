@@ -30,8 +30,8 @@ Upload output to Canvas by following Monday by 11:59 pm
 Finally, throughout the semester you will have periodic assignments to ensure that you're making progress on your final projects.
 
 - **Week 4: ** [Research Topics](a1.qmd)
-- **Week 6: ** Potential Data
-- **Week 8: ** Explortatory Analysis
+- **Week 6: ** [Potential Data](a2.qmd)
+- **Week 8: ** Exploratory Analysis
 - **Week 11:**  Draft
 - **Week 12:**  Presentations
 - **Week 13:**  Final Paper

@@ -102,6 +102,10 @@ ul.task-list li input[type="checkbox"] {
     <a class="nav-link active" href="../class/index.html" aria-current="page"> 
 <span class="menu-text">Class</span></a>
   </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../assignments/index.html"> 
+<span class="menu-text">Assignments</span></a>
+  </li>  
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
@@ -173,6 +177,18 @@ ul.task-list li input[type="checkbox"] {
   <div class="sidebar-item-container"> 
   <a href="../class/03-class.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">3: Causation – Experiments</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../class/04-class.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">4: Causation – Observational Studies</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../class/05-class.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">5: Bivariate Regression</span></a>
   </div>
 </li>
       </ul>
@@ -315,7 +331,7 @@ ul.task-list li input[type="checkbox"] {
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp('/' + window.location.host + '/');
+        var filterRegex = new RegExp("https:\/\/josephessig-source\.github\.io\/pols1600_site\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
