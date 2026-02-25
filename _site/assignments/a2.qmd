@@ -101,7 +101,7 @@ I don't expect you to have the final data you will use in for your analysis all 
 
 I do expect you to try and find at least some potential data set that might be useful. 
 
-It can be something we've worked with in class like the Covid-19 data or something you've downloaded from the web, pulled from the replication files of a published paper, or constructed yourself in a .csv file. See these slides [on loading data into R](https://josephessig-source.github.io/pols1600_site/loading-data-into-r){target="_blank"}. 
+It can be something we've worked with in class like the Covid-19 data or something you've downloaded from the web, pulled from the replication files of a published paper, or constructed yourself in a .csv file. See these slides [on loading data into R](https://josephessig-source.github.io/pols1600_site/slides/01-slides.html#/loading-data-into-r){target="_blank"}. 
 
 Similarly, I don't expect you to produce a full set of descriptive tables and figures, although you're welcome to do as much as you like. At a minimum, after you've successfully loaded the data into R, try to get a High Level Overview of the Data and calculate some simple summary statistics. 
 

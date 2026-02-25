@@ -52,7 +52,7 @@ Andrews House 310
 :::
 
 ::: g-col-4
-[{{< fa video size=3x >}}](#)
+[{{< fa video size=3x >}}](https://canvas.brown.edu/courses/1102109/external_tools/40432)
 
 ### Zoom
 :::

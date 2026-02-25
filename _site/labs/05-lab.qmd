@@ -66,8 +66,6 @@ You will work in your assigned groups. **Only one member of each group needs to 
 
 This lab **must** contain the names of the group members in attendance.
 
-If you are attending remotely, you will submit your labs individually.
-
 Your groups are [here](https://canvas.brown.edu/courses/1102109/groups)
 
 # Goals {.unnumbered}
