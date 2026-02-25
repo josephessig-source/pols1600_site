@@ -58,38 +58,25 @@ library(texreg)
 
 ## Class Plan
 
-- Announcements (20)
-  - [Assignment 1: Research Questions](https://pols1600.paultesta.org/assignments/a1) graded by Thursday, March 6
-  - [Assignment 2  Data:](https://pols1600.paultesta.org/assignments/a2) now due Sunday March 16
-  - [Assignment 3  Data:](https://pols1600.paultesta.org/assignments/a2) now due Sunday March 30 ? (Or should it be right before spring break?)
 - Review: Simple Linear Regression and Lab 5 (15-20 min)
-- Preview: Setup for Lab 6 (10-15 min)
 - Estimating and Interpreting Multiple Regression (25-30 min)
 - Difference-in-Differences (15-20 min)
-
-
-## Annoucements
+- Preview: Setup for Lab 6 (10-15 min)
 
 
 ## Assignment 2
 
-- Prompt posted on website [here]{https://pols1600.paultesta.org/assignments/a2}
+- Prompt posted on website [here](https://josephessig-source.github.io/pols1600_site/assignments/a2.html)
 
-- Uploaded to Canvas by [Sunday, March 16]{.blue}
+- Uploaded to Canvas by [Sunday, March 8]{.blue}
+
+- Let me know by Friday if you are having trouble getting all your group members on the same page, can extend. 
 
 - Revised Research Question
 
 - Implied Linear Model
 
 - Code to load possible data 
-
-## Feedback
-
-- Not a lot
-
-- So let's try to get those numbers up and will summarize the results of the [survey](https://brown.co1.qualtrics.com/jfe/form/SV_aVqL4lh92U7igGG){target="_blank"} next week
-
-
 
 ## Packages for today
 
@@ -105,7 +92,7 @@ the_packages <- c(
   "tidyverse", "lubridate", "forcats", "haven", "labelled",
   ## Extensions for ggplot
   "ggmap","ggrepel", "ggridges", "ggthemes", "ggpubr", 
-  "GGally", "scales", "dagitty", "ggdag", "ggforce",
+  "scales", "dagitty", "ggdag", "ggforce",
   # Data 
   "COVID19","maps","mapdata","qss","tidycensus", "dataverse", 
   # Analysis
@@ -119,7 +106,6 @@ lapply(the_packages, library, character.only = TRUE)
 ```
 
   
-
 # {{< fa magnifying-glass>}} Lab 5 & Simple Linear Regression {.inverse}
 
 ## Review: Key Concepts from the Lab
@@ -133,9 +119,9 @@ Let's pick up where we left off on Thursday. First we'll need to run some code t
 
 # ---- Load data ----
 ## Covid-19 Data
-load(url("https://pols1600.paultesta.org/files/data/covid.rda"))
+load(url("https://josephessig-source.github.io/pols1600_site/files/data/covid.rda"))
 ## Presidential Election Data
-load(url("https://pols1600.paultesta.org/files/data/pres_df.rda"))
+load(url("https://josephessig-source.github.io/pols1600_site/files/data/pres_df.rda"))
 
 # ---- Recode Covid Data ----
 territories <- c(
@@ -501,22 +487,24 @@ fig_q7cef +
   col = "blue",
   linetype = "dashed")+
   annotate("text",
-           label = expression(paste(beta[0]," = " )),
+           label = "beta[0] == ''",
+           parse=TRUE,
            x = 0, 
            y = coef(m2_lab)[1] + 0.075,
            hjust = "center",
            col = "blue"
            )+
     annotate("text",
-           label = expression(paste(beta[1]," = 0.29 - 0.34 = -0.05" )),
+           label = "beta[1] == '0.29 - 0.34 = -0.05'",
+           parse=TRUE,
            x = 0, 
            y = coef(m2_lab)[1] +coef(m2_lab)[2] - 0.05,
            hjust = "left",
            col = "blue"
            )+
   annotate("text",
-           label = expression(
-             paste(beta[0]," + ", beta[1], " = " )),
+           label = "beta[0] + beta[1] ==''",
+           parse=TRUE,
            x = 1, 
            y = coef(m2_lab)[1] + 0.05,
            hjust = "center",
@@ -677,265 +665,6 @@ fig_m5_lab_fetch
 - Finally Q10 asked you to consider some possible [alternative explanations]{.blue} or [omitted variables]{.blue} that might explain the [positive  relationship]{.blue}, between Republican Vote Share and Covid-19 deaths.
 
 - In this week's lab, we'll see how we can use [multiple regression]{.blue} to evaluate these claims.
-
-
-# {{< fa code >}}Previewing Lab 6
-
-## Red Covid
-
-The core thesis of Red Covid is something like the following:
-
-> Since Covid-19 vaccines became widely available to the general public in the spring of 2021, Republicans have been less likely to get the vaccine. Lower rates of vaccination among Republicans have in turn led to higher rates of death from Covid-19 in Red States compared to Blue States.
-
-## {.smaller}
-#### Testing Alternative Explanations of Red Covid 
-
-- A skeptic might argue that this relationship is [spurious]{.blue}. 
-
-- There are lots of ways that Red States differ from Blue States -- demographics, economics, geography, culture -- that might explain the differences in Covid-19 deaths.
-
-## {.smaller}
-#### Testing Alternative Explanations of Red Covid 
-
-- In Lab 6, we use multiple regression to try and [control for]{.blue} the following [alternative explanations]{.blue}:
-
-  - Differences in [median age]{.blue}
-  - Differences in [median income]{.blue}
-
-- To do this, we need to merge in some additional state level data from the census.
-
-## Loading data from the Census
-
-If you worked through the instructions [here]() and  installed `tidycensus` and a Census API key on your machine, you should be able to run the following:
-
-```{r}
-#| label: acs_data
-acs_df <- tidycensus::get_acs(geography = "state", 
-              variables = c(med_income = "B19013_001",
-                            med_age = "B01002_001"), 
-              year = 2019)
-```
-
-If not, no worries, just uncomment the code below:
-
-```{r}
-# Uncomment if get_acs() doesn't work:
-# load(url("https://pols1600.paultesta.org/files/data/acs_df.rda"))
-
-```
-
-## Tidy Census Data{.smaller}
-
-::: panel-tabset
-
-## Task
-
-`get_acs()` returns data whose [unit of analysis]{.blue} is roughly a [state-variable]{.blue}
-
-We need to [reshape]{.blue} `acs_df` using `pivot_wider()` so that the [unit of analysis]{.blue} is just a [state]{.blue}, and each column variable is a [column]{.blue}
-
-## {{< fa table >}}-Old
-
-```{r}
-acs_df
-```
-
-
-## {{< fa code >}}-Tidy
-```{r}
-#| label: acs_tidy
-acs_df %>%
-  mutate(
-    state = NAME,
-  ) %>%
-  select(state, variable, estimate) %>%
-  pivot_wider(names_from = variable,
-              values_from = estimate) -> acs_df
-```
-
-## {{< fa table >}}-New
-
-```{r}
-acs_df
-```
-
-:::
-
-## Merge Census data into Covid data{.smaller}
-
-::::: panel-tabset
-
-
-## Task
-
-::::{.nonincremental}
-
-Now we can [merge]{.blue} `acs_df` into `covid_us` using the `left_join()` function
-
-::: {.callout-note}
-- In the code, we'll save the output of joining `acs_df` to `covid_us` to a [new dataframe]{.blue} called `covid_df` to avoid potentially [duplicating columns]{.blue}  
-:::
-
-::::
-
-## {{< fa code >}}-Merge
-```{r}
-#| label: acs_merge
-
-dim(acs_df)
-dim(acs_df)
-dim(covid_us)
-# Merge tmp with acs_df and save as final covid_df file
-covid_df <- covid_df %>% left_join(
-  acs_df,
-  by = c("state" = "state")
-)
-dim(covid_df)  # Same number of rows as tmp w/ 2 additional columns
-
-```
-
-:::::
-
-## Subset Data{.smaller}
-
-::::: panel-tabset
-
-## Task
-
-::::{.nonincremental}
-Next, we'll [subset]{.blue} the data to include just the values from variables we'll use in the lab on from September 23, 2021 using:
-
-- `filter()`
-- `select()`
-
-::: {.callout-note}
-- Again, we'll save this output to a new object called `covid_lab`  
-:::
-
-::::
-
-## {{< fa code >}}-Subset
-
-```{r}
-the_vars <- c(
-  # Covid variables
-  "state","state_po","date","new_deaths_pc_14day", "percent_vaccinated",
-  # Election variables
-  "winner","rep_voteshare",
-  # Demographic variables
-  "med_age","med_income","population")
-
-
-covid_lab <- covid_df %>%
-  filter( date == "2021-09-23") %>%
-  select(all_of(the_vars)) %>%
-  ungroup()
-
-length(the_vars)
-dim(covid_lab)
-```
-
-## {{< fa table >}}-Subsetted Data
-
-```{r}
-covid_lab
-```
-
-:::::
-
-
-## Standardized Variables{.smaller}
-
-::::{.nonincremental}
-
-When numeric [variables]{.blue} are measured on [different scales]{.blue}, it can be useful to construct [standardized]{.blue} measures, sometimes called [z-scores]{.blue}
-
-$$z\text{-scores of x} = \frac{x_i - \mu_{x}}{\sigma_x}$$
-
-- The *z-score* of Age is
-
-$$z\text{-scores of Age} = \frac{\text{Age}_i - \text{Average Age}}{\text{Standard Deviation of Age}}$$
-
-::: {.callout-note}
-- Standardized variables [all]{.blue} have a [mean of 0]{.blue} and a [standard deviation of 1]{.blue}
-- Standardizing variables helps us [interpret coefficients]{.blue} in [multiple regressions]{.blue} with predictors [measured on different scales]{.blue} 
-:::
-
-::::
-
-## Standardizing variables for the lab{.smaller}
-
-
-::::: panel-tabset
-
-## Task
-
-::::{.nonincremental}
-
-Create [standardized versions]{.blue} of
-
-- `rep_voteshare`
-- `med_age`
-- `med_income`
-- `percent_vaccinated`
-
-::: {.callout-note}
-- We'll use the suffix `_std` to distinguish the [standardized]{.blue} variables from the [original]{.blue} variables
-:::
-
-::::
-## {{< fa code >}}-Standardize
-
-```{r}
-covid_lab %>%
-  mutate(
-    rep_voteshare_std = (rep_voteshare - mean(rep_voteshare)) / sd(rep_voteshare),
-    med_age_std = ( med_age - mean( med_age)) / sd( med_age),
-    med_income_std = (med_income - mean(med_income)) / sd(med_income),
-    percent_vaccinated_std = (percent_vaccinated - mean(percent_vaccinated)) / sd(percent_vaccinated)
-  ) -> covid_lab
-```
-
-## {{< fa table >}}-Compare
-
-```{r}
-covid_lab %>%
-  summarise(
-    mn_rep_vote = mean(rep_voteshare),
-    mn_rep_vote_std = round(mean(rep_voteshare_std),2),
-    sd_rep_vote = sd(rep_voteshare),
-    sd_rep_vote_std = sd(rep_voteshare_std)
-  )
-```
-
-
-## {{< fa chart-line >}}-Compare
-
-```{r}
-covid_lab %>% 
-  ggplot(aes(rep_voteshare_std,rep_voteshare))+
-  geom_point()
-```
-
-
-:::::
-
-## Save Data
-
-Finally, I'll save the data for Thursday's lab
-
-```{r}
-#| eval: false
-# Don't run this code
-save(covid_lab, file = "../files/data/06_lab.rda")
-
-```
-
-And on Thursday, we'll be able to load the `covid_lab` just by running:
-
-```{r}
-load(url("https://pols1600.paultesta.org/files/data/06_lab.rda"))
-```
 
 # {{< fa lightbulb >}} Multiple Regression     {.inverse}
 
@@ -1139,19 +868,21 @@ Let's estimate the following models:
 
 
 
-$$\text{m1: tc_diff} = \beta_0 + \beta_1\text{interested}+\epsilon $$ 
+Let's estimate the following models:
 
-$$\text{m2: tc_diff} = \beta_0 + \beta_1\text{pol_interest}+\epsilon$$ 
+$$\text{m1: tc\_diff} = \beta_0 + \beta_1\text{interested}+\epsilon$$ 
 
-$$\text{m3: tc_diff} = \beta_0 + \beta_1\text{pol_interest_f} +\epsilon$$ 
+$$\text{m2: tc\_diff} = \beta_0 + \beta_1\text{pol\_interest}+\epsilon$$ 
 
-$$\text{m4: tc_diff} = \beta_0 + \beta_1\text{interested} + \beta_2\text{age} +\epsilon$$ 
+$$\text{m3: tc\_diff} = \beta_0 + \beta_1\text{pol\_interest\_f} +\epsilon$$ 
 
-$$\text{m5: tc_diff} = \beta_0 + \beta_1\text{interested} + \beta_2\text{age} + \beta_3\text{interested} \times \text{age}+\epsilon$$ 
+$$\text{m4: tc\_diff} = \beta_0 + \beta_1\text{interested} + \beta_2\text{age} +\epsilon$$ 
 
-$$\text{m6: tc_diff} = \beta_0 + \beta_1\text{age} + \beta_2\text{income} +\epsilon$$
+$$\text{m5: tc\_diff} = \beta_0 + \beta_1\text{interested} + \beta_2\text{age} + \beta_3\text{interested} \times \text{age}+\epsilon$$ 
 
-$$\text{m7: tc_diff} = \beta_0 + \beta_1\text{age} + \beta_2\text{income} + \beta_4\text{age}\times \text{income}+\epsilon $$
+$$\text{m6: tc\_diff} = \beta_0 + \beta_1\text{age} + \beta_2\text{income} +\epsilon$$
+
+$$\text{m7: tc\_diff} = \beta_0 + \beta_1\text{age} + \beta_2\text{income} + \beta_4\text{age}\times \text{income}+\epsilon $$
 
 ## Skills
 
@@ -2480,7 +2211,7 @@ snow_g %>%
   geom_line()+
   xlim(-1,4)+
   annotate(geom = "text", x = 0, y = 135,
-           label = expression(beta[0]), hjust=0.5, vjust =-.5)+
+           label = "beta[0]", parse=TRUE, hjust=0.5, vjust =-.5)+
   geom_segment(aes(x=0, xend = 3, y=135, yend=135), 
                linetype = 1, col ="gray30",
                arrow = arrow(length = unit(0.01, "npc")))+
@@ -2488,18 +2219,18 @@ snow_g %>%
                linetype = 1, col ="gray30",
                arrow = arrow(length = unit(0.01, "npc")))+
   annotate(geom = "text", x = 3, y = 141,
-           label = expression(beta[1]), hjust=-0.5, vjust =0.5,
+           label = "beta[1]",parse=TRUE, hjust=-0.5, vjust =0.5,
            col = "gray30") +
   geom_segment(aes(x=3.2, xend = 3.2, y=147, yend=97), 
                linetype = 1, col ="gray50",
                arrow = arrow(length = unit(0.01, "npc")))+
   annotate(geom = "text", x = 3, y = 122.5,
-           label = expression(beta[2]), hjust=-0.5, vjust =0.5,col = "gray50")+
+           label = "beta[2]",parse=TRUE, hjust=-0.5, vjust =0.5,col = "gray50")+
   geom_segment(aes(x=3, xend = 3, y=97, yend=19), 
                linetype = 1, col ="gray70",
                arrow = arrow(length = unit(0.01, "npc")))+
   annotate(geom = "text", x = 3, y = 58,
-           label = expression(beta[3]), hjust=-0.5, vjust =0.5,col = "gray70")+
+           label = "beta[3]",parse=TRUE, hjust=-0.5, vjust =0.5,col = "gray70")+
   scale_x_continuous(breaks = c(0,3),labels = c("Pre","Post"))+
   theme_bw() -> did_p
 
@@ -2600,6 +2331,248 @@ m1 <- lm( y ~ x1 + x2 + x3, data = df)
 - DiD relies on an assumption of [parallel trends]{.blue}
 
 - We can use linear regression to estimate and generalize DiD designs
+
+# {{< fa code >}}Previewing Lab 6
+
+## Red Covid
+
+The core thesis of Red Covid is something like the following:
+
+> Since Covid-19 vaccines became widely available to the general public in the spring of 2021, Republicans have been less likely to get the vaccine. Lower rates of vaccination among Republicans have in turn led to higher rates of death from Covid-19 in Red States compared to Blue States.
+
+## {.smaller}
+#### Testing Alternative Explanations of Red Covid 
+
+- A skeptic might argue that this relationship is [spurious]{.blue}. 
+
+- There are lots of ways that Red States differ from Blue States -- demographics, economics, geography, culture -- that might explain the differences in Covid-19 deaths.
+
+## {.smaller}
+#### Testing Alternative Explanations of Red Covid 
+
+- In Lab 6, we use multiple regression to try and [control for]{.blue} the following [alternative explanations]{.blue}:
+
+  - Differences in [median age]{.blue}
+  - Differences in [median income]{.blue}
+
+- To do this, we need to merge in some additional state level data from the census.
+
+## Loading data from the Census
+
+If you worked through the instructions [here]() and  installed `tidycensus` and a Census API key on your machine, you should be able to run the following:
+
+```{r}
+#| label: acs_data
+acs_df <- tidycensus::get_acs(geography = "state", 
+              variables = c(med_income = "B19013_001",
+                            med_age = "B01002_001"), 
+              year = 2019)
+```
+
+If not, no worries, just uncomment the code below:
+
+```{r}
+# Uncomment if get_acs() doesn't work:
+# load(url("https://josephessig-source.github.io/pols1600_site/files/data/acs_df.rda"))
+
+```
+
+## Tidy Census Data{.smaller}
+
+::: panel-tabset
+
+## Task
+
+`get_acs()` returns data whose [unit of analysis]{.blue} is roughly a [state-variable]{.blue}
+
+We need to [reshape]{.blue} `acs_df` using `pivot_wider()` so that the [unit of analysis]{.blue} is just a [state]{.blue}, and each column variable is a [column]{.blue}
+
+## {{< fa table >}}-Old
+
+```{r}
+acs_df
+```
+
+
+## {{< fa code >}}-Tidy
+```{r}
+#| label: acs_tidy
+acs_df %>%
+  mutate(
+    state = NAME,
+  ) %>%
+  select(state, variable, estimate) %>%
+  pivot_wider(names_from = variable,
+              values_from = estimate) -> acs_df
+```
+
+## {{< fa table >}}-New
+
+```{r}
+acs_df
+```
+
+:::
+
+## Merge Census data into Covid data{.smaller}
+
+::::: panel-tabset
+
+
+## Task
+
+::::{.nonincremental}
+
+Now we can [merge]{.blue} `acs_df` into `covid_us` using the `left_join()` function
+
+::: {.callout-note}
+- In the code, we'll save the output of joining `acs_df` to `covid_us` to a [new dataframe]{.blue} called `covid_df` to avoid potentially [duplicating columns]{.blue}  
+:::
+
+::::
+
+## {{< fa code >}}-Merge
+```{r}
+#| label: acs_merge
+
+dim(acs_df)
+dim(acs_df)
+dim(covid_us)
+# Merge tmp with acs_df and save as final covid_df file
+covid_df <- covid_df %>% left_join(
+  acs_df,
+  by = c("state" = "state")
+)
+dim(covid_df)  # Same number of rows as tmp w/ 2 additional columns
+
+```
+
+:::::
+
+## Subset Data{.smaller}
+
+::::: panel-tabset
+
+## Task
+
+::::{.nonincremental}
+Next, we'll [subset]{.blue} the data to include just the values from variables we'll use in the lab on from September 23, 2021 using:
+
+- `filter()`
+- `select()`
+
+::: {.callout-note}
+- Again, we'll save this output to a new object called `covid_lab`  
+:::
+
+::::
+
+## {{< fa code >}}-Subset
+
+```{r}
+the_vars <- c(
+  # Covid variables
+  "state","state_po","date","new_deaths_pc_14day", "percent_vaccinated",
+  # Election variables
+  "winner","rep_voteshare",
+  # Demographic variables
+  "med_age","med_income","population")
+
+
+covid_lab <- covid_df %>%
+  filter( date == "2021-09-23") %>%
+  select(all_of(the_vars)) %>%
+  ungroup()
+
+length(the_vars)
+dim(covid_lab)
+```
+
+## {{< fa table >}}-Subsetted Data
+
+```{r}
+covid_lab
+```
+
+:::::
+
+
+## Standardized Variables{.smaller}
+
+::::{.nonincremental}
+
+When numeric [variables]{.blue} are measured on [different scales]{.blue}, it can be useful to construct [standardized]{.blue} measures, sometimes called [z-scores]{.blue}
+
+$$z\text{-scores of x} = \frac{x_i - \mu_{x}}{\sigma_x}$$
+
+- The *z-score* of Age is
+
+$$z\text{-scores of Age} = \frac{\text{Age}_i - \text{Average Age}}{\text{Standard Deviation of Age}}$$
+
+::: {.callout-note}
+- Standardized variables [all]{.blue} have a [mean of 0]{.blue} and a [standard deviation of 1]{.blue}
+- Standardizing variables helps us [interpret coefficients]{.blue} in [multiple regressions]{.blue} with predictors [measured on different scales]{.blue} 
+:::
+
+::::
+
+## Standardizing variables for the lab{.smaller}
+
+
+::::: panel-tabset
+
+## Task
+
+::::{.nonincremental}
+
+Create [standardized versions]{.blue} of
+
+- `rep_voteshare`
+- `med_age`
+- `med_income`
+- `percent_vaccinated`
+
+::: {.callout-note}
+- We'll use the suffix `_std` to distinguish the [standardized]{.blue} variables from the [original]{.blue} variables
+:::
+
+::::
+## {{< fa code >}}-Standardize
+
+```{r}
+covid_lab %>%
+  mutate(
+    rep_voteshare_std = (rep_voteshare - mean(rep_voteshare)) / sd(rep_voteshare),
+    med_age_std = ( med_age - mean( med_age)) / sd( med_age),
+    med_income_std = (med_income - mean(med_income)) / sd(med_income),
+    percent_vaccinated_std = (percent_vaccinated - mean(percent_vaccinated)) / sd(percent_vaccinated)
+  ) -> covid_lab
+```
+
+## {{< fa table >}}-Compare
+
+```{r}
+covid_lab %>%
+  summarise(
+    mn_rep_vote = mean(rep_voteshare),
+    mn_rep_vote_std = round(mean(rep_voteshare_std),2),
+    sd_rep_vote = sd(rep_voteshare),
+    sd_rep_vote_std = sd(rep_voteshare_std)
+  )
+```
+
+
+## {{< fa chart-line >}}-Compare
+
+```{r}
+covid_lab %>% 
+  ggplot(aes(rep_voteshare_std,rep_voteshare))+
+  geom_point()
+```
+
+
+:::::
+
 
 
 ## References

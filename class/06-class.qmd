@@ -4,7 +4,6 @@ date: "2024-01-30"
 bibliography: ../files/paperpile.bib
 subtitle: "Modeling outcomes with multiple predictors"
 image: "featured.jpg"
-draft: true
 ---
 
 ```{r slides-videos, echo=FALSE, include=FALSE}
@@ -59,13 +58,14 @@ slide_frame(paste0("/slides/", wk, "-slides.html"))
 
 -   {{< fa laptop-file >}} Download this week's `r lab`
 
-- {{< fa paintbrush >}} Upload the rendered html file to Canvas [here](https://canvas.brown.edu/courses/1094972/assignments) 
-- {{< fa graduation-cap >}} Review the commented solutions after class `r comments`
+- {{< fa paintbrush >}} Upload the rendered html file to Canvas [here](https://canvas.brown.edu/courses/1102109) 
+
+- {{< fa graduation-cap >}} Review the commented solutions after class
 
 
 ## Assignments
 
-- {{< fa chalkboard-user >}} Complete [Assignment 1: Research Questions](https://pols1600.paultesta.org/assignments/a1){target="_blank"}
+- {{< fa chalkboard-user >}} Complete [Assignment 2: Research Topics](https://josephessig-source.github.io/pols1600_site/assignments/a2.html){target="_blank"}
 
 
 - {{< fa chalkboard-user >}} Complete QSS Tutorial 6: Prediction 2
@@ -73,14 +73,10 @@ slide_frame(paste0("/slides/", wk, "-slides.html"))
 ```{r}
 #| eval: false
 
-# After completing the software setup you should be able to to run the following to launch the tutorials
-
-learnr::run_tutorial( package = "qsslearnr")
-
 learnr::run_tutorial("06-prediction2 ", package = "qsslearnr")
 
 ```
 
-- {{< fa paintbrush >}} Upload the rendered html tutorial files to Canvas [here](https://canvas.brown.edu/courses/1094972/assignments) 
+- {{< fa paintbrush >}} Upload the rendered html tutorial files to Canvas [here](https://canvas.brown.edu/courses/1102109/assignments) 
 
 
