@@ -203,7 +203,7 @@
 <div class="quarto-title-authors">
 </div>
 
-  <p class="date">Updated Feb 2, 2026</p>
+  <p class="date">Updated Feb 25, 2026</p>
 </section>
 <section>
 <section id="overview" class="title-slide slide level1 inverse center">
@@ -249,29 +249,13 @@
 <p>You can see the available problem sets by running the following code in your console:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a>learnr<span class="sc">::</span><span class="fu">run_tutorial</span>(<span class="at">package =</span> <span class="st">"qsslearnr"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Available tutorials:
-* qsslearnr
-  - 00-intro          : "QSS Tutorial 0: Introduction to R"
-  - 01-measurement1   : "QSS Tutorial 1: Measurment I"
-  - 02-measurement2   : "QSS Tutorial 2: Measurment II"
-  - 03-causality1     : "QSS Tutorial 3: Causality I"
-  - 04-causality2     : "QSS Tutorial 4: Causality II"
-  - 05-prediction1    : "QSS Tutorial 5: Prediction I"
-  - 06-prediction2    : "QSS Tutorial 6: Prediction II"
-  - 07-probability1   : "QSS Tutorial 7: Probability I"
-  - 08-probability2   : "QSS Tutorial 8: Probability II"
-  - 09-uncertainty1   : "QSS Tutorial 9: Uncertainty I"
-  - 10-uncertainty2   : "QSS Tutorial 10: Uncertainty II"
-  - tidy-01-causality : "QSS Review Tutorial for Tidyverse Users"</code></pre>
-</div>
 </div>
 </section>
 <section id="tutorials-1" class="slide level2">
 <h2>Tutorials</h2>
 <p>And start a specific tutorial by running:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a>learnr<span class="sc">::</span><span class="fu">run_tutorial</span>(<span class="st">"00-intro"</span>, <span class="at">package =</span> <span class="st">"qsslearnr"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a>learnr<span class="sc">::</span><span class="fu">run_tutorial</span>(<span class="st">"00-intro"</span>, <span class="at">package =</span> <span class="st">"qsslearnr"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Please upload tutorials 00-intro and 01-measurement1 to Canvas by Monday, February 2nd.</p>
 </section>
@@ -340,10 +324,10 @@
 <ul>
 <li>Write code Blocks/Chunks</li>
 </ul>
-<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb6-1"><a></a><span class="in">```{r}</span></span>
-<span id="cb6-2"><a></a><span class="co">#| echo: true</span></span>
-<span id="cb6-3"><a></a><span class="dv">2</span><span class="sc">+</span><span class="dv">2</span></span>
-<span id="cb6-4"><a></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb5-1"><a></a><span class="in">```{r}</span></span>
+<span id="cb5-2"><a></a><span class="co">#| echo: true</span></span>
+<span id="cb5-3"><a></a><span class="dv">2</span><span class="sc">+</span><span class="dv">2</span></span>
+<span id="cb5-4"><a></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
 <li><p>Describe code using Markdown</p>
 <ul>
@@ -474,21 +458,21 @@
 <section id="r-is-logical-1" class="slide level2">
 <h2>R is logical</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a>x <span class="ot">&lt;-</span> T; y <span class="ot">&lt;-</span> F</span>
-<span id="cb7-2"><a></a></span>
-<span id="cb7-3"><a></a>x <span class="sc">==</span> T</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a>x <span class="ot">&lt;-</span> T; y <span class="ot">&lt;-</span> F</span>
+<span id="cb6-2"><a></a></span>
+<span id="cb6-3"><a></a>x <span class="sc">==</span> T</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] TRUE</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a>x <span class="sc">==</span> T <span class="sc">&amp;</span> y <span class="sc">==</span> T</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a>x <span class="sc">==</span> T <span class="sc">&amp;</span> y <span class="sc">==</span> T</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] FALSE</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a>x <span class="sc">==</span> T <span class="sc">|</span> y <span class="sc">==</span> T</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a>x <span class="sc">==</span> T <span class="sc">|</span> y <span class="sc">==</span> T</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] TRUE</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a><span class="sc">!</span>x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a><span class="sc">!</span>x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] FALSE</code></pre>
 </div>
@@ -559,7 +543,7 @@
 <li>The number 5 is an object in R</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a></a><span class="dv">5</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a></a><span class="dv">5</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 5</code></pre>
 </div>
@@ -568,17 +552,17 @@
 <li>We can assign the object 5, the name x, using the assignment operator <code>&lt;-</code></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a></a>x <span class="ot">&lt;-</span> <span class="dv">5</span> <span class="co"># Read this as "x gets 5"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a></a>x <span class="ot">&lt;-</span> <span class="dv">5</span> <span class="co"># Read this as "x gets 5"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
 <li>Now if we tell R to show us x, we’ll get</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a></a>x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a></a>x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 5</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a></a><span class="fu">print</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a></a><span class="fu">print</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 5</code></pre>
 </div>
@@ -588,30 +572,30 @@
 <h2>Data come in different types</h2>
 
 <img data-src="http://r4ds.had.co.nz/diagrams/data-structures-overview.png" width="500" class="r-stretch"></section>
-<section id="data-come-in-different-types-1" class="slide level2 smaller scrollable">
+<section id="data-come-in-different-types-1" class="slide level2 smaller">
 <h2>Data come in different types</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a></a><span class="co"># Create some data</span></span>
-<span id="cb22-2"><a></a></span>
-<span id="cb22-3"><a></a><span class="co"># Numeric</span></span>
-<span id="cb22-4"><a></a>x <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="co"># Double</span></span>
-<span id="cb22-5"><a></a>y <span class="ot">&lt;-</span> <span class="dv">6</span>L <span class="co"># Integer</span></span>
-<span id="cb22-6"><a></a></span>
-<span id="cb22-7"><a></a><span class="co"># Logical</span></span>
-<span id="cb22-8"><a></a>only_two_types_of_people <span class="ot">&lt;-</span> <span class="cn">TRUE</span> </span>
-<span id="cb22-9"><a></a></span>
-<span id="cb22-10"><a></a><span class="co"># Character</span></span>
-<span id="cb22-11"><a></a>me <span class="ot">&lt;-</span> <span class="st">"Joe"</span></span>
-<span id="cb22-12"><a></a></span>
-<span id="cb22-13"><a></a><span class="co"># Factor</span></span>
-<span id="cb22-14"><a></a>grades <span class="ot">=</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="st">"A"</span>,<span class="st">"B"</span>,<span class="st">"C"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a></a><span class="co"># Create some data</span></span>
+<span id="cb21-2"><a></a></span>
+<span id="cb21-3"><a></a><span class="co"># Numeric</span></span>
+<span id="cb21-4"><a></a>x <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="co"># Double</span></span>
+<span id="cb21-5"><a></a>y <span class="ot">&lt;-</span> <span class="dv">6</span>L <span class="co"># Integer</span></span>
+<span id="cb21-6"><a></a></span>
+<span id="cb21-7"><a></a><span class="co"># Logical</span></span>
+<span id="cb21-8"><a></a>only_two_types_of_people <span class="ot">&lt;-</span> <span class="cn">TRUE</span> </span>
+<span id="cb21-9"><a></a></span>
+<span id="cb21-10"><a></a><span class="co"># Character</span></span>
+<span id="cb21-11"><a></a>me <span class="ot">&lt;-</span> <span class="st">"Joe"</span></span>
+<span id="cb21-12"><a></a></span>
+<span id="cb21-13"><a></a><span class="co"># Factor</span></span>
+<span id="cb21-14"><a></a>grades <span class="ot">=</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="st">"A"</span>,<span class="st">"B"</span>,<span class="st">"C"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div><div class="column" style="width:45%;">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a></a><span class="fu">data</span>(<span class="st">"iris"</span>)</span>
-<span id="cb23-2"><a></a><span class="fu">head</span>(iris)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a></a><span class="fu">data</span>(<span class="st">"iris"</span>)</span>
+<span id="cb22-2"><a></a><span class="fu">head</span>(iris)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  Sepal.Length Sepal.Width Petal.Length Petal.Width Species
 1          5.1         3.5          1.4         0.2  setosa
@@ -621,28 +605,32 @@
 5          5.0         3.6          1.4         0.2  setosa
 6          5.4         3.9          1.7         0.4  setosa</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a></a><span class="fu">class</span>(iris[<span class="st">"Sepal.Length"</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a></a><span class="fu">class</span>(iris[<span class="st">"Sepal.Length"</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "data.frame"</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a></a><span class="fu">class</span>(iris<span class="sc">$</span>Sepal.Length)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a></a><span class="fu">class</span>(iris<span class="sc">$</span>Sepal.Length)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "numeric"</code></pre>
 </div>
 </div>
-</div><section id="data-types" class="slide level2">
+</div></div>
+</section>
+<section id="data-types" class="slide level2">
 <h2>Data Types</h2>
 <p>One common ocurrence is that a function in R is expecting data of one type but (e.g.&nbsp;<code>numeric</code>) but actually gets data of different type (e.g.&nbsp;<code>character</code>)</p>
 <p>The <code>class()</code> function is a useful <code>base R</code> for troubleshooting such errors.</p>
 <p>For example, different operations on data frames return different objects.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a></a><span class="co"># What type are they?</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a></a><span class="co"># What type are they?</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section><section id="data-come-in-different-shapes-and-sizes" class="slide level2">
+</section>
+<section id="data-come-in-different-shapes-and-sizes" class="slide level2">
 <h2>Data come in different “shapes” and “sizes”</h2>
 
 <img data-src="https://miro.medium.com/v2/resize:fit:1400/format:webp/0*MgEQsDgZZ7fJcdhZ.png" class="r-stretch"><p>Source: <a href="https://medium.com/@tiwarigaurav2512/r-data-types-847fffb01d5b" target="_blank">Gaurav Tiwari</a></p>
-</section><section id="section" class="slide level2 smaller">
+</section>
+<section id="section" class="slide level2 smaller">
 <h2></h2>
 <table class="caption-top">
 <colgroup>
@@ -704,7 +692,8 @@
 </tr>
 </tbody>
 </table>
-</section><section id="everything-that-happens-in-r-is-the-result-of-a-function" class="slide level2">
+</section>
+<section id="everything-that-happens-in-r-is-the-result-of-a-function" class="slide level2">
 <h2>Everything that happens in R is the result of a function</h2>
 <ul>
 <li class="fragment">You’ve already seen and used some R functions
@@ -715,7 +704,8 @@
 <li class="fragment"><code>library()</code> loads packages you’ve installed so you can use functions and data that are part of that package</li>
 </ul></li>
 </ul>
-</section><section id="three-sources-of-functions" class="slide level2 smaller">
+</section>
+<section id="three-sources-of-functions" class="slide level2 smaller">
 <h2>Three sources of functions</h2>
 <p>Three sources of functions:</p>
 <ul>
@@ -733,7 +723,8 @@
 <li class="fragment"><code>my_function &lt;- function(x){x^2}</code></li>
 </ul></li>
 </ul>
-</section><section id="functions-are-like-recipes" class="slide level2 smaller">
+</section>
+<section id="functions-are-like-recipes" class="slide level2 smaller">
 <h2>Functions are like recipes</h2>
 <p>They have:</p>
 <div class="columns">
@@ -747,29 +738,31 @@
 </div><div class="column" style="width:60%;">
 <p><img data-src="https://www.rforecology.com/functions_image0_new.png"> <a href="https://www.rforecology.com/post/how-to-create-your-own-function-in-r/" target="_blank">(Source)</a></p>
 </div></div>
-</section><section id="example-function" class="slide level2">
+</section>
+<section id="example-function" class="slide level2">
 <h2>Example Function</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a></a>is_it_the_weekend <span class="ot">&lt;-</span> <span class="cf">function</span>(x){</span>
-<span id="cb30-2"><a></a>  <span class="co"># Determine if I have to go to work today</span></span>
-<span id="cb30-3"><a></a>  <span class="co"># If x is in the weekend</span></span>
-<span id="cb30-4"><a></a>  <span class="cf">if</span>(x <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Saturday"</span>,<span class="st">"Sunday"</span>)){</span>
-<span id="cb30-5"><a></a>    <span class="fu">return</span>(<span class="st">"Yes, take it easy!"</span>)</span>
-<span id="cb30-6"><a></a>  }<span class="cf">else</span>{</span>
-<span id="cb30-7"><a></a>    <span class="fu">return</span>(<span class="st">"Sorry, back to work."</span>)</span>
-<span id="cb30-8"><a></a>  }</span>
-<span id="cb30-9"><a></a></span>
-<span id="cb30-10"><a></a>}</span>
-<span id="cb30-11"><a></a><span class="fu">is_it_the_weekend</span>(<span class="st">"Saturday"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a></a>is_it_the_weekend <span class="ot">&lt;-</span> <span class="cf">function</span>(x){</span>
+<span id="cb29-2"><a></a>  <span class="co"># Determine if I have to go to work today</span></span>
+<span id="cb29-3"><a></a>  <span class="co"># If x is in the weekend</span></span>
+<span id="cb29-4"><a></a>  <span class="cf">if</span>(x <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Saturday"</span>,<span class="st">"Sunday"</span>)){</span>
+<span id="cb29-5"><a></a>    <span class="fu">return</span>(<span class="st">"Yes, take it easy!"</span>)</span>
+<span id="cb29-6"><a></a>  }<span class="cf">else</span>{</span>
+<span id="cb29-7"><a></a>    <span class="fu">return</span>(<span class="st">"Sorry, back to work."</span>)</span>
+<span id="cb29-8"><a></a>  }</span>
+<span id="cb29-9"><a></a></span>
+<span id="cb29-10"><a></a>}</span>
+<span id="cb29-11"><a></a><span class="fu">is_it_the_weekend</span>(<span class="st">"Saturday"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Yes, take it easy!"</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a></a><span class="fu">is_it_the_weekend</span>(<span class="st">"Monday"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a></a><span class="fu">is_it_the_weekend</span>(<span class="st">"Monday"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Sorry, back to work."</code></pre>
 </div>
 </div>
-</section><section id="getting-setup-to-work-in-r" class="slide level2">
+</section>
+<section id="getting-setup-to-work-in-r" class="slide level2">
 <h2>Getting setup to work in R</h2>
 <p>Each time you start a project in R, you will want to:</p>
 <ul>
@@ -778,18 +771,22 @@
 <li class="fragment"><p>Set any “global” options you want</p></li>
 <li class="fragment"><p>Load the data you’ll be using</p></li>
 </ul>
-</section><section id="set-your-working-directory" class="slide level2">
+</section>
+<section id="set-your-working-directory" class="slide level2">
 <h2>Set your working directory</h2>
 
-<img data-src="https://statisticsglobe.com/wp-content/uploads/2020/03/figure-2-set-working-directory-to-source-file-location-manually.png" class="r-stretch"></section><section id="load-and-if-needed-install-the-r-packages-you-will-use" class="slide level2">
+<img data-src="https://statisticsglobe.com/wp-content/uploads/2020/03/figure-2-set-working-directory-to-source-file-location-manually.png" class="r-stretch"></section>
+<section id="load-and-if-needed-install-the-r-packages-you-will-use" class="slide level2 scrollable">
 <h2>Load (and if needed, install) the R packages you will use</h2>
 <ul>
 <li><p>Install packages <span class="blue">once</span><sup>1</sup> with <code>install.packages("package_name")</code></p></li>
 <li><p>Load packages <span class="blue">every session</span> with <code>library("package_name")</code></p></li>
 </ul>
-</section><section id="install-packages-for-the-lab" class="slide level2 inverse">
+<aside><ol class="aside-footnotes"><li id="fn1"><p>Occasionally, you’ll have to update packages to newer versions and will likely need to reinstall when you upgrade R</p></li></ol></aside></section>
+<section id="install-packages-for-the-lab" class="slide level2 inverse">
 <h2><i class="fa-solid fa-code" aria-label="code"></i> Install packages for the lab</h2>
-</section><section id="install-packages-for-the-lab-1" class="slide level2 smaller">
+</section>
+<section id="install-packages-for-the-lab-1" class="slide level2 smaller">
 <h2>Install packages for the lab</h2>
 <p>Let’s install the <code>tidyverse</code> and <code>COVID19</code>.</p>
 <ul>
@@ -798,15 +795,15 @@
 <li>Copy and paste the following into your console</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a></a><span class="fu">install.packages</span>(<span class="st">"tidyverse"</span>)</span>
-<span id="cb34-2"><a></a><span class="fu">install.packages</span>(<span class="st">"COVID19"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a></a><span class="fu">install.packages</span>(<span class="st">"tidyverse"</span>)</span>
+<span id="cb33-2"><a></a><span class="fu">install.packages</span>(<span class="st">"COVID19"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
 <li>Once you’ve installed these packages comment out the code (Why?)</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a></a><span class="co"># install.packages("tidyverse")</span></span>
-<span id="cb35-2"><a></a><span class="co"># install.packages("COVID19")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a></a><span class="co"># install.packages("tidyverse")</span></span>
+<span id="cb34-2"><a></a><span class="co"># install.packages("COVID19")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="callout callout-tip callout-titled callout-style-default">
 <div class="callout-body">
@@ -822,19 +819,18 @@
 </div>
 </div>
 </div>
-</section><section id="loading-the-tidyverse-and-covid19-packages" class="slide level2">
+</section>
+<section id="loading-the-tidyverse-and-covid19-packages" class="slide level2">
 <h2>Loading the <code>tidyverse</code> and <code>COVID19</code> packages</h2>
 <ul>
 <li class="fragment">Type the following into your code chunk:</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a></a><span class="fu">library</span>(<span class="st">"tidyverse"</span>)</span>
-<span id="cb36-2"><a></a><span class="fu">library</span>(COVID19)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: package 'COVID19' was built under R version 4.2.3</code></pre>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a></a><span class="fu">library</span>(<span class="st">"tidyverse"</span>)</span>
+<span id="cb35-2"><a></a><span class="fu">library</span>(COVID19)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</div>
-</section><section id="load-the-data-youll-be-using" class="slide level2 smaller">
+</section>
+<section id="load-the-data-youll-be-using" class="slide level2 smaller">
 <h2>Load the data you’ll be using</h2>
 <p>There are three ways to load data.</p>
 <ul>
@@ -850,14 +846,16 @@
 </ul>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a></a><span class="co"># EXAMPLE CODE (Won't actually run)</span></span>
-<span id="cb38-2"><a></a><span class="co"># Read a .csv file saved locally on my Desktop</span></span>
-<span id="cb38-3"><a></a>df_csv <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">"~/Desktop/data.csv"</span>)</span>
-<span id="cb38-4"><a></a><span class="co"># Read a .dta file saved on the web</span></span>
-<span id="cb38-5"><a></a>df_dta <span class="ot">&lt;-</span> haven<span class="sc">::</span><span class="fu">read_dta</span>(<span class="st">"https://josephessig-source.github.io/pols1600_site/files/data/covid.rda"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a></a><span class="co"># EXAMPLE CODE (Won't actually run)</span></span>
+<span id="cb36-2"><a></a><span class="co"># Read a .csv file saved locally on my Desktop</span></span>
+<span id="cb36-3"><a></a>df_csv <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">"~/Desktop/data.csv"</span>)</span>
+<span id="cb36-4"><a></a><span class="co"># Read a .dta file saved on the web</span></span>
+<span id="cb36-5"><a></a>df_dta <span class="ot">&lt;-</span> haven<span class="sc">::</span><span class="fu">read_dta</span>(<span class="st">"https://josephessig-source.github.io/pols1600_site/files/data/covid.rda"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
-</section><section id="working-with-data-in-r" class="title-slide slide level1 inverse center">
+</section></section>
+<section>
+<section id="working-with-data-in-r" class="title-slide slide level1 inverse center">
 <h1><i class="fa-solid fa-lightbulb" aria-label="lightbulb"></i> Working with Data in R</h1>
 
 </section>
@@ -889,27 +887,27 @@
 <section id="loading-state-level-covid-data" class="slide level2 inverse">
 <h2><i class="fa-solid fa-code" aria-label="code"></i> Loading state-level Covid data</h2>
 </section>
-<section id="loading-state-level-covid-data-1" class="slide level2">
+<section id="loading-state-level-covid-data-1" class="slide level2 scrollable">
 <h2>Loading state-level Covid data</h2>
 <p>The code below downloads two years of daily state-level Covid data:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a></a>covid <span class="ot">&lt;-</span> COVID19<span class="sc">::</span><span class="fu">covid19</span>(</span>
-<span id="cb39-2"><a></a>  <span class="at">country =</span> <span class="st">"US"</span>,</span>
-<span id="cb39-3"><a></a>  <span class="at">start =</span> <span class="st">"2020-01-01"</span>,</span>
-<span id="cb39-4"><a></a>  <span class="at">end =</span> <span class="st">"2022-12-31"</span>,</span>
-<span id="cb39-5"><a></a>  <span class="at">level =</span> <span class="dv">2</span>,</span>
-<span id="cb39-6"><a></a>  <span class="at">verbose =</span> F</span>
-<span id="cb39-7"><a></a>    </span>
-<span id="cb39-8"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a></a>covid <span class="ot">&lt;-</span> COVID19<span class="sc">::</span><span class="fu">covid19</span>(</span>
+<span id="cb37-2"><a></a>  <span class="at">country =</span> <span class="st">"US"</span>,</span>
+<span id="cb37-3"><a></a>  <span class="at">start =</span> <span class="st">"2020-01-01"</span>,</span>
+<span id="cb37-4"><a></a>  <span class="at">end =</span> <span class="st">"2022-12-31"</span>,</span>
+<span id="cb37-5"><a></a>  <span class="at">level =</span> <span class="dv">2</span>,</span>
+<span id="cb37-6"><a></a>  <span class="at">verbose =</span> F</span>
+<span id="cb37-7"><a></a>    </span>
+<span id="cb37-8"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Please run the following<sup>2</sup></p>
+<p>Please run the following<sup>1</sup></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a></a><span class="fu">load</span>(<span class="fu">url</span>(<span class="st">"https://josephessig-source.github.io/pols1600_site/files/data/covid.rda"</span>))</span>
-<span id="cb40-2"><a></a></span>
-<span id="cb40-3"><a></a><span class="co">#load() tells R to load a .rda file, which is one way to store data.</span></span>
-<span id="cb40-4"><a></a><span class="co">#In this case, the rda file is stored at a URL, not on your computer. </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a></a><span class="fu">load</span>(<span class="fu">url</span>(<span class="st">"https://josephessig-source.github.io/pols1600_site/files/data/covid.rda"</span>))</span>
+<span id="cb38-2"><a></a></span>
+<span id="cb38-3"><a></a><span class="co">#load() tells R to load a .rda file, which is one way to store data.</span></span>
+<span id="cb38-4"><a></a><span class="co">#In this case, the rda file is stored at a URL, not on your computer. </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section>
+<aside><ol class="aside-footnotes"><li id="fn2"><p>30 people trying to download this data live sometimes causes errors with the server</p></li></ol></aside></section>
 <section id="loading-state-level-covid-data-2" class="slide level2 smaller">
 <h2>Loading state-level Covid data</h2>
 <ul>
@@ -920,14 +918,14 @@
 <li><code>verbose = F</code> tells the function not to print other stuff</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb41" data-code-line-numbers="|2|3|4-5|6|7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a></a>covid <span class="ot">&lt;-</span> COVID19<span class="sc">::</span><span class="fu">covid19</span>(</span>
-<span id="cb41-2"><a></a>  <span class="at">country =</span> <span class="st">"US"</span>,</span>
-<span id="cb41-3"><a></a>  <span class="at">start =</span> <span class="st">"2020-01-01"</span>,</span>
-<span id="cb41-4"><a></a>  <span class="at">end =</span> <span class="st">"2022-12-31"</span>,</span>
-<span id="cb41-5"><a></a>  <span class="at">level =</span> <span class="dv">2</span>,</span>
-<span id="cb41-6"><a></a>  <span class="at">verbose =</span> F</span>
-<span id="cb41-7"><a></a>    </span>
-<span id="cb41-8"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb39" data-code-line-numbers="|2|3|4-5|6|7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a></a>covid <span class="ot">&lt;-</span> COVID19<span class="sc">::</span><span class="fu">covid19</span>(</span>
+<span id="cb39-2"><a></a>  <span class="at">country =</span> <span class="st">"US"</span>,</span>
+<span id="cb39-3"><a></a>  <span class="at">start =</span> <span class="st">"2020-01-01"</span>,</span>
+<span id="cb39-4"><a></a>  <span class="at">end =</span> <span class="st">"2022-12-31"</span>,</span>
+<span id="cb39-5"><a></a>  <span class="at">level =</span> <span class="dv">2</span>,</span>
+<span id="cb39-6"><a></a>  <span class="at">verbose =</span> F</span>
+<span id="cb39-7"><a></a>    </span>
+<span id="cb39-8"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="looking-at-your-data" class="slide level2 smaller">
@@ -948,7 +946,7 @@
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a></a><span class="fu">table</span>(covid<span class="sc">$</span>school_closing)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a></a><span class="fu">table</span>(covid<span class="sc">$</span>school_closing)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
    -3    -2    -1     0     1     2     3 
@@ -999,7 +997,8 @@
 <li class="fragment">Good for numeric data</li>
 </ul></li>
 </ul>
-</section>
+</section></section>
+<section>
 <section id="data-wrangling-in-the-tidyverse" class="title-slide slide level1 inverse center">
 <h1><i class="fa-solid fa-lightbulb" aria-label="lightbulb"></i> Data Wrangling in the Tidyverse</h1>
 
@@ -1045,13 +1044,13 @@
 <h2>The <code>%&gt;%</code> (“pipe” operator)</h2>
 <p>The <code>%&gt;%</code> lets us chain functions together so we can read left to right</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a></a><span class="fu">slice</span>(<span class="fu">filter</span>(covid, administrative_area_level_2 <span class="sc">==</span> <span class="st">"Rhode Island"</span>), <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a></a><span class="fu">slice</span>(<span class="fu">filter</span>(covid, administrative_area_level_2 <span class="sc">==</span> <span class="st">"Rhode Island"</span>), <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Becomes</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a></a>covid <span class="sc">%&gt;%</span> </span>
-<span id="cb45-2"><a></a>  <span class="fu">filter</span>(administrative_area_level_2 <span class="sc">==</span> <span class="st">"Rhode Island"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb45-3"><a></a>  <span class="fu">slice</span>(<span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a></a>covid <span class="sc">%&gt;%</span> </span>
+<span id="cb43-2"><a></a>  <span class="fu">filter</span>(administrative_area_level_2 <span class="sc">==</span> <span class="st">"Rhode Island"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb43-3"><a></a>  <span class="fu">slice</span>(<span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="callout callout-tip callout-titled callout-style-default">
 <div class="callout-body">
@@ -1067,7 +1066,8 @@
 </div>
 </div>
 </div>
-</section>
+</section></section>
+<section>
 <section id="describing-data-in-r" class="title-slide slide level1 inverse center">
 <h1><i class="fa-solid fa-lightbulb" aria-label="lightbulb"></i> Describing Data in R</h1>
 
@@ -1147,7 +1147,8 @@
 </tbody>
 </table>
 <p>All of these functions have an argument called <code>na.rm=F</code>. If your data have missing values, you’ll need to set <code>na.rm=F</code> (e.g.&nbsp;<code>mean(x, na.rm=T)</code>)</p>
-</section>
+</section></section>
+<section>
 <section id="exploring-covid-19-data-for-lab" class="title-slide slide level1 inverse center">
 <h1><i class="fa-solid fa-code" aria-label="code"></i> Exploring Covid-19 Data for Lab</h1>
 
@@ -1180,21 +1181,21 @@
 </ol>
 </div><div class="column" style="width:70%;">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a></a><span class="fu">dim</span>(covid)</span>
-<span id="cb46-2"><a></a><span class="fu">head</span>(covid)</span>
-<span id="cb46-3"><a></a><span class="fu">glimpse</span>(covid)</span>
-<span id="cb46-4"><a></a><span class="fu">table</span>(covid<span class="sc">$</span>administrative_area_level_2)</span>
-<span id="cb46-5"><a></a><span class="fu">length</span>(<span class="fu">unique</span>(covid<span class="sc">$</span>administrative_area_level_2))</span>
-<span id="cb46-6"><a></a>covid<span class="sc">$</span>confirmed[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]</span>
-<span id="cb46-7"><a></a>covid <span class="sc">%&gt;%</span></span>
-<span id="cb46-8"><a></a>  <span class="fu">select</span>(administrative_area_level_2, date, confirmed) <span class="sc">%&gt;%</span></span>
-<span id="cb46-9"><a></a>  <span class="fu">slice</span>(<span class="dv">10</span><span class="sc">:</span><span class="dv">20</span>)</span>
-<span id="cb46-10"><a></a><span class="fu">summary</span>(covid<span class="sc">$</span>confirmed)</span>
-<span id="cb46-11"><a></a><span class="fu">table</span>(covid<span class="sc">$</span>facial_coverings)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a></a><span class="fu">dim</span>(covid)</span>
+<span id="cb44-2"><a></a><span class="fu">head</span>(covid)</span>
+<span id="cb44-3"><a></a><span class="fu">glimpse</span>(covid)</span>
+<span id="cb44-4"><a></a><span class="fu">table</span>(covid<span class="sc">$</span>administrative_area_level_2)</span>
+<span id="cb44-5"><a></a><span class="fu">length</span>(<span class="fu">unique</span>(covid<span class="sc">$</span>administrative_area_level_2))</span>
+<span id="cb44-6"><a></a>covid<span class="sc">$</span>confirmed[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]</span>
+<span id="cb44-7"><a></a>covid <span class="sc">%&gt;%</span></span>
+<span id="cb44-8"><a></a>  <span class="fu">select</span>(administrative_area_level_2, date, confirmed) <span class="sc">%&gt;%</span></span>
+<span id="cb44-9"><a></a>  <span class="fu">slice</span>(<span class="dv">10</span><span class="sc">:</span><span class="dv">20</span>)</span>
+<span id="cb44-10"><a></a><span class="fu">summary</span>(covid<span class="sc">$</span>confirmed)</span>
+<span id="cb44-11"><a></a><span class="fu">table</span>(covid<span class="sc">$</span>facial_coverings)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div></div>
 </section>
-<section id="answer-the-following" class="slide level2">
+<section id="answer-the-following" class="slide level2 scrollable">
 <h2>Answer the following</h2>
 <ul>
 <li>How many observations are there (rows)</li>
@@ -1204,9 +1205,9 @@
 <li>In words, how would you describe what a row in your data set corresponds to?</li>
 </ul></li>
 <li>Are there any missing values for <code>confirmed</code></li>
-<li>What range of values can <code>facial_coverings</code> take?<sup>3</sup></li>
+<li>What range of values can <code>facial_coverings</code> take?<sup>1</sup></li>
 </ul>
-</section>
+<aside><ol class="aside-footnotes"><li id="fn3"><p>See: https://covid19datahub.io/articles/docs.html</p></li></ol></aside></section>
 <section id="subsetting-our-data-to-only-u.s.-states" class="slide level2 scrollable">
 <h2>Subsetting our data to only U.S. States</h2>
 <p><span class="blue">Goal:</span> Subset our Covid data to include only the 50 states + DC</p>
@@ -1219,26 +1220,26 @@
 <section id="create-a-vector-of-the-territories-we-dont-want" class="slide level2">
 <h2>1. Create a vector of the territories we <strong>don’t</strong> want</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a></a>territories <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb47-2"><a></a>  <span class="st">"American Samoa"</span>,</span>
-<span id="cb47-3"><a></a>  <span class="st">"Guam"</span>,</span>
-<span id="cb47-4"><a></a>  <span class="st">"Northern Mariana Islands"</span>,</span>
-<span id="cb47-5"><a></a>  <span class="st">"Puerto Rico"</span>,</span>
-<span id="cb47-6"><a></a>  <span class="st">"Virgin Islands"</span></span>
-<span id="cb47-7"><a></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a></a>territories <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb45-2"><a></a>  <span class="st">"American Samoa"</span>,</span>
+<span id="cb45-3"><a></a>  <span class="st">"Guam"</span>,</span>
+<span id="cb45-4"><a></a>  <span class="st">"Northern Mariana Islands"</span>,</span>
+<span id="cb45-5"><a></a>  <span class="st">"Puerto Rico"</span>,</span>
+<span id="cb45-6"><a></a>  <span class="st">"Virgin Islands"</span></span>
+<span id="cb45-7"><a></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="use-the-filter-command-to-filter-out-these-territories" class="slide level2">
 <h2>2. Use the <code>filter()</code> command to “filter” out these territories</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a></a>covid_us <span class="ot">&lt;-</span> covid <span class="sc">%&gt;%</span></span>
-<span id="cb48-2"><a></a>  <span class="fu">filter</span>(<span class="sc">!</span>administrative_area_level_2 <span class="sc">%in%</span> territories )</span>
-<span id="cb48-3"><a></a></span>
-<span id="cb48-4"><a></a><span class="fu">dim</span>(covid)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a></a>covid_us <span class="ot">&lt;-</span> covid <span class="sc">%&gt;%</span></span>
+<span id="cb46-2"><a></a>  <span class="fu">filter</span>(<span class="sc">!</span>administrative_area_level_2 <span class="sc">%in%</span> territories )</span>
+<span id="cb46-3"><a></a></span>
+<span id="cb46-4"><a></a><span class="fu">dim</span>(covid)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 58809    47</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a></a><span class="fu">dim</span>(covid_us)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a></a><span class="fu">dim</span>(covid_us)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 53678    47</code></pre>
 </div>
@@ -1263,20 +1264,20 @@
 <h2>Calculate new Covid-19 cases</h2>
 <p>Please run and comment the following code:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a></a><span class="fu">dim</span>(covid_us)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a></a><span class="fu">dim</span>(covid_us)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 53678    47</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a></a>covid_us <span class="sc">%&gt;%</span></span>
-<span id="cb54-2"><a></a>  <span class="fu">mutate</span>(</span>
-<span id="cb54-3"><a></a>    <span class="at">state =</span> administrative_area_level_2,</span>
-<span id="cb54-4"><a></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb54-5"><a></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(state) <span class="sc">%&gt;%</span></span>
-<span id="cb54-6"><a></a>  <span class="fu">mutate</span>(</span>
-<span id="cb54-7"><a></a>    <span class="at">new_cases =</span> confirmed <span class="sc">-</span> <span class="fu">lag</span>(confirmed),</span>
-<span id="cb54-8"><a></a>    <span class="at">new_cases_pc =</span> new_cases<span class="sc">/</span>population <span class="sc">*</span><span class="dv">100000</span></span>
-<span id="cb54-9"><a></a>    ) <span class="ot">-&gt;</span> covid_us</span>
-<span id="cb54-10"><a></a><span class="fu">dim</span>(covid_us)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a></a>covid_us <span class="sc">%&gt;%</span></span>
+<span id="cb52-2"><a></a>  <span class="fu">mutate</span>(</span>
+<span id="cb52-3"><a></a>    <span class="at">state =</span> administrative_area_level_2,</span>
+<span id="cb52-4"><a></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb52-5"><a></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(state) <span class="sc">%&gt;%</span></span>
+<span id="cb52-6"><a></a>  <span class="fu">mutate</span>(</span>
+<span id="cb52-7"><a></a>    <span class="at">new_cases =</span> confirmed <span class="sc">-</span> <span class="fu">lag</span>(confirmed),</span>
+<span id="cb52-8"><a></a>    <span class="at">new_cases_pc =</span> new_cases<span class="sc">/</span>population <span class="sc">*</span><span class="dv">100000</span></span>
+<span id="cb52-9"><a></a>    ) <span class="ot">-&gt;</span> covid_us</span>
+<span id="cb52-10"><a></a><span class="fu">dim</span>(covid_us)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 53678    50</code></pre>
 </div>
@@ -1285,19 +1286,19 @@
 <section id="create-face-mask-policy-variable" class="slide level2">
 <h2>Create Face Mask Policy variable</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a></a>covid_us <span class="sc">%&gt;%</span></span>
-<span id="cb56-2"><a></a>  <span class="fu">mutate</span>(</span>
-<span id="cb56-3"><a></a>    <span class="at">face_masks =</span> <span class="fu">case_when</span>(</span>
-<span id="cb56-4"><a></a>      facial_coverings <span class="sc">==</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">"No policy"</span>,</span>
-<span id="cb56-5"><a></a>      <span class="fu">abs</span>(facial_coverings) <span class="sc">==</span> <span class="dv">1</span> <span class="sc">~</span> <span class="st">"Recommended"</span>,</span>
-<span id="cb56-6"><a></a>      <span class="fu">abs</span>(facial_coverings) <span class="sc">==</span> <span class="dv">2</span> <span class="sc">~</span> <span class="st">"Some requirements"</span>,</span>
-<span id="cb56-7"><a></a>      <span class="fu">abs</span>(facial_coverings) <span class="sc">==</span> <span class="dv">3</span> <span class="sc">~</span> <span class="st">"Required shared places"</span>,</span>
-<span id="cb56-8"><a></a>      <span class="fu">abs</span>(facial_coverings) <span class="sc">==</span> <span class="dv">4</span> <span class="sc">~</span> <span class="st">"Required all times"</span>,</span>
-<span id="cb56-9"><a></a>      </span>
-<span id="cb56-10"><a></a>    ) </span>
-<span id="cb56-11"><a></a>  ) <span class="ot">-&gt;</span> covid_us</span>
-<span id="cb56-12"><a></a></span>
-<span id="cb56-13"><a></a><span class="fu">levels</span>(<span class="fu">factor</span>(covid_us<span class="sc">$</span>face_masks))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a></a>covid_us <span class="sc">%&gt;%</span></span>
+<span id="cb54-2"><a></a>  <span class="fu">mutate</span>(</span>
+<span id="cb54-3"><a></a>    <span class="at">face_masks =</span> <span class="fu">case_when</span>(</span>
+<span id="cb54-4"><a></a>      facial_coverings <span class="sc">==</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">"No policy"</span>,</span>
+<span id="cb54-5"><a></a>      <span class="fu">abs</span>(facial_coverings) <span class="sc">==</span> <span class="dv">1</span> <span class="sc">~</span> <span class="st">"Recommended"</span>,</span>
+<span id="cb54-6"><a></a>      <span class="fu">abs</span>(facial_coverings) <span class="sc">==</span> <span class="dv">2</span> <span class="sc">~</span> <span class="st">"Some requirements"</span>,</span>
+<span id="cb54-7"><a></a>      <span class="fu">abs</span>(facial_coverings) <span class="sc">==</span> <span class="dv">3</span> <span class="sc">~</span> <span class="st">"Required shared places"</span>,</span>
+<span id="cb54-8"><a></a>      <span class="fu">abs</span>(facial_coverings) <span class="sc">==</span> <span class="dv">4</span> <span class="sc">~</span> <span class="st">"Required all times"</span>,</span>
+<span id="cb54-9"><a></a>      </span>
+<span id="cb54-10"><a></a>    ) </span>
+<span id="cb54-11"><a></a>  ) <span class="ot">-&gt;</span> covid_us</span>
+<span id="cb54-12"><a></a></span>
+<span id="cb54-13"><a></a><span class="fu">levels</span>(<span class="fu">factor</span>(covid_us<span class="sc">$</span>face_masks))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "No policy"              "Recommended"            "Required all times"    
 [4] "Required shared places" "Some requirements"     </code></pre>
@@ -1307,26 +1308,26 @@
 <section id="make-face_masks-a-factor-to-reflect-order-of-policies" class="slide level2">
 <h2>Make <code>face_masks</code> a factor to reflect order of policies</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a></a><span class="fu">levels</span>(<span class="fu">factor</span>(covid_us<span class="sc">$</span>face_masks))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a></a><span class="fu">levels</span>(<span class="fu">factor</span>(covid_us<span class="sc">$</span>face_masks))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "No policy"              "Recommended"            "Required all times"    
 [4] "Required shared places" "Some requirements"     </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a></a>covid_us <span class="sc">%&gt;%</span></span>
-<span id="cb60-2"><a></a>  <span class="fu">mutate</span>(</span>
-<span id="cb60-3"><a></a>    <span class="at">face_masks =</span> <span class="fu">factor</span>(</span>
-<span id="cb60-4"><a></a>      face_masks,</span>
-<span id="cb60-5"><a></a>      <span class="at">levels =</span> <span class="fu">c</span>(</span>
-<span id="cb60-6"><a></a>        <span class="st">"No policy"</span>, </span>
-<span id="cb60-7"><a></a>        <span class="st">"Recommended"</span>, </span>
-<span id="cb60-8"><a></a>        <span class="st">"Some requirements"</span>,</span>
-<span id="cb60-9"><a></a>        <span class="st">"Required shared places"</span>,</span>
-<span id="cb60-10"><a></a>        <span class="st">"Required all times"</span></span>
-<span id="cb60-11"><a></a>        )</span>
-<span id="cb60-12"><a></a>    )</span>
-<span id="cb60-13"><a></a>  ) <span class="ot">-&gt;</span> covid_us</span>
-<span id="cb60-14"><a></a></span>
-<span id="cb60-15"><a></a><span class="fu">levels</span>(covid_us<span class="sc">$</span>face_masks)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a></a>covid_us <span class="sc">%&gt;%</span></span>
+<span id="cb58-2"><a></a>  <span class="fu">mutate</span>(</span>
+<span id="cb58-3"><a></a>    <span class="at">face_masks =</span> <span class="fu">factor</span>(</span>
+<span id="cb58-4"><a></a>      face_masks,</span>
+<span id="cb58-5"><a></a>      <span class="at">levels =</span> <span class="fu">c</span>(</span>
+<span id="cb58-6"><a></a>        <span class="st">"No policy"</span>, </span>
+<span id="cb58-7"><a></a>        <span class="st">"Recommended"</span>, </span>
+<span id="cb58-8"><a></a>        <span class="st">"Some requirements"</span>,</span>
+<span id="cb58-9"><a></a>        <span class="st">"Required shared places"</span>,</span>
+<span id="cb58-10"><a></a>        <span class="st">"Required all times"</span></span>
+<span id="cb58-11"><a></a>        )</span>
+<span id="cb58-12"><a></a>    )</span>
+<span id="cb58-13"><a></a>  ) <span class="ot">-&gt;</span> covid_us</span>
+<span id="cb58-14"><a></a></span>
+<span id="cb58-15"><a></a><span class="fu">levels</span>(covid_us<span class="sc">$</span>face_masks)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "No policy"              "Recommended"            "Some requirements"     
 [4] "Required shared places" "Required all times"    </code></pre>
@@ -1343,15 +1344,15 @@
 <section id="face-masks-and-new-covid-19-cases-per-100k" class="slide level2">
 <h2>Face Masks and New Covid-19 Cases (per 100k)</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a></a>covid_us <span class="sc">%&gt;%</span></span>
-<span id="cb62-2"><a></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(face_masks))<span class="sc">%&gt;%</span></span>
-<span id="cb62-3"><a></a>  <span class="fu">group_by</span>(face_masks)<span class="sc">%&gt;%</span></span>
-<span id="cb62-4"><a></a>  <span class="fu">summarize</span>(</span>
-<span id="cb62-5"><a></a>    <span class="st">`</span><span class="at">Average No. of New Cases</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">round</span>(<span class="fu">mean</span>(new_cases_pc, <span class="at">na.rm=</span>T),<span class="dv">2</span>)</span>
-<span id="cb62-6"><a></a>  )<span class="sc">%&gt;%</span></span>
-<span id="cb62-7"><a></a>  <span class="fu">rename</span>(</span>
-<span id="cb62-8"><a></a>    <span class="st">"Face Mask Policy"</span> <span class="ot">=</span> face_masks</span>
-<span id="cb62-9"><a></a>  ) <span class="ot">-&gt;</span> face_mask_summary</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a></a>covid_us <span class="sc">%&gt;%</span></span>
+<span id="cb60-2"><a></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(face_masks))<span class="sc">%&gt;%</span></span>
+<span id="cb60-3"><a></a>  <span class="fu">group_by</span>(face_masks)<span class="sc">%&gt;%</span></span>
+<span id="cb60-4"><a></a>  <span class="fu">summarize</span>(</span>
+<span id="cb60-5"><a></a>    <span class="st">`</span><span class="at">Average No. of New Cases</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">round</span>(<span class="fu">mean</span>(new_cases_pc, <span class="at">na.rm=</span>T),<span class="dv">2</span>)</span>
+<span id="cb60-6"><a></a>  )<span class="sc">%&gt;%</span></span>
+<span id="cb60-7"><a></a>  <span class="fu">rename</span>(</span>
+<span id="cb60-8"><a></a>    <span class="st">"Face Mask Policy"</span> <span class="ot">=</span> face_masks</span>
+<span id="cb60-9"><a></a>  ) <span class="ot">-&gt;</span> face_mask_summary</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="face-masks-and-new-covid-19-cases-per-100k-1" class="slide level2 smaller">
@@ -1399,82 +1400,83 @@
 <section id="commented-code" class="slide level2">
 <h2>Commented Code</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a></a><span class="co"># ---- Libraries ----</span></span>
-<span id="cb63-2"><a></a><span class="do">## Uncomment to install</span></span>
-<span id="cb63-3"><a></a><span class="co"># install.packages("tidyverse")</span></span>
-<span id="cb63-4"><a></a><span class="co"># install.packages("COVID19")</span></span>
-<span id="cb63-5"><a></a></span>
-<span id="cb63-6"><a></a><span class="fu">library</span>(<span class="st">"tidyverse"</span>)</span>
-<span id="cb63-7"><a></a><span class="fu">library</span>(<span class="st">"COVID19"</span>)</span>
-<span id="cb63-8"><a></a></span>
-<span id="cb63-9"><a></a><span class="co"># ---- Load data ----</span></span>
-<span id="cb63-10"><a></a><span class="fu">load</span>(<span class="fu">url</span>(<span class="st">"https://pols1600.paultesta.org/files/data/covid.rda"</span>))</span>
-<span id="cb63-11"><a></a></span>
-<span id="cb63-12"><a></a><span class="co"># ---- Subset to US states and DC ----</span></span>
-<span id="cb63-13"><a></a></span>
-<span id="cb63-14"><a></a>territories <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb63-15"><a></a>  <span class="st">"American Samoa"</span>,</span>
-<span id="cb63-16"><a></a>  <span class="st">"Guam"</span>,</span>
-<span id="cb63-17"><a></a>  <span class="st">"Northern Mariana Islands"</span>,</span>
-<span id="cb63-18"><a></a>  <span class="st">"Puerto Rico"</span>,</span>
-<span id="cb63-19"><a></a>  <span class="st">"Virgin Islands"</span></span>
-<span id="cb63-20"><a></a>  )</span>
-<span id="cb63-21"><a></a></span>
-<span id="cb63-22"><a></a></span>
-<span id="cb63-23"><a></a>covid_us <span class="ot">&lt;-</span> covid <span class="sc">%&gt;%</span></span>
-<span id="cb63-24"><a></a>  <span class="fu">filter</span>(<span class="sc">!</span>administrative_area_level_2 <span class="sc">%in%</span> territories )</span>
-<span id="cb63-25"><a></a></span>
-<span id="cb63-26"><a></a><span class="do">## Check subsetting</span></span>
-<span id="cb63-27"><a></a><span class="fu">dim</span>(covid)[<span class="dv">1</span>] <span class="sc">&gt;</span> <span class="fu">dim</span>(covid_us)[<span class="dv">1</span>]</span>
-<span id="cb63-28"><a></a></span>
-<span id="cb63-29"><a></a><span class="co"># ---- Recode covid_us ----</span></span>
-<span id="cb63-30"><a></a></span>
-<span id="cb63-31"><a></a>covid_us <span class="sc">%&gt;%</span></span>
-<span id="cb63-32"><a></a>  <span class="fu">mutate</span>(</span>
-<span id="cb63-33"><a></a>    <span class="at">state =</span> administrative_area_level_2,</span>
-<span id="cb63-34"><a></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb63-35"><a></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(state) <span class="sc">%&gt;%</span></span>
-<span id="cb63-36"><a></a>  <span class="fu">mutate</span>(</span>
-<span id="cb63-37"><a></a>    <span class="at">new_cases =</span> confirmed <span class="sc">-</span> <span class="fu">lag</span>(confirmed),</span>
-<span id="cb63-38"><a></a>    <span class="at">new_cases_pc =</span> new_cases<span class="sc">/</span>population <span class="sc">*</span><span class="dv">100000</span></span>
-<span id="cb63-39"><a></a>    ) <span class="sc">%&gt;%</span></span>
-<span id="cb63-40"><a></a>  <span class="fu">mutate</span>(</span>
-<span id="cb63-41"><a></a>    <span class="at">face_masks =</span> <span class="fu">case_when</span>(</span>
-<span id="cb63-42"><a></a>      facial_coverings <span class="sc">==</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">"No policy"</span>,</span>
-<span id="cb63-43"><a></a>      <span class="fu">abs</span>(facial_coverings) <span class="sc">==</span> <span class="dv">1</span> <span class="sc">~</span> <span class="st">"Recommended"</span>,</span>
-<span id="cb63-44"><a></a>      <span class="fu">abs</span>(facial_coverings) <span class="sc">==</span> <span class="dv">2</span> <span class="sc">~</span> <span class="st">"Some requirements"</span>,</span>
-<span id="cb63-45"><a></a>      <span class="fu">abs</span>(facial_coverings) <span class="sc">==</span> <span class="dv">3</span> <span class="sc">~</span> <span class="st">"Required shared places"</span>,</span>
-<span id="cb63-46"><a></a>      <span class="fu">abs</span>(facial_coverings) <span class="sc">==</span> <span class="dv">4</span> <span class="sc">~</span> <span class="st">"Required all times"</span></span>
-<span id="cb63-47"><a></a>      ) </span>
-<span id="cb63-48"><a></a>    ) <span class="sc">%&gt;%</span></span>
-<span id="cb63-49"><a></a>  <span class="fu">mutate</span>(</span>
-<span id="cb63-50"><a></a>    <span class="at">face_masks =</span> <span class="fu">factor</span>(</span>
-<span id="cb63-51"><a></a>      face_masks,</span>
-<span id="cb63-52"><a></a>      <span class="at">levels =</span> <span class="fu">c</span>(</span>
-<span id="cb63-53"><a></a>        <span class="st">"No policy"</span>, </span>
-<span id="cb63-54"><a></a>        <span class="st">"Recommended"</span>, </span>
-<span id="cb63-55"><a></a>        <span class="st">"Some requirements"</span>,</span>
-<span id="cb63-56"><a></a>        <span class="st">"Required shared places"</span>,</span>
-<span id="cb63-57"><a></a>        <span class="st">"Required all times"</span></span>
-<span id="cb63-58"><a></a>        )</span>
-<span id="cb63-59"><a></a>      )</span>
-<span id="cb63-60"><a></a>    )<span class="ot">-&gt;</span> covid_us</span>
-<span id="cb63-61"><a></a></span>
-<span id="cb63-62"><a></a></span>
-<span id="cb63-63"><a></a><span class="co"># ---- Calculate new cases per capita by facemask policy</span></span>
-<span id="cb63-64"><a></a>covid_us <span class="sc">%&gt;%</span></span>
-<span id="cb63-65"><a></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(face_masks))<span class="sc">%&gt;%</span></span>
-<span id="cb63-66"><a></a>  <span class="fu">group_by</span>(face_masks)<span class="sc">%&gt;%</span></span>
-<span id="cb63-67"><a></a>  <span class="fu">summarize</span>(</span>
-<span id="cb63-68"><a></a>    <span class="st">`</span><span class="at">Average No. of New Cases</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">round</span>(<span class="fu">mean</span>(new_cases_pc, <span class="at">na.rm=</span>T),<span class="dv">2</span>)</span>
-<span id="cb63-69"><a></a>  )<span class="sc">%&gt;%</span></span>
-<span id="cb63-70"><a></a>  <span class="fu">rename</span>(</span>
-<span id="cb63-71"><a></a>    <span class="st">"Face Mask Policy"</span> <span class="ot">=</span> face_masks</span>
-<span id="cb63-72"><a></a>  ) <span class="ot">-&gt;</span> face_mask_summary</span>
-<span id="cb63-73"><a></a></span>
-<span id="cb63-74"><a></a>face_mask_summary</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a></a><span class="co"># ---- Libraries ----</span></span>
+<span id="cb61-2"><a></a><span class="do">## Uncomment to install</span></span>
+<span id="cb61-3"><a></a><span class="co"># install.packages("tidyverse")</span></span>
+<span id="cb61-4"><a></a><span class="co"># install.packages("COVID19")</span></span>
+<span id="cb61-5"><a></a></span>
+<span id="cb61-6"><a></a><span class="fu">library</span>(<span class="st">"tidyverse"</span>)</span>
+<span id="cb61-7"><a></a><span class="fu">library</span>(<span class="st">"COVID19"</span>)</span>
+<span id="cb61-8"><a></a></span>
+<span id="cb61-9"><a></a><span class="co"># ---- Load data ----</span></span>
+<span id="cb61-10"><a></a><span class="fu">load</span>(<span class="fu">url</span>(<span class="st">"https://pols1600.paultesta.org/files/data/covid.rda"</span>))</span>
+<span id="cb61-11"><a></a></span>
+<span id="cb61-12"><a></a><span class="co"># ---- Subset to US states and DC ----</span></span>
+<span id="cb61-13"><a></a></span>
+<span id="cb61-14"><a></a>territories <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb61-15"><a></a>  <span class="st">"American Samoa"</span>,</span>
+<span id="cb61-16"><a></a>  <span class="st">"Guam"</span>,</span>
+<span id="cb61-17"><a></a>  <span class="st">"Northern Mariana Islands"</span>,</span>
+<span id="cb61-18"><a></a>  <span class="st">"Puerto Rico"</span>,</span>
+<span id="cb61-19"><a></a>  <span class="st">"Virgin Islands"</span></span>
+<span id="cb61-20"><a></a>  )</span>
+<span id="cb61-21"><a></a></span>
+<span id="cb61-22"><a></a></span>
+<span id="cb61-23"><a></a>covid_us <span class="ot">&lt;-</span> covid <span class="sc">%&gt;%</span></span>
+<span id="cb61-24"><a></a>  <span class="fu">filter</span>(<span class="sc">!</span>administrative_area_level_2 <span class="sc">%in%</span> territories )</span>
+<span id="cb61-25"><a></a></span>
+<span id="cb61-26"><a></a><span class="do">## Check subsetting</span></span>
+<span id="cb61-27"><a></a><span class="fu">dim</span>(covid)[<span class="dv">1</span>] <span class="sc">&gt;</span> <span class="fu">dim</span>(covid_us)[<span class="dv">1</span>]</span>
+<span id="cb61-28"><a></a></span>
+<span id="cb61-29"><a></a><span class="co"># ---- Recode covid_us ----</span></span>
+<span id="cb61-30"><a></a></span>
+<span id="cb61-31"><a></a>covid_us <span class="sc">%&gt;%</span></span>
+<span id="cb61-32"><a></a>  <span class="fu">mutate</span>(</span>
+<span id="cb61-33"><a></a>    <span class="at">state =</span> administrative_area_level_2,</span>
+<span id="cb61-34"><a></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb61-35"><a></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(state) <span class="sc">%&gt;%</span></span>
+<span id="cb61-36"><a></a>  <span class="fu">mutate</span>(</span>
+<span id="cb61-37"><a></a>    <span class="at">new_cases =</span> confirmed <span class="sc">-</span> <span class="fu">lag</span>(confirmed),</span>
+<span id="cb61-38"><a></a>    <span class="at">new_cases_pc =</span> new_cases<span class="sc">/</span>population <span class="sc">*</span><span class="dv">100000</span></span>
+<span id="cb61-39"><a></a>    ) <span class="sc">%&gt;%</span></span>
+<span id="cb61-40"><a></a>  <span class="fu">mutate</span>(</span>
+<span id="cb61-41"><a></a>    <span class="at">face_masks =</span> <span class="fu">case_when</span>(</span>
+<span id="cb61-42"><a></a>      facial_coverings <span class="sc">==</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">"No policy"</span>,</span>
+<span id="cb61-43"><a></a>      <span class="fu">abs</span>(facial_coverings) <span class="sc">==</span> <span class="dv">1</span> <span class="sc">~</span> <span class="st">"Recommended"</span>,</span>
+<span id="cb61-44"><a></a>      <span class="fu">abs</span>(facial_coverings) <span class="sc">==</span> <span class="dv">2</span> <span class="sc">~</span> <span class="st">"Some requirements"</span>,</span>
+<span id="cb61-45"><a></a>      <span class="fu">abs</span>(facial_coverings) <span class="sc">==</span> <span class="dv">3</span> <span class="sc">~</span> <span class="st">"Required shared places"</span>,</span>
+<span id="cb61-46"><a></a>      <span class="fu">abs</span>(facial_coverings) <span class="sc">==</span> <span class="dv">4</span> <span class="sc">~</span> <span class="st">"Required all times"</span></span>
+<span id="cb61-47"><a></a>      ) </span>
+<span id="cb61-48"><a></a>    ) <span class="sc">%&gt;%</span></span>
+<span id="cb61-49"><a></a>  <span class="fu">mutate</span>(</span>
+<span id="cb61-50"><a></a>    <span class="at">face_masks =</span> <span class="fu">factor</span>(</span>
+<span id="cb61-51"><a></a>      face_masks,</span>
+<span id="cb61-52"><a></a>      <span class="at">levels =</span> <span class="fu">c</span>(</span>
+<span id="cb61-53"><a></a>        <span class="st">"No policy"</span>, </span>
+<span id="cb61-54"><a></a>        <span class="st">"Recommended"</span>, </span>
+<span id="cb61-55"><a></a>        <span class="st">"Some requirements"</span>,</span>
+<span id="cb61-56"><a></a>        <span class="st">"Required shared places"</span>,</span>
+<span id="cb61-57"><a></a>        <span class="st">"Required all times"</span></span>
+<span id="cb61-58"><a></a>        )</span>
+<span id="cb61-59"><a></a>      )</span>
+<span id="cb61-60"><a></a>    )<span class="ot">-&gt;</span> covid_us</span>
+<span id="cb61-61"><a></a></span>
+<span id="cb61-62"><a></a></span>
+<span id="cb61-63"><a></a><span class="co"># ---- Calculate new cases per capita by facemask policy</span></span>
+<span id="cb61-64"><a></a>covid_us <span class="sc">%&gt;%</span></span>
+<span id="cb61-65"><a></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(face_masks))<span class="sc">%&gt;%</span></span>
+<span id="cb61-66"><a></a>  <span class="fu">group_by</span>(face_masks)<span class="sc">%&gt;%</span></span>
+<span id="cb61-67"><a></a>  <span class="fu">summarize</span>(</span>
+<span id="cb61-68"><a></a>    <span class="st">`</span><span class="at">Average No. of New Cases</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">round</span>(<span class="fu">mean</span>(new_cases_pc, <span class="at">na.rm=</span>T),<span class="dv">2</span>)</span>
+<span id="cb61-69"><a></a>  )<span class="sc">%&gt;%</span></span>
+<span id="cb61-70"><a></a>  <span class="fu">rename</span>(</span>
+<span id="cb61-71"><a></a>    <span class="st">"Face Mask Policy"</span> <span class="ot">=</span> face_masks</span>
+<span id="cb61-72"><a></a>  ) <span class="ot">-&gt;</span> face_mask_summary</span>
+<span id="cb61-73"><a></a></span>
+<span id="cb61-74"><a></a>face_mask_summary</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section>
+</section></section>
+<section>
 <section id="summary" class="title-slide slide level1 inverse center">
 <h1><i class="fa-solid fa-home" aria-label="home"></i> Summary</h1>
 
@@ -1507,10 +1509,7 @@
 </ul>
 
 
-</section>
-
-</div>
-<aside><ol class="aside-footnotes"><li id="fn1"><p>Occasionally, you’ll have to update packages to newer versions and will likely need to reinstall when you upgrade R</p></li><li id="fn2"><p>30 people trying to download this data live sometimes causes errors with the server</p></li><li id="fn3"><p>See: https://covid19datahub.io/articles/docs.html</p></li></ol></aside></section></section>
+</section></section>
 
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
@@ -1730,6 +1729,82 @@
         ]
       });
     </script>
+    
+
+    <script>
+
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+
+      // slide changes (different for each slide format).
+
+      (function () {
+
+        // dispatch for htmlwidgets
+
+        function fireSlideEnter() {
+
+          const event = window.document.createEvent("Event");
+
+          event.initEvent("slideenter", true, true);
+
+          window.document.dispatchEvent(event);
+
+        }
+
+    
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+
+          fireSlideEnter();
+
+    
+
+          // dispatch for shiny
+
+          if (window.jQuery) {
+
+            if (previousSlide) {
+
+              window.jQuery(previousSlide).trigger("hidden");
+
+            }
+
+            if (currentSlide) {
+
+              window.jQuery(currentSlide).trigger("shown");
+
+            }
+
+          }
+
+        }
+
+    
+
+        // hookup for slidy
+
+        if (window.w3c_slidy) {
+
+          window.w3c_slidy.add_observer(function (slide_num) {
+
+            // slide_num starts at position 1
+
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+
+          });
+
+        }
+
+    
+
+      })();
+
+    </script>
+
+    
+
     <script id="quarto-html-after-body" type="application/javascript">
       window.document.addEventListener("DOMContentLoaded", function (event) {
         const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
@@ -1799,7 +1874,7 @@
         }
           var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
           var mailtoRegex = new RegExp(/^mailto:/);
-            var filterRegex = new RegExp("https:\/\/josephessig-source\.github\.io\/pols1600_site\/");
+            var filterRegex = new RegExp('/' + window.location.host + '/');
           var isInternal = (href) => {
               return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
           }

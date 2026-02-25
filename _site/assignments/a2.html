@@ -350,7 +350,7 @@ $$</code></pre>
 <h1>Loading and summarizing Data in R.</h1>
 <p>I don’t expect you to have the final data you will use in for your analysis all set up and ready to go.</p>
 <p>I do expect you to try and find at least some potential data set that might be useful.</p>
-<p>It can be something we’ve worked with in class like the Covid-19 data or something you’ve downloaded from the web, pulled from the replication files of a published paper, or constructed yourself in a .csv file. See these slides <a href="https://josephessig-source.github.io/pols1600_site/loading-data-into-r" target="_blank">on loading data into R</a>.</p>
+<p>It can be something we’ve worked with in class like the Covid-19 data or something you’ve downloaded from the web, pulled from the replication files of a published paper, or constructed yourself in a .csv file. See these slides <a href="https://josephessig-source.github.io/pols1600_site/slides/01-slides.html#/loading-data-into-r" target="_blank">on loading data into R</a>.</p>
 <p>Similarly, I don’t expect you to produce a full set of descriptive tables and figures, although you’re welcome to do as much as you like. At a minimum, after you’ve successfully loaded the data into R, try to get a High Level Overview of the Data and calculate some simple summary statistics.</p>
 <p>Again, use the slides and past assignments as templates. Use Quarto’s sections and code chunks to structure your tasks.</p>
 </section>
@@ -628,7 +628,7 @@ $$</code></pre>
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/josephessig-source\.github\.io\/pols1600_site\/");
+        var filterRegex = new RegExp('/' + window.location.host + '/');
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
