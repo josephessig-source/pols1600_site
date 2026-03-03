@@ -10,3 +10,5 @@ Untitled.Rmd
 /.quarto/
 .github
 
+
+**/*.quarto_ipynb
