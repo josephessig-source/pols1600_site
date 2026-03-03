@@ -819,7 +819,7 @@ Let's [load, inspect, and recode]{.blue} some data from the [2016 NES](https://e
 
 ```{r}
 # Load data from 2016 NES
-load(url("https://pols1600.paultesta.org/files/data/nes.rda"))
+load(url("https://josephessig-source.github.io/pols1600_site/files/data/nes.rda"))
 
 
 ```
@@ -868,19 +868,21 @@ Let's estimate the following models:
 
 
 
-$$\text{m1: tc_diff} = \beta_0 + \beta_1\text{interested}+\epsilon $$ 
+Let's estimate the following models:
 
-$$\text{m2: tc_diff} = \beta_0 + \beta_1\text{pol_interest}+\epsilon$$ 
+$$\text{m1: tc\_diff} = \beta_0 + \beta_1\text{interested}+\epsilon$$ 
 
-$$\text{m3: tc_diff} = \beta_0 + \beta_1\text{pol_interest_f} +\epsilon$$ 
+$$\text{m2: tc\_diff} = \beta_0 + \beta_1\text{pol\_interest}+\epsilon$$ 
 
-$$\text{m4: tc_diff} = \beta_0 + \beta_1\text{interested} + \beta_2\text{age} +\epsilon$$ 
+$$\text{m3: tc\_diff} = \beta_0 + \beta_1\text{pol\_interest\_f} +\epsilon$$ 
 
-$$\text{m5: tc_diff} = \beta_0 + \beta_1\text{interested} + \beta_2\text{age} + \beta_3\text{interested} \times \text{age}+\epsilon$$ 
+$$\text{m4: tc\_diff} = \beta_0 + \beta_1\text{interested} + \beta_2\text{age} +\epsilon$$ 
 
-$$\text{m6: tc_diff} = \beta_0 + \beta_1\text{age} + \beta_2\text{income} +\epsilon$$
+$$\text{m5: tc\_diff} = \beta_0 + \beta_1\text{interested} + \beta_2\text{age} + \beta_3\text{interested} \times \text{age}+\epsilon$$ 
 
-$$\text{m7: tc_diff} = \beta_0 + \beta_1\text{age} + \beta_2\text{income} + \beta_4\text{age}\times \text{income}+\epsilon $$
+$$\text{m6: tc\_diff} = \beta_0 + \beta_1\text{age} + \beta_2\text{income} +\epsilon$$
+
+$$\text{m7: tc\_diff} = \beta_0 + \beta_1\text{age} + \beta_2\text{income} + \beta_4\text{age}\times \text{income}+\epsilon $$
 
 ## Skills
 
@@ -2357,21 +2359,10 @@ The core thesis of Red Covid is something like the following:
 
 ## Loading data from the Census
 
-If you worked through the instructions [here]() and  installed `tidycensus` and a Census API key on your machine, you should be able to run the following:
+Just uncomment the code below:
 
 ```{r}
-#| label: acs_data
-acs_df <- tidycensus::get_acs(geography = "state", 
-              variables = c(med_income = "B19013_001",
-                            med_age = "B01002_001"), 
-              year = 2019)
-```
-
-If not, no worries, just uncomment the code below:
-
-```{r}
-# Uncomment if get_acs() doesn't work:
-# load(url("https://josephessig-source.github.io/pols1600_site/files/data/acs_df.rda"))
+load(url("https://josephessig-source.github.io/pols1600_site/files/data/acs_df.rda"))
 
 ```
 
@@ -2380,8 +2371,6 @@ If not, no worries, just uncomment the code below:
 ::: panel-tabset
 
 ## Task
-
-`get_acs()` returns data whose [unit of analysis]{.blue} is roughly a [state-variable]{.blue}
 
 We need to [reshape]{.blue} `acs_df` using `pivot_wider()` so that the [unit of analysis]{.blue} is just a [state]{.blue}, and each column variable is a [column]{.blue}
 
@@ -2441,7 +2430,7 @@ covid_df <- covid_df %>% left_join(
   acs_df,
   by = c("state" = "state")
 )
-dim(covid_df)  # Same number of rows as tmp w/ 2 additional columns
+dim(covid_df) 
 
 ```
 
@@ -2571,6 +2560,3 @@ covid_lab %>%
 
 :::::
 
-
-
-## References

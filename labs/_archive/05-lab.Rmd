@@ -1,0 +1,606 @@
+---
+title: 'Lab 05 - Examining the Phenomena of Red Covid'
+author: "Your Group Members Names Here"
+date: "Last Updated `r format(Sys.Date())`"
+output:
+  html_document:
+    theme: journal
+    toc: TRUE
+    toc_float: TRUE
+    toc_depth: 2
+    number_sections: TRUE
+---
+
+```{r setup, include = FALSE, cache = FALSE}
+knitr::opts_chunk$set(error = TRUE, 
+                      comment = NA, 
+                      warnings = FALSE, 
+                      errors = FALSE, 
+                      messages = FALSE, 
+                      cache = TRUE,
+                      tidy = FALSE)
+```
+
+<style>
+div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}
+</style>
+
+
+
+# Overview {-}
+
+Today we will explore the phenomena of "Red Covid" discussed by the *NYT*'s David Leonhardt in articles last fall [here](https://www.nytimes.com/2021/09/27/briefing/covid-red-states-vaccinations.html) and more recently [here](https://www.nytimes.com/2021/09/27/briefing/covid-red-states-vaccinations.html). 
+
+The core thesis of Red Covid is something like the following:
+
+Since Covid-19 vaccines became widely available to the general public in the spring of 2021, Republicans have been less likely to get the vaccine. Lower rates of vaccination among Republicans have in turn led to higher rates of death from Covid-19 in Red States compared to Blue States.
+
+In this lab, we'll reproduce some basic evidence of this phenomena, using bivariate linear regression as a tool to summarize and describe relationships. 
+
+Next week, we'll see how multiple regression (linear regression with multiple predictors) can be used to assess alternative explanations for the patterns we see.
+
+
+To accomplish this we will:
+
+1. Set up our work space (2-3 Minutes)
+
+2. Load data on Covid-19 and the 2020 Election. (5 Minutes)
+
+3. Describe the structure of these two datasets (5 Minutes)
+
+4. Transform the datasets so we can analyze them (10 minutes)
+
+5. Merge the election data into our Covid-19 data (5 minues)
+
+6. Calculate the average number new Covid-19 deaths in Red and Blue States (5 minutes)
+
+7. Calculate the average number new Covid-19 deaths in Red and B
+Blue States using linear regression (10 minutes)
+
+8. Explore the relationships between Republican vote share, vaccination rates, and deaths from Covid-19 on September 23, 2021 (10 minutes)
+
+9. Visualize the relationships between Republican vote share, vaccination rates, and deaths from Covid-19 on September 23, 2021 (15-20 minutes)
+
+10. Discuss some alternative explanations for these relationships (5-10 minutes)
+
+11. Take the weekly survey (2-3 minutes)
+
+One of these 10 tasks (excluding the weekly survey) will be randomly selected as the graded question for the lab.
+
+You will work in your assigned groups. **Only one member of each group needs to submit the html file of lab.**
+
+This lab **must** contain the names of the group members in attendance. 
+
+If you are attending remotely, you will submit your labs individually.
+
+Here are your assigned groups for the semester.
+
+```{r groups, echo=F}
+groups_df <- tibble::tibble(
+`Group 1` = c("Anna Lister", "Kate Kuli", "Andreas Young", "Claudia Spelman",""),
+`Group 2` = c("Elizabeth Steeves","Fabian Lopez","Lorenzo Mahoney", "Ariana Palomo",""),
+`Group 3` = c("Will Lake","Taha Siddiqui" , "Amanda Page", "Noah Soutier",""),
+`Group 4` = c("Georgia Kennedy-Bailey","Samuel Levine", "Elie Lubin", "Bianca Rosen",""),
+`Group 5` = c("Theo Simmons","Fengyu Seah", "Hunter Keneley", "Schuyler Dubitsky",""),
+`Group 6` = c("Logan Torres", "Jonathan Zhang", "Osiris Russell-Delano", "Aicha Sama",""),
+`Group 7` = c("Natalia Ibarra", "Khaled Abdo", "Starrchild Jackson", "Selene Luna", "Yoo Min Lee")
+)
+
+DT::datatable(groups_df)
+```
+
+# Goals {-}
+
+Conceptually, this lab is designed to help reinforce the relationship between linear models like $y=\beta_0 + \beta_1x$ and the conditional expectation function $E[Y|X]$. 
+
+- Questions 1-5 are designed to reinforce your **data wrangling** skills. In particular, you will get practice:
+  - Creating and recoding variables using `mutate()`
+  - Calculating a [moving average](https://en.wikipedia.org/wiki/Moving_average) or rolling mean using the `rollmean()` function from the `zoo` package
+  - Transforming the data on presidential elections so that it can be merged with the data on Covid-19 using the `pivot_wider()` function.
+  - [Merging data](https://r4ds.had.co.nz/relational-data.html) together using the `left_join()` function.
+
+- In question 6, you will see how calculating conditional means provides a simple test of "Red Covid" claim.
+
+- In question 7, you will see how a linear model returns the same information as these conditional means (in a sligthly different format)
+
+- In question 8, you will get practice interpreting linear models with continuous predictors (i.e. predictors that take on a range of values)
+
+- In question 9, you will get practice visualizing these models and using the figures help interpret your results substantively.
+
+- Question 10 asks you to play the role of a skeptic and consider what other factors might explain the relationships we found in Questions 6-9. We will explore these factors in next week's lab.
+
+
+
+# Please knit this .Rmd file {-}
+
+As with every lab, you should:
+
+- Download the file
+- Save it in your course folder
+- **Update the `author:` section of the YAML header to include the names of your group members in attendance.**
+- Knit the document
+- Open the html file in your browser (Easier to read)
+- Knit the document again after completing a section or chunk (Error checking)
+- Upload the final lab to [Canvas](https://canvas.brown.edu/courses/1087979/assignments/7870523?module_item_id=10762397){target="_blank"}.
+
+
+
+# Set up your workspace
+
+1. **In the code chunk below, please set up your work space by loading more packages, using the [code from slides 9-11 from Tuesday's class](https://pols1600.paultesta.org/slides/05-slides.html#9){target="_blank"}**
+
+
+```{r extendedsetup, message=F}
+# List of packages
+
+
+
+# Define ipak function to load packages
+
+
+# Use ipak function to load packages
+
+```
+
+
+----
+
+#  Load the data for today.
+
+Next we'll load data to explore the phenomenon of *Red Covid* 
+
+## Load Covid-19 data
+
+First we'll need data on Covid-19 cases and deaths that we've worked with throughout the course.
+
+**In the chunk below, please write code to load data on Covid-19 in the states using the `covid19()` function from the `COVID19` package. ([slides](https://pols1600.paultesta.org/slides/05-slides.html#13){target="_blank"})**
+
+```{r covid}
+# Load covid-19 data
+
+```
+
+
+## Load Election Data
+
+Next we need data on the 2020 presidential election. 
+
+**In the code chunk below, write code that will download data presidential elections from 1976 to 2020 from the MIT Election Lab's dataverse.** 
+
+The code you'll need is [here](https://pols1600.paultesta.org/slides/05-slides.html#21){target="_blank"}
+
+
+
+```{r pres_data, message=F}
+# Load election data
+
+```
+
+- `Sys.setenv("DATAVERSE_SERVER" = "dataverse.harvard.edu")` sets a parameter in your `R` enivornment that tells the `dataverse` package to use Harvard's dataverse
+- `get_dataframe_by_name()` downloads the `"1976-2020-president.tab"` file from the [U.S. President 1976–2020 dataverse](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/42MVDX) using its digital object identifier (DOI): doi:10.7910/DVN/42MVDX
+- If this doesn't work, you can use `load(url("https://pols1600.paultesta.org/files/data/pres_df.rda"))` instead
+
+# Describe the structure of each dataset
+
+1. **Specifically what is the unit of observation? Substantively, what do rows in `covid` and `pres_df` correspond to?** 
+
+
+You may want to use the code chunk below to get a quick high-level overview of the data
+  
+```{r hlo}
+# Take a quick look at your two data sets
+
+
+```
+
+
+# Transform data for analysis.
+
+Ok, so our main data set on Covid-19 describes the state of the pandemic in a given state on a given date. To explore the concept of *Red Covid*, we'll need to add data on the 2020 election to distinguish Red States from Blue States.
+
+To accomplish this, we're going to need to:
+
+- Recode the Covid-19 data like we've done before
+- Reshape and recode the presidential election data.
+
+## Recode the Covid-19 data 
+
+In the chunk below, **please recode the `covid` data to create a `covid_us` data set**, again using code from the slides as your guide, starting [here](https://pols1600.paultesta.org/slides/05-slides.html#14){target="_blank"} and ending [here](https://pols1600.paultesta.org/slides/05-slides.html#20){target="_blank"}
+
+```{r covid19recode}
+# Create a vector containing of US territories
+
+
+# Filter out Territories and create state variable
+
+
+# Calculate new cases, new cases per capita, and 7-day average
+
+
+
+# Recode facemask policy (Not strictly necessary so feel free to skip)
+
+
+# Create year-month and percent vaccinated variables
+
+
+```
+
+
+## Create new measures of the 7-day and 14-day averages of new deaths from Covid-19 per 100,000 residents
+
+Using the code from this [slide](https://pols1600.paultesta.org/slides/05-slides.html#15){target="_blank"} as a guide:
+
+- Anywhere you see `new_cases` write `new_deaths`
+- Anywhere you see `confirmed` write `deaths`
+- For the 14-day average, copy the code for `new_deaths_pc_7da` change the `new_deaths_pc_7da` to `new_deaths_pc_14da` and set `k=14` in the `zoo::rollmean()`
+- Remember to save the output of `mutate()` back into `covid_us`
+
+```{r deaths}
+# Create the following variables:
+# new_deaths
+# new_deaths_pc
+# new_deaths_pc_7da
+# new_deaths_pc_14da
+
+```
+
+
+## Reshape and recode the presidential election data.
+
+We want to add election data to our Covid-19 data. To do this, we need to transform our election data, which is structured by candidate-state-election, into a data set that contains the election results by state for 2020.
+
+Using the code from this [slide](https://pols1600.paultesta.org/slides/05-slides.html#23) transform `pres_df` to create a new  data frame called `pres2020_df` by
+
+- Creating a copy of the year variable called `year_election`
+  - This is a stupid technical thing for merging later...
+
+- Taking the `state` variable which was `ALLCAPS` and turning into `Title Case` using the `str_to_title()` function
+
+- Changing the observations of `state` which are now `"District Of Columbia"` to `"District Of Columbia"`
+
+- Filtering the data to include only candidates from the Democratic and Republican Parties
+
+- Filtering the data to inlcude only the results from the 2020 election.
+
+- Selecting the `state`, `state_po`, `year_election`, `party_simplified`, `candidatevotes` and `totalvotes` columns from `pres_df`
+
+- Pivoting the `candidatevotes` into two new columns with names from the `party_simplified` column
+
+- Creating measures of the Democratic (`dem_voteshare`)and Republican (`rep_voteshare`) canditdates' vote shares in each state by dividing the new `DEMOCRAT` and `REPUBLICAN` columns by the values from the `totalvotes` column
+
+- Creating a variable called `winner` which takes a value of `"Trump"` if the `rep_voteshare` variable for a state is greater than the `dem_voteshare` for a state.
+
+- Making the `winner` variable a factor, with `Trump` as the first level and `Biden` as the second level 
+  - This is a trick for `ggplot` so that if we want to use `winner` to color points on a scatter plot, the points for Trump observations will show up as red and the points for Biden observations will show as blue.
+
+- Saving the output of these transformations to an data frame called `pres2020_df`
+
+Which, I know sounds like a lot, but... 
+
+**All you need to do is copy and paste the code from this [slide](https://pols1600.paultesta.org/slides/05-slides.html#23){target="_blank"}.**
+
+```{r pres_wrangle}
+# Transform Presidential Election data
+
+```
+
+
+# Merge the election data into the Covid-19 data
+
+Now that we've got our election data structured as electoral results per state, we can merge this state-level data into our Covid-19 data, using the common variable `state` in each data frame.
+
+- **In the code chunk below, use the `left_join()` command to merge the `pres2020_df` data into the `covid_us` data.** 
+
+Again, you should be able to just copy and paste the code from [here](https://pols1600.paultesta.org/slides/05-slides.html#30){target="_blank"}
+
+```{r merge_pres}
+# Merge in Presidential Data
+```
+
+--------------------------------------------------------------
+
+Ok. That was a lot of code just to get the data set up to do some simple analyses^[Which is why so much of the start of this course has been focused on developing our coding skills].
+
+Let's start with some simple descriptive statistics.
+
+
+# Calculate the average number new Covid-19 deaths in Red and Blue States
+
+## For all the observations
+
+With the `covid_us` data set:
+
+- use the `group_by()` command to have `summarise()` calculate values separately by the `winner` of each state.
+- use the `summarise()` command with `mean()` function to calculate the average number of new deaths (`new_deaths`) and the average of the 7-day rolling average of new deaths per 100,000 citizens (`new_deaths_pc_7da`) 
+  - Remember to tell `mean()` what to do with NAs using the `na.rm` argument.
+
+```{r redcovidall}
+# Calculate the mean number of new_deaths and new_deaths_pc_7da
+
+```
+
+
+## For the all the observations before April 19, 2021
+
+Now let's compare one of the **empirical implications** of Leonhardt's claims, specifically that "Red Covid" emerged as a phenomena because Republicans were less  willing to take the vaccine. 
+
+If that's true, then the differences between Red and Blue states in terms of new deaths and new deaths per 100,000 residents should be smaller or reversed (i.e. more deaths in Blue states compared to Red States)
+
+- In the code chunk below, take the your code from the previous chunk, and use the `filter()` command to subset the data to include only obsevations with a value of `date` less than `"2021-04-19`
+
+```{r redcovidearly}
+# Calculate the mean number of new_deaths and new_deaths_pc_7da before April 19, 2021
+```
+
+
+## For the all the observations after April 19, 2021
+
+Similarly, if Leonhardt's claim is true, then the differences between Red and Blue states should be more evident in the period after the vaccine became widely available.
+
+- In the code chunk below, take the your code from the previous chunk, and use the `filter()` command to subset the data to include only obsevations with a value of `date` greater than `"2021-04-19`
+
+```{r redcovidlate}
+# Calculate the mean number of new_deaths and new_deaths_pc_7da after April 19, 2021
+```
+
+
+
+- **Please interpret the results of this analysis here**
+
+- When we look at the difference in the average number of new deaths between Red and Blue States in the full dataset, we see that ...
+
+- However, when we  consider differences in the 7-day average of new deaths per 100,000 residents, we see that ...
+
+- When we limit our analysis, to just observations before April 19, 2021 ...
+
+- When we look at observations after the vaccine became widely available ...
+
+
+
+# Calculate the average number new Covid-19 deaths in Red and Blue States using linear regression
+
+Now let's see how a linear model can be used to estimate conditional means. 
+
+Please estimate the following models using the `lm()` function:
+
+\[
+\text{New Deaths} = \beta_0 + \beta_1 \text{Election Winner} + \epsilon
+\]
+
+\[
+\text{7-day average of New Deaths (per 100k)} = \beta_0 + \beta_1 \text{Election Winner} + \epsilon
+\]
+
+Save the output of lm into objects called `m1` and `m2` and display the results of each model (by printing the objects on their own line)
+
+```{r m1m2}
+# Fit m1
+
+# Fit m2
+
+
+# Interpret model coefficients in terms of conditional means
+
+```
+
+- **Please interpret the coefficients of these models in terms of the conditional means you estimated for all the observations in the previous section**
+
+
+- The intercept corresponds to ...
+
+- The coefficient on winner corresponds to... 
+
+- The intercept plus the coefficient corresponds to ...
+
+-------------
+
+Neat. So this simple bivariate model with a binary predictor (a predictor that takes a value of 0 for states Trump won and 1 for states Biden won) is an example of a case where the conditional expectation function is identical to linear regression. As we will see below, for models with continous variables, linear regression provides a linear estimate of the conditional expectation function.
+
+
+
+# Explore the relationships between Republican vote share, vaccination rates, and deaths from Covid-19 on September 23, 2021
+
+Let's tease out some further implications Leonhardt's claim. 
+
+- If vaccines are effective at reducing deaths from Covid-19, then the coefficient on $\beta_1$ in the following model should be **PUT YOUR ANSWER HERE (NEGATIVE/POSITIVE)**
+
+\[
+\text{m3} =\text{14-day average of New Deaths (per 100k)} = \beta_0 + \beta_1 \text{Percent Vaccinated}
+\]
+
+- If Republicans are less likely to take the vaccine, then as the share of State's population that voted for Trump increases, we'd expect the percent of that state's population that is vaccinated to **PUT YOUR ANSWER HERE** and the so the coefficient on  $\beta_1$ in the following model should be **PUT YOUR ANSWER HERE**
+
+\[
+\text{m4} =\text{Percent Vaccinated} = \beta_0 + \beta_1 \text{Republican Vote Share}
+\]
+
+- Finally, if we find the expected relationships in models `m3` and `m4` above, we would expect the relationship between Trump's vote share new deaths from Covid-19 per 100,000 residents to be **PUT YOUR ANSWER HERE** in the following model:
+
+\[
+\text{m5} =\text{14-day average of New Deaths (per 100k)} = \beta_0 + \beta_1 \text{Republican Vote Share}
+\]
+
+
+---------------------
+
+Now let's estimate these models!
+
+For comparability, we will limit our analysis to just the observations from Sept 23, 2021, that Leonhardt used in his [article in the fall](https://www.nytimes.com/2021/09/27/briefing/covid-red-states-vaccinations.html) and use the 14-day average, rather than the 7-day average we've discussed so far, since that's what Leonhardt uses.
+
+In the code chunk below, use `lm()` to estimate the relationship between:
+
+- Deaths modeled by percent vaccinated on 2021-09-23 (`new_deaths_pc_14da ~ percent_vaccinated`)
+
+- Percent vaccinated modeled by Republican Vote share on 2021-09-23 (`percent_vaccinated ~ ???`)
+
+- Deaths modeled by Republican vote share on 2021-09-23
+
+To estimate these models using only data from September 23, 2021, place the following argument: `subset = date == "2021-09-23"` after the `data = covid_us` argument in `lm()` in each of your models. 
+
+Remember to separate arguments in lm using a comma ( `lm(formula = ??? ~ ???, data = ???, subset = ??? == ???)`)
+
+Please assign the output of each model to objects called `m3`, `m4`, and `m5`. Place these objects on their own line and interpret the results.
+
+```{r m3m4m5}
+# Deaths modeled by percent vaccinated on 2021-09-23
+
+
+#  Percent vaccinated modeled by Republican vote share on 2021-09-23
+
+
+# Deaths modeled by Republican vote share on 2021-09-23
+
+
+```
+
+- **Do your models' estimates match your expectations?** That is do the coefficients on each of the predictors have the expected sign (positive or negative), that you wrote above? Please write one sentence for each model, describing how the outcome in that model is expected to change with a unit change in the predictor
+
+[Yes/No].
+
+
+- A one percentage point increase in the percent of a state's population that is vaccinated is associated with a ...
+
+- A one percentage point increase in the ...
+
+- A ...
+
+# Visualize the relationships between Republican Vote Share and deaths from Covid-19 on September 23, 2021
+
+Now, let's visualize the results of the model `m5` from the previous section.
+
+In the code chunk below, uncomment the code to produce a basic figure, for model `m5`
+
+```{r}
+# # # # Data for plot
+# covid_us %>%
+#   # Only use observations from September 23, 2021
+#   filter(date == "2021-09-23") %>%
+#   # Exclude DC
+#   filter(state != "District of Columbia") %>%
+#   # Set aesthetics
+#   ggplot(aes(x = rep_voteshare,
+#              y = new_deaths_pc_14da))+
+#   # Set geometries
+#   geom_point(aes(col=rep_voteshare),size=2,alpha=.5)+
+#   # Include the linear regression of lm(new_deaths_pc_14da ~ rep_voteshare)
+#   geom_smooth(method = "lm", se=F, 
+#               col = "grey", linetype =2) -> fig_m5
+# 
+# # Display figure
+# fig_m5
+```
+
+Now let's explore ways to improve this figure. 
+
+**In the code chunk below, please improve `fig_m5`**
+
+```{r}
+# Mess around with figure fig_m5 in this code chunk
+```
+
+
+Play around with different options and themes by adding elements to `fig_m5` ( literally `fig_m5 + ...`). You might try some of the following:
+
+
+- Better labels for the `x` and `y` axes using `lab()`. Maybe even include a `title`
+
+- Changing the `theme` of the plot. Try out the following themes `ggtheme` package:
+
+  - `theme_bw()`
+  - `theme_classic()`
+  - `theme_tufte()`
+  - `theme_stata()`
+  - `theme_fivethirtyeight`
+  - `theme_economist()`
+  - `theme_wsj()`
+
+- Try adding a vertical line at the 50% threshold using `geom_vline()`. You'll need to set
+  - `xintercept = 50` 
+
+And may want to play around with arguments like:
+  - `col`
+  - `linetype`
+  - `size`
+
+```{r, eval=F}
+# Example of adding a vertical line
+fig_m5 + 
+  geom_vline(xintercept = 50, col = "orange")
+```
+
+
+- Try changing the color of the points using the following:
+
+```{r, eval=F}
+fig_m5 +  scale_color_gradient2(
+    midpoint = 50,
+    low = "blue", mid = "grey", high = "red",
+    guide = "none")
+```
+
+- Try annotating your graph with the `annotate()` function. You'll need to tell it:
+  - a `geom` this general "text" (ie `geom = "text")
+  - `x` and `y` coordinates for the label
+  - `label` this is the text of your annotation (`label = "my label text")
+
+```{r, eval = F}
+fig_m5 +  annotate(
+  geom = "text",
+  x = 50,
+  y = 1,
+  label = "Your label goes here"
+)
+```
+
+- Or maybe try adding state labels using the `geom_text_repel()` function
+  - You'll need to make sure `ggrepel` is installed and loaded (it should be)
+  - You could use a variable like `state_po` to add the postal codes to each dot
+  
+```{r, eval=F}
+fig_m5 +
+  geom_text_repel(aes(label = state_po))
+```
+
+
+- Or something else. Have fun with it, but don't let the perfect be the enemy of the good enough.
+
+![](https://i.kym-cdn.com/photos/images/newsfeed/001/018/899/936.jpg)
+
+**When you're finished exploring, please write the code for your new and improved `fig_m5` in the code chunk below**
+
+Here's an example fo what an improved `fig_m5` might look like
+
+```{r}
+# Updated fig_m5 code here
+
+
+```
+
+
+In the comments to this lab, I'll include some code to recreate as closely as possible, the first two figures from Leonhardt's September 27, 2021 [article.](https://www.nytimes.com/2021/09/27/briefing/covid-red-states-vaccinations.html)  
+
+
+
+# Alternative explanations for Red Covid
+
+Finally, let's consider some alternative explanations for why we might see an association between state partisanship and Covid-19 outcomes. 
+
+Think about factors that might be associated with both Covid-19 deaths and a state's Republican voteshare
+
+**Please write some alternative explanations for why we might see a relationship between the Republican Vote Share in a State and Covid-19 outcomes**
+
+- Alternative Explanation 1
+- Alternative Explanation 2
+- ...
+- Write as many as you want!
+
+
+If you're stumped, Leonhardt discusses some of these explanations in his November 2021 [article](https://www.nytimes.com/2021/11/08/briefing/covid-death-toll-red-america.html){target="_blank"} on the matter.
+
+
+# Take the Class Survey
+
+If you've got a moment please take a few moments to complete the [class survey](https://brown.co1.qualtrics.com/jfe/form/SV_6mUeyI7tqVURHQW){target="_blank"} for this week.
+
+
