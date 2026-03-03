@@ -819,7 +819,7 @@ Let's [load, inspect, and recode]{.blue} some data from the [2016 NES](https://e
 
 ```{r}
 # Load data from 2016 NES
-load(url("https://pols1600.paultesta.org/files/data/nes.rda"))
+load(url("https://josephessig-source.github.io/pols1600_site/files/data/nes.rda"))
 
 
 ```
@@ -2359,21 +2359,10 @@ The core thesis of Red Covid is something like the following:
 
 ## Loading data from the Census
 
-If you worked through the instructions [here]() and  installed `tidycensus` and a Census API key on your machine, you should be able to run the following:
+Just uncomment the code below:
 
 ```{r}
-#| label: acs_data
-acs_df <- tidycensus::get_acs(geography = "state", 
-              variables = c(med_income = "B19013_001",
-                            med_age = "B01002_001"), 
-              year = 2019)
-```
-
-If not, no worries, just uncomment the code below:
-
-```{r}
-# Uncomment if get_acs() doesn't work:
-# load(url("https://josephessig-source.github.io/pols1600_site/files/data/acs_df.rda"))
+load(url("https://josephessig-source.github.io/pols1600_site/files/data/acs_df.rda"))
 
 ```
 
@@ -2382,8 +2371,6 @@ If not, no worries, just uncomment the code below:
 ::: panel-tabset
 
 ## Task
-
-`get_acs()` returns data whose [unit of analysis]{.blue} is roughly a [state-variable]{.blue}
 
 We need to [reshape]{.blue} `acs_df` using `pivot_wider()` so that the [unit of analysis]{.blue} is just a [state]{.blue}, and each column variable is a [column]{.blue}
 
@@ -2443,7 +2430,7 @@ covid_df <- covid_df %>% left_join(
   acs_df,
   by = c("state" = "state")
 )
-dim(covid_df)  # Same number of rows as tmp w/ 2 additional columns
+dim(covid_df) 
 
 ```
 
@@ -2573,6 +2560,3 @@ covid_lab %>%
 
 :::::
 
-
-
-## References
