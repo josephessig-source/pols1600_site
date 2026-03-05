@@ -964,7 +964,7 @@ $$\text{If }\frac{\beta}{se} > 2 \to \text{Statistically Significant}$$
 
 ## m1
 
-$$\text{m1: tc_diff} = \beta_0 + \beta_1\text{interested}+\epsilon $$ 
+$$\text{m1: tc\_diff} = \beta_0 + \beta_1\text{interested}+\epsilon $$ 
 
 
 
@@ -1040,7 +1040,7 @@ fig_tc_m1
 
 ## m2
 
-$$\text{m2: tc_diff} = \beta_0 + \beta_1\text{pol_interest}+\epsilon$$ 
+$$\text{m2: tc\_diff} = \beta_0 + \beta_1\text{pol\_interest}+\epsilon$$ 
 
 
 
@@ -1116,7 +1116,7 @@ fig_tc_m2
 
 ## m3
 
-$$\text{m3: tc_diff} = \beta_0 + \beta_1\text{pol_interest_f} +\epsilon$$ 
+$$\text{m3: tc\_diff} = \beta_0 + \beta_1\text{pol\_interest\_f} +\epsilon$$ 
 
 
 
@@ -1233,7 +1233,7 @@ nes %>%
 
 ## m4
 
-$$\text{m4: tc_diff} = \beta_0 + \beta_1\text{interested} + \beta_2\text{age} +\epsilon$$ 
+$$\text{m4: tc\_diff} = \beta_0 + \beta_1\text{interested} + \beta_2\text{age} +\epsilon$$ 
 
 
 
@@ -1388,7 +1388,7 @@ fig_tc_m4_3d
 
 ## m5
 
-$$\text{m5: tc_diff} = \beta_0 + \beta_1\text{interested} + \beta_2\text{age} + \beta_3\text{interested} \times \text{age}+\epsilon$$ 
+$$\text{m5: tc\_diff} = \beta_0 + \beta_1\text{interested} + \beta_2\text{age} + \beta_3\text{interested} \times \text{age}+\epsilon$$ 
 
 
 
@@ -1539,7 +1539,7 @@ fig_tc_m5_3d
 
 ## m6
 
-$$\text{m6: tc_diff} = \beta_0 + \beta_1\text{age} + \beta_2\text{income} +\epsilon$$
+$$\text{m6: tc\_diff} = \beta_0 + \beta_1\text{age} + \beta_2\text{income} +\epsilon$$
 
 
 
@@ -1722,7 +1722,7 @@ fig_tc_m6_3d
 
 ## m7
 
-$$\text{m7: tc_diff} = \beta_0 + \beta_1\text{age} + \beta_2\text{income} + \beta_4\text{age}\times \text{income}+\epsilon $$
+$$\text{m7: tc\_diff} = \beta_0 + \beta_1\text{age} + \beta_2\text{income} + \beta_4\text{age}\times \text{income}+\epsilon $$
 
 
 ```{r}
