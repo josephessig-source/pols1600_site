@@ -24,11 +24,10 @@ The final project that you will submit for this class consists of the following:
 7. Appendix (10 percent ~ Variable codebook and all the R code for your project)
 
 
-The specific expectations for each section are discussed in further detail in [Assignment 4](/assignments/a4){target="blank"}
+The specific expectations for each section will be discussed in further detail in your next assignment. 
 
 
 Our focus this week will be on the logistical aspects of your final project
-
 
 - <a href="pols1600_paper_template.qmd" download="" >Downloading the template</a> for your final paper
 - Making sure you're set up for collaboration with GoogleDrive
