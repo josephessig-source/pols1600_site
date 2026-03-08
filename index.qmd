@@ -127,7 +127,7 @@ labs <- c(
     paste0(
     "labs/",
   stringr::str_pad(0:13, 2, pad = "0"),
-  "-lab.qmd ",
+  "-lab.qmd",
   "\" download >"
   ),
   as.character(fa("laptop-file")),
