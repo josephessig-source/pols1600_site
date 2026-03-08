@@ -211,11 +211,17 @@
       margin-right: 0; 
     }
   </style>
+  <script src="../site_libs/kePrint-0.0.1/kePrint.js"></script>
+
+  <link href="../site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+
+  <link href="../site_libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
+
   <script src="../site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
 
   <link href="../site_libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
 
-  <script src="../site_libs/datatables-binding-0.33/datatables.js"></script>
+  <script src="../site_libs/datatables-binding-0.34.0/datatables.js"></script>
 
   <script src="../site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 
@@ -225,15 +231,9 @@
 
   <script src="../site_libs/dt-core-1.13.6/js/jquery.dataTables.min.js"></script>
 
-  <link href="../site_libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet">
+  <link href="../site_libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
 
-  <script src="../site_libs/crosstalk-1.2.1/js/crosstalk.min.js"></script>
-
-  <script src="../site_libs/kePrint-0.0.1/kePrint.js"></script>
-
-  <link href="../site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
-
-  <link href="../site_libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
+  <script src="../site_libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
 
 </head>
 <body class="quarto-light">
@@ -247,7 +247,7 @@
 <div class="quarto-title-authors">
 </div>
 
-  <p class="date">Updated Nov 6, 2025</p>
+  <p class="date">Updated Mar 8, 2026</p>
 </section>
 <section>
 <section id="overview" class="title-slide slide level1 inverse center">
@@ -257,9 +257,7 @@
 <section id="class-plan" class="slide level2">
 <h2>Class Plan</h2>
 <ul>
-<li class="fragment">Announcements (2-3 min)</li>
-<li class="fragment">Setup (2-3 min)</li>
-<li class="fragment">Feedback (15 min)</li>
+<li class="fragment">Announcements</li>
 <li class="fragment">Topics:
 <ul>
 <li class="fragment">What does it mean to control for X</li>
@@ -283,11 +281,8 @@
 <section id="annoucements" class="slide level2">
 <h2>Annoucements</h2>
 <ul>
-<li class="fragment"><a href="https://pols1600.paultesta.org/assignments/a1" target="_blank">Assignment 1: Research Questions</a> Feedback end of today
-<ul>
-<li class="fragment">Feedback by class on Thursday</li>
-</ul></li>
-<li class="fragment"><a href="https://pols1600.paultesta.org/assignments/a2" target="_blank">Assignment 2 Data:</a> due Friday March 22</li>
+<li class="fragment"><p><a href="https://josephessig-source.github.io/pols1600_site/assignments/a2.html/" target="_blank">Assignment 2 Data:</a> due Sunday March 15</p></li>
+<li class="fragment"><p>Lab 5 grades will be posted this week.</p></li>
 </ul>
 </section>
 <section id="setup-packages-for-today" class="slide level2">
@@ -301,102 +296,379 @@
 <span id="cb1-6"><a></a>  <span class="st">"tidyverse"</span>, <span class="st">"lubridate"</span>, <span class="st">"forcats"</span>, <span class="st">"haven"</span>, <span class="st">"labelled"</span>,</span>
 <span id="cb1-7"><a></a>  <span class="do">## Extensions for ggplot</span></span>
 <span id="cb1-8"><a></a>  <span class="st">"ggmap"</span>,<span class="st">"ggrepel"</span>, <span class="st">"ggridges"</span>, <span class="st">"ggthemes"</span>, <span class="st">"ggpubr"</span>, </span>
-<span id="cb1-9"><a></a>  <span class="st">"GGally"</span>, <span class="st">"scales"</span>, <span class="st">"dagitty"</span>, <span class="st">"ggdag"</span>, <span class="st">"ggforce"</span>,</span>
+<span id="cb1-9"><a></a>  <span class="st">"scales"</span>, <span class="st">"dagitty"</span>, <span class="st">"ggdag"</span>, <span class="st">"ggforce"</span>,</span>
 <span id="cb1-10"><a></a>  <span class="co"># Data </span></span>
 <span id="cb1-11"><a></a>  <span class="st">"COVID19"</span>,<span class="st">"maps"</span>,<span class="st">"mapdata"</span>,<span class="st">"qss"</span>,<span class="st">"tidycensus"</span>, <span class="st">"dataverse"</span>, </span>
 <span id="cb1-12"><a></a>  <span class="co"># Analysis</span></span>
 <span id="cb1-13"><a></a>  <span class="st">"DeclareDesign"</span>, <span class="st">"easystats"</span>, <span class="st">"zoo"</span></span>
 <span id="cb1-14"><a></a>)</span>
 <span id="cb1-15"><a></a></span>
-<span id="cb1-16"><a></a><span class="do">## Define a function to load (and if needed install) packages</span></span>
-<span id="cb1-17"><a></a></span>
-<span id="cb1-18"><a></a>ipak <span class="ot">&lt;-</span> <span class="cf">function</span>(pkg){</span>
-<span id="cb1-19"><a></a>    new.pkg <span class="ot">&lt;-</span> pkg[<span class="sc">!</span>(pkg <span class="sc">%in%</span> <span class="fu">installed.packages</span>()[, <span class="st">"Package"</span>])]</span>
-<span id="cb1-20"><a></a>    <span class="cf">if</span> (<span class="fu">length</span>(new.pkg)) </span>
-<span id="cb1-21"><a></a>        <span class="fu">install.packages</span>(new.pkg, <span class="at">dependencies =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb1-22"><a></a>    <span class="fu">sapply</span>(pkg, require, <span class="at">character.only =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb1-23"><a></a>}</span>
-<span id="cb1-24"><a></a></span>
-<span id="cb1-25"><a></a><span class="do">## Install (if needed) and load libraries in the_packages</span></span>
-<span id="cb1-26"><a></a><span class="fu">ipak</span>(the_packages)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-16"><a></a><span class="fu">lapply</span>(the_packages, library, <span class="at">character.only =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>   kableExtra            DT        texreg     htmltools     tidyverse 
-         TRUE          TRUE          TRUE          TRUE          TRUE 
-    lubridate       forcats         haven      labelled         ggmap 
-         TRUE          TRUE          TRUE          TRUE          TRUE 
-      ggrepel      ggridges      ggthemes        ggpubr        GGally 
-         TRUE          TRUE          TRUE          TRUE          TRUE 
-       scales       dagitty         ggdag       ggforce       COVID19 
-         TRUE          TRUE          TRUE          TRUE          TRUE 
-         maps       mapdata           qss    tidycensus     dataverse 
-         TRUE          TRUE          TRUE          TRUE          TRUE 
-DeclareDesign     easystats           zoo 
-         TRUE          TRUE          TRUE </code></pre>
-</div>
-</div>
-</section>
-<section id="feedback" class="slide level2 center">
-<h2>Feedback</h2>
-</section>
-<section id="what-did-we-like" class="slide level2 smaller">
-<h2>What did we like</h2>
-<div class="cell">
-<div class="cell-output-display">
-<div id="htmlwidget-5eb13ff819617bf42a38" style="width:100%;height:90%;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-5eb13ff819617bf42a38">{"x":{"filter":"none","vertical":false,"fillContainer":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17"],["I like the labs and working with my group.","I have liked the guided lab as I feel like my group is not prepared to work together fully to solve lab problems","That we work with recent data which makes it more engaging.","I really liked creating the regression tables and visualizing them. I feel like I see them in every scientific paper, and knowing how they're created makes it so much easier to understand them.","I like using Covid data because it's easier to apply to the data because we are familiar with it","I liked this lab a lot.","making graphs, learning about controlling for confounding variables","i like working in a group for the labs","I really enjoyed learning how to make figures/ plot data!","Felt a little lost by the explanations today","I am enjoying learning how to move around script and building a muscle in that sense. I also like how modern and applicable each dataset is","I actually really had fun at the lab this week, and even got ahead at certain points!","I really liked the lab this week! I thought it was super interesting and R is definitely starting to click for me.","Coming up with our research questions required me to understand previous reports I read from a quantitative research method perspective.","I enjoy the group work and I believe that there is a good balance between work done individually and things we walk through as a group.","I enjoyed the lab, a good level of trying and instruction","I like working in groups, it's been fun to meet new people."]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Likes<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"columnDefs":[{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"Likes","targets":1}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[5,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
-</div>
-</div>
-</section>
-<section id="what-did-we-dislike" class="slide level2 smaller">
-<h2>What did we dislike</h2>
-<div class="cell">
-<div class="cell-output-display">
-<div id="htmlwidget-9298019afa6d503ca340" style="width:100%;height:90%;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-9298019afa6d503ca340">{"x":{"filter":"none","vertical":false,"fillContainer":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17"],["Maybe I would like to have more time to write code and understand syntax outside of copying code chunks from slides and moving so quickly.","I feel like I still am not sure which commands to use when we get to more complicated problems.","Just trying to remember and keep track of all the parts of the labs. Not a bad thing and Professor Testa gives great breakdowns of the instructions.","How to change the color of points on a graph? I've just been copy pasting earlier code for that because otherwise it hasn't been working when I try to code it myself.","I just find it hard to catch up once I have made an error, but usually once I fix my error, I can use the instructions to try and catch up","How the summarise function works.","I wish I felt more confident in doing the basic coding for labs.","I think the variables and the statics of the graphs/coding we are doing is very hard to understand","N/A","I need you to explain more thoroughly what standard deviation and iscolating variables does.","Class moves a bit fast at times, especially labs","I am finding the final to be a bit hard to understand.","The tutorials (I'm also way behind so it's definitely my fault).","The speed at which lectures on Tuesdays take place can be discouraging","Some of the ways in which topic in experimentation and research studies are explained could be a little bit clearer. The mathematical equations are likely helpful for some but it may be a bit more beneficial if accompanied with more explanation.","I personally would enjoy a little more conceptual background of why we do certain things in R but recognize we might not have the time or be at the level as a class for that to be valuable.","One thing I've had trouble with lately is getting my labs to save properly, do I always have to go to file and then save as?"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Dislikes<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"columnDefs":[{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"Dislikes","targets":1}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[5,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
-</div>
-</div>
-</section>
-<section id="what-were-good-at" class="slide level2 smaller">
-<h2>What we’re good at</h2>
-<div class="cell">
-<div class="cell-output-display">
-<div id="htmlwidget-2e16c8ae8a713d4a2b4f" style="width:100%;height:90%;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-2e16c8ae8a713d4a2b4f">{"x":{"filter":"none","vertical":false,"fillContainer":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17"],["I think I understand pipe, mutate, and filter really well.","i can use the basic functions like dim and summary well","copy/paste :)","fitting linear regression models","uhhh, using the outline to properly layout my document","Linear regression models","linear regression models.","I can do the basic codes like dim, summary to see the data frames","I'm good at making a new code chunk.","I am good at creating graphs once I have the variables.","Figuring out/ trying to understand my errors and really reading through the code","Copy, paste, replace","Linear regression I guess.","creating co-chunks and halfpipes","I am able to interpret patterns code and use it to workshop backwards how I could create my own code.","Find solutions to things I don't know how to do","One thing I do really well in R is set up graphs."]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>code_skills<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"columnDefs":[{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"code_skills","targets":1}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[5,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
-</div>
-</div>
-</section>
-<section id="what-were-working-on" class="slide level2 smaller">
-<h2>What we’re working on</h2>
-<div class="cell">
-<div class="cell-output-display">
-<div id="htmlwidget-e5505f5f0de0e5330ef8" style="width:100%;height:90%;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-e5505f5f0de0e5330ef8">{"x":{"filter":"none","vertical":false,"fillContainer":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17"],["I think I want more time with summarise vs table functions and also just how to write some code syntactically such as ggplot. It would me nice to maybe have some site that shows syntax in R.","How to know when to use commands and apply them to conceptual questions like understanding how to use multiple commands together the right way","remembering all the codes for our data (ex. %&amp;gt;% and #). It gets a little confusing so I'm hoping to understand them more as time goes on.","the aesthetics and geometries of graphs","fast keys","Syntax of functions","the pipe function","","I wish I better understood what the code is actually doing. Like I know what it does but I don't actually understand why it's doing that which makes it harder to remember what code to use.","I wish i understood SD versus raw data. I was very confused by the lesson today conceptually when we hit the LM part\n","Memorizing each command! Knowing what to put down and when, but I think that will come naturally with more repetition like anything new","I think sometimes the tutorials are a bit difficult, and I wish we had more space to work on those in class.","Some of the functions that we used in the first few labs.","understanding how to write equations in R notation","One thing I wish I understood better is distinguishing between which functions use the pipe function and feeling more comfortable using that in my code.","Some general understandings of the environment and how variables are stored in R","I wish I understood how to find data myself and then download that data into R."]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>code_challenge<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"columnDefs":[{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"code_challenge","targets":1}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[5,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
-</div>
-</div>
-</section>
-<section id="how-are-we-doing" class="slide level2">
-<h2>How are we doing?</h2>
+<pre><code>[[1]]
+ [1] "kableExtra"    "texreg"        "see"           "report"       
+ [5] "parameters"    "performance"   "modelbased"    "insight"      
+ [9] "effectsize"    "datawizard"    "correlation"   "bayestestR"   
+[13] "easystats"     "DeclareDesign" "estimatr"      "fabricatr"    
+[17] "randomizr"     "haven"         "labelled"      "lubridate"    
+[21] "forcats"       "stringr"       "dplyr"         "purrr"        
+[25] "readr"         "tidyr"         "tibble"        "ggplot2"      
+[29] "tidyverse"     "stats"         "graphics"      "grDevices"    
+[33] "utils"         "datasets"      "methods"       "base"         
 
-<img data-src="07-slides_files/figure-revealjs/howwedoing-1.png" width="960" class="r-stretch"></section>
-<section id="dont-trust-the-polls" class="slide level2">
-<h2>Don’t trust the polls</h2>
+[[2]]
+ [1] "DT"            "kableExtra"    "texreg"        "see"          
+ [5] "report"        "parameters"    "performance"   "modelbased"   
+ [9] "insight"       "effectsize"    "datawizard"    "correlation"  
+[13] "bayestestR"    "easystats"     "DeclareDesign" "estimatr"     
+[17] "fabricatr"     "randomizr"     "haven"         "labelled"     
+[21] "lubridate"     "forcats"       "stringr"       "dplyr"        
+[25] "purrr"         "readr"         "tidyr"         "tibble"       
+[29] "ggplot2"       "tidyverse"     "stats"         "graphics"     
+[33] "grDevices"     "utils"         "datasets"      "methods"      
+[37] "base"         
 
-<img data-src="07-slides_files/figure-revealjs/figtrump-1.png" width="960" class="r-stretch"></section>
-<section id="section" class="slide level2">
-<h2></h2>
+[[3]]
+ [1] "DT"            "kableExtra"    "texreg"        "see"          
+ [5] "report"        "parameters"    "performance"   "modelbased"   
+ [9] "insight"       "effectsize"    "datawizard"    "correlation"  
+[13] "bayestestR"    "easystats"     "DeclareDesign" "estimatr"     
+[17] "fabricatr"     "randomizr"     "haven"         "labelled"     
+[21] "lubridate"     "forcats"       "stringr"       "dplyr"        
+[25] "purrr"         "readr"         "tidyr"         "tibble"       
+[29] "ggplot2"       "tidyverse"     "stats"         "graphics"     
+[33] "grDevices"     "utils"         "datasets"      "methods"      
+[37] "base"         
 
-<img data-src="07-slides_files/figure-revealjs/unnamed-chunk-10-1.png" width="960" class="r-stretch"></section>
-<section id="what-should-we-do-going-forward" class="slide level2">
-<h2>What should we do going forward?</h2>
-<ul>
-<li class="fragment">From me:
-<ul>
-<li class="fragment">Shorter labs</li>
-<li class="fragment">Shorter slides</li>
-<li class="fragment">More coding, less copy-pasting</li>
-</ul></li>
-<li class="fragment">From you?</li>
-</ul>
+[[4]]
+ [1] "htmltools"     "DT"            "kableExtra"    "texreg"       
+ [5] "see"           "report"        "parameters"    "performance"  
+ [9] "modelbased"    "insight"       "effectsize"    "datawizard"   
+[13] "correlation"   "bayestestR"    "easystats"     "DeclareDesign"
+[17] "estimatr"      "fabricatr"     "randomizr"     "haven"        
+[21] "labelled"      "lubridate"     "forcats"       "stringr"      
+[25] "dplyr"         "purrr"         "readr"         "tidyr"        
+[29] "tibble"        "ggplot2"       "tidyverse"     "stats"        
+[33] "graphics"      "grDevices"     "utils"         "datasets"     
+[37] "methods"       "base"         
+
+[[5]]
+ [1] "htmltools"     "DT"            "kableExtra"    "texreg"       
+ [5] "see"           "report"        "parameters"    "performance"  
+ [9] "modelbased"    "insight"       "effectsize"    "datawizard"   
+[13] "correlation"   "bayestestR"    "easystats"     "DeclareDesign"
+[17] "estimatr"      "fabricatr"     "randomizr"     "haven"        
+[21] "labelled"      "lubridate"     "forcats"       "stringr"      
+[25] "dplyr"         "purrr"         "readr"         "tidyr"        
+[29] "tibble"        "ggplot2"       "tidyverse"     "stats"        
+[33] "graphics"      "grDevices"     "utils"         "datasets"     
+[37] "methods"       "base"         
+
+[[6]]
+ [1] "htmltools"     "DT"            "kableExtra"    "texreg"       
+ [5] "see"           "report"        "parameters"    "performance"  
+ [9] "modelbased"    "insight"       "effectsize"    "datawizard"   
+[13] "correlation"   "bayestestR"    "easystats"     "DeclareDesign"
+[17] "estimatr"      "fabricatr"     "randomizr"     "haven"        
+[21] "labelled"      "lubridate"     "forcats"       "stringr"      
+[25] "dplyr"         "purrr"         "readr"         "tidyr"        
+[29] "tibble"        "ggplot2"       "tidyverse"     "stats"        
+[33] "graphics"      "grDevices"     "utils"         "datasets"     
+[37] "methods"       "base"         
+
+[[7]]
+ [1] "htmltools"     "DT"            "kableExtra"    "texreg"       
+ [5] "see"           "report"        "parameters"    "performance"  
+ [9] "modelbased"    "insight"       "effectsize"    "datawizard"   
+[13] "correlation"   "bayestestR"    "easystats"     "DeclareDesign"
+[17] "estimatr"      "fabricatr"     "randomizr"     "haven"        
+[21] "labelled"      "lubridate"     "forcats"       "stringr"      
+[25] "dplyr"         "purrr"         "readr"         "tidyr"        
+[29] "tibble"        "ggplot2"       "tidyverse"     "stats"        
+[33] "graphics"      "grDevices"     "utils"         "datasets"     
+[37] "methods"       "base"         
+
+[[8]]
+ [1] "htmltools"     "DT"            "kableExtra"    "texreg"       
+ [5] "see"           "report"        "parameters"    "performance"  
+ [9] "modelbased"    "insight"       "effectsize"    "datawizard"   
+[13] "correlation"   "bayestestR"    "easystats"     "DeclareDesign"
+[17] "estimatr"      "fabricatr"     "randomizr"     "haven"        
+[21] "labelled"      "lubridate"     "forcats"       "stringr"      
+[25] "dplyr"         "purrr"         "readr"         "tidyr"        
+[29] "tibble"        "ggplot2"       "tidyverse"     "stats"        
+[33] "graphics"      "grDevices"     "utils"         "datasets"     
+[37] "methods"       "base"         
+
+[[9]]
+ [1] "htmltools"     "DT"            "kableExtra"    "texreg"       
+ [5] "see"           "report"        "parameters"    "performance"  
+ [9] "modelbased"    "insight"       "effectsize"    "datawizard"   
+[13] "correlation"   "bayestestR"    "easystats"     "DeclareDesign"
+[17] "estimatr"      "fabricatr"     "randomizr"     "haven"        
+[21] "labelled"      "lubridate"     "forcats"       "stringr"      
+[25] "dplyr"         "purrr"         "readr"         "tidyr"        
+[29] "tibble"        "ggplot2"       "tidyverse"     "stats"        
+[33] "graphics"      "grDevices"     "utils"         "datasets"     
+[37] "methods"       "base"         
+
+[[10]]
+ [1] "ggmap"         "htmltools"     "DT"            "kableExtra"   
+ [5] "texreg"        "see"           "report"        "parameters"   
+ [9] "performance"   "modelbased"    "insight"       "effectsize"   
+[13] "datawizard"    "correlation"   "bayestestR"    "easystats"    
+[17] "DeclareDesign" "estimatr"      "fabricatr"     "randomizr"    
+[21] "haven"         "labelled"      "lubridate"     "forcats"      
+[25] "stringr"       "dplyr"         "purrr"         "readr"        
+[29] "tidyr"         "tibble"        "ggplot2"       "tidyverse"    
+[33] "stats"         "graphics"      "grDevices"     "utils"        
+[37] "datasets"      "methods"       "base"         
+
+[[11]]
+ [1] "ggrepel"       "ggmap"         "htmltools"     "DT"           
+ [5] "kableExtra"    "texreg"        "see"           "report"       
+ [9] "parameters"    "performance"   "modelbased"    "insight"      
+[13] "effectsize"    "datawizard"    "correlation"   "bayestestR"   
+[17] "easystats"     "DeclareDesign" "estimatr"      "fabricatr"    
+[21] "randomizr"     "haven"         "labelled"      "lubridate"    
+[25] "forcats"       "stringr"       "dplyr"         "purrr"        
+[29] "readr"         "tidyr"         "tibble"        "ggplot2"      
+[33] "tidyverse"     "stats"         "graphics"      "grDevices"    
+[37] "utils"         "datasets"      "methods"       "base"         
+
+[[12]]
+ [1] "ggridges"      "ggrepel"       "ggmap"         "htmltools"    
+ [5] "DT"            "kableExtra"    "texreg"        "see"          
+ [9] "report"        "parameters"    "performance"   "modelbased"   
+[13] "insight"       "effectsize"    "datawizard"    "correlation"  
+[17] "bayestestR"    "easystats"     "DeclareDesign" "estimatr"     
+[21] "fabricatr"     "randomizr"     "haven"         "labelled"     
+[25] "lubridate"     "forcats"       "stringr"       "dplyr"        
+[29] "purrr"         "readr"         "tidyr"         "tibble"       
+[33] "ggplot2"       "tidyverse"     "stats"         "graphics"     
+[37] "grDevices"     "utils"         "datasets"      "methods"      
+[41] "base"         
+
+[[13]]
+ [1] "ggthemes"      "ggridges"      "ggrepel"       "ggmap"        
+ [5] "htmltools"     "DT"            "kableExtra"    "texreg"       
+ [9] "see"           "report"        "parameters"    "performance"  
+[13] "modelbased"    "insight"       "effectsize"    "datawizard"   
+[17] "correlation"   "bayestestR"    "easystats"     "DeclareDesign"
+[21] "estimatr"      "fabricatr"     "randomizr"     "haven"        
+[25] "labelled"      "lubridate"     "forcats"       "stringr"      
+[29] "dplyr"         "purrr"         "readr"         "tidyr"        
+[33] "tibble"        "ggplot2"       "tidyverse"     "stats"        
+[37] "graphics"      "grDevices"     "utils"         "datasets"     
+[41] "methods"       "base"         
+
+[[14]]
+ [1] "ggpubr"        "ggthemes"      "ggridges"      "ggrepel"      
+ [5] "ggmap"         "htmltools"     "DT"            "kableExtra"   
+ [9] "texreg"        "see"           "report"        "parameters"   
+[13] "performance"   "modelbased"    "insight"       "effectsize"   
+[17] "datawizard"    "correlation"   "bayestestR"    "easystats"    
+[21] "DeclareDesign" "estimatr"      "fabricatr"     "randomizr"    
+[25] "haven"         "labelled"      "lubridate"     "forcats"      
+[29] "stringr"       "dplyr"         "purrr"         "readr"        
+[33] "tidyr"         "tibble"        "ggplot2"       "tidyverse"    
+[37] "stats"         "graphics"      "grDevices"     "utils"        
+[41] "datasets"      "methods"       "base"         
+
+[[15]]
+ [1] "scales"        "ggpubr"        "ggthemes"      "ggridges"     
+ [5] "ggrepel"       "ggmap"         "htmltools"     "DT"           
+ [9] "kableExtra"    "texreg"        "see"           "report"       
+[13] "parameters"    "performance"   "modelbased"    "insight"      
+[17] "effectsize"    "datawizard"    "correlation"   "bayestestR"   
+[21] "easystats"     "DeclareDesign" "estimatr"      "fabricatr"    
+[25] "randomizr"     "haven"         "labelled"      "lubridate"    
+[29] "forcats"       "stringr"       "dplyr"         "purrr"        
+[33] "readr"         "tidyr"         "tibble"        "ggplot2"      
+[37] "tidyverse"     "stats"         "graphics"      "grDevices"    
+[41] "utils"         "datasets"      "methods"       "base"         
+
+[[16]]
+ [1] "dagitty"       "scales"        "ggpubr"        "ggthemes"     
+ [5] "ggridges"      "ggrepel"       "ggmap"         "htmltools"    
+ [9] "DT"            "kableExtra"    "texreg"        "see"          
+[13] "report"        "parameters"    "performance"   "modelbased"   
+[17] "insight"       "effectsize"    "datawizard"    "correlation"  
+[21] "bayestestR"    "easystats"     "DeclareDesign" "estimatr"     
+[25] "fabricatr"     "randomizr"     "haven"         "labelled"     
+[29] "lubridate"     "forcats"       "stringr"       "dplyr"        
+[33] "purrr"         "readr"         "tidyr"         "tibble"       
+[37] "ggplot2"       "tidyverse"     "stats"         "graphics"     
+[41] "grDevices"     "utils"         "datasets"      "methods"      
+[45] "base"         
+
+[[17]]
+ [1] "ggdag"         "dagitty"       "scales"        "ggpubr"       
+ [5] "ggthemes"      "ggridges"      "ggrepel"       "ggmap"        
+ [9] "htmltools"     "DT"            "kableExtra"    "texreg"       
+[13] "see"           "report"        "parameters"    "performance"  
+[17] "modelbased"    "insight"       "effectsize"    "datawizard"   
+[21] "correlation"   "bayestestR"    "easystats"     "DeclareDesign"
+[25] "estimatr"      "fabricatr"     "randomizr"     "haven"        
+[29] "labelled"      "lubridate"     "forcats"       "stringr"      
+[33] "dplyr"         "purrr"         "readr"         "tidyr"        
+[37] "tibble"        "ggplot2"       "tidyverse"     "stats"        
+[41] "graphics"      "grDevices"     "utils"         "datasets"     
+[45] "methods"       "base"         
+
+[[18]]
+ [1] "ggforce"       "ggdag"         "dagitty"       "scales"       
+ [5] "ggpubr"        "ggthemes"      "ggridges"      "ggrepel"      
+ [9] "ggmap"         "htmltools"     "DT"            "kableExtra"   
+[13] "texreg"        "see"           "report"        "parameters"   
+[17] "performance"   "modelbased"    "insight"       "effectsize"   
+[21] "datawizard"    "correlation"   "bayestestR"    "easystats"    
+[25] "DeclareDesign" "estimatr"      "fabricatr"     "randomizr"    
+[29] "haven"         "labelled"      "lubridate"     "forcats"      
+[33] "stringr"       "dplyr"         "purrr"         "readr"        
+[37] "tidyr"         "tibble"        "ggplot2"       "tidyverse"    
+[41] "stats"         "graphics"      "grDevices"     "utils"        
+[45] "datasets"      "methods"       "base"         
+
+[[19]]
+ [1] "COVID19"       "ggforce"       "ggdag"         "dagitty"      
+ [5] "scales"        "ggpubr"        "ggthemes"      "ggridges"     
+ [9] "ggrepel"       "ggmap"         "htmltools"     "DT"           
+[13] "kableExtra"    "texreg"        "see"           "report"       
+[17] "parameters"    "performance"   "modelbased"    "insight"      
+[21] "effectsize"    "datawizard"    "correlation"   "bayestestR"   
+[25] "easystats"     "DeclareDesign" "estimatr"      "fabricatr"    
+[29] "randomizr"     "haven"         "labelled"      "lubridate"    
+[33] "forcats"       "stringr"       "dplyr"         "purrr"        
+[37] "readr"         "tidyr"         "tibble"        "ggplot2"      
+[41] "tidyverse"     "stats"         "graphics"      "grDevices"    
+[45] "utils"         "datasets"      "methods"       "base"         
+
+[[20]]
+ [1] "maps"          "COVID19"       "ggforce"       "ggdag"        
+ [5] "dagitty"       "scales"        "ggpubr"        "ggthemes"     
+ [9] "ggridges"      "ggrepel"       "ggmap"         "htmltools"    
+[13] "DT"            "kableExtra"    "texreg"        "see"          
+[17] "report"        "parameters"    "performance"   "modelbased"   
+[21] "insight"       "effectsize"    "datawizard"    "correlation"  
+[25] "bayestestR"    "easystats"     "DeclareDesign" "estimatr"     
+[29] "fabricatr"     "randomizr"     "haven"         "labelled"     
+[33] "lubridate"     "forcats"       "stringr"       "dplyr"        
+[37] "purrr"         "readr"         "tidyr"         "tibble"       
+[41] "ggplot2"       "tidyverse"     "stats"         "graphics"     
+[45] "grDevices"     "utils"         "datasets"      "methods"      
+[49] "base"         
+
+[[21]]
+ [1] "mapdata"       "maps"          "COVID19"       "ggforce"      
+ [5] "ggdag"         "dagitty"       "scales"        "ggpubr"       
+ [9] "ggthemes"      "ggridges"      "ggrepel"       "ggmap"        
+[13] "htmltools"     "DT"            "kableExtra"    "texreg"       
+[17] "see"           "report"        "parameters"    "performance"  
+[21] "modelbased"    "insight"       "effectsize"    "datawizard"   
+[25] "correlation"   "bayestestR"    "easystats"     "DeclareDesign"
+[29] "estimatr"      "fabricatr"     "randomizr"     "haven"        
+[33] "labelled"      "lubridate"     "forcats"       "stringr"      
+[37] "dplyr"         "purrr"         "readr"         "tidyr"        
+[41] "tibble"        "ggplot2"       "tidyverse"     "stats"        
+[45] "graphics"      "grDevices"     "utils"         "datasets"     
+[49] "methods"       "base"         
+
+[[22]]
+ [1] "qss"           "mapdata"       "maps"          "COVID19"      
+ [5] "ggforce"       "ggdag"         "dagitty"       "scales"       
+ [9] "ggpubr"        "ggthemes"      "ggridges"      "ggrepel"      
+[13] "ggmap"         "htmltools"     "DT"            "kableExtra"   
+[17] "texreg"        "see"           "report"        "parameters"   
+[21] "performance"   "modelbased"    "insight"       "effectsize"   
+[25] "datawizard"    "correlation"   "bayestestR"    "easystats"    
+[29] "DeclareDesign" "estimatr"      "fabricatr"     "randomizr"    
+[33] "haven"         "labelled"      "lubridate"     "forcats"      
+[37] "stringr"       "dplyr"         "purrr"         "readr"        
+[41] "tidyr"         "tibble"        "ggplot2"       "tidyverse"    
+[45] "stats"         "graphics"      "grDevices"     "utils"        
+[49] "datasets"      "methods"       "base"         
+
+[[23]]
+ [1] "tidycensus"    "qss"           "mapdata"       "maps"         
+ [5] "COVID19"       "ggforce"       "ggdag"         "dagitty"      
+ [9] "scales"        "ggpubr"        "ggthemes"      "ggridges"     
+[13] "ggrepel"       "ggmap"         "htmltools"     "DT"           
+[17] "kableExtra"    "texreg"        "see"           "report"       
+[21] "parameters"    "performance"   "modelbased"    "insight"      
+[25] "effectsize"    "datawizard"    "correlation"   "bayestestR"   
+[29] "easystats"     "DeclareDesign" "estimatr"      "fabricatr"    
+[33] "randomizr"     "haven"         "labelled"      "lubridate"    
+[37] "forcats"       "stringr"       "dplyr"         "purrr"        
+[41] "readr"         "tidyr"         "tibble"        "ggplot2"      
+[45] "tidyverse"     "stats"         "graphics"      "grDevices"    
+[49] "utils"         "datasets"      "methods"       "base"         
+
+[[24]]
+ [1] "dataverse"     "tidycensus"    "qss"           "mapdata"      
+ [5] "maps"          "COVID19"       "ggforce"       "ggdag"        
+ [9] "dagitty"       "scales"        "ggpubr"        "ggthemes"     
+[13] "ggridges"      "ggrepel"       "ggmap"         "htmltools"    
+[17] "DT"            "kableExtra"    "texreg"        "see"          
+[21] "report"        "parameters"    "performance"   "modelbased"   
+[25] "insight"       "effectsize"    "datawizard"    "correlation"  
+[29] "bayestestR"    "easystats"     "DeclareDesign" "estimatr"     
+[33] "fabricatr"     "randomizr"     "haven"         "labelled"     
+[37] "lubridate"     "forcats"       "stringr"       "dplyr"        
+[41] "purrr"         "readr"         "tidyr"         "tibble"       
+[45] "ggplot2"       "tidyverse"     "stats"         "graphics"     
+[49] "grDevices"     "utils"         "datasets"      "methods"      
+[53] "base"         
+
+[[25]]
+ [1] "dataverse"     "tidycensus"    "qss"           "mapdata"      
+ [5] "maps"          "COVID19"       "ggforce"       "ggdag"        
+ [9] "dagitty"       "scales"        "ggpubr"        "ggthemes"     
+[13] "ggridges"      "ggrepel"       "ggmap"         "htmltools"    
+[17] "DT"            "kableExtra"    "texreg"        "see"          
+[21] "report"        "parameters"    "performance"   "modelbased"   
+[25] "insight"       "effectsize"    "datawizard"    "correlation"  
+[29] "bayestestR"    "easystats"     "DeclareDesign" "estimatr"     
+[33] "fabricatr"     "randomizr"     "haven"         "labelled"     
+[37] "lubridate"     "forcats"       "stringr"       "dplyr"        
+[41] "purrr"         "readr"         "tidyr"         "tibble"       
+[45] "ggplot2"       "tidyverse"     "stats"         "graphics"     
+[49] "grDevices"     "utils"         "datasets"      "methods"      
+[53] "base"         
+
+[[26]]
+ [1] "dataverse"     "tidycensus"    "qss"           "mapdata"      
+ [5] "maps"          "COVID19"       "ggforce"       "ggdag"        
+ [9] "dagitty"       "scales"        "ggpubr"        "ggthemes"     
+[13] "ggridges"      "ggrepel"       "ggmap"         "htmltools"    
+[17] "DT"            "kableExtra"    "texreg"        "see"          
+[21] "report"        "parameters"    "performance"   "modelbased"   
+[25] "insight"       "effectsize"    "datawizard"    "correlation"  
+[29] "bayestestR"    "easystats"     "DeclareDesign" "estimatr"     
+[33] "fabricatr"     "randomizr"     "haven"         "labelled"     
+[37] "lubridate"     "forcats"       "stringr"       "dplyr"        
+[41] "purrr"         "readr"         "tidyr"         "tibble"       
+[45] "ggplot2"       "tidyverse"     "stats"         "graphics"     
+[49] "grDevices"     "utils"         "datasets"      "methods"      
+[53] "base"         
+
+[[27]]
+ [1] "zoo"           "dataverse"     "tidycensus"    "qss"          
+ [5] "mapdata"       "maps"          "COVID19"       "ggforce"      
+ [9] "ggdag"         "dagitty"       "scales"        "ggpubr"       
+[13] "ggthemes"      "ggridges"      "ggrepel"       "ggmap"        
+[17] "htmltools"     "DT"            "kableExtra"    "texreg"       
+[21] "see"           "report"        "parameters"    "performance"  
+[25] "modelbased"    "insight"       "effectsize"    "datawizard"   
+[29] "correlation"   "bayestestR"    "easystats"     "DeclareDesign"
+[33] "estimatr"      "fabricatr"     "randomizr"     "haven"        
+[37] "labelled"      "lubridate"     "forcats"       "stringr"      
+[41] "dplyr"         "purrr"         "readr"         "tidyr"        
+[45] "tibble"        "ggplot2"       "tidyverse"     "stats"        
+[49] "graphics"      "grDevices"     "utils"         "datasets"     
+[53] "methods"       "base"         </code></pre>
+</div>
+</div>
 </section></section>
 <section>
 <section id="what-does-it-mean-to-control-for-x" class="title-slide slide level1 inverse center">
@@ -414,7 +686,7 @@ DeclareDesign     easystats           zoo
 \textrm{Y} &amp;= \hat{Y} + \hat{\epsilon}
 \end{aligned}\]</span></p>
 </section>
-<section id="section-1" class="slide level2 smaller">
+<section id="section" class="slide level2 smaller">
 <h2></h2>
 <h4 id="coefficients-describe-the-unique-variance-in-y-explained-by-x-and-only-x">Coefficients describe the unique variance in Y explained by X (and only X)</h4>
 <div class="panel-tabset">
@@ -426,7 +698,7 @@ DeclareDesign     easystats           zoo
 </div>
 <div id="tabset-1-2">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a><span class="fu">load</span>(<span class="fu">url</span>(<span class="st">"https://pols1600.paultesta.org/files/data/06_lab.rda"</span>))</span>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a><span class="fu">load</span>(<span class="fu">url</span>(<span class="st">"https://josephessig-source.github.io/pols1600_site/files/data/06_lab.rda"</span>))</span>
 <span id="cb3-2"><a></a>m1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(new_deaths_pc_14day <span class="sc">~</span> rep_voteshare_std, covid_lab)</span>
 <span id="cb3-3"><a></a>m2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(new_deaths_pc_14day <span class="sc">~</span> rep_voteshare_std <span class="sc">+</span> med_age_std, covid_lab)</span>
 <span id="cb3-4"><a></a>m3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(new_deaths_pc_14day <span class="sc">~</span> rep_voteshare_std <span class="sc">+</span> med_age_std <span class="sc">+</span> med_income_std, covid_lab)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -531,8 +803,9 @@ DeclareDesign     easystats           zoo
 </section>
 <section id="residualized-regression" class="slide level2">
 <h2>Residualized Regression</h2>
-<p>Residualized regression is way of understanding what it means to <span class="blue">control for variables</span> in a regression.</p>
-<p>Residualized regression provides a way of illustrating what we mean when say the coefficients describe the unique variance in Y explained by some predictor <span class="math inline">\(x\)</span> (and only <span class="math inline">\(x\)</span>)</p>
+<p>Residualized regression is a way of understanding what it means to <span class="blue">control for variables</span> in a regression.</p>
+<p>Residualized regression provides a way of illustrating what we mean when we say the coefficients describe the unique variance in Y explained by some predictor <span class="math inline">\(x\)</span> (and only <span class="math inline">\(x\)</span>)</p>
+<p>This result is called the <strong>Frisch-Waugh-Lovell (FWL) theorem</strong></p>
 </section>
 <section id="whats-a-residual" class="slide level2">
 <h2>What’s a residual</h2>
@@ -553,22 +826,22 @@ DeclareDesign     easystats           zoo
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a><span class="co"># Trust but verify</span></span>
 <span id="cb5-2"><a></a><span class="fu">cor</span>(<span class="fu">resid</span>(m2),covid_lab<span class="sc">$</span>rep_voteshare_std) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 4.337636e-17</code></pre>
+<pre><code>[1] 1.674688e-17</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a><span class="fu">cor</span>(<span class="fu">resid</span>(m2),covid_lab<span class="sc">$</span>med_age_std)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 2.946319e-17</code></pre>
+<pre><code>[1] 8.682706e-17</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a><span class="fu">cor</span>(<span class="fu">resid</span>(m2),<span class="fu">fitted</span>(m2))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -7.506391e-17</code></pre>
+<pre><code>[1] -1.520407e-16</code></pre>
 </div>
 </div>
 </div><div class="column" style="width:55%;">
-<p><img data-src="https://www.researchgate.net/publication/299483509/figure/fig1/AS:992683870937088@1613685686096/llustration-of-the-linear-regression-model-as-a-projection-method.png"></p>
+<p><img data-src="../files/llustration-of-the-linear-regression-model-as-a-projection-method.png"></p>
 </div></div>
 </section>
-<section id="section-4" class="slide level2 smaller scrollable">
+<section id="section-3" class="slide level2 smaller scrollable">
 <h2></h2>
 <h4 id="residualized-regression-1">Residualized Regression</h4>
 <div class="panel-tabset">
@@ -647,10 +920,10 @@ DeclareDesign     easystats           zoo
 <section id="why-did-the-coefficient-on-rep-vote-share-change-in-m3-but-not-m2" class="slide level2 center">
 <h2>Why did the coefficient on Rep Vote Share change in <code>m3</code> but not <code>m2</code>?</h2>
 </section>
-<section id="section-6" class="slide level2 smaller">
+<section id="section-5" class="slide level2 smaller">
 <h2></h2>
 </section>
-<section id="section-7" class="slide level2 smaller">
+<section id="section-6" class="slide level2 smaller">
 <h2></h2>
 <div class="cell">
 <div class="cell-output-display">
@@ -705,14 +978,14 @@ DeclareDesign     easystats           zoo
 </div>
 </div>
 </section>
-<section id="section-8" class="slide level2">
+<section id="section-7" class="slide level2">
 <h2></h2>
 <p><span class="math display">\[
 \text{Covid-19 Deaths} = \beta_0 + \beta_1 \text{Rep Vote Share}
 \]</span></p>
 
 <img data-src="07-slides_files/figure-revealjs/venn_iv1-1.png" width="960" class="r-stretch"></section>
-<section id="section-9" class="slide level2 smaller">
+<section id="section-8" class="slide level2 smaller">
 <h2></h2>
 <div class="cell">
 <div class="cell-output-display">
@@ -833,7 +1106,7 @@ DeclareDesign     easystats           zoo
 </div>
 </div>
 </section>
-<section id="section-10" class="slide level2">
+<section id="section-9" class="slide level2">
 <h2></h2>
 <p><span class="math display">\[
 \text{Deaths} = \beta_0 + \beta_1 \text{Rep VS} + \beta_2 \text{Age}
@@ -841,7 +1114,7 @@ DeclareDesign     easystats           zoo
 
 <img data-src="07-slides_files/figure-revealjs/venn_iv2-1.png" width="960" class="r-stretch"><p><span class="math inline">\(\beta_1\)</span> doesn’t change because <code>age</code> has no relationship to <code>deaths</code> in these data</p>
 </section>
-<section id="section-11" class="slide level2 smaller">
+<section id="section-10" class="slide level2 smaller">
 <h2></h2>
 <div class="cell">
 <div class="cell-output-display">
@@ -978,7 +1251,7 @@ DeclareDesign     easystats           zoo
 </div>
 </div>
 </section>
-<section id="section-12" class="slide level2">
+<section id="section-11" class="slide level2">
 <h2></h2>
 <p><span class="math display">\[
 \text{Deaths} = \beta_0 + \beta_1 \text{Rep VS} + \beta_2 \text{Age} + \beta_3 \text{Income}
@@ -1020,7 +1293,7 @@ y &amp;= 0.56 + 0.07(-0.87) - 0.02(0.62) - 0.22(0.38) + \hat{\epsilon} &amp; \te
 <li class="fragment">Plot predicted values in your <span class="blue">prediction data frame</span> to help interpret your model</li>
 </ul>
 </section>
-<section id="section-13" class="slide level2 smaller">
+<section id="section-12" class="slide level2 smaller">
 <h2></h2>
 <h4 id="are-there-decreasing-returns-to-vaccination">Are there decreasing returns to vaccination?</h4>
 <div class="panel-tabset">
@@ -1214,7 +1487,7 @@ Num. obs.
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="07-slides_files/figure-revealjs/unnamed-chunk-25-1.png" width="960"></p>
+<p><img data-src="07-slides_files/figure-revealjs/unnamed-chunk-2-1.png" width="960"></p>
 </figure>
 </div>
 </div>
@@ -1339,7 +1612,7 @@ F-statistic: 12.28 on 3 and 47 DF,  p-value: 4.689e-06</code></pre>
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="07-slides_files/figure-revealjs/unnamed-chunk-29-1.png" width="960"></p>
+<p><img data-src="07-slides_files/figure-revealjs/unnamed-chunk-6-1.png" width="960"></p>
 </figure>
 </div>
 </div>
@@ -1348,7 +1621,7 @@ F-statistic: 12.28 on 3 and 47 DF,  p-value: 4.689e-06</code></pre>
 </div>
 </div>
 </section>
-<section id="section-14" class="slide level2 smaller">
+<section id="section-13" class="slide level2 smaller">
 <h2></h2>
 <h4 id="using-r2-to-compare-models">Using <span class="math inline">\(R^2\)</span> to compare models</h4>
 <div class="panel-tabset">
@@ -1582,7 +1855,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 </div>
 </section>
-<section id="section-15" class="slide level2 smaller">
+<section id="section-14" class="slide level2 smaller">
 <h2></h2>
 <h4 id="standardized-vs-non-standardized-predictors">Standardized vs Non Standardized Predictors</h4>
 <div class="panel-tabset">
@@ -1868,7 +2141,7 @@ Num. obs.
 <li class="fragment"><p>Can facilitate comparison and estimation</p></li>
 <li class="fragment"><p>Might make interpretation easier (but the onus is on you to describe your models well)</p>
 <ul>
-<li class="fragment">Don’t standardized binary predictors</li>
+<li class="fragment">Don’t standardize binary predictors</li>
 </ul></li>
 </ul>
 </div>
@@ -1884,7 +2157,7 @@ Num. obs.
 <h2>Motivating Example: What causes Cholera?</h2>
 <ul>
 <li class="fragment"><p>In the 1800s, cholera was thought to be transmitted through the air.</p></li>
-<li class="fragment"><p>John Snow (the physician, not the snack), to explore the origins eventunally concluding that cholera was transmitted through living organisms in water.</p></li>
+<li class="fragment"><p>Led John Snow (the physician, not from Game of Thrones) to explore the origins of Cholera, eventually concluding that cholera was transmitted through living organisms in water.</p></li>
 <li class="fragment"><p>Leveraged a <strong>natural experiment</strong> in which one water company in London moved its pipes further upstream (reducing contamination for Lambeth), while other companies kept their pumps serving Southwark and Vauxhall in the same location.</p></li>
 </ul>
 </section>
@@ -1919,7 +2192,7 @@ Num. obs.
 <section id="average-treatment-on-treated-1" class="slide level2 smaller">
 <h2>Average Treatment on Treated</h2>
 <p>Our goal is to estimate the average effect of treatment on treated (ATT):</p>
-<p>We we can observe is:</p>
+<p>What we can observe is:</p>
 <table class="caption-top">
 <colgroup>
 <col style="width: 25%">
@@ -1980,12 +2253,12 @@ Num. obs.
 <h2>How can we estimate the effect of moving pumps upstream?</h2>
 <p>Recall, our goal is to estimate the effect of the the treatment on the treated:</p>
 <p><span class="math display">\[\tau_{ATT} = E[Y_{1i}(1) -  Y_{0i}(1)|D=1]\]</span></p>
-<p>Let’s conisder some strategies Snow could take to estimate this quantity:</p>
+<p>Let’s consider some strategies Snow could take to estimate this quantity:</p>
 </section>
 <section id="before-vs-after-comparisons" class="slide level2 smaller">
 <h2>Before vs after comparisons:</h2>
 <ul>
-<li><p>Snow could have compared Labmeth in 1854 <span class="math inline">\((E[Y_i(1)|D_i = 1] = 19)\)</span> to Lambeth in 1849 <span class="math inline">\((E[Y_i(0)|D_i = 1]=85)\)</span>, and claimed that moving the pumps upstream led to <strong>66 fewer cholera deaths.</strong></p></li>
+<li><p>Snow could have compared Lambeth in 1854 <span class="math inline">\((E[Y_i(1)|D_i = 1] = 19)\)</span> to Lambeth in 1849 <span class="math inline">\((E[Y_i(0)|D_i = 1]=85)\)</span>, and claimed that moving the pumps upstream led to <strong>66 fewer cholera deaths.</strong></p></li>
 <li><p>Assumes Lambeth’s pre-treatment outcomes in 1849 are a good proxy for what its outcomes would have been in 1954 if the pumps hadn’t moved <span class="math inline">\((E[Y_{0i}(1)|D_i = 1])\)</span>.</p></li>
 <li><p>A skeptic might argue that Lambeth in 1849 <span class="math inline">\(\neq\)</span> Lambeth in 1854</p></li>
 </ul>
@@ -2052,7 +2325,7 @@ Num. obs.
 <h2>Difference in Differences</h2>
 <p>To address these concerns, Snow employed what we now call a <span class="blue">difference-in-differences</span> design,</p>
 <p>There are two, equivalent ways to view this design.</p>
-<p><span class="math display">\[\underbrace{\{E[Y_{i}(1)|D_{i} = 1] − E[Y_{i}(1)|D_{i} = 0]\}}_{\text{1. Treat-Control |Post }}− \overbrace{\{E[Y_{i}(0)|D_{i} = 1] − E[Y_{i}(0)|D_{i}=0 ]}^{\text{Treated-Control|Pre}}\]</span></p>
+<p><span class="math display">\[\underbrace{\{E[Y_{i}(1)|D_{i} = 1] − E[Y_{i}(1)|D_{i} = 0]\}}_{\text{1. Treat-Control |Post }}− \overbrace{\{E[Y_{i}(0)|D_{i} = 1] − E[Y_{i}(0)|D_{i}=0 ]\}}^{\text{Treated-Control|Pre}}\]</span></p>
 <ul>
 <li><p>Difference 1: Average change between Treated and Control in Post Period</p></li>
 <li><p>Difference 2: Average change between Treated and Control in Pre Period</p></li>
@@ -2099,7 +2372,7 @@ Num. obs.
 <ul>
 <li class="fragment">linear estimate of the conditional expectation function</li>
 </ul></li>
-<li class="fragment">In the canonincal pre-post, treated and control DiD, <span class="math inline">\(\beta_3\)</span> from the following linear regression will give us the ATT:</li>
+<li class="fragment">In the canonical pre-post, treated and control DiD, <span class="math inline">\(\beta_3\)</span> from the following linear regression will give us the ATT:</li>
 </ul>
 <div class="fragment">
 <p><span class="math display">\[
@@ -2137,8 +2410,8 @@ Coefficients:
 <div id="tabset-7-3">
 <div class="cell">
 <div class="cell-output-display">
-<div class="datatables html-widget html-fill-item" id="htmlwidget-6527a6496e8d93ef47c3" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-6527a6496e8d93ef47c3">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4"],["Pre","Pre","Post","Post"],[1849,1849,1854,1854],["Control","Treated","Control","Treated"],["S&amp;V","Lambeth","S&amp;V","Lambeth"],[135,85,147,19]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Period<\/th>\n      <th>Year<\/th>\n      <th>Treated<\/th>\n      <th>Company<\/th>\n      <th>Deaths<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[2,5]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"Period","targets":1},{"name":"Year","targets":2},{"name":"Treated","targets":3},{"name":"Company","targets":4},{"name":"Deaths","targets":5}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-3699a5db5ebcec73f506" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-3699a5db5ebcec73f506">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4"],["Pre","Pre","Post","Post"],[1849,1849,1854,1854],["Control","Treated","Control","Treated"],["S&amp;V","Lambeth","S&amp;V","Lambeth"],[135,85,147,19]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Period<\/th>\n      <th>Year<\/th>\n      <th>Treated<\/th>\n      <th>Company<\/th>\n      <th>Deaths<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[2,5]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"Period","targets":1},{"name":"Year","targets":2},{"name":"Treated","targets":3},{"name":"Company","targets":4},{"name":"Deaths","targets":5}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </div>
@@ -2247,7 +2520,7 @@ Num. obs.
 <section id="summary" class="slide level2 smaller">
 <h2>Summary</h2>
 <ul>
-<li class="fragment"><p>A <span class="blue">Difference in Differences</span> (DiD, or diff-in-diff) design combines a pre-post comparison, with a treated and control comparison</p></li>
+<li class="fragment"><p>A Difference in Differences (DiD, or diff-in-diff) design combines a pre-post comparison, with a treated and control comparison</p></li>
 <li class="fragment"><p>Differencing twice accounts for fixed differences <span class="blue">across units</span> and <span class="blue">between periods</span></p>
 <ul>
 <li class="fragment">But not time varying differences across units…</li>
@@ -2255,35 +2528,18 @@ Num. obs.
 <li class="fragment"><p>The key identifying assumption of a DiD design is the assumption of <span class="blue">parallel trends</span></p>
 <ul>
 <li class="fragment">Absent treatment, treated and control groups would see the same changes over time.</li>
-<li class="fragment">Hard to prove, possible to assess if we have multiple periods of pre-treatment observations</li>
+<li class="fragment">Hard to prove, possible to test</li>
 </ul></li>
-</ul>
-</section>
-<section id="generalizing-diff-in-diff-with-linear-regression" class="slide level2 smaller">
-<h2>Generalizing Diff-in-Diff with Linear Regression</h2>
-<ul>
-<li class="fragment">Linear regression allows us to generalizes Diff-in-Diff to multiple periods and treatment interventions, with <span class="blue">fixed effects</span></li>
-</ul>
-<div class="fragment">
-<p><span class="math display">\[
-y_{it} = \overbrace{\alpha_i}^{\text{Unit FE}} + \underbrace{\gamma_t}_{\text{Period FE}} + \overbrace{\tau*d_{it}}^{\text{Treatment}} + \underbrace{X\beta}_{\text{Covariates}} + \epsilon_{it}
-\]</span></p>
-</div>
-<ul>
-<li class="fragment"><span class="blue">Unit fixed effects</span> <span class="math inline">\((\alpha_i)\)</span>control for time-invariant differences across units</li>
-<li class="fragment"><span class="blue">Period fixed effects</span> <span class="math inline">\((\gamma_i)\)</span> control for unit-invariant differences across periods</li>
-<li class="fragment"><span class="blue"><span class="math inline">\(\tau\)</span></span> corresponds the <span class="blue">Difference-in-Difference</span> estimate for a <span class="blue">two-way fixed effects</span> regression</li>
 </ul>
 </section>
 <section id="extensions-and-limitations" class="slide level2 smaller">
 <h2>Extensions and limitations</h2>
 <ul>
-<li class="fragment">Interpretation of <span class="blue">two-way fixed effects</span> DiD estimator is <span class="blue">complicated</span>…
+<li class="fragment">Diff-in-Diff easy to estimate with linear regression</li>
+<li class="fragment">Generalizes to multiple periods and treatment interventions
 <ul>
-<li class="fragment"><span class="citation" data-cites="Goodman-Bacon2021-ah">Goodman-Bacon (<a href="#/references" role="doc-biblioref" onclick="">2021</a>)</span></li>
-<li class="fragment"><span class="citation" data-cites="Callaway2021-av">Callaway and Sant’Anna (<a href="#/references" role="doc-biblioref" onclick="">2021</a>)</span></li>
-</ul></li>
 <li class="fragment">More pre-treatment periods allow you assess “parallel trends” assumption</li>
+</ul></li>
 <li class="fragment">Alternative methods
 <ul>
 <li class="fragment">Synthetic control</li>
@@ -2305,6 +2561,40 @@ y_{it} = \overbrace{\alpha_i}^{\text{Unit FE}} + \underbrace{\gamma_t}_{\text{Pe
 </ul>
 </section></section>
 <section>
+<section id="summary-1" class="title-slide slide level1 inverse center">
+<h1><i class="fa-solid fa-home" aria-label="home"></i> Summary</h1>
+
+</section>
+<section id="summary---linear-regression" class="slide level2 smaller">
+<h2>Summary - Linear Regression</h2>
+<ul>
+<li class="fragment"><p>Linear regression produces linear estimates of the Conditional Expectation Function</p></li>
+<li class="fragment"><p>We estimate linear regression using <code>lm()</code></p></li>
+</ul>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a></a>m1 <span class="ot">&lt;-</span> <span class="fu">lm</span>( y <span class="sc">~</span> x1 <span class="sc">+</span> x2 <span class="sc">+</span> x3, <span class="at">data =</span> df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<ul>
+<li class="fragment"><p>We interpret linear regression by: looking at the <span class="blue">sign</span>, <span class="blue">size</span>, and, eventually, <span class="blue">significance</span> of coefficients</p>
+<ul>
+<li class="fragment">the intercept <span class="math inline">\((\beta_0)\)</span> corresponds to the model’s prediction when every other predictor is zero</li>
+<li class="fragment">the other <span class="math inline">\(\beta\)</span>s describe how <span class="math inline">\(y\)</span> changes with a [unit change] in <span class="math inline">\(x\)</span>, controlling for other predictors in the model</li>
+</ul></li>
+<li class="fragment"><p>We present our results using <span class="blue">regression tables</span> and <span class="blue">figures</span> showing <span class="blue">predicted values</span></p></li>
+</ul>
+</section>
+<section id="summary---difference-in-differences" class="slide level2 smaller">
+<h2>Summary - Difference-in-Differences</h2>
+<ul>
+<li class="fragment"><p>Difference-in-Differences (DiD) is a powerful research design for observational data that combines a <span class="blue">pre-post comparisons</span> with a <span class="blue">treated and control</span> comparisons</p></li>
+<li class="fragment"><p>Differencing twice accounts for fixed differences <span class="blue">across units</span> and <span class="blue">between periods</span></p></li>
+<li class="fragment"><p>DiD relies on an assumption of <span class="blue">parallel trends</span></p></li>
+<li class="fragment"><p>We can use linear regression to estimate and generalize DiD designs</p></li>
+</ul>
+</section></section>
+<section>
 <section id="previewing-lab-7" class="title-slide slide level1 inverse center">
 <h1><i class="fa-solid fa-code" aria-label="code"></i> Previewing Lab 7</h1>
 
@@ -2312,17 +2602,17 @@ y_{it} = \overbrace{\alpha_i}^{\text{Unit FE}} + \underbrace{\gamma_t}_{\text{Pe
 <section id="replicating-grumbach-and-hill-2022" class="slide level2">
 <h2>Replicating Grumbach and Hill (2022)</h2>
 <ul>
-<li class="fragment"><p>In this week’s lab, we’ll be conducting a partial replication of <span class="citation" data-cites="Grumbach2022-zj">Grumbach and Hill (<a href="#/references" role="doc-biblioref" onclick="">2022</a>)</span> <a href="../files/readings/grumbach_hill_2021.pdf" target="_blank">“Rock the Registration: Same Day Registration Increases Turnout of Young Voters.”</a></p></li>
-<li class="fragment"><p>On Thursday, we’ll walk through</p>
+<li class="fragment"><p>In this week’s lab, we’ll be conducting a partial replication of <span class="citation" data-cites="Grumbach2022-zj">Grumbach and Hill (<a href="#/q3-load-the-data-into-r" role="doc-biblioref" onclick="">2022</a>)</span> <a href="../files/readings/grumbach_hill_2021.pdf" target="_blank">“Rock the Registration: Same Day Registration Increases Turnout of Young Voters.”</a></p></li>
+<li class="fragment"><p>On Friday, we’ll walk through</p>
 <ul>
 <li class="fragment">the paper’s design and argument</li>
 <li class="fragment">setting up and exploring the data</li>
 <li class="fragment">reproducing some descriptive figures</li>
 </ul></li>
-<li class="fragment"><p>Next Thursday, we’ll focus on replicating and understanding the main results</p></li>
+<li class="fragment"><p>Next Friday, we’ll focus on replicating and understanding the main results</p></li>
 </ul>
 </section>
-<section id="section-17" class="slide level2">
+<section id="section-16" class="slide level2">
 <h2></h2>
 
 <img data-src="images/07_grumbach2022.png" class="r-stretch"></section>
@@ -2345,7 +2635,7 @@ y_{it} = \overbrace{\alpha_i}^{\text{Unit FE}} + \underbrace{\gamma_t}_{\text{Pe
 </section>
 <section id="reading-grumbach-and-hill-2022" class="slide level2 smaller">
 <h2>Reading Grumbach and Hill (2022)</h2>
-<p>Reading <span class="citation" data-cites="Grumbach2022-zj">Grumbach and Hill (<a href="#/references" role="doc-biblioref" onclick="">2022</a>)</span>, focus on being able to answer the following:</p>
+<p>Reading <span class="citation" data-cites="Grumbach2022-zj">Grumbach and Hill (<a href="#/q3-load-the-data-into-r" role="doc-biblioref" onclick="">2022</a>)</span>, focus on being able to answer the following:</p>
 <ul>
 <li class="fragment">What’s the research question?
 <ul>
@@ -2391,50 +2681,33 @@ y_{it} = \overbrace{\alpha_i}^{\text{Unit FE}} + \underbrace{\gamma_t}_{\text{Pe
 <h2>4. Download the files in their original format</h2>
 
 <img data-src="images/07_rep5.png" class="r-stretch"></section>
-<section id="section-18" class="slide level2">
+<section id="section-17" class="slide level2">
 <h2></h2>
 <h3 id="save-and-unzip-the-downloaded-files-into-your-course-folder-where-your-labs-are-saved">5. Save and unzip the downloaded files into your course folder where your labs are saved</h3>
 
 <img data-src="images/07_rep6.png" class="r-stretch"></section>
-<section id="q3-load-the-data-into-r" class="slide level2 smaller">
+<section id="q3-load-the-data-into-r" class="slide level2 smaller scrollable">
 <h2>Q3: Load the data into R</h2>
 <p>If you’ve saved the dataverse_files <span class="blue">into the folder where your lab is saved</span>, you should be able to run the following code after <span class="blue">setting the working directory</span> to <span class="blue">source file location</span>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a></a><span class="co"># Remember to set working directory:</span></span>
-<span id="cb40-2"><a></a><span class="co"># Session &gt; Set working directory &gt; Source file location</span></span>
-<span id="cb40-3"><a></a></span>
-<span id="cb40-4"><a></a><span class="co"># Load fips_codes</span></span>
-<span id="cb40-5"><a></a>fips_codes <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"dataverse_files/fips_codes_website.csv"</span>)<span class="sc">%&gt;%</span></span>
-<span id="cb40-6"><a></a>  janitor<span class="sc">::</span><span class="fu">clean_names</span>()</span>
-<span id="cb40-7"><a></a></span>
-<span id="cb40-8"><a></a><span class="co"># Load policy data</span></span>
-<span id="cb40-9"><a></a>data <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"dataverse_files/policy_data_updated.RDS"</span>)<span class="sc">%&gt;%</span></span>
-<span id="cb40-10"><a></a>  janitor<span class="sc">::</span><span class="fu">clean_names</span>()</span>
-<span id="cb40-11"><a></a></span>
-<span id="cb40-12"><a></a><span class="co"># Load CPS data</span></span>
-<span id="cb40-13"><a></a>cps <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"dataverse_files/cps_00021.csv"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb40-14"><a></a>  janitor<span class="sc">::</span><span class="fu">clean_names</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a></a><span class="co"># Remember to set working directory:</span></span>
+<span id="cb41-2"><a></a><span class="co"># Session &gt; Set working directory &gt; Source file location</span></span>
+<span id="cb41-3"><a></a></span>
+<span id="cb41-4"><a></a><span class="co"># Load fips_codes</span></span>
+<span id="cb41-5"><a></a>fips_codes <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"dataverse_files/fips_codes_website.csv"</span>)<span class="sc">%&gt;%</span></span>
+<span id="cb41-6"><a></a>  janitor<span class="sc">::</span><span class="fu">clean_names</span>()</span>
+<span id="cb41-7"><a></a></span>
+<span id="cb41-8"><a></a><span class="co"># Load policy data</span></span>
+<span id="cb41-9"><a></a>data <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"dataverse_files/policy_data_updated.RDS"</span>)<span class="sc">%&gt;%</span></span>
+<span id="cb41-10"><a></a>  janitor<span class="sc">::</span><span class="fu">clean_names</span>()</span>
+<span id="cb41-11"><a></a></span>
+<span id="cb41-12"><a></a><span class="co"># Load CPS data</span></span>
+<span id="cb41-13"><a></a>cps <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"dataverse_files/cps_00021.csv"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb41-14"><a></a>  janitor<span class="sc">::</span><span class="fu">clean_names</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section></section>
-<section>
-<section id="summary-1" class="title-slide slide level1 inverse center">
-<h1><i class="fa-solid fa-home" aria-label="home"></i> Summary</h1>
-
-</section>
-<section id="summary-2" class="slide level2">
-<h2>Summary</h2>
-</section>
-<section id="references" class="slide level2 smaller scrollable">
-<h2>References</h2>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
-<div id="ref-Callaway2021-av" class="csl-entry" role="listitem">
-Callaway, Brantly, and Pedro H C Sant’Anna. 2021. <span>“<span class="nocase">Difference-in-Differences with multiple time periods</span>.”</span> <em>Journal of Econometrics</em> 225 (2): 200–230.
-</div>
-<div id="ref-Goodman-Bacon2021-ah" class="csl-entry" role="listitem">
-Goodman-Bacon, Andrew. 2021. <span>“<span class="nocase">Difference-in-differences with variation in treatment timing</span>.”</span> <em>Journal of Econometrics</em> 225 (2): 254–77.
-</div>
 <div id="ref-Grumbach2022-zj" class="csl-entry" role="listitem">
 Grumbach, Jacob M, and Charlotte Hill. 2022. <span>“<span class="nocase">Rock the Registration: Same Day Registration Increases Turnout of Young Voters</span>.”</span> <em>The Journal of Politics</em> 84 (1): 405–17.
 </div>
@@ -2803,7 +3076,7 @@ Grumbach, Jacob M, and Charlotte Hill. 2022. <span>“<span class="nocase">Rock 
         }
           var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
           var mailtoRegex = new RegExp(/^mailto:/);
-            var filterRegex = new RegExp("https:\/\/josephessig-source\.github\.io\/pols1600_site\/");
+            var filterRegex = new RegExp('/' + window.location.host + '/');
           var isInternal = (href) => {
               return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
           }
