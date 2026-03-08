@@ -21,7 +21,7 @@ execute:
 
 # Overview {.unnumbered}
 
-In this lab, we will begin the process of replicating Grumbach and Hill (2021) "Rock the Registration: Same Day Registration Increases Turnout of Young Voters."
+In this lab, we will begin the process of replicating Grumbach and Hill (2021) "Rock the Registration: Same Day Registration Increases Turnout of Young Voters." 
 
 To accomplish this we will:
 
