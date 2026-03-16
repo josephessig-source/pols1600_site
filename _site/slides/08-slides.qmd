@@ -58,42 +58,22 @@ library(texreg)
 
 # {{< fa map-location>}} Overview {.inverse}
 
-## Class Plan {.smaller}
-
-- Announcements (5 min)
-- Feedback (5 min)
+- Announcements 
 - Class plan
-  - Probability (10 min)
-  - Conditional Probability (10 min)
-  - Probability Distributions (10 min)
-  - Expected Values and Variances (10 min)
-  - Standard Errors (10 min)
-  - Previewing Lab 8 (10 min)
+  - Probability 
+  - Conditional Probability 
+  - Probability Distributions
+  - Expected Values and Variances 
+  - Standard Errors
+  - Previewing Lab 8
 
 ## Assignments
 
-- [Assignment 2: Due March 23](https://pols1600.paultesta.org/assignments/a2)
-  - Feedback over Spring Break
+- Assignment 2 feedback this week - some changes to due dates for future: 
 
-- [Assignment 3](https://pols1600.paultesta.org/assignments/a3): Now Due April 6
+- Assignment 3 (data exploration) will be due Sunday, April 5. 
 
-- [Assignment 4](https://pols1600.paultesta.org/assignments/a3): Still due April 20
-
-
-## Annoucements: Assignment 2 {.smaller}
-
-Full prompt [here](https://pols1600.paultesta.org/assignments/a2)
-
-1. A revised description of your group's research project
-2. A description of a linear model implied by your question
-3. R code that loads some potentially relevant data to your question and at least one descriptive summary of that data.
-4. Some information about your group such as:
-    - A group name^[If you're Group 01 don't change your name to Group 4]
-    - A group color or color scheme
-    - A group motto, mascot, crest, etc.
-    - Your group's theme song
-    - Your group's astrological sign
-    - Anything else that you think well help you form strong ingroup bounds that facilitate collaboration
+- Assignment 4 (paper draft) still due Sunday, March 19. 
 
 ## Final Project {.smaller}
 
@@ -116,7 +96,7 @@ Assignment 3 will focus on the logistics
   - Recoding
   - HLO
 
-Assignment 4 will focus on estimation and interpretation, and presentation
+Assignment 4 will focus on estimation, interpretation, and presentation
 
   - Intro + Theory
   - Data and Design
@@ -137,7 +117,7 @@ the_packages <- c(
   "tidyverse", "lubridate", "forcats", "haven", "labelled",
   ## Extensions for ggplot
   "ggmap","ggrepel", "ggridges", "ggthemes", "ggpubr", 
-  "GGally", "scales", "dagitty", "ggdag", "ggforce",
+  "scales", "dagitty", "ggdag", "ggforce",
   # Data 
   "COVID19","maps","mapdata","qss","tidycensus", "dataverse", 
   # Analysis
@@ -149,11 +129,6 @@ the_packages <- c(
 lapply(the_packages, library, character.only = TRUE)
 
 ```
-
-
-## Course Survey
-
-Please take the course survey [here](https://brown.co1.qualtrics.com/jfe/form/SV_eFmwvHaKLBBLoJU)
 
 
 
@@ -171,7 +146,7 @@ Please take the course survey [here](https://brown.co1.qualtrics.com/jfe/form/SV
 
   - Three *rules* of probability ([**Kolmogorov axioms**]{.blue})
 
-  - Two interpretations interpreting probabilities ([**Frequentist**]{.blue} and [**Bayesian**]{.blue})
+  - Two interpretations of probabilities ([**Frequentist**]{.blue} and [**Bayesian**]{.blue})
 
 
 
@@ -296,7 +271,6 @@ $$Pr(A) = Pr(A \text{ and } B) + Pr(A \text{ and } B^{\complement})$$
 
   - Flip a fair coin, the probability of heads is Pr(Heads) = 0.5
 
-
 - **Frequentist:** view this probability as the [limit of the relative frequency]{.blue} of an event [over repeated trials]{.blue}.
 
 $$Pr(E) = \lim_{n \to \infty} \frac{n_{E}}{n} \approx \frac{ \text{# of Times E happened}}{\text{Total # of Trials}}$$
@@ -326,7 +300,6 @@ For example, suppose we wanted to test whether a coin is "fair" $(p = Pr(Heads) 
 ## Bayesian interpretations of probability {.smaller}
 
 
-
 - Frequentist interpretations make sense for describing processes that we could easily repeat (e.g. Coin flips, Surveys, Experiments)
 
 
@@ -337,7 +310,6 @@ For example, suppose we wanted to test whether a coin is "fair" $(p = Pr(Heads) 
 
 
 - The task for a Bayesian statistics is to update these [*prior* beliefs ]{.blue} () based on a model of the [*likelihood*]{.blue} of observing some data to form new beliefs after observing the data (called the [*posterior beliefs*]{.blue}).
-
 
 
 ## Bayesian Updating
@@ -901,28 +873,6 @@ $$\rho=\frac{Cov[X,Y]}{\sigma_X\sigma_Y}$$
 :::
 
 
-## Properties of Variance and Covariance
-
-- $Cov[X,Y]=E[XY]-E[X]E[Y]$
-
-- $Var[X]=E[X^2]-(E[X])^2$
-
-- $Var[X|Y]=E[X^2|Y]-(E[X|Y])^2$
-
-- $Cov[X,Y]=Cov[X,E[Y|X]]$
-
-- $Var[X+Y]=Var[X]+Var[Y]+2Cov[X,Y]$
-
-- $Var[Y]=Var[E[Y|X]]+E[Var[Y|X]]$
-
-## What you need to know (WYNK)
-
-Honestly, for this class, you won't need to know these properties. 
-
-They'll show up in proofs and theorems and become important when you're trying to evaluate properties of an estimator (isn't unbiased, is it "efficient", or consistent does it have minimum variance?) but that's for another day/course.
-
-
-
 ## Summary: Random Variables and Probability Distributions{.smaller}
 
 - [Random variables]{.blue} assign numeric values to each event in an experiment.
@@ -1009,7 +959,7 @@ $$
 ## {.smaller}
 #### Standard errors of regression coefficients
 
-The standard error for the $k$th coefficient $\beta_k$ is simply the square root of the of the $k$th diagnoal element of the [variance-covariance matrix]{.blue}
+The standard error for the $k$th coefficient $\beta_k$ is simply the square root of the of the $k$th diagonal element of the [variance-covariance matrix]{.blue}
 
 $$
 \text{SE}(\beta_k) = \sqrt{Var(\beta_k)}
@@ -1050,8 +1000,6 @@ As you will see, `lm_robust()` provides a convenient way to:
 - calculate a variety of robust [standard errors]{.blue} using the `se_type = "stata"` argument for example to get the SEs Stata uses
 - include [fixed effects]{.blue} using `fixed_effects = ~ st + year` argument
 - cluster standard errors by some grouping id variable `cluster=st`
-- generate estimates quickly using the [Cholesky Decomposition]{.blue}
-
 
 # {{<fa magnifying-glass >}} Previewing Lab 8{.inverse}
 
@@ -1059,7 +1007,7 @@ As you will see, `lm_robust()` provides a convenient way to:
 
 The goals of this weeks lab are to:
 
-- Help develop your inuition behind the Two-way Fixed Effects Estimator
+- Help develop your intuition behind the Two-way Fixed Effects Estimator
 
 - Learn how to estimate models with fixed effects and robust clustered standard errors using `lm_robust()`
 
@@ -1074,14 +1022,13 @@ The goals of this weeks lab are to:
 Question 8 from last week's lab asked you to recreate Figure 2 from @Grumbach2022-zj
 
 
-
 ## {{< fa code >}} Code
 
 ```{r}
 #| label: fig2data
 
 # Load data
-load(url("https://pols1600.paultesta.org/files/data/cps_clean.rda"))
+load(url("https://josephessig-source.github.io/pols1600_site/files/data/cps_clean.rda"))
 
 # Calculate turnout by age group and SDR
 cps %>% 
@@ -1166,7 +1113,19 @@ Q3.2 will ask you to describe similar variation across years.
 Q3.3 will then ask you to look at variation across SDR policy within a single state.
 
 The goal these questions is to help illustrate motivation for including [fixed effects]{.blue} as way of generalizing the logic of a [difference in differences]{.blue} design
-
 :::
 
-## References
+## Generalizing Diff-in-Diff with Linear Regression with Fixed Effects {.smaller}
+
+- Linear regression allows us to generalizes Diff-in-Diff to multiple periods and treatment interventions, with [fixed effects]{.blue}
+
+:::{.fragment}
+$$
+y_{it} = \overbrace{\alpha_i}^{\text{Unit FE}} + \underbrace{\gamma_t}_{\text{Period FE}} + \overbrace{\tau*d_{it}}^{\text{Treatment}} + \underbrace{X\beta}_{\text{Covariates}} + \epsilon_{it}
+$$
+:::
+
+  - [Unit fixed effects]{.blue} $(\alpha_i)$control for time-invariant differences across units
+  - [Period fixed effects]{.blue} $(\gamma_i)$ control for unit-invariant differences across periods
+  - [$\tau$]{.blue} corresponds the [Difference-in-Difference]{.blue} estimate for a [two-way fixed effects]{.blue} regression
+  

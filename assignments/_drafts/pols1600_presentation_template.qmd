@@ -79,7 +79,7 @@ Put a screen shot of a regression table here
 
 Put a figure here
 
-![](https://pols1600.paultesta.org/labs/06-lab-comments_files/figure-html/m1fig-1.png)
+![](https://josephessig-source.github.io/pols1600_site/labs/06-lab-comments_files/figure-html/m1fig-1.png)
 
 ::::
 

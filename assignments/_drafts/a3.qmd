@@ -6,7 +6,6 @@ format:
     toc_float: TRUE
     toc_depth: 2
     number_sections: TRUE
-draft: TRUE
 ---
 
 # Overview {.unnumbered}

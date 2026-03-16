@@ -6,7 +6,6 @@ format:
     toc_float: TRUE
     toc_depth: 2
     number_sections: TRUE
-draft: TRUE
 ---
 
 You final will paper consists of seven sections. There is no minimum (or maximum) length for the final paper, but I've included rough estimates in parentheses of how long I think each section should be along with the relative contribution of each section to your final grade.
@@ -21,7 +20,7 @@ You final will paper consists of seven sections. There is no minimum (or maximum
 
 Specific guidance, expectations, and grading criteria for each section are provided below.
 
-You need not have every section completely finished in this draft, but the more you have done the more feedback you will get. Remember, the data, design, and results section make up 70 percent of your grade, so while a good introduction, compelling theory, and thoughtful conclusion are important, you should budget your time accordingly.
+**You need not have every section completely finished in this draft**, but the more you have done the more feedback you will get. Remember, the data, design, and results section make up 70 percent of your grade, so while a good introduction, compelling theory, and thoughtful conclusion are important, you should budget your time accordingly.
 
 Your actual grade for the draft will reflect a general assessment of the status of your project
 
@@ -30,10 +29,10 @@ Your actual grade for the draft will reflect a general assessment of the status 
 - 80: Lots of work to do, but if done, headed in the right direction
 - 70: Major revisions needed. We should probably talk in office hours 
 
-Additionally, I will assign points to each section as if it were you final paper to give you a sense of where to focus your efforts. This is not your actual grade for this assignment, but can be though of as a rough estimate of the grade you would receive on a section if you were to submit it, as is, for your final paper. Your grade for that section on the final paper may increase or decrease depending on the changes you make to your draft.
-Additionally, I will assign points to each section as if it were you final paper to give you a sense of where to focus your efforts. This is not your actual grade for this assignment, but can be though of as a rough estimate of the grade you would receive on a section if you were to submit it, as is, for your final paper. Your grade for that section on the final paper may increase or decrease depending on the changes you make to your draft.
 
-I have also posted a <a href="pols1600_paper_template.qmd" download > template for the final paper</a> and an [example of a final paper](https://pols1600.paultesta.org/files/pols1600_final_paper_example){target="blank"} from a previous version of POLS 1600.
+Additionally, I will assign points to each section as if it were your final paper to give you a sense of where to focus your efforts. This is not your actual grade for this assignment, but can be though of as a rough estimate of the grade you would receive on a section if you were to submit it, as is, for your final paper. Your grade for that section on the final paper may increase or decrease depending on the changes you make to your draft.
+
+I have also posted a <a href="pols1600_paper_template.qmd" download > template for the final paper</a> and an [example of a final paper](https://josephessig-source.github.io/pols1600_site/files/pols1600_final_paper_example){target="blank"} from a previous version of POLS 1600.
 
 - The template contains some **sample code** to that may be usefully adapted for your projects, but **should not appear** in your final paper (i.e. keep use the structure provided by the template, but delete the code I've included.)
 
