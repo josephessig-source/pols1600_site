@@ -36,8 +36,7 @@ I have also posted a <a href="pols1600_paper_template.qmd" download > template f
 
 - The template contains some **sample code** to that may be usefully adapted for your projects, but **should not appear** in your final paper (i.e. keep use the structure provided by the template, but delete the code I've included.)
 
-- The final paper assignment has changed over time. There are things this paper does, which I no longer ask you to do (e.g. explain the difference between simulation and asymptotic approaches to statistical inference). There are things I ask you to do (e.g. write a separate theory section that motivates your expectations) which this paper was not required to do.
-
+- The final paper assignment has changed over time. There are things this paper does, which I do not ask you to do (e.g. explain the difference between simulation and asymptotic approaches to statistical inference). There are things I ask you to do (e.g. write a separate theory section that motivates your expectations) which this paper was not required to do.
 
 ---------------------------------------------------
 
@@ -54,7 +53,6 @@ Plan to write at least four paragraphs that
 - Describes your empirical strategy
 
 - Provides an outline of the rest of the paper and previews your results.
-
 
 ## Grading Criteria (5 points)
 
@@ -82,6 +80,20 @@ Plan to write at least four paragraphs that
   - **No discussion** of empirical results
   - **Does little** to pique reader's interest in the rest of the paper.
   - **Writing throughout** is **muddled and vague**, with **uncorrekt spellung** and **grammur** and consistent citations
+
+# Introduction 
+
+This section provides an introduction and overview of your project. 
+
+Plan to write at least four paragraphs that
+
+- Clearly articulates your group's research question
+
+- Lays out the theoretical framework that motivates your inquiry
+
+- Describes your empirical strategy
+
+- Provides an outline of the rest of the paper and previews your results.
 
 # Theory and Expectations 
 

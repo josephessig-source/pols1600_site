@@ -73,7 +73,7 @@ library(texreg)
 
 - Assignment 3 (data exploration) will be due Sunday, April 5. 
 
-- Assignment 4 (paper draft) still due Sunday, March 19. 
+- Assignment 4 (paper draft) still due April, March 19. 
 
 ## Final Project {.smaller}
 
