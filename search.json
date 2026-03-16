@@ -12913,7 +12913,7 @@
     "href": "assignments/a3.html",
     "title": "A3: Initial Analyses",
     "section": "",
-    "text": "The broad goal for this assignment is to ensure that you’re making progress on your final project.\nThe final project that you will submit for this class consists of the following:\n\nIntroduction (5 percent, ~ 4 paragraphs)\nTheory and Expectations (10 percent, ~4+ paragraphs)\nData (20 percent ~ 4+ paragraphs)\nDesign (25 percent ~ 5+ paragraphs)\nResults (25 percent ~ 5+ paragraphs)\nConclusion (5 percent ~ 3+ paragraphs)\nAppendix (10 percent ~ Variable codebook and all the R code for your project)\n\nThe specific expectations for each section will be discussed in further detail in your next assignment.\nOur focus this week will be on the logistical aspects of your final project\n\nDownloading the template for your final paper\nMaking sure you’re set up for collaboration with GoogleDrive\nFinish wrangling your data in the code of your final paper\n\nLoading the data into R\nInspect the data\nCompleting recoding and if necessary, merging of the data\n\nBegin describing the data\nBegin outlining the other sections of your document (Intro, Theory, Data & Design, etc.)\n\nNext week, we will focus on estimating, interpreting and presenting your results.",
+    "text": "The broad goal for this assignment is to ensure that you’re making progress on your final project.\nThe final project that you will submit for this class consists of the following:\n\nIntroduction (5 percent, ~ 4 paragraphs)\nTheory and Expectations (10 percent, ~4+ paragraphs)\nData (20 percent ~ 4+ paragraphs)\nDesign (25 percent ~ 5+ paragraphs)\nResults (25 percent ~ 5+ paragraphs)\nConclusion (5 percent ~ 3+ paragraphs)\nAppendix (10 percent ~ Variable codebook and all the R code for your project)\n\nThe specific expectations for each section will be discussed in further detail in your next assignment.\nNext week’s assignment is linked here, which may help with your outlining.\nOur focus this week will be on the logistical aspects of your final project:\n\nDownloading the template for your final paper\nMaking sure you’re set up for collaboration with GoogleDrive\nFinish wrangling your data in the code of your final paper\n\nLoading the data into R\nInspect the data\nCompleting recoding and if necessary, merging of the data\n\nBegin describing the data\nBegin outlining the other sections of your document (Intro, Theory, Data & Design, etc.)\n\nNext week, we will focus on estimating, interpreting and presenting your results.",
     "crumbs": [
       "Assignments",
       "A3: Exploratory Analysis"
@@ -12924,7 +12924,7 @@
     "href": "assignments/a3.html#data-wrangling-and-inspection",
     "title": "A3: Initial Analyses",
     "section": "Data wrangling and inspection",
-    "text": "Data wrangling and inspection",
+    "text": "Data wrangling and inspection\nLoad your data into R and start getting a HLO of the data. Subset the data to just the variables you will need.",
     "crumbs": [
       "Assignments",
       "A3: Exploratory Analysis"
@@ -12935,10 +12935,43 @@
     "href": "assignments/a5.html",
     "title": "A5: Presentation",
     "section": "",
-    "text": "On Thursday you will present the initial results of your group projects.\nHere is a template which you can:  download . Please upload the rendered file with your presentation to Canvas before class on Monday, April 27.",
+    "text": "This week you will present the initial results of your group projects.\nHere is a template which you can:  download . Please upload the rendered file with your presentation to Canvas before class on Monday, April 27.",
     "crumbs": [
       "Assignments",
       "A5: Presentations"
+    ]
+  },
+  {
+    "objectID": "assignments/a3.html#recoding",
+    "href": "assignments/a3.html#recoding",
+    "title": "A3: Initial Analyses",
+    "section": "Recoding",
+    "text": "Recoding\nIn this chunk, work on creating any new variables or making any transformations of variables you will need, like creating a factor, assigning a numerical value based on labels, etc.",
+    "crumbs": [
+      "Assignments",
+      "A3: Exploratory Analysis"
+    ]
+  },
+  {
+    "objectID": "assignments/a3.html#describing-the-data",
+    "href": "assignments/a3.html#describing-the-data",
+    "title": "A3: Initial Analyses",
+    "section": "Describing the data",
+    "text": "Describing the data\nProvide descriptive statistics for some of your variables. Create at least 1 figure to visualize your data (it does not have to be pretty, or be the final version you will include in your paper.)",
+    "crumbs": [
+      "Assignments",
+      "A3: Exploratory Analysis"
+    ]
+  },
+  {
+    "objectID": "assignments/a3.html#outlining-the-paper",
+    "href": "assignments/a3.html#outlining-the-paper",
+    "title": "A3: Initial Analyses",
+    "section": "Outlining the paper",
+    "text": "Outlining the paper\nPlease provide a few sentences or bullet points giving a broad overview of each section for your paper.\n\nIntroduction\n\nWhat is your research question?\n\n\n\nTheory\n\nWhat is the phenomena you are studying? (Research Question/Outcome of Interest)\nWhy should we care about this phenomena? (Context/Motivation/Importance)\nWhat are the factors scholars think explain this phenomena? (Literature Review/Key predictors/Alternative explanations). Identify at least 1 relevant paper.\n\n\n\nData\n\nWhat is your data, and where does it come from? Is the data approriate for your RQ?\nWhat is the unit of analysis?\n\n\n\nDesign\n\nHow will you test your theoretical expectations?\nDescribe, in words, at least 1 regression model you will run.\nResults\nWhat do you expect your results to look like? You don’t need to go into detail on the specifics of your analysis, just think about the direction of your potential results.",
+    "crumbs": [
+      "Assignments",
+      "A3: Exploratory Analysis"
     ]
   }
 ]
