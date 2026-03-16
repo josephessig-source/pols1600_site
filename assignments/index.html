@@ -201,6 +201,30 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text">A2: Data</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../assignments/a3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">A3: Exploratory Analysis</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../assignments/a4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">A4: Draft</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../assignments/a5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">A5: Presentations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../assignments/pols1600_paper_template.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Final Paper</span></a>
+  </div>
+</li>
       </ul>
   </li>
     </ul>
@@ -255,10 +279,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ul>
 <li><strong>Week 4: </strong> <a href="../assignments/a1.html">Research Topics</a></li>
 <li><strong>Week 6: </strong> <a href="../assignments/a2.html">Potential Data</a></li>
-<li><strong>Week 8: </strong> Exploratory Analysis</li>
-<li><strong>Week 11:</strong> Draft</li>
-<li><strong>Week 12:</strong> Presentations</li>
-<li><strong>Week 13:</strong> Final Paper</li>
+<li><strong>Week 9: </strong> <a href="../assignments/a3.html">Exploratory Analysis</a> - due Sunday, April 5.</li>
+<li><strong>Week 11:</strong> <a href="../assignments/a4.html">Draft</a> - due Sunday, April 19.</li>
+<li><strong>Week 12:</strong> <a href="../assignments/a5.html">Presentations</a> - uploaded by Sunday, April 26, presented April 27-May 1 in class.</li>
+<li><strong>Week 13:</strong> <a href="../assignments/pols1600_paper_template.html">Final Paper</a> - due on Sunday, May 10th (late submissions NOT accepted)</li>
 </ul>
 
 
@@ -337,7 +361,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/josephessig-source\.github\.io\/pols1600_site\/");
+        var filterRegex = new RegExp('/' + window.location.host + '/');
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
