@@ -32,7 +32,7 @@ Your actual grade for the draft will reflect a general assessment of the status 
 
 Additionally, I will assign points to each section as if it were your final paper to give you a sense of where to focus your efforts. This is not your actual grade for this assignment, but can be though of as a rough estimate of the grade you would receive on a section if you were to submit it, as is, for your final paper. Your grade for that section on the final paper may increase or decrease depending on the changes you make to your draft.
 
-I have also posted a <a href="pols1600_paper_template.qmd" download > template for the final paper</a> and an [example of a final paper](pols1600_final_paper_example.html){target="blank"} from a previous version of POLS 1600.
+I have also posted a [template for the final paper](../files/pols1600_paper_template.qmd) and an [example of a final paper](../files/pols1600_final_paper_example.html) from a previous version of POLS 1600.
 
 - The template contains some **sample code** to that may be usefully adapted for your projects, but **should not appear** in your final paper (i.e. keep use the structure provided by the template, but delete the code I've included.)
 
