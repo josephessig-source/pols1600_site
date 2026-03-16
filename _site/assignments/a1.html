@@ -166,6 +166,30 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text">A2: Data</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../assignments/a3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">A3: Exploratory Analysis</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../assignments/a4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">A4: Draft</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../assignments/a5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">A5: Presentations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../assignments/pols1600_paper_template.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Final Paper</span></a>
+  </div>
+</li>
       </ul>
   </li>
     </ul>
@@ -408,7 +432,7 @@ ul.task-list li input[type="checkbox"] {
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/josephessig-source\.github\.io\/pols1600_site\/");
+        var filterRegex = new RegExp('/' + window.location.host + '/');
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }

@@ -4203,7 +4203,7 @@ window.Quarto = {
 <style type="text/css"></style>
 </head>
 
-<body class="nav-fixed quarto-light">
+<body class="nav-sidebar docked nav-fixed quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -4233,7 +4233,7 @@ window.Quarto = {
 <span class="menu-text">Class</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../assignments/index.html"> 
+    <a class="nav-link active" href="../assignments/index.html" aria-current="page"> 
 <span class="menu-text">Assignments</span></a>
   </li>  
 </ul>
@@ -4242,10 +4242,91 @@ window.Quarto = {
 </div>
       </div> <!-- /container-fluid -->
     </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../assignments/a1.html">Assignments</a></li><li class="breadcrumb-item"><a href="../assignments/pols1600_paper_template.html">Final Paper</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
 </header>
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Overview</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../assignments/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Assignments</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Assignments</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../assignments/a1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">A1: Introductions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../assignments/a2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">A2: Data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../assignments/a3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">A3: Exploratory Analysis</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../assignments/a4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">A4: Draft</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../assignments/a5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">A5: Presentations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../assignments/pols1600_paper_template.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Final Paper</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
@@ -4272,7 +4353,7 @@ window.Quarto = {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../assignments/a1.html">Assignments</a></li><li class="breadcrumb-item"><a href="../assignments/pols1600_paper_template.html">Final Paper</a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title">POLS 1600: Final Paper Template</h1>
 </div>
@@ -4319,12 +4400,12 @@ window.Quarto = {
 <p>In this section you will develop on your theoretical framework to develop a set of testable empirical implications that address your broader research question.</p>
 <p>This section should begin by explaining the following:</p>
 <ul>
-<li><p>What is the phenomena you are studying? (Research Question/Outcome of Interest)</p></li>
-<li><p>Why should we care about this phenomena? (Context/Motivation/Importance)</p></li>
+<li><p>What is the phenomenon you are studying? (Research Question/Outcome of Interest)</p></li>
+<li><p>Why should we care about this? (Context/Motivation/Importance)</p></li>
 </ul>
 <p>Then it should turn to addressing:</p>
 <ul>
-<li>What are the factors scholars think explain this phenomena? (Literature Review/Key predictors/Alternative explanations)</li>
+<li>What are the factors scholars think explain this phenomenon? (Literature Review/Key predictors/Alternative explanations)</li>
 </ul>
 <p>Which should lead to a discussion of</p>
 <ul>
@@ -4337,11 +4418,11 @@ window.Quarto = {
 <ul>
 <li><p>Identify the source or sources of your data</p></li>
 <li><p>Define the unit of analysis and number of observations in your data</p></li>
-<li><p>Explain how your key concepts (outcome variable, key predictors, covariates/alternative explanations) are operationalized and measured</p></li>
+<li><p>Explain how your key concepts (outcome variable, key predictors, covariates/alternative explanations) are measured</p></li>
 <li><p>Describe the distributions of these data using a table and/or figure(s).</p></li>
-<li><p>Interpret these distributions for your reader. What does a typical observation in the data look like. Are some data skewed. Are their big outliers</p></li>
+<li><p>Interpret these distributions for your reader. What does a typical observation in the data look like. Are some data skewed. Are there big outliers?</p></li>
 </ul>
-<p>Before you write anythin in this section, you will want to adapt the code chunks below to:</p>
+<p>Before you write anything in this section, you will want to adapt the code chunks below to:</p>
 <ul>
 <li><p>Set up the work space</p></li>
 <li><p>Load your data</p></li>

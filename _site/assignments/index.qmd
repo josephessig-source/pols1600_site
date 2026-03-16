@@ -31,8 +31,8 @@ Finally, throughout the semester you will have periodic assignments to ensure th
 
 - **Week 4: ** [Research Topics](a1.qmd)
 - **Week 6: ** [Potential Data](a2.qmd)
-- **Week 8: ** Exploratory Analysis
-- **Week 11:**  Draft
-- **Week 12:**  Presentations
-- **Week 13:**  Final Paper
+- **Week 9: ** [Exploratory Analysis](a3.qmd) - due Sunday, April 5. 
+- **Week 11:**  [Draft](a4.qmd) - due Sunday, April 19. 
+- **Week 12:**  [Presentations](a5.qmd) - uploaded by Sunday, April 26, presented April 27-May 1 in class. 
+- **Week 13:**  [Final Paper](pols1600_paper_template.qmd) - due on Sunday, May 10th (late submissions NOT accepted)
 

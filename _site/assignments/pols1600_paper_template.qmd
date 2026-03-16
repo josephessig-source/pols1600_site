@@ -33,25 +33,23 @@ This document provides a template for the structure of your final paper for POLS
 
 - Provides an outline of the rest of the paper and previews your results.
 
-
 # Theory and Expectations 
 
 In this section you will develop on your theoretical framework to develop a set of testable empirical implications that address your broader research question.
 
 This section should begin by explaining the following:
 
-- What is the phenomena you are studying? (Research Question/Outcome of Interest)
+- What is the phenomenon you are studying? (Research Question/Outcome of Interest)
 
-- Why should we care about this phenomena? (Context/Motivation/Importance)
+- Why should we care about this? (Context/Motivation/Importance)
 
 Then it should turn to addressing:
 
-- What are the factors scholars think explain this phenomena? (Literature Review/Key predictors/Alternative explanations)
+- What are the factors scholars think explain this phenomenon? (Literature Review/Key predictors/Alternative explanations)
 
 Which should lead to a discussion of
 
 - What are the empirical implications of these claims? (Testable hypotheses)
-
 
 # Data 
 
@@ -61,13 +59,13 @@ In this section you will describe your data.
 
 - Define the unit of analysis and number of observations in your data
 
-- Explain how your key concepts (outcome variable, key predictors, covariates/alternative explanations) are operationalized and measured
+- Explain how your key concepts (outcome variable, key predictors, covariates/alternative explanations) are measured
 
 - Describe the distributions of these data using a table and/or figure(s). 
 
-- Interpret these distributions for your reader. What does a typical observation in the data look like. Are some data skewed. Are their big outliers 
+- Interpret these distributions for your reader. What does a typical observation in the data look like. Are some data skewed. Are there big outliers?
 
-Before you write anythin in this section, you will want to adapt the code chunks below to:
+Before you write anything in this section, you will want to adapt the code chunks below to:
 
 - Set up the work space
 
