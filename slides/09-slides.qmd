@@ -54,22 +54,30 @@ library(haven)
 library(DeclareDesign)
 library(easystats)
 library(texreg)
-
+library(ggpubr)
 ```
-
 
 
 # {{< fa map-location>}} Overview {.inverse}
 
 ## Class Plan {.smaller}
 
-- Announcements (5 min)
-- Feedback (5 min)
-- Class plan
-  - Probability Distributions (20 min)
-  - Law of Large Numbers (20 min)
-  - Central Limit Theorem (20 min)
-  - Standard Errors (10 min)
+- Class plan for this week
+  - Probability Distributions 
+  - Law of Large Numbers 
+  - Central Limit Theorem 
+  - Standard Errors 
+
+## Announcements
+
+- Tutorial and lab this week, as usual (due Monday April 6)
+
+- Assignment 3, data exploration due Sunday April 5
+
+- If you got your data ready in assignment 2, should be simple. 
+
+- You will complete your data cleaning, create 1 descriptive figure, and complete a basic outline. 
+
 
 ## Goals
 
@@ -81,168 +89,6 @@ library(texreg)
 - [The Central Limit Theorem]{.blue} tells us that distribution of sample means of a given sample size converges in distribution to a Normal probability distribution
 
 - [Standard Errors]{.blue} describe the [width of a sampling distribution]{.blue} and allow us to assess the [statistical significance]{.blue} of regression estimates
-
-
-## Annoucements: Assignment 2 {.smaller}
-
-- Feedback on Assignment 2 posted to Canvas
-
-- Proposal:
-
-  - Substitute Lab 11 with in class workshops on Final Project
-  - This will count as both your grade on [Assignment 3](https://pols1600.paultesta.org/assignments/a3) and the Lab for that week
-  - Assignment 3 no longer due April 6, but you can upload questions for feedback this weekend.
-
-
-## Setup: Packages for today
-
-```{r}
-#| label: packages
-#| echo: true
-
-## Pacakges for today
-the_packages <- c(
-  ## R Markdown
-  "kableExtra","DT","texreg","htmltools",
-  ## Tidyverse
-  "tidyverse", "lubridate", "forcats", "haven", "labelled",
-  ## Extensions for ggplot
-  "ggmap","ggrepel", "ggridges", "ggthemes", "ggpubr", 
-  "patchwork",
-  "GGally", "scales", "dagitty", "ggdag", "ggforce",
-  # Data 
-  "COVID19","maps","mapdata","qss","tidycensus", "dataverse", 
-  # Analysis
-  "DeclareDesign", "easystats", "zoo"
-)
-
-## Define a function to load (and if needed install) packages
-
-lapply(the_packages, library, character.only = TRUE)
-
-```
-
-
-## Feedback
-
-![](https://i.pinimg.com/736x/74/42/a8/7442a830aa63f844eb04474c149e7834.jpg)
-
-```{r}
-#| label: feeback
-#| echo: false
-
-df <- haven::read_spss("../files/data/class_surveys/wk08.sav")
-
-
-df %>%
-  mutate(
-    optout =ifelse(is.na(optout),1, optout),
-    year = lubridate::year(StartDate)
-  ) %>% 
-  filter(year == 2025) %>% 
-  filter(optout != 2) -> df
-
-```
-
-
-## What did we like {.smaller}
-
-```{r}
-#| label: likes
-#| echo: false
-
-
-DT::datatable(df %>% 
-                select(Likes),
-               fillContainer = F,
-              height = "90%",
-              options = list(
-                pageLength = 5
-              )
-              )
-```
-
-## What did we dislike {.smaller}
-
-```{r}
-#| label: dislikes
-#| echo: false
-
-
-DT::datatable(df %>% 
-                select(Dislikes),
-               fillContainer = F,
-              height = "90%",
-              options = list(
-                pageLength = 5
-              )
-              )
-```
-
-## Advice for Others{.smaller}
-
-
-```{r}
-#| label: advice
-#| echo: false
-
-DT::datatable(df %>% 
-                select(Advice),
-               fillContainer = F,
-              height = "90%",
-              options = list(
-                pageLength = 5
-              )
-              )
-```
-
-## Help me with my fit
-
-![](https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExMDBrNm1ycms0NnJkZm53MTJkZHY4MWJpMnM1dDJhYmthbXRyMmw5OSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/9WxhJU5SUVhao/giphy.gif)
-
-## Our Fashion Advice {.smaller}
-
-```{r}
-#| echo: false
-library(tidyverse)
-library(kableExtra)
-
-
-df_poll <- df
-
-
-df_poll %>% 
-  mutate(across(starts_with("fit"), forcats::as_factor)) ->df_poll
-
-df_poll %>% 
-  select(starts_with("fit")) %>% 
-  pivot_longer(cols = starts_with("fit")) %>% 
-  group_by(name, value) %>% 
-  summarise(
-    n =n(),
-  ) %>% 
-  group_by(name) %>% 
-  summarise(
-    Choice = value[n==max(n)],
-    Votes = max(n)
-  ) %>% 
-  mutate(
-    Option = str_to_title(gsub("fit_","",name)),
-
-  ) %>% select(
-    Option, Choice, Votes
-  ) %>% ungroup() %>% na.omit() -> fashion_tab
-
-kable(fashion_tab[,2:4])
-```
-
-## What would Derek Guy say?
-
-
-{{< tweet ProfPaulTesta 1860348618294603905 >}}
-
-
-
 
 # {{< fa lightbulb >}} Probability Distributions {.inverse}
 
@@ -1772,10 +1618,6 @@ X(X'X)^{-1} =
 $$
 
 Clustered standard errors go a step further, summing up the residuals within clusters (groups) in the data. 
-
-## Replicating Grumbach and Hill
-
-Ok, let's revisit some of the questions from [lab 8](https://pols1600.paultesta.org/labs/08-lab-comments)
 
 ## Summary
 
