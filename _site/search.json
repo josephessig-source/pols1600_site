@@ -1061,7 +1061,7 @@
     "href": "slides/09-slides.html#class-plan",
     "title": "POLS 1600",
     "section": "Class Plan",
-    "text": "Class Plan\n\nAnnouncements (5 min)\nFeedback (5 min)\nClass plan\n\nProbability Distributions (20 min)\nLaw of Large Numbers (20 min)\nCentral Limit Theorem (20 min)\nStandard Errors (10 min)"
+    "text": "Class Plan\n\nClass plan for this week\n\nProbability Distributions\nLaw of Large Numbers\nCentral Limit Theorem\nStandard Errors"
   },
   {
     "objectID": "slides/09-slides.html#goals",
@@ -6125,7 +6125,7 @@
     "href": "index.html",
     "title": "POLS 1600",
     "section": "",
-    "text": "This course provides a foundation in the principles and practice of quantitative social science, with a focus on building tools to make descriptive, causal, and predictive inferences.\n\nLogistics\nWe meet three times a week from 12-12:50pm with lectures on Monday and Wednesday and lab sessions on Friday. You will need a laptop that can run R and Rstudio for both lectures and labs.\n\n\n\n\nLecture\nMondays and Wednesdays, 12-12:50pm\n\n\n\n\n\nLabs\nFridays, 12-12:50pm\n\n\n\n\n\nAssignments\nDue on Canvas\n\n\n\n\n\nLocation\nAndrews House 310\n\n\n\n\n\nZoom\n\n\n\n\n\nOffice Hours\nJoe | 2-4pm, Thursdays  Stephen Roberts Hall, Rm. 123 (Taubman Center)  [Sara Ansari, TA | 10 am to 11 am Wednesdays]  Room 325, 111 Thayer St\n\n\n\n\n\nSchedule\n\n\n\n\n\n\n\n\n\n\n\nLecture\nLabs\nSolutions\nAssignments\n\n\n\n\nWeek 0\n\n\n\n\n\n\nIntroductions\n\n\n\n\n\n\n\n\n\n\nWeek 1\n\n\n\n\n\n\nData & Measurement\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWeek 2\n\n\n\n\n\n\nData Visualization\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWeek 3\n\n\n\n\n\n\nCausation -- Experiments\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWeek 4\n\n\n\n\n\n\n\n\n\n\nCausation -- Observational Studies\n\n\n\n\n\n\n\n\n\n\nWeek 5\n\n\n\n\n\n\nBivariate Regression\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWeek 6\n\n\n\n\n\n\n\n\n\n\nMultiple Regression\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWeek 7\n\n\n\n\n\n\nRegression Extensions\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWeek 8\n\n\n\n\n\n\n\n\n\n\nProbability - Random Variables & Distributions\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWeek 9\n\n\n\n\n\n\nProbability - Limit Theorems\n\n\n\n\n\n\nWeek 10\n\n\n\n\n\n\n\n\n\n\nInference -- Confidence Intervals\n\n\n\n\n\n\nWeek 11\n\n\n\n\n\n\n\n\n\n\nInference -- Hypothesis Testing\n\n\n\n\n\n\nWeek 12\n\n\n\n\n\n\nWorkshop\n\n\n\n\n\n\nWeek 13\n\n\n\n\n\n\nPresentations\n\n\n\n\n\n\n\n\n\nInstructors\n\n\nJoseph Essig\nPostdoctoral Research Associate\nTaubman Center for American Politics and Policy\nBrown University &lt;joseph_essig@brown.edu&gt;\n\n\nSara Ansari\nTeaching Assistant\nDepartment of Political Science\nBrown University &lt;sara_ansari@brown.edu&gt;"
+    "text": "This course provides a foundation in the principles and practice of quantitative social science, with a focus on building tools to make descriptive, causal, and predictive inferences.\n\nLogistics\nWe meet three times a week from 12-12:50pm with lectures on Monday and Wednesday and lab sessions on Friday. You will need a laptop that can run R and Rstudio for both lectures and labs.\n\n\n\n\nLecture\nMondays and Wednesdays, 12-12:50pm\n\n\n\n\n\nLabs\nFridays, 12-12:50pm\n\n\n\n\n\nAssignments\nDue on Canvas\n\n\n\n\n\nLocation\nAndrews House 310\n\n\n\n\n\nZoom\n\n\n\n\n\nOffice Hours\nJoe | 2-4pm, Thursdays  Stephen Roberts Hall, Rm. 123 (Taubman Center)  [Sara Ansari, TA | 10 am to 11 am Wednesdays]  Room 325, 111 Thayer St\n\n\n\n\n\nSchedule\n\n\n\n\n\n\n\n\n\n\n\nLecture\nLabs\nSolutions\nAssignments\n\n\n\n\nWeek 0\n\n\n\n\n\n\nIntroductions\n\n\n\n\n\n\n\n\n\n\nWeek 1\n\n\n\n\n\n\nData & Measurement\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWeek 2\n\n\n\n\n\n\nData Visualization\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWeek 3\n\n\n\n\n\n\nCausation -- Experiments\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWeek 4\n\n\n\n\n\n\n\n\n\n\nCausation -- Observational Studies\n\n\n\n\n\n\n\n\n\n\nWeek 5\n\n\n\n\n\n\nBivariate Regression\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWeek 6\n\n\n\n\n\n\n\n\n\n\nMultiple Regression\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWeek 7\n\n\n\n\n\n\nRegression Extensions\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWeek 8\n\n\n\n\n\n\n\n\n\n\nProbability - Random Variables & Distributions\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWeek 9\n\n\n\n\n\n\nProbability - Limit Theorems\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWeek 10\n\n\n\n\n\n\n\n\n\n\nInference -- Confidence Intervals\n\n\n\n\n\n\nWeek 11\n\n\n\n\n\n\n\n\n\n\nInference -- Hypothesis Testing\n\n\n\n\n\n\nWeek 12\n\n\n\n\n\n\nWorkshop\n\n\n\n\n\n\nWeek 13\n\n\n\n\n\n\nPresentations\n\n\n\n\n\n\n\n\n\nInstructors\n\n\nJoseph Essig\nPostdoctoral Research Associate\nTaubman Center for American Politics and Policy\nBrown University &lt;joseph_essig@brown.edu&gt;\n\n\nSara Ansari\nTeaching Assistant\nDepartment of Political Science\nBrown University &lt;sara_ansari@brown.edu&gt;"
   },
   {
     "objectID": "labs/01-lab.html",
@@ -6517,7 +6517,7 @@
     "href": "labs/07-lab-comments.html",
     "title": "Comments Lab 07 - Replicating Grumbach and Hill (2022):",
     "section": "",
-    "text": "In this lab, we will begin the process of replicating Grumbach and Hill (2021) “Rock the Registration: Same Day Registration Increases Turnout of Young Voters.”\nTo accomplish this we will:\n\nLoad packages and set the working directory to where this file is saved. (5 minutes)\nSummarize the study in terms of it’s research question, theory, design, and results. (10 minutes)\nDownload the replication files and save them in the same folder as this lab (5 minutes)\nLoad the data from your computers into R (5 minutes)\nGet a quick HLO of the data (10 minutes)\nMerge data on election policy into data on voting (5 minutes, together),\nRecode the covariates, key predictors, and outcome for the study (10 minutes, partly together)\nRecreate Figure 1 (15 minutes)\nRecreate Figure 2 (15 minutes)\n\nFinally, we’ll take the weekly survey which should be a fun one\nOne of these 8 tasks will be randomly selected as the graded question for the lab.\n\nset.seed(3142024)\ngraded_question &lt;- sample(1:8,size = 1)\npaste(\"Question\",graded_question,\"is the graded question for this week\")\n\n[1] \"Question 6 is the graded question for this week\"\n\n\nYou will work in your assigned groups. Only one member of each group needs to submit the html file of lab.\nThis lab must contain the names of the group members in attendance.\nIf you are attending remotely, you will submit your labs individually.\nHere are your assigned groups for the semester."
+    "text": "In this lab, we will begin the process of replicating Grumbach and Hill (2021) “Rock the Registration: Same Day Registration Increases Turnout of Young Voters”\nTo accomplish this we will:\n\nLoad packages and set the working directory to where this file is saved.\nSummarize the study in terms of its research question, theory, design, and results.\nDownload the replication files and save them in the same folder as this lab\nLoad the data from your computers into R\nGet a quick HLO of the data\nMerge data on election policy into data on voting\nRecode the covariates, key predictors, and outcome for the study\nRecreate Figure 1\nRecreate Figure 2\n\nOne of these 8 tasks will be randomly selected as the graded question for the lab.\nYou will work in your assigned groups. Only one member of each group needs to submit the html file of lab.\nThis lab must contain the names of the group members in attendance.\nIf you are not present, you will submit your labs individually."
   },
   {
     "objectID": "labs/07-lab-comments.html#please-render-this-.qmd-file",
@@ -6531,7 +6531,7 @@
     "href": "labs/07-lab-comments.html#load-packages",
     "title": "Comments Lab 07 - Replicating Grumbach and Hill (2022):",
     "section": "Load packages",
-    "text": "Load packages\nAs always, let’s load the packages we’ll need for today\n\nthe_packages &lt;- c(\n  ## R Markdown\n  \"kableExtra\",\"DT\",\"texreg\",\"htmltools\",\n  ## Tidyverse\n  \"tidyverse\", \"lubridate\", \"forcats\", \"haven\", \"labelled\",\n  ## Extensions for ggplot\n  \"ggmap\",\"ggrepel\", \"ggridges\", \"ggthemes\", \"ggpubr\", \n  \"GGally\", \"scales\", \"dagitty\", \"ggdag\", \"ggforce\",\n  # Data \n  \"COVID19\",\"maps\",\"mapdata\",\"qss\",\"tidycensus\", \"dataverse\",\n  \"janitor\",\n  # Analysis\n  \"DeclareDesign\", \"easystats\", \"zoo\"\n)\n\n# Define function to load packages\nipak &lt;- function(pkg){\n    new.pkg &lt;- pkg[!(pkg %in% installed.packages()[, \"Package\"])]\n    if (length(new.pkg)) \n        install.packages(new.pkg, dependencies = TRUE)\n    sapply(pkg, require, character.only = TRUE)\n}\n\nipak(the_packages)\n\n   kableExtra            DT        texreg     htmltools     tidyverse \n         TRUE          TRUE          TRUE          TRUE          TRUE \n    lubridate       forcats         haven      labelled         ggmap \n         TRUE          TRUE          TRUE          TRUE          TRUE \n      ggrepel      ggridges      ggthemes        ggpubr        GGally \n         TRUE          TRUE          TRUE          TRUE          TRUE \n       scales       dagitty         ggdag       ggforce       COVID19 \n         TRUE          TRUE          TRUE          TRUE          TRUE \n         maps       mapdata           qss    tidycensus     dataverse \n         TRUE          TRUE          TRUE          TRUE          TRUE \n      janitor DeclareDesign     easystats           zoo \n         TRUE          TRUE          TRUE          TRUE \n\n\nWe will also want to set our working directory to where your lab is saved."
+    "text": "Load packages\nAs always, let’s load the packages we’ll need for today\nWe will also want to set our working directory to where your lab is saved."
   },
   {
     "objectID": "labs/07-lab-comments.html#important-set-your-working-directory",
@@ -12972,6 +12972,73 @@
     "crumbs": [
       "Assignments",
       "A3: Exploratory Analysis"
+    ]
+  },
+  {
+    "objectID": "slides/09-slides.html#announcements",
+    "href": "slides/09-slides.html#announcements",
+    "title": "POLS 1600",
+    "section": "Announcements",
+    "text": "Announcements\n\nTutorial and lab this week, as usual (due Monday April 6)\nAssignment 3, data exploration due Sunday April 5\nIf you got your data ready in assignment 2, should be simple.\nYou will complete your data cleaning, create 1 descriptive figure, and complete a basic outline."
+  },
+  {
+    "objectID": "class/09-class.html",
+    "href": "class/09-class.html",
+    "title": "Probability II",
+    "section": "",
+    "text": "Imai (2022) Chapter 6",
+    "crumbs": [
+      "Class",
+      "Weekly Content",
+      "9: Probability - Limit Theorems"
+    ]
+  },
+  {
+    "objectID": "class/09-class.html#readings",
+    "href": "class/09-class.html#readings",
+    "title": "Probability II",
+    "section": "",
+    "text": "Imai (2022) Chapter 6",
+    "crumbs": [
+      "Class",
+      "Weekly Content",
+      "9: Probability - Limit Theorems"
+    ]
+  },
+  {
+    "objectID": "class/09-class.html#lecture",
+    "href": "class/09-class.html#lecture",
+    "title": "Probability II",
+    "section": "Lecture",
+    "text": "Lecture\n\n View all slides in new window",
+    "crumbs": [
+      "Class",
+      "Weekly Content",
+      "9: Probability - Limit Theorems"
+    ]
+  },
+  {
+    "objectID": "class/09-class.html#lab",
+    "href": "class/09-class.html#lab",
+    "title": "Probability II",
+    "section": "Lab",
+    "text": "Lab\n\n Download this week’s lab (link coming soon)\n Upload the rendered html file to Canvas here",
+    "crumbs": [
+      "Class",
+      "Weekly Content",
+      "9: Probability - Limit Theorems"
+    ]
+  },
+  {
+    "objectID": "class/09-class.html#assignments",
+    "href": "class/09-class.html#assignments",
+    "title": "Probability II",
+    "section": "Assignments",
+    "text": "Assignments\n\n{&lt; fa chalkboard-user &gt;} Complete assignment 3 (exploratory analysis) due Sunday April 5\n Complete QSS Tutorial 8 - Probability 2.\n\n\n# After completing the software setup you should be able to to run the following to launch the tutorials\n\nlearnr::run_tutorial(\"08-probability2\", package = \"qsslearnr\")\n\n\n Upload the rendered html tutorial files to Canvas here",
+    "crumbs": [
+      "Class",
+      "Weekly Content",
+      "9: Probability - Limit Theorems"
     ]
   }
 ]
