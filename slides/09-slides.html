@@ -1491,7 +1491,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <div class="quarto-title-authors">
 </div>
 
-  <p class="date">Updated Mar 30, 2026</p>
+  <p class="date">Updated Apr 1, 2026</p>
 </section>
 <section>
 <section id="overview" class="title-slide slide level1 inverse center">
@@ -2271,7 +2271,7 @@ E[\bar{X}_n]&amp;=\mu \hspace{2em}Var[\bar{X}_n]&amp;=\frac{\sigma^2}{n} \hspace
 <h2>Lab 8</h2>
 <ul>
 <li class="fragment"><p>Lab 8 got into the weeds on standard errors, asking you to use <code>lm_robust()</code> to calculate <span class="blue">robust clustered standard errors</span></p></li>
-<li class="fragment"><p>A <span class="blue">standard error</span> is simply the <span class="blue">standard deviation</span> of a theoretical <span class="blue">sampling distribution</span></p></li>
+<li class="fragment"><p>A <span class="blue">standard error</span> is simply an estimate of the <span class="blue">standard deviation</span> of a theoretical <span class="blue">sampling distribution</span></p></li>
 <li class="fragment"><p>A <span class="blue">sampling distribution</span> describes the range of estimates <span class="blue">we could have seen</span></p></li>
 <li class="fragment"><p><span class="blue">Standard errors</span> are key to <span class="blue">quantifying uncertainty</span> and making claims about <span class="blue">statistical significance</span></p></li>
 </ul>
@@ -2292,6 +2292,15 @@ y = X\beta + \hat{\epsilon}\\
 \end{aligned}
 \]</span></p>
 </section>
+<section id="variance-of-regression-coefficients-intiution" class="slide level2">
+<h2>Variance of Regression Coefficients: Intiution</h2>
+<ul>
+<li class="fragment"><p>Last time, discussed sampling distributions and how we can approximate them with a normal distribution (CLT).</p></li>
+<li class="fragment"><p>For a regression coefficient, centered around <span class="math inline">\(\beta\)</span> and we need to estimate a <span class="math inline">\(\sigma^2\)</span> (variance).</p></li>
+<li class="fragment"><p>To do this, we use the residuals.</p></li>
+<li class="fragment"><p>You do not need to understand all the matrix algebra.</p></li>
+</ul>
+</section>
 <section id="variance-of-regression-coefficients-depends-on-the-errors" class="slide level2 smaller">
 <h2>Variance of Regression Coefficients depends on the errors</h2>
 <p><span class="math display">\[
@@ -2309,7 +2318,7 @@ y = X\beta + \hat{\epsilon}\\
 \begin{aligned}
 E[\text{c}] &amp;= \text{c} \\
 Var[\text{c}] &amp;= 0\\
-Var[X] &amp;= Var[X^2] - Var[X]^2
+Var[X] &amp;= E[X^2] - E[X]^2
 \end{aligned}
 \]</span></p>
 <p><span class="math display">\[
@@ -2384,9 +2393,18 @@ Var(\epsilon|X) = E[\epsilon\epsilon'] = \Sigma &amp;=
 <h2>Constant Error Variance</h2>
 
 <img data-src="09-slides_files/figure-revealjs/errorvar-1.png" width="960" class="r-stretch"></section>
+<section id="variance-of-regression-coefficients-robust-se" class="slide level2">
+<h2>Variance of Regression Coefficients: Robust SE</h2>
+<ul>
+<li class="fragment"><p>So far, we assumed that variance is the same for every observation</p></li>
+<li class="fragment"><p>This let us estimate uncertainty using a single number: <span class="math inline">\(\sigma^2\)</span></p></li>
+<li class="fragment"><p>But in many real datasets, some observations are much noisier than others</p></li>
+<li class="fragment"><p>We need a way to estimate variance that allows variance to differ across observations</p></li>
+</ul>
+</section>
 <section id="robust-standard-errors" class="slide level2 smaller">
 <h2>Robust Standard Errors</h2>
-<p>Robust standard errors attempt to estimat <span class="math inline">\(\sigma_i^2\)</span> using the residuals from the model <span class="math inline">\(\hat{\epsilon_i}\)</span> and <a href="https://declaredesign.org/r/estimatr/articles/mathematical-notes.html" target="_blank">additional adjustments</a> to yield <span class="blue">robust standard errors</span> that are <span class="blue">consistent</span>, even when there is heteroskedasiticity.</p>
+<p>Robust standard errors attempt to estimate <span class="math inline">\(\sigma_i^2\)</span> using the residuals from the model <span class="math inline">\(\hat{\epsilon_i}\)</span> and <a href="https://declaredesign.org/r/estimatr/articles/mathematical-notes.html" target="_blank">additional adjustments</a> to yield <span class="blue">robust standard errors</span> that are <span class="blue">consistent</span>, even when there is heteroskedasiticity.</p>
 <p><span class="math display">\[
 Var[\hat{\beta}]= (X'X)^{-1}X'
 \begin{bmatrix}
@@ -2396,7 +2414,7 @@ Var[\hat{\beta}]= (X'X)^{-1}X'
 \vdots &amp; \vdots  &amp; \vdots &amp;\ddots &amp; \vdots\\
 0 &amp; 0 &amp; 0 &amp; \cdots &amp; \hat{\epsilon}_n^2 \\
 \end{bmatrix}
-X(X'X)^{-1} =
+X(X'X)^{-1}  
 \]</span></p>
 <p>Clustered standard errors go a step further, summing up the residuals within clusters (groups) in the data.</p>
 </section>
@@ -2408,6 +2426,15 @@ X(X'X)^{-1} =
 <li class="fragment"><p><span class="blue">The Central Limit Theorem</span> tells us that distribution of sample means of a given sample size converges in distribution to a Normal probability distribution</p></li>
 <li class="fragment"><p><span class="blue">Standard Errors</span> describe the <span class="blue">width of a sampling distribution</span> and allow us to assess the <span class="blue">statistical significance</span> of regression estimates</p></li>
 </ul>
+</section>
+<section id="next-time" class="slide level2">
+<h2>Next time</h2>
+<ul>
+<li class="fragment"><p>We will (finally) discuss how to use our coefficient estimates and standard errors to perform <strong>statistical inference</strong></p></li>
+<li class="fragment"><p>We will cover <strong>confidence intervals</strong> and how they are related to <strong>hypothesis tests</strong></p></li>
+<li class="fragment"><p>Lastly, discuss how these <strong>asymptotic</strong> approaches differ from other approaches to inference, such as simulation.</p></li>
+</ul>
+<p><em>Asymptotic</em> refers to the use of assumptions about our estimator/ its sampling distribution as <em>n</em> goes to infinity (recall the Central Limit Theorem)</p>
 </section>
 <section id="references" class="slide level2">
 <h2>References</h2>
