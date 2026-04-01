@@ -1355,7 +1355,7 @@
     "href": "slides/09-slides.html#lab-8",
     "title": "POLS 1600",
     "section": "Lab 8",
-    "text": "Lab 8\n\nLab 8 got into the weeds on standard errors, asking you to use lm_robust() to calculate robust clustered standard errors\nA standard error is simply the standard deviation of a theoretical sampling distribution\nA sampling distribution describes the range of estimates we could have seen\nStandard errors are key to quantifying uncertainty and making claims about statistical significance"
+    "text": "Lab 8\n\nLab 8 got into the weeds on standard errors, asking you to use lm_robust() to calculate robust clustered standard errors\nA standard error is simply an estimate of the standard deviation of a theoretical sampling distribution\nA sampling distribution describes the range of estimates we could have seen\nStandard errors are key to quantifying uncertainty and making claims about statistical significance"
   },
   {
     "objectID": "slides/09-slides.html#errors-and-residuals",
@@ -1376,7 +1376,7 @@
     "href": "slides/09-slides.html#variance-of-regression-coefficients-depends-on-the-errors-1",
     "title": "POLS 1600",
     "section": "Variance of Regression Coefficients depends on the errors",
-    "text": "Variance of Regression Coefficients depends on the errors\nRecall that\n\\[\n\\begin{aligned}\nE[\\text{c}] &= \\text{c} \\\\\nVar[\\text{c}] &= 0\\\\\nVar[X] &= Var[X^2] - Var[X]^2\n\\end{aligned}\n\\]\n\\[\n\\begin{aligned}\nVar[\\hat{\\beta}] &= Var[\\beta] +Vav[(X'X)^{-1}X'\\epsilon] \\\\\n&= 0 +E[(X'X)^{-1}X'\\epsilon \\epsilon'X(X'X)^{-1}] - E[(X'X)^{-1}X'\\epsilon]E](X'X)^{-1}X'\\epsilon] \\\\\n&= E[(X'X)^{-1}X'\\epsilon \\epsilon'X(X'X)^{-1}] - 0 \\\\\n& = (X'X)^{-1}X'E[\\epsilon \\epsilon']X(X'X)^{-1} \\\\\n& = (X'X)^{-1}X'\\Sigma X(X'X)^{-1} \\\\\n\\end{aligned}\n\\]"
+    "text": "Variance of Regression Coefficients depends on the errors\nRecall that\n\\[\n\\begin{aligned}\nE[\\text{c}] &= \\text{c} \\\\\nVar[\\text{c}] &= 0\\\\\nVar[X] &= E[X^2] - E[X]^2\n\\end{aligned}\n\\]\n\\[\n\\begin{aligned}\nVar[\\hat{\\beta}] &= Var[\\beta] +Vav[(X'X)^{-1}X'\\epsilon] \\\\\n&= 0 +E[(X'X)^{-1}X'\\epsilon \\epsilon'X(X'X)^{-1}] - E[(X'X)^{-1}X'\\epsilon]E](X'X)^{-1}X'\\epsilon] \\\\\n&= E[(X'X)^{-1}X'\\epsilon \\epsilon'X(X'X)^{-1}] - 0 \\\\\n& = (X'X)^{-1}X'E[\\epsilon \\epsilon']X(X'X)^{-1} \\\\\n& = (X'X)^{-1}X'\\Sigma X(X'X)^{-1} \\\\\n\\end{aligned}\n\\]"
   },
   {
     "objectID": "slides/09-slides.html#constant-error-variance",
@@ -1418,7 +1418,7 @@
     "href": "slides/09-slides.html#robust-standard-errors",
     "title": "POLS 1600",
     "section": "Robust Standard Errors",
-    "text": "Robust Standard Errors\nRobust standard errors attempt to estimat \\(\\sigma_i^2\\) using the residuals from the model \\(\\hat{\\epsilon_i}\\) and additional adjustments to yield robust standard errors that are consistent, even when there is heteroskedasiticity.\n\\[\nVar[\\hat{\\beta}]= (X'X)^{-1}X'\n\\begin{bmatrix}\n\\hat{\\epsilon}_1^2 & 0 & 0 & \\cdots & 0 \\\\\n0 &\\hat{\\epsilon}_2^2  & 0 & \\cdots &0 \\\\\n0 & 0 &\\hat{\\epsilon}_3^2 & \\cdots &0 \\\\\n\\vdots & \\vdots  & \\vdots &\\ddots & \\vdots\\\\\n0 & 0 & 0 & \\cdots & \\hat{\\epsilon}_n^2 \\\\\n\\end{bmatrix}\nX(X'X)^{-1} =\n\\]\nClustered standard errors go a step further, summing up the residuals within clusters (groups) in the data."
+    "text": "Robust Standard Errors\nRobust standard errors attempt to estimate \\(\\sigma_i^2\\) using the residuals from the model \\(\\hat{\\epsilon_i}\\) and additional adjustments to yield robust standard errors that are consistent, even when there is heteroskedasiticity.\n\\[\nVar[\\hat{\\beta}]= (X'X)^{-1}X'\n\\begin{bmatrix}\n\\hat{\\epsilon}_1^2 & 0 & 0 & \\cdots & 0 \\\\\n0 &\\hat{\\epsilon}_2^2  & 0 & \\cdots &0 \\\\\n0 & 0 &\\hat{\\epsilon}_3^2 & \\cdots &0 \\\\\n\\vdots & \\vdots  & \\vdots &\\ddots & \\vdots\\\\\n0 & 0 & 0 & \\cdots & \\hat{\\epsilon}_n^2 \\\\\n\\end{bmatrix}\nX(X'X)^{-1}  \n\\]\nClustered standard errors go a step further, summing up the residuals within clusters (groups) in the data."
   },
   {
     "objectID": "slides/09-slides.html#replicating-grumbach-and-hill",
@@ -13040,5 +13040,26 @@
       "Weekly Content",
       "9: Probability - Limit Theorems"
     ]
+  },
+  {
+    "objectID": "slides/09-slides.html#variance-of-regression-coefficients-intiution",
+    "href": "slides/09-slides.html#variance-of-regression-coefficients-intiution",
+    "title": "POLS 1600",
+    "section": "Variance of Regression Coefficients: Intiution",
+    "text": "Variance of Regression Coefficients: Intiution\n\nLast time, discussed sampling distributions and how we can approximate them with a normal distribution (CLT).\nFor a regression coefficient, centered around \\(\\beta\\) and we need to estimate a \\(\\sigma^2\\) (variance).\nTo do this, we use the residuals.\nYou do not need to understand all the matrix algebra."
+  },
+  {
+    "objectID": "slides/09-slides.html#variance-of-regression-coefficients-robust-se",
+    "href": "slides/09-slides.html#variance-of-regression-coefficients-robust-se",
+    "title": "POLS 1600",
+    "section": "Variance of Regression Coefficients: Robust SE",
+    "text": "Variance of Regression Coefficients: Robust SE\n\nSo far, we assumed that variance is the same for every observation\nThis let us estimate uncertainty using a single number: \\(\\sigma^2\\)\nBut in many real datasets, some observations are much noisier than others\nWe need a way to estimate variance that allows variance to differ across observations"
+  },
+  {
+    "objectID": "slides/09-slides.html#next-time",
+    "href": "slides/09-slides.html#next-time",
+    "title": "POLS 1600",
+    "section": "Next time",
+    "text": "Next time\n\nWe will (finally) discuss how to use our coefficient estimates and standard errors to perform statistical inference\nWe will cover confidence intervals and how they are related to hypothesis tests\nLastly, discuss how these asymptotic approaches differ from other approaches to inference, such as simulation.\n\nAsymptotic refers to the use of assumptions about our estimator/ its sampling distribution as n goes to infinity (recall the Central Limit Theorem)"
   }
 ]

@@ -53,7 +53,7 @@ slide_frame(paste0("/slides/", wk, "-slides.html"))
 ## Lab
 
 
-- {{< fa laptop-file >}} Download this week's lab (link coming soon)
+- {{< fa laptop-file >}} Download this week's `lab`
 
 - {{< fa paintbrush >}} Upload the rendered html file to Canvas [here](https://canvas.brown.edu/courses/1102109/assignments) 
 
