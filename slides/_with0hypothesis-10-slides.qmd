@@ -68,16 +68,15 @@ library(texreg)
 
 ## Announcements
 
-- Final regular lab this week (continuing with the ANES data)
+- Final lab this week (continuing with the ANES data)
 
-- Since you all decided on your own analysis and example code provided, no posted solutions for labs 9 and 10. 
+- Since you all decided your own analysis, no solutions for labs 9 and 10. 
 
-- Next week's lectures:
-  - Finish discussion of Hypothesis Testing, Asymptotic vs. Permutation
-  - Course Review 
+- Next week's lecture:
+  - Workshop/Review/special topics
 
 - Next week's lab: 
-  - Work on draft (A4) 
+  - Work on draft (A4). 
 
 ## Setup: Packages for today
 
@@ -93,7 +92,8 @@ the_packages <- c(
   "tidyverse", "lubridate", "forcats", "haven", "labelled",
   ## Extensions for ggplot
   "ggmap","ggrepel", "ggridges", "ggthemes", "ggpubr", 
-  "patchwork","scales", "dagitty", "ggdag", "ggforce",
+  "patchwork",
+  "GGally", "scales", "dagitty", "ggdag", "ggforce",
   # Data 
   "COVID19","maps","mapdata","qss","tidycensus", "dataverse", 
   # Analysis
@@ -179,7 +179,7 @@ lapply(the_packages, library, character.only = TRUE)
 #| label: sampledistcode
 
 # Load Data
-load(url("https://josephessig-source.github.io/pols1600_site/files/data/nes24.rda"))
+load(url("https://pols1600.paultesta.org/files/data/nes24.rda"))
 
 # ---- Population ----
 
