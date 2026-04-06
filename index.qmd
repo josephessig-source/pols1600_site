@@ -81,7 +81,7 @@ library(kableExtra)
 library(icons)
 library(fontawesome)
 start_date <- "2025-01-23"
-show_up_to_week <- 9
+show_up_to_week <- 10
 show_solutions_up_to_week <- 8
 fa_html_dependency()
 week <- paste0("Week ", 0:13)

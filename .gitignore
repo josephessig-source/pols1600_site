@@ -9,6 +9,7 @@ Untitled.Rmd
 *_archive/
 /.quarto/
 .github
+slides/*_cache/
 
 
 **/*.quarto_ipynb

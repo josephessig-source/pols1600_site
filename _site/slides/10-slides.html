@@ -202,12 +202,12 @@
 
 <section id="title-slide" align="left" data-background-image="images/pols1600_hex.png" data-background-position="90% 50%" data-background-size="40%" class="quarto-title-block center">
   <h1 class="title">POLS 1600</h1>
-  <p class="subtitle">Quantifying uncertainty:<br> Confidence Intervals &amp;<br>Hypothesis Tests</p>
+  <p class="subtitle">Uncertainty I: Confidence Intervals</p>
 
 <div class="quarto-title-authors">
 </div>
 
-  <p class="date">Updated Nov 6, 2025</p>
+  <p class="date">Updated Apr 6, 2026</p>
 </section>
 <section>
 <section id="overview" class="title-slide slide level1 inverse center">
@@ -220,26 +220,26 @@
 <li class="fragment">Announcements</li>
 <li class="fragment">Topics:
 <ul>
-<li class="fragment">Sampling distributions and standard errors (15 minutes)</li>
-<li class="fragment">Confidence intervals (15 minutes )</li>
-<li class="fragment">Hypothesis testing (15 minutes)</li>
-<li class="fragment">Quantifying uncertainty for regression (15 minutes)</li>
-<li class="fragment">Lab 8 (Finally)</li>
+<li class="fragment">Sampling distributions and standard errors</li>
+<li class="fragment">Confidence intervals</li>
+<li class="fragment">Hypothesis testing</li>
+<li class="fragment">Quantifying uncertainty for regression</li>
 </ul></li>
 </ul>
 </section>
 <section id="announcements" class="slide level2">
 <h2>Announcements</h2>
 <ul>
-<li class="fragment"><p>Final lab this week.</p></li>
-<li class="fragment"><p>Next week’s lecture:</p>
+<li class="fragment"><p>Final regular lab this week (continuing with the ANES data)</p></li>
+<li class="fragment"><p>Since you all decided on your own analysis and example code provided, no posted solutions for labs 9 and 10.</p></li>
+<li class="fragment"><p>Next week’s lectures:</p>
 <ul>
-<li class="fragment">Workshop/Review/special topics</li>
-<li class="fragment">Ask questions in the survey</li>
+<li class="fragment">Finish discussion of Hypothesis Testing, Asymptotic vs.&nbsp;Permutation</li>
+<li class="fragment">Course Review</li>
 </ul></li>
 <li class="fragment"><p>Next week’s lab:</p>
 <ul>
-<li class="fragment">Work on draft (A3 leading into A4)</li>
+<li class="fragment">Work on draft (A4)</li>
 </ul></li>
 </ul>
 </section>
@@ -254,93 +254,447 @@
 <span id="cb1-6"><a></a>  <span class="st">"tidyverse"</span>, <span class="st">"lubridate"</span>, <span class="st">"forcats"</span>, <span class="st">"haven"</span>, <span class="st">"labelled"</span>,</span>
 <span id="cb1-7"><a></a>  <span class="do">## Extensions for ggplot</span></span>
 <span id="cb1-8"><a></a>  <span class="st">"ggmap"</span>,<span class="st">"ggrepel"</span>, <span class="st">"ggridges"</span>, <span class="st">"ggthemes"</span>, <span class="st">"ggpubr"</span>, </span>
-<span id="cb1-9"><a></a>  <span class="st">"patchwork"</span>,</span>
-<span id="cb1-10"><a></a>  <span class="st">"GGally"</span>, <span class="st">"scales"</span>, <span class="st">"dagitty"</span>, <span class="st">"ggdag"</span>, <span class="st">"ggforce"</span>,</span>
-<span id="cb1-11"><a></a>  <span class="co"># Data </span></span>
-<span id="cb1-12"><a></a>  <span class="st">"COVID19"</span>,<span class="st">"maps"</span>,<span class="st">"mapdata"</span>,<span class="st">"qss"</span>,<span class="st">"tidycensus"</span>, <span class="st">"dataverse"</span>, </span>
-<span id="cb1-13"><a></a>  <span class="co"># Analysis</span></span>
-<span id="cb1-14"><a></a>  <span class="st">"DeclareDesign"</span>, <span class="st">"easystats"</span>, <span class="st">"zoo"</span>, <span class="st">"boot"</span>, <span class="st">"modelr"</span> ,<span class="st">"purrr"</span></span>
-<span id="cb1-15"><a></a>)</span>
-<span id="cb1-16"><a></a></span>
-<span id="cb1-17"><a></a><span class="do">## Define a function to load (and if needed install) packages</span></span>
-<span id="cb1-18"><a></a></span>
-<span id="cb1-19"><a></a>ipak <span class="ot">&lt;-</span> <span class="cf">function</span>(pkg){</span>
-<span id="cb1-20"><a></a>    new.pkg <span class="ot">&lt;-</span> pkg[<span class="sc">!</span>(pkg <span class="sc">%in%</span> <span class="fu">installed.packages</span>()[, <span class="st">"Package"</span>])]</span>
-<span id="cb1-21"><a></a>    <span class="cf">if</span> (<span class="fu">length</span>(new.pkg)) </span>
-<span id="cb1-22"><a></a>        <span class="fu">install.packages</span>(new.pkg, <span class="at">dependencies =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb1-23"><a></a>    <span class="fu">sapply</span>(pkg, require, <span class="at">character.only =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb1-24"><a></a>}</span>
-<span id="cb1-25"><a></a></span>
-<span id="cb1-26"><a></a><span class="do">## Install (if needed) and load libraries in the_packages</span></span>
-<span id="cb1-27"><a></a><span class="fu">ipak</span>(the_packages)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-9"><a></a>  <span class="st">"patchwork"</span>,<span class="st">"scales"</span>, <span class="st">"dagitty"</span>, <span class="st">"ggdag"</span>, <span class="st">"ggforce"</span>,</span>
+<span id="cb1-10"><a></a>  <span class="co"># Data </span></span>
+<span id="cb1-11"><a></a>  <span class="st">"COVID19"</span>,<span class="st">"maps"</span>,<span class="st">"mapdata"</span>,<span class="st">"qss"</span>,<span class="st">"tidycensus"</span>, <span class="st">"dataverse"</span>, </span>
+<span id="cb1-12"><a></a>  <span class="co"># Analysis</span></span>
+<span id="cb1-13"><a></a>  <span class="st">"DeclareDesign"</span>, <span class="st">"easystats"</span>, <span class="st">"zoo"</span>, <span class="st">"boot"</span>, <span class="st">"modelr"</span> ,<span class="st">"purrr"</span></span>
+<span id="cb1-14"><a></a>)</span>
+<span id="cb1-15"><a></a></span>
+<span id="cb1-16"><a></a><span class="do">## Define a function to load (and if needed install) packages</span></span>
+<span id="cb1-17"><a></a></span>
+<span id="cb1-18"><a></a><span class="fu">lapply</span>(the_packages, library, <span class="at">character.only =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>   kableExtra            DT        texreg     htmltools     tidyverse 
-         TRUE          TRUE          TRUE          TRUE          TRUE 
-    lubridate       forcats         haven      labelled         ggmap 
-         TRUE          TRUE          TRUE          TRUE          TRUE 
-      ggrepel      ggridges      ggthemes        ggpubr     patchwork 
-         TRUE          TRUE          TRUE          TRUE          TRUE 
-       GGally        scales       dagitty         ggdag       ggforce 
-         TRUE          TRUE          TRUE          TRUE          TRUE 
-      COVID19          maps       mapdata           qss    tidycensus 
-         TRUE          TRUE          TRUE          TRUE          TRUE 
-    dataverse DeclareDesign     easystats           zoo          boot 
-         TRUE          TRUE          TRUE          TRUE          TRUE 
-       modelr         purrr 
-         TRUE          TRUE </code></pre>
+<pre><code>[[1]]
+ [1] "kableExtra"    "texreg"        "see"           "report"       
+ [5] "parameters"    "performance"   "modelbased"    "insight"      
+ [9] "effectsize"    "datawizard"    "correlation"   "bayestestR"   
+[13] "easystats"     "DeclareDesign" "estimatr"      "fabricatr"    
+[17] "randomizr"     "haven"         "labelled"      "lubridate"    
+[21] "forcats"       "stringr"       "dplyr"         "purrr"        
+[25] "readr"         "tidyr"         "tibble"        "ggplot2"      
+[29] "tidyverse"     "stats"         "graphics"      "grDevices"    
+[33] "utils"         "datasets"      "methods"       "base"         
+
+[[2]]
+ [1] "DT"            "kableExtra"    "texreg"        "see"          
+ [5] "report"        "parameters"    "performance"   "modelbased"   
+ [9] "insight"       "effectsize"    "datawizard"    "correlation"  
+[13] "bayestestR"    "easystats"     "DeclareDesign" "estimatr"     
+[17] "fabricatr"     "randomizr"     "haven"         "labelled"     
+[21] "lubridate"     "forcats"       "stringr"       "dplyr"        
+[25] "purrr"         "readr"         "tidyr"         "tibble"       
+[29] "ggplot2"       "tidyverse"     "stats"         "graphics"     
+[33] "grDevices"     "utils"         "datasets"      "methods"      
+[37] "base"         
+
+[[3]]
+ [1] "DT"            "kableExtra"    "texreg"        "see"          
+ [5] "report"        "parameters"    "performance"   "modelbased"   
+ [9] "insight"       "effectsize"    "datawizard"    "correlation"  
+[13] "bayestestR"    "easystats"     "DeclareDesign" "estimatr"     
+[17] "fabricatr"     "randomizr"     "haven"         "labelled"     
+[21] "lubridate"     "forcats"       "stringr"       "dplyr"        
+[25] "purrr"         "readr"         "tidyr"         "tibble"       
+[29] "ggplot2"       "tidyverse"     "stats"         "graphics"     
+[33] "grDevices"     "utils"         "datasets"      "methods"      
+[37] "base"         
+
+[[4]]
+ [1] "htmltools"     "DT"            "kableExtra"    "texreg"       
+ [5] "see"           "report"        "parameters"    "performance"  
+ [9] "modelbased"    "insight"       "effectsize"    "datawizard"   
+[13] "correlation"   "bayestestR"    "easystats"     "DeclareDesign"
+[17] "estimatr"      "fabricatr"     "randomizr"     "haven"        
+[21] "labelled"      "lubridate"     "forcats"       "stringr"      
+[25] "dplyr"         "purrr"         "readr"         "tidyr"        
+[29] "tibble"        "ggplot2"       "tidyverse"     "stats"        
+[33] "graphics"      "grDevices"     "utils"         "datasets"     
+[37] "methods"       "base"         
+
+[[5]]
+ [1] "htmltools"     "DT"            "kableExtra"    "texreg"       
+ [5] "see"           "report"        "parameters"    "performance"  
+ [9] "modelbased"    "insight"       "effectsize"    "datawizard"   
+[13] "correlation"   "bayestestR"    "easystats"     "DeclareDesign"
+[17] "estimatr"      "fabricatr"     "randomizr"     "haven"        
+[21] "labelled"      "lubridate"     "forcats"       "stringr"      
+[25] "dplyr"         "purrr"         "readr"         "tidyr"        
+[29] "tibble"        "ggplot2"       "tidyverse"     "stats"        
+[33] "graphics"      "grDevices"     "utils"         "datasets"     
+[37] "methods"       "base"         
+
+[[6]]
+ [1] "htmltools"     "DT"            "kableExtra"    "texreg"       
+ [5] "see"           "report"        "parameters"    "performance"  
+ [9] "modelbased"    "insight"       "effectsize"    "datawizard"   
+[13] "correlation"   "bayestestR"    "easystats"     "DeclareDesign"
+[17] "estimatr"      "fabricatr"     "randomizr"     "haven"        
+[21] "labelled"      "lubridate"     "forcats"       "stringr"      
+[25] "dplyr"         "purrr"         "readr"         "tidyr"        
+[29] "tibble"        "ggplot2"       "tidyverse"     "stats"        
+[33] "graphics"      "grDevices"     "utils"         "datasets"     
+[37] "methods"       "base"         
+
+[[7]]
+ [1] "htmltools"     "DT"            "kableExtra"    "texreg"       
+ [5] "see"           "report"        "parameters"    "performance"  
+ [9] "modelbased"    "insight"       "effectsize"    "datawizard"   
+[13] "correlation"   "bayestestR"    "easystats"     "DeclareDesign"
+[17] "estimatr"      "fabricatr"     "randomizr"     "haven"        
+[21] "labelled"      "lubridate"     "forcats"       "stringr"      
+[25] "dplyr"         "purrr"         "readr"         "tidyr"        
+[29] "tibble"        "ggplot2"       "tidyverse"     "stats"        
+[33] "graphics"      "grDevices"     "utils"         "datasets"     
+[37] "methods"       "base"         
+
+[[8]]
+ [1] "htmltools"     "DT"            "kableExtra"    "texreg"       
+ [5] "see"           "report"        "parameters"    "performance"  
+ [9] "modelbased"    "insight"       "effectsize"    "datawizard"   
+[13] "correlation"   "bayestestR"    "easystats"     "DeclareDesign"
+[17] "estimatr"      "fabricatr"     "randomizr"     "haven"        
+[21] "labelled"      "lubridate"     "forcats"       "stringr"      
+[25] "dplyr"         "purrr"         "readr"         "tidyr"        
+[29] "tibble"        "ggplot2"       "tidyverse"     "stats"        
+[33] "graphics"      "grDevices"     "utils"         "datasets"     
+[37] "methods"       "base"         
+
+[[9]]
+ [1] "htmltools"     "DT"            "kableExtra"    "texreg"       
+ [5] "see"           "report"        "parameters"    "performance"  
+ [9] "modelbased"    "insight"       "effectsize"    "datawizard"   
+[13] "correlation"   "bayestestR"    "easystats"     "DeclareDesign"
+[17] "estimatr"      "fabricatr"     "randomizr"     "haven"        
+[21] "labelled"      "lubridate"     "forcats"       "stringr"      
+[25] "dplyr"         "purrr"         "readr"         "tidyr"        
+[29] "tibble"        "ggplot2"       "tidyverse"     "stats"        
+[33] "graphics"      "grDevices"     "utils"         "datasets"     
+[37] "methods"       "base"         
+
+[[10]]
+ [1] "ggmap"         "htmltools"     "DT"            "kableExtra"   
+ [5] "texreg"        "see"           "report"        "parameters"   
+ [9] "performance"   "modelbased"    "insight"       "effectsize"   
+[13] "datawizard"    "correlation"   "bayestestR"    "easystats"    
+[17] "DeclareDesign" "estimatr"      "fabricatr"     "randomizr"    
+[21] "haven"         "labelled"      "lubridate"     "forcats"      
+[25] "stringr"       "dplyr"         "purrr"         "readr"        
+[29] "tidyr"         "tibble"        "ggplot2"       "tidyverse"    
+[33] "stats"         "graphics"      "grDevices"     "utils"        
+[37] "datasets"      "methods"       "base"         
+
+[[11]]
+ [1] "ggrepel"       "ggmap"         "htmltools"     "DT"           
+ [5] "kableExtra"    "texreg"        "see"           "report"       
+ [9] "parameters"    "performance"   "modelbased"    "insight"      
+[13] "effectsize"    "datawizard"    "correlation"   "bayestestR"   
+[17] "easystats"     "DeclareDesign" "estimatr"      "fabricatr"    
+[21] "randomizr"     "haven"         "labelled"      "lubridate"    
+[25] "forcats"       "stringr"       "dplyr"         "purrr"        
+[29] "readr"         "tidyr"         "tibble"        "ggplot2"      
+[33] "tidyverse"     "stats"         "graphics"      "grDevices"    
+[37] "utils"         "datasets"      "methods"       "base"         
+
+[[12]]
+ [1] "ggridges"      "ggrepel"       "ggmap"         "htmltools"    
+ [5] "DT"            "kableExtra"    "texreg"        "see"          
+ [9] "report"        "parameters"    "performance"   "modelbased"   
+[13] "insight"       "effectsize"    "datawizard"    "correlation"  
+[17] "bayestestR"    "easystats"     "DeclareDesign" "estimatr"     
+[21] "fabricatr"     "randomizr"     "haven"         "labelled"     
+[25] "lubridate"     "forcats"       "stringr"       "dplyr"        
+[29] "purrr"         "readr"         "tidyr"         "tibble"       
+[33] "ggplot2"       "tidyverse"     "stats"         "graphics"     
+[37] "grDevices"     "utils"         "datasets"      "methods"      
+[41] "base"         
+
+[[13]]
+ [1] "ggthemes"      "ggridges"      "ggrepel"       "ggmap"        
+ [5] "htmltools"     "DT"            "kableExtra"    "texreg"       
+ [9] "see"           "report"        "parameters"    "performance"  
+[13] "modelbased"    "insight"       "effectsize"    "datawizard"   
+[17] "correlation"   "bayestestR"    "easystats"     "DeclareDesign"
+[21] "estimatr"      "fabricatr"     "randomizr"     "haven"        
+[25] "labelled"      "lubridate"     "forcats"       "stringr"      
+[29] "dplyr"         "purrr"         "readr"         "tidyr"        
+[33] "tibble"        "ggplot2"       "tidyverse"     "stats"        
+[37] "graphics"      "grDevices"     "utils"         "datasets"     
+[41] "methods"       "base"         
+
+[[14]]
+ [1] "ggpubr"        "ggthemes"      "ggridges"      "ggrepel"      
+ [5] "ggmap"         "htmltools"     "DT"            "kableExtra"   
+ [9] "texreg"        "see"           "report"        "parameters"   
+[13] "performance"   "modelbased"    "insight"       "effectsize"   
+[17] "datawizard"    "correlation"   "bayestestR"    "easystats"    
+[21] "DeclareDesign" "estimatr"      "fabricatr"     "randomizr"    
+[25] "haven"         "labelled"      "lubridate"     "forcats"      
+[29] "stringr"       "dplyr"         "purrr"         "readr"        
+[33] "tidyr"         "tibble"        "ggplot2"       "tidyverse"    
+[37] "stats"         "graphics"      "grDevices"     "utils"        
+[41] "datasets"      "methods"       "base"         
+
+[[15]]
+ [1] "patchwork"     "ggpubr"        "ggthemes"      "ggridges"     
+ [5] "ggrepel"       "ggmap"         "htmltools"     "DT"           
+ [9] "kableExtra"    "texreg"        "see"           "report"       
+[13] "parameters"    "performance"   "modelbased"    "insight"      
+[17] "effectsize"    "datawizard"    "correlation"   "bayestestR"   
+[21] "easystats"     "DeclareDesign" "estimatr"      "fabricatr"    
+[25] "randomizr"     "haven"         "labelled"      "lubridate"    
+[29] "forcats"       "stringr"       "dplyr"         "purrr"        
+[33] "readr"         "tidyr"         "tibble"        "ggplot2"      
+[37] "tidyverse"     "stats"         "graphics"      "grDevices"    
+[41] "utils"         "datasets"      "methods"       "base"         
+
+[[16]]
+ [1] "scales"        "patchwork"     "ggpubr"        "ggthemes"     
+ [5] "ggridges"      "ggrepel"       "ggmap"         "htmltools"    
+ [9] "DT"            "kableExtra"    "texreg"        "see"          
+[13] "report"        "parameters"    "performance"   "modelbased"   
+[17] "insight"       "effectsize"    "datawizard"    "correlation"  
+[21] "bayestestR"    "easystats"     "DeclareDesign" "estimatr"     
+[25] "fabricatr"     "randomizr"     "haven"         "labelled"     
+[29] "lubridate"     "forcats"       "stringr"       "dplyr"        
+[33] "purrr"         "readr"         "tidyr"         "tibble"       
+[37] "ggplot2"       "tidyverse"     "stats"         "graphics"     
+[41] "grDevices"     "utils"         "datasets"      "methods"      
+[45] "base"         
+
+[[17]]
+ [1] "dagitty"       "scales"        "patchwork"     "ggpubr"       
+ [5] "ggthemes"      "ggridges"      "ggrepel"       "ggmap"        
+ [9] "htmltools"     "DT"            "kableExtra"    "texreg"       
+[13] "see"           "report"        "parameters"    "performance"  
+[17] "modelbased"    "insight"       "effectsize"    "datawizard"   
+[21] "correlation"   "bayestestR"    "easystats"     "DeclareDesign"
+[25] "estimatr"      "fabricatr"     "randomizr"     "haven"        
+[29] "labelled"      "lubridate"     "forcats"       "stringr"      
+[33] "dplyr"         "purrr"         "readr"         "tidyr"        
+[37] "tibble"        "ggplot2"       "tidyverse"     "stats"        
+[41] "graphics"      "grDevices"     "utils"         "datasets"     
+[45] "methods"       "base"         
+
+[[18]]
+ [1] "ggdag"         "dagitty"       "scales"        "patchwork"    
+ [5] "ggpubr"        "ggthemes"      "ggridges"      "ggrepel"      
+ [9] "ggmap"         "htmltools"     "DT"            "kableExtra"   
+[13] "texreg"        "see"           "report"        "parameters"   
+[17] "performance"   "modelbased"    "insight"       "effectsize"   
+[21] "datawizard"    "correlation"   "bayestestR"    "easystats"    
+[25] "DeclareDesign" "estimatr"      "fabricatr"     "randomizr"    
+[29] "haven"         "labelled"      "lubridate"     "forcats"      
+[33] "stringr"       "dplyr"         "purrr"         "readr"        
+[37] "tidyr"         "tibble"        "ggplot2"       "tidyverse"    
+[41] "stats"         "graphics"      "grDevices"     "utils"        
+[45] "datasets"      "methods"       "base"         
+
+[[19]]
+ [1] "ggforce"       "ggdag"         "dagitty"       "scales"       
+ [5] "patchwork"     "ggpubr"        "ggthemes"      "ggridges"     
+ [9] "ggrepel"       "ggmap"         "htmltools"     "DT"           
+[13] "kableExtra"    "texreg"        "see"           "report"       
+[17] "parameters"    "performance"   "modelbased"    "insight"      
+[21] "effectsize"    "datawizard"    "correlation"   "bayestestR"   
+[25] "easystats"     "DeclareDesign" "estimatr"      "fabricatr"    
+[29] "randomizr"     "haven"         "labelled"      "lubridate"    
+[33] "forcats"       "stringr"       "dplyr"         "purrr"        
+[37] "readr"         "tidyr"         "tibble"        "ggplot2"      
+[41] "tidyverse"     "stats"         "graphics"      "grDevices"    
+[45] "utils"         "datasets"      "methods"       "base"         
+
+[[20]]
+ [1] "COVID19"       "ggforce"       "ggdag"         "dagitty"      
+ [5] "scales"        "patchwork"     "ggpubr"        "ggthemes"     
+ [9] "ggridges"      "ggrepel"       "ggmap"         "htmltools"    
+[13] "DT"            "kableExtra"    "texreg"        "see"          
+[17] "report"        "parameters"    "performance"   "modelbased"   
+[21] "insight"       "effectsize"    "datawizard"    "correlation"  
+[25] "bayestestR"    "easystats"     "DeclareDesign" "estimatr"     
+[29] "fabricatr"     "randomizr"     "haven"         "labelled"     
+[33] "lubridate"     "forcats"       "stringr"       "dplyr"        
+[37] "purrr"         "readr"         "tidyr"         "tibble"       
+[41] "ggplot2"       "tidyverse"     "stats"         "graphics"     
+[45] "grDevices"     "utils"         "datasets"      "methods"      
+[49] "base"         
+
+[[21]]
+ [1] "maps"          "COVID19"       "ggforce"       "ggdag"        
+ [5] "dagitty"       "scales"        "patchwork"     "ggpubr"       
+ [9] "ggthemes"      "ggridges"      "ggrepel"       "ggmap"        
+[13] "htmltools"     "DT"            "kableExtra"    "texreg"       
+[17] "see"           "report"        "parameters"    "performance"  
+[21] "modelbased"    "insight"       "effectsize"    "datawizard"   
+[25] "correlation"   "bayestestR"    "easystats"     "DeclareDesign"
+[29] "estimatr"      "fabricatr"     "randomizr"     "haven"        
+[33] "labelled"      "lubridate"     "forcats"       "stringr"      
+[37] "dplyr"         "purrr"         "readr"         "tidyr"        
+[41] "tibble"        "ggplot2"       "tidyverse"     "stats"        
+[45] "graphics"      "grDevices"     "utils"         "datasets"     
+[49] "methods"       "base"         
+
+[[22]]
+ [1] "mapdata"       "maps"          "COVID19"       "ggforce"      
+ [5] "ggdag"         "dagitty"       "scales"        "patchwork"    
+ [9] "ggpubr"        "ggthemes"      "ggridges"      "ggrepel"      
+[13] "ggmap"         "htmltools"     "DT"            "kableExtra"   
+[17] "texreg"        "see"           "report"        "parameters"   
+[21] "performance"   "modelbased"    "insight"       "effectsize"   
+[25] "datawizard"    "correlation"   "bayestestR"    "easystats"    
+[29] "DeclareDesign" "estimatr"      "fabricatr"     "randomizr"    
+[33] "haven"         "labelled"      "lubridate"     "forcats"      
+[37] "stringr"       "dplyr"         "purrr"         "readr"        
+[41] "tidyr"         "tibble"        "ggplot2"       "tidyverse"    
+[45] "stats"         "graphics"      "grDevices"     "utils"        
+[49] "datasets"      "methods"       "base"         
+
+[[23]]
+ [1] "qss"           "mapdata"       "maps"          "COVID19"      
+ [5] "ggforce"       "ggdag"         "dagitty"       "scales"       
+ [9] "patchwork"     "ggpubr"        "ggthemes"      "ggridges"     
+[13] "ggrepel"       "ggmap"         "htmltools"     "DT"           
+[17] "kableExtra"    "texreg"        "see"           "report"       
+[21] "parameters"    "performance"   "modelbased"    "insight"      
+[25] "effectsize"    "datawizard"    "correlation"   "bayestestR"   
+[29] "easystats"     "DeclareDesign" "estimatr"      "fabricatr"    
+[33] "randomizr"     "haven"         "labelled"      "lubridate"    
+[37] "forcats"       "stringr"       "dplyr"         "purrr"        
+[41] "readr"         "tidyr"         "tibble"        "ggplot2"      
+[45] "tidyverse"     "stats"         "graphics"      "grDevices"    
+[49] "utils"         "datasets"      "methods"       "base"         
+
+[[24]]
+ [1] "tidycensus"    "qss"           "mapdata"       "maps"         
+ [5] "COVID19"       "ggforce"       "ggdag"         "dagitty"      
+ [9] "scales"        "patchwork"     "ggpubr"        "ggthemes"     
+[13] "ggridges"      "ggrepel"       "ggmap"         "htmltools"    
+[17] "DT"            "kableExtra"    "texreg"        "see"          
+[21] "report"        "parameters"    "performance"   "modelbased"   
+[25] "insight"       "effectsize"    "datawizard"    "correlation"  
+[29] "bayestestR"    "easystats"     "DeclareDesign" "estimatr"     
+[33] "fabricatr"     "randomizr"     "haven"         "labelled"     
+[37] "lubridate"     "forcats"       "stringr"       "dplyr"        
+[41] "purrr"         "readr"         "tidyr"         "tibble"       
+[45] "ggplot2"       "tidyverse"     "stats"         "graphics"     
+[49] "grDevices"     "utils"         "datasets"      "methods"      
+[53] "base"         
+
+[[25]]
+ [1] "dataverse"     "tidycensus"    "qss"           "mapdata"      
+ [5] "maps"          "COVID19"       "ggforce"       "ggdag"        
+ [9] "dagitty"       "scales"        "patchwork"     "ggpubr"       
+[13] "ggthemes"      "ggridges"      "ggrepel"       "ggmap"        
+[17] "htmltools"     "DT"            "kableExtra"    "texreg"       
+[21] "see"           "report"        "parameters"    "performance"  
+[25] "modelbased"    "insight"       "effectsize"    "datawizard"   
+[29] "correlation"   "bayestestR"    "easystats"     "DeclareDesign"
+[33] "estimatr"      "fabricatr"     "randomizr"     "haven"        
+[37] "labelled"      "lubridate"     "forcats"       "stringr"      
+[41] "dplyr"         "purrr"         "readr"         "tidyr"        
+[45] "tibble"        "ggplot2"       "tidyverse"     "stats"        
+[49] "graphics"      "grDevices"     "utils"         "datasets"     
+[53] "methods"       "base"         
+
+[[26]]
+ [1] "dataverse"     "tidycensus"    "qss"           "mapdata"      
+ [5] "maps"          "COVID19"       "ggforce"       "ggdag"        
+ [9] "dagitty"       "scales"        "patchwork"     "ggpubr"       
+[13] "ggthemes"      "ggridges"      "ggrepel"       "ggmap"        
+[17] "htmltools"     "DT"            "kableExtra"    "texreg"       
+[21] "see"           "report"        "parameters"    "performance"  
+[25] "modelbased"    "insight"       "effectsize"    "datawizard"   
+[29] "correlation"   "bayestestR"    "easystats"     "DeclareDesign"
+[33] "estimatr"      "fabricatr"     "randomizr"     "haven"        
+[37] "labelled"      "lubridate"     "forcats"       "stringr"      
+[41] "dplyr"         "purrr"         "readr"         "tidyr"        
+[45] "tibble"        "ggplot2"       "tidyverse"     "stats"        
+[49] "graphics"      "grDevices"     "utils"         "datasets"     
+[53] "methods"       "base"         
+
+[[27]]
+ [1] "dataverse"     "tidycensus"    "qss"           "mapdata"      
+ [5] "maps"          "COVID19"       "ggforce"       "ggdag"        
+ [9] "dagitty"       "scales"        "patchwork"     "ggpubr"       
+[13] "ggthemes"      "ggridges"      "ggrepel"       "ggmap"        
+[17] "htmltools"     "DT"            "kableExtra"    "texreg"       
+[21] "see"           "report"        "parameters"    "performance"  
+[25] "modelbased"    "insight"       "effectsize"    "datawizard"   
+[29] "correlation"   "bayestestR"    "easystats"     "DeclareDesign"
+[33] "estimatr"      "fabricatr"     "randomizr"     "haven"        
+[37] "labelled"      "lubridate"     "forcats"       "stringr"      
+[41] "dplyr"         "purrr"         "readr"         "tidyr"        
+[45] "tibble"        "ggplot2"       "tidyverse"     "stats"        
+[49] "graphics"      "grDevices"     "utils"         "datasets"     
+[53] "methods"       "base"         
+
+[[28]]
+ [1] "zoo"           "dataverse"     "tidycensus"    "qss"          
+ [5] "mapdata"       "maps"          "COVID19"       "ggforce"      
+ [9] "ggdag"         "dagitty"       "scales"        "patchwork"    
+[13] "ggpubr"        "ggthemes"      "ggridges"      "ggrepel"      
+[17] "ggmap"         "htmltools"     "DT"            "kableExtra"   
+[21] "texreg"        "see"           "report"        "parameters"   
+[25] "performance"   "modelbased"    "insight"       "effectsize"   
+[29] "datawizard"    "correlation"   "bayestestR"    "easystats"    
+[33] "DeclareDesign" "estimatr"      "fabricatr"     "randomizr"    
+[37] "haven"         "labelled"      "lubridate"     "forcats"      
+[41] "stringr"       "dplyr"         "purrr"         "readr"        
+[45] "tidyr"         "tibble"        "ggplot2"       "tidyverse"    
+[49] "stats"         "graphics"      "grDevices"     "utils"        
+[53] "datasets"      "methods"       "base"         
+
+[[29]]
+ [1] "boot"          "zoo"           "dataverse"     "tidycensus"   
+ [5] "qss"           "mapdata"       "maps"          "COVID19"      
+ [9] "ggforce"       "ggdag"         "dagitty"       "scales"       
+[13] "patchwork"     "ggpubr"        "ggthemes"      "ggridges"     
+[17] "ggrepel"       "ggmap"         "htmltools"     "DT"           
+[21] "kableExtra"    "texreg"        "see"           "report"       
+[25] "parameters"    "performance"   "modelbased"    "insight"      
+[29] "effectsize"    "datawizard"    "correlation"   "bayestestR"   
+[33] "easystats"     "DeclareDesign" "estimatr"      "fabricatr"    
+[37] "randomizr"     "haven"         "labelled"      "lubridate"    
+[41] "forcats"       "stringr"       "dplyr"         "purrr"        
+[45] "readr"         "tidyr"         "tibble"        "ggplot2"      
+[49] "tidyverse"     "stats"         "graphics"      "grDevices"    
+[53] "utils"         "datasets"      "methods"       "base"         
+
+[[30]]
+ [1] "modelr"        "boot"          "zoo"           "dataverse"    
+ [5] "tidycensus"    "qss"           "mapdata"       "maps"         
+ [9] "COVID19"       "ggforce"       "ggdag"         "dagitty"      
+[13] "scales"        "patchwork"     "ggpubr"        "ggthemes"     
+[17] "ggridges"      "ggrepel"       "ggmap"         "htmltools"    
+[21] "DT"            "kableExtra"    "texreg"        "see"          
+[25] "report"        "parameters"    "performance"   "modelbased"   
+[29] "insight"       "effectsize"    "datawizard"    "correlation"  
+[33] "bayestestR"    "easystats"     "DeclareDesign" "estimatr"     
+[37] "fabricatr"     "randomizr"     "haven"         "labelled"     
+[41] "lubridate"     "forcats"       "stringr"       "dplyr"        
+[45] "purrr"         "readr"         "tidyr"         "tibble"       
+[49] "ggplot2"       "tidyverse"     "stats"         "graphics"     
+[53] "grDevices"     "utils"         "datasets"      "methods"      
+[57] "base"         
+
+[[31]]
+ [1] "modelr"        "boot"          "zoo"           "dataverse"    
+ [5] "tidycensus"    "qss"           "mapdata"       "maps"         
+ [9] "COVID19"       "ggforce"       "ggdag"         "dagitty"      
+[13] "scales"        "patchwork"     "ggpubr"        "ggthemes"     
+[17] "ggridges"      "ggrepel"       "ggmap"         "htmltools"    
+[21] "DT"            "kableExtra"    "texreg"        "see"          
+[25] "report"        "parameters"    "performance"   "modelbased"   
+[29] "insight"       "effectsize"    "datawizard"    "correlation"  
+[33] "bayestestR"    "easystats"     "DeclareDesign" "estimatr"     
+[37] "fabricatr"     "randomizr"     "haven"         "labelled"     
+[41] "lubridate"     "forcats"       "stringr"       "dplyr"        
+[45] "purrr"         "readr"         "tidyr"         "tibble"       
+[49] "ggplot2"       "tidyverse"     "stats"         "graphics"     
+[53] "grDevices"     "utils"         "datasets"      "methods"      
+[57] "base"         </code></pre>
 </div>
 </div>
-<!-- ## Feedback -->
-<!-- ![](https://media1.tenor.com/m/wDzDbUBVbW4AAAAC/the-critic-it-stinks.gif) -->
-<!-- ```{r} -->
-<!-- #| label: feeback -->
-<!-- #| echo: false -->
-<!-- df_wk09 <- haven::read_spss("../files/data/class_surveys/wk09.sav") -->
-<!-- df_wk09 %>% -->
-<!--   mutate( -->
-<!--     optout =ifelse(is.na(optout),1, optout) -->
-<!--   ) %>%  -->
-<!--   filter(optout != 2) -> df_wk09 -->
-<!-- ``` -->
-<!-- ## What did we like {.smaller} -->
-<!-- ```{r} -->
-<!-- #| label: likes -->
-<!-- #| echo: false -->
-<!-- DT::datatable(df_wk09 %>%  -->
-<!--                 select(Likes), -->
-<!--                fillContainer = F, -->
-<!--               height = "90%", -->
-<!--               options = list( -->
-<!--                 pageLength = 6 -->
-<!--               ) -->
-<!--               ) -->
-<!-- ``` -->
-<!-- ## What did we dislike {.smaller} -->
-<!-- ```{r} -->
-<!-- #| label: dislikes -->
-<!-- #| echo: false -->
-<!-- DT::datatable(df_wk09 %>%  -->
-<!--                 select(Dislikes), -->
-<!--                fillContainer = F, -->
-<!--               height = "90%", -->
-<!--               options = list( -->
-<!--                 pageLength = 6 -->
-<!--               ) -->
-<!--               ) -->
-<!-- ``` -->
-<!-- ## What are we streaming {.smaller} -->
-<!-- ```{r} -->
-<!-- #| label: namesake -->
-<!-- #| echo: false -->
-<!-- DT::datatable(df_wk09 %>%  -->
-<!--                 select(Streaming), -->
-<!--                fillContainer = F, -->
-<!--               height = "90%", -->
-<!--               options = list( -->
-<!--                 pageLength = 6 -->
-<!--               ) -->
-<!--               ) -->
-<!-- ``` -->
 </section>
 <section id="goals" class="slide level2 smaller">
 <h2>Goals:</h2>
@@ -405,7 +759,7 @@
 <div id="tabset-1-2">
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a><span class="co"># Load Data</span></span>
-<span id="cb3-2"><a></a><span class="fu">load</span>(<span class="fu">url</span>(<span class="st">"https://pols1600.paultesta.org/files/data/nes24.rda"</span>))</span>
+<span id="cb3-2"><a></a><span class="fu">load</span>(<span class="fu">url</span>(<span class="st">"https://josephessig-source.github.io/pols1600_site/files/data/nes24.rda"</span>))</span>
 <span id="cb3-3"><a></a></span>
 <span id="cb3-4"><a></a><span class="co"># ---- Population ----</span></span>
 <span id="cb3-5"><a></a></span>
@@ -1629,8 +1983,8 @@ RMSE
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a><span class="fu">coef</span>(m1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>(Intercept)      income   education 
-0.311609712 0.007034253 0.166755964 </code></pre>
+<pre><code>(Intercept)   education      income 
+0.311609712 0.166755964 0.007034253 </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a></a>X <span class="ot">&lt;-</span> <span class="fu">model.matrix</span>(m1,<span class="at">data=</span>df)</span>
 <span id="cb15-2"><a></a>y <span class="ot">&lt;-</span> <span class="fu">model.frame</span>(m1)<span class="sc">$</span>dv_participation</span>
@@ -1639,8 +1993,8 @@ RMSE
 <div class="cell-output cell-output-stdout">
 <pre><code>                   [,1]
 (Intercept) 0.311609712
-income      0.007034253
-education   0.166755964</code></pre>
+education   0.166755964
+income      0.007034253</code></pre>
 </div>
 </div>
 </div>
@@ -2245,841 +2599,6 @@ RMSE
 </div>
 </div>
 </div>
-</section></section>
-<section>
-<section id="review-lab-8" class="title-slide slide level1 inverse center">
-<h1><i class="fa-solid fa-magnifiying-glass" aria-label="magnifiying-glass"></i>Review: Lab 8</h1>
-
-</section>
-<section id="lab-8-robust-ses-and-fes" class="slide level2 smaller">
-<h2>Lab 8: Robust SEs and FEs</h2>
-<div class="panel-tabset">
-<ul id="tabset-10" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-10-1">Overview</a></li><li><a href="#tabset-10-2"><i class="fa-solid fa-code" aria-label="code"></i> Code</a></li><li><a href="#tabset-10-3"><i class="fa-solid fa-table" aria-label="table"></i> FE Models</a></li><li><a href="#tabset-10-4"><i class="fa-solid fa-lightbulb" aria-label="lightbulb"></i></a></li></ul>
-<div class="tab-content">
-<div id="tabset-10-1">
-<ul>
-<li>Last week we explored the effects of:
-<ul>
-<li>Cluster robust standard errors</li>
-<li>Fixed effects for state and year</li>
-</ul></li>
-<li>Today, we examine the interaction models at the heart of the Grumbach and Hill’s claims</li>
-</ul>
-</div>
-<div id="tabset-10-2">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a></a><span class="co"># Load data</span></span>
-<span id="cb23-2"><a></a></span>
-<span id="cb23-3"><a></a><span class="fu">load</span>(<span class="fu">url</span>(<span class="st">"https://pols1600.paultesta.org/files/data/cps_clean.rda"</span>))</span>
-<span id="cb23-4"><a></a></span>
-<span id="cb23-5"><a></a><span class="co"># Recode data</span></span>
-<span id="cb23-6"><a></a></span>
-<span id="cb23-7"><a></a></span>
-<span id="cb23-8"><a></a>presidential_elections <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">1980</span>, <span class="dv">2016</span>, <span class="at">by =</span> <span class="dv">4</span>)</span>
-<span id="cb23-9"><a></a> </span>
-<span id="cb23-10"><a></a>cps <span class="sc">%&gt;%</span> </span>
-<span id="cb23-11"><a></a>  <span class="fu">mutate</span>(</span>
-<span id="cb23-12"><a></a>    <span class="at">age_group =</span> <span class="fu">fct_relevel</span>(age_group, <span class="st">"65+"</span>),</span>
-<span id="cb23-13"><a></a>    <span class="at">SDR =</span> <span class="fu">ifelse</span>(sdr <span class="sc">==</span> <span class="dv">1</span>, <span class="st">"SDR"</span>,<span class="st">"non-SDR"</span>),</span>
-<span id="cb23-14"><a></a>    <span class="at">election_type =</span> <span class="fu">ifelse</span>(year <span class="sc">%in%</span> presidential_elections, <span class="st">"General"</span>,<span class="st">"Midterm"</span>),</span>
-<span id="cb23-15"><a></a>  ) <span class="ot">-&gt;</span> cps</span>
-<span id="cb23-16"><a></a></span>
-<span id="cb23-17"><a></a><span class="co"># ---- m1: Simple OLS regression ----</span></span>
-<span id="cb23-18"><a></a>m1 <span class="ot">&lt;-</span> <span class="fu">lm_robust</span>(dv_voted <span class="sc">~</span> sdr, </span>
-<span id="cb23-19"><a></a>                <span class="at">data =</span> cps,</span>
-<span id="cb23-20"><a></a>                <span class="at">se_type =</span> <span class="st">"classical"</span>,</span>
-<span id="cb23-21"><a></a>                <span class="at">try_cholesky =</span> T)</span>
-<span id="cb23-22"><a></a></span>
-<span id="cb23-23"><a></a><span class="co"># ---- m2: Simple OLS with robust standard errors ----</span></span>
-<span id="cb23-24"><a></a>m2 <span class="ot">&lt;-</span> <span class="fu">lm_robust</span>(dv_voted <span class="sc">~</span> sdr, </span>
-<span id="cb23-25"><a></a>                <span class="at">data =</span> cps,</span>
-<span id="cb23-26"><a></a>                <span class="at">se_type =</span> <span class="st">"stata"</span>,</span>
-<span id="cb23-27"><a></a>                <span class="at">try_cholesky =</span> T)</span>
-<span id="cb23-28"><a></a></span>
-<span id="cb23-29"><a></a><span class="co"># ---- m3: Two-way Fixed Effects for State and Year ----</span></span>
-<span id="cb23-30"><a></a>m3 <span class="ot">&lt;-</span> <span class="fu">lm_robust</span>(dv_voted <span class="sc">~</span> sdr,</span>
-<span id="cb23-31"><a></a>                <span class="at">data =</span> cps,</span>
-<span id="cb23-32"><a></a>                <span class="at">fixed_effects =</span> <span class="sc">~</span> st <span class="sc">+</span> year,</span>
-<span id="cb23-33"><a></a>                <span class="at">se_type =</span> <span class="st">"stata"</span>,</span>
-<span id="cb23-34"><a></a>                <span class="at">try_cholesky =</span> T)</span>
-<span id="cb23-35"><a></a></span>
-<span id="cb23-36"><a></a><span class="co"># ---- m4: TWFE for State and Year and cluster robust SEs ----</span></span>
-<span id="cb23-37"><a></a></span>
-<span id="cb23-38"><a></a>m4 <span class="ot">&lt;-</span> <span class="fu">lm_robust</span>(dv_voted <span class="sc">~</span> sdr,</span>
-<span id="cb23-39"><a></a>                <span class="at">data =</span> cps,</span>
-<span id="cb23-40"><a></a>                <span class="at">fixed_effects =</span> <span class="sc">~</span> st <span class="sc">+</span> year,</span>
-<span id="cb23-41"><a></a>                <span class="at">se_type =</span> <span class="st">"stata"</span>,</span>
-<span id="cb23-42"><a></a>                <span class="at">clusters =</span> st,</span>
-<span id="cb23-43"><a></a>                <span class="at">try_cholesky =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</div>
-<div id="tabset-10-3">
-<div class="cell">
-<div class="cell-output-display">
-<table class="texreg caption-top" data-quarto-postprocess="true" style="margin: 10px auto;border-collapse: collapse;border-spacing: 0px;caption-side: bottom;color: #000000;border-top: 2px solid #000000;">
-<caption>Statistical models</caption>
-<thead>
-<tr class="header">
-<th data-quarto-table-cell-role="th" style="padding-left: 5px; padding-right: 5px">&nbsp;</th>
-<th data-quarto-table-cell-role="th" style="padding-left: 5px; padding-right: 5px">Model 1</th>
-<th data-quarto-table-cell-role="th" style="padding-left: 5px; padding-right: 5px">Model 2</th>
-<th data-quarto-table-cell-role="th" style="padding-left: 5px; padding-right: 5px">Model 3</th>
-<th data-quarto-table-cell-role="th" style="padding-left: 5px; padding-right: 5px">Model 4</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd" style="border-top: 1px solid #000000;">
-<td style="padding-left: 5px; padding-right: 5px">(Intercept)</td>
-<td style="padding-left: 5px; padding-right: 5px">0.54787<sup>***</sup></td>
-<td style="padding-left: 5px; padding-right: 5px">0.54787<sup>***</sup></td>
-<td style="padding-left: 5px; padding-right: 5px">&nbsp;</td>
-<td style="padding-left: 5px; padding-right: 5px">&nbsp;</td>
-</tr>
-<tr class="even">
-<td style="padding-left: 5px; padding-right: 5px">&nbsp;</td>
-<td style="padding-left: 5px; padding-right: 5px">(0.00037)</td>
-<td style="padding-left: 5px; padding-right: 5px">(0.00038)</td>
-<td style="padding-left: 5px; padding-right: 5px">&nbsp;</td>
-<td style="padding-left: 5px; padding-right: 5px">&nbsp;</td>
-</tr>
-<tr class="odd">
-<td style="padding-left: 5px; padding-right: 5px">sdr</td>
-<td style="padding-left: 5px; padding-right: 5px">0.06159<sup>***</sup></td>
-<td style="padding-left: 5px; padding-right: 5px">0.06159<sup>***</sup></td>
-<td style="padding-left: 5px; padding-right: 5px">0.00671<sup>***</sup></td>
-<td style="padding-left: 5px; padding-right: 5px">0.00671</td>
-</tr>
-<tr class="even">
-<td style="padding-left: 5px; padding-right: 5px">&nbsp;</td>
-<td style="padding-left: 5px; padding-right: 5px">(0.00110)</td>
-<td style="padding-left: 5px; padding-right: 5px">(0.00108)</td>
-<td style="padding-left: 5px; padding-right: 5px">(0.00185)</td>
-<td style="padding-left: 5px; padding-right: 5px">(0.01405)</td>
-</tr>
-<tr class="odd" style="border-top: 1px solid #000000;">
-<td style="padding-left: 5px; padding-right: 5px">R<sup>2</sup></td>
-<td style="padding-left: 5px; padding-right: 5px">0.00157</td>
-<td style="padding-left: 5px; padding-right: 5px">0.00157</td>
-<td style="padding-left: 5px; padding-right: 5px">0.02845</td>
-<td style="padding-left: 5px; padding-right: 5px">0.02845</td>
-</tr>
-<tr class="even">
-<td style="padding-left: 5px; padding-right: 5px">Adj. R<sup>2</sup></td>
-<td style="padding-left: 5px; padding-right: 5px">0.00157</td>
-<td style="padding-left: 5px; padding-right: 5px">0.00157</td>
-<td style="padding-left: 5px; padding-right: 5px">0.02841</td>
-<td style="padding-left: 5px; padding-right: 5px">0.02841</td>
-</tr>
-<tr class="odd">
-<td style="padding-left: 5px; padding-right: 5px">Num. obs.</td>
-<td style="padding-left: 5px; padding-right: 5px">1988501</td>
-<td style="padding-left: 5px; padding-right: 5px">1988501</td>
-<td style="padding-left: 5px; padding-right: 5px">1988501</td>
-<td style="padding-left: 5px; padding-right: 5px">1988501</td>
-</tr>
-<tr class="even">
-<td style="padding-left: 5px; padding-right: 5px">RMSE</td>
-<td style="padding-left: 5px; padding-right: 5px">0.49658</td>
-<td style="padding-left: 5px; padding-right: 5px">0.49658</td>
-<td style="padding-left: 5px; padding-right: 5px">0.48986</td>
-<td style="padding-left: 5px; padding-right: 5px">0.48986</td>
-</tr>
-<tr class="odd" style="border-bottom: 2px solid #000000;">
-<td style="padding-left: 5px; padding-right: 5px">N Clusters</td>
-<td style="padding-left: 5px; padding-right: 5px">&nbsp;</td>
-<td style="padding-left: 5px; padding-right: 5px">&nbsp;</td>
-<td style="padding-left: 5px; padding-right: 5px">&nbsp;</td>
-<td style="padding-left: 5px; padding-right: 5px">49</td>
-</tr>
-</tbody><tfoot>
-<tr class="odd">
-<td colspan="5" style="font-size: 0.8em"><sup>***</sup>p &lt; 0.001; <sup>**</sup>p &lt; 0.01; <sup>*</sup>p &lt; 0.05</td>
-</tr>
-</tfoot>
-
-</table>
-</div>
-</div>
-</div>
-<div id="tabset-10-4">
-<ul>
-<li class="fragment"><p>Fixed effects drastically reduce the overall size of the effect of SDR</p></li>
-<li class="fragment"><p>Robust standard errors change our estimates of uncertainty.</p></li>
-<li class="fragment"><p>Adjusting for:</p>
-<ul>
-<li class="fragment">Simple non-constant error variance <span class="math inline">\(\to\)</span> no difference</li>
-<li class="fragment">Cluster <span class="math inline">\(\to\)</span> non-significant result</li>
-</ul></li>
-<li class="fragment"><p>Generally prefer <em>conservative</em> models (e.g.&nbsp;<code>m4</code>)</p></li>
-</ul>
-</div>
-</div>
-</div>
-</section>
-<section id="sdr-and-age" class="slide level2 smaller">
-<h2>SDR and Age</h2>
-<p>Grumbach and Hill, however, are interested in a different question, namely, <strong>whether the effects of same day registration vary by age.</strong></p>
-<p>Formally, we we can describe these models using an <span class="blue">interaction model</span>:</p>
-<p><span class="math display">\[
-y_{ist} = \beta_0 + \overbrace{\alpha_s}^{\text{FE State}} + \underbrace{\gamma_t}_{\text{FE Year}} + \overbrace{\beta_1sdr_{st}}^{\text{ME of SDR for 65+}} + \underbrace{\sum_{k = 18-14}^{k = 55-64}\beta_{k} sdr_{st}\times age_{ist}}_{\Delta \text{ in ME of SDR for Age }}  +\overbrace{X\beta}^{\text{Controls}}+\epsilon_{ist}
-\]</span> Where the <span class="blue">marginal effect</span> of SDR varies based on the age of the respondent.</p>
-</section>
-<section id="marginal-effects-general" class="slide level2 smaller">
-<h2>Marginal Effects: General</h2>
-<p>The marginal effect of any variable in a multiple regression as the partial derivative of the outcome with respect to that variable.</p>
-<p><span class="math display">\[
-\begin{aligned}
-y &amp;= \beta_0 + \beta_1 x +\beta_2z \\
-\frac{\partial y}{\partial x} &amp;= 0 + \beta_1*(1) + 0\\
-\frac{\partial y}{\partial x} &amp;= \beta_1
-\end{aligned}
-\]</span></p>
-<p>In multiple regression with no interactions between terms, the <span class="math inline">\(\beta\)</span>s correspond to marginal effects.</p>
-</section>
-<section id="marginal-effects-interactions" class="slide level2 smaller">
-<h2>Marginal Effects: Interactions</h2>
-<p>Now consider a multiple regression with an interaction between two variables <span class="math inline">\(x\)</span> and <span class="math inline">\(z\)</span></p>
-<p><span class="math display">\[
-y = \beta_0 +\beta_1x +\beta_2 z + \beta_3 x*z
-\]</span></p>
-<p>Taking the partial derivative of y with respect to x <span class="math inline">\((\frac{\partial y}{\partial x})\)</span>, there are now two terms with <span class="math inline">\(x\)</span> in them:</p>
-<p><span class="math display">\[
-\begin{aligned}
-y &amp;= \beta_0 +\beta_1x +\beta_2 z + \beta_3 x*z \\
-\frac{\partial y}{\partial x} &amp;= 0 + \beta_1*(1) +0 + \beta_3*(1)*z\\
-\frac{\partial y}{\partial x} &amp;= \beta_1 +\beta_3z
-\end{aligned}
-\]</span></p>
-<p>And the marginal effect of <span class="math inline">\(x\)</span> now depends on value of <span class="math inline">\(z\)</span> at which we evaluate the model.</p>
-</section>
-<section id="marginal-effects-ses-for-interactions" class="slide level2 smaller">
-<h2>Marginal Effects: SEs for Interactions</h2>
-<p>The <a href="https://www.jstor.org/stable/25791835" target="_blank">standard error</a> of this marginal effect of <span class="math inline">\(x\)</span> (and <span class="math inline">\(z\)</span>…) in this model:</p>
-<p><span class="math display">\[
-y = \beta_0 +\beta_1x +\beta_2 z + \beta_3 x*z
-\]</span></p>
-<p>is now a function of the variance and covariance of <span class="math inline">\(\beta_1\)</span> and <span class="math inline">\(\beta_3\)</span> and the value of the conditioning term <span class="math inline">\(z\)</span></p>
-<p><span class="math display">\[
-\text{Var}(\frac{\partial y}{\partial x}) = \text{Var}(\beta_1) + z^2\text{Var}(\beta_3) + 2\times z \text{Cov}(\beta_1,\beta_3)
-\]</span></p>
-</section>
-<section id="mariginal-effects-grumbach-and-hill" class="slide level2 smaller">
-<h2>Mariginal Effects: Grumbach and Hill</h2>
-<p>In G&amp;H’s models, the ME of SDR varies with age.</p>
-<p><span class="math display">\[
-y_{ist} = \beta_0 + \overbrace{\alpha_s}^{\text{FE State}} + \underbrace{\gamma_t}_{\text{FE Year}} + \overbrace{\beta_1sdr_{st}}^{\text{ME of SDR for 65+}} + \underbrace{\sum_{k = 18-14}^{k = 55-64}\beta_{k} sdr_{st}\times age_{ist}}_{\Delta \text{ in ME of SDR for Age }}  +\overbrace{X\beta}^{\text{Controls}}+\epsilon_{ist}
-\]</span></p>
-<p>Since 65+ is the <span class="blue">excluded/reference category</span>:</p>
-<p><span class="math display">\[
-\text{Marginal Effect of SDR for 65+} = \beta_1
-\]</span></p>
-<p>For 18-24 year olds the quantity of interest is the sum of:</p>
-<p><span class="math display">\[
-\text{Marginal Effect of SDR for 18-24} = \beta_1 + \beta_{sdr \times 18-24}
-\]</span></p>
-<p>The SEs of the Marginal effects is function of the variances and covariances of both <span class="math inline">\(\beta_1\)</span> and <span class="math inline">\(\beta_{sdr\times age}\)</span></p>
-</section>
-<section id="lab-8-robust-ses-and-fes-1" class="slide level2 smaller">
-<h2>Lab 8: Robust SEs and FEs</h2>
-<div class="panel-tabset">
-<ul id="tabset-11" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-11-1">Overview</a></li><li><a href="#tabset-11-2"><i class="fa-solid fa-code" aria-label="code"></i></a></li><li><a href="#tabset-11-3"><i class="fa-solid fa-table" aria-label="table"></i></a></li><li><a href="#tabset-11-4"><i class="fa-solid fa-chart-line" aria-label="chart-line"></i> Figure 3</a></li><li><a href="#tabset-11-5"><i class="fa-solid fa-chart-line" aria-label="chart-line"></i> G&amp;H</a></li><li><a href="#tabset-11-6"><i class="fa-solid fa-lightbulb" aria-label="lightbulb"></i></a></li></ul>
-<div class="tab-content">
-<div id="tabset-11-1">
-<p>Let’s estimate the interaction models used by G&amp;H and recreate figure 3 calculating the correct standard errrors for the interactions</p>
-</div>
-<div id="tabset-11-2">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a></a>m1gh <span class="ot">&lt;-</span> <span class="fu">lm_robust</span>(dv_voted <span class="sc">~</span> sdr<span class="sc">*</span>age_group, </span>
-<span id="cb24-2"><a></a>                  <span class="at">data =</span> cps,</span>
-<span id="cb24-3"><a></a>                  <span class="at">fixed_effects =</span> <span class="sc">~</span> st <span class="sc">+</span> year,</span>
-<span id="cb24-4"><a></a>                  <span class="at">se_type =</span> <span class="st">"stata"</span>,</span>
-<span id="cb24-5"><a></a>                  <span class="at">clusters =</span> st,</span>
-<span id="cb24-6"><a></a>                  <span class="at">try_cholesky =</span> T</span>
-<span id="cb24-7"><a></a>                  )</span>
-<span id="cb24-8"><a></a></span>
-<span id="cb24-9"><a></a></span>
-<span id="cb24-10"><a></a>m2gh <span class="ot">&lt;-</span> <span class="fu">lm_robust</span>(dv_voted <span class="sc">~</span> sdr<span class="sc">*</span>age_group <span class="sc">+</span></span>
-<span id="cb24-11"><a></a>                    <span class="fu">factor</span>(race) <span class="sc">+</span> is_female <span class="sc">+</span></span>
-<span id="cb24-12"><a></a>                    income <span class="sc">+</span> education, </span>
-<span id="cb24-13"><a></a>                  <span class="at">data =</span> cps,</span>
-<span id="cb24-14"><a></a>                  <span class="at">fixed_effects =</span> <span class="sc">~</span> st <span class="sc">+</span> year,</span>
-<span id="cb24-15"><a></a>                  <span class="at">se_type =</span> <span class="st">"stata"</span>,</span>
-<span id="cb24-16"><a></a>                  <span class="at">clusters =</span> st,</span>
-<span id="cb24-17"><a></a>                  <span class="at">try_cholesky =</span> T</span>
-<span id="cb24-18"><a></a>                  )</span>
-<span id="cb24-19"><a></a></span>
-<span id="cb24-20"><a></a></span>
-<span id="cb24-21"><a></a><span class="co"># ---- Function to calculate marginal effect and SE of interactions ----</span></span>
-<span id="cb24-22"><a></a></span>
-<span id="cb24-23"><a></a>me_fn <span class="ot">&lt;-</span> <span class="cf">function</span>(mod, cohort, <span class="at">ci=</span><span class="fl">0.95</span>){</span>
-<span id="cb24-24"><a></a>  <span class="co"># Confidence Level for CI</span></span>
-<span id="cb24-25"><a></a>  alpha <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">-</span>ci</span>
-<span id="cb24-26"><a></a>  z <span class="ot">&lt;-</span> <span class="fu">qnorm</span>(<span class="dv">1</span><span class="sc">-</span>alpha<span class="sc">/</span><span class="dv">2</span>)</span>
-<span id="cb24-27"><a></a>  </span>
-<span id="cb24-28"><a></a>  <span class="co"># Age (Always one for indicator of specific cohort)</span></span>
-<span id="cb24-29"><a></a>  age <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb24-30"><a></a>  </span>
-<span id="cb24-31"><a></a>  <span class="co"># Variance Covariance Matrix from Model</span></span>
-<span id="cb24-32"><a></a>  cov <span class="ot">&lt;-</span> <span class="fu">vcov</span>(mod)</span>
-<span id="cb24-33"><a></a>  </span>
-<span id="cb24-34"><a></a>  <span class="co"># coefficient for SDR (Marginal Effect for reference category: 65+)</span></span>
-<span id="cb24-35"><a></a>  b1 <span class="ot">&lt;-</span> <span class="fu">coef</span>(mod)[<span class="st">"sdr"</span>]</span>
-<span id="cb24-36"><a></a>  </span>
-<span id="cb24-37"><a></a>  <span class="co"># If age is one of the interactions</span></span>
-<span id="cb24-38"><a></a>  <span class="cf">if</span>(cohort <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"18-24"</span>,<span class="st">"25-34"</span>,<span class="st">"35-44"</span>,<span class="st">"45-54"</span>,<span class="st">"55-64"</span>)){</span>
-<span id="cb24-39"><a></a>    <span class="co"># get the name of the specific interaction</span></span>
-<span id="cb24-40"><a></a>    the_int <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">"sdr:age_group"</span>,cohort,<span class="at">sep=</span><span class="st">""</span>)</span>
-<span id="cb24-41"><a></a>    <span class="co"># the coefficient on the interaction</span></span>
-<span id="cb24-42"><a></a>    b2 <span class="ot">&lt;-</span> <span class="fu">coef</span>(mod)[the_int]</span>
-<span id="cb24-43"><a></a>    <span class="co"># Calculate marginal effect for age cohort</span></span>
-<span id="cb24-44"><a></a>    me <span class="ot">&lt;-</span> b1 <span class="sc">+</span> b2<span class="sc">*</span>age</span>
-<span id="cb24-45"><a></a>    me_se <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(cov[<span class="st">"sdr"</span>,<span class="st">"sdr"</span>] <span class="sc">+</span> age<span class="sc">^</span><span class="dv">2</span><span class="sc">*</span>cov[the_int,the_int] <span class="sc">+</span> <span class="dv">2</span><span class="sc">*</span>age<span class="sc">*</span>cov[<span class="st">"sdr"</span>,the_int])</span>
-<span id="cb24-46"><a></a>    ll <span class="ot">&lt;-</span> me <span class="sc">-</span> z<span class="sc">*</span>me_se</span>
-<span id="cb24-47"><a></a>    ul <span class="ot">&lt;-</span> me <span class="sc">+</span> z<span class="sc">*</span>me_se</span>
-<span id="cb24-48"><a></a>  }</span>
-<span id="cb24-49"><a></a>  <span class="cf">if</span>(<span class="sc">!</span>cohort <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"18-24"</span>,<span class="st">"25-34"</span>,<span class="st">"35-44"</span>,<span class="st">"45-54"</span>,<span class="st">"55-64"</span>)){</span>
-<span id="cb24-50"><a></a>    me <span class="ot">&lt;-</span> b1 </span>
-<span id="cb24-51"><a></a>    me_se <span class="ot">&lt;-</span> mod<span class="sc">$</span>std.error[<span class="st">"sdr"</span>]</span>
-<span id="cb24-52"><a></a>    ll <span class="ot">&lt;-</span> mod<span class="sc">$</span>conf.low[<span class="st">"sdr"</span>]</span>
-<span id="cb24-53"><a></a>    ul <span class="ot">&lt;-</span> mod<span class="sc">$</span>conf.high[<span class="st">"sdr"</span>]</span>
-<span id="cb24-54"><a></a>  }</span>
-<span id="cb24-55"><a></a></span>
-<span id="cb24-56"><a></a>  <span class="co"># scale results to be percentage points</span></span>
-<span id="cb24-57"><a></a>  res <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb24-58"><a></a>    <span class="at">Age =</span> cohort,</span>
-<span id="cb24-59"><a></a>    <span class="at">Effect =</span> me<span class="sc">*</span><span class="dv">100</span>,</span>
-<span id="cb24-60"><a></a>    <span class="at">SE =</span> me_se<span class="sc">*</span><span class="dv">100</span>,</span>
-<span id="cb24-61"><a></a>    <span class="at">ll =</span> ll<span class="sc">*</span><span class="dv">100</span>,</span>
-<span id="cb24-62"><a></a>    <span class="at">ul =</span> ul<span class="sc">*</span><span class="dv">100</span></span>
-<span id="cb24-63"><a></a>  )</span>
-<span id="cb24-64"><a></a>  <span class="fu">return</span>(res)</span>
-<span id="cb24-65"><a></a></span>
-<span id="cb24-66"><a></a></span>
-<span id="cb24-67"><a></a>}</span>
-<span id="cb24-68"><a></a></span>
-<span id="cb24-69"><a></a></span>
-<span id="cb24-70"><a></a><span class="do">## List of age cohorts</span></span>
-<span id="cb24-71"><a></a>the_age_groups <span class="ot">&lt;-</span> <span class="fu">levels</span>(cps<span class="sc">$</span>age_group)</span>
-<span id="cb24-72"><a></a></span>
-<span id="cb24-73"><a></a><span class="do">## Model 1: No controls</span></span>
-<span id="cb24-74"><a></a><span class="do">## Estimate Marginal effect for each age cohort</span></span>
-<span id="cb24-75"><a></a>the_age_groups <span class="sc">%&gt;%</span> </span>
-<span id="cb24-76"><a></a>  purrr<span class="sc">::</span><span class="fu">map_df</span>(<span class="sc">~</span><span class="fu">me_fn</span>(m1gh, <span class="at">cohort=</span>.)) <span class="sc">%&gt;%</span> </span>
-<span id="cb24-77"><a></a>  <span class="co"># Add labels for plotting</span></span>
-<span id="cb24-78"><a></a>  <span class="fu">mutate</span>(</span>
-<span id="cb24-79"><a></a>    <span class="at">Age =</span> <span class="fu">factor</span>(Age),</span>
-<span id="cb24-80"><a></a>    <span class="at">Model =</span> <span class="st">"No controls"</span></span>
-<span id="cb24-81"><a></a>  ) <span class="ot">-&gt;</span> fig3_no_controls</span>
-<span id="cb24-82"><a></a></span>
-<span id="cb24-83"><a></a><span class="do">## Model 3: Controls for Education, Income, Race,and Sex </span></span>
-<span id="cb24-84"><a></a><span class="do">## Estimate Marginal effect for each age cohort</span></span>
-<span id="cb24-85"><a></a>the_age_groups <span class="sc">%&gt;%</span> </span>
-<span id="cb24-86"><a></a>  purrr<span class="sc">::</span><span class="fu">map_df</span>(<span class="sc">~</span><span class="fu">me_fn</span>(m2gh, <span class="at">cohort=</span>.)) <span class="sc">%&gt;%</span> </span>
-<span id="cb24-87"><a></a>  <span class="co"># Add labels for plotting</span></span>
-<span id="cb24-88"><a></a>  <span class="fu">mutate</span>(</span>
-<span id="cb24-89"><a></a>    <span class="at">Age =</span> <span class="fu">factor</span>(Age),</span>
-<span id="cb24-90"><a></a>    <span class="at">Model =</span> <span class="st">"With controls"</span></span>
-<span id="cb24-91"><a></a>  ) <span class="ot">-&gt;</span> fig3_controls</span>
-<span id="cb24-92"><a></a>  </span>
-<span id="cb24-93"><a></a><span class="do">## Combine estimates into data frame for plotting</span></span>
-<span id="cb24-94"><a></a>fig3_df <span class="ot">&lt;-</span> fig3_no_controls <span class="sc">%&gt;%</span> <span class="fu">bind_rows</span>(fig3_controls)</span>
-<span id="cb24-95"><a></a></span>
-<span id="cb24-96"><a></a><span class="do">## Recreate Figure 3</span></span>
-<span id="cb24-97"><a></a></span>
-<span id="cb24-98"><a></a></span>
-<span id="cb24-99"><a></a>fig3_df <span class="sc">%&gt;%</span> </span>
-<span id="cb24-100"><a></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(Age, Effect))<span class="sc">+</span></span>
-<span id="cb24-101"><a></a>  <span class="fu">geom_point</span>()<span class="sc">+</span></span>
-<span id="cb24-102"><a></a>  <span class="fu">geom_linerange</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> ll, <span class="at">ymax =</span>ul))<span class="sc">+</span></span>
-<span id="cb24-103"><a></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>)<span class="sc">+</span></span>
-<span id="cb24-104"><a></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>Model)<span class="sc">+</span></span>
-<span id="cb24-105"><a></a>  <span class="fu">theme_minimal</span>() <span class="ot">-&gt;</span> fig3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</div>
-<div id="tabset-11-3">
-<div class="cell">
-<div class="cell-output-display">
-<table class="texreg caption-top" data-quarto-postprocess="true" style="margin: 10px auto;border-collapse: collapse;border-spacing: 0px;caption-side: bottom;color: #000000;border-top: 2px solid #000000;">
-<caption>Statistical models</caption>
-<thead>
-<tr class="header">
-<th data-quarto-table-cell-role="th" style="padding-left: 5px; padding-right: 5px">&nbsp;</th>
-<th data-quarto-table-cell-role="th" style="padding-left: 5px; padding-right: 5px">Model 1</th>
-<th data-quarto-table-cell-role="th" style="padding-left: 5px; padding-right: 5px">Model 2</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd" style="border-top: 1px solid #000000;">
-<td style="padding-left: 5px; padding-right: 5px">sdr</td>
-<td style="padding-left: 5px; padding-right: 5px">0.0120</td>
-<td style="padding-left: 5px; padding-right: 5px">0.0004</td>
-</tr>
-<tr class="even">
-<td style="padding-left: 5px; padding-right: 5px">&nbsp;</td>
-<td style="padding-left: 5px; padding-right: 5px">(0.0162)</td>
-<td style="padding-left: 5px; padding-right: 5px">(0.0128)</td>
-</tr>
-<tr class="odd">
-<td style="padding-left: 5px; padding-right: 5px">age_group18-24</td>
-<td style="padding-left: 5px; padding-right: 5px">-0.3518<sup>***</sup></td>
-<td style="padding-left: 5px; padding-right: 5px">-0.4125<sup>***</sup></td>
-</tr>
-<tr class="even">
-<td style="padding-left: 5px; padding-right: 5px">&nbsp;</td>
-<td style="padding-left: 5px; padding-right: 5px">(0.0061)</td>
-<td style="padding-left: 5px; padding-right: 5px">(0.0051)</td>
-</tr>
-<tr class="odd">
-<td style="padding-left: 5px; padding-right: 5px">age_group25-34</td>
-<td style="padding-left: 5px; padding-right: 5px">-0.2149<sup>***</sup></td>
-<td style="padding-left: 5px; padding-right: 5px">-0.3198<sup>***</sup></td>
-</tr>
-<tr class="even">
-<td style="padding-left: 5px; padding-right: 5px">&nbsp;</td>
-<td style="padding-left: 5px; padding-right: 5px">(0.0060)</td>
-<td style="padding-left: 5px; padding-right: 5px">(0.0040)</td>
-</tr>
-<tr class="odd">
-<td style="padding-left: 5px; padding-right: 5px">age_group35-44</td>
-<td style="padding-left: 5px; padding-right: 5px">-0.1026<sup>***</sup></td>
-<td style="padding-left: 5px; padding-right: 5px">-0.2179<sup>***</sup></td>
-</tr>
-<tr class="even">
-<td style="padding-left: 5px; padding-right: 5px">&nbsp;</td>
-<td style="padding-left: 5px; padding-right: 5px">(0.0063)</td>
-<td style="padding-left: 5px; padding-right: 5px">(0.0038)</td>
-</tr>
-<tr class="odd">
-<td style="padding-left: 5px; padding-right: 5px">age_group45-54</td>
-<td style="padding-left: 5px; padding-right: 5px">-0.0431<sup>***</sup></td>
-<td style="padding-left: 5px; padding-right: 5px">-0.1450<sup>***</sup></td>
-</tr>
-<tr class="even">
-<td style="padding-left: 5px; padding-right: 5px">&nbsp;</td>
-<td style="padding-left: 5px; padding-right: 5px">(0.0059)</td>
-<td style="padding-left: 5px; padding-right: 5px">(0.0038)</td>
-</tr>
-<tr class="odd">
-<td style="padding-left: 5px; padding-right: 5px">age_group55-64</td>
-<td style="padding-left: 5px; padding-right: 5px">0.0064</td>
-<td style="padding-left: 5px; padding-right: 5px">-0.0642<sup>***</sup></td>
-</tr>
-<tr class="even">
-<td style="padding-left: 5px; padding-right: 5px">&nbsp;</td>
-<td style="padding-left: 5px; padding-right: 5px">(0.0047)</td>
-<td style="padding-left: 5px; padding-right: 5px">(0.0036)</td>
-</tr>
-<tr class="odd">
-<td style="padding-left: 5px; padding-right: 5px">sdr:age_group18-24</td>
-<td style="padding-left: 5px; padding-right: 5px">0.0142</td>
-<td style="padding-left: 5px; padding-right: 5px">0.0472<sup>***</sup></td>
-</tr>
-<tr class="even">
-<td style="padding-left: 5px; padding-right: 5px">&nbsp;</td>
-<td style="padding-left: 5px; padding-right: 5px">(0.0108)</td>
-<td style="padding-left: 5px; padding-right: 5px">(0.0081)</td>
-</tr>
-<tr class="odd">
-<td style="padding-left: 5px; padding-right: 5px">sdr:age_group25-34</td>
-<td style="padding-left: 5px; padding-right: 5px">0.0003</td>
-<td style="padding-left: 5px; padding-right: 5px">0.0219<sup>**</sup></td>
-</tr>
-<tr class="even">
-<td style="padding-left: 5px; padding-right: 5px">&nbsp;</td>
-<td style="padding-left: 5px; padding-right: 5px">(0.0137)</td>
-<td style="padding-left: 5px; padding-right: 5px">(0.0076)</td>
-</tr>
-<tr class="odd">
-<td style="padding-left: 5px; padding-right: 5px">sdr:age_group35-44</td>
-<td style="padding-left: 5px; padding-right: 5px">-0.0142</td>
-<td style="padding-left: 5px; padding-right: 5px">0.0074</td>
-</tr>
-<tr class="even">
-<td style="padding-left: 5px; padding-right: 5px">&nbsp;</td>
-<td style="padding-left: 5px; padding-right: 5px">(0.0162)</td>
-<td style="padding-left: 5px; padding-right: 5px">(0.0087)</td>
-</tr>
-<tr class="odd">
-<td style="padding-left: 5px; padding-right: 5px">sdr:age_group45-54</td>
-<td style="padding-left: 5px; padding-right: 5px">-0.0147</td>
-<td style="padding-left: 5px; padding-right: 5px">0.0001</td>
-</tr>
-<tr class="even">
-<td style="padding-left: 5px; padding-right: 5px">&nbsp;</td>
-<td style="padding-left: 5px; padding-right: 5px">(0.0120)</td>
-<td style="padding-left: 5px; padding-right: 5px">(0.0068)</td>
-</tr>
-<tr class="odd">
-<td style="padding-left: 5px; padding-right: 5px">sdr:age_group55-64</td>
-<td style="padding-left: 5px; padding-right: 5px">-0.0149</td>
-<td style="padding-left: 5px; padding-right: 5px">-0.0108</td>
-</tr>
-<tr class="even">
-<td style="padding-left: 5px; padding-right: 5px">&nbsp;</td>
-<td style="padding-left: 5px; padding-right: 5px">(0.0096)</td>
-<td style="padding-left: 5px; padding-right: 5px">(0.0062)</td>
-</tr>
-<tr class="odd">
-<td style="padding-left: 5px; padding-right: 5px">factor(race)200</td>
-<td style="padding-left: 5px; padding-right: 5px">&nbsp;</td>
-<td style="padding-left: 5px; padding-right: 5px">0.0518<sup>***</sup></td>
-</tr>
-<tr class="even">
-<td style="padding-left: 5px; padding-right: 5px">&nbsp;</td>
-<td style="padding-left: 5px; padding-right: 5px">&nbsp;</td>
-<td style="padding-left: 5px; padding-right: 5px">(0.0081)</td>
-</tr>
-<tr class="odd">
-<td style="padding-left: 5px; padding-right: 5px">factor(race)300</td>
-<td style="padding-left: 5px; padding-right: 5px">&nbsp;</td>
-<td style="padding-left: 5px; padding-right: 5px">-0.0548<sup>***</sup></td>
-</tr>
-<tr class="even">
-<td style="padding-left: 5px; padding-right: 5px">&nbsp;</td>
-<td style="padding-left: 5px; padding-right: 5px">&nbsp;</td>
-<td style="padding-left: 5px; padding-right: 5px">(0.0118)</td>
-</tr>
-<tr class="odd">
-<td style="padding-left: 5px; padding-right: 5px">factor(race)650</td>
-<td style="padding-left: 5px; padding-right: 5px">&nbsp;</td>
-<td style="padding-left: 5px; padding-right: 5px">-0.1619<sup>***</sup></td>
-</tr>
-<tr class="even">
-<td style="padding-left: 5px; padding-right: 5px">&nbsp;</td>
-<td style="padding-left: 5px; padding-right: 5px">&nbsp;</td>
-<td style="padding-left: 5px; padding-right: 5px">(0.0305)</td>
-</tr>
-<tr class="odd">
-<td style="padding-left: 5px; padding-right: 5px">factor(race)651</td>
-<td style="padding-left: 5px; padding-right: 5px">&nbsp;</td>
-<td style="padding-left: 5px; padding-right: 5px">-0.1784<sup>***</sup></td>
-</tr>
-<tr class="even">
-<td style="padding-left: 5px; padding-right: 5px">&nbsp;</td>
-<td style="padding-left: 5px; padding-right: 5px">&nbsp;</td>
-<td style="padding-left: 5px; padding-right: 5px">(0.0090)</td>
-</tr>
-<tr class="odd">
-<td style="padding-left: 5px; padding-right: 5px">factor(race)652</td>
-<td style="padding-left: 5px; padding-right: 5px">&nbsp;</td>
-<td style="padding-left: 5px; padding-right: 5px">-0.1277<sup>***</sup></td>
-</tr>
-<tr class="even">
-<td style="padding-left: 5px; padding-right: 5px">&nbsp;</td>
-<td style="padding-left: 5px; padding-right: 5px">&nbsp;</td>
-<td style="padding-left: 5px; padding-right: 5px">(0.0188)</td>
-</tr>
-<tr class="odd">
-<td style="padding-left: 5px; padding-right: 5px">factor(race)700</td>
-<td style="padding-left: 5px; padding-right: 5px">&nbsp;</td>
-<td style="padding-left: 5px; padding-right: 5px">-0.0916<sup>***</sup></td>
-</tr>
-<tr class="even">
-<td style="padding-left: 5px; padding-right: 5px">&nbsp;</td>
-<td style="padding-left: 5px; padding-right: 5px">&nbsp;</td>
-<td style="padding-left: 5px; padding-right: 5px">(0.0236)</td>
-</tr>
-<tr class="odd">
-<td style="padding-left: 5px; padding-right: 5px">factor(race)801</td>
-<td style="padding-left: 5px; padding-right: 5px">&nbsp;</td>
-<td style="padding-left: 5px; padding-right: 5px">0.0130</td>
-</tr>
-<tr class="even">
-<td style="padding-left: 5px; padding-right: 5px">&nbsp;</td>
-<td style="padding-left: 5px; padding-right: 5px">&nbsp;</td>
-<td style="padding-left: 5px; padding-right: 5px">(0.0110)</td>
-</tr>
-<tr class="odd">
-<td style="padding-left: 5px; padding-right: 5px">factor(race)802</td>
-<td style="padding-left: 5px; padding-right: 5px">&nbsp;</td>
-<td style="padding-left: 5px; padding-right: 5px">-0.0233<sup>*</sup></td>
-</tr>
-<tr class="even">
-<td style="padding-left: 5px; padding-right: 5px">&nbsp;</td>
-<td style="padding-left: 5px; padding-right: 5px">&nbsp;</td>
-<td style="padding-left: 5px; padding-right: 5px">(0.0097)</td>
-</tr>
-<tr class="odd">
-<td style="padding-left: 5px; padding-right: 5px">factor(race)803</td>
-<td style="padding-left: 5px; padding-right: 5px">&nbsp;</td>
-<td style="padding-left: 5px; padding-right: 5px">-0.0406</td>
-</tr>
-<tr class="even">
-<td style="padding-left: 5px; padding-right: 5px">&nbsp;</td>
-<td style="padding-left: 5px; padding-right: 5px">&nbsp;</td>
-<td style="padding-left: 5px; padding-right: 5px">(0.0277)</td>
-</tr>
-<tr class="odd">
-<td style="padding-left: 5px; padding-right: 5px">factor(race)804</td>
-<td style="padding-left: 5px; padding-right: 5px">&nbsp;</td>
-<td style="padding-left: 5px; padding-right: 5px">-0.0566</td>
-</tr>
-<tr class="even">
-<td style="padding-left: 5px; padding-right: 5px">&nbsp;</td>
-<td style="padding-left: 5px; padding-right: 5px">&nbsp;</td>
-<td style="padding-left: 5px; padding-right: 5px">(0.0403)</td>
-</tr>
-<tr class="odd">
-<td style="padding-left: 5px; padding-right: 5px">factor(race)805</td>
-<td style="padding-left: 5px; padding-right: 5px">&nbsp;</td>
-<td style="padding-left: 5px; padding-right: 5px">0.0548</td>
-</tr>
-<tr class="even">
-<td style="padding-left: 5px; padding-right: 5px">&nbsp;</td>
-<td style="padding-left: 5px; padding-right: 5px">&nbsp;</td>
-<td style="padding-left: 5px; padding-right: 5px">(0.0291)</td>
-</tr>
-<tr class="odd">
-<td style="padding-left: 5px; padding-right: 5px">factor(race)806</td>
-<td style="padding-left: 5px; padding-right: 5px">&nbsp;</td>
-<td style="padding-left: 5px; padding-right: 5px">-0.0432</td>
-</tr>
-<tr class="even">
-<td style="padding-left: 5px; padding-right: 5px">&nbsp;</td>
-<td style="padding-left: 5px; padding-right: 5px">&nbsp;</td>
-<td style="padding-left: 5px; padding-right: 5px">(0.0520)</td>
-</tr>
-<tr class="odd">
-<td style="padding-left: 5px; padding-right: 5px">factor(race)807</td>
-<td style="padding-left: 5px; padding-right: 5px">&nbsp;</td>
-<td style="padding-left: 5px; padding-right: 5px">-0.0486</td>
-</tr>
-<tr class="even">
-<td style="padding-left: 5px; padding-right: 5px">&nbsp;</td>
-<td style="padding-left: 5px; padding-right: 5px">&nbsp;</td>
-<td style="padding-left: 5px; padding-right: 5px">(0.0574)</td>
-</tr>
-<tr class="odd">
-<td style="padding-left: 5px; padding-right: 5px">factor(race)808</td>
-<td style="padding-left: 5px; padding-right: 5px">&nbsp;</td>
-<td style="padding-left: 5px; padding-right: 5px">-0.0593</td>
-</tr>
-<tr class="even">
-<td style="padding-left: 5px; padding-right: 5px">&nbsp;</td>
-<td style="padding-left: 5px; padding-right: 5px">&nbsp;</td>
-<td style="padding-left: 5px; padding-right: 5px">(0.0473)</td>
-</tr>
-<tr class="odd">
-<td style="padding-left: 5px; padding-right: 5px">factor(race)809</td>
-<td style="padding-left: 5px; padding-right: 5px">&nbsp;</td>
-<td style="padding-left: 5px; padding-right: 5px">-0.1125<sup>***</sup></td>
-</tr>
-<tr class="even">
-<td style="padding-left: 5px; padding-right: 5px">&nbsp;</td>
-<td style="padding-left: 5px; padding-right: 5px">&nbsp;</td>
-<td style="padding-left: 5px; padding-right: 5px">(0.0271)</td>
-</tr>
-<tr class="odd">
-<td style="padding-left: 5px; padding-right: 5px">factor(race)810</td>
-<td style="padding-left: 5px; padding-right: 5px">&nbsp;</td>
-<td style="padding-left: 5px; padding-right: 5px">0.0169</td>
-</tr>
-<tr class="even">
-<td style="padding-left: 5px; padding-right: 5px">&nbsp;</td>
-<td style="padding-left: 5px; padding-right: 5px">&nbsp;</td>
-<td style="padding-left: 5px; padding-right: 5px">(0.0340)</td>
-</tr>
-<tr class="odd">
-<td style="padding-left: 5px; padding-right: 5px">factor(race)811</td>
-<td style="padding-left: 5px; padding-right: 5px">&nbsp;</td>
-<td style="padding-left: 5px; padding-right: 5px">-0.0932</td>
-</tr>
-<tr class="even">
-<td style="padding-left: 5px; padding-right: 5px">&nbsp;</td>
-<td style="padding-left: 5px; padding-right: 5px">&nbsp;</td>
-<td style="padding-left: 5px; padding-right: 5px">(0.1396)</td>
-</tr>
-<tr class="odd">
-<td style="padding-left: 5px; padding-right: 5px">factor(race)812</td>
-<td style="padding-left: 5px; padding-right: 5px">&nbsp;</td>
-<td style="padding-left: 5px; padding-right: 5px">-0.0474</td>
-</tr>
-<tr class="even">
-<td style="padding-left: 5px; padding-right: 5px">&nbsp;</td>
-<td style="padding-left: 5px; padding-right: 5px">&nbsp;</td>
-<td style="padding-left: 5px; padding-right: 5px">(0.0891)</td>
-</tr>
-<tr class="odd">
-<td style="padding-left: 5px; padding-right: 5px">factor(race)813</td>
-<td style="padding-left: 5px; padding-right: 5px">&nbsp;</td>
-<td style="padding-left: 5px; padding-right: 5px">-0.0445<sup>***</sup></td>
-</tr>
-<tr class="even">
-<td style="padding-left: 5px; padding-right: 5px">&nbsp;</td>
-<td style="padding-left: 5px; padding-right: 5px">&nbsp;</td>
-<td style="padding-left: 5px; padding-right: 5px">(0.0076)</td>
-</tr>
-<tr class="odd">
-<td style="padding-left: 5px; padding-right: 5px">factor(race)814</td>
-<td style="padding-left: 5px; padding-right: 5px">&nbsp;</td>
-<td style="padding-left: 5px; padding-right: 5px">-0.0316</td>
-</tr>
-<tr class="even">
-<td style="padding-left: 5px; padding-right: 5px">&nbsp;</td>
-<td style="padding-left: 5px; padding-right: 5px">&nbsp;</td>
-<td style="padding-left: 5px; padding-right: 5px">(0.1223)</td>
-</tr>
-<tr class="odd">
-<td style="padding-left: 5px; padding-right: 5px">factor(race)815</td>
-<td style="padding-left: 5px; padding-right: 5px">&nbsp;</td>
-<td style="padding-left: 5px; padding-right: 5px">-0.1124</td>
-</tr>
-<tr class="even">
-<td style="padding-left: 5px; padding-right: 5px">&nbsp;</td>
-<td style="padding-left: 5px; padding-right: 5px">&nbsp;</td>
-<td style="padding-left: 5px; padding-right: 5px">(0.0601)</td>
-</tr>
-<tr class="odd">
-<td style="padding-left: 5px; padding-right: 5px">factor(race)816</td>
-<td style="padding-left: 5px; padding-right: 5px">&nbsp;</td>
-<td style="padding-left: 5px; padding-right: 5px">0.2548</td>
-</tr>
-<tr class="even">
-<td style="padding-left: 5px; padding-right: 5px">&nbsp;</td>
-<td style="padding-left: 5px; padding-right: 5px">&nbsp;</td>
-<td style="padding-left: 5px; padding-right: 5px">(0.1910)</td>
-</tr>
-<tr class="odd">
-<td style="padding-left: 5px; padding-right: 5px">factor(race)817</td>
-<td style="padding-left: 5px; padding-right: 5px">&nbsp;</td>
-<td style="padding-left: 5px; padding-right: 5px">0.1245</td>
-</tr>
-<tr class="even">
-<td style="padding-left: 5px; padding-right: 5px">&nbsp;</td>
-<td style="padding-left: 5px; padding-right: 5px">&nbsp;</td>
-<td style="padding-left: 5px; padding-right: 5px">(0.1979)</td>
-</tr>
-<tr class="odd">
-<td style="padding-left: 5px; padding-right: 5px">factor(race)818</td>
-<td style="padding-left: 5px; padding-right: 5px">&nbsp;</td>
-<td style="padding-left: 5px; padding-right: 5px">0.8195<sup>***</sup></td>
-</tr>
-<tr class="even">
-<td style="padding-left: 5px; padding-right: 5px">&nbsp;</td>
-<td style="padding-left: 5px; padding-right: 5px">&nbsp;</td>
-<td style="padding-left: 5px; padding-right: 5px">(0.0074)</td>
-</tr>
-<tr class="odd">
-<td style="padding-left: 5px; padding-right: 5px">factor(race)819</td>
-<td style="padding-left: 5px; padding-right: 5px">&nbsp;</td>
-<td style="padding-left: 5px; padding-right: 5px">-0.0831</td>
-</tr>
-<tr class="even">
-<td style="padding-left: 5px; padding-right: 5px">&nbsp;</td>
-<td style="padding-left: 5px; padding-right: 5px">&nbsp;</td>
-<td style="padding-left: 5px; padding-right: 5px">(0.1869)</td>
-</tr>
-<tr class="odd">
-<td style="padding-left: 5px; padding-right: 5px">factor(race)820</td>
-<td style="padding-left: 5px; padding-right: 5px">&nbsp;</td>
-<td style="padding-left: 5px; padding-right: 5px">0.0325</td>
-</tr>
-<tr class="even">
-<td style="padding-left: 5px; padding-right: 5px">&nbsp;</td>
-<td style="padding-left: 5px; padding-right: 5px">&nbsp;</td>
-<td style="padding-left: 5px; padding-right: 5px">(0.0592)</td>
-</tr>
-<tr class="odd">
-<td style="padding-left: 5px; padding-right: 5px">factor(race)830</td>
-<td style="padding-left: 5px; padding-right: 5px">&nbsp;</td>
-<td style="padding-left: 5px; padding-right: 5px">-0.1871<sup>**</sup></td>
-</tr>
-<tr class="even">
-<td style="padding-left: 5px; padding-right: 5px">&nbsp;</td>
-<td style="padding-left: 5px; padding-right: 5px">&nbsp;</td>
-<td style="padding-left: 5px; padding-right: 5px">(0.0667)</td>
-</tr>
-<tr class="odd">
-<td style="padding-left: 5px; padding-right: 5px">is_female</td>
-<td style="padding-left: 5px; padding-right: 5px">&nbsp;</td>
-<td style="padding-left: 5px; padding-right: 5px">0.0240<sup>***</sup></td>
-</tr>
-<tr class="even">
-<td style="padding-left: 5px; padding-right: 5px">&nbsp;</td>
-<td style="padding-left: 5px; padding-right: 5px">&nbsp;</td>
-<td style="padding-left: 5px; padding-right: 5px">(0.0017)</td>
-</tr>
-<tr class="odd">
-<td style="padding-left: 5px; padding-right: 5px">income</td>
-<td style="padding-left: 5px; padding-right: 5px">&nbsp;</td>
-<td style="padding-left: 5px; padding-right: 5px">0.0093<sup>***</sup></td>
-</tr>
-<tr class="even">
-<td style="padding-left: 5px; padding-right: 5px">&nbsp;</td>
-<td style="padding-left: 5px; padding-right: 5px">&nbsp;</td>
-<td style="padding-left: 5px; padding-right: 5px">(0.0002)</td>
-</tr>
-<tr class="odd">
-<td style="padding-left: 5px; padding-right: 5px">education</td>
-<td style="padding-left: 5px; padding-right: 5px">&nbsp;</td>
-<td style="padding-left: 5px; padding-right: 5px">0.0895<sup>***</sup></td>
-</tr>
-<tr class="even">
-<td style="padding-left: 5px; padding-right: 5px">&nbsp;</td>
-<td style="padding-left: 5px; padding-right: 5px">&nbsp;</td>
-<td style="padding-left: 5px; padding-right: 5px">(0.0016)</td>
-</tr>
-<tr class="odd" style="border-top: 1px solid #000000;">
-<td style="padding-left: 5px; padding-right: 5px">R<sup>2</sup></td>
-<td style="padding-left: 5px; padding-right: 5px">0.0864</td>
-<td style="padding-left: 5px; padding-right: 5px">0.1707</td>
-</tr>
-<tr class="even">
-<td style="padding-left: 5px; padding-right: 5px">Adj. R<sup>2</sup></td>
-<td style="padding-left: 5px; padding-right: 5px">0.0864</td>
-<td style="padding-left: 5px; padding-right: 5px">0.1706</td>
-</tr>
-<tr class="odd">
-<td style="padding-left: 5px; padding-right: 5px">Num. obs.</td>
-<td style="padding-left: 5px; padding-right: 5px">1980510</td>
-<td style="padding-left: 5px; padding-right: 5px">1616508</td>
-</tr>
-<tr class="even">
-<td style="padding-left: 5px; padding-right: 5px">RMSE</td>
-<td style="padding-left: 5px; padding-right: 5px">0.4748</td>
-<td style="padding-left: 5px; padding-right: 5px">0.4515</td>
-</tr>
-<tr class="odd" style="border-bottom: 2px solid #000000;">
-<td style="padding-left: 5px; padding-right: 5px">N Clusters</td>
-<td style="padding-left: 5px; padding-right: 5px">49</td>
-<td style="padding-left: 5px; padding-right: 5px">49</td>
-</tr>
-</tbody><tfoot>
-<tr class="odd">
-<td colspan="3" style="font-size: 0.8em"><sup>***</sup>p &lt; 0.001; <sup>**</sup>p &lt; 0.01; <sup>*</sup>p &lt; 0.05</td>
-</tr>
-</tfoot>
-
-</table>
-</div>
-</div>
-</div>
-<div id="tabset-11-4">
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="10-slides_files/figure-revealjs/fig3-1.png" width="960"></p>
-</figure>
-</div>
-</div>
-</div>
-</div>
-<div id="tabset-11-5">
-<p><img data-src="https://pols1600.paultesta.org/labs/images/08_fig3.png"></p>
-</div>
-<div id="tabset-11-6">
-<ul>
-<li class="fragment">Why the differences?
-<ul>
-<li class="fragment">Differences in how we calculated the SEs for marginal effects</li>
-<li class="fragment">Differences in coding of age and other covariates</li>
-</ul></li>
-<li class="fragment">Same substantive pattern, but somewhat weaker…</li>
-</ul>
-</div>
-</div>
-</div>
 </section>
 <section id="references" class="slide level2">
 <h2>References</h2>
@@ -3449,7 +2968,7 @@ y_{ist} = \beta_0 + \overbrace{\alpha_s}^{\text{FE State}} + \underbrace{\gamma_
         }
           var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
           var mailtoRegex = new RegExp(/^mailto:/);
-            var filterRegex = new RegExp("https:\/\/josephessig-source\.github\.io\/pols1600_site\/");
+            var filterRegex = new RegExp('/' + window.location.host + '/');
           var isInternal = (href) => {
               return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
           }

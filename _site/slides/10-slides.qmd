@@ -1,6 +1,6 @@
 ---
 title: "POLS 1600"
-subtitle: "Quantifying uncertainty:<br> Confidence Intervals &<br>Hypothesis Tests"
+subtitle: "Uncertainty I: Confidence Intervals"
 date: last-modified
 date-format: "[Updated ]MMM D, YYYY"
 format: 
@@ -61,22 +61,23 @@ library(texreg)
 
 - Announcements
 - Topics:
-  - Sampling distributions and standard errors (15 minutes)
-  - Confidence intervals (15 minutes )
-  - Hypothesis testing (15 minutes)
-  - Quantifying uncertainty for regression (15 minutes)
-  - Lab 8 (Finally)
+  - Sampling distributions and standard errors 
+  - Confidence intervals 
+  - Hypothesis testing
+  - Quantifying uncertainty for regression 
 
 ## Announcements
 
-- Final lab this week.
+- Final regular lab this week (continuing with the ANES data)
 
-- Next week's lecture:
-  - Workshop/Review/special topics
-  - Ask questions in the survey
+- Since you all decided on your own analysis and example code provided, no posted solutions for labs 9 and 10. 
+
+- Next week's lectures:
+  - Finish discussion of Hypothesis Testing, Asymptotic vs. Permutation
+  - Course Review 
 
 - Next week's lab: 
-  - Work on draft (A3 leading into A4)
+  - Work on draft (A4) 
 
 ## Setup: Packages for today
 
@@ -92,8 +93,7 @@ the_packages <- c(
   "tidyverse", "lubridate", "forcats", "haven", "labelled",
   ## Extensions for ggplot
   "ggmap","ggrepel", "ggridges", "ggthemes", "ggpubr", 
-  "patchwork",
-  "GGally", "scales", "dagitty", "ggdag", "ggforce",
+  "patchwork","scales", "dagitty", "ggdag", "ggforce",
   # Data 
   "COVID19","maps","mapdata","qss","tidycensus", "dataverse", 
   # Analysis
@@ -105,76 +105,6 @@ the_packages <- c(
 lapply(the_packages, library, character.only = TRUE)
 
 ```
-
-
-
-<!-- ## Feedback -->
-
-<!-- ![](https://media1.tenor.com/m/wDzDbUBVbW4AAAAC/the-critic-it-stinks.gif) -->
-
-<!-- ```{r} -->
-<!-- #| label: feeback -->
-<!-- #| echo: false -->
-
-<!-- df_wk09 <- haven::read_spss("../files/data/class_surveys/wk09.sav") -->
-
-<!-- df_wk09 %>% -->
-<!--   mutate( -->
-<!--     optout =ifelse(is.na(optout),1, optout) -->
-<!--   ) %>%  -->
-<!--   filter(optout != 2) -> df_wk09 -->
-
-<!-- ``` -->
-
-
-<!-- ## What did we like {.smaller} -->
-
-<!-- ```{r} -->
-<!-- #| label: likes -->
-<!-- #| echo: false -->
-<!-- DT::datatable(df_wk09 %>%  -->
-<!--                 select(Likes), -->
-<!--                fillContainer = F, -->
-<!--               height = "90%", -->
-<!--               options = list( -->
-<!--                 pageLength = 6 -->
-<!--               ) -->
-<!--               ) -->
-<!-- ``` -->
-
-<!-- ## What did we dislike {.smaller} -->
-
-<!-- ```{r} -->
-<!-- #| label: dislikes -->
-<!-- #| echo: false -->
-
-
-<!-- DT::datatable(df_wk09 %>%  -->
-<!--                 select(Dislikes), -->
-<!--                fillContainer = F, -->
-<!--               height = "90%", -->
-<!--               options = list( -->
-<!--                 pageLength = 6 -->
-<!--               ) -->
-<!--               ) -->
-<!-- ``` -->
-
-<!-- ## What are we streaming {.smaller} -->
-
-<!-- ```{r} -->
-<!-- #| label: namesake -->
-<!-- #| echo: false -->
-
-<!-- DT::datatable(df_wk09 %>%  -->
-<!--                 select(Streaming), -->
-<!--                fillContainer = F, -->
-<!--               height = "90%", -->
-<!--               options = list( -->
-<!--                 pageLength = 6 -->
-<!--               ) -->
-<!--               ) -->
-<!-- ``` -->
-
 
 
 ## Goals:{.smaller}
@@ -249,7 +179,7 @@ lapply(the_packages, library, character.only = TRUE)
 #| label: sampledistcode
 
 # Load Data
-load(url("https://pols1600.paultesta.org/files/data/nes24.rda"))
+load(url("https://josephessig-source.github.io/pols1600_site/files/data/nes24.rda"))
 
 # ---- Population ----
 
@@ -1785,348 +1715,6 @@ Is this a causal relationship? What assumptions would we need to make a causal c
 
 ::::
 
-# {{<fa magnifiying-glass>}}Review: Lab 8 {.inverse}
-
-
-## Lab 8: Robust SEs and FEs {.smaller}
-
-:::: panel-tabset
-
-## Overview
-
-:::{.nonincremental}
-
--  Last week we explored the effects of:
-    - Cluster robust standard errors
-    - Fixed effects for state and year
-- Today, we examine the interaction models at the heart of the Grumbach and Hill's claims
-
-
-
-:::
-
-## {{<fa code>}} Code
-
-```{r}
-#| label: lab8
-
-# Load data
-
-load(url("https://pols1600.paultesta.org/files/data/cps_clean.rda"))
-
-# Recode data
-
-
-presidential_elections <- seq(1980, 2016, by = 4)
- 
-cps %>% 
-  mutate(
-    age_group = fct_relevel(age_group, "65+"),
-    SDR = ifelse(sdr == 1, "SDR","non-SDR"),
-    election_type = ifelse(year %in% presidential_elections, "General","Midterm"),
-  ) -> cps
-
-# ---- m1: Simple OLS regression ----
-m1 <- lm_robust(dv_voted ~ sdr, 
-                data = cps,
-                se_type = "classical",
-                try_cholesky = T)
-
-# ---- m2: Simple OLS with robust standard errors ----
-m2 <- lm_robust(dv_voted ~ sdr, 
-                data = cps,
-                se_type = "stata",
-                try_cholesky = T)
-
-# ---- m3: Two-way Fixed Effects for State and Year ----
-m3 <- lm_robust(dv_voted ~ sdr,
-                data = cps,
-                fixed_effects = ~ st + year,
-                se_type = "stata",
-                try_cholesky = T)
-
-# ---- m4: TWFE for State and Year and cluster robust SEs ----
-
-m4 <- lm_robust(dv_voted ~ sdr,
-                data = cps,
-                fixed_effects = ~ st + year,
-                se_type = "stata",
-                clusters = st,
-                try_cholesky = T)
-
-
-
-
-```
-
-## {{<fa table>}} FE Models
-
-```{r}
-#| label: tab1lab8
-#| echo: false
-
-htmlreg(l = list(m1,m2,m3, m4),
-        digits = 5,
-        include.ci = F,
-        ) %>% HTML() %>% browsable()
-```
-
-## {{<fa lightbulb>}}
-
-- Fixed effects drastically reduce the overall size of the effect of SDR
-
-- Robust standard errors change our estimates of uncertainty.
-- Adjusting for:
-  - Simple non-constant error variance $\to$ no difference
-  - Cluster $\to$ non-significant result
-- Generally prefer *conservative* models (e.g. `m4`)
-
-::::
-
-## SDR and Age {.smaller}
-
-Grumbach and Hill, however, are interested in a different question, namely, **whether the effects of same day registration vary by age.** 
-
-Formally, we we can describe these models using an [interaction model]{.blue}:
-
-
-$$
-y_{ist} = \beta_0 + \overbrace{\alpha_s}^{\text{FE State}} + \underbrace{\gamma_t}_{\text{FE Year}} + \overbrace{\beta_1sdr_{st}}^{\text{ME of SDR for 65+}} + \underbrace{\sum_{k = 18-14}^{k = 55-64}\beta_{k} sdr_{st}\times age_{ist}}_{\Delta \text{ in ME of SDR for Age }}  +\overbrace{X\beta}^{\text{Controls}}+\epsilon_{ist}
-$$
-Where the [marginal effect]{.blue} of SDR varies based on the age of the respondent.
-
-## Marginal Effects: General {.smaller}
-
-The marginal effect of any variable in a multiple regression as the partial derivative of the outcome with respect to that variable.
-
-$$
-\begin{aligned}
-y &= \beta_0 + \beta_1 x +\beta_2z \\
-\frac{\partial y}{\partial x} &= 0 + \beta_1*(1) + 0\\
-\frac{\partial y}{\partial x} &= \beta_1
-\end{aligned} 
-$$
-
-In multiple regression with no interactions between terms, the $\beta$s correspond to marginal effects.
-
-## Marginal Effects: Interactions {.smaller}
-
-
-
-Now consider a multiple regression with an interaction between two variables $x$ and $z$
-
-$$
-y = \beta_0 +\beta_1x +\beta_2 z + \beta_3 x*z
-$$
-
-Taking the partial derivative of y with respect to x $(\frac{\partial y}{\partial x})$, there are now two terms with $x$ in them:
-
-$$
-\begin{aligned}
-y &= \beta_0 +\beta_1x +\beta_2 z + \beta_3 x*z \\
-\frac{\partial y}{\partial x} &= 0 + \beta_1*(1) +0 + \beta_3*(1)*z\\
-\frac{\partial y}{\partial x} &= \beta_1 +\beta_3z
-\end{aligned} 
-$$
-
-And the marginal effect of $x$ now depends on value of $z$ at which we evaluate the model.
-
-## Marginal Effects: SEs for Interactions {.smaller}
-
-The [standard error](https://www.jstor.org/stable/25791835) of this marginal effect of $x$ (and $z$...) in this model:
-
-
-$$
-y = \beta_0 +\beta_1x +\beta_2 z + \beta_3 x*z
-$$
-
-is now a function of the variance and covariance of $\beta_1$ and $\beta_3$ and the value of the conditioning term $z$
-
-$$
-\text{Var}(\frac{\partial y}{\partial x}) = \text{Var}(\beta_1) + z^2\text{Var}(\beta_3) + 2\times z \text{Cov}(\beta_1,\beta_3)
-$$
-
-## Mariginal Effects: Grumbach and Hill {.smaller} 
-
-In G&H's models, the ME of SDR varies with age.
-
-$$
-y_{ist} = \beta_0 + \overbrace{\alpha_s}^{\text{FE State}} + \underbrace{\gamma_t}_{\text{FE Year}} + \overbrace{\beta_1sdr_{st}}^{\text{ME of SDR for 65+}} + \underbrace{\sum_{k = 18-14}^{k = 55-64}\beta_{k} sdr_{st}\times age_{ist}}_{\Delta \text{ in ME of SDR for Age }}  +\overbrace{X\beta}^{\text{Controls}}+\epsilon_{ist}
-$$
-
-Since 65+ is the [excluded/reference category]{.blue}:
-
-$$
-\text{Marginal Effect of SDR for 65+} = \beta_1
-$$
-
-For 18-24 year olds the quantity of interest is the sum of:
-
-$$
-\text{Marginal Effect of SDR for 18-24} = \beta_1 + \beta_{sdr \times 18-24}
-$$
-
-
-The SEs of the Marginal effects is function of the variances and covariances of both $\beta_1$ and $\beta_{sdr\times age}$
-
-
-## Lab 8: Robust SEs and FEs {.smaller}
-
-:::: panel-tabset
-
-## Overview
-
-Let's estimate the interaction models used by G&H and recreate figure 3 calculating the correct standard errrors for the interactions
-
-## {{<fa code>}}
-
-```{r}
-#| label: lab8int
-
-m1gh <- lm_robust(dv_voted ~ sdr*age_group, 
-                  data = cps,
-                  fixed_effects = ~ st + year,
-                  se_type = "stata",
-                  clusters = st,
-                  try_cholesky = T
-                  )
-
-
-m2gh <- lm_robust(dv_voted ~ sdr*age_group +
-                    factor(race) + is_female +
-                    income + education, 
-                  data = cps,
-                  fixed_effects = ~ st + year,
-                  se_type = "stata",
-                  clusters = st,
-                  try_cholesky = T
-                  )
-
-
-# ---- Function to calculate marginal effect and SE of interactions ----
-
-me_fn <- function(mod, cohort, ci=0.95){
-  # Confidence Level for CI
-  alpha <- 1-ci
-  z <- qnorm(1-alpha/2)
-  
-  # Age (Always one for indicator of specific cohort)
-  age <- 1
-  
-  # Variance Covariance Matrix from Model
-  cov <- vcov(mod)
-  
-  # coefficient for SDR (Marginal Effect for reference category: 65+)
-  b1 <- coef(mod)["sdr"]
-  
-  # If age is one of the interactions
-  if(cohort %in% c("18-24","25-34","35-44","45-54","55-64")){
-    # get the name of the specific interaction
-    the_int <- paste("sdr:age_group",cohort,sep="")
-    # the coefficient on the interaction
-    b2 <- coef(mod)[the_int]
-    # Calculate marginal effect for age cohort
-    me <- b1 + b2*age
-    me_se <- sqrt(cov["sdr","sdr"] + age^2*cov[the_int,the_int] + 2*age*cov["sdr",the_int])
-    ll <- me - z*me_se
-    ul <- me + z*me_se
-  }
-  if(!cohort %in% c("18-24","25-34","35-44","45-54","55-64")){
-    me <- b1 
-    me_se <- mod$std.error["sdr"]
-    ll <- mod$conf.low["sdr"]
-    ul <- mod$conf.high["sdr"]
-  }
-
-  # scale results to be percentage points
-  res <- tibble(
-    Age = cohort,
-    Effect = me*100,
-    SE = me_se*100,
-    ll = ll*100,
-    ul = ul*100
-  )
-  return(res)
-
-
-}
-
-
-## List of age cohorts
-the_age_groups <- levels(cps$age_group)
-
-## Model 1: No controls
-## Estimate Marginal effect for each age cohort
-the_age_groups %>% 
-  purrr::map_df(~me_fn(m1gh, cohort=.)) %>% 
-  # Add labels for plotting
-  mutate(
-    Age = factor(Age),
-    Model = "No controls"
-  ) -> fig3_no_controls
-
-## Model 3: Controls for Education, Income, Race,and Sex 
-## Estimate Marginal effect for each age cohort
-the_age_groups %>% 
-  purrr::map_df(~me_fn(m2gh, cohort=.)) %>% 
-  # Add labels for plotting
-  mutate(
-    Age = factor(Age),
-    Model = "With controls"
-  ) -> fig3_controls
-  
-## Combine estimates into data frame for plotting
-fig3_df <- fig3_no_controls %>% bind_rows(fig3_controls)
-
-## Recreate Figure 3
-
-
-fig3_df %>% 
-  ggplot(aes(Age, Effect))+
-  geom_point()+
-  geom_linerange(aes(ymin = ll, ymax =ul))+
-  geom_hline(yintercept = 0, linetype = "dashed")+
-  facet_wrap(~Model)+
-  theme_minimal() -> fig3
-
-```
-
-## {{<fa table>}}
-
-```{r}
-#| label: fig3_tab
-#| echo: false
-
-htmlreg(list(m1gh, m2gh), 
-        digits = 4,
-        include.ci = F) %>% HTML() %>% browsable()
-```
-
-
-## {{<fa chart-line>}} Figure 3
-
-
-```{r}
-#| label: fig3
-#| echo: false
-
-fig3
-
-```
-
-## {{<fa chart-line>}} G&H
-
-![](https://pols1600.paultesta.org/labs/images/08_fig3.png)
-
-## {{<fa lightbulb>}}
-
-- Why the differences?
-  - Differences in how we calculated the SEs for marginal effects
-  - Differences in coding of age and other covariates
-
-- Same substantive pattern, but somewhat weaker...
-
-::::
 
 
 
