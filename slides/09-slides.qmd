@@ -1328,7 +1328,7 @@ fig_clt_approx
 
 - Lab 8 got into the weeds on standard errors, asking you to use `lm_robust()` to calculate [robust clustered standard errors]{.blue}
 
-- A [standard error]{.blue} is simply the [standard deviation]{.blue} of a theoretical [sampling distribution]{.blue}
+- A [standard error]{.blue} is simply an estimate of the [standard deviation]{.blue} of a theoretical [sampling distribution]{.blue}
 
 - A [sampling distribution]{.blue} describes the range of estimates [we could have seen]{.blue}
 
@@ -1355,6 +1355,17 @@ y = X\beta + \hat{\epsilon}\\
 \end{aligned}
 $$
 
+## Variance of Regression Coefficients: Intiution
+
+- Last time,  discussed sampling distributions and how we can approximate them with a normal distribution (CLT). 
+
+- For a regression coefficient, centered around $\beta$ and we need to estimate a $\sigma^2$ (variance).
+
+- To do this, we use the residuals. 
+
+- You do not need to understand all the matrix algebra. 
+
+
 ## Variance of Regression Coefficients depends on the errors{.smaller}
 
 $$
@@ -1373,7 +1384,7 @@ $$
 \begin{aligned}
 E[\text{c}] &= \text{c} \\
 Var[\text{c}] &= 0\\
-Var[X] &= Var[X^2] - Var[X]^2
+Var[X] &= E[X^2] - E[X]^2
 \end{aligned}
 $$
 
@@ -1601,9 +1612,21 @@ ggarrange(p_constant, p_nonconstant)
 
 ```
 
+
+## Variance of Regression Coefficients: Robust SE
+
+- So far, we assumed that variance is the same for every observation
+
+- This let us estimate uncertainty using a single number: $\sigma^2$
+
+- But in many real datasets, some observations are much noisier than others
+
+- We need a way to estimate variance that allows variance to differ across observations
+
+
 ## Robust Standard Errors {.smaller}
 
-Robust standard errors attempt to estimat $\sigma_i^2$ using the residuals from the model $\hat{\epsilon_i}$ and [additional adjustments](https://declaredesign.org/r/estimatr/articles/mathematical-notes.html) to yield [robust standard errors]{.blue} that are [consistent]{.blue}, even when there is heteroskedasiticity. 
+Robust standard errors attempt to estimate $\sigma_i^2$ using the residuals from the model $\hat{\epsilon_i}$ and [additional adjustments](https://declaredesign.org/r/estimatr/articles/mathematical-notes.html) to yield [robust standard errors]{.blue} that are [consistent]{.blue}, even when there is heteroskedasiticity. 
 
 $$
 Var[\hat{\beta}]= (X'X)^{-1}X'
@@ -1614,7 +1637,7 @@ Var[\hat{\beta}]= (X'X)^{-1}X'
 \vdots & \vdots  & \vdots &\ddots & \vdots\\
 0 & 0 & 0 & \cdots & \hat{\epsilon}_n^2 \\
 \end{bmatrix}
-X(X'X)^{-1} = 
+X(X'X)^{-1}  
 $$
 
 Clustered standard errors go a step further, summing up the residuals within clusters (groups) in the data. 
@@ -1628,5 +1651,16 @@ Clustered standard errors go a step further, summing up the residuals within clu
 - [The Central Limit Theorem]{.blue} tells us that distribution of sample means of a given sample size converges in distribution to a Normal probability distribution
 
 - [Standard Errors]{.blue} describe the [width of a sampling distribution]{.blue} and allow us to assess the [statistical significance]{.blue} of regression estimates
+
+## Next time
+
+- We will (finally) discuss how to use our coefficient estimates and standard errors to perform **statistical inference**
+
+- We will cover **confidence intervals** and how they are related to **hypothesis tests**
+
+- Lastly, discuss how these **asymptotic** approaches differ from other approaches to inference, such as simulation. 
+
+*Asymptotic* refers to the use of assumptions about our estimator/ its sampling distribution as *n* goes to infinity (recall the Central Limit Theorem)
+
 
 ## References
