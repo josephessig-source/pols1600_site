@@ -1,6 +1,6 @@
 ---
 title: "POLS 1600"
-subtitle: "Presentations"
+subtitle: "Statistical Inference<br>and Course Review"
 date: last-modified
 date-format: "[Updated ]MMM D, YYYY"
 format: 
@@ -64,9 +64,9 @@ library(texreg)
 ## Class Plan
 
 - Announcements
-- Presentations
-- Workshop / Review
-  - Predicted values from linear models
+- Feedback
+- Course Review
+- Statistical Inference
 - Final Projects
 
 
@@ -77,15 +77,6 @@ library(texreg)
 - [Assignment 4](https://pols1600.paultesta.org/assignments/a3) now due April 25.
 - April 29, Final Workshop 
 - May 1   Class Presentations
-
-
-## A Warning on P-Values and Significance {.smaller}
-
-> "A p-value, or statistical significance, does not measure the size of an effect or the importance of a result." — *American Statistical Association*
-
-- **Statistical Significance $\neq$ Practical Significance:** A massive sample size can make a tiny, meaningless effect statistically significant ($p < 0.05$).
-- **The $0.05$ threshold is arbitrary:** There is no magic difference between $p = 0.049$ and $p = 0.051$. Treat them as a continuous measure of evidence.
-- **Look at the Confidence Interval:** The standard error of your estimate and your CIs are often more informative than $p$-values because they show you the *magnitude* of the effect and the precision of the estimate.
 
 
 ## Setup: Packages for today
@@ -116,46 +107,9 @@ lapply(the_packages, library, character.only = TRUE)
 
 ```
 
-# {{< fa magnifying-glass>}} Presentations {.inverse}
+# {{< fa magnifying-glass>}} Course Review {.inverse}
 
-## Presentations {.smaller}
-
-- Motivation
-
-- Research Question
-
-- Theory
-
-- Expectations
-
-- Data
-
-  - Summary
-
-  - Descriptive Table and/or Figure (Optional)
-
-- Design
-
-- Results
-
-  - Summary
-
-  - Table (Optional)
-
-  - Figure (Optional)
-
-- Conclusion
-
--   Appendices (Extra Slides Optional)
-
-## Template
-
-Let's open up the [template](https://pols1600.paultesta.org/assignments/a5) and explore.
-
-
-# {{< fa magnifying-glass>}} Review {.inverse}
-
-## Three Modes of Inference
+## Types of inference
 
 - Descriptive
 
@@ -317,7 +271,7 @@ We can think of a confidence interval as a [range of hypotheses we would fail to
 #| label: pval_ci
 
 # Load Data
-load(url("https://josephessig-source.github.io/pols1600_site/files/data/nes24.rda"))
+load(url("https://pols1600.paultesta.org/files/data/nes24.rda"))
 
 # Fit Model
 m1 <- lm_robust(dv_participation ~   education + income, df,
