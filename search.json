@@ -4764,7 +4764,7 @@
     "href": "labs/10-lab.html#load-packages",
     "title": "Lab 10 - Exploring data in the 2024 National Elections Study Continued",
     "section": "1.1 Load Packages",
-    "text": "1.1 Load Packages\nPlease load the libraries you will use in your analysis.\n\n# Libraries"
+    "text": "1.1 Load Packages\nPlease load the libraries you will use in your analysis. (Take a look at the previous lab if you don’t know which packages you need).\n\n# Libraries"
   },
   {
     "objectID": "labs/10-lab.html#set-your-working-directory-in-r-studio",
@@ -4827,7 +4827,7 @@
     "href": "labs/10-lab.html#visualize-predicted-values",
     "title": "Lab 10 - Exploring data in the 2024 National Elections Study Continued",
     "section": "5.2 Visualize predicted values",
-    "text": "5.2 Visualize predicted values\nSimilarly here is some code to produce predicted values for m2vc and m3vc. The basic steps are:\n\nCreate a prediction data frame varying the values of some predictors from a model, while holding others constant using expand_grid()\nProduce predicted values with confidence intervals from your regression model using the predict() function\nBind those predictions and CIs to the orginal prediction dataframe using cbind()\nProduce a figure using ggplot()\n\n\n# # Predictors for m2\n# pred_dfm2 &lt;- expand_grid(\n#   age = seq(min(df$age, na.rm =T), max(df$age, na.rm = T)),\n#   race_5cat = sort(unique(df$race_5cat))\n# )\n# \n# # Predictions with confidence intervals\n# pred_dfm2 &lt;- cbind(\n#   pred_dfm2,\n#   predict(m2, newdata = pred_dfm2, interval = \"confidence\")$fit\n# )\n# \n# # Plot predictions from m2\n# \n# fig_m2 &lt;- pred_dfm2 %&gt;% \n#   ggplot(aes(age, fit, col = race_5cat))+\n#   geom_ribbon(aes(ymin = lwr, ymax = upr, \n#     fill = race_5cat\n#     ),\n#     alpha = .5)+\n#   geom_line()+\n#   facet_wrap( ~ race_5cat)+\n#   theme_minimal()+\n#   guides(\n#     col = \"none\",\n#     fill = \"none\"\n#   )+\n#   labs(\n#     y = \"Predicted Vote Choice\",\n#     title = \"Support for Trump by Age and Race\"\n#   )\n# \n# # Display figure\n# fig_m2\n# \n# # Predictors for m3\n# pred_dfm3 &lt;- expand_grid(\n#   age = seq(min(df$age, na.rm =T), max(df$age, na.rm = T)),\n#   race_5cat = sort(unique(df$race_5cat)),\n#   partyid = mean(df$partyid, na.rm=T)\n# )\n# \n# # Predictions with confidence intervals\n# pred_dfm3 &lt;- cbind(\n#   pred_dfm3,\n#   predict(m3, newdata = pred_dfm3, interval = \"confidence\")$fit\n# )\n# \n# # Plot predictions from m2\n# \n# fig_m3 &lt;- pred_dfm3 %&gt;% \n#   ggplot(aes(age, fit, col = race_5cat))+\n#   geom_ribbon(aes(ymin = lwr, ymax = upr, \n#     fill = race_5cat\n#     ),\n#     alpha = .5)+\n#   geom_line()+\n#   facet_wrap( ~ race_5cat)+\n#   theme_minimal()+\n#   guides(\n#     col = \"none\",\n#     fill = \"none\"\n#   )+\n#   labs(\n#     y = \"Predicted Vote Choice\",\n#     title = \"Support for Trump by Age and Race Controlling for Partisanship\"\n#   )\n# \n# fig_m3\n\nPlease produce at least one figure showing predicted values from at least one of your models\n\n# Create a prediction data frame\n\n# Bind predicted values to prediction data frame\n\n# Produce Figure\n\n# Dispaly figure"
+    "text": "5.2 Visualize predicted values\nSimilarly here is some code to produce predicted values for m2vc and m3vc. The basic steps are:\n\nCreate a prediction data frame varying the values of some predictors from a model, while holding others constant using expand_grid()\nProduce predicted values with confidence intervals from your regression model using the predict() function\nBind those predictions and CIs to the orginal prediction dataframe using cbind()\nProduce a figure using ggplot()\n\n\n# # Predictors for m2\n# pred_dfm2 &lt;- expand_grid(\n#   age = seq(min(df$age, na.rm =T), max(df$age, na.rm = T)),\n#   race_5cat = sort(unique(df$race_5cat))\n# )\n# \n# # Predictions with confidence intervals\n# pred_dfm2 &lt;- cbind(\n#   pred_dfm2,\n#   predict(m2, newdata = pred_dfm2, interval = \"confidence\")$fit\n# )\n# \n# # Plot predictions from m2\n# \n# fig_m2 &lt;- pred_dfm2 %&gt;% \n#   ggplot(aes(age, fit, col = race_5cat))+\n#   geom_ribbon(aes(ymin = lwr, ymax = upr, \n#     fill = race_5cat\n#     ),\n#     alpha = .5)+\n#   geom_line()+\n#   facet_wrap( ~ race_5cat)+\n#   theme_minimal()+\n#   guides(\n#     col = \"none\",\n#     fill = \"none\"\n#   )+\n#   labs(\n#     y = \"Predicted Vote Choice\",\n#     title = \"Support for Trump by Age and Race\"\n#   )\n# \n# # Display figure\n# fig_m2\n# \n# # Predictors for m3\n# pred_dfm3 &lt;- expand_grid(\n#   age = seq(min(df$age, na.rm =T), max(df$age, na.rm = T)),\n#   race_5cat = sort(unique(df$race_5cat)),\n#   partyid = mean(df$partyid, na.rm=T)\n# )\n# \n# # Predictions with confidence intervals\n# pred_dfm3 &lt;- cbind(\n#   pred_dfm3,\n#   predict(m3, newdata = pred_dfm3, interval = \"confidence\")$fit\n# )\n# \n# # Plot predictions from m2\n# \n# fig_m3 &lt;- pred_dfm3 %&gt;% \n#   ggplot(aes(age, fit, col = race_5cat))+\n#   geom_ribbon(aes(ymin = lwr, ymax = upr, \n#     fill = race_5cat\n#     ),\n#     alpha = .5)+\n#   geom_line()+\n#   facet_wrap( ~ race_5cat)+\n#   theme_minimal()+\n#   guides(\n#     col = \"none\",\n#     fill = \"none\"\n#   )+\n#   labs(\n#     y = \"Predicted Vote Choice\",\n#     title = \"Support for Trump by Age and Race Controlling for Partisanship\"\n#   )\n# \n# fig_m3\n\nPlease produce at least one figure showing predicted values from at least one of your models\n\n# Create a prediction data frame\n\n# Bind predicted values to prediction data frame\n\n# Produce Figure\n\n# Display figure"
   },
   {
     "objectID": "labs/10-lab.html#interperet-results",
@@ -6125,7 +6125,7 @@
     "href": "index.html",
     "title": "POLS 1600",
     "section": "",
-    "text": "This course provides a foundation in the principles and practice of quantitative social science, with a focus on building tools to make descriptive, causal, and predictive inferences.\n\nLogistics\nWe meet three times a week from 12-12:50pm with lectures on Monday and Wednesday and lab sessions on Friday. You will need a laptop that can run R and Rstudio for both lectures and labs.\n\n\n\n\nLecture\nMondays and Wednesdays, 12-12:50pm\n\n\n\n\n\nLabs\nFridays, 12-12:50pm\n\n\n\n\n\nAssignments\nDue on Canvas\n\n\n\n\n\nLocation\nAndrews House 310\n\n\n\n\n\nZoom\n\n\n\n\n\nOffice Hours\nJoe | 2-4pm, Thursdays  Stephen Roberts Hall, Rm. 123 (Taubman Center)  [Sara Ansari, TA | 10 am to 11 am Wednesdays]  Room 325, 111 Thayer St\n\n\n\n\n\nSchedule\n\n\n\n\n\n\n\n\n\n\n\nLecture\nLabs\nSolutions\nAssignments\n\n\n\n\nWeek 0\n\n\n\n\n\n\nIntroductions\n\n\n\n\n\n\n\n\n\n\nWeek 1\n\n\n\n\n\n\nData & Measurement\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWeek 2\n\n\n\n\n\n\nData Visualization\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWeek 3\n\n\n\n\n\n\nCausation -- Experiments\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWeek 4\n\n\n\n\n\n\n\n\n\n\nCausation -- Observational Studies\n\n\n\n\n\n\n\n\n\n\nWeek 5\n\n\n\n\n\n\nBivariate Regression\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWeek 6\n\n\n\n\n\n\n\n\n\n\nMultiple Regression\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWeek 7\n\n\n\n\n\n\nRegression Extensions\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWeek 8\n\n\n\n\n\n\n\n\n\n\nProbability - Random Variables & Distributions\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWeek 9\n\n\n\n\n\n\nProbability - Limit Theorems\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWeek 10\n\n\n\n\n\n\n\n\n\n\nInference -- Confidence Intervals\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWeek 11\n\n\n\n\n\n\n\n\n\n\nInference -- Hypothesis Testing\n\n\n\n\n\n\nWeek 12\n\n\n\n\n\n\nWorkshop\n\n\n\n\n\n\nWeek 13\n\n\n\n\n\n\nPresentations\n\n\n\n\n\n\n\n\n\nInstructors\n\n\nJoseph Essig\nPostdoctoral Research Associate\nTaubman Center for American Politics and Policy\nBrown University &lt;joseph_essig@brown.edu&gt;\n\n\nSara Ansari\nTeaching Assistant\nDepartment of Political Science\nBrown University &lt;sara_ansari@brown.edu&gt;"
+    "text": "This course provides a foundation in the principles and practice of quantitative social science, with a focus on building tools to make descriptive, causal, and predictive inferences.\n\nLogistics\nWe meet three times a week from 12-12:50pm with lectures on Monday and Wednesday and lab sessions on Friday. You will need a laptop that can run R and Rstudio for both lectures and labs.\n\n\n\n\nLecture\nMondays and Wednesdays, 12-12:50pm\n\n\n\n\n\nLabs\nFridays, 12-12:50pm\n\n\n\n\n\nAssignments\nDue on Canvas\n\n\n\n\n\nLocation\nAndrews House 310\n\n\n\n\n\nZoom\n\n\n\n\n\nOffice Hours\nJoe | 2-4pm, Thursdays  Stephen Roberts Hall, Rm. 123 (Taubman Center)  [Sara Ansari, TA | 10 am to 11 am Wednesdays]  Room 325, 111 Thayer St\n\n\n\n\n\nSchedule\n\n\n\n\n\n\n\n\n\n\n\nLecture\nLabs\nSolutions\nAssignments\n\n\n\n\nWeek 0\n\n\n\n\n\n\nIntroductions\n\n\n\n\n\n\n\n\n\n\nWeek 1\n\n\n\n\n\n\nData & Measurement\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWeek 2\n\n\n\n\n\n\nData Visualization\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWeek 3\n\n\n\n\n\n\nCausation -- Experiments\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWeek 4\n\n\n\n\n\n\n\n\n\n\nCausation -- Observational Studies\n\n\n\n\n\n\n\n\n\n\nWeek 5\n\n\n\n\n\n\nBivariate Regression\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWeek 6\n\n\n\n\n\n\n\n\n\n\nMultiple Regression\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWeek 7\n\n\n\n\n\n\nRegression Extensions\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWeek 8\n\n\n\n\n\n\n\n\n\n\nProbability - Random Variables & Distributions\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWeek 9\n\n\n\n\n\n\nProbability - Limit Theorems\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWeek 10\n\n\n\n\n\n\n\n\n\n\nInference -- Confidence Intervals\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWeek 11\n\n\n\n\n\n\n\n\n\n\nInference -- Hypothesis Testing\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWeek 12\n\n\n\n\n\n\nWorkshop\n\n\n\n\n\n\nWeek 13\n\n\n\n\n\n\nPresentations\n\n\n\n\n\n\n\n\n\nInstructors\n\n\nJoseph Essig\nPostdoctoral Research Associate\nTaubman Center for American Politics and Policy\nBrown University &lt;joseph_essig@brown.edu&gt;\n\n\nSara Ansari\nTeaching Assistant\nDepartment of Political Science\nBrown University &lt;sara_ansari@brown.edu&gt;"
   },
   {
     "objectID": "labs/01-lab.html",
@@ -10374,7 +10374,7 @@
     "href": "slides/11-slides.html#class-plan",
     "title": "POLS 1600",
     "section": "Class Plan",
-    "text": "Class Plan\n\nAnnouncements\nFeedback\nCourse Review\nStatistical Inference\nFinal Projects"
+    "text": "Class Plan\n\nAnnouncements\nStatistical Inference/Hypothesis Testing Continued\nDiscussion of Final Projects and Friday’s Lab"
   },
   {
     "objectID": "slides/11-slides.html#annoucements",
@@ -10409,7 +10409,7 @@
     "href": "slides/11-slides.html#data-wrangling",
     "title": "POLS 1600",
     "section": "Data Wrangling",
-    "text": "Data Wrangling\n\nThe process of transforming data into a useable format\n\nYou should know how to:\n\nLoad, look at,and transform data into R\nGet a HLO of the raw data:\n\nUnit of observation\nDimensions of the data\nQuickly summarize the distributions and values of variables\n\nRecode the data to:\n\nReplace values as NAs\nCreate categories, indicators (0,1), and factors\nTransform predictors (e.g. standardizing predictors)\n\nReshape the data\n\nPivoting columns and rows\nJoining data sets together.\n\nAggregate the data into summaries"
+    "text": "Data Wrangling\n\nThe process of transforming data into a useable format\n\nYou should know how to:\n\nLoad, look at,and transform data into R\nGet a HLO of the raw data:\n\nUnit of observation\nDimensions of the data\nQuickly summarize the distributions and values of variables\n\nRecode data to:\n\nReplace values as NAs\nCreate categories, indicators (0,1), and factors\nTransform predictors (e.g. standardizing predictors)\n\nReshape the data\n\nPivoting columns and rows\nJoining data sets together.\n\nAggregate the data into summaries"
   },
   {
     "objectID": "slides/11-slides.html#data-visualization",
@@ -10423,14 +10423,14 @@
     "href": "slides/11-slides.html#causal-inference",
     "title": "POLS 1600",
     "section": "Causal Inference",
-    "text": "Causal Inference\n\nCausal Inference requires counterfactual comparisons\n\nYou should know:\n\nPotential outcomes and DAGs\nThe fundamental problem of causal inference\nBias caused by:\n\nConfounding (Coffee and Cancer)\nColliding (Dating Jerks)\n\nCasual Identification in:\n\nExperimental designs\nObservational designs"
+    "text": "Causal Inference\n\nCausal Inference requires counterfactual comparisons\n\nYou should know:\n\nPotential outcomes and DAGs\nThe fundamental problem of causal inference\nBias caused by:\n\nConfounding (Coffee and Cancer)\nColliding (Dating Jerks)\n\nCasual Identification in:\n\nExperimental designs\nObservational designs\n\nThe Average Treatment Effect (ATE)"
   },
   {
     "objectID": "slides/11-slides.html#prediction-with-linear-models",
     "href": "slides/11-slides.html#prediction-with-linear-models",
     "title": "POLS 1600",
     "section": "Prediction with Linear Models",
-    "text": "Prediction with Linear Models\n\nLinear regression provides a linear estimate of the conditional expectation function\n\nYou should know:\n\nHow linear regression works\nWhat it means to control for predictors in a multiple regression\nWhen and why we should control for predictors.\nHow to translate substantive claims into empirical expectations for our models\nHow to estimate and interpret these models using tables and figures\nHow to quantify uncertainty about these estimates using confidence intervals and hypothesis tests."
+    "text": "Prediction with Linear Models\n\nLinear regression provides a linear estimate of the conditional expectation function\n\nYou should know:\n\nHow linear regression works\nWhat it means to control for predictors in a multiple regression\nHow to translate substantive claims into empirical expectations for our models\nHow to estimate and interpret these models using tables and figures\nHow to quantify uncertainty about these estimates using confidence intervals and hypothesis tests."
   },
   {
     "objectID": "slides/11-slides.html#probability",
@@ -10444,28 +10444,28 @@
     "href": "slides/11-slides.html#sampling-distributions-and-standard-errors",
     "title": "POLS 1600",
     "section": "Sampling Distributions and Standard Errors",
-    "text": "Sampling Distributions and Standard Errors\n\nA sampling distribution is a theoretical probability distribution of estimates obtained from taking repeated samples of size \\(n\\) from some population\n\nA distribution of what we could have seen\n\nA standard error is simply the standard deviation (\\(\\sigma\\)) of the sampling distribution\n\nA measure of how much our estimate could have varied.\n\nLaw of Large Numbers: As \\(N \\to \\infty\\) \\(\\bar{x} \\to \\mu\\)\nCentral Limit Theorem: As \\(N \\to \\infty\\) \\(\\bar{x} \\sim \\mathcal{N}(\\mu, \\sigma^2)\\)"
+    "text": "Sampling Distributions and Standard Errors\n\nA sampling distribution is a theoretical probability distribution of estimates obtained from taking repeated samples of size \\(n\\) from some population\n\nA distribution of what we could have seen\n\nA standard error is simply the standard deviation (\\(\\sigma\\)) of the sampling distribution of an estimator.\n\nA measure of how much our estimate could have varied.\n\nLaw of Large Numbers: As \\(N \\to \\infty\\) \\(\\bar{x} \\to \\mu\\)\nCentral Limit Theorem: As \\(N \\to \\infty\\) \\(\\bar{x} \\sim \\mathcal{N}(\\mu, \\frac{\\sigma^2}{n})\\)"
   },
   {
     "objectID": "slides/11-slides.html#confidence-intervals",
     "href": "slides/11-slides.html#confidence-intervals",
     "title": "POLS 1600",
     "section": "Confidence Intervals",
-    "text": "Confidence Intervals\n\nConfidence intervals provide a range of plausible values for our estimate\n\n\nThree components:\n\nPoint Estimate (i.e. a mean, or coefficient)\nConfidence Level (Often 95 percent by convention)\nMargin of Error (+/- some range (typically 2*SD for 95 percent CI))\n\nConfidence is about the interval\n\n95 percent of the intervals construct in this manner would contain the truth."
+    "text": "Confidence Intervals\n\nConfidence intervals provide a range of plausible values for our estimate\n\n\nThree components:\n\nPoint Estimate (i.e. a mean, or coefficient)\nConfidence Level (Often 95 percent by convention)\nMargin of Error (+/- some range (typically 1.96*SE for 95 percent CI))\n\nConfidence is about the interval\n\n95 percent of the intervals constructed in this manner would contain the true parameter in repeated samples."
   },
   {
     "objectID": "slides/11-slides.html#hypothesis-testing",
     "href": "slides/11-slides.html#hypothesis-testing",
     "title": "POLS 1600",
     "section": "Hypothesis Testing",
-    "text": "Hypothesis Testing\n\nA hypothesis test quantifies how likely it is that we would observe what we did (our test statistic), if some claim about the world were true (our hypothesis, typically a null ).\nIf our claim were true, then under this null hypothesis, our test statistic would have a distribution centered around the truth.\nA p-value which describes the probability of observing a test statistic as extreme or more extreme in a world where our null hypothesis was true\n\nIf our p-value is small (\\(p &lt; 0.05\\)), we reject the null hypothesis\nIf our p-value is large (\\(p &gt; 0.05\\)), we fail to reject the null, or retain the null hypothesis"
+    "text": "Hypothesis Testing\n\nA hypothesis test quantifies how likely it is that we would observe what we did (our test statistic), if some claim about the world were true (our hypothesis, typically a null ).\nIf our claim were true, then under this null hypothesis, our test statistic would have a distribution centered around the null value.\nA p-value which describes the probability of observing a test statistic as extreme or more extreme in a world where our null hypothesis was true\n\nIf our p-value is small (\\(p &lt; 0.05\\)), we reject the null hypothesis\nIf our p-value is large (\\(p &gt; 0.05\\)), we fail to reject the null, or retain the null hypothesis"
   },
   {
     "objectID": "slides/11-slides.html#section",
     "href": "slides/11-slides.html#section",
     "title": "POLS 1600",
     "section": "",
-    "text": "Relationship between CIs and Hypothsis Testing\n\nConcept Code Table Figure\n\n\nWe can think of a confidence interval as a range of hypotheses we would fail to reject with \\(p &lt; \\alpha\\)\n\n\n\n# Load Data\nload(url(\"https://pols1600.paultesta.org/files/data/nes24.rda\"))\n\n# Fit Model\nm1 &lt;- lm_robust(dv_participation ~   education + income, df,\n                se = \"classical\")\n\n# Range of hypotheses for education\npval_ci_df &lt;- tibble(\n  # Hypothesized Betas for Education\n  Hypothesis = seq(0, .32, length.out = 100),\n  # Test Statistics\n  Statistic = (m1$coefficients[\"education\"] - Hypothesis) /\n  m1$std.error[\"education\"],\n  # P-value for two sided test\n  `p-value` = 2*pt(abs(Statistic), df = m1$df,lower.tail = F)\n)\n\nfig_pval_ci &lt;- pval_ci_df %&gt;% \n  ggplot(aes(Hypothesis, `p-value`))+\n  geom_line()+\n  geom_vline(xintercept = m1$coefficients[\"education\"],\n             linetype = \"solid\",\n             col = \"red\")+\n  geom_vline(xintercept = m1$conf.low[\"education\"],\n             linetype = \"dotted\")+\n  geom_vline(xintercept = m1$conf.high[\"education\"],\n             linetype = \"dotted\")+\n  geom_hline(yintercept = 0.05,\n             linetype = \"dashed\")+\n  labs(\n    x = \"Hypothesized Education, Coefficent\",\n    title = \"Confidence intervals are a range\\nof plausible hypotheses\"\n  )+\n  theme_minimal()\n\n\n\n\n\nStatistical models\n\n\n\n\n \n\n\nModel 1\n\n\n\n\n\n\n(Intercept)\n\n\n0.31*\n\n\n\n\n \n\n\n[ 0.14; 0.48]\n\n\n\n\neducation\n\n\n0.17*\n\n\n\n\n \n\n\n[ 0.12; 0.21]\n\n\n\n\nincome\n\n\n0.01\n\n\n\n\n \n\n\n[-0.01; 0.03]\n\n\n\n\nR2\n\n\n0.04\n\n\n\n\nAdj. R2\n\n\n0.04\n\n\n\n\nNum. obs.\n\n\n1687\n\n\n\n\nRMSE\n\n\n1.29\n\n\n\n\n\n\n* 0 outside the confidence interval."
+    "text": "Relationship between CIs and Hypothesis Testing\n\nConcept Code Table Figure\n\n\nWe can think of a confidence interval as a range of hypotheses we would fail to reject with \\(p &lt; \\alpha\\)\nIf a \\(95\\%\\) confidence interval excludes 0, the corresponding two-sided hypothesis test will reject at \\(\\alpha = 0.05\\)\n\n\n\n# Load Data\nload(url(\"https://josephessig-source.github.io/pols1600_site/files/data/nes24.rda\"))\n\n# Fit Model\nm1 &lt;- lm_robust(dv_participation ~   education + income, df,\n                se = \"classical\")\n\n# Range of hypotheses for education\npval_ci_df &lt;- tibble(\n  # Hypothesized Betas for Education\n  Hypothesis = seq(0, .32, length.out = 100),\n  # Test Statistics\n  Statistic = (m1$coefficients[\"education\"] - Hypothesis) /\n  m1$std.error[\"education\"],\n  # P-value for two sided test\n  `p-value` = 2*pt(abs(Statistic), df = m1$df,lower.tail = F)\n)\n\nfig_pval_ci &lt;- pval_ci_df %&gt;% \n  ggplot(aes(Hypothesis, `p-value`))+\n  geom_line()+\n  geom_vline(xintercept = m1$coefficients[\"education\"],\n             linetype = \"solid\",\n             col = \"red\")+\n  geom_vline(xintercept = m1$conf.low[\"education\"],\n             linetype = \"dotted\")+\n  geom_vline(xintercept = m1$conf.high[\"education\"],\n             linetype = \"dotted\")+\n  geom_hline(yintercept = 0.05,\n             linetype = \"dashed\")+\n  labs(\n    x = \"Hypothesized Education, Coefficent\",\n    title = \"Confidence intervals are a range\\nof plausible hypotheses\"\n  )+\n  theme_minimal()\n\n\n\n\n\nStatistical models\n\n\n\n\n \n\n\nModel 1\n\n\n\n\n\n\n(Intercept)\n\n\n0.31*\n\n\n\n\n \n\n\n[ 0.14; 0.48]\n\n\n\n\neducation\n\n\n0.17*\n\n\n\n\n \n\n\n[ 0.12; 0.21]\n\n\n\n\nincome\n\n\n0.01\n\n\n\n\n \n\n\n[-0.01; 0.03]\n\n\n\n\nR2\n\n\n0.04\n\n\n\n\nAdj. R2\n\n\n0.04\n\n\n\n\nNum. obs.\n\n\n1687\n\n\n\n\nRMSE\n\n\n1.29\n\n\n\n\n\n\n* 0 outside the confidence interval."
   },
   {
     "objectID": "slides/11-slides.html#four-possible-outcomes-of-a-hypothesis-test",
@@ -13121,5 +13121,240 @@
       "Weekly Content",
       "10: Inference -- Confidence Intervals"
     ]
+  },
+  {
+    "objectID": "labs/10-lab.html#interpret-results",
+    "href": "labs/10-lab.html#interpret-results",
+    "title": "Lab 10 - Exploring data in the 2024 National Elections Study Continued",
+    "section": "5.3 Interpret results",
+    "text": "5.3 Interpret results\nHere is my interpretation of the models:\nME: Our baseline model confirms our initial expectations. Controlling for race, older respondents have higher predicted levels of support for Trump by 0.002 percentage points. Controlling for race, the model predicts that a 60 year old respondent is about 6.3 percentage points more likely to vote for Trump than a 30 year-old respondent. The test statistic for this coefficient is 3.10 corresponding to a p-value &lt; 0.05, suggesting that if there were no relationship between age and vote choice in this model, it would be very unlikely that we observed a test statistic of this magnitude. Similarly the confidence interval for this estimate has suggests that coefficients as small as 0.0008 and as large as 0.0034 are plausible values for the relationship between age and vote choice in these data. Similarly, controlling for age, Black, Hispanic, and Asian respondents report significantly lower levels of support for Trump than white respondents (p &lt; 0.05).\nTurning to the interaction model, we see that the magnitude of the coefficient on age (which corresponds to the marginal effect of age for white respondents) increases, while the coefficients on the interactions between age and racial indicators are generally negative, suggesting that the relationship between age and support for Trump is less strong for these racial and ethnic groups. Figure 1 helps clarify these marginal effects, as we see that slope for age is clearly positive for white respondents, clearly negative for Black respondents. The confidence intervals for the predicted values of the other racial and ethnic groups are generally wide, and consisent with positive, negative, or no relationship between age and vote choice.\nFinally, looking at the model controlling for partisanship, we see that none of the relationships between age, race, and vote choice, remain statistically significant once we account for the relationships between partisanship and vote choice, and the relationships between partisanship and age and race. In sum, apparent demographic differences in support for Trump appear driven by the differences in partisan identification across racial groups and within age groups.\nYOU:"
+  },
+  {
+    "objectID": "labs/11-lab.html",
+    "href": "labs/11-lab.html",
+    "title": "Lab 11 - Peer Workshop on Final Papers",
+    "section": "",
+    "text": "Overview\nIn this lab, you will have a break from the usual focus on R, and will instead spend time discussing your projects with each other. You will pair up with another group, spend time reviewing their plans for their final project, and then reflect on the feedback your own group received.\nAs long as you provide a response to every question below, your group will receive a 100. Focus on engaging with each others’ work: one thoughtful insight is worth more than hundreds of throwaway comments.\nAfter reviewing the tips below, fill in your responses to section 1 and 2 after your discussion(s) with another group or groups.\n\n\nGoals\n\nTo practice giving and receiving feedback on research. Communicating your research clearly and constructively critiquing the work of your peers are essential skills in the research process\nTo identify at least one concrete actionable revision that will improve your group’s project. By the end of this lab, each group should have at least one key takeaway they can use to improve their project.\n\n\n\nWhere to start\nYou are not expected to have a full draft of your paper. Instead, your group should be prepared to briefly explain:\n\nYour research question\nYour main hypothesis (what you expect to find)\nYour data source(s)\nYour key variables (dependent + main independent variable(s))\nYour planned empirical strategy (what models or comparisons you will run)\nOne area where you feel uncertain or would like feedback\n\nThe HTML files you submitted for assignments 2 and 3 should be helpful here, and you may want to present them (or parts of them) in addition to a verbal discussion.\n\n\nReceiving feedback\nIt can be difficult to receive critiques on a project you have been working hard on. Keep these tips in mind during your discussion with other groups:\nListen Actively: Avoid the urge to be defensive. Listen to understand where others may be confused. If they are confused, your future reader might be too!\nAsk Clarifying Questions: If a point is not clear, ask for specific examples. Say things like, “Could you explain what you mean by…” or “Do you have suggestions on how we could…”\nTake Notes: You won’t remember everything they say. Jot down key points so you can discuss them as a group later.\nBe Grateful: Thank your peers for their time and insights.\n\n\nGiving feedback\nProviding good feedback is about being constructive, specific, and kind. You are not grading their paper; you are helping them clarify their ideas before they finalize their analysis. Here are some points to review if you are stuck:\nResearch Question: Is the research question clear? Can you think of any ways to make the “so what” more compelling?\nTheory: Do they have a theoretical framework that logically motivates their analysis? What parts of their theory might require additional support from the literature?\nData: What is/are the main source(s) of data, and what variables are available? Would you make different choices about how to measure (operationalize) a key concept using the same data source (e.g. use another variable, a different way of recoding)? Can you think of another source that might have relevant data?\nDesign: Can you understand how they plan to move from a baseline (bivariate) model to a multiple regression model that controls for alternative explanations? What would you want to see explored that they don’t already look at?\nOverall: What do you think is the strongest part of their project so far? Where did you feel confused or need more information?\n\n\n1 Your feedback\nPlease fill this section out based on the feedback you provided to the other group(s).\nWhich group did you talk to? [Insert Group Name/Members here]\nSummarize their research question and empirical strategy: [Write a 2-3 sentence summary of what the other group is studying and how they are testing it.]\nWhat specific feedback were they looking for? [What question or area did the other group ask you to focus on?]\nWhat did you ask about or suggest? [List at least 2 specific questions you asked them or suggestions you provided regarding their theory, data, or design.]\n\n\n2 Your group’s reflection\nPlease fill this section out based on the feedback your group received.\nList 2 (or more) comments you found helpful:\n\n[Comment 1]\n[Comment 2]\n\nImplementation Plan: For each comment listed above, discuss whether you plan to implement anything new (either in your analysis or your writing) as a result. Why or why not?\n\n[Response to Comment 1]\n[Response to Comment 2]"
+  },
+  {
+    "objectID": "slides/11-slides.html#announcements",
+    "href": "slides/11-slides.html#announcements",
+    "title": "POLS 1600",
+    "section": "Announcements",
+    "text": "Announcements\n\nLab 11 this week - give and receive feedback on your projects.\nFinal 2 lectures (Wednesday, Monday) - course review.\nAssignment 4 due Sunday April 19th\nNext Wednesday, April 22, Work on converting draft into presentation"
+  },
+  {
+    "objectID": "slides/11-slides.html#statistical-power-1",
+    "href": "slides/11-slides.html#statistical-power-1",
+    "title": "POLS 1600",
+    "section": "Statistical Power",
+    "text": "Statistical Power\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\nConceptPowerComments\n\n\n\nConsider two distributions of statistics under\n\na null of no effect (\\(H_0\\))\nan effect of \\(\\tau\\) (\\(H_1\\))\n\nFor a significance threshold of \\(\\alpha\\) we would:\n\nFail to reject the null \\(\\beta\\) (Type II Errors)\nCorrectly reject the null \\(1 -\\beta\\) (Statistical Power)\n\n\n\n\nTry changing \\(\\tau\\) (the effect size), and se (the standard deviation of the effect)\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\nPower is a function of:\n\nSample size (\\(N\\))\n\nLarger samples, smaller standard errors (LLN)\n\nEffect size (\\(\\tau\\))\n\nBigger effects less overlap\n\nSignificance threshold (\\(\\alpha\\))\n\nDecrease Type 1 (False Positives) error leads to increased Type 2 (False Negatives)\n\nThe distribution of the data\n\nVariance, asymptotic approximations"
+  },
+  {
+    "objectID": "slides/11-slides.html#paths-to-statistical-inference",
+    "href": "slides/11-slides.html#paths-to-statistical-inference",
+    "title": "POLS 1600",
+    "section": "Paths to Statistical Inference",
+    "text": "Paths to Statistical Inference\nWhether we use math, bootstrapping, or shuffling, the goal of statistical inference is exactly the same: quantifying our uncertainty.\n\n1. Asymptotic Inference\n\nWe use the Central Limit Theorem and to assume a theoretical distribution (like the \\(t\\)-distribution).\nCompare the observed test statistic to the assumed sampling distribution under the null.\nBest for: Large samples with well-behaved data. Very fast.\n\n2. Bootstrapping (Using Resampling)\n\nWe draw new samples with replacement from our data to mimic drawing new samples from the population.\nCompare the observed test statistic to the empirical approximation of the sampling distribution.\nBest for: Constructing Confidence Intervals and Standard Errors without relying on strict assumptions.\n\n3. Randomization Inference (Permutation)\n\nWe shuffle the treatment labels without replacement to simulate a world where the treatment has no effect.\nCenters on the null hypothesis.\nBest for: Calculating exact \\(p\\)-values and testing hypotheses, especially in experiments with small samples."
+  },
+  {
+    "objectID": "slides/11-slides.html#the-lady-tasting-tea",
+    "href": "slides/11-slides.html#the-lady-tasting-tea",
+    "title": "POLS 1600",
+    "section": "The Lady Tasting Tea",
+    "text": "The Lady Tasting Tea\n\nThe Claim: In the 1920s, Dr. Muriel Bristol claimed she could taste whether milk or tea was poured into her cup first.\nThe Experiment: Ronald Fisher prepared 8 cups of tea.\n\n4 had milk poured first.\n4 had tea poured first.\nThe cups were presented in a random, blinded order.\n\nThe Task: Identify the 4 cups that had milk poured first.\nThe Null Hypothesis (\\(H_0\\)): She has no tasting ability; she is just guessing blindly."
+  },
+  {
+    "objectID": "slides/11-slides.html#permutations",
+    "href": "slides/11-slides.html#permutations",
+    "title": "POLS 1600",
+    "section": "Permutations",
+    "text": "Permutations\n\nIf she is just guessing (\\(H_0\\) is true), her choices are completely independent of the actual cups.\nHow many possible ways can she choose 4 cups out of 8? \\[\n\\binom{8}{4} = \\frac{8!}{4!(8-4)!} = 70\n\\]\nIf she is guessing blindly, every one of these 70 combinations is equally likely.\nIf she gets all 4 correct, what is the probability of that happening by chance? 1/70 ≈ 0.014.\nBecause 0.014 &lt; 0.05, we reject the null hypothesis!"
+  },
+  {
+    "objectID": "slides/11-slides.html#simulating-the-null-distribution",
+    "href": "slides/11-slides.html#simulating-the-null-distribution",
+    "title": "POLS 1600",
+    "section": "Simulating the Null Distribution",
+    "text": "Simulating the Null Distribution\nWe can simulate this process in R by randomly shuffling (permuting) the “Milk First” labels while holding her guesses constant, we generate a distribution of the test statistic under the null.\nThis is exactly what we do in randomization inference."
+  },
+  {
+    "objectID": "slides/11-slides.html#code-1",
+    "href": "slides/11-slides.html#code-1",
+    "title": "POLS 1600",
+    "section": " Code",
+    "text": "Code\n\n# 1. Setup the actual truth (4 milk, 4 tea)\ntruth &lt;- c(rep(\"Milk\", 4), rep(\"Tea\", 4))\n\n# 2. Assume she got them all right (her guesses exactly match the truth)\nlady_guesses &lt;- c(rep(\"Milk\", 4), rep(\"Tea\", 4))\n\n# 3. Create a function to simulate one random guess\nsimulate_guess &lt;- function() {\n  shuffled_truth &lt;- sample(truth, replace = FALSE)\n  # Calculate test statistic: number of correctly identified \"Milk\" cups\n  correct_milk &lt;- sum(shuffled_truth == \"Milk\" & lady_guesses == \"Milk\")\n  return(correct_milk)\n}\n\n# 4. Repeat 10,000 times to build the null distribution\nset.seed(1600)\nnull_distribution &lt;- tibble(\n  sim = 1:10000,\n  correct_milk = replicate(10000, simulate_guess())\n)\n\n# 5. Plot\nfig_tea &lt;- null_distribution %&gt;%\n  ggplot(aes(x = correct_milk)) +\n  geom_bar(fill = \"grey60\", color = \"black\") +\n  geom_vline(xintercept = 4, color = \"red\", linetype = \"dashed\", linewidth = 1) +\n  theme_minimal() +\n  scale_x_continuous(breaks = 0:4) +\n  labs(\n    title = \"Null Distribution of Correct 'Milk First' Guesses\",\n    subtitle = \"Red dashed line indicates observed test statistic (4 correct)\",\n    x = \"Number of Correct 'Milk First' Guesses\",\n    y = \"Frequency\"\n  )"
+  },
+  {
+    "objectID": "slides/11-slides.html#plot",
+    "href": "slides/11-slides.html#plot",
+    "title": "POLS 1600",
+    "section": "Plot",
+    "text": "Plot"
+  },
+  {
+    "objectID": "slides/11-slides.html#comments-1",
+    "href": "slides/11-slides.html#comments-1",
+    "title": "POLS 1600",
+    "section": "Comments",
+    "text": "Comments\n\nThe bar chart represents the sampling distribution of our test statistic if the null hypothesis were true (she is randomly guessing).\nThe red line represents our observed test statistic (she guessed all 4 correctly).\nNotice how rare it is to get 4 correct by chance! Only about 1.4% of our 10,000 simulations resulted in 4 correct guesses. This simulation matches the exact math (1/70 = 0.014), yielding a \\(p\\)-value of 0.014."
+  },
+  {
+    "objectID": "slides/11-slides.html#putting-it-all-together",
+    "href": "slides/11-slides.html#putting-it-all-together",
+    "title": "POLS 1600",
+    "section": "Putting It All Together",
+    "text": "Putting It All Together\n\nInference is about uncertainty: We only have one sample, but we want to learn about the population.\nStandard Errors: Tell us how much our estimate would vary if we took new samples.\nConfidence Intervals: Give us a plausible range for the true population parameter based on our sample estimate and its standard error.\nHypothesis Testing & P-values: Help us quantify the evidence against a specific baseline claim (the null hypothesis \\(H_0\\)).\nPower: Reminds us that sample size and effect size dictate our ability to detect the truth."
+  },
+  {
+    "objectID": "slides/11-slides.html#structure-of-final-paper-and-drafts",
+    "href": "slides/11-slides.html#structure-of-final-paper-and-drafts",
+    "title": "POLS 1600",
+    "section": "Structure of Final Paper and Drafts",
+    "text": "Structure of Final Paper and Drafts\nAssignment 4: Seven sections\n\nIntroduction (5 percent, ~ 4 paragraphs)\nTheory and Expectations (10 percent, ~4+ paragraphs)\nData (20 percent ~ 4+ paragraphs)\nDesign (25 percent ~ 5+ paragraphs)\nResults (25 percent ~ 5+ paragraphs)\nConclusion (5 percent ~ 3+ paragraphs)\nAppendix (10 percent ~ Variable codebook and all the R code for your project)"
+  },
+  {
+    "objectID": "slides/11-slides.html#for-friday",
+    "href": "slides/11-slides.html#for-friday",
+    "title": "POLS 1600",
+    "section": "For Friday",
+    "text": "For Friday\n\nDownload template\nMake progress on:\n\n\nData (20 percent ~ 4+ paragraphs)\n\n\nDesign (25 percent ~ 5+ paragraphs)\n\n\nResults (25 percent ~ 5+ paragraphs)"
+  },
+  {
+    "objectID": "slides/11-slides.html#for-friday-1",
+    "href": "slides/11-slides.html#for-friday-1",
+    "title": "POLS 1600",
+    "section": "For Friday",
+    "text": "For Friday\nSee Lab 11 - Peer Workshop on Final Papers\nYou are not expected to have a full draft of your paper. Instead, your group should be prepared to briefly explain:\n\nYour research question\nYour main hypothesis (what you expect to find)\nYour data source(s)\nYour key variables (dependent + main independent variable(s))\nYour planned empirical strategy (what models or comparisons you will run)\nOne area where you feel uncertain or would like feedback\n\nThe HTML files you submitted for assignments 2 and 3 should be helpful here, and you may want to present them (or parts of them) in addition to a verbal discussion."
+  },
+  {
+    "objectID": "slides/11-slides.html#types-of-inference",
+    "href": "slides/11-slides.html#types-of-inference",
+    "title": "POLS 1600",
+    "section": "Types of inference",
+    "text": "Types of inference\n\nDescriptive\nCausal\nPredictive"
+  },
+  {
+    "objectID": "slides/11-slides.html#regression",
+    "href": "slides/11-slides.html#regression",
+    "title": "POLS 1600",
+    "section": "Regression",
+    "text": "Regression"
+  },
+  {
+    "objectID": "slides/11-slides.html#controlling-for-variables-residualized-regression",
+    "href": "slides/11-slides.html#controlling-for-variables-residualized-regression",
+    "title": "POLS 1600",
+    "section": "Controlling for Variables & Residualized Regression",
+    "text": "Controlling for Variables & Residualized Regression\n\nRegression models partition the variance in the outcome into variance explained by the model and unexplained variance (residuals)\n\nYou should know:\n\nThe logic of residualized regression. You can isolate the effect of \\(X_1\\) on \\(Y\\) by regressing the residuals of \\(Y\\) (unexplained by \\(X_2\\)) on the residuals of \\(X_1\\) (unexplained by \\(X_2\\)).\nProperties of Residuals: Residuals (\\(\\hat{\\epsilon}\\)) are orthogonal to (uncorrelated with) both the predictors and the predicted values.\nWhy coefficients change Controlling for a new variable only changes the coefficient of an existing predictor if the new variable is correlated with both the predictor and the outcome."
+  },
+  {
+    "objectID": "slides/11-slides.html#predictions-and-model-fit",
+    "href": "slides/11-slides.html#predictions-and-model-fit",
+    "title": "POLS 1600",
+    "section": "Predictions and Model Fit",
+    "text": "Predictions and Model Fit\n\nRegression coefficients define a formula to generate predicted values, while fit statistics summarize how well the model explains the data\n\nYou should know:\n\nGenerating predictions: How to use expand_grid() to hold variables constant and predict() to generate expected values, which is especially useful for interpreting polynomials or interaction terms.\nR-squared (\\(R^2\\)): The proportion of variance in the outcome explained by the model (\\(ESS/TSS\\)).\nStandardization: Why we convert variables to z-scores (mean 0, standard deviation 1) to compare coefficients on a common scale."
+  },
+  {
+    "objectID": "slides/11-slides.html#difference-in-differences-did",
+    "href": "slides/11-slides.html#difference-in-differences-did",
+    "title": "POLS 1600",
+    "section": "Difference-in-Differences (DiD)",
+    "text": "Difference-in-Differences (DiD)\n\nDiff in Diff estimates causal effects by comparing the change in outcomes over time between a treated group and a control group\n\nYou should know:\n\nDiff in Diff: How differencing twice isolates the treatment effect by removing fixed differences across units (Treated vs. Control) and fixed changes over time (Post vs. Pre).\nAverage Treatment on Treated (ATT): The specific causal quantity estimated (\\(E[Y_{1i}(1) - Y_{0i}(1)|D=1]\\)).\nParallel Trends Assumption: The crucial identifying assumption that, absent treatment, the treated group would have followed the exact same trajectory as the control group.\nRegression Implementation: How to estimate DiD using a linear model (\\(Y = \\beta_0 + \\beta_1 Post + \\beta_2 Treated + \\beta_3 Post \\times Treated\\)), where the interaction term (\\(\\beta_3\\)) provides the ATT."
+  },
+  {
+    "objectID": "slides/11-slides.html#the-law-of-large-numbers-lln",
+    "href": "slides/11-slides.html#the-law-of-large-numbers-lln",
+    "title": "POLS 1600",
+    "section": "The Law of Large Numbers (LLN)",
+    "text": "The Law of Large Numbers (LLN)\n\nAs sample size increases, the sample mean converges to the true population mean\n\nYou should know:\n\nThe core intuition: Why an unbiased estimate improves and its variance decreases as the sample size grows.\nMathematical formulation: How the distance between the sample mean and the population mean \\(\\mu\\) approaches 0 as \\(n \\to \\infty\\).’\n\nSee these slides"
+  },
+  {
+    "objectID": "slides/11-slides.html#the-central-limit-theorem-clt",
+    "href": "slides/11-slides.html#the-central-limit-theorem-clt",
+    "title": "POLS 1600",
+    "section": "The Central Limit Theorem (CLT)",
+    "text": "The Central Limit Theorem (CLT)\n\nThe sampling distribution of the mean approaches a Normal distribution as sample size grows, regardless of the population’s underlying distribution\n\nYou should know:\n\nSampling distributions: What they are and how their width (variance) decreases as sample size increases.\nStandardization: How to calculate and interpret Z-scores (\\(Z=\\frac{X-\\mu}{\\sigma}\\)).\nProperties of the sample mean: Understanding that \\(E[\\bar{X}_n]=\\mu\\) and \\(Var[\\bar{X}_n]=\\frac{\\sigma^2}{n}\\).\nNormal approximation: How the CLT allows us to conduct statistical inference regardless of the shape of the population distribution.\n\nSee these slides"
+  },
+  {
+    "objectID": "slides/11-slides.html#standard-errors-and-variance",
+    "href": "slides/11-slides.html#standard-errors-and-variance",
+    "title": "POLS 1600",
+    "section": "Standard Errors and Variance",
+    "text": "Standard Errors and Variance\n\nStandard errors quantify uncertainty by estimating the standard deviation of a sampling distribution\n\nYou should know:\n\nVariance of regression coefficients: How it depends on the residuals in your model.\nHomoskedasticity vs. Heteroskedasticity: Recognizing the difference between constant error variance (\\(\\sigma^2\\)) and non-constant error variance.\nRobust Standard Errors: Why we use functions like lm_robust() to calculate consistent standard errors (or cluster them by group) when error variance is not constant.\n\nSee these slides"
+  },
+  {
+    "objectID": "slides/11-slides.html#sampling-distributions-and-statistical-inference",
+    "href": "slides/11-slides.html#sampling-distributions-and-statistical-inference",
+    "title": "POLS 1600",
+    "section": "Sampling Distributions and Statistical Inference",
+    "text": "Sampling Distributions and Statistical Inference\n\nSee also the earlier slides in this presentation on:\nConfidence Intervals\nSampling Distributions\nHypothesis Testing\nStatistical Power\nRandomization Inference"
+  },
+  {
+    "objectID": "class/11-class.html",
+    "href": "class/11-class.html",
+    "title": "Statistical Inference & Hypothesis Testing Continued",
+    "section": "",
+    "text": "Imai (2022) Chapter 7",
+    "crumbs": [
+      "Class",
+      "Weekly Content",
+      "11: Inference -- Hypothesis Testing"
+    ]
+  },
+  {
+    "objectID": "class/11-class.html#readings",
+    "href": "class/11-class.html#readings",
+    "title": "Statistical Inference & Hypothesis Testing Continued",
+    "section": "",
+    "text": "Imai (2022) Chapter 7",
+    "crumbs": [
+      "Class",
+      "Weekly Content",
+      "11: Inference -- Hypothesis Testing"
+    ]
+  },
+  {
+    "objectID": "class/11-class.html#lecture",
+    "href": "class/11-class.html#lecture",
+    "title": "Statistical Inference & Hypothesis Testing Continued",
+    "section": "Lecture",
+    "text": "Lecture\n\n View all slides in new window",
+    "crumbs": [
+      "Class",
+      "Weekly Content",
+      "11: Inference -- Hypothesis Testing"
+    ]
+  },
+  {
+    "objectID": "class/11-class.html#lab",
+    "href": "class/11-class.html#lab",
+    "title": "Statistical Inference & Hypothesis Testing Continued",
+    "section": "Lab",
+    "text": "Lab\n\n Download this week’s here \n Upload the rendered html file to Canvas here",
+    "crumbs": [
+      "Class",
+      "Weekly Content",
+      "11: Inference -- Hypothesis Testing"
+    ]
+  },
+  {
+    "objectID": "class/11-class.html#assignments",
+    "href": "class/11-class.html#assignments",
+    "title": "Statistical Inference & Hypothesis Testing Continued",
+    "section": "Assignments",
+    "text": "Assignments\n\n Complete QSS Tutorial 10: Uncertainty 2\n Submit Assignment 4: Paper draft by Sunday, May 19th\n\n\n# The last tutorial! \n\nlearnr::run_tutorial(\"10-uncertainty2\", package = \"qsslearnr\")\n\n\n Upload the rendered html tutorial files to Canvas here",
+    "crumbs": [
+      "Class",
+      "Weekly Content",
+      "11: Inference -- Hypothesis Testing"
+    ]
+  },
+  {
+    "objectID": "slides/11-slides.html#estimating-uncertainty-simulation-vs.-analytic",
+    "href": "slides/11-slides.html#estimating-uncertainty-simulation-vs.-analytic",
+    "title": "POLS 1600",
+    "section": "Estimating Uncertainty: Simulation vs. Analytic",
+    "text": "Estimating Uncertainty: Simulation vs. Analytic\n\nBootstrapping can be used to obtain a standard error and confidence intervals using resampling.\n\nTo make inferences about a population, we need to understand the sampling distribution and Standard Error (SE). There are two main ways to do this:\n\nSimulation (Bootstrapping): Treat your observed sample as if it were the true population. Draw repeated samples with replacement to create a “resampling distribution.”\n\nCalculating SE: The Standard Error is the standard deviation of this simulated resampling distribution (the “plug-in principle”).\n\nAnalytic (Asymptotic): Relies on statistical theory (Law of Large Numbers & Central Limit Theorem), which state that sampling distributions approach a normal distribution as sample size grows.\n\nSee these slides"
   }
 ]
