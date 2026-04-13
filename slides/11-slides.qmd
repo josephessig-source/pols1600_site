@@ -493,6 +493,46 @@ fig_tea
 - **Hypothesis Testing & P-values:** Help us quantify the evidence against a specific baseline claim (the null hypothesis $H_0$). 
 - **Power:** Reminds us that sample size and effect size dictate our ability to detect the truth.
 
+
+# {{< fa lightbulb>}} Final Projects {.inverse}
+
+## Structure of Final Paper and Drafts {.smaller}
+
+[Assignment 4:](https://josephessig-source.github.io/pols1600_site/assignments/a4.html) Seven sections
+
+1.  Introduction (5 percent, \~ 4 paragraphs)
+2.  Theory and Expectations (10 percent, \~4+ paragraphs)
+3.  Data (20 percent \~ 4+ paragraphs)
+4.  Design (25 percent \~ 5+ paragraphs)
+5.  Results (25 percent \~ 5+ paragraphs)
+6.  Conclusion (5 percent \~ 3+ paragraphs)
+7.  Appendix (10 percent \~ Variable codebook and all the R code for your project)
+
+## For Friday {.smaller}
+
+- [Download template](https://josephessig-source.github.io/pols1600_site/assignments/pols1600_paper_template.qmd)
+
+- Make progress on:
+  - 3.  **Data** (20 percent \~ 4+ paragraphs)
+  - 4.  **Design** (25 percent \~ 5+ paragraphs)
+  - 5.  **Results** (25 percent \~ 5+ paragraphs)
+
+## For Friday {.smaller}
+
+See [Lab 11 - Peer Workshop on Final Papers](https://josephessig-source.github.io/pols1600_site/labs/11-lab.qmd)
+
+You are not expected to have a full draft of your paper. Instead, your group should be prepared to briefly explain:
+
+- Your research question
+- Your main hypothesis (what you expect to find)
+- Your data source(s)
+- Your key variables (dependent + main independent variable(s))
+- Your planned empirical strategy (what models or comparisons you will run)
+- **One area where you feel uncertain or would like feedback**
+
+The HTML files you submitted for assignments 2 and 3 should be helpful here, and you may want to present them (or parts of  them) in addition to a verbal discussion. 
+
+
 # {{< fa magnifying-glass>}} Course Review {.inverse}
 
 ## Types of inference
@@ -508,11 +548,11 @@ fig_tea
 > Summarize distributions and relationships in data
 
 - You should know how to:
-  - [Calculate](https://josephessig-source.github.io/pols1600_site//slides/01-slides#/using-r-to-summarize-data) and interpret measures: 
+  - [Calculate](https://josephessig-source.github.io/pols1600_site/slides/01-slides#/using-r-to-summarize-data) and interpret measures: 
   - Central Tendency
   - Dispersion
   - Association
-- [Load](https://josephessig-source.github.io/pols1600_site//slides/01-slides#/loading-data-into-r), [look at](https://josephessig-source.github.io/pols1600_site//slides/01-slides#/looking-at-your-data), [wrangle](https://josephessig-source.github.io/pols1600_site//slides/01-slides#/dplyr-functions-for-data-wrangling), and [describe](https://josephessig-source.github.io/pols1600_site//slides/01-slides#/describing-data-in-r) data using:
+- [Load](https://josephessig-source.github.io/pols1600_site/slides/01-slides#/loading-data-into-r), [look at](https://josephessig-source.github.io/pols1600_site/slides/01-slides#/looking-at-your-data), [wrangle](https://josephessig-source.github.io/pols1600_site/slides/01-slides#/dplyr-functions-for-data-wrangling), and [describe](https://josephessig-source.github.io/pols1600_site/slides/01-slides#/describing-data-in-r) data using:
   - Tables
   - Figures
   
@@ -523,18 +563,18 @@ fig_tea
 You should know how to:
 
 - Load, look at,and transform data into R
-- Get a [HLO](https://josephessig-source.github.io/pols1600_site//slides/01-slides#/hlos-allow-you-to) of the raw data:
+- Get a [HLO](https://josephessig-source.github.io/pols1600_site/slides/01-slides#/hlos-allow-you-to) of the raw data:
   - Unit of observation
   - Dimensions of the data
   - Quickly summarize the distributions and values of variables
-- [Recode](https://josephessig-source.github.io/pols1600_site//labs/09-lab-comments#recode-the-data) the data to:
+- [Recode](https://josephessig-source.github.io/pols1600_site/labs/07-lab-comments.html#recode-covariates) data to:
   - Replace values as `NA`s
   - Create categories, indicators (0,1), and factors
   - Transform predictors (e.g. standardizing predictors)
 - Reshape the data
   - Pivoting columns and rows
   - Joining data sets together.
-- [Aggregate](https://josephessig-source.github.io/pols1600_site//labs/02-lab-comments#reproduce-the-figure-from-lab-01) the data into [summaries](https://josephessig-source.github.io/pols1600_site//labs/03-lab-comments#calculate-the-average-treatment-effect)
+- [Aggregate](https://josephessig-source.github.io/pols1600_site/labs/02-lab-comments#reproduce-the-figure-from-lab-01) the data into [summaries](https://josephessig-source.github.io/pols1600_site/labs/03-lab-comments#calculate-the-average-treatment-effect)
   
 ## Data Visualization{.smaller}
 
@@ -542,11 +582,11 @@ You should know how to:
 
 You should know:
 
-- The [grammar of graphics](https://josephessig-source.github.io/pols1600_site//slides/02-slides#/the-grammar-of-graphics):
+- The [grammar of graphics](https://josephessig-source.github.io/pols1600_site/slides/02-slides#/the-grammar-of-graphics):
   - Data
   - Aesthetic mappings
   - Geometries
-- How to [generate common plots](https://josephessig-source.github.io/pols1600_site//slides/02-slides#/describing-distributions-and-associations) to describe:
+- How to [generate common plots](https://josephessig-source.github.io/pols1600_site/slides/02-slides#/describing-distributions-and-associations) to describe:
   - Distributions
   - Relationships
   
@@ -556,42 +596,42 @@ You should know:
 
 You should know:
 
-- [Potential outcomes](https://josephessig-source.github.io/pols1600_site//slides/03-slides#/potential-outcomes-notation) and [DAGs](https://josephessig-source.github.io/pols1600_site//slides/05-slides#/directed-acyclic-graphs-1)
+- [Potential outcomes](https://josephessig-source.github.io/pols1600_site/slides/03-slides#/potential-outcomes-notation) and [DAGs](https://josephessig-source.github.io/pols1600_site/slides/04-slides.html#/directed-acyclic-graphs)
 
-- The [fundamental problem of causal inference](https://josephessig-source.github.io/pols1600_site//slides/03-slides#/fundamental-problem-of-causal-inference)
+- The [fundamental problem of causal inference](https://josephessig-source.github.io/pols1600_site/slides/03-slides#/fundamental-problem-of-causal-inference)
 
 - Bias caused by:
-  - [Confounding](https://josephessig-source.github.io/pols1600_site//slides/05-slides#/section-1) (Coffee and Cancer)
-  - [Colliding](https://josephessig-source.github.io/pols1600_site//slides/05-slides#/section-2) (Dating Jerks)
+  - [Confounding](https://josephessig-source.github.io/pols1600_site/slides/04-slides.html#/section) (Coffee and Cancer)
+  - [Colliding](https://josephessig-source.github.io/pols1600_site/slides/04-slides.html#/section-1) (Dating Jerks)
 - Casual Identification in:
-  - [Experimental](https://josephessig-source.github.io/pols1600_site//slides/03-slides#/causal-identification-with-experimental-designs) designs
-  - [Observational](https://josephessig-source.github.io/pols1600_site//slides/05-slides#/observational-designs) designs 
-  
+  - [Experimental](https://josephessig-source.github.io/pols1600_site/slides/03-slides#/causal-identification-with-experimental-designs) designs
+  - [Observational](https://josephessig-source.github.io/pols1600_site/slides/04-slides.html#/causal-inference-in-observational-studies) designs 
+
+- [The Average Treatment Effect (ATE)](https://josephessig-source.github.io/pols1600_site/slides/03-slides#/estimating-an-average-treatment-effect)
+
 ## Prediction with Linear Models {.smaller}
 
 > Linear regression provides a linear estimate of the conditional expectation function 
 
 You should know:
 
-- [How linear regression works](https://josephessig-source.github.io/pols1600_site//slides/05-slides#/understanding-linear-regression)
+- [How linear regression works](https://josephessig-source.github.io/pols1600_site/slides/05-slides#/understanding-linear-regression)
 
-- [What it means to control for](https://josephessig-source.github.io/pols1600_site//slides/07-slides.html#/regression-models-partition-variance) predictors in a multiple regression
+- [What it means to control for](https://josephessig-source.github.io/pols1600_site/slides/07-slides.html#/regression-models-partition-variance) predictors in a multiple regression
 
-- When and [why we should control](https://josephessig-source.github.io/pols1600_site//slides/05-slides#/when-to-control-for-a-variable) for predictors.
+- How to translate [substantive claims]{.blue} into [empirical expectations](https://josephessig-source.github.io/pols1600_site/labs/06-lab-comments#estimate-a-model-controlling-for-age) for our models
 
-- How to translate [substantive claims]{.blue} into [empirical expectations](https://josephessig-source.github.io/pols1600_site//labs/06-lab-comments#estimate-a-model-controlling-for-age) for our models
+- How to [estimate and interpret]{.blue} these models using [tables](https://josephessig-source.github.io/pols1600_site/labs/06-lab-comments#display-the-model-as-a-regression-table) and [figures](https://josephessig-source.github.io/pols1600_site/slides/10-slides.html#/predicted-values)
 
-- How to [estimate and interpret]{.blue} these models using [tables](https://josephessig-source.github.io/pols1600_site//labs/06-lab-comments#display-the-model-as-a-regression-table) and [figures](https://josephessig-source.github.io/pols1600_site//labs/10-lab-comments#visualize-predicted-values)
-
-- How to [quantify uncertainty]{.blue} about these estimates using [confidence intervals](https://josephessig-source.github.io/pols1600_site//slides/10-slides#/confidence-intervals-1) and [hypothesis tests](https://josephessig-source.github.io/pols1600_site//slides/10-slides#/what-is-a-hypothesis-test).
+- How to [quantify uncertainty]{.blue} about these estimates using [confidence intervals](https://josephessig-source.github.io/pols1600_site/slides/10-slides#/confidence-intervals-1) and [hypothesis tests](https://josephessig-source.github.io/pols1600_site/slides/10-slides#/what-is-a-hypothesis-test).
 
 ## Probability {.smaller}
 
-- [Probability](https://josephessig-source.github.io/pols1600_site//slides/08-slides#/probability-1) describes the likelihood of an event
+- [Probability](https:/josephessig-source.github.io/pols1600_site/slides/08-slides#/probability-1) describes the likelihood of an event
 
-- [Random variables](https://josephessig-source.github.io/pols1600_site//slides/08-slides#/random-variables) assign numeric values to all the events that could occur.
+- [Random variables](https://josephessig-source.github.io/pols1600_site/slides/08-slides#/random-variables) assign numeric values to all the events that could occur.
 
-- [Probability distributions](https://josephessig-source.github.io/pols1600_site//slides/08-slides#/probability-distributions) assign probabilities to every value of a random variable. Can be:
+- [Probability distributions](https://josephessig-source.github.io/pols1600_site/slides/08-slides#/probability-distributions) assign probabilities to every value of a random variable. Can be:
 
   - discrete
   - continuous
@@ -655,7 +695,7 @@ You should know:
 - **Properties of the sample mean:** Understanding that $E[\bar{X}_n]=\mu$ and $Var[\bar{X}_n]=\frac{\sigma^2}{n}$.
 - **Normal approximation:** How the CLT allows us to conduct statistical inference regardless of the shape of the population distribution.
 
-See [these slides](https://josephessig-source.github.io/pols1600_site/slides/09-slides.html#/the-central-limit-theorems)
+See [these slides](https://josephessig-source.github.io/pols1600_site/slides/09-slides.html#/the-central-limit-theorem)
 
 ## Standard Errors and Variance {.smaller}
 
@@ -669,9 +709,23 @@ You should know:
 
 See [these slides](https://josephessig-source.github.io/pols1600_site/slides/09-slides.html#/lab-8-and-standard-errors)
 
+## Estimating Uncertainty: Simulation vs. Analytic
+
+> Bootstrapping can be used to obtain a standard error and confidence intervals using resampling. 
+
+To make inferences about a population, we need to understand the sampling distribution and Standard Error (SE). There are two main ways to do this:
+
+- **Simulation (Bootstrapping):** Treat your observed sample as if it were the true population. Draw repeated samples *with replacement* to create a "resampling distribution."
+
+  - **Calculating SE:** The Standard Error is the standard deviation of this simulated resampling distribution (the "plug-in principle").
+  
+- **Analytic (Asymptotic):** Relies on statistical theory (Law of Large Numbers & Central Limit Theorem), which state that sampling distributions approach a normal distribution as sample size grows.
+
+[See these slides](https://josephessig-source.github.io/pols1600_site/slides/10-slides.html#/calculating-standard-errors)
+
 ## Sampling Distributions and Statistical Inference
 
-- See earlier slides in this presentation on:
+- See also the earlier slides in this presentation on:
 
 - Confidence Intervals
 - Sampling Distributions
