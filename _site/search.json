@@ -10409,7 +10409,7 @@
     "href": "slides/11-slides.html#data-wrangling",
     "title": "POLS 1600",
     "section": "Data Wrangling",
-    "text": "Data Wrangling\n\nThe process of transforming data into a useable format\n\nYou should know how to:\n\nLoad, look at,and transform data into R\nGet a HLO of the raw data:\n\nUnit of observation\nDimensions of the data\nQuickly summarize the distributions and values of variables\n\nRecode the data to:\n\nReplace values as NAs\nCreate categories, indicators (0,1), and factors\nTransform predictors (e.g. standardizing predictors)\n\nReshape the data\n\nPivoting columns and rows\nJoining data sets together.\n\nAggregate the data into summaries"
+    "text": "Data Wrangling\n\nThe process of transforming data into a useable format\n\nYou should know how to:\n\nLoad, look at,and transform data into R\nGet a HLO of the raw data:\n\nUnit of observation\nDimensions of the data\nQuickly summarize the distributions and values of variables\n\nRecode data to:\n\nReplace values as NAs\nCreate categories, indicators (0,1), and factors\nTransform predictors (e.g. standardizing predictors)\n\nReshape the data\n\nPivoting columns and rows\nJoining data sets together.\n\nAggregate the data into summaries"
   },
   {
     "objectID": "slides/11-slides.html#data-visualization",
@@ -10423,14 +10423,14 @@
     "href": "slides/11-slides.html#causal-inference",
     "title": "POLS 1600",
     "section": "Causal Inference",
-    "text": "Causal Inference\n\nCausal Inference requires counterfactual comparisons\n\nYou should know:\n\nPotential outcomes and DAGs\nThe fundamental problem of causal inference\nBias caused by:\n\nConfounding (Coffee and Cancer)\nColliding (Dating Jerks)\n\nCasual Identification in:\n\nExperimental designs\nObservational designs"
+    "text": "Causal Inference\n\nCausal Inference requires counterfactual comparisons\n\nYou should know:\n\nPotential outcomes and DAGs\nThe fundamental problem of causal inference\nBias caused by:\n\nConfounding (Coffee and Cancer)\nColliding (Dating Jerks)\n\nCasual Identification in:\n\nExperimental designs\nObservational designs\n\nThe Average Treatment Effect (ATE)"
   },
   {
     "objectID": "slides/11-slides.html#prediction-with-linear-models",
     "href": "slides/11-slides.html#prediction-with-linear-models",
     "title": "POLS 1600",
     "section": "Prediction with Linear Models",
-    "text": "Prediction with Linear Models\n\nLinear regression provides a linear estimate of the conditional expectation function\n\nYou should know:\n\nHow linear regression works\nWhat it means to control for predictors in a multiple regression\nWhen and why we should control for predictors.\nHow to translate substantive claims into empirical expectations for our models\nHow to estimate and interpret these models using tables and figures\nHow to quantify uncertainty about these estimates using confidence intervals and hypothesis tests."
+    "text": "Prediction with Linear Models\n\nLinear regression provides a linear estimate of the conditional expectation function\n\nYou should know:\n\nHow linear regression works\nWhat it means to control for predictors in a multiple regression\nHow to translate substantive claims into empirical expectations for our models\nHow to estimate and interpret these models using tables and figures\nHow to quantify uncertainty about these estimates using confidence intervals and hypothesis tests."
   },
   {
     "objectID": "slides/11-slides.html#probability",
@@ -13288,6 +13288,73 @@
     "href": "slides/11-slides.html#sampling-distributions-and-statistical-inference",
     "title": "POLS 1600",
     "section": "Sampling Distributions and Statistical Inference",
-    "text": "Sampling Distributions and Statistical Inference\n\nSee earlier slides in this presentation on:\nConfidence Intervals\nSampling Distributions\nHypothesis Testing\nStatistical Power\nRandomization Inference"
+    "text": "Sampling Distributions and Statistical Inference\n\nSee also the earlier slides in this presentation on:\nConfidence Intervals\nSampling Distributions\nHypothesis Testing\nStatistical Power\nRandomization Inference"
+  },
+  {
+    "objectID": "class/11-class.html",
+    "href": "class/11-class.html",
+    "title": "Statistical Inference & Hypothesis Testing Continued",
+    "section": "",
+    "text": "Imai (2022) Chapter 7",
+    "crumbs": [
+      "Class",
+      "Weekly Content",
+      "11: Inference -- Hypothesis Testing"
+    ]
+  },
+  {
+    "objectID": "class/11-class.html#readings",
+    "href": "class/11-class.html#readings",
+    "title": "Statistical Inference & Hypothesis Testing Continued",
+    "section": "",
+    "text": "Imai (2022) Chapter 7",
+    "crumbs": [
+      "Class",
+      "Weekly Content",
+      "11: Inference -- Hypothesis Testing"
+    ]
+  },
+  {
+    "objectID": "class/11-class.html#lecture",
+    "href": "class/11-class.html#lecture",
+    "title": "Statistical Inference & Hypothesis Testing Continued",
+    "section": "Lecture",
+    "text": "Lecture\n\n View all slides in new window",
+    "crumbs": [
+      "Class",
+      "Weekly Content",
+      "11: Inference -- Hypothesis Testing"
+    ]
+  },
+  {
+    "objectID": "class/11-class.html#lab",
+    "href": "class/11-class.html#lab",
+    "title": "Statistical Inference & Hypothesis Testing Continued",
+    "section": "Lab",
+    "text": "Lab\n\n Download this week’s here \n Upload the rendered html file to Canvas here",
+    "crumbs": [
+      "Class",
+      "Weekly Content",
+      "11: Inference -- Hypothesis Testing"
+    ]
+  },
+  {
+    "objectID": "class/11-class.html#assignments",
+    "href": "class/11-class.html#assignments",
+    "title": "Statistical Inference & Hypothesis Testing Continued",
+    "section": "Assignments",
+    "text": "Assignments\n\n Complete QSS Tutorial 10: Uncertainty 2\n Submit Assignment 4: Paper draft by Sunday, May 19th\n\n\n# The last tutorial! \n\nlearnr::run_tutorial(\"10-uncertainty2\", package = \"qsslearnr\")\n\n\n Upload the rendered html tutorial files to Canvas here",
+    "crumbs": [
+      "Class",
+      "Weekly Content",
+      "11: Inference -- Hypothesis Testing"
+    ]
+  },
+  {
+    "objectID": "slides/11-slides.html#estimating-uncertainty-simulation-vs.-analytic",
+    "href": "slides/11-slides.html#estimating-uncertainty-simulation-vs.-analytic",
+    "title": "POLS 1600",
+    "section": "Estimating Uncertainty: Simulation vs. Analytic",
+    "text": "Estimating Uncertainty: Simulation vs. Analytic\n\nBootstrapping can be used to obtain a standard error and confidence intervals using resampling.\n\nTo make inferences about a population, we need to understand the sampling distribution and Standard Error (SE). There are two main ways to do this:\n\nSimulation (Bootstrapping): Treat your observed sample as if it were the true population. Draw repeated samples with replacement to create a “resampling distribution.”\n\nCalculating SE: The Standard Error is the standard deviation of this simulated resampling distribution (the “plug-in principle”).\n\nAnalytic (Asymptotic): Relies on statistical theory (Law of Large Numbers & Central Limit Theorem), which state that sampling distributions approach a normal distribution as sample size grows.\n\nSee these slides"
   }
 ]
