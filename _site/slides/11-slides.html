@@ -191,10 +191,6 @@
       margin-right: 0; 
     }
   </style>
-  <script src="../site_libs/kePrint-0.0.1/kePrint.js"></script>
-
-  <link href="../site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
-
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/monaco-editor@0.47.0/min/vs/editor/editor.main.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     
@@ -1470,12 +1466,12 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 
 <section id="title-slide" align="left" data-background-image="images/pols1600_hex.png" data-background-position="90% 50%" data-background-size="40%" class="quarto-title-block center">
   <h1 class="title">POLS 1600</h1>
-  <p class="subtitle">Statistical Inference<br>and Course Review</p>
+  <p class="subtitle">Statistical Inference &amp; Uncertainty II</p>
 
 <div class="quarto-title-authors">
 </div>
 
-  <p class="date">Updated Nov 6, 2025</p>
+  <p class="date">Updated Apr 13, 2026</p>
 </section>
 <section>
 <section id="overview" class="title-slide slide level1 inverse center">
@@ -1486,205 +1482,23 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <h2>Class Plan</h2>
 <ul>
 <li class="fragment">Announcements</li>
-<li class="fragment">Feedback</li>
-<li class="fragment">Course Review</li>
-<li class="fragment">Statistical Inference</li>
-<li class="fragment">Final Projects</li>
+<li class="fragment">Statistical Inference/Hypothesis Testing Continued</li>
+<li class="fragment">Discussion of Final Projects and Friday’s Lab</li>
 </ul>
 </section>
-<section id="annoucements" class="slide level2">
-<h2>Annoucements</h2>
+<section id="announcements" class="slide level2">
+<h2>Announcements</h2>
 <ul>
-<li class="fragment">Lab 11/<a href="https://pols1600.paultesta.org/assignments/a3" target="_blank">Assignment 3</a> this week</li>
-<li class="fragment">Next Tuesday, April 22, Work on Presentations/Drafts</li>
-<li class="fragment"><a href="https://pols1600.paultesta.org/assignments/a3" target="_blank">Assignment 4</a> now due April 25.</li>
-<li class="fragment">April 29, Final Workshop</li>
-<li class="fragment">May 1 Class Presentations</li>
+<li class="fragment">Lab 11 this week - give and receive feedback on your projects.</li>
+<li class="fragment">Final 2 lectures (Wednesday, Monday) - course review.</li>
+<li class="fragment"><a href="https://josephessig-source.github.io/pols1600_site/assignments/a4.html" target="_blank">Assignment 4</a> due Sunday April 19th</li>
+<li class="fragment">Next Wednesday, April 22, Work on converting draft into presentation</li>
 </ul>
-</section>
-<section id="setup-packages-for-today" class="slide level2">
-<h2>Setup: Packages for today</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="do">## Pacakges for today</span></span>
-<span id="cb1-2"><a></a>the_packages <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb1-3"><a></a>  <span class="do">## R Markdown</span></span>
-<span id="cb1-4"><a></a>  <span class="st">"kableExtra"</span>,<span class="st">"DT"</span>,<span class="st">"texreg"</span>,<span class="st">"htmltools"</span>,</span>
-<span id="cb1-5"><a></a>  <span class="do">## Tidyverse</span></span>
-<span id="cb1-6"><a></a>  <span class="st">"tidyverse"</span>, <span class="st">"lubridate"</span>, <span class="st">"forcats"</span>, <span class="st">"haven"</span>, <span class="st">"labelled"</span>,</span>
-<span id="cb1-7"><a></a>  <span class="do">## Extensions for ggplot</span></span>
-<span id="cb1-8"><a></a>  <span class="st">"ggmap"</span>,<span class="st">"ggrepel"</span>, <span class="st">"ggridges"</span>, <span class="st">"ggthemes"</span>, <span class="st">"ggpubr"</span>, </span>
-<span id="cb1-9"><a></a>  <span class="st">"patchwork"</span>,</span>
-<span id="cb1-10"><a></a>  <span class="st">"GGally"</span>, <span class="st">"scales"</span>, <span class="st">"dagitty"</span>, <span class="st">"ggdag"</span>, <span class="st">"ggforce"</span>,</span>
-<span id="cb1-11"><a></a>  <span class="co"># Data </span></span>
-<span id="cb1-12"><a></a>  <span class="st">"COVID19"</span>,<span class="st">"maps"</span>,<span class="st">"mapdata"</span>,<span class="st">"qss"</span>,<span class="st">"tidycensus"</span>, <span class="st">"dataverse"</span>, </span>
-<span id="cb1-13"><a></a>  <span class="co"># Analysis</span></span>
-<span id="cb1-14"><a></a>  <span class="st">"DeclareDesign"</span>, <span class="st">"easystats"</span>, <span class="st">"zoo"</span></span>
-<span id="cb1-15"><a></a>)</span>
-<span id="cb1-16"><a></a></span>
-<span id="cb1-17"><a></a><span class="do">## Define a function to load (and if needed install) packages</span></span>
-<span id="cb1-18"><a></a></span>
-<span id="cb1-19"><a></a>ipak <span class="ot">&lt;-</span> <span class="cf">function</span>(pkg){</span>
-<span id="cb1-20"><a></a>    new.pkg <span class="ot">&lt;-</span> pkg[<span class="sc">!</span>(pkg <span class="sc">%in%</span> <span class="fu">installed.packages</span>()[, <span class="st">"Package"</span>])]</span>
-<span id="cb1-21"><a></a>    <span class="cf">if</span> (<span class="fu">length</span>(new.pkg)) </span>
-<span id="cb1-22"><a></a>        <span class="fu">install.packages</span>(new.pkg, <span class="at">dependencies =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb1-23"><a></a>    <span class="fu">sapply</span>(pkg, require, <span class="at">character.only =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb1-24"><a></a>}</span>
-<span id="cb1-25"><a></a></span>
-<span id="cb1-26"><a></a><span class="do">## Install (if needed) and load libraries in the_packages</span></span>
-<span id="cb1-27"><a></a><span class="fu">ipak</span>(the_packages)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>   kableExtra            DT        texreg     htmltools     tidyverse 
-         TRUE          TRUE          TRUE          TRUE          TRUE 
-    lubridate       forcats         haven      labelled         ggmap 
-         TRUE          TRUE          TRUE          TRUE          TRUE 
-      ggrepel      ggridges      ggthemes        ggpubr     patchwork 
-         TRUE          TRUE          TRUE          TRUE          TRUE 
-       GGally        scales       dagitty         ggdag       ggforce 
-         TRUE          TRUE          TRUE          TRUE          TRUE 
-      COVID19          maps       mapdata           qss    tidycensus 
-         TRUE          TRUE          TRUE          TRUE          TRUE 
-    dataverse DeclareDesign     easystats           zoo 
-         TRUE          TRUE          TRUE          TRUE </code></pre>
-</div>
-</div>
 </section></section>
 <section>
 <section id="review" class="title-slide slide level1 inverse center">
 <h1><i class="fa-solid fa-magnifying-glass" aria-label="magnifying-glass"></i> Review</h1>
 
-</section>
-<section id="three-modes-of-inference" class="slide level2">
-<h2>Three Modes of Inference</h2>
-<ul>
-<li class="fragment"><p>Descriptive</p></li>
-<li class="fragment"><p>Causal</p></li>
-<li class="fragment"><p>Predictive</p></li>
-</ul>
-</section>
-<section id="descriptive-inference" class="slide level2 smaller">
-<h2>Descriptive Inference</h2>
-<blockquote>
-<p>Summarize distributions and relationships in data</p>
-</blockquote>
-<ul>
-<li class="fragment">You should know how to:
-<ul>
-<li class="fragment"><a href="https://pols1600.paultesta.org/slides/01-slides#/using-r-to-summarize-data" target="_blank">Calculate</a> and interpret measures:</li>
-<li class="fragment">Central Tendency</li>
-<li class="fragment">Dispersion</li>
-<li class="fragment">Association</li>
-</ul></li>
-<li class="fragment"><a href="https://pols1600.paultesta.org/slides/01-slides#/loading-data-into-r" target="_blank">Load</a>, <a href="https://pols1600.paultesta.org/slides/01-slides#/looking-at-your-data" target="_blank">look at</a>, <a href="https://pols1600.paultesta.org/slides/01-slides#/dplyr-functions-for-data-wrangling" target="_blank">wrangle</a>, and <a href="https://pols1600.paultesta.org/slides/01-slides#/describing-data-in-r" target="_blank">describe</a> data using:
-<ul>
-<li class="fragment">Tables</li>
-<li class="fragment">Figures</li>
-</ul></li>
-</ul>
-</section>
-<section id="data-wrangling" class="slide level2 smaller">
-<h2>Data Wrangling</h2>
-<blockquote>
-<p>The process of transforming data into a useable format</p>
-</blockquote>
-<p>You should know how to:</p>
-<ul>
-<li class="fragment">Load, look at,and transform data into R</li>
-<li class="fragment">Get a <a href="https://pols1600.paultesta.org/slides/01-slides#/hlos-allow-you-to" target="_blank">HLO</a> of the raw data:
-<ul>
-<li class="fragment">Unit of observation</li>
-<li class="fragment">Dimensions of the data</li>
-<li class="fragment">Quickly summarize the distributions and values of variables</li>
-</ul></li>
-<li class="fragment"><a href="https://pols1600.paultesta.org/labs/09-lab-comments#recode-the-data" target="_blank">Recode</a> the data to:
-<ul>
-<li class="fragment">Replace values as <code>NA</code>s</li>
-<li class="fragment">Create categories, indicators (0,1), and factors</li>
-<li class="fragment">Transform predictors (e.g.&nbsp;standardizing predictors)</li>
-</ul></li>
-<li class="fragment">Reshape the data
-<ul>
-<li class="fragment">Pivoting columns and rows</li>
-<li class="fragment">Joining data sets together.</li>
-</ul></li>
-<li class="fragment"><a href="https://pols1600.paultesta.org/labs/02-lab-comments#reproduce-the-figure-from-lab-01" target="_blank">Aggregate</a> the data into <a href="https://pols1600.paultesta.org/labs/03-lab-comments#calculate-the-average-treatment-effect" target="_blank">summaries</a></li>
-</ul>
-</section>
-<section id="data-visualization" class="slide level2 smaller">
-<h2>Data Visualization</h2>
-<blockquote>
-<p>A tool for describing distributions and relationships</p>
-</blockquote>
-<p>You should know:</p>
-<ul>
-<li class="fragment">The <a href="https://pols1600.paultesta.org/slides/02-slides#/the-grammar-of-graphics" target="_blank">grammar of graphics</a>:
-<ul>
-<li class="fragment">Data</li>
-<li class="fragment">Aesthetic mappings</li>
-<li class="fragment">Geometries</li>
-</ul></li>
-<li class="fragment">How to <a href="https://pols1600.paultesta.org/slides/02-slides#/describing-distributions-and-associations" target="_blank">generate common plots</a> to describe:
-<ul>
-<li class="fragment">Distributions</li>
-<li class="fragment">Relationships</li>
-</ul></li>
-</ul>
-</section>
-<section id="causal-inference" class="slide level2 smaller">
-<h2>Causal Inference</h2>
-<blockquote>
-<p>Causal Inference requires counterfactual comparisons</p>
-</blockquote>
-<p>You should know:</p>
-<ul>
-<li class="fragment"><p><a href="https://pols1600.paultesta.org/slides/03-slides#/potential-outcomes-notation" target="_blank">Potential outcomes</a> and <a href="https://pols1600.paultesta.org/slides/05-slides#/directed-acyclic-graphs-1" target="_blank">DAGs</a></p></li>
-<li class="fragment"><p>The <a href="https://pols1600.paultesta.org/slides/03-slides#/fundamental-problem-of-causal-inference" target="_blank">fundamental problem of causal inference</a></p></li>
-<li class="fragment"><p>Bias caused by:</p>
-<ul>
-<li class="fragment"><a href="https://pols1600.paultesta.org/slides/05-slides#/section-1" target="_blank">Confounding</a> (Coffee and Cancer)</li>
-<li class="fragment"><a href="https://pols1600.paultesta.org/slides/05-slides#/section-2" target="_blank">Colliding</a> (Dating Jerks)</li>
-</ul></li>
-<li class="fragment"><p>Casual Identification in:</p>
-<ul>
-<li class="fragment"><a href="https://pols1600.paultesta.org/slides/03-slides#/causal-identification-with-experimental-designs" target="_blank">Experimental</a> designs</li>
-<li class="fragment"><a href="https://pols1600.paultesta.org/slides/05-slides#/observational-designs" target="_blank">Observational</a> designs</li>
-</ul></li>
-</ul>
-</section>
-<section id="prediction-with-linear-models" class="slide level2 smaller">
-<h2>Prediction with Linear Models</h2>
-<blockquote>
-<p>Linear regression provides a linear estimate of the conditional expectation function</p>
-</blockquote>
-<p>You should know:</p>
-<ul>
-<li class="fragment"><p><a href="https://pols1600.paultesta.org/slides/05-slides#/understanding-linear-regression" target="_blank">How linear regression works</a></p></li>
-<li class="fragment"><p><a href="https://pols1600.paultesta.org/slides/07-slides.html#/regression-models-partition-variance" target="_blank">What it means to control for</a> predictors in a multiple regression</p></li>
-<li class="fragment"><p>When and <a href="https://pols1600.paultesta.org/slides/05-slides#/when-to-control-for-a-variable" target="_blank">why we should control</a> for predictors.</p></li>
-<li class="fragment"><p>How to translate <span class="blue">substantive claims</span> into <a href="https://pols1600.paultesta.org/labs/06-lab-comments#estimate-a-model-controlling-for-age" target="_blank">empirical expectations</a> for our models</p></li>
-<li class="fragment"><p>How to <span class="blue">estimate and interpret</span> these models using <a href="https://pols1600.paultesta.org/labs/06-lab-comments#display-the-model-as-a-regression-table" target="_blank">tables</a> and <a href="https://pols1600.paultesta.org/labs/10-lab-comments#visualize-predicted-values" target="_blank">figures</a></p></li>
-<li class="fragment"><p>How to <span class="blue">quantify uncertainty</span> about these estimates using <a href="https://pols1600.paultesta.org/slides/10-slides#/confidence-intervals-1" target="_blank">confidence intervals</a> and <a href="https://pols1600.paultesta.org/slides/10-slides#/what-is-a-hypothesis-test" target="_blank">hypothesis tests</a>.</p></li>
-</ul>
-</section></section>
-<section>
-<section id="quantifying-uncertainty" class="title-slide slide level1 inverse center">
-<h1><i class="fa-solid fa-lightbulb" aria-label="lightbulb"></i> Quantifying Uncertainty</h1>
-
-</section>
-<section id="probability" class="slide level2 smaller">
-<h2>Probability</h2>
-<ul>
-<li class="fragment"><p><a href="https://pols1600.paultesta.org/slides/08-slides#/probability-1" target="_blank">Probability</a> describes the likelihood of an event</p></li>
-<li class="fragment"><p><a href="https://pols1600.paultesta.org/slides/08-slides#/random-variables" target="_blank">Random variables</a> assign numeric values to all the events that could occur.</p></li>
-<li class="fragment"><p><a href="https://pols1600.paultesta.org/slides/08-slides#/probability-distributions" target="_blank">Probability distributions</a> assign probabilities to every value of a random variable. Can be:</p>
-<ul>
-<li class="fragment">discrete</li>
-<li class="fragment">continuous</li>
-<li class="fragment">characterized by their expected values and variances</li>
-<li class="fragment">used to:</li>
-<li class="fragment">describe the <span class="blue">data generating process</span></li>
-<li class="fragment"><span class="blue">quantify uncertainty</span> about estimates</li>
-</ul></li>
-</ul>
 </section>
 <section id="sampling-distributions-and-standard-errors" class="slide level2 smaller">
 <h2>Sampling Distributions and Standard Errors</h2>
@@ -1693,12 +1507,12 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <ul>
 <li class="fragment">A distribution of what we could have seen</li>
 </ul></li>
-<li class="fragment"><p>A standard error is simply the standard deviation (<span class="math inline">\(\sigma\)</span>) of the sampling distribution</p>
+<li class="fragment"><p>A standard error is simply the standard deviation (<span class="math inline">\(\sigma\)</span>) of the sampling distribution of an estimator.</p>
 <ul>
 <li class="fragment">A measure of how much our estimate could have varied.</li>
 </ul></li>
 <li class="fragment"><p>Law of Large Numbers: As <span class="math inline">\(N \to \infty\)</span> <span class="math inline">\(\bar{x} \to \mu\)</span></p></li>
-<li class="fragment"><p>Central Limit Theorem: As <span class="math inline">\(N \to \infty\)</span> <span class="math inline">\(\bar{x} \sim \mathcal{N}(\mu, \sigma^2)\)</span></p></li>
+<li class="fragment"><p>Central Limit Theorem: As <span class="math inline">\(N \to \infty\)</span> <span class="math inline">\(\bar{x} \sim \mathcal{N}(\mu, \frac{\sigma^2}{n})\)</span></p></li>
 </ul>
 </section>
 <section id="confidence-intervals" class="slide level2 smaller">
@@ -1711,11 +1525,11 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <ul>
 <li class="fragment">Point Estimate (i.e.&nbsp;a mean, or coefficient)</li>
 <li class="fragment">Confidence Level (Often 95 percent by convention)</li>
-<li class="fragment">Margin of Error (+/- some range (typically 2*SD for 95 percent CI))</li>
+<li class="fragment">Margin of Error (+/- some range (typically 1.96*SE for 95 percent CI))</li>
 </ul></li>
 <li class="fragment">Confidence is about the interval
 <ul>
-<li class="fragment">95 percent of the intervals construct in this manner would contain the truth.</li>
+<li class="fragment">95 percent of the intervals constructed in this manner would contain the true parameter in repeated samples.</li>
 </ul></li>
 </ul>
 </section>
@@ -1723,7 +1537,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <h2>Hypothesis Testing</h2>
 <ul>
 <li class="fragment"><p>A hypothesis test quantifies how likely it is that we would observe what we did (our test statistic), if some claim about the world were true (our hypothesis, typically a null ).</p></li>
-<li class="fragment"><p>If our claim were true, then <span class="blue">under this null hypothesis</span>, our test statistic would have a distribution centered around the truth.</p></li>
+<li class="fragment"><p>If our claim were true, then <span class="blue">under this null hypothesis</span>, our test statistic would have a distribution centered around the null value.</p></li>
 <li class="fragment"><p>A <a href="" target="_blank">p-value</a> which describes the probability of observing a test statistic as extreme or more extreme in a world where our null hypothesis was true</p>
 <ul>
 <li class="fragment"><p>If our <span class="blue">p-value is small</span> (<span class="math inline">\(p &lt; 0.05\)</span>), we <span class="blue">reject the null</span> hypothesis</p>
@@ -1733,50 +1547,51 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 </section>
 <section id="section" class="slide level2 smaller">
 <h2></h2>
-<h4 id="relationship-between-cis-and-hypothsis-testing">Relationship between CIs and Hypothsis Testing</h4>
+<h4 id="relationship-between-cis-and-hypothesis-testing">Relationship between CIs and Hypothesis Testing</h4>
 <div class="panel-tabset">
 <ul id="tabset-1" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-1-1">Concept</a></li><li><a href="#tabset-1-2"><i class="fa-solid fa-code" aria-label="code"></i> Code</a></li><li><a href="#tabset-1-3"><i class="fa-solid fa-table" aria-label="table"></i> Table</a></li><li><a href="#tabset-1-4"><i class="fa-solid fa-chart-line" aria-label="chart-line"></i> Figure</a></li></ul>
 <div class="tab-content">
 <div id="tabset-1-1">
 <p>We can think of a confidence interval as a <span class="blue">range of hypotheses we would fail to reject</span> with <span class="math inline">\(p &lt; \alpha\)</span></p>
+<p>If a <span class="math inline">\(95\%\)</span> confidence interval excludes 0, the corresponding two-sided hypothesis test will reject at <span class="math inline">\(\alpha = 0.05\)</span></p>
 </div>
 <div id="tabset-1-2">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a><span class="co"># Load Data</span></span>
-<span id="cb3-2"><a></a><span class="fu">load</span>(<span class="fu">url</span>(<span class="st">"https://pols1600.paultesta.org/files/data/nes24.rda"</span>))</span>
-<span id="cb3-3"><a></a></span>
-<span id="cb3-4"><a></a><span class="co"># Fit Model</span></span>
-<span id="cb3-5"><a></a>m1 <span class="ot">&lt;-</span> <span class="fu">lm_robust</span>(dv_participation <span class="sc">~</span>   education <span class="sc">+</span> income, df,</span>
-<span id="cb3-6"><a></a>                <span class="at">se =</span> <span class="st">"classical"</span>)</span>
-<span id="cb3-7"><a></a></span>
-<span id="cb3-8"><a></a><span class="co"># Range of hypotheses for education</span></span>
-<span id="cb3-9"><a></a>pval_ci_df <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb3-10"><a></a>  <span class="co"># Hypothesized Betas for Education</span></span>
-<span id="cb3-11"><a></a>  <span class="at">Hypothesis =</span> <span class="fu">seq</span>(<span class="dv">0</span>, .<span class="dv">32</span>, <span class="at">length.out =</span> <span class="dv">100</span>),</span>
-<span id="cb3-12"><a></a>  <span class="co"># Test Statistics</span></span>
-<span id="cb3-13"><a></a>  <span class="at">Statistic =</span> (m1<span class="sc">$</span>coefficients[<span class="st">"education"</span>] <span class="sc">-</span> Hypothesis) <span class="sc">/</span></span>
-<span id="cb3-14"><a></a>  m1<span class="sc">$</span>std.error[<span class="st">"education"</span>],</span>
-<span id="cb3-15"><a></a>  <span class="co"># P-value for two sided test</span></span>
-<span id="cb3-16"><a></a>  <span class="st">`</span><span class="at">p-value</span><span class="st">`</span> <span class="ot">=</span> <span class="dv">2</span><span class="sc">*</span><span class="fu">pt</span>(<span class="fu">abs</span>(Statistic), <span class="at">df =</span> m1<span class="sc">$</span>df,<span class="at">lower.tail =</span> F)</span>
-<span id="cb3-17"><a></a>)</span>
-<span id="cb3-18"><a></a></span>
-<span id="cb3-19"><a></a>fig_pval_ci <span class="ot">&lt;-</span> pval_ci_df <span class="sc">%&gt;%</span> </span>
-<span id="cb3-20"><a></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(Hypothesis, <span class="st">`</span><span class="at">p-value</span><span class="st">`</span>))<span class="sc">+</span></span>
-<span id="cb3-21"><a></a>  <span class="fu">geom_line</span>()<span class="sc">+</span></span>
-<span id="cb3-22"><a></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> m1<span class="sc">$</span>coefficients[<span class="st">"education"</span>],</span>
-<span id="cb3-23"><a></a>             <span class="at">linetype =</span> <span class="st">"solid"</span>,</span>
-<span id="cb3-24"><a></a>             <span class="at">col =</span> <span class="st">"red"</span>)<span class="sc">+</span></span>
-<span id="cb3-25"><a></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> m1<span class="sc">$</span>conf.low[<span class="st">"education"</span>],</span>
-<span id="cb3-26"><a></a>             <span class="at">linetype =</span> <span class="st">"dotted"</span>)<span class="sc">+</span></span>
-<span id="cb3-27"><a></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> m1<span class="sc">$</span>conf.high[<span class="st">"education"</span>],</span>
-<span id="cb3-28"><a></a>             <span class="at">linetype =</span> <span class="st">"dotted"</span>)<span class="sc">+</span></span>
-<span id="cb3-29"><a></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="fl">0.05</span>,</span>
-<span id="cb3-30"><a></a>             <span class="at">linetype =</span> <span class="st">"dashed"</span>)<span class="sc">+</span></span>
-<span id="cb3-31"><a></a>  <span class="fu">labs</span>(</span>
-<span id="cb3-32"><a></a>    <span class="at">x =</span> <span class="st">"Hypothesized Education, Coefficent"</span>,</span>
-<span id="cb3-33"><a></a>    <span class="at">title =</span> <span class="st">"Confidence intervals are a range</span><span class="sc">\n</span><span class="st">of plausible hypotheses"</span></span>
-<span id="cb3-34"><a></a>  )<span class="sc">+</span></span>
-<span id="cb3-35"><a></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="co"># Load Data</span></span>
+<span id="cb1-2"><a></a><span class="fu">load</span>(<span class="fu">url</span>(<span class="st">"https://josephessig-source.github.io/pols1600_site/files/data/nes24.rda"</span>))</span>
+<span id="cb1-3"><a></a></span>
+<span id="cb1-4"><a></a><span class="co"># Fit Model</span></span>
+<span id="cb1-5"><a></a>m1 <span class="ot">&lt;-</span> <span class="fu">lm_robust</span>(dv_participation <span class="sc">~</span>   education <span class="sc">+</span> income, df,</span>
+<span id="cb1-6"><a></a>                <span class="at">se =</span> <span class="st">"classical"</span>)</span>
+<span id="cb1-7"><a></a></span>
+<span id="cb1-8"><a></a><span class="co"># Range of hypotheses for education</span></span>
+<span id="cb1-9"><a></a>pval_ci_df <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb1-10"><a></a>  <span class="co"># Hypothesized Betas for Education</span></span>
+<span id="cb1-11"><a></a>  <span class="at">Hypothesis =</span> <span class="fu">seq</span>(<span class="dv">0</span>, .<span class="dv">32</span>, <span class="at">length.out =</span> <span class="dv">100</span>),</span>
+<span id="cb1-12"><a></a>  <span class="co"># Test Statistics</span></span>
+<span id="cb1-13"><a></a>  <span class="at">Statistic =</span> (m1<span class="sc">$</span>coefficients[<span class="st">"education"</span>] <span class="sc">-</span> Hypothesis) <span class="sc">/</span></span>
+<span id="cb1-14"><a></a>  m1<span class="sc">$</span>std.error[<span class="st">"education"</span>],</span>
+<span id="cb1-15"><a></a>  <span class="co"># P-value for two sided test</span></span>
+<span id="cb1-16"><a></a>  <span class="st">`</span><span class="at">p-value</span><span class="st">`</span> <span class="ot">=</span> <span class="dv">2</span><span class="sc">*</span><span class="fu">pt</span>(<span class="fu">abs</span>(Statistic), <span class="at">df =</span> m1<span class="sc">$</span>df,<span class="at">lower.tail =</span> F)</span>
+<span id="cb1-17"><a></a>)</span>
+<span id="cb1-18"><a></a></span>
+<span id="cb1-19"><a></a>fig_pval_ci <span class="ot">&lt;-</span> pval_ci_df <span class="sc">%&gt;%</span> </span>
+<span id="cb1-20"><a></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(Hypothesis, <span class="st">`</span><span class="at">p-value</span><span class="st">`</span>))<span class="sc">+</span></span>
+<span id="cb1-21"><a></a>  <span class="fu">geom_line</span>()<span class="sc">+</span></span>
+<span id="cb1-22"><a></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> m1<span class="sc">$</span>coefficients[<span class="st">"education"</span>],</span>
+<span id="cb1-23"><a></a>             <span class="at">linetype =</span> <span class="st">"solid"</span>,</span>
+<span id="cb1-24"><a></a>             <span class="at">col =</span> <span class="st">"red"</span>)<span class="sc">+</span></span>
+<span id="cb1-25"><a></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> m1<span class="sc">$</span>conf.low[<span class="st">"education"</span>],</span>
+<span id="cb1-26"><a></a>             <span class="at">linetype =</span> <span class="st">"dotted"</span>)<span class="sc">+</span></span>
+<span id="cb1-27"><a></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> m1<span class="sc">$</span>conf.high[<span class="st">"education"</span>],</span>
+<span id="cb1-28"><a></a>             <span class="at">linetype =</span> <span class="st">"dotted"</span>)<span class="sc">+</span></span>
+<span id="cb1-29"><a></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="fl">0.05</span>,</span>
+<span id="cb1-30"><a></a>             <span class="at">linetype =</span> <span class="st">"dashed"</span>)<span class="sc">+</span></span>
+<span id="cb1-31"><a></a>  <span class="fu">labs</span>(</span>
+<span id="cb1-32"><a></a>    <span class="at">x =</span> <span class="st">"Hypothesized Education, Coefficent"</span>,</span>
+<span id="cb1-33"><a></a>    <span class="at">title =</span> <span class="st">"Confidence intervals are a range</span><span class="sc">\n</span><span class="st">of plausible hypotheses"</span></span>
+<span id="cb1-34"><a></a>  )<span class="sc">+</span></span>
+<span id="cb1-35"><a></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 <div id="tabset-1-3">
@@ -1938,8 +1753,13 @@ RMSE
 <h2>Type 1 and 2 Errors</h2>
 
 <img data-src="https://miro.medium.com/max/1400/1*uF5aBZ63BZ8IDEyF8wo-CA.png" class="r-stretch"><p><a href="https://towardsdatascience.com/a-general-guidance-of-hypothesis-testing-7cab119ca999" target="_blank">Source</a></p>
+</section></section>
+<section>
+<section id="statistical-power" class="title-slide slide level1 center">
+<h1>Statistical Power</h1>
+
 </section>
-<section id="statistical-power" class="slide level2 smaller">
+<section id="statistical-power-1" class="slide level2">
 <h2>Statistical Power</h2>
 <div id="qwebr-insertion-location-1"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
@@ -1982,2540 +1802,359 @@ RMSE
 </ul></li>
 <li class="fragment">The distribution of the data
 <ul>
-<li class="fragment">Variance, asympotitc approximations</li>
+<li class="fragment">Variance, asymptotic approximations</li>
 </ul></li>
 </ul>
 </div>
 </div>
 </div>
+</section>
+<section id="paths-to-statistical-inference" class="slide level2 smaller">
+<h2>Paths to Statistical Inference</h2>
+<p>Whether we use math, bootstrapping, or shuffling, the goal of statistical inference is exactly the same: quantifying our uncertainty.</p>
+<ul>
+<li class="fragment"><strong>1. Asymptotic Inference</strong>
+<ul>
+<li class="fragment">We use the Central Limit Theorem and to <em>assume</em> a theoretical distribution (like the <span class="math inline">\(t\)</span>-distribution).</li>
+<li class="fragment">Compare the observed test statistic to the assumed sampling distribution under the null.</li>
+<li class="fragment"><strong>Best for:</strong> Large samples with well-behaved data. Very fast.</li>
+</ul></li>
+<li class="fragment"><strong>2. Bootstrapping (Using Resampling)</strong>
+<ul>
+<li class="fragment">We draw new samples <em>with replacement</em> from our data to mimic drawing new samples from the population.</li>
+<li class="fragment">Compare the observed test statistic to the <em>empirical</em> approximation of the sampling distribution.</li>
+<li class="fragment"><strong>Best for:</strong> Constructing <strong>Confidence Intervals</strong> and Standard Errors without relying on strict assumptions.</li>
+</ul></li>
+<li class="fragment"><strong>3. Randomization Inference (Permutation)</strong>
+<ul>
+<li class="fragment">We shuffle the treatment labels <em>without replacement</em> to simulate a world where the treatment has no effect.</li>
+<li class="fragment">Centers on the <em>null hypothesis</em>.</li>
+<li class="fragment"><strong>Best for:</strong> Calculating exact <strong><span class="math inline">\(p\)</span>-values</strong> and testing hypotheses, especially in experiments with small samples.</li>
+</ul></li>
+</ul>
 </section></section>
 <section>
-<section id="final-projects" class="title-slide slide level1 inverse center">
-<h1><i class="fa-solid fa-lightbulb" aria-label="lightbulb"></i> Final Projects</h1>
+<section id="randomization-inference" class="title-slide slide level1 inverse center">
+<h1><i class="fa-solid fa-mug-hot" aria-label="mug-hot"></i> Randomization Inference</h1>
 
 </section>
-<section id="strucutre-of-final-paper-and-drafts" class="slide level2 smaller scrollable">
-<h2>Strucutre of Final Paper and Drafts</h2>
-<p><a href="https://pols1600.paultesta.org/assignments/a4" target="_blank">Assignment 4:</a> Seven sections</p>
-<ol type="1">
-<li class="fragment">Introduction (5 percent, ~ 4 paragraphs)</li>
-<li class="fragment">Theory and Expectations (10 percent, ~4+ paragraphs)</li>
-<li class="fragment">Data (20 percent ~ 4+ paragraphs)</li>
-<li class="fragment">Design (25 percent ~ 5+ paragraphs)</li>
-<li class="fragment">Results (25 percent ~ 5+ paragraphs)</li>
-<li class="fragment">Conclusion (5 percent ~ 3+ paragraphs)</li>
-<li class="fragment">Appendix (10 percent ~ Variable codebook and all the R code for your project)</li>
-</ol>
-</section>
-<section id="for-thursday" class="slide level2 smaller scrollable">
-<h2>For Thursday</h2>
+<section id="the-lady-tasting-tea" class="slide level2 smaller">
+<h2>The Lady Tasting Tea</h2>
 <ul>
-<li class="fragment"><p><a href="https://pols1600.paultesta.org/assignments/a3" target="_blank">Assignment 3</a></p></li>
-<li class="fragment"><p><a href="https://pols1600.paultesta.org/assignments/pols1600_paper_template.qmd" target="_blank">Download template</a></p></li>
-<li class="fragment"><p>Create shared google drive.</p></li>
-<li class="fragment"><p>Make progress on:</p>
+<li class="fragment"><strong>The Claim:</strong> In the 1920s, Dr.&nbsp;Muriel Bristol claimed she could taste whether milk or tea was poured into her cup first.</li>
+<li class="fragment"><strong>The Experiment:</strong> Ronald Fisher prepared 8 cups of tea.
 <ul>
-<li class="fragment"><ol start="3" type="1">
-<li class="fragment"><strong>Data</strong> (20 percent ~ 4+ paragraphs)</li>
-</ol></li>
-<li class="fragment"><ol start="4" type="1">
-<li class="fragment"><em>Design</em> (25 percent ~ 5+ paragraphs)</li>
-</ol></li>
-<li class="fragment"><ol start="5" type="1">
-<li class="fragment"><strong>Results</strong> (25 percent ~ 5+ paragraphs)</li>
-</ol></li>
+<li class="fragment">4 had milk poured first.</li>
+<li class="fragment">4 had tea poured first.</li>
+<li class="fragment">The cups were presented in a random, blinded order.</li>
 </ul></li>
+<li class="fragment"><strong>The Task:</strong> Identify the 4 cups that had milk poured first.</li>
+<li class="fragment"><strong>The Null Hypothesis (</strong><span class="math inline">\(H_0\)</span><strong>):</strong> She has no tasting ability; she is just guessing blindly.</li>
 </ul>
 </section>
-<section id="motivating-questions" class="slide level2 smaller">
-<h2>Motivating Questions</h2>
-<p>In the reset of today’s class, we’ll get some practice putting together the various skills you need for your drafts by exploring the following:</p>
+<section id="permutations" class="slide level2 smaller">
+<h2>Permutations</h2>
 <ul>
-<li class="fragment"><p>How does partisanship shape American’s perceptions of vaccines?</p></li>
-<li class="fragment"><p>Who is skeptical of the benefits of vaccination?</p></li>
-<li class="fragment"><p>Have these perceptions about vaccines changed over time?</p></li>
-</ul>
-</section>
-<section id="tasks" class="slide level2 smaller">
-<h2>Tasks:</h2>
-<p>To explore these questions, we need to</p>
-<ul>
-<li class="fragment"><p>Get setup to work</p></li>
-<li class="fragment"><p>Load our data</p></li>
-<li class="fragment"><p>Recode our data</p></li>
-<li class="fragment"><p>Summarize our data</p></li>
-<li class="fragment"><p>Specify our expectations</p></li>
-<li class="fragment"><p>Estimate models to test these expectations</p></li>
-<li class="fragment"><p>Present and interpret results using</p>
-<ul>
-<li class="fragment">Tables</li>
-<li class="fragment">Figures</li>
-<li class="fragment">Confidence intervals</li>
-<li class="fragment">Hypothesis tests</li>
-</ul></li>
-</ul>
-</section>
-<section id="new-packages" class="slide level2">
-<h2>New packages</h2>
-<p>To easily load survey data for our question, we’ll need the <code>anesr</code> package, which loads data from the American National Election Studies into R</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a><span class="co"># # Uncomment to uninstall package to download NES survey data</span></span>
-<span id="cb4-2"><a></a><span class="co"># library(devtools)</span></span>
-<span id="cb4-3"><a></a><span class="co"># install_github("jamesmartherus/anesr")</span></span>
-<span id="cb4-4"><a></a><span class="fu">require</span>(anesr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="packages-for-today" class="slide level2">
-<h2>Packages for today</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a><span class="do">## Pacakges for today</span></span>
-<span id="cb5-2"><a></a>the_packages <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb5-3"><a></a>  <span class="do">## R Markdown</span></span>
-<span id="cb5-4"><a></a>  <span class="st">"kableExtra"</span>,<span class="st">"DT"</span>,<span class="st">"texreg"</span>,<span class="st">"htmltools"</span>,</span>
-<span id="cb5-5"><a></a>  <span class="do">## Tidyverse</span></span>
-<span id="cb5-6"><a></a>  <span class="st">"tidyverse"</span>, <span class="st">"lubridate"</span>, <span class="st">"forcats"</span>, <span class="st">"haven"</span>, <span class="st">"labelled"</span>,</span>
-<span id="cb5-7"><a></a>  <span class="do">## Extensions for ggplot</span></span>
-<span id="cb5-8"><a></a>  <span class="st">"ggmap"</span>,<span class="st">"ggrepel"</span>, <span class="st">"ggridges"</span>, <span class="st">"ggthemes"</span>, <span class="st">"ggpubr"</span>, </span>
-<span id="cb5-9"><a></a>  <span class="st">"patchwork"</span>,</span>
-<span id="cb5-10"><a></a>  <span class="st">"GGally"</span>, <span class="st">"scales"</span>, <span class="st">"dagitty"</span>, <span class="st">"ggdag"</span>, <span class="st">"ggforce"</span>,</span>
-<span id="cb5-11"><a></a>  <span class="co"># Data </span></span>
-<span id="cb5-12"><a></a>  <span class="st">"COVID19"</span>,<span class="st">"maps"</span>,<span class="st">"mapdata"</span>,<span class="st">"qss"</span>,<span class="st">"tidycensus"</span>, <span class="st">"dataverse"</span>, </span>
-<span id="cb5-13"><a></a>  <span class="co"># Analysis</span></span>
-<span id="cb5-14"><a></a>  <span class="st">"DeclareDesign"</span>, <span class="st">"easystats"</span>, <span class="st">"zoo"</span></span>
-<span id="cb5-15"><a></a>)</span>
-<span id="cb5-16"><a></a></span>
-<span id="cb5-17"><a></a><span class="do">## Define a function to load (and if needed install) packages</span></span>
-<span id="cb5-18"><a></a></span>
-<span id="cb5-19"><a></a>ipak <span class="ot">&lt;-</span> <span class="cf">function</span>(pkg){</span>
-<span id="cb5-20"><a></a>    new.pkg <span class="ot">&lt;-</span> pkg[<span class="sc">!</span>(pkg <span class="sc">%in%</span> <span class="fu">installed.packages</span>()[, <span class="st">"Package"</span>])]</span>
-<span id="cb5-21"><a></a>    <span class="cf">if</span> (<span class="fu">length</span>(new.pkg)) </span>
-<span id="cb5-22"><a></a>        <span class="fu">install.packages</span>(new.pkg, <span class="at">dependencies =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb5-23"><a></a>    <span class="fu">sapply</span>(pkg, require, <span class="at">character.only =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb5-24"><a></a>}</span>
-<span id="cb5-25"><a></a></span>
-<span id="cb5-26"><a></a><span class="do">## Install (if needed) and load libraries in the_packages</span></span>
-<span id="cb5-27"><a></a><span class="fu">ipak</span>(the_packages)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>   kableExtra            DT        texreg     htmltools     tidyverse 
-         TRUE          TRUE          TRUE          TRUE          TRUE 
-    lubridate       forcats         haven      labelled         ggmap 
-         TRUE          TRUE          TRUE          TRUE          TRUE 
-      ggrepel      ggridges      ggthemes        ggpubr     patchwork 
-         TRUE          TRUE          TRUE          TRUE          TRUE 
-       GGally        scales       dagitty         ggdag       ggforce 
-         TRUE          TRUE          TRUE          TRUE          TRUE 
-      COVID19          maps       mapdata           qss    tidycensus 
-         TRUE          TRUE          TRUE          TRUE          TRUE 
-    dataverse DeclareDesign     easystats           zoo 
-         TRUE          TRUE          TRUE          TRUE </code></pre>
-</div>
-</div>
-</section>
-<section id="data" class="slide level2 smaller">
-<h2>Data</h2>
-<p>Now that we have <code>anesr</code> installed, let’s load data from the 2016 and 2020 National Election Studies:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a><span class="co"># Load data</span></span>
-<span id="cb7-2"><a></a><span class="fu">data</span>(timeseries_2016, <span class="at">package =</span> <span class="st">"anesr"</span>)</span>
-<span id="cb7-3"><a></a><span class="fu">data</span>(timeseries_2020, <span class="at">package =</span> <span class="st">"anesr"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>And copy those data frames into new dataframes with shorter names</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a><span class="co"># Rename datasets</span></span>
-<span id="cb8-2"><a></a>nes16 <span class="ot">&lt;-</span> timeseries_2016</span>
-<span id="cb8-3"><a></a>nes20 <span class="ot">&lt;-</span> timeseries_2020</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="finding-variables-outcomes" class="slide level2 smaller">
-<h2>Finding variables: Outcomes</h2>
-<p>Our primary outcome of interest are beliefs about vaccines.</p>
-<p>Variables <code>V162162x</code> in the 2016 NES and <code>V202383x</code> in the 2020 NES will serve as our primary outcome of interest, summarizing respondents answer to the following question:</p>
-<blockquote>
-<p>Do the health benefits of vaccinations generally outweigh the risks, do the risks outweigh the benefits, or is there no difference?</p>
-</blockquote>
-</section>
-<section id="finding-variables-predictors" class="slide level2 smaller">
-<h2>Finding variables: Predictors</h2>
-<p>Similarly, <code>V161158x</code> in the 2016 NES and <code>V201231x</code> in the 2020 NES will serve our key predictor (respondent’s partisanship).</p>
-<p>Finally, we’ll control respondents’ age, using <code>V161267</code> in the 2016 NES and <code>V201507x</code> in the 2020 NES</p>
-</section>
-<section id="examine-distributions-vaccine-beliefs" class="slide level2 smaller">
-<h2>Examine Distributions: Vaccine Beliefs</h2>
-<p>The variables in the NES datasets are of a class <code>labelled</code> which allows numeric values to have substantive labels</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a><span class="fu">class</span>(nes16<span class="sc">$</span>V162162x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "haven_labelled"</code></pre>
-</div>
-</div>
-<p>Our outcome variable has the following labels:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a>labelled<span class="sc">::</span><span class="fu">val_labels</span>(nes16<span class="sc">$</span>V162162x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>                                   -9. Refused 
-                                            -9 
-                                -8. Don't know 
-                                            -8 
--7. No post data, deleted due to incomplete IW 
-                                            -7 
-                -6. No post-election interview 
-                                            -6 
-                      1. Benefits much greater 
-                                             1 
-                2. Benefits moderately greater 
-                                             2 
-                  3. Benefits slightly greater 
-                                             3 
-                              4. No difference 
-                                             4 
-                     5. Risks slightly greater 
-                                             5 
-                   6. Risks moderately greater 
-                                             6 
-                         7. Risks much greater 
-                                             7 </code></pre>
-</div>
-</div>
-<p>And distribution of responses:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a><span class="fu">table</span>(nes16<span class="sc">$</span>V162162x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-  -9   -8   -7   -6    1    2    3    4    5    6    7 
-  21   28   86  536 1687  726  258  539   96  211   82 </code></pre>
-</div>
-</div>
-</section>
-<section id="recoding-outcome-variables" class="slide level2">
-<h2>Recoding outcome variables</h2>
-<div class="panel-tabset">
-<ul id="tabset-3" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-3-1">Tasks</a></li><li><a href="#tabset-3-2"><i class="fa-solid fa-code" aria-label="code"></i> Code</a></li></ul>
-<div class="tab-content">
-<div id="tabset-3-1">
-<p>What transformations do we need to make to <code>V162162x</code> in <code>nes16</code> and <code>V202383x</code> in <code>nes20</code> so that these variables are suitable for analysis?</p>
-<ul>
-<li class="fragment"><p>Recode negative values to be <code>NA</code></p></li>
-<li class="fragment"><p>Reverse code so that higher values indicate greater belief vaccines benefits</p></li>
-<li class="fragment"><p>Create an indicator of people who are vaccine skeptics</p></li>
-</ul>
-</div>
-<div id="tabset-3-2">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a></a>nes16 <span class="sc">%&gt;%</span></span>
-<span id="cb15-2"><a></a>  <span class="fu">mutate</span>(</span>
-<span id="cb15-3"><a></a>    <span class="co"># Make Negative values NA, Reverse Code So Higher Values = Benefits &gt; Risks</span></span>
-<span id="cb15-4"><a></a>    <span class="at">vaccine_benefits =</span> <span class="fu">ifelse</span>(V162162x <span class="sc">&lt;</span> <span class="dv">0</span>, <span class="cn">NA</span>, (V162162x<span class="dv">-8</span>)<span class="sc">*-</span><span class="dv">1</span>),</span>
-<span id="cb15-5"><a></a>    <span class="co"># Indicator of vaccine skepticism (Risks &gt; Benefits)</span></span>
-<span id="cb15-6"><a></a>    <span class="at">vaccine_skeptic01 =</span> <span class="fu">case_when</span>(</span>
-<span id="cb15-7"><a></a>      vaccine_benefits <span class="sc">&gt;</span> <span class="dv">4</span> <span class="sc">~</span> <span class="dv">0</span>,</span>
-<span id="cb15-8"><a></a>      vaccine_benefits <span class="sc">&lt;=</span> <span class="dv">4</span> <span class="sc">~</span> <span class="dv">1</span>,</span>
-<span id="cb15-9"><a></a>      <span class="cn">TRUE</span> <span class="sc">~</span> <span class="cn">NA_real_</span></span>
-<span id="cb15-10"><a></a>    )</span>
-<span id="cb15-11"><a></a>  ) <span class="ot">-&gt;</span> nes16 <span class="co"># Save recodes to nes16</span></span>
-<span id="cb15-12"><a></a></span>
-<span id="cb15-13"><a></a>nes20 <span class="sc">%&gt;%</span></span>
-<span id="cb15-14"><a></a>  <span class="fu">mutate</span>(</span>
-<span id="cb15-15"><a></a>    <span class="co"># Make Negative values NA, Reverse Code So Higher Values = Benefits &gt; Risks</span></span>
-<span id="cb15-16"><a></a>    <span class="at">vaccine_benefits =</span> <span class="fu">ifelse</span>(V202383x <span class="sc">&lt;</span> <span class="dv">0</span>, <span class="cn">NA</span>, (V202383x<span class="dv">-8</span>)<span class="sc">*-</span><span class="dv">1</span>),</span>
-<span id="cb15-17"><a></a>    <span class="co"># Indicator of vaccine skepticism (Risks &gt; Benefits)</span></span>
-<span id="cb15-18"><a></a>    <span class="at">vaccine_skeptic01 =</span> <span class="fu">case_when</span>(</span>
-<span id="cb15-19"><a></a>      vaccine_benefits <span class="sc">&gt;</span> <span class="dv">4</span> <span class="sc">~</span> <span class="dv">0</span>,</span>
-<span id="cb15-20"><a></a>      vaccine_benefits <span class="sc">&lt;=</span> <span class="dv">4</span> <span class="sc">~</span> <span class="dv">1</span>,</span>
-<span id="cb15-21"><a></a>      <span class="cn">TRUE</span> <span class="sc">~</span> <span class="cn">NA_real_</span></span>
-<span id="cb15-22"><a></a>    )</span>
-<span id="cb15-23"><a></a>  ) <span class="ot">-&gt;</span> nes20 <span class="co"># Save recodes to nes20</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="recoding-predictors" class="slide level2">
-<h2>Recoding Predictors</h2>
-<div class="panel-tabset">
-<ul id="tabset-4" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-4-1">Tasks</a></li><li><a href="#tabset-4-2"><i class="fa-solid fa-code" aria-label="code"></i> Code</a></li></ul>
-<div class="tab-content">
-<div id="tabset-4-1">
-<p>Now we repeat this process for our key predictor, partisanship.</p>
-<ul>
-<li><p>Recode partisanship variables <code>V161158x</code> in <code>nes16</code> and <code>V201231x</code> in <code>nes20</code></p></li>
-<li><p>Create indicators from this recoded variable that classify partisanship as categorical variable (with Democrats as the reference category)</p></li>
-</ul>
-<p>And our covariate, age variables <code>V161267</code> in <code>nes16</code> and <code>V201507x</code> in <code>nes20</code></p>
-<ul>
-<li>Recode negative values to be <code>NA</code></li>
-</ul>
-</div>
-<div id="tabset-4-2">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a></a>nes16 <span class="sc">%&gt;%</span></span>
-<span id="cb16-2"><a></a>  <span class="fu">mutate</span>(</span>
-<span id="cb16-3"><a></a>    <span class="at">pid =</span> <span class="fu">ifelse</span>(V161158x <span class="sc">&lt;</span> <span class="dv">0</span>, <span class="cn">NA</span>, V161158x),</span>
-<span id="cb16-4"><a></a>    <span class="at">pid3cat =</span> <span class="fu">case_when</span>(</span>
-<span id="cb16-5"><a></a>      pid <span class="sc">&lt;</span> <span class="dv">4</span> <span class="sc">~</span> <span class="st">"Democrat"</span>,</span>
-<span id="cb16-6"><a></a>      pid <span class="sc">==</span> <span class="dv">4</span> <span class="sc">~</span> <span class="st">"Independent"</span>,</span>
-<span id="cb16-7"><a></a>      pid <span class="sc">&gt;</span> <span class="dv">4</span> <span class="sc">~</span> <span class="st">"Republican"</span>,</span>
-<span id="cb16-8"><a></a>      <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">"Independent"</span></span>
-<span id="cb16-9"><a></a>    ) <span class="sc">%&gt;%</span> <span class="fu">factor</span>(., <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Democrat"</span>,<span class="st">"Independent"</span>,<span class="st">"Republican"</span>)),</span>
-<span id="cb16-10"><a></a>    <span class="at">age =</span> <span class="fu">ifelse</span>(V161267 <span class="sc">&lt;</span> <span class="dv">0</span>, <span class="cn">NA</span>, V161267)</span>
-<span id="cb16-11"><a></a>  ) <span class="ot">-&gt;</span> nes16</span>
-<span id="cb16-12"><a></a></span>
-<span id="cb16-13"><a></a><span class="do">## Recoding Partisanship (V201231x) in 2020 NES</span></span>
-<span id="cb16-14"><a></a></span>
-<span id="cb16-15"><a></a>nes20 <span class="sc">%&gt;%</span></span>
-<span id="cb16-16"><a></a>  <span class="fu">mutate</span>(</span>
-<span id="cb16-17"><a></a>    <span class="at">pid =</span> <span class="fu">ifelse</span>(V201231x <span class="sc">&lt;</span> <span class="dv">0</span>, <span class="cn">NA</span>, V201231x),</span>
-<span id="cb16-18"><a></a>    <span class="at">pid3cat =</span> <span class="fu">case_when</span>(</span>
-<span id="cb16-19"><a></a>      pid <span class="sc">&lt;</span> <span class="dv">4</span> <span class="sc">~</span> <span class="st">"Democrat"</span>,</span>
-<span id="cb16-20"><a></a>      pid <span class="sc">==</span> <span class="dv">4</span> <span class="sc">~</span> <span class="st">"Independent"</span>,</span>
-<span id="cb16-21"><a></a>      pid <span class="sc">&gt;</span> <span class="dv">4</span> <span class="sc">~</span> <span class="st">"Republican"</span>,</span>
-<span id="cb16-22"><a></a>      <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">"Independent"</span></span>
-<span id="cb16-23"><a></a>    ) <span class="sc">%&gt;%</span> <span class="fu">factor</span>(., <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Democrat"</span>,<span class="st">"Independent"</span>,<span class="st">"Republican"</span>)),</span>
-<span id="cb16-24"><a></a>    <span class="at">age =</span> <span class="fu">ifelse</span>(V201507x <span class="sc">&lt;</span> <span class="dv">0</span>, <span class="cn">NA</span>, V201507x)</span>
-<span id="cb16-25"><a></a>  ) <span class="ot">-&gt;</span> nes20</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="progress-report" class="slide level2 smaller">
-<h2>Progress Report</h2>
-<p>To explore these questions, we need to</p>
-<ul>
-<li class="fragment"><p><em>Get setup to work</em> ✅</p></li>
-<li class="fragment"><p><em>Load our data</em> ✅</p></li>
-<li class="fragment"><p><em>Recode our data</em> ✅</p></li>
-<li class="fragment"><p><strong>Summarize our data</strong>📥</p></li>
-<li class="fragment"><p>Specify our expectations</p></li>
-<li class="fragment"><p>Estimate models to test these expectations</p></li>
-<li class="fragment"><p>Presenting and interpreting results using</p>
-<ul>
-<li class="fragment">Tables</li>
-<li class="fragment">Figures</li>
-<li class="fragment">Confidence intervals</li>
-<li class="fragment">Hypothesis tests</li>
-</ul></li>
-</ul>
-</section>
-<section id="descriptive-statistics-2016" class="slide level2 smaller scrollable">
-<h2>Descriptive statistics (2016)</h2>
-<div class="panel-tabset">
-<ul id="tabset-5" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-5-1">Tasks</a></li><li><a href="#tabset-5-2"><i class="fa-solid fa-code" aria-label="code"></i> Code</a></li><li><a href="#tabset-5-3"><i class="fa-solid fa-table" aria-label="table"></i> Table</a></li></ul>
-<div class="tab-content">
-<div id="tabset-5-1">
-<ol type="1">
-<li class="fragment"><p>Create <code>the_vars</code></p></li>
-<li class="fragment"><p>Select these variables</p></li>
-<li class="fragment"><p>Pivot the data</p></li>
-<li class="fragment"><p>Calculate summary statistics</p></li>
-<li class="fragment"><p>Format as an html table</p></li>
-</ol>
-</div>
-<div id="tabset-5-2">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a></a><span class="co"># 1. Create a object with the names of the variables you want to summarize</span></span>
-<span id="cb17-2"><a></a>the_vars <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"vaccine_skeptic01"</span>,<span class="st">"pid"</span>,<span class="st">"age"</span>)</span>
-<span id="cb17-3"><a></a><span class="co"># 2. Select these variables</span></span>
-<span id="cb17-4"><a></a>nes16 <span class="sc">%&gt;%</span></span>
-<span id="cb17-5"><a></a>  <span class="fu">select</span>(<span class="fu">all_of</span>(the_vars)) <span class="sc">%&gt;%</span></span>
-<span id="cb17-6"><a></a><span class="co"># 3. Pivot the data</span></span>
-<span id="cb17-7"><a></a>  <span class="fu">pivot_longer</span>(</span>
-<span id="cb17-8"><a></a>    <span class="at">cols =</span> <span class="fu">all_of</span>(the_vars),</span>
-<span id="cb17-9"><a></a>    <span class="at">names_to =</span> <span class="st">"Variable"</span></span>
-<span id="cb17-10"><a></a>  )<span class="sc">%&gt;%</span></span>
-<span id="cb17-11"><a></a>  <span class="fu">mutate</span>(</span>
-<span id="cb17-12"><a></a>    <span class="at">Variable =</span> <span class="fu">factor</span>(Variable, <span class="at">levels =</span> the_vars)</span>
-<span id="cb17-13"><a></a>  )<span class="sc">%&gt;%</span></span>
-<span id="cb17-14"><a></a>  <span class="fu">arrange</span>(Variable)<span class="sc">%&gt;%</span></span>
-<span id="cb17-15"><a></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(Variable)<span class="sc">%&gt;%</span></span>
-<span id="cb17-16"><a></a>  <span class="co"># 3. Calculate summary statistics</span></span>
-<span id="cb17-17"><a></a>  dplyr<span class="sc">::</span><span class="fu">summarise</span>(</span>
-<span id="cb17-18"><a></a>    <span class="at">min =</span> <span class="fu">min</span>(value, <span class="at">na.rm=</span>T),</span>
-<span id="cb17-19"><a></a>    <span class="at">p25 =</span> <span class="fu">quantile</span>(value, <span class="at">na.rm=</span>T, <span class="at">prob =</span> <span class="fl">0.25</span>),</span>
-<span id="cb17-20"><a></a>    <span class="at">Median =</span> <span class="fu">quantile</span>(value, <span class="at">na.rm=</span>T, <span class="at">prob =</span> <span class="fl">0.5</span>),</span>
-<span id="cb17-21"><a></a>    <span class="at">mean =</span> <span class="fu">mean</span>(value, <span class="at">na.rm=</span>T),</span>
-<span id="cb17-22"><a></a>    <span class="at">p75 =</span> <span class="fu">quantile</span>(value, <span class="at">na.rm=</span>T, <span class="at">prob =</span> <span class="fl">0.25</span>),</span>
-<span id="cb17-23"><a></a>    <span class="at">max =</span> <span class="fu">max</span>(value, <span class="at">na.rm=</span>T),</span>
-<span id="cb17-24"><a></a>    <span class="at">missing =</span> <span class="fu">sum</span>(<span class="fu">is.na</span>(value))</span>
-<span id="cb17-25"><a></a>  ) <span class="ot">-&gt;</span> sum_df </span>
-<span id="cb17-26"><a></a></span>
-<span id="cb17-27"><a></a>sum_tab <span class="ot">&lt;-</span> </span>
-<span id="cb17-28"><a></a>knitr<span class="sc">::</span><span class="fu">kable</span>(sum_df,</span>
-<span id="cb17-29"><a></a>             <span class="at">caption =</span> <span class="st">"Descriptive Statistics"</span>,</span>
-<span id="cb17-30"><a></a>             <span class="at">digits =</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb17-31"><a></a>  kableExtra<span class="sc">::</span><span class="fu">kable_styling</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb17-32"><a></a>  kableExtra<span class="sc">::</span><span class="fu">pack_rows</span>(<span class="st">"Outcome"</span>, <span class="at">start_row =</span> <span class="dv">1</span>, <span class="at">end_row =</span><span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb17-33"><a></a>  kableExtra<span class="sc">::</span><span class="fu">pack_rows</span>(<span class="st">"Key Predictors"</span>, <span class="at">start_row =</span> <span class="dv">2</span>, <span class="at">end_row =</span><span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb17-34"><a></a>  kableExtra<span class="sc">::</span><span class="fu">pack_rows</span>(<span class="st">"Covariates"</span>, <span class="at">start_row =</span> <span class="dv">3</span>, <span class="at">end_row =</span><span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</div>
-<div id="tabset-5-3">
-<div class="cell">
-<div class="cell-output-display">
-<table class="table caption-top" data-quarto-postprocess="true" style="margin-left: auto; margin-right: auto;">
-<caption>Descriptive Statistics</caption>
-<thead>
-<tr class="header">
-<th style="text-align: left;" data-quarto-table-cell-role="th">Variable</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">min</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">p25</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">Median</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">mean</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">p75</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">max</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">missing</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd" data-grouplength="1">
-<td colspan="8" style="border-bottom: 1px solid"><strong>Outcome</strong></td>
-</tr>
-<tr class="even">
-<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">vaccine_skeptic01</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">0.26</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">671</td>
-</tr>
-<tr class="odd" data-grouplength="1">
-<td colspan="8" style="border-bottom: 1px solid"><strong>Key Predictors</strong></td>
-</tr>
-<tr class="even">
-<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">pid</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">2</td>
-<td style="text-align: right;">4</td>
-<td style="text-align: right;">3.86</td>
-<td style="text-align: right;">2</td>
-<td style="text-align: right;">7</td>
-<td style="text-align: right;">23</td>
-</tr>
-<tr class="odd" data-grouplength="1">
-<td colspan="8" style="border-bottom: 1px solid"><strong>Covariates</strong></td>
-</tr>
-<tr class="even">
-<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">age</td>
-<td style="text-align: right;">18</td>
-<td style="text-align: right;">34</td>
-<td style="text-align: right;">50</td>
-<td style="text-align: right;">49.58</td>
-<td style="text-align: right;">34</td>
-<td style="text-align: right;">90</td>
-<td style="text-align: right;">121</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="progress-report-1" class="slide level2 smaller">
-<h2>Progress Report</h2>
-<p>To explore these questions, we need to</p>
-<ul>
-<li class="fragment"><p><em>Get setup to work</em> ✅</p></li>
-<li class="fragment"><p><em>Load our data</em> ✅</p></li>
-<li class="fragment"><p><em>Recode our data</em> ✅</p></li>
-<li class="fragment"><p><em>Summarize our data</em> ✅</p></li>
-<li class="fragment"><p><strong>Specify our expectations</strong> 📥</p></li>
-<li class="fragment"><p>Estimate models to test these expectations</p></li>
-<li class="fragment"><p>Presenting and interpreting results using</p>
-<ul>
-<li class="fragment">Tables</li>
-<li class="fragment">Figures</li>
-<li class="fragment">Confidence intervals (review)</li>
-<li class="fragment">Hypothesis tests (new!)</li>
-</ul></li>
-</ul>
-</section>
-<section id="specificying-expecations" class="slide level2 smaller">
-<h2>Specificying Expecations</h2>
-<p>Consider our first two motivating questions</p>
-<ul>
-<li><p>How does partisanship shape American’s perceptions of vaccines?</p></li>
-<li><p>Who is skeptical of the benefits of vaccination?</p></li>
-</ul>
-<p>And some illustrative stereotypes:</p>
-<ul>
-<li>“Republicans are <em>anti-science</em>”</li>
-<li>“Liberal always fall for Goopy <em>pseudo-science</em>”</li>
-<li>“Independents love to <em>do their own research</em>”</li>
-</ul>
-<p>What are the empirical implications of these claims?</p>
-</section>
-<section id="specificying-expecations-1" class="slide level2 smaller">
-<h2>Specificying Expecations</h2>
-<p>Similarly, consider our third question:</p>
-<ul>
-<li>Have these perceptions about vaccines changed over time?</li>
-</ul>
-<p>And some similar simplified claims:</p>
-<ul>
-<li>“The Covid-19 vaccine is a miracle of modern science”</li>
-<li>“Social media is rife with misinformation about the Covid-19 vaccine”</li>
-<li>“Politicians are politicizing vaccine politics for political benefits”</li>
-</ul>
-<p>What are the empirical implications of these claims?</p>
-</section>
-<section id="specificying-expecations-2" class="slide level2 smaller">
-<h2>Specificying Expecations</h2>
-<p>Our goal is to take claims/conventional wisdom/theories, and derive their empirical implications:</p>
-<ul>
-<li class="fragment"><strong>H1: Partisan Differences in Vaccine Skepticism</strong>
-<ul>
-<li class="fragment"><strong>H1a:</strong> Republicans will be the most skeptical of vaccines</li>
-<li class="fragment"><strong>H1b:</strong> Democrats will be the most skeptical of vaccines</li>
-<li class="fragment"><strong>H1c:</strong> Independents will be the most skeptical of vaccines</li>
-</ul></li>
-</ul>
-</section>
-<section id="specificying-expecations-3" class="slide level2 smaller">
-<h2>Specificying Expecations</h2>
-<ul>
-<li class="fragment"><strong>H2: Temporal Differences in Vaccine Skepticism</strong>
-<ul>
-<li class="fragment"><strong>H2a:</strong> Vaccine skepticism will decrease from 2016 to 2020 with the widespread roll out of the Covid-19 vaccine</li>
-<li class="fragment"><strong>H2b:</strong> Vaccine skepticism will increase from 2016 to 2020 with increased amounts of misinformation about the Covid-19 vaccine</li>
-</ul></li>
-<li class="fragment"><strong>H3: Partisan Difference in Vaccine Skepticism Over Time</strong> Partisan differences in Vaccine Skepticism will increase from 2016 to 2020 with the politicization of Covid-19 policies</li>
-</ul>
-</section>
-<section id="motivating-your-expectations" class="slide level2 smaller">
-<h2>Motivating your expectations</h2>
-<p>In your final papers, unlike in these slides, your expectations should be grounded in existing theory, research, and evidence. For the present question, we might cite sources such as:</p>
-<ul>
-<li class="fragment"><p>Enders, Adam M., and Steven M. Smallpage. “Informational cues, partisan-motivated reasoning, and the manipulation of conspiracy beliefs.” Political Communication 36.1 (2019): 83-102.</p></li>
-<li class="fragment"><p>Stecula, Dominik A., and Mark Pickup. “How populism and conservative media fuel conspiracy beliefs about COVID-19 and what it means for COVID-19 behaviors.” Research &amp; Politics 8.1 (2021): 2053168021993979.</p></li>
-<li class="fragment"><p>Jennings, Will, et al.&nbsp;“Lack of trust, conspiracy beliefs, and social media use predict COVID-19 vaccine hesitancy.” Vaccines 9.6 (2021): 593.</p></li>
-<li class="fragment"><p>Hollander, Barry A. “Partisanship, individual differences, and news media exposure as predictors of conspiracy beliefs.” Journalism &amp; Mass Communication Quarterly 95.3 (2018): 691-713.</p></li>
-</ul>
-</section>
-<section id="model-specification" class="slide level2 smaller">
-<h2>Model Specification</h2>
-<p>Translate these expectations into empirical models requires choices about <strong>how to specify our models</strong></p>
-<ul>
-<li class="fragment"><p>How should we measure/operationalize our outcome</p>
-<ul>
-<li class="fragment">Should we measure beliefs about vaccines with 7-point ordinal scale or as a binary indicator of vaccine skepticism</li>
-</ul></li>
-<li class="fragment"><p>How should we measure/operationalize our key predictor(s)</p>
-<ul>
-<li class="fragment">Should we measure partisanship using a 7 point scale or as categorical variable?</li>
-</ul></li>
-<li class="fragment"><p>What should we control for in our model?</p>
-<ul>
-<li class="fragment">Factors likely to predict both our outcome and our key predictor of interest</li>
-</ul></li>
-<li class="fragment"><p>There are rarely <em>definitive</em> answers to these questions. Instead, we will often estimate <strong>multiple models</strong> to try and show that our findings are <strong>robust</strong> to alternative specifications</p></li>
-</ul>
-</section>
-<section id="model-specification-1" class="slide level2 smaller scrollable">
-<h2>Model Specification</h2>
-<p>For your projects, every group will almost surely estimate some form of the following:</p>
-<ol type="1">
-<li class="fragment"><p>Baseline bivariate model: The simplest test of the relationship between your outcome and key predictor</p></li>
-<li class="fragment"><p>Multiple regression model: A test of the robustness of this relationship, controlling for alternative explanations</p></li>
-</ol>
-</section>
-<section id="model-specification-2" class="slide level2 smaller">
-<h2>Model Specification</h2>
-<p>In practice, I suspect you may estimate multiple regression models such as:</p>
-<ul>
-<li class="fragment"><p>Alternative specifications/operationalizations of outcomes and predictors</p></li>
-<li class="fragment"><p>Interaction models to test conditional relationships</p></li>
-<li class="fragment"><p>Polynomial models to test non-linear relationships</p></li>
+<li class="fragment">If she is just guessing (<span class="math inline">\(H_0\)</span> is true), her choices are completely independent of the actual cups.</li>
+<li class="fragment">How many possible ways can she choose 4 cups out of 8? <span class="math display">\[
+\binom{8}{4} = \frac{8!}{4!(8-4)!} = 70
+\]</span></li>
+<li class="fragment">If she is guessing blindly, every one of these 70 combinations is equally likely.</li>
+<li class="fragment">If she gets all 4 correct, what is the probability of that happening by chance? <strong>1/70 ≈ 0.014</strong>.</li>
+<li class="fragment">Because <strong>0.014 &lt; 0.05</strong>, we <span class="blue">reject the null hypothesis</span>!</li>
 </ul>
 </section>
 <section id="section-1" class="slide level2 smaller">
 <h2></h2>
-<h4 id="translating-theoretical-claims-into-empirical-expectations">Translating Theoretical Claims into Empirical Expectations</h4>
-<p>Before we estimate our models in R, we will write down our models formally and empirical implications of our theoretical expectations in terms of the coefficients of our model.</p>
-<p>For example, our baseline model might be:</p>
-<p><span class="math display">\[\text{Vaccine Skepticism} = \beta_0 + \beta_1 \text{PID}_{7pt} + X\beta + \epsilon\]</span></p>
-<p>If <span class="math inline">\(\beta_1\)</span> is positive this is consistent with <strong>H1a</strong> (greater skepticism among Republicans), - If <span class="math inline">\(\beta_2\)</span> is negative this is consistent with <strong>H1b</strong> (greater skepticism among Democrats),</p>
+<h4 id="section-2"></h4>
+</section>
+<section id="simulating-the-null-distribution" class="slide level2">
+<h2>Simulating the Null Distribution</h2>
+<p>We can simulate this process in R by randomly shuffling (permuting) the “Milk First” labels while holding her guesses constant, we generate a <span class="blue">distribution of the test statistic under the null</span>.</p>
+<p>This is exactly what we do in randomization inference.</p>
+</section>
+<section id="code-1" class="slide level2">
+<h2><i class="fa-solid fa-code" aria-label="code"></i> Code</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a><span class="co"># 1. Setup the actual truth (4 milk, 4 tea)</span></span>
+<span id="cb2-2"><a></a>truth <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">"Milk"</span>, <span class="dv">4</span>), <span class="fu">rep</span>(<span class="st">"Tea"</span>, <span class="dv">4</span>))</span>
+<span id="cb2-3"><a></a></span>
+<span id="cb2-4"><a></a><span class="co"># 2. Assume she got them all right (her guesses exactly match the truth)</span></span>
+<span id="cb2-5"><a></a>lady_guesses <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">"Milk"</span>, <span class="dv">4</span>), <span class="fu">rep</span>(<span class="st">"Tea"</span>, <span class="dv">4</span>))</span>
+<span id="cb2-6"><a></a></span>
+<span id="cb2-7"><a></a><span class="co"># 3. Create a function to simulate one random guess</span></span>
+<span id="cb2-8"><a></a>simulate_guess <span class="ot">&lt;-</span> <span class="cf">function</span>() {</span>
+<span id="cb2-9"><a></a>  shuffled_truth <span class="ot">&lt;-</span> <span class="fu">sample</span>(truth, <span class="at">replace =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb2-10"><a></a>  <span class="co"># Calculate test statistic: number of correctly identified "Milk" cups</span></span>
+<span id="cb2-11"><a></a>  correct_milk <span class="ot">&lt;-</span> <span class="fu">sum</span>(shuffled_truth <span class="sc">==</span> <span class="st">"Milk"</span> <span class="sc">&amp;</span> lady_guesses <span class="sc">==</span> <span class="st">"Milk"</span>)</span>
+<span id="cb2-12"><a></a>  <span class="fu">return</span>(correct_milk)</span>
+<span id="cb2-13"><a></a>}</span>
+<span id="cb2-14"><a></a></span>
+<span id="cb2-15"><a></a><span class="co"># 4. Repeat 10,000 times to build the null distribution</span></span>
+<span id="cb2-16"><a></a><span class="fu">set.seed</span>(<span class="dv">1600</span>)</span>
+<span id="cb2-17"><a></a>null_distribution <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb2-18"><a></a>  <span class="at">sim =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10000</span>,</span>
+<span id="cb2-19"><a></a>  <span class="at">correct_milk =</span> <span class="fu">replicate</span>(<span class="dv">10000</span>, <span class="fu">simulate_guess</span>())</span>
+<span id="cb2-20"><a></a>)</span>
+<span id="cb2-21"><a></a></span>
+<span id="cb2-22"><a></a><span class="co"># 5. Plot</span></span>
+<span id="cb2-23"><a></a>fig_tea <span class="ot">&lt;-</span> null_distribution <span class="sc">%&gt;%</span></span>
+<span id="cb2-24"><a></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> correct_milk)) <span class="sc">+</span></span>
+<span id="cb2-25"><a></a>  <span class="fu">geom_bar</span>(<span class="at">fill =</span> <span class="st">"grey60"</span>, <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb2-26"><a></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">4</span>, <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb2-27"><a></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb2-28"><a></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">4</span>) <span class="sc">+</span></span>
+<span id="cb2-29"><a></a>  <span class="fu">labs</span>(</span>
+<span id="cb2-30"><a></a>    <span class="at">title =</span> <span class="st">"Null Distribution of Correct 'Milk First' Guesses"</span>,</span>
+<span id="cb2-31"><a></a>    <span class="at">subtitle =</span> <span class="st">"Red dashed line indicates observed test statistic (4 correct)"</span>,</span>
+<span id="cb2-32"><a></a>    <span class="at">x =</span> <span class="st">"Number of Correct 'Milk First' Guesses"</span>,</span>
+<span id="cb2-33"><a></a>    <span class="at">y =</span> <span class="st">"Frequency"</span></span>
+<span id="cb2-34"><a></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="plot" class="slide level2">
+<h2>Plot</h2>
+
+<img data-src="11-slides_files/figure-revealjs/unnamed-chunk-1-1.png" width="960" class="r-stretch"></section>
+<section id="comments-1" class="slide level2">
+<h2>Comments</h2>
 <ul>
-<li class="fragment">But how could we test <strong>H1c</strong> – greater skepticism among Independents, who are “4s” on <span class="math inline">\(\text{PID}_{7pt}\)</span>?</li>
+<li class="fragment"><p>The bar chart represents the sampling distribution of our test statistic if the null hypothesis were true (she is randomly guessing).</p></li>
+<li class="fragment"><p>The red line represents our observed test statistic (she guessed all 4 correctly).</p></li>
+<li class="fragment"><p>Notice how rare it is to get 4 correct by chance! Only about 1.4% of our 10,000 simulations resulted in 4 correct guesses. This simulation matches the exact math (1/70 = 0.014), yielding a <span class="math inline">\(p\)</span>-value of 0.014.</p></li>
 </ul>
 </section>
-<section id="section-2" class="slide level2 smaller">
-<h2></h2>
-<h4 id="translating-theoretical-claims-into-empirical-expectations-1">Translating Theoretical Claims into Empirical Expectations</h4>
-<p>We could fit a polynomial regression, including both partisanship and “partissanship squared” to allow the relationship between partisanship and vaccine skepticism to vary non-linearly</p>
-<p><span class="math display">\[\text{Vaccine Skepticism} = \beta_0 + \beta_1 \text{PID}_{7pt} +  \beta_2 \text{PID}_{7pt}^2+ X\beta+ \epsilon\]</span></p>
-</section>
-<section id="section-3" class="slide level2 smaller">
-<h2></h2>
-<h4 id="translating-theoretical-claims-into-empirical-expectations-2">Translating Theoretical Claims into Empirical Expectations</h4>
-<p>Or we could estimate a model treating Partisanship as a <strong>categorical</strong> variable rather than an <strong>ordinal interval</strong> variable.</p>
-<p>In our recoding, we set <code>"Democrat"</code> to be the first level of the variable <code>pid3cat</code>, so the model R will estimate by default is:</p>
-<p><span class="math display">\[\text{Vaccine Skepticism} = \beta_0 + \beta_1 \text{PID}_{Ind} +  \beta_2 \text{PID}_{Rep}+ X\beta + \epsilon\]</span></p>
-</section>
-<section id="testing-differences-over-time" class="slide level2 smaller">
-<h2>Testing differences over time</h2>
-<p>Testing Hypotheses 2 and 3 involve making comparisons across models estimated on data from different surveys.</p>
-<p>Formally, testing these expectations is a little more complicated</p>
+<section id="putting-it-all-together" class="slide level2 smaller">
+<h2>Putting It All Together</h2>
 <ul>
-<li class="fragment">we could pool our two surveys together include an interaction term for survey year</li>
+<li class="fragment"><strong>Inference is about uncertainty:</strong> We only have one sample, but we want to learn about the population.</li>
+<li class="fragment"><strong>Standard Errors:</strong> Tell us how much our estimate would vary if we took new samples.</li>
+<li class="fragment"><strong>Confidence Intervals:</strong> Give us a plausible range for the true population parameter based on our sample estimate and its standard error.</li>
+<li class="fragment"><strong>Hypothesis Testing &amp; P-values:</strong> Help us quantify the evidence against a specific baseline claim (the null hypothesis <span class="math inline">\(H_0\)</span>).</li>
+<li class="fragment"><strong>Power:</strong> Reminds us that sample size and effect size dictate our ability to detect the truth.</li>
 </ul>
-<p>For our purposes, we’ll treat these as more qualitative/exploratory hypotheses:</p>
+</section></section>
+<section>
+<section id="course-review" class="title-slide slide level1 inverse center">
+<h1><i class="fa-solid fa-magnifying-glass" aria-label="magnifying-glass"></i> Course Review</h1>
+
+</section>
+<section id="types-of-inference" class="slide level2">
+<h2>Types of inference</h2>
 <ul>
-<li class="fragment"><p>H2a/b implies overall rates of vaccine skepticism will be lower/higher in 2020 compared to 2016</p></li>
-<li class="fragment"><p>H3 implies that whatever partisan differences we find in 2016 should be larger in 2020.</p></li>
+<li class="fragment"><p>Descriptive</p></li>
+<li class="fragment"><p>Causal</p></li>
+<li class="fragment"><p>Predictive</p></li>
 </ul>
 </section>
-<section id="progress-report-2" class="slide level2 smaller">
-<h2>Progress Report</h2>
-<p>To explore these questions, we need to</p>
+<section id="descriptive-inference" class="slide level2 smaller">
+<h2>Descriptive Inference</h2>
+<blockquote>
+<p>Summarize distributions and relationships in data</p>
+</blockquote>
 <ul>
-<li class="fragment"><p><em>Get setup to work</em> ✅</p></li>
-<li class="fragment"><p><em>Load our data</em> ✅</p></li>
-<li class="fragment"><p><em>Recode our data</em> ✅</p></li>
-<li class="fragment"><p><em>Specify our expectations</em> ✅</p></li>
-<li class="fragment"><p><strong>Estimate models to test these expectations</strong> 📥</p></li>
-<li class="fragment"><p>Presenting and interpreting results using</p>
+<li class="fragment">You should know how to:
+<ul>
+<li class="fragment"><a href="https://josephessig-source.github.io/pols1600_site//slides/01-slides#/using-r-to-summarize-data" target="_blank">Calculate</a> and interpret measures:</li>
+<li class="fragment">Central Tendency</li>
+<li class="fragment">Dispersion</li>
+<li class="fragment">Association</li>
+</ul></li>
+<li class="fragment"><a href="https://josephessig-source.github.io/pols1600_site//slides/01-slides#/loading-data-into-r" target="_blank">Load</a>, <a href="https://josephessig-source.github.io/pols1600_site//slides/01-slides#/looking-at-your-data" target="_blank">look at</a>, <a href="https://josephessig-source.github.io/pols1600_site//slides/01-slides#/dplyr-functions-for-data-wrangling" target="_blank">wrangle</a>, and <a href="https://josephessig-source.github.io/pols1600_site//slides/01-slides#/describing-data-in-r" target="_blank">describe</a> data using:
 <ul>
 <li class="fragment">Tables</li>
 <li class="fragment">Figures</li>
-<li class="fragment">Confidence intervals</li>
-<li class="fragment">Hypothesis tests</li>
 </ul></li>
 </ul>
 </section>
-<section id="estimating-empirical-models" class="slide level2">
-<h2>Estimating Empirical Models</h2>
-<p>Having derived empirical implications of our theoretical expectations expressed in terms of linear regressions, now we simply have to estimate our models in R.</p>
-<p>When estimating the <strong>same model</strong> on <strong>different datasets</strong> we can write the formulas once</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a></a>f1 <span class="ot">&lt;-</span> <span class="fu">formula</span>(vaccine_skeptic01 <span class="sc">~</span> pid <span class="sc">+</span> age)</span>
-<span id="cb18-2"><a></a>f2 <span class="ot">&lt;-</span> <span class="fu">formula</span>(vaccine_skeptic01 <span class="sc">~</span> pid <span class="sc">+</span> <span class="fu">I</span>(pid<span class="sc">^</span><span class="dv">2</span>) <span class="sc">+</span> age)</span>
-<span id="cb18-3"><a></a>f3 <span class="ot">&lt;-</span> <span class="fu">formula</span>(vaccine_skeptic01 <span class="sc">~</span> pid3cat <span class="sc">+</span> age)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="estimating-empirical-models-1" class="slide level2">
-<h2>Estimating Empirical Models</h2>
-<p>And then pass it to <code>lm()</code> with different <code>data</code> arguments:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a></a>m1_2016 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">formula =</span> f1, <span class="at">data =</span> nes16)</span>
-<span id="cb19-2"><a></a>m1_2020 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">formula =</span> f1, <span class="at">data =</span> nes20)</span>
-<span id="cb19-3"><a></a>m2_2016 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">formula =</span> f2, <span class="at">data =</span> nes16)</span>
-<span id="cb19-4"><a></a>m2_2020 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">formula =</span> f2, <span class="at">data =</span> nes20)</span>
-<span id="cb19-5"><a></a>m3_2016 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">formula =</span> f3, <span class="at">data =</span> nes16)</span>
-<span id="cb19-6"><a></a>m3_2020 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">formula =</span> f3, <span class="at">data =</span> nes20)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="estimating-empirical-models-2" class="slide level2 smaller">
-<h2>Estimating Empirical Models</h2>
-<p>If you’ve:</p>
+<section id="data-wrangling" class="slide level2 smaller">
+<h2>Data Wrangling</h2>
+<blockquote>
+<p>The process of transforming data into a useable format</p>
+</blockquote>
+<p>You should know how to:</p>
 <ul>
-<li><p>coded your data correctly</p></li>
-<li><p>developed clear testable implications from your theoretical expectations</p></li>
+<li class="fragment">Load, look at,and transform data into R</li>
+<li class="fragment">Get a <a href="https://josephessig-source.github.io/pols1600_site//slides/01-slides#/hlos-allow-you-to" target="_blank">HLO</a> of the raw data:
+<ul>
+<li class="fragment">Unit of observation</li>
+<li class="fragment">Dimensions of the data</li>
+<li class="fragment">Quickly summarize the distributions and values of variables</li>
+</ul></li>
+<li class="fragment"><a href="https://josephessig-source.github.io/pols1600_site//labs/09-lab-comments#recode-the-data" target="_blank">Recode</a> the data to:
+<ul>
+<li class="fragment">Replace values as <code>NA</code>s</li>
+<li class="fragment">Create categories, indicators (0,1), and factors</li>
+<li class="fragment">Transform predictors (e.g.&nbsp;standardizing predictors)</li>
+</ul></li>
+<li class="fragment">Reshape the data
+<ul>
+<li class="fragment">Pivoting columns and rows</li>
+<li class="fragment">Joining data sets together.</li>
+</ul></li>
+<li class="fragment"><a href="https://josephessig-source.github.io/pols1600_site//labs/02-lab-comments#reproduce-the-figure-from-lab-01" target="_blank">Aggregate</a> the data into <a href="https://josephessig-source.github.io/pols1600_site//labs/03-lab-comments#calculate-the-average-treatment-effect" target="_blank">summaries</a></li>
 </ul>
-<p>Specifying and estimating empirical models is straightforward. Literally a few lines of code.</p>
 </section>
-<section id="progress-report-3" class="slide level2 smaller">
-<h2>Progress Report</h2>
-<p>To explore these questions, we need to</p>
+<section id="data-visualization" class="slide level2 smaller">
+<h2>Data Visualization</h2>
+<blockquote>
+<p>A tool for describing distributions and relationships</p>
+</blockquote>
+<p>You should know:</p>
 <ul>
-<li class="fragment"><p><em>Get setup to work</em> ✅</p></li>
-<li class="fragment"><p><em>Load our data</em> ✅</p></li>
-<li class="fragment"><p><em>Recode our data</em> ✅</p></li>
-<li class="fragment"><p><em>Specify our expectations</em> ✅</p></li>
-<li class="fragment"><p><em>Estimate models to test these expectations</em> ✅</p></li>
-<li class="fragment"><p><em>Present our results</em> 📥</p>
+<li class="fragment">The <a href="https://josephessig-source.github.io/pols1600_site//slides/02-slides#/the-grammar-of-graphics" target="_blank">grammar of graphics</a>:
 <ul>
-<li class="fragment">Tables</li>
-<li class="fragment">Figures</li>
-<li class="fragment">Confidence intervals</li>
-<li class="fragment">Hypothesis testing</li>
+<li class="fragment">Data</li>
+<li class="fragment">Aesthetic mappings</li>
+<li class="fragment">Geometries</li>
+</ul></li>
+<li class="fragment">How to <a href="https://josephessig-source.github.io/pols1600_site//slides/02-slides#/describing-distributions-and-associations" target="_blank">generate common plots</a> to describe:
+<ul>
+<li class="fragment">Distributions</li>
+<li class="fragment">Relationships</li>
 </ul></li>
 </ul>
 </section>
-<section id="presenting-and-interpreting-your-results" class="slide level2 smaller">
-<h2>Presenting and Interpreting Your Results</h2>
-<p>Presenting and interpreting your results is requires both art and science.</p>
-<p>Your goal is to tell a story with your results,</p>
-<p>Let’s start by producing a regression table, which provides a concise summary of multiple regression models.</p>
-</section>
-<section id="regression-tables" class="slide level2 smaller">
-<h2>Regression Tables</h2>
-<div class="panel-tabset">
-<ul id="tabset-6" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-6-1">Tasks</a></li><li><a href="#tabset-6-2"><i class="fa-solid fa-code" aria-label="code"></i> Code</a></li><li><a href="#tabset-6-3"><i class="fa-solid fa-table" aria-label="table"></i> Basic</a></li><li><a href="#tabset-6-4"><i class="fa-solid fa-table" aria-label="table"></i> Fetch</a></li></ul>
-<div class="tab-content">
-<div id="tabset-6-1">
+<section id="causal-inference" class="slide level2 smaller">
+<h2>Causal Inference</h2>
+<blockquote>
+<p>Causal Inference requires counterfactual comparisons</p>
+</blockquote>
+<p>You should know:</p>
 <ul>
-<li><p>Giving the variables in substantive names</p></li>
-<li><p>Reporting coefficients to 3 decimal places</p></li>
-<li><p>Using a single significance threshold of <span class="math inline">\(p &lt; 0.05\)</span></p></li>
-<li><p>Giving the models custom names</p></li>
-<li><p>Adding a header to group models by year</p></li>
-<li><p>Changing the caption of the table</p></li>
-</ul>
-</div>
-<div id="tabset-6-2">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a></a><span class="co"># Basic</span></span>
-<span id="cb20-2"><a></a>tab_basic <span class="ot">&lt;-</span> texreg<span class="sc">::</span><span class="fu">htmlreg</span>(</span>
-<span id="cb20-3"><a></a>  <span class="fu">list</span>(m1_2016,m2_2016,m3_2016,</span>
-<span id="cb20-4"><a></a>       m1_2020,m2_2020,m3_2020)</span>
-<span id="cb20-5"><a></a>)</span>
-<span id="cb20-6"><a></a></span>
-<span id="cb20-7"><a></a><span class="co"># Formatted</span></span>
-<span id="cb20-8"><a></a>tab_fetch <span class="ot">&lt;-</span> texreg<span class="sc">::</span><span class="fu">htmlreg</span>(</span>
-<span id="cb20-9"><a></a>  <span class="fu">list</span>(m1_2016,m2_2016,m3_2016,</span>
-<span id="cb20-10"><a></a>       m1_2020,m2_2020,m3_2020),</span>
-<span id="cb20-11"><a></a>  <span class="co"># Reporting coefficients to 3 decimal places</span></span>
-<span id="cb20-12"><a></a>  <span class="at">digits =</span> <span class="dv">3</span>,</span>
-<span id="cb20-13"><a></a>  <span class="co"># Using a single significance threshold </span></span>
-<span id="cb20-14"><a></a>  <span class="at">stars =</span> <span class="fl">0.05</span>,</span>
-<span id="cb20-15"><a></a>  <span class="co"># Giving the variables in substantive names</span></span>
-<span id="cb20-16"><a></a>  <span class="at">custom.coef.names =</span> <span class="fu">c</span>(</span>
-<span id="cb20-17"><a></a>    <span class="st">"(Intercept)"</span>,</span>
-<span id="cb20-18"><a></a>    <span class="st">"PID (7pt)"</span>,</span>
-<span id="cb20-19"><a></a>    <span class="st">"Age"</span>,</span>
-<span id="cb20-20"><a></a>    <span class="st">"PID&lt;sup&gt;2&lt;/sup&gt; (7pt)"</span>,</span>
-<span id="cb20-21"><a></a>    <span class="st">"Independent"</span>,</span>
-<span id="cb20-22"><a></a>    <span class="st">"Republican"</span></span>
-<span id="cb20-23"><a></a>  ),</span>
-<span id="cb20-24"><a></a>  <span class="co"># Use SE instead o CIs</span></span>
-<span id="cb20-25"><a></a>  <span class="at">include.ci =</span> F,</span>
-<span id="cb20-26"><a></a>  <span class="co"># Giving the models custom names</span></span>
-<span id="cb20-27"><a></a>  <span class="at">custom.model.names =</span> <span class="fu">paste</span>(<span class="st">"("</span>,<span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>),<span class="st">")"</span>, <span class="at">sep=</span><span class="st">""</span>),</span>
-<span id="cb20-28"><a></a>  <span class="co"># Adding a header to group models by year</span></span>
-<span id="cb20-29"><a></a>  <span class="at">custom.header =</span> <span class="fu">list</span>(<span class="st">"NES 2016"</span> <span class="ot">=</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="st">"NES 2020"</span> <span class="ot">=</span> <span class="dv">4</span><span class="sc">:</span><span class="dv">6</span>),</span>
-<span id="cb20-30"><a></a>  <span class="co"># Changing the caption of the table</span></span>
-<span id="cb20-31"><a></a>  <span class="at">caption =</span> <span class="st">"Partisanship and Vaccine Skepticism"</span></span>
-<span id="cb20-32"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</div>
-<div id="tabset-6-3">
-<table class="texreg" style="margin: 10px auto;border-collapse: collapse;border-spacing: 0px;caption-side: bottom;color: #000000;border-top: 2px solid #000000;">
-<caption>
-Statistical models
-</caption>
-<thead>
-<tr>
-<th style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
-</th>
-<th style="padding-left: 5px;padding-right: 5px;">
-Model 1
-</th>
-<th style="padding-left: 5px;padding-right: 5px;">
-Model 2
-</th>
-<th style="padding-left: 5px;padding-right: 5px;">
-Model 3
-</th>
-<th style="padding-left: 5px;padding-right: 5px;">
-Model 4
-</th>
-<th style="padding-left: 5px;padding-right: 5px;">
-Model 5
-</th>
-<th style="padding-left: 5px;padding-right: 5px;">
-Model 6
-</th>
-</tr>
-</thead>
-<tbody>
-<tr style="border-top: 1px solid #000000;">
-<td style="padding-left: 5px;padding-right: 5px;">
-(Intercept)
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-0.46<sup>***</sup>
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-0.35<sup>***</sup>
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-0.42<sup>***</sup>
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-0.34<sup>***</sup>
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-0.32<sup>***</sup>
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-0.35<sup>***</sup>
-</td>
-</tr>
-<tr>
-<td style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-(0.02)
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-(0.04)
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-(0.02)
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-(0.02)
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-(0.02)
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-(0.02)
-</td>
-</tr>
-<tr>
-<td style="padding-left: 5px;padding-right: 5px;">
-pid
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
--0.00
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-0.06<sup>***</sup>
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-0.02<sup>***</sup>
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-0.04<sup>***</sup>
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
-</td>
-</tr>
-<tr>
-<td style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-(0.00)
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-(0.02)
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-(0.00)
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-(0.01)
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
-</td>
-</tr>
-<tr>
-<td style="padding-left: 5px;padding-right: 5px;">
-age
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
--0.00<sup>***</sup>
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
--0.00<sup>***</sup>
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
--0.00<sup>***</sup>
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
--0.00<sup>***</sup>
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
--0.00<sup>***</sup>
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
--0.00<sup>***</sup>
-</td>
-</tr>
-<tr>
-<td style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-(0.00)
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-(0.00)
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-(0.00)
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-(0.00)
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-(0.00)
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-(0.00)
-</td>
-</tr>
-<tr>
-<td style="padding-left: 5px;padding-right: 5px;">
-pid^2
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
--0.01<sup>***</sup>
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
--0.00
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
-</td>
-</tr>
-<tr>
-<td style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-(0.00)
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-(0.00)
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
-</td>
-</tr>
-<tr>
-<td style="padding-left: 5px;padding-right: 5px;">
-pid3catIndependent
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-0.17<sup>***</sup>
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-0.20<sup>***</sup>
-</td>
-</tr>
-<tr>
-<td style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-(0.02)
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-(0.02)
-</td>
-</tr>
-<tr>
-<td style="padding-left: 5px;padding-right: 5px;">
-pid3catRepublican
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
--0.02
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-0.10<sup>***</sup>
-</td>
-</tr>
-<tr>
-<td style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-(0.02)
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-(0.01)
-</td>
-</tr>
-<tr style="border-top: 1px solid #000000;">
-<td style="padding-left: 5px;padding-right: 5px;">
-R<sup>2</sup>
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-0.02
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-0.03
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-0.04
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-0.03
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-0.03
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-0.05
-</td>
-</tr>
-<tr>
-<td style="padding-left: 5px;padding-right: 5px;">
-Adj. R<sup>2</sup>
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-0.02
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-0.03
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-0.04
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-0.03
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-0.03
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-0.04
-</td>
-</tr>
-<tr style="border-bottom: 2px solid #000000;">
-<td style="padding-left: 5px;padding-right: 5px;">
-Num. obs.
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-3494
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-3494
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-3507
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-7041
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-7041
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-7052
-</td>
-</tr>
-</tbody>
-<tfoot>
-<tr>
-<td style="font-size: 0.8em;" colspan="7">
-<sup>***</sup>p &lt; 0.001; <sup>**</sup>p &lt; 0.01; <sup>*</sup>p &lt; 0.05
-</td>
-</tr>
-</tfoot>
-</table>
-</div>
-<div id="tabset-6-4">
-<table class="texreg" style="margin: 10px auto;border-collapse: collapse;border-spacing: 0px;caption-side: bottom;color: #000000;border-top: 2px solid #000000;">
-<caption>
-Partisanship and Vaccine Skepticism
-</caption>
-<thead>
-<tr>
-<th>
-&nbsp;
-</th>
-<th style="padding-left: 5px;padding-right: 5px;border-bottom: 1px solid #000000;" colspan="3">
-NES 2016
-</th>
-<th style="padding-left: 5px;padding-right: 5px;border-bottom: 1px solid #000000;" colspan="3">
-NES 2020
-</th>
-</tr>
-<tr>
-<th style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
-</th>
-<th style="padding-left: 5px;padding-right: 5px;">
-(1)
-</th>
-<th style="padding-left: 5px;padding-right: 5px;">
-(2)
-</th>
-<th style="padding-left: 5px;padding-right: 5px;">
-(3)
-</th>
-<th style="padding-left: 5px;padding-right: 5px;">
-(4)
-</th>
-<th style="padding-left: 5px;padding-right: 5px;">
-(5)
-</th>
-<th style="padding-left: 5px;padding-right: 5px;">
-(6)
-</th>
-</tr>
-</thead>
-<tbody>
-<tr style="border-top: 1px solid #000000;">
-<td style="padding-left: 5px;padding-right: 5px;">
-(Intercept)
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-0.458<sup>*</sup>
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-0.350<sup>*</sup>
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-0.417<sup>*</sup>
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-0.343<sup>*</sup>
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-0.318<sup>*</sup>
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-0.352<sup>*</sup>
-</td>
-</tr>
-<tr>
-<td style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-(0.025)
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-(0.035)
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-(0.023)
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-(0.018)
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-(0.024)
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-(0.016)
-</td>
-</tr>
-<tr>
-<td style="padding-left: 5px;padding-right: 5px;">
-PID (7pt)
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
--0.005
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-0.064<sup>*</sup>
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-0.021<sup>*</sup>
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-0.037<sup>*</sup>
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
-</td>
-</tr>
-<tr>
-<td style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-(0.003)
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-(0.016)
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-(0.002)
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-(0.011)
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
-</td>
-</tr>
-<tr>
-<td style="padding-left: 5px;padding-right: 5px;">
-Age
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
--0.004<sup>*</sup>
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
--0.003<sup>*</sup>
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
--0.004<sup>*</sup>
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
--0.004<sup>*</sup>
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
--0.004<sup>*</sup>
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
--0.003<sup>*</sup>
-</td>
-</tr>
-<tr>
-<td style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-(0.000)
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-(0.000)
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-(0.000)
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-(0.000)
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-(0.000)
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-(0.000)
-</td>
-</tr>
-<tr>
-<td style="padding-left: 5px;padding-right: 5px;">
-PID<sup>2</sup> (7pt)
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
--0.009<sup>*</sup>
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
--0.002
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
-</td>
-</tr>
-<tr>
-<td style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-(0.002)
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-(0.001)
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
-</td>
-</tr>
-<tr>
-<td style="padding-left: 5px;padding-right: 5px;">
-Independent
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-0.175<sup>*</sup>
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-0.200<sup>*</sup>
-</td>
-</tr>
-<tr>
-<td style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-(0.023)
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-(0.016)
-</td>
-</tr>
-<tr>
-<td style="padding-left: 5px;padding-right: 5px;">
-Republican
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
--0.016
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-0.100<sup>*</sup>
-</td>
-</tr>
-<tr>
-<td style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-(0.016)
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-(0.011)
-</td>
-</tr>
-<tr style="border-top: 1px solid #000000;">
-<td style="padding-left: 5px;padding-right: 5px;">
-R<sup>2</sup>
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-0.023
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-0.028
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-0.042
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-0.032
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-0.032
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-0.045
-</td>
-</tr>
-<tr>
-<td style="padding-left: 5px;padding-right: 5px;">
-Adj. R<sup>2</sup>
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-0.022
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-0.027
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-0.042
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-0.032
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-0.032
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-0.045
-</td>
-</tr>
-<tr style="border-bottom: 2px solid #000000;">
-<td style="padding-left: 5px;padding-right: 5px;">
-Num. obs.
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-3494
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-3494
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-3507
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-7041
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-7041
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-7052
-</td>
-</tr>
-</tbody>
-<tfoot>
-<tr>
-<td style="font-size: 0.8em;" colspan="7">
-<sup>*</sup>p &lt; 0.05
-</td>
-</tr>
-</tfoot>
-</table>
-</div>
-</div>
-</div>
-</section>
-<section id="telling-a-story-with-regression" class="slide level2 smaller">
-<h2>Telling a Story with Regression</h2>
-<p>First, provide an overview the models presented in the table</p>
+<li class="fragment"><p><a href="https://josephessig-source.github.io/pols1600_site//slides/03-slides#/potential-outcomes-notation" target="_blank">Potential outcomes</a> and <a href="https://josephessig-source.github.io/pols1600_site//slides/05-slides#/directed-acyclic-graphs-1" target="_blank">DAGs</a></p></li>
+<li class="fragment"><p>The <a href="https://josephessig-source.github.io/pols1600_site//slides/03-slides#/fundamental-problem-of-causal-inference" target="_blank">fundamental problem of causal inference</a></p></li>
+<li class="fragment"><p>Bias caused by:</p>
 <ul>
-<li>Explain what each model is doing conceptually</li>
-</ul>
-<p>Then start with your simplest model (first column)</p>
-<ul>
-<li>Use this as a chance to explain core concepts from the course
-<ul>
-<li>What is regression</li>
-<li>How should I interpret a coefficient substantively</li>
-<li>How should I interepret the statistical signficance of a give coefficient</li>
+<li class="fragment"><a href="https://josephessig-source.github.io/pols1600_site//slides/05-slides#/section-1" target="_blank">Confounding</a> (Coffee and Cancer)</li>
+<li class="fragment"><a href="https://josephessig-source.github.io/pols1600_site//slides/05-slides#/section-2" target="_blank">Colliding</a> (Dating Jerks)</li>
 </ul></li>
-<li>As you move from left to right (simple to more complex)
+<li class="fragment"><p>Casual Identification in:</p>
 <ul>
-<li>you need not interpret every single coefficient in the model</li>
-<li>instead highlight the factors that are important for the reader to note (e.g.&nbsp;a comparison between one coefficient in model or another.)</li>
+<li class="fragment"><a href="https://josephessig-source.github.io/pols1600_site//slides/03-slides#/causal-identification-with-experimental-designs" target="_blank">Experimental</a> designs</li>
+<li class="fragment"><a href="https://josephessig-source.github.io/pols1600_site//slides/05-slides#/observational-designs" target="_blank">Observational</a> designs</li>
 </ul></li>
 </ul>
 </section>
-<section id="example" class="slide level2 smaller">
-<h2>Example</h2>
-<p>Table 1 presents the results of three specifications exploring the relationship between partisanship and vaccine skepticism using data from the 2016 (Models 1-3) and 2020 (Models 4-5) National Election Studies.</p>
-<p>Models 1 and 4 operationalize partisanship as a 7-point scale, where 1 corresponds to Strong Democrats, 4 to Indepndents, and 7 to Strong Republicans in the 2016 (Model 1) and 2020 (Model 2) surveys.</p>
-<p>Models 2 and 5 allow the relationship between partisanship and vaccine skepticism to vary non-linear again for the 2016 (Model 2) and 2020 (Model 5) elections.</p>
-<p>Models 3 and 6 treat partisanship as categorical variable, describing how Independents and Republicans differ from Democrats, the reference category in these models.</p>
-<p>All models control age, since (put in substantive justification for controlling for age here)</p>
-</section>
-<section id="story-testing-for-partisan-differences" class="slide level2 smaller">
-<h2>Story: Testing for Partisan Differences</h2>
+<section id="prediction-with-linear-models" class="slide level2 smaller">
+<h2>Prediction with Linear Models</h2>
+<blockquote>
+<p>Linear regression provides a linear estimate of the conditional expectation function</p>
+</blockquote>
+<p>You should know:</p>
 <ul>
-<li class="fragment"><p>The results from Model 1 provide little initial evidence for partisan differences in vaccine skepticism in the 2016 Election.</p>
-<ul>
-<li class="fragment">The coefficient on the partisanship variable is -0.005, suggesting that a unit increase in partisanship (going from being a Strong Democrat to just a Democrat, or an Independent to an independent who leans Republican), is associated with just a 0.5 percentage point increase in the probability of being a vaccine skeptic (believing that the risks of vaccination outweigh the benefits or that their is no difference in the risks versus benefits).</li>
-</ul></li>
-<li class="fragment"><p>Furthermore the 95-percent confidence interval for this estimate (-0.011, 0.002) brackets 0, suggesting the true population estimate from this model could be either positive or negative. Similarly, we fail to reject the null hypothesis that the true coefficient on partisanship in this model is 0 as the test statistic for this estimate ( -1.38) corresponds to a p-value of 0.168 suggesting that we would see test statistics this large or larger fairly often when the true relationship was 0.</p></li>
-<li class="fragment"><p>In sum, the results from Model 1 provide little support for any of the expectations described by <em>H1</em></p></li>
+<li class="fragment"><p><a href="https://josephessig-source.github.io/pols1600_site//slides/05-slides#/understanding-linear-regression" target="_blank">How linear regression works</a></p></li>
+<li class="fragment"><p><a href="https://josephessig-source.github.io/pols1600_site//slides/07-slides.html#/regression-models-partition-variance" target="_blank">What it means to control for</a> predictors in a multiple regression</p></li>
+<li class="fragment"><p>When and <a href="https://josephessig-source.github.io/pols1600_site//slides/05-slides#/when-to-control-for-a-variable" target="_blank">why we should control</a> for predictors.</p></li>
+<li class="fragment"><p>How to translate <span class="blue">substantive claims</span> into <a href="https://josephessig-source.github.io/pols1600_site//labs/06-lab-comments#estimate-a-model-controlling-for-age" target="_blank">empirical expectations</a> for our models</p></li>
+<li class="fragment"><p>How to <span class="blue">estimate and interpret</span> these models using <a href="https://josephessig-source.github.io/pols1600_site//labs/06-lab-comments#display-the-model-as-a-regression-table" target="_blank">tables</a> and <a href="https://josephessig-source.github.io/pols1600_site//labs/10-lab-comments#visualize-predicted-values" target="_blank">figures</a></p></li>
+<li class="fragment"><p>How to <span class="blue">quantify uncertainty</span> about these estimates using <a href="https://josephessig-source.github.io/pols1600_site//slides/10-slides#/confidence-intervals-1" target="_blank">confidence intervals</a> and <a href="https://josephessig-source.github.io/pols1600_site//slides/10-slides#/what-is-a-hypothesis-test" target="_blank">hypothesis tests</a>.</p></li>
 </ul>
 </section>
-<section id="testing-for-partisan-differences-model-2" class="slide level2 smaller">
-<h2>Testing for Partisan Differences: Model 2</h2>
+<section id="probability" class="slide level2 smaller">
+<h2>Probability</h2>
 <ul>
-<li class="fragment">While coefficients from Model 1 suggest little evidence of partisan differences in vaccine skepticism, the coefficients on both partisanship, and partisanship squared are statistically significant (p &lt; 0.05).</li>
-</ul>
-</section>
-<section id="interpreting-model-2" class="slide level2 smaller">
-<h2>Interpreting Model 2</h2>
-<div class="panel-tabset">
-<ul id="tabset-7" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-7-1">Task</a></li><li><a href="#tabset-7-2"><i class="fa-solid fa-code" aria-label="code"></i></a></li><li><a href="#tabset-7-3"><i class="fa-solid fa-chart-lines" aria-label="chart-lines"></i> Figure</a></li><li><a href="#tabset-7-4">Interpretation</a></li></ul>
-<div class="tab-content">
-<div id="tabset-7-1">
+<li class="fragment"><p><a href="https://josephessig-source.github.io/pols1600_site//slides/08-slides#/probability-1" target="_blank">Probability</a> describes the likelihood of an event</p></li>
+<li class="fragment"><p><a href="https://josephessig-source.github.io/pols1600_site//slides/08-slides#/random-variables" target="_blank">Random variables</a> assign numeric values to all the events that could occur.</p></li>
+<li class="fragment"><p><a href="https://josephessig-source.github.io/pols1600_site//slides/08-slides#/probability-distributions" target="_blank">Probability distributions</a> assign probabilities to every value of a random variable. Can be:</p>
 <ul>
-<li class="fragment">The coefficients from polynomial regressions can be difficult to interpret jointly and so Figure 1 presents the predicted values from Model 2, holding age constant at its sample mean.</li>
-</ul>
-</div>
-<div id="tabset-7-2">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a></a>pred_df_m2 <span class="ot">&lt;-</span> <span class="fu">expand_grid</span>(</span>
-<span id="cb21-2"><a></a>  <span class="at">pid =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">7</span>,</span>
-<span id="cb21-3"><a></a>  <span class="at">age =</span> <span class="fu">mean</span>(nes16<span class="sc">$</span>age, <span class="at">na.rm=</span>T)</span>
-<span id="cb21-4"><a></a>)</span>
-<span id="cb21-5"><a></a>pred_df_m2 <span class="ot">&lt;-</span> <span class="fu">cbind</span>(pred_df_m2, <span class="fu">predict</span>(m2_2016,pred_df_m2, <span class="at">interval =</span><span class="st">"confidence"</span>))</span>
-<span id="cb21-6"><a></a></span>
-<span id="cb21-7"><a></a>fig_m2 <span class="ot">&lt;-</span> pred_df_m2 <span class="sc">%&gt;%</span></span>
-<span id="cb21-8"><a></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(pid, fit, <span class="at">ymin =</span>lwr, <span class="at">ymax =</span>upr))<span class="sc">+</span></span>
-<span id="cb21-9"><a></a>  <span class="fu">geom_line</span>()<span class="sc">+</span></span>
-<span id="cb21-10"><a></a>  <span class="fu">geom_ribbon</span>(<span class="at">alpha=</span>.<span class="dv">2</span>, <span class="at">fill=</span><span class="st">"grey"</span>)<span class="sc">+</span></span>
-<span id="cb21-11"><a></a>  <span class="fu">theme_bw</span>()<span class="sc">+</span></span>
-<span id="cb21-12"><a></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Partisanship"</span>,</span>
-<span id="cb21-13"><a></a>       <span class="at">y =</span> <span class="st">"Predicted Vaccine Skepticism"</span>,</span>
-<span id="cb21-14"><a></a>       <span class="at">title =</span> <span class="st">"Independents are the most skeptical of vaccines"</span>,</span>
-<span id="cb21-15"><a></a>       <span class="at">subtitle =</span> <span class="st">"Data: 2016 NES"</span></span>
-<span id="cb21-16"><a></a>       )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</div>
-<div id="tabset-7-3">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a></a>fig_m2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="11-slides_files/figure-revealjs/pred-1.png" width="960"></p>
-</figure>
-</div>
-</div>
-</div>
-</div>
-<div id="tabset-7-4">
-<p>We see from Model 2 that 29.7 percent [27.3%, 32.1%] of Independents in the 2016 NES were predicted to be vaccine skeptics compared to 23.7 percent [20.8%, 26.5%] of Strong Democrats and only 20.1 percent [16.9%, 23.3%] of Strong Republicans.</p>
-</div>
-</div>
-</div>
-</section>
-<section id="interpreting-model-3" class="slide level2 smaller">
-<h2>Interpreting Model 3</h2>
-<div class="panel-tabset">
-<ul id="tabset-8" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-8-1">Interpretation</a></li><li><a href="#tabset-8-2"><i class="fa-solid fa-code" aria-label="code"></i> Code</a></li></ul>
-<div class="tab-content">
-<div id="tabset-8-1">
-<p>Model 3 tells a similar story to model 2. Again, adjusting for differences in vaccine skepticism explained by age, Model 3 predicts that 41.7 percent [37.7%, 45.6%] of Independents in the 2016 NES are vaccine skeptics compared to 24.2 percent [22.1%, 26.2%] of Democrats, and 22.6 percent [20.4%, 24.8%] of Republicans.</p>
-<p>Note the coefficients from Model 3 imply that the differences between Independents and Democrats are statistically significant (<span class="math inline">\(\beta_{Ind} = 0.175, p &lt; 0.05\)</span>), the differences between Republicans and Democrats are not (<span class="math inline">\(\beta_{Rep} = -0.004, p = 0.31\)</span>)</p>
-</div>
-<div id="tabset-8-2">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a></a>pred_df_m3 <span class="ot">&lt;-</span> <span class="fu">expand_grid</span>(</span>
-<span id="cb23-2"><a></a>  <span class="at">pid3cat =</span> <span class="fu">c</span>(<span class="st">"Democrat"</span>, <span class="st">"Independent"</span>,<span class="st">"Republican"</span>),</span>
-<span id="cb23-3"><a></a>  <span class="at">age =</span> <span class="fu">mean</span>(nes16<span class="sc">$</span>age, <span class="at">na.rm=</span>T)</span>
-<span id="cb23-4"><a></a>)</span>
-<span id="cb23-5"><a></a>pred_df_m3 <span class="ot">&lt;-</span> <span class="fu">cbind</span>(pred_df_m3, <span class="fu">predict</span>(m3_2016,pred_df_m3, <span class="at">interval =</span><span class="st">"confidence"</span>))</span>
-<span id="cb23-6"><a></a>pred_df_m3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>      pid3cat      age       fit       lwr       upr
-1    Democrat 49.58231 0.2419547 0.2211228 0.2627867
-2 Independent 49.58231 0.4169043 0.3773539 0.4564547
-3  Republican 49.58231 0.2261496 0.2038046 0.2484947</code></pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="section-5" class="slide level2 smaller">
-<h2></h2>
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a></a>tab_fetch</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<table class="texreg" style="margin: 10px auto;border-collapse: collapse;border-spacing: 0px;caption-side: bottom;color: #000000;border-top: 2px solid #000000;">
-<caption>
-Partisanship and Vaccine Skepticism
-</caption>
-<thead>
-<tr>
-<th>
-&nbsp;
-</th>
-<th style="padding-left: 5px;padding-right: 5px;border-bottom: 1px solid #000000;" colspan="3">
-NES 2016
-</th>
-<th style="padding-left: 5px;padding-right: 5px;border-bottom: 1px solid #000000;" colspan="3">
-NES 2020
-</th>
-</tr>
-<tr>
-<th style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
-</th>
-<th style="padding-left: 5px;padding-right: 5px;">
-(1)
-</th>
-<th style="padding-left: 5px;padding-right: 5px;">
-(2)
-</th>
-<th style="padding-left: 5px;padding-right: 5px;">
-(3)
-</th>
-<th style="padding-left: 5px;padding-right: 5px;">
-(4)
-</th>
-<th style="padding-left: 5px;padding-right: 5px;">
-(5)
-</th>
-<th style="padding-left: 5px;padding-right: 5px;">
-(6)
-</th>
-</tr>
-</thead>
-<tbody>
-<tr style="border-top: 1px solid #000000;">
-<td style="padding-left: 5px;padding-right: 5px;">
-(Intercept)
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-0.458<sup>*</sup>
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-0.350<sup>*</sup>
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-0.417<sup>*</sup>
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-0.343<sup>*</sup>
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-0.318<sup>*</sup>
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-0.352<sup>*</sup>
-</td>
-</tr>
-<tr>
-<td style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-(0.025)
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-(0.035)
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-(0.023)
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-(0.018)
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-(0.024)
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-(0.016)
-</td>
-</tr>
-<tr>
-<td style="padding-left: 5px;padding-right: 5px;">
-PID (7pt)
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
--0.005
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-0.064<sup>*</sup>
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-0.021<sup>*</sup>
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-0.037<sup>*</sup>
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
-</td>
-</tr>
-<tr>
-<td style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-(0.003)
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-(0.016)
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-(0.002)
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-(0.011)
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
-</td>
-</tr>
-<tr>
-<td style="padding-left: 5px;padding-right: 5px;">
-Age
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
--0.004<sup>*</sup>
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
--0.003<sup>*</sup>
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
--0.004<sup>*</sup>
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
--0.004<sup>*</sup>
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
--0.004<sup>*</sup>
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
--0.003<sup>*</sup>
-</td>
-</tr>
-<tr>
-<td style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-(0.000)
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-(0.000)
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-(0.000)
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-(0.000)
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-(0.000)
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-(0.000)
-</td>
-</tr>
-<tr>
-<td style="padding-left: 5px;padding-right: 5px;">
-PID<sup>2</sup> (7pt)
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
--0.009<sup>*</sup>
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
--0.002
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
-</td>
-</tr>
-<tr>
-<td style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-(0.002)
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-(0.001)
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
-</td>
-</tr>
-<tr>
-<td style="padding-left: 5px;padding-right: 5px;">
-Independent
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-0.175<sup>*</sup>
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-0.200<sup>*</sup>
-</td>
-</tr>
-<tr>
-<td style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-(0.023)
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-(0.016)
-</td>
-</tr>
-<tr>
-<td style="padding-left: 5px;padding-right: 5px;">
-Republican
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
--0.016
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-0.100<sup>*</sup>
-</td>
-</tr>
-<tr>
-<td style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-(0.016)
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-(0.011)
-</td>
-</tr>
-<tr style="border-top: 1px solid #000000;">
-<td style="padding-left: 5px;padding-right: 5px;">
-R<sup>2</sup>
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-0.023
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-0.028
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-0.042
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-0.032
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-0.032
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-0.045
-</td>
-</tr>
-<tr>
-<td style="padding-left: 5px;padding-right: 5px;">
-Adj. R<sup>2</sup>
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-0.022
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-0.027
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-0.042
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-0.032
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-0.032
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-0.045
-</td>
-</tr>
-<tr style="border-bottom: 2px solid #000000;">
-<td style="padding-left: 5px;padding-right: 5px;">
-Num. obs.
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-3494
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-3494
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-3507
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-7041
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-7041
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-7052
-</td>
-</tr>
-</tbody>
-<tfoot>
-<tr>
-<td style="font-size: 0.8em;" colspan="7">
-<sup>*</sup>p &lt; 0.05
-</td>
-</tr>
-</tfoot>
-</table>
-</section>
-<section id="testing-for-differences-over-time" class="slide level2 smaller">
-<h2>Testing for Differences Over Time</h2>
-<p>The results for the 2016 NES suggest political independents are most skeptical of vaccines.</p>
-<p>The results for 2020 suggest the relationship between partisanship and vaccine skepticism has changed overtime.</p>
-<ul>
-<li class="fragment"><p>The coefficient on partisanship in model 4 is now positive and statistically significant (p &lt; 0.05), suggesting that as respondents become more Republican, they are more likely to be skeptical of vaccines</p></li>
-<li class="fragment"><p>The coefficients from Model 5 suggest the relationship between partisanship skepticism is non linear, which is confirmed by model 6.</p></li>
-<li class="fragment"><p>In Model 6, we see that independents remain the most skeptical of vaccines in 2020 <span class="math inline">\((\beta = 0.20,\, p &lt;0.05)\)</span>, but that Republicans now tend to be more skeptical of vaccines than Democrats <span class="math inline">\((\beta = 0.10,\, p &lt;0.05)\)</span></p></li>
-</ul>
-</section></section>
-<section>
-<section id="regression-discontinuity-design" class="title-slide slide level1 inverse center">
-<h1><i class="fa-solid fa-lightbulb" aria-label="lightbulb"></i> Regression Discontinuity Design</h1>
-
-</section>
-<section id="motivating-example" class="slide level2">
-<h2>Motivating Example</h2>
-<div class="columns">
-<div class="column" style="width:30%;">
-<ul>
-<li class="fragment">Do Members of Parliament in the UK get richer from holding office (QSS Chapter 4.3.4)</li>
-</ul>
-</div><div class="column" style="width:70%;">
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="./images/04_eggers.png" width="386"></p>
-</figure>
-</div>
-</div>
-</div>
-<p><a href="https://www.cambridge.org/core/journals/american-political-science-review/article/abs/mps-for-sale-returns-to-office-in-postwar-british-politics/E4C2B102194AA1EA0D2F1F777EAE3C08" target="_blank">Eggers and Hainmueller (2009)</a> ]</p>
-</div></div>
-</section>
-<section id="logic-of-the-regression-discontinuity-design-rdd" class="slide level2">
-<h2>Logic of the Regression Discontinuity Design (RDD)</h2>
-<ul>
-<li class="fragment"><p>What’s the effect of holding elected office in the UK on personal wealth?</p></li>
-<li class="fragment"><p>People who win elections differ in many ways from people who lose elections.</p></li>
-<li class="fragment"><p>Logic of an RDD:</p>
-<ul>
-<li class="fragment"><p>Just look at the wealth of individuals who either narrowly won or lost elections.</p></li>
-<li class="fragment"><p>Candidates close to 50 percent cutoff (discontinuity) should be more comparable (better counterfactuals)</p></li>
+<li class="fragment">discrete</li>
+<li class="fragment">continuous</li>
+<li class="fragment">characterized by their expected values and variances</li>
+<li class="fragment">used to:</li>
+<li class="fragment">describe the <span class="blue">data generating process</span></li>
+<li class="fragment"><span class="blue">quantify uncertainty</span> about estimates</li>
 </ul></li>
 </ul>
 </section>
-<section id="eggers-and-hainmueller-2009" class="slide level2 smaller">
-<h2>Eggers and Hainmueller (2009)</h2>
-<div class="panel-tabset">
-<ul id="tabset-9" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-9-1">Data</a></li><li><a href="#tabset-9-2">Variables</a></li><li><a href="#tabset-9-3"><i class="fa-solid fa-code" aria-label="code"></i></a></li><li><a href="#tabset-9-4"><i class="fa-solid fa-chart-line" aria-label="chart-line"></i></a></li></ul>
-<div class="tab-content">
-<div id="tabset-9-1">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a></a><span class="fu">library</span>(qss)</span>
-<span id="cb26-2"><a></a><span class="fu">data</span>(MPs)</span>
-<span id="cb26-3"><a></a><span class="fu">glimpse</span>(MPs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Rows: 427
-Columns: 10
-$ surname    &lt;chr&gt; "Llewellyn", "Morris", "Walker", "Walker", "Waring", "Brown…
-$ firstname  &lt;chr&gt; "David", "Claud", "George", "Harold", "John", "Ronald", "Le…
-$ party      &lt;chr&gt; "tory", "labour", "tory", "labour", "tory", "labour", "tory…
-$ ln.gross   &lt;dbl&gt; 12.13591, 12.44809, 12.42845, 11.91845, 13.52022, 12.46052,…
-$ ln.net     &lt;dbl&gt; 12.135906, 12.448091, 10.349009, 12.395034, 13.520219, 9.63…
-$ yob        &lt;int&gt; 1916, 1920, 1914, 1927, 1923, 1921, 1907, 1912, 1905, 1920,…
-$ yod        &lt;int&gt; 1992, 2000, 1999, 2003, 1989, 2002, 1987, 1984, 1998, 2004,…
-$ margin.pre &lt;dbl&gt; NA, NA, -0.057168204, -0.072508894, -0.269689620, 0.3409586…
-$ region     &lt;chr&gt; "Wales", "South West England", "North East England", "Yorks…
-$ margin     &lt;dbl&gt; 0.05690404, -0.04973833, -0.04158868, 0.02329524, -0.230005…</code></pre>
-</div>
-</div>
-</div>
-<div id="tabset-9-2">
-<div class="cell">
-<div class="cell-output-display">
-<table class="caption-top">
-<colgroup>
-<col style="width: 14%">
-<col style="width: 85%">
-</colgroup>
-<thead>
-<tr class="header">
-<th style="text-align: left;">Variable</th>
-<th style="text-align: left;">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">surname</td>
-<td style="text-align: left;">surname of the candidate</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">firstname</td>
-<td style="text-align: left;">first name of the candidate</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">party</td>
-<td style="text-align: left;">party of the candidate (labour or tory)</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">ln.gross</td>
-<td style="text-align: left;">log gross wealth at the time of death</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">ln.net</td>
-<td style="text-align: left;">log net wealth at the time of death</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">yob</td>
-<td style="text-align: left;">year of birth of the candidate</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">yod</td>
-<td style="text-align: left;">year of death of the candidate</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">margin.pre</td>
-<td style="text-align: left;">margin of the candidate’s party in the previous election electoral</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">region</td>
-<td style="text-align: left;">region</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">margin</td>
-<td style="text-align: left;">margin of victory (vote share)</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-<div id="tabset-9-3">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a></a>MPs <span class="sc">%&gt;%</span></span>
-<span id="cb28-2"><a></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(margin, ln.net))<span class="sc">+</span></span>
-<span id="cb28-3"><a></a>  <span class="fu">geom_point</span>(<span class="at">shape=</span><span class="dv">1</span>)<span class="sc">+</span></span>
-<span id="cb28-4"><a></a>  <span class="fu">facet_grid</span>(<span class="sc">~</span>party)<span class="sc">+</span></span>
-<span id="cb28-5"><a></a>  <span class="fu">geom_smooth</span>(<span class="at">data =</span>MPs <span class="sc">%&gt;%</span></span>
-<span id="cb28-6"><a></a>                <span class="fu">filter</span>(margin <span class="sc">&lt;</span><span class="dv">0</span>),</span>
-<span id="cb28-7"><a></a>              <span class="at">method =</span> <span class="st">"lm"</span>)<span class="sc">+</span></span>
-<span id="cb28-8"><a></a>  <span class="fu">geom_smooth</span>(<span class="at">data =</span>MPs <span class="sc">%&gt;%</span></span>
-<span id="cb28-9"><a></a>                <span class="fu">filter</span>(margin <span class="sc">&gt;</span><span class="dv">0</span>),</span>
-<span id="cb28-10"><a></a>              <span class="at">method =</span> <span class="st">"lm"</span>)<span class="sc">+</span></span>
-<span id="cb28-11"><a></a>  <span class="fu">theme_bw</span>() <span class="ot">-&gt;</span> fig_rdd</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</div>
-<div id="tabset-9-4">
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="11-slides_files/figure-revealjs/rddfig-1.png" width="960"></p>
-</figure>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
+<section id="regression" class="slide level2">
+<h2>Regression</h2>
 </section>
-<section id="rdd-notation" class="slide level2 smaller">
-<h2>RDD Notation</h2>
+<section id="controlling-for-variables-residualized-regression" class="slide level2 smaller">
+<h2>Controlling for Variables &amp; Residualized Regression</h2>
+<blockquote>
+<p>Regression models partition the variance in the outcome into variance explained by the model and unexplained variance (residuals)</p>
+</blockquote>
+<p>You should know:</p>
 <ul>
-<li class="fragment"><span class="math inline">\(X\)</span> is a <strong>forcing</strong> variable</li>
-<li class="fragment">Treatment <span class="math inline">\(D\)</span> is a determined by <span class="math inline">\(X\)</span></li>
-</ul>
-<p><span class="math display">\[
-D_i = 1\{X_i &gt; c\}
-\]</span></p>
-<ul>
-<li class="fragment"><p><span class="math inline">\(X\)</span> is the <code>margin</code> variable in the example data, and <span class="math inline">\(D=1\)</span> if <code>margin</code> is greater than 0 (i.e.&nbsp;the candidate won the election)</p></li>
-<li class="fragment"><p>Interested in the differences in the outcome at the threshold</p></li>
-</ul>
-<p><span class="math display">\[\lim_{x \downarrow  c} E[Y_i|X=x] - \lim_{x \uparrow  c} E[Y_i|X=x]\]</span></p>
-</section>
-<section id="causal-identification-with-an-rdd" class="slide level2 smaller">
-<h2>Causal Identification with an RDD</h2>
-<p>If we assume <span class="math inline">\(E[Y_i(0)|X=x]\)</span> and <span class="math inline">\(E[Y_i(1)|X=x]\)</span> are continuous in x, then we can estimate a (local) ATE at the threshold:</p>
-<p><span class="math display">\[\begin{align}
-ATE_{RDD} &amp;= E[Y(1)-Y(0)|X_i=c] \\
-&amp;=  E[Y(1)|X_i=c] -  E[Y(0)|X_i=c]\\
-&amp;= \lim_{x \downarrow  c} E[Y_i|X=x] - \lim_{x \uparrow  c} E[Y_i|X=x] \\
-\end{align}\]</span></p>
-</section>
-<section id="continuity-assumption" class="slide level2">
-<h2>Continuity Assumption</h2>
-
-<img data-src="https://mixtape.scunning.com/graphics/rdd_simul_ex.jpg" class="r-stretch"><p><a href="https://mixtape.scunning.com/regression-discontinuity.html#continuity-assumption" target="_blank">Cunningham (2022)</a></p>
-</section>
-<section id="causal-identification-with-an-rdd-1" class="slide level2 smaller">
-<h2>Causal Identification with an RDD</h2>
-<ul>
-<li class="fragment"><p>The continuity assumption is a formal way of saying that observations close to the threshold are good counterfactuals for each other</p></li>
-<li class="fragment"><p>We can’t prove this assumption</p></li>
-<li class="fragment"><p>But if it holds, we should observe</p>
-<ul>
-<li class="fragment"><p>no sorting around the cutoff (no self selection)</p></li>
-<li class="fragment"><p>similar distributions of covariates around the cutoff (balance tests)</p></li>
-<li class="fragment"><p>no effect of treatment on things measured pre-treatment (placebo tests)</p></li>
-</ul></li>
-</ul>
-</section></section>
-<section>
-<section id="instrumental-variables" class="title-slide slide level1 inverse center">
-<h1><i class="fa-solid fa-lightbulb" aria-label="lightbulb"></i> Instrumental Variables</h1>
-
-</section>
-<section id="instrumental-variables-1" class="slide level2 smaller">
-<h2>Instrumental Variables</h2>
-<p>Instrumental variables are an economists favorite tool for dealing with <strong>omitted variable bias</strong></p>
-<ul>
-<li class="fragment">We have some non random treatment whose effects we’d like to assess</li>
-<li class="fragment">We’re worried that these effects are <strong>confounded</strong> by some unobserved, omitted variable, that influences both the treatment and the outcome</li>
-<li class="fragment">We find an <strong>instrumental variable</strong> that satisfies the following:
-<ul>
-<li class="fragment">Randomization</li>
-<li class="fragment">Excludability</li>
-<li class="fragment">First-stage relatioship</li>
-<li class="fragment">Monotonicity</li>
-</ul></li>
-<li class="fragment">Allowing us estimate a Local Average Treatment Effect (LATE) using the only the variation in our treatment is <strong>exogenous</strong> (uncorrelated with ommited variables)</li>
+<li class="fragment"><a href="https://josephessig-source.github.io/pols1600_site/slides/07-slides.html#/residualized-regression" target="_blank">The logic of residualized regression.</a> You can isolate the effect of <span class="math inline">\(X_1\)</span> on <span class="math inline">\(Y\)</span> by regressing the residuals of <span class="math inline">\(Y\)</span> (unexplained by <span class="math inline">\(X_2\)</span>) on the residuals of <span class="math inline">\(X_1\)</span> (unexplained by <span class="math inline">\(X_2\)</span>).</li>
+<li class="fragment"><a href="https://josephessig-source.github.io/pols1600_site/slides/07-slides.html#/residuals-are-uncorrelated-with-x-and-haty" target="_blank">Properties of Residuals:</a> Residuals (<span class="math inline">\(\hat{\epsilon}\)</span>) are orthogonal to (uncorrelated with) both the predictors and the predicted values.</li>
+<li class="fragment"><a href="https://josephessig-source.github.io/pols1600_site/slides/07-slides.html#/why-did-the-coefficient-on-rep-vote-share-change-in-m3-but-not-m2" target="_blank">Why coefficients change</a> Controlling for a new variable only changes the coefficient of an existing predictor if the new variable is correlated with both the predictor and the outcome.</li>
 </ul>
 </section>
-<section id="iv-assumption-randomization" class="slide level2">
-<h2>IV Assumption: Randomization</h2>
-<div class="columns">
-<div class="column" style="width:30%;">
+<section id="predictions-and-model-fit" class="slide level2 smaller">
+<h2>Predictions and Model Fit</h2>
+<blockquote>
+<p>Regression coefficients define a formula to generate predicted values, while fit statistics summarize how well the model explains the data</p>
+</blockquote>
+<p>You should know:</p>
 <ul>
-<li class="fragment">No path from <span class="math inline">\(U\)</span> to <span class="math inline">\(Z\)</span></li>
-</ul>
-</div><div class="column" style="width:70%;">
-<p><img data-src="https://book.declaredesign.org/figures/figure-16-7.svg"> <a href="https://book.declaredesign.org/observational-causal.html?q=instrumental#instrumental-variables" target="_blank">Source</a></p>
-</div></div>
-</section>
-<section id="iv-assumption-excludability" class="slide level2">
-<h2>IV Assumption: Excludability</h2>
-<div class="columns">
-<div class="column" style="width:30%;">
-<ul>
-<li class="fragment">No path from <span class="math inline">\(Z\)</span> to <span class="math inline">\(Y\)</span></li>
-</ul>
-</div><div class="column" style="width:70%;">
-<p><img data-src="https://book.declaredesign.org/figures/figure-16-7.svg"></p>
-<p><a href="https://book.declaredesign.org/observational-causal.html?q=instrumental#instrumental-variables" target="_blank">Source</a></p>
-</div></div>
-</section>
-<section id="iv-assumption-first-stage" class="slide level2">
-<h2>IV Assumption: First Stage</h2>
-<div class="columns">
-<div class="column" style="width:30%;">
-<ul>
-<li class="fragment">Path from <span class="math inline">\(Z\)</span> to <span class="math inline">\(D\)</span></li>
-</ul>
-</div><div class="column" style="width:70%;">
-<p><img data-src="https://book.declaredesign.org/figures/figure-16-7.svg"></p>
-<p><a href="https://book.declaredesign.org/observational-causal.html?q=instrumental#instrumental-variables" target="_blank">Source</a></p>
-</div></div>
-</section>
-<section id="iv-assumption-monotonicity" class="slide level2">
-<h2>IV Assumption: Monotonicity</h2>
-<div class="columns">
-<div class="column" style="width:30%;">
-<ul>
-<li class="fragment"><span class="math inline">\(D_i(Z=1)\geq D_i(Z=0)\)</span></li>
-<li class="fragment">“No Defiers”</li>
-</ul>
-</div><div class="column" style="width:70%;">
-<p><img data-src="https://book.declaredesign.org/figures/figure-16-7.svg"></p>
-<p><a href="https://book.declaredesign.org/observational-causal.html?q=instrumental#instrumental-variables" target="_blank">Source</a></p>
-</div></div>
-</section>
-<section id="compliance" class="slide level2">
-<h2>Compliance</h2>
-<p>With a binary treatment, <span class="math inline">\(D\)</span> and binary instrument <span class="math inline">\(Z\)</span> there are four types of compliance</p>
-<div class="cell">
-<div class="cell-output-display">
-<table class="caption-top">
-<thead>
-<tr class="header">
-<th style="text-align: left;">Type</th>
-<th style="text-align: right;"><span class="math inline">\(D_i(Z=1)\)</span></th>
-<th style="text-align: right;"><span class="math inline">\(D_i(Z=0)\)</span></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">Always Takers</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">1</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Never Takers</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">0</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Compliers</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">0</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Defiers</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">1</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<ul>
-<li class="fragment">Assuming Monotonicity means there are “No Defiers”</li>
+<li class="fragment"><strong>Generating predictions:</strong> How to use <code>expand_grid()</code> to hold variables constant and <code>predict()</code> to generate expected values, which is especially useful for interpreting polynomials or interaction terms.</li>
+<li class="fragment"><strong>R-squared (<span class="math inline">\(R^2\)</span>):</strong> The proportion of variance in the outcome explained by the model (<span class="math inline">\(ESS/TSS\)</span>).</li>
+<li class="fragment"><strong>Standardization:</strong> Why we convert variables to z-scores (mean 0, standard deviation 1) to compare coefficients on a common scale.</li>
 </ul>
 </section>
-<section id="estimating-the-local-average-treatment-effect" class="slide level2">
-<h2>Estimating the Local Average Treatment Effect</h2>
-<p>If we believe our assumptions of:</p>
+<section id="difference-in-differences-did" class="slide level2 smaller">
+<h2>Difference-in-Differences (DiD)</h2>
+<blockquote>
+<p>Diff in Diff estimates causal effects by comparing the change in outcomes over time between a treated group and a control group</p>
+</blockquote>
+<p>You should know:</p>
 <ul>
-<li class="fragment">Randomization</li>
-<li class="fragment">Excludability</li>
-<li class="fragment">First-stage relationship</li>
-<li class="fragment">Monotonicity</li>
-</ul>
-<p>Then we can estimate <span class="blue">Local Average Treatment Effect (LATE)</span> sometimes called the <span class="blue">Complier Average Treatment Effect (CATE)</span></p>
-</section>
-<section id="estimating-the-local-average-treatment-effect-1" class="slide level2">
-<h2>Estimating the Local Average Treatment Effect</h2>
-<p>It can be <a href="https://www.mattblackwell.org/files/teaching/s10-iv-handout.pdf" target="_blank">shown</a> that the LATE:</p>
-<p><span class="math display">\[LATE = \frac{E[Y|Z=1] - E[Y|Z=0]}{E[D|Z=1]-E[D|Z=0]}= \frac{ATE_{Z\to Y}}{ATE_{Z\to D}}\]</span></p>
-<p>Where:</p>
-<ul>
-<li class="fragment"><p><span class="math inline">\(ATE_{Z\to Y}\)</span> is the known as the “Intent to Treat” effect (ITT) (i.e.&nbsp;the effect of being assigned to treatment)</p></li>
-<li class="fragment"><p><span class="math inline">\(ATE_{Z\to D}\)</span> is the “effect” of being assigned to treatment on actually receiving treatment</p></li>
+<li class="fragment"><strong>Diff in Diff:</strong> <a href="https://josephessig-source.github.io/pols1600_site/slides/07-slides.html#/how-can-we-estimate-the-effect-of-moving-pumps-upstream" target="_blank">How differencing twice isolates the treatment effect by removing fixed differences across units (Treated vs.&nbsp;Control) and fixed changes over time (Post vs.&nbsp;Pre).</a></li>
+<li class="fragment"><strong>Average Treatment on Treated (ATT):</strong> <a href="https://josephessig-source.github.io/pols1600_site/slides/07-slides.html#/average-treatment-on-treated" target="_blank">The specific causal quantity estimated</a> (<span class="math inline">\(E[Y_{1i}(1) - Y_{0i}(1)|D=1]\)</span>).</li>
+<li class="fragment"><strong>Parallel Trends Assumption:</strong> The crucial identifying assumption that, absent treatment, the treated group would have followed the exact <a href="https://josephessig-source.github.io/pols1600_site/slides/07-slides.html#/identifying-assumption-of-a-difference-in-differences-design" target="_blank">same trajectory as the control group.</a></li>
+<li class="fragment"><strong>Regression Implementation:</strong> <a href="https://josephessig-source.github.io/pols1600_site/slides/07-slides.html#/using-linear-regression-to-estimate-a-difference-in-difference" target="_blank">How to estimate DiD using a linear model</a> (<span class="math inline">\(Y = \beta_0 + \beta_1 Post + \beta_2 Treated + \beta_3 Post \times Treated\)</span>), where the interaction term (<span class="math inline">\(\beta_3\)</span>) provides the ATT.</li>
 </ul>
 </section>
-<section id="example-earnings-and-military-service" class="slide level2 smaller">
-<h2>Example: Earnings and Military Service</h2>
-<p>Adapted from <a href="https://raw.githack.com/edrubin/EC421W19/master/LectureNotes/11InstrumentalVariables/11_instrumental_variables.html#42" target="_blank">Edward Rubin</a></p>
-<p><em>Example:</em> If we want to estimate the effect of veteran status on earnings,</p>
-<p><span class="math display">\[
-\begin{align}
-  \text{Earnings}_i = \beta_0 + \beta_1 \text{Veteran}_i + u_i \tag{1}
-\end{align}
-\]</span></p>
-<p>We would love to calculate <span class="math inline">\(\color{#e64173}{\text{Earnings}_{1i}} - \color{#6A5ACD}{\text{Earnings}_{0i}}\)</span>, but we can’t.</p>
-<p>And OLS will likely be biased for <span class="math inline">\((1)\)</span> due to selection/omitted-variable bias.</p>
-</section>
-<section id="introductory-example" class="slide level2 smaller">
-<h2>Introductory example</h2>
-<p>Imagine that we can split veteran status into an exogenous (as-if random, unbiased) part and an endogenous (non-random, biased) part…</p>
-<p><span class="math display">\[
-\begin{align}
-  \text{Earnings}_i
-  &amp;= \beta_0 + \beta_1 \text{Veteran}_i + u_i \tag{1} \\
-  &amp;= \beta_0 + \beta_1 \left(\text{Veteran}_i^{\text{Exog.}} + \text{Veteran}_i^{\text{Endog.}}\right) + u_i \\
-  &amp;= \beta_0 + \beta_1 \text{Veteran}_i^{\text{Exog.}} + \underbrace{\beta_1 \text{Veteran}_i^{\text{Endog.}} + u_i}_{w_i} \\
-  &amp;= \beta_0 + \beta_1 \text{Veteran}_i^{\text{Exog.}} + w_i
-\end{align}
-\]</span></p>
-<p>We could use this exogenous variation in veteran status to consistently estimate <span class="math inline">\(\beta_1\)</span>.</p>
-<p><strong>Q:</strong> What would exogenous variation in veteran status mean?</p>
-</section>
-<section id="introductory-example-1" class="slide level2 smaller">
-<h2>Introductory example</h2>
-<p><strong>Q:</strong> What would exogenous variation in veteran status mean?</p>
-<p><span class="math inline">\(A_1\)</span> Choices to enlist in the military that are essentially random—or at least uncorrelated with omitted variables and the disturbance.</p>
-<p><span class="math inline">\(A_2\)</span> .No selection bias:</p>
-<p><span class="math display">\[
-\begin{align}
-  \color{#e64173}{\mathop{E}\left(\text{Earnings}_{0i}\mid\text{Veteran}_i = 1\right)} - \color{#6A5ACD}{\mathop{E}\left( \text{Earnings}_{0i} \mid \text{Veteran}_i = 0 \right)} = 0
-\end{align}
-\]</span></p>
-</section>
-<section id="instruments" class="slide level2 smaller scrollable">
-<h2>Instruments</h2>
+<section id="the-law-of-large-numbers-lln" class="slide level2 smaller">
+<h2>The Law of Large Numbers (LLN)</h2>
+<blockquote>
+<p>As sample size increases, the sample mean converges to the true population mean</p>
+</blockquote>
+<p>You should know:</p>
 <ul>
-<li class="fragment"><p><strong>Q:</strong> How do we isolate this <em>exogenous variation</em> in our explanatory variable?</p></li>
-<li class="fragment"><p><strong>A:</strong> Find an instrument (an instrumental variable).</p></li>
-<li class="fragment"><p><strong>Q:</strong> What’s an instrument?</p></li>
-<li class="fragment"><p><strong>A:</strong> An <strong>instrument</strong> is a variable that is</p>
-<ol type="1">
-<li class="fragment"><strong>correlated</strong> with the <strong>explanatory variable</strong> of interest (<em>relevant</em>),</li>
-<li class="fragment"><strong>uncorrelated</strong> with the <strong>error</strong> term (<em>exogenous</em>).</li>
-</ol></li>
+<li class="fragment"><strong>The core intuition:</strong> Why an unbiased estimate improves and its variance decreases as the sample size grows.</li>
+<li class="fragment"><strong>Mathematical formulation:</strong> How the distance between the sample mean and the population mean <span class="math inline">\(\mu\)</span> approaches 0 as <span class="math inline">\(n \to \infty\)</span>.’</li>
 </ul>
+<p>See <a href="https://josephessig-source.github.io/pols1600_site/slides/09-slides.html#/the-law-of-large-numbers" target="_blank">these slides</a></p>
 </section>
-<section id="instruments-1" class="slide level2 smaller scrollable">
-<h2>Instruments</h2>
-<p>So if we want an instrument <span class="math inline">\(z_i\)</span> for endogenous veteran status in</p>
-<p><span class="math display">\[
-\begin{align}
-  \text{Earnings}_i = \beta_0 + \beta_1 \text{Veteran}_i + u_i
-\end{align}
-\]</span></p>
-<ol type="1">
-<li class="fragment"><strong>Relevant:</strong> <span class="math inline">\(\mathop{\text{Cov}} \left( \text{Veteran}_i,\, z_i \right) \neq 0\)</span></li>
-<li class="fragment"><strong>Exogenous:</strong> <span class="math inline">\(\mathop{\text{Cov}} \left( z_i,\, u_i \right) = 0\)</span></li>
-</ol>
+<section id="the-central-limit-theorem-clt" class="slide level2 smaller">
+<h2>The Central Limit Theorem (CLT)</h2>
+<blockquote>
+<p>The sampling distribution of the mean approaches a Normal distribution as sample size grows, regardless of the population’s underlying distribution</p>
+</blockquote>
+<p>You should know:</p>
+<ul>
+<li class="fragment"><strong>Sampling distributions:</strong> What they are and how their width (variance) decreases as sample size increases.</li>
+<li class="fragment"><strong>Standardization:</strong> How to calculate and interpret Z-scores (<span class="math inline">\(Z=\frac{X-\mu}{\sigma}\)</span>).</li>
+<li class="fragment"><strong>Properties of the sample mean:</strong> Understanding that <span class="math inline">\(E[\bar{X}_n]=\mu\)</span> and <span class="math inline">\(Var[\bar{X}_n]=\frac{\sigma^2}{n}\)</span>.</li>
+<li class="fragment"><strong>Normal approximation:</strong> How the CLT allows us to conduct statistical inference regardless of the shape of the population distribution.</li>
+</ul>
+<p>See <a href="https://josephessig-source.github.io/pols1600_site/slides/09-slides.html#/the-central-limit-theorems" target="_blank">these slides</a></p>
 </section>
-<section id="instruments-relevance" class="slide level2 smaller scrollable">
-<h2>Instruments: Relevance</h2>
-<p><strong>Relevance:</strong> We need the instrument to cause a change in (correlate with) our endogenous explanatory variable.</p>
-<p>We can actually test this requirement using regression and a <em>t</em> test.</p>
-<p><strong><em>Example:</em></strong> For the veteran status, consider three potential instruments:</p>
-<div class="columns">
-<div class="column" style="width:30%;">
-<ol type="1">
-<li class="fragment"><p>Social security number</p></li>
-<li class="fragment"><p>Physical fitness</p></li>
-<li class="fragment"><p>Vietnam War draft</p></li>
-</ol>
-</div><div class="column" style="width:70%;">
+<section id="standard-errors-and-variance" class="slide level2 smaller">
+<h2>Standard Errors and Variance</h2>
+<blockquote>
+<p>Standard errors quantify uncertainty by estimating the standard deviation of a sampling distribution</p>
+</blockquote>
+<p>You should know:</p>
 <ul>
-<li class="fragment"><p><strong>Probably not relevant</strong> uncorrelated with military service</p></li>
-<li class="fragment"><p><em>Potentially relevant</em> service may correlate with fitness</p></li>
-<li class="fragment"><p><strong>Relevant</strong> being drafted led to service</p></li>
+<li class="fragment"><strong>Variance of regression coefficients:</strong> How it depends on the residuals in your model.</li>
+<li class="fragment"><strong>Homoskedasticity vs.&nbsp;Heteroskedasticity:</strong> Recognizing the difference between constant error variance (<span class="math inline">\(\sigma^2\)</span>) and non-constant error variance.</li>
+<li class="fragment"><strong>Robust Standard Errors:</strong> Why we use functions like <code>lm_robust()</code> to calculate consistent standard errors (or cluster them by group) when error variance is not constant.</li>
 </ul>
-</div></div>
+<p>See <a href="https://josephessig-source.github.io/pols1600_site/slides/09-slides.html#/lab-8-and-standard-errors" target="_blank">these slides</a></p>
 </section>
-<section id="instruments-exogeneity" class="slide level2 smaller scrollable">
-<h2>Instruments: Exogeneity</h2>
-<p><span class="blue">Exogeneity:</span> The instrument to be independent of omitted factors that affect our outcome variable—as good as randomly assigned.</p>
-<p><span class="math inline">\(z_i\)</span> must be uncorrelated with our disturbance <span class="math inline">\(u_i\)</span>. <span class="blue">Not testable.</span></p>
-<p><strong><em>Example:</em></strong> For the <span class="blue">veteran status</span>, consider three potential instruments:</p>
-<div class="columns">
-<div class="column" style="width:30%;">
-<ol type="1">
-<li class="fragment"><p>Social security number</p></li>
-<li class="fragment"><p>Physical fitness</p></li>
-<li class="fragment"><p>Vietnam War draft</p></li>
-</ol>
-</div><div class="column" style="width:70%;">
+<section id="sampling-distributions-and-statistical-inference" class="slide level2">
+<h2>Sampling Distributions and Statistical Inference</h2>
 <ul>
-<li class="fragment"><p><strong>Exogenous</strong> SSN essentially random</p></li>
-<li class="fragment"><p><em>Not Exogenous</em> fitness correlated with many things</p></li>
-<li class="fragment"><p><strong>Exogenous</strong> draft via lottery</p></li>
-</ul>
-</div></div>
-</section>
-<section id="venn-diagram-explanation" class="slide level2">
-<h2>Venn diagram explanation</h2>
-<p>In the following figures (Venn diagrams)</p>
-<ul>
-<li class="fragment">Each circle illustrates a variable.</li>
-<li class="fragment">Overlap gives the share of correlatation between two variables.</li>
-<li class="fragment">Dotted borders denote <em>omitted</em> variables.</li>
-</ul>
-</section>
-<section id="relevant-and-exogenous" class="slide level2">
-<h2>Relevant and Exogenous</h2>
-
-<img data-src="11-slides_files/figure-revealjs/venn_iv-1.png" width="960" class="r-stretch"></section>
-<section id="relevant-not-exogenous" class="slide level2">
-<h2>Relevant, Not Exogenous</h2>
-
-<img data-src="11-slides_files/figure-revealjs/venn_iv_endog-1.png" width="960" class="r-stretch"></section>
-<section id="not-relevant-and-not-exogenous" class="slide level2">
-<h2>Not Relevant and Not Exogenous</h2>
-
-<img data-src="11-slides_files/figure-revealjs/venn_iv_irrelevant-1.png" width="960" class="r-stretch"></section>
-<section id="relevant-not-exogenous-1" class="slide level2">
-<h2>Relevant, Not Exogenous</h2>
-
-<img data-src="11-slides_files/figure-revealjs/venn_iv_endog2-1.png" width="960" class="r-stretch"></section>
-<section id="take-aways" class="slide level2">
-<h2>Take-aways</h2>
-<ul>
-<li class="fragment">Figure 1: <span class="blue">Valid instrument</span> (relevant; exogenous, e.g.&nbsp;draft lotto number)</li>
-<li class="fragment">Figure 2: <span class="yellow">Invalid instrument</span> (relevant; not exogenous, e.g.&nbsp;physical fitness)</li>
-<li class="fragment">Figure 3: <span class="yellow">Invalid instrument</span> (not relevant; not exogenous)</li>
-<li class="fragment">Figure 4: <span class="yellow">Invalid instrument</span> (relevant; not exogenous)</li>
-</ul>
-</section>
-<section id="iv-applications" class="slide level2">
-<h2>IV Applications</h2>
-
-<img data-src="images/ivtweet.png" class="r-stretch"></section>
-<section id="iv-summary" class="slide level2">
-<h2>IV Summary</h2>
-<p>Instrumental variables require a number of assumptions to yield credible causal claims:</p>
-<ul>
-<li class="fragment">Randomization</li>
-<li class="fragment">Excludability</li>
-<li class="fragment">First-stage relationship</li>
-<li class="fragment">Monotonicity</li>
-</ul>
-<p>Estimation and inference of IVs is beyond the scope of this course.</p>
-<ul>
-<li class="fragment"><p>See Edward Rubin’s excellent <a href="https://raw.githack.com/edrubin/EC421W19/master/LectureNotes/11InstrumentalVariables/11_instrumental_variables.html#85" target="_blank">slides</a></p></li>
-<li class="fragment"><p>And Matt Blackwells <a href="https://www.mattblackwell.org/files/teaching/s10-iv-handout.pdf" target="_blank">notes</a></p></li>
-<li class="fragment"><p>Understanding the identifying assumptions of IV can help you critique a study (even if the you don’t fully understand the math)</p></li>
-</ul>
-</section></section>
-<section>
-<section id="summary" class="title-slide slide level1 inverse center">
-<h1><i class="fa-solid fa-lightbulb" aria-label="lightbulb"></i> Summary</h1>
-
-</section>
-<section id="what-you-need-to-know" class="slide level2">
-<h2>What you need to know</h2>
-<ul>
-<li class="fragment">Causal inference in observational and experimental studies is about counterfactual comparisons</li>
-<li class="fragment">In observational studies, to make causal claims we generally make some assumption of conditional independence:</li>
-</ul>
-<p><span class="math display">\[
-Y_i(1),Y_i(0), \perp D_i |X_i
-\]</span></p>
-<ul>
-<li class="fragment">The credibility of this assumption depends less on the data, and more on how the data were generated.</li>
-<li class="fragment"><strong>Selection on Observables</strong> is rarely a credible assumption</li>
-<li class="fragment">Observational designs that produce credible causal inference, leverage aspects of the world that create <em>natural experiments</em></li>
-<li class="fragment">You should be able to describe the logic and assumptions of common designs in social science
-<ul>
-<li class="fragment"><strong>Difference-in-Differences:</strong> <em>Parallel Trends</em></li>
-<li class="fragment"><strong>Regression Discontiniuity:</strong> <em>Continuity at the cutoff</em></li>
-<li class="fragment"><strong>Instrumental Variables:</strong> Instruments need to be <em>Relevant and Exogenous</em></li>
-</ul></li>
+<li class="fragment"><p>See earlier slides in this presentation on:</p></li>
+<li class="fragment"><p>Confidence Intervals</p></li>
+<li class="fragment"><p>Sampling Distributions</p></li>
+<li class="fragment"><p>Hypothesis Testing</p></li>
+<li class="fragment"><p>Statistical Power</p></li>
+<li class="fragment"><p>Randomization Inference</p></li>
 </ul>
 
 
@@ -4883,7 +2522,7 @@ Y_i(1),Y_i(0), \perp D_i |X_i
         }
           var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
           var mailtoRegex = new RegExp(/^mailto:/);
-            var filterRegex = new RegExp("https:\/\/josephessig-source\.github\.io\/pols1600_site\/");
+            var filterRegex = new RegExp('/' + window.location.host + '/');
           var isInternal = (href) => {
               return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
           }

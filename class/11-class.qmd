@@ -2,7 +2,7 @@
 title: "Statistical Inference & Hypothesis Testing Continued"
 date: "2026-04-13"
 bibliography: ../files/paperpile.bib
-subtitle: "How do we quantify uncertainty?Asymptotic and permutation based approaches to hypothesis tests and p-values"
+subtitle: "Approaches to Statistical Inference"
 image: "featured.jpg"
 draft: true
 ---
