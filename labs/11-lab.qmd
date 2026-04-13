@@ -1,0 +1,106 @@
+---
+title: "Lab 11 - Peer Workshop on Final Papers"
+author: "Your Group Members Names Here"
+date: "Last Updated `r format(Sys.Date())`"
+format:
+  html:
+    toc: true
+    embed-resources: true
+    toc-location: right
+    toc-float: true
+    toc-depth: 2
+    number-sections: true
+execute: 
+  eval: true
+  echo: true
+  warning: false
+  message: false
+  cache: true
+---
+
+
+# Overview {.unnumbered}
+
+In this lab, you will have a break from the usual focus on R, and will instead spend time discussing your projects with each other. You will pair up with another group, spend time reviewing their plans for their final project, and then reflect on the feedback your own group received.
+
+As long as you provide a response to every question below, your group will receive a 100. Focus on engaging with each others' work: one thoughtful insight is worth more than hundreds of throwaway comments. 
+
+After reviewing the tips below, fill in your responses to section 1 and 2 after your discussion(s) with another group or groups. 
+
+# Goals {.unnumbered}
+
+1. To practice giving and receiving feedback on research. Communicating your research clearly and constructively critiquing the work of your peers are essential skills in the research process
+
+2. To identify at least one concrete actionable revision that will improve your group's project. By the end of this lab, each group should have at least one key takeaway they can use to improve their project. 
+
+# Where to start  {.unnumbered}
+
+You are not expected to have a full draft of your paper. Instead, your group should be prepared to briefly explain:
+
+- Your research question
+- Your main hypothesis (what you expect to find)
+- Your data source(s)
+- Your key variables (dependent + main independent variable(s))
+- Your planned empirical strategy (what models or comparisons you will run)
+- **One area where you feel uncertain or would like feedback**
+
+The HTML files you submitted for assignments 2 and 3 should be helpful here, and you may want to present them (or parts of  them) in addition to a verbal discussion. 
+
+# Receiving feedback {.unnumbered}
+
+It can be difficult to receive critiques on a project you have been working hard on. Keep these tips in mind during your discussion with other groups:
+
+**Listen Actively:** Avoid the urge to be defensive. Listen to understand where others may be confused. If they are confused, your future reader might be too!
+
+**Ask Clarifying Questions:** If a point is not clear, ask for specific examples. Say things like, "Could you explain what you mean by..." or "Do you have suggestions on how we could..."
+
+**Take Notes:** You won't remember everything they say. Jot down key points so you can discuss them as a group later.
+
+**Be Grateful:** Thank your peers for their time and insights. 
+
+# Giving feedback {.unnumbered}
+
+Providing good feedback is about being constructive, specific, and kind. You are not grading their paper; you are helping them clarify their ideas before they finalize their analysis. Here are some points to review if you are stuck: 
+
+**Research Question:** Is the research question clear? Can you think of any ways to make the "so what" more compelling?  
+
+**Theory:** Do they have a theoretical framework that logically motivates their analysis? What parts of their theory might require additional support from the literature? 
+
+**Data:** What is/are the main source(s) of data, and what variables are available? Would you make different choices about how to measure (operationalize) a key concept using the same data source (e.g. use another variable, a different way of recoding)? Can you think of another source that might have relevant data? 
+
+**Design:** Can you understand how they plan to move from a baseline (bivariate) model to a multiple regression model that controls for alternative explanations? What would you want to see explored that they don't already look at? 
+
+**Overall:** What do you think is the strongest part of their project so far? Where did you feel confused or need more information?
+
+# Your feedback
+
+Please fill this section out based on the feedback you provided to the other group(s). 
+
+**Which group did you talk to?**
+[Insert Group Name/Members here]
+
+**Summarize their research question and empirical strategy:**
+[Write a 2-3 sentence summary of what the other group is studying and how they are testing it.]
+
+**What specific feedback were they looking for?**
+[What question or area did the other group ask you to focus on?]
+
+**What did you ask about or suggest?**
+[List at least 2 specific questions you asked them or suggestions you provided regarding their theory, data, or design.]
+
+# Your group's reflection
+
+Please fill this section out based on the feedback your group received. 
+
+**List 2 (or more) comments you found helpful:**
+
+1. [Comment 1]
+
+2. [Comment 2]
+
+**Implementation Plan:**
+For each comment listed above, discuss whether you plan to implement anything new (either in your analysis or your writing) as a result. Why or why not? 
+
+* [Response to Comment 1]
+* [Response to Comment 2]
+

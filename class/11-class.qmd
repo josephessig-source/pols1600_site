@@ -1,15 +1,15 @@
 ---
-title: "Data and Measurement"
-date: "2024-01-30"
+title: "Statistical Inference & Hypothesis Testing Continued"
+date: "2026-04-13"
 bibliography: ../files/paperpile.bib
-subtitle: "How do we describe the world around us."
+subtitle: "How do we quantify uncertainty?Asymptotic and permutation based approaches to hypothesis tests and p-values"
 image: "featured.jpg"
 draft: true
 ---
 
 ```{r slides-videos, echo=FALSE, include=FALSE}
 source(here::here("R", "slide-things.R"))
-wk <- "01"
+wk <- "11"
 lab <- paste0(
     "<a href=\"",
     paste0(
@@ -36,8 +36,7 @@ comments <- paste0(
 
 ## Readings
 
--   {{< fa book >}} @Imai2022-pm Chapter 1 [here's a free version of an older, non-tidyverse version](files/readings/QSS_ch01_and_ch03.pdf)
-
+-   {{< fa book >}} @Imai2022-pm Chapter 7
 
 
 ## Lecture
@@ -53,33 +52,29 @@ slide_frame(paste0("/slides/", wk, "-slides.html"))
 ```
 
 
-
 ## Lab
 
 
--   {{< fa laptop-file >}} Download this week's `r lab`
+- {{< fa laptop-file >}} Download this week's `r lab`
 
-- {{< fa paintbrush >}} Upload the rendered html file to Canvas [here](https://canvas.brown.edu/courses/1094972/assignments) 
-- {{< fa graduation-cap >}} Review the commented solutions after class `r comments`
+- {{< fa paintbrush >}} Upload the rendered html file to Canvas [here](https://canvas.brown.edu/courses/1102109/assignments) 
 
 
 ## Assignments
 
-- {{< fa lightbulb >}} Work through [Software Setup](../resources/00-software-setup.qmd) before class next week
+- {{< fa chalkboard-user >}} Complete QSS Tutorial 10: Uncertainty 2
 
-- {{< fa chalkboard-user >}} Complete QSS Tutorial 0: Introduction to R; QSS Tutorial 1: Measurement 1
+- {{< fa chalkboard-user >}} Submit [Assignment 4: Paper draft](https://josephessig-source.github.io/pols1600_site/assignments/a4.html) by Sunday, May 19th
 
 ```{r}
 #| eval: false
 
-# After completing the software setup you should be able to to run the following to launch the tutorials
+# The last tutorial! 
 
-learnr::run_tutorial("00-intro", package = "qsslearnr")
-
-learnr::run_tutorial("01-measurement1", package = "qsslearnr")
+learnr::run_tutorial("10-uncertainty2", package = "qsslearnr")
 
 ```
 
-- {{< fa paintbrush >}} Upload the rendered html tutorial files to Canvas [here](https://canvas.brown.edu/courses/1094972/assignments) 
+- {{< fa paintbrush >}} Upload the rendered html tutorial files to Canvas [here](https://canvas.brown.edu/courses/1102109/assignments) 
 
 
