@@ -1,8 +1,8 @@
 {
-  "hash": "09398de65d6ea559a1e4d6b66861408a",
+  "hash": "4dd008331b91ce5a5371fb612dd7130c",
   "result": {
     "engine": "knitr",
-    "markdown": "---\ntitle: \"Review and Presentation Prep\"\ndate: \"2026-04-20\"\nbibliography: ../files/paperpile.bib\nsubtitle: \"Wrapping things up\"\nimage: \"featured.jpg\"\ndraft: true\n---\n\n\n\n\n\n## Readings\n\n-   {{< fa book >}} @Imai2022-pm Chapter 7 \n\n\n\n## Lecture\n\n\n<p class=\"buttons\"><a class=\"btn btn-danger\" target=\"_blank\" href=\"/slides/12-slides.html\"><i class=\"fa-solid fa-arrow-up-right-from-square\"></i> View all slides in new window</a>\n<div class=\"ratio ratio-16x9\">\n<iframe src=\"/slides/12-slides.html\"></iframe>\n</div>\n\n\n\n## Lab\n\n\n-   No lab this week. \n\n## Assignments\n\n- {{< fa lightbulb >}} Work on turning your draft into a presentation \n\n- {{< fa chalkboard-user >}} Submit assignment 5 (completed presentation) before class on Monday April 27. \n\n\n\n\n",
+    "markdown": "---\ntitle: \"Review and Presentation Prep\"\ndate: \"2026-04-20\"\nbibliography: ../files/paperpile.bib\nsubtitle: \"Wrapping things up\"\nimage: \"featured.jpg\"\n---\n\n\n\n\n\n## Readings\n\n-   {{< fa book >}} @Imai2022-pm Chapter 7 \n\n\n\n## Lecture\n\n\n<p class=\"buttons\"><a class=\"btn btn-danger\" target=\"_blank\" href=\"/slides/12-slides.html\"><i class=\"fa-solid fa-arrow-up-right-from-square\"></i> View all slides in new window</a>\n<div class=\"ratio ratio-16x9\">\n<iframe src=\"/slides/12-slides.html\"></iframe>\n</div>\n\n\n\n## Lab\n\n\n-   No lab this week. \n\n## Assignments\n\n- {{< fa lightbulb >}} Work on turning your draft into a presentation \n\n- {{< fa chalkboard-user >}} Submit assignment 5 (completed presentation) before class on Monday April 27. \n\n\n\n\n",
     "supporting": [],
     "filters": [
       "rmarkdown/pagebreak.lua"
