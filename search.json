@@ -13363,5 +13363,65 @@
     "title": "POLS 1600",
     "section": "",
     "text": "tab_better\n\n\nPartisanship and Vaccine Skepticism\n\n\n\n\n \n\n\nNES 2016\n\n\nNES 2020\n\n\n\n\n \n\n\n(1)\n\n\n(2)\n\n\n(3)\n\n\n(4)\n\n\n(5)\n\n\n(6)\n\n\n\n\n\n\n(Intercept)\n\n\n0.458*\n\n\n0.350*\n\n\n0.417*\n\n\n0.343*\n\n\n0.318*\n\n\n0.352*\n\n\n\n\n \n\n\n(0.025)\n\n\n(0.035)\n\n\n(0.023)\n\n\n(0.018)\n\n\n(0.024)\n\n\n(0.016)\n\n\n\n\nPID (7pt)\n\n\n-0.005\n\n\n0.064*\n\n\n \n\n\n0.021*\n\n\n0.037*\n\n\n \n\n\n\n\n \n\n\n(0.003)\n\n\n(0.016)\n\n\n \n\n\n(0.002)\n\n\n(0.011)\n\n\n \n\n\n\n\nAge\n\n\n-0.004*\n\n\n-0.003*\n\n\n-0.004*\n\n\n-0.004*\n\n\n-0.004*\n\n\n-0.003*\n\n\n\n\n \n\n\n(0.000)\n\n\n(0.000)\n\n\n(0.000)\n\n\n(0.000)\n\n\n(0.000)\n\n\n(0.000)\n\n\n\n\nPID2 (7pt)\n\n\n \n\n\n-0.009*\n\n\n \n\n\n \n\n\n-0.002\n\n\n \n\n\n\n\n \n\n\n \n\n\n(0.002)\n\n\n \n\n\n \n\n\n(0.001)\n\n\n \n\n\n\n\nIndependent\n\n\n \n\n\n \n\n\n0.175*\n\n\n \n\n\n \n\n\n0.200*\n\n\n\n\n \n\n\n \n\n\n \n\n\n(0.023)\n\n\n \n\n\n \n\n\n(0.016)\n\n\n\n\nRepublican\n\n\n \n\n\n \n\n\n-0.016\n\n\n \n\n\n \n\n\n0.100*\n\n\n\n\n \n\n\n \n\n\n \n\n\n(0.016)\n\n\n \n\n\n \n\n\n(0.011)\n\n\n\n\nR2\n\n\n0.023\n\n\n0.028\n\n\n0.042\n\n\n0.032\n\n\n0.032\n\n\n0.045\n\n\n\n\nAdj. R2\n\n\n0.022\n\n\n0.027\n\n\n0.042\n\n\n0.032\n\n\n0.032\n\n\n0.045\n\n\n\n\nNum. obs.\n\n\n3494\n\n\n3494\n\n\n3507\n\n\n7041\n\n\n7041\n\n\n7052\n\n\n\n\n\n\n*p &lt; 0.05"
+  },
+  {
+    "objectID": "class/12-class.html",
+    "href": "class/12-class.html",
+    "title": "Review and Presentation Prep",
+    "section": "",
+    "text": "Imai (2022) Chapter 7",
+    "crumbs": [
+      "Class",
+      "Weekly Content",
+      "12: Workshop"
+    ]
+  },
+  {
+    "objectID": "class/12-class.html#readings",
+    "href": "class/12-class.html#readings",
+    "title": "Review and Presentation Prep",
+    "section": "",
+    "text": "Imai (2022) Chapter 7",
+    "crumbs": [
+      "Class",
+      "Weekly Content",
+      "12: Workshop"
+    ]
+  },
+  {
+    "objectID": "class/12-class.html#lecture",
+    "href": "class/12-class.html#lecture",
+    "title": "Review and Presentation Prep",
+    "section": "Lecture",
+    "text": "Lecture\n\n View all slides in new window",
+    "crumbs": [
+      "Class",
+      "Weekly Content",
+      "12: Workshop"
+    ]
+  },
+  {
+    "objectID": "class/12-class.html#lab",
+    "href": "class/12-class.html#lab",
+    "title": "Review and Presentation Prep",
+    "section": "Lab",
+    "text": "Lab\n\nNo lab this week.",
+    "crumbs": [
+      "Class",
+      "Weekly Content",
+      "12: Workshop"
+    ]
+  },
+  {
+    "objectID": "class/12-class.html#assignments",
+    "href": "class/12-class.html#assignments",
+    "title": "Review and Presentation Prep",
+    "section": "Assignments",
+    "text": "Assignments\n\n Work on turning your draft into a presentation\n Submit assignment 5 (completed presentation) before class on Monday April 27.",
+    "crumbs": [
+      "Class",
+      "Weekly Content",
+      "12: Workshop"
+    ]
   }
 ]
