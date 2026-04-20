@@ -1,15 +1,15 @@
 ---
-title: "Data and Measurement"
-date: "2024-01-30"
+title: "Review and Presentation Prep"
+date: "2026-04-20"
 bibliography: ../files/paperpile.bib
-subtitle: "How do we describe the world around us."
+subtitle: "Wrapping things up"
 image: "featured.jpg"
 draft: true
 ---
 
 ```{r slides-videos, echo=FALSE, include=FALSE}
 source(here::here("R", "slide-things.R"))
-wk <- "01"
+wk <- "12"
 lab <- paste0(
     "<a href=\"",
     paste0(
@@ -36,7 +36,7 @@ comments <- paste0(
 
 ## Readings
 
--   {{< fa book >}} @Imai2022-pm Chapter 1 [here's a free version of an older, non-tidyverse version](files/readings/QSS_ch01_and_ch03.pdf)
+-   {{< fa book >}} @Imai2022-pm Chapter 7 
 
 
 
@@ -57,29 +57,14 @@ slide_frame(paste0("/slides/", wk, "-slides.html"))
 ## Lab
 
 
--   {{< fa laptop-file >}} Download this week's `r lab`
-
-- {{< fa paintbrush >}} Upload the rendered html file to Canvas [here](https://canvas.brown.edu/courses/1094972/assignments) 
-- {{< fa graduation-cap >}} Review the commented solutions after class `r comments`
-
+-   No lab this week. 
 
 ## Assignments
 
-- {{< fa lightbulb >}} Work through [Software Setup](../resources/00-software-setup.qmd) before class next week
+- {{< fa lightbulb >}} Work on turning your draft into a presentation 
 
-- {{< fa chalkboard-user >}} Complete QSS Tutorial 0: Introduction to R; QSS Tutorial 1: Measurement 1
+- {{< fa chalkboard-user >}} Submit assignment 5 (completed presentation) before class on Monday April 27. 
 
-```{r}
-#| eval: false
 
-# After completing the software setup you should be able to to run the following to launch the tutorials
-
-learnr::run_tutorial("00-intro", package = "qsslearnr")
-
-learnr::run_tutorial("01-measurement1", package = "qsslearnr")
-
-```
-
-- {{< fa paintbrush >}} Upload the rendered html tutorial files to Canvas [here](https://canvas.brown.edu/courses/1094972/assignments) 
 
 
